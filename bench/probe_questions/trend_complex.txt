@@ -1,0 +1,31 @@
+# Round 11 probe (2026-10-24): complicated trend questions (since when, by how much, per month, under a condition, two things at once). Read for correctness; asked of the 3-year car.
+since when has my consumption been rising
+when did my battery health start to drop
+by how much has my battery health fallen since the start
+how much has my consumption changed over the last year
+is my consumption on the highway getting worse
+did the number of hard brakes change after the first of september
+is the battery degrading faster in summer
+how fast is the battery health falling per year
+what will my battery health be in a year at this rate
+is my range in winter lower than in summer
+how has my average speed changed month by month
+which month had the most hard braking
+has the number of warnings gone up since last year
+how did my energy use change between 2024 and 2025
+are there more fault codes in summer than in winter
+did my charging power get lower over the years
+has the pack temperature in summer gone up over the years
+how many km do I drive per month now compared with the first year
+am I driving more at night than I used to
+is my regen better now than two years ago
+how many fast charges did I do each month this year
+was this winter worse for range than the last one
+is the tyre pressure falling faster than before
+what is the long-term trend of my efficiency
+has the 12 volt battery voltage dropped over the years
+when did the coolant flow start to change
+how does this month compare with the same month last year
+did the car get slower to charge since the software update
+is the motor getting hotter year after year
+give me a yearly summary of my driving

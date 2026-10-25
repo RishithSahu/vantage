@@ -1,0 +1,26 @@
+# The owner's second round of wrong answers (2026-10-24 evening, installed 1.3.2).  Each line is a question exactly as typed.
+hello how are you
+What is my current fuel level?
+What was my fuel level at 6 PM yesterday
+Which trip had the highest fuel consumption this month
+Compare my average fuel consumption this week with last week
+How many times have I started the engine yesterday
+how many battery related issues till now
+how many battery related issues today
+What was my highest speed 3 sundays ago
+what was highest speed on 11th october
+How many kilometres did I drive last week
+How many trips did I make last week
+When did my tyre pressure last fall below the recommended threshold
+What was my battery state of charge at the beginning and end of my last trip
+4 pm yesterday
+Which trip had the highest battery consumption this month
+Is my engine temperature gradually increasing over time
+Has my average driving range decreased over the last two weeks
+Compare battery discharge rates across my last five trips
+Compare fuel consumption before and after my last service
+Which hour of the day has the highest average energy consumption
+Has the frequency of hard braking increased this month
+Did anything unusual happen to the engine temperature today
+highest engine temp
+highest engine temp today

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VehicleGPT - review the interpretation</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#14202b;--mute:#5d6b78;--line:#d8dee5;--acc:#0b63ce;--ok:#0a7d4b;--warn:#b25e00;--bad:#b3261e;--model:#e8f0fc;--inh:#eef0f2;--user:#fff3d6}
+@media (prefers-color-scheme:dark){:root{--bg:#10151b;--card:#18202a;--ink:#e8eef4;--mute:#9aa8b6;--line:#2c3947;--acc:#6aa8ff;--ok:#4cc38a;--warn:#f0a050;--bad:#ff8a80;--model:#1b2b44;--inh:#222c37;--user:#4a3a12}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,Segoe UI,Roboto,sans-serif}
+main{max-width:880px;margin:0 auto;padding:16px}h1{font-size:20px;margin:4px 0 2px}p.sub{margin:0 0 14px;color:var(--mute)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}input,select,button,textarea{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:7px;padding:7px 9px}
+input.q{flex:1;min-width:220px}button{cursor:pointer}button.primary{background:var(--acc);border-color:var(--acc);color:#fff}button:disabled{opacity:.5;cursor:default}
+.field{display:grid;grid-template-columns:150px 1fr auto;gap:8px;align-items:start;padding:7px 0;border-top:1px solid var(--line)}.field:first-of-type{border-top:0}
+.field label{font-weight:600}.field label small{display:block;font-weight:400;color:var(--mute)}.badge{font-size:12px;border-radius:999px;padding:2px 8px;white-space:nowrap}
+.b-model{background:var(--model)}.b-inherited{background:var(--inh)}.b-user{background:var(--user)}.b-none{color:var(--mute)}
+.meaning{color:var(--mute);margin:4px 0 8px}.note{color:var(--warn)}.err{color:var(--bad)}.ans{white-space:pre-wrap}.mini{display:flex;gap:6px;flex-wrap:wrap;margin:3px 0}
+.hist div{padding:6px 0;border-top:1px solid var(--line)}.hist div:first-child{border-top:0}.req{color:var(--bad)}
+@media (max-width:560px){.field{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>Review the interpretation</h1>
+<p class="sub">A language model proposes how to read your question. Check it, change anything that is wrong - including the operation or the quantity - then run it. Nothing runs until you confirm.</p>
+<div class="card"><div class="row"><input id="who" placeholder="participant (optional)" size="12" aria-label="participant"><input id="task" placeholder="task (optional)" size="10" aria-label="task"></div>
+<div class="row" style="margin-top:8px"><input id="goal" class="q" placeholder="your goal, in your own words (optional)" aria-label="goal"></div>
+<div class="row" style="margin-top:8px"><input id="q" class="q" placeholder="Ask about the car, for example: how many hard brakes did I have yesterday" autocomplete="off" aria-label="question"><button id="go" class="primary">Interpret</button></div><label class="sub"><input type="checkbox" id="fu"> this continues my previous question</label><div id="status" class="sub" role="status"></div></div>
+<div id="prev" class="card" hidden></div><div id="out" class="card" hidden></div>
+<div class="card"><b>This session</b><div id="hist" class="hist"></div></div>
+</main>
+<script>
+const $=s=>document.querySelector(s),esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let CAT=null,PROP=null,CUR=null,T0=0,T1=0,T2=0,Q='';
+const api=async(p,b)=>{const r=await fetch(p,b?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}:{});return r.json()};
+const opts=(list,sel,empty)=>(empty?'<option value="">(none)</option>':'')+list.map(x=>{const v=typeof x==='object'?x.id:x,t=typeof x==='object'?(x.title||x.id)+(x.available===false?' (not recorded)':'')+' ['+x.id+']':x;return `<option value="${esc(v)}"${v==sel?' selected':''}>${esc(t)}</option>`}).join('');
+function ctl(f,val){const k=f.kind,n=f.name,id='f_'+n;
+ const sel=(list,e=true)=>`<select id="${id}" data-n="${n}">${opts(list,val,e)}</select>`;
+ switch(k){case 'signal':return sel(CAT.signals);case 'event':return sel(CAT.events);case 'tool':return sel(CAT.tools);case 'stat':return sel(CAT.stats);case 'cstat':return sel(CAT.cstats);case 'minmax':return sel(CAT.minmax);case 'evsel':return sel(CAT.evsel);
+ case 'entity':return sel(CAT.entities);case 'metric':return sel(CAT.metrics);case 'order':return sel(CAT.orders);case 'tclass':return sel(CAT.trip_classes);case 'focus':return sel(CAT.foci);case 'decl':return sel(CAT.declines);case 'saykind':return sel(CAT.saykinds);case 'unit':return sel(CAT.units);
+ case 'int':return `<input id="${id}" data-n="${n}" type="number" min="1" max="50" value="${esc(val??'')}">`;
+ case 'period':return `<input id="${id}" data-n="${n}" list="pl" value="${esc(val??'')}" placeholder="e.g. yesterday, last 5 days"><datalist id="pl">${CAT.periods.map(p=>`<option>${esc(p)}</option>`).join('')}</datalist>`;
+ case 'dur':return `<input id="${id}" data-n="${n}" value="${esc(val??'')}" placeholder="e.g. 10 minutes">`;
+ case 'grps':{const a=(val||[])[0]||'',b=(val||[])[1]||'';return `<div class="mini"><select data-g="${n}0">${opts(CAT.conditions,a,true)}</select><span>versus</span><select data-g="${n}1">${opts(CAT.conditions,b,true)}</select></div>`}
+ case 'sel':{const s=val||{};return `<div class="mini" data-sel="${n}"><select data-s="entity">${opts(CAT.entities,s.entity,true)}</select><select data-s="metric">${opts(CAT.metrics,s.metric,true)}</select><select data-s="order">${opts(CAT.orders,s.order,true)}</select><input data-s="k" type="number" min="1" max="50" placeholder="how many" value="${esc(s.k??'')}" style="width:100px"><select data-s="class">${opts(CAT.trip_classes,s.class,true)}</select></div>`}
+ case 'conds':{const rows=(val||[]).map(c=>condRow(c)).join('');return `<div data-c="${n}">${rows}<div class="mini"><button type="button" data-addn>+ named condition</button><button type="button" data-addt>+ threshold</button></div></div>`}
+ default:return `<input id="${id}" data-n="${n}" value="${esc(val??'')}">`}}
+function condRow(c){if(typeof c==='string')return `<div class="mini" data-row="n"><select data-cn>${opts(CAT.conditions,c,false)}</select><button type="button" data-del>remove</button></div>`;
+ return `<div class="mini" data-row="t"><select data-cs>${opts(CAT.signals,c.signal,false)}</select><select data-co>${CAT.cmp_ops.map(o=>`<option${o==c.op?' selected':''}>${o}</option>`).join('')}</select><input data-cv type="number" step="any" value="${esc(c.value??'')}" style="width:90px"><select data-cu>${opts(CAT.units,c.unit,true)}</select><button type="button" data-del>remove</button></div>`}
+function collect(){const args={};document.querySelectorAll('#flds [data-n]').forEach(e=>{if(e.value!=='')args[e.dataset.n]=e.value});
+ document.querySelectorAll('#flds [data-sel]').forEach(b=>{const s={};b.querySelectorAll('[data-s]').forEach(e=>{if(e.value!=='')s[e.dataset.s]=e.dataset.s==='k'?parseInt(e.value):e.value});if(Object.keys(s).length)args[b.dataset.sel]=s});
+ const gs={};document.querySelectorAll('#flds [data-g]').forEach(e=>{const n=e.dataset.g.slice(0,-1);(gs[n]=gs[n]||[]);if(e.value)gs[n].push(e.value)});Object.entries(gs).forEach(([n,v])=>{if(v.length)args[n]=v});
+ document.querySelectorAll('#flds [data-c]').forEach(b=>{const out=[];b.querySelectorAll('[data-row]').forEach(r=>{if(r.dataset.row==='n')out.push(r.querySelector('[data-cn]').value);else{const v=r.querySelector('[data-cv]').value;if(v==='')return;const c={signal:r.querySelector('[data-cs]').value,op:r.querySelector('[data-co]').value,value:parseFloat(v)};const u=r.querySelector('[data-cu]').value;if(u)c.unit=u;out.push(c)}});if(out.length)args[b.dataset.c]=out});
+ return args}
+function srcBadge(f,now){const base=PROP&&PROP.fn===CUR.fn?PROP.args?.[f.name]:undefined,had=base!==undefined;const cur=now[f.name];const same=JSON.stringify(base)===JSON.stringify(cur);
+ if(cur===undefined)return '<span class="badge b-none">not set</span>';if(had&&same){const s=(PROP.fields.find(x=>x.name===f.name)||{}).source||'model';return `<span class="badge b-${s}">${s==='inherited'?'from earlier':'proposed'}</span>`}return '<span class="badge b-user">your change</span>'}
+function render(){const fn=CUR.fn,spec=CAT.field_specs[fn]||[],f0=CAT.functions.find(x=>x.name===fn)||{};
+ const now=CUR.args||{};
+ $('#prev').hidden=false;$('#prev').innerHTML=`<div class="row"><b>Operation</b><select id="fn">${CAT.functions.map(f=>`<option value="${f.name}"${f.name==fn?' selected':''}>${esc(f.label)} (${f.name})</option>`).join('')}</select></div><div class="meaning">${esc(f0.meaning||'')}</div>${PROP&&PROP.note?`<div class="note">${esc(PROP.note)}</div>`:''}${PROP&&!PROP.ok?`<div class="err">The model produced no usable proposal (${esc(PROP.error||'')}). Choose the operation and fill the fields.</div>`:''}<div id="flds">${spec.map(f=>`<div class="field"><label>${esc(f.name)}${f.required?' <span class="req">*</span>':''}<small>${esc(f.kind)}</small></label><div data-fw="${f.name}">${ctl(f,now[f.name])}</div><div>${srcBadge(f,now)}</div></div>`).join('')}</div>
+ <div class="row" style="margin-top:10px"><button id="run" class="primary">Run this interpretation</button><button id="cancel">Cancel</button><button id="giveup" title="Nothing here gets me what I wanted">I give up</button><span class="sub" id="runst"></span></div>`;
+ $('#fn').onchange=e=>{CUR={fn:e.target.value,args:{}};render()};
+ $('#flds').addEventListener('input',()=>{CUR.args=collect();document.querySelectorAll('#flds .field').forEach((el,i)=>{el.lastElementChild.innerHTML=srcBadge(spec[i],CUR.args)})});
+ $('#flds').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(!b)return;if(e.target.matches('[data-del]')){e.target.closest('[data-row]').remove();$('#flds').dispatchEvent(new Event('input'))}
+  if(e.target.matches('[data-addn]')){e.target.parentElement.insertAdjacentHTML('beforebegin',condRow(CAT.conditions[0].id));$('#flds').dispatchEvent(new Event('input'))}
+  if(e.target.matches('[data-addt]')){e.target.parentElement.insertAdjacentHTML('beforebegin',condRow({signal:CAT.signals[0].id,op:'gt',value:''}));$('#flds').dispatchEvent(new Event('input'))}});
+ $('#run').onclick=run;$('#cancel').onclick=()=>{$('#prev').hidden=true};$('#giveup').onclick=async()=>{await api('/api/abandon',{q:Q,participant:$('#who').value,task:$('#task').value,reason:'gave up',client:{review_ms:Date.now()-T0,propose_ms:PROP&&PROP.propose_ms}});$('#prev').hidden=true;$('#status').textContent='Recorded: gave up on this one.'};}
+async function interpret(){const q=$('#q').value.trim();if(!q)return;Q=q;$('#go').disabled=true;$('#status').textContent='The model is reading your question...';$('#out').hidden=true;
+ const r=await api('/api/interpret',{q,participant:$('#who').value,task:$('#task').value,goal:$('#goal').value,follow_up:$('#fu').checked});$('#go').disabled=false;$('#status').textContent=r.timing?`Proposal in ${(r.propose_ms/1000).toFixed(1)} s (laptop timing)`:'';
+ if(!CAT)CAT=await api('/api/catalogue');PROP=r;CUR={fn:r.fn||CAT.functions[0].name,args:r.fn?{...(r.args||{})}:{}};T0=Date.now();render()}
+async function run(){$('#run').disabled=true;$('#runst').textContent='Running...';T1=Date.now();CUR.args=collect();
+ const body={q:Q,participant:$('#who').value,task:$('#task').value,goal:$('#goal').value,proposal:{fn:PROP.fn,args:PROP.args,raw:PROP.raw,timing:PROP.timing},final:{fn:CUR.fn,args:CUR.args},client:{review_ms:T1-T0,propose_ms:PROP.propose_ms}};
+ const r=await api('/api/execute',body);T2=Date.now();$('#run').disabled=false;$('#runst').textContent='';
+ const ed=(r.edits||[]).map(e=>`<li>${esc(e.field)}: ${esc(JSON.stringify(e.from))} &rarr; ${esc(JSON.stringify(e.to))}</li>`).join('');
+ $('#out').hidden=false;$('#out').innerHTML=`<b>Answer</b><div class="ans">${esc(r.answer||r.error||'')}</div>${ed?`<p class="sub">You changed ${r.edits.length} thing(s):</p><ul>${ed}</ul>`:'<p class="sub">You ran the proposal unchanged.</p>'}<div class="row"><span>Is this what you asked for?</span><button data-v="yes">Yes</button><button data-v="no">No</button></div><div class="row" id="sat"><span>How satisfied are you with this?</span>${[1,2,3,4,5].map(n=>`<label><input type="radio" name="sat" value="${n}"> ${n}</label>`).join(' ')}<span class="sub">1 = not at all, 5 = very</span></div>`;
+ $('#out').querySelectorAll('[data-v]').forEach(b=>b.onclick=async()=>{const sv=document.querySelector('input[name=sat]:checked');await api('/api/judge',{q:Q,participant:$('#who').value,task:$('#task').value,verdict:b.dataset.v,satisfaction:sv?parseInt(sv.value):null,client:{total_ms:Date.now()-T0,run_ms:T2-T1,answer_to_verdict_ms:Date.now()-T2}});b.parentElement.innerHTML=`<span class="sub">Recorded: ${b.dataset.v}</span>`;});
+ $('#hist').insertAdjacentHTML('afterbegin',`<div>${esc(Q)} <span class="badge ${ed?'b-user':'b-model'}">${ed?r.edits.length+' edit(s)':'unchanged'}</span><br><span class="sub">${esc((r.answer||'').split('\n')[0])}</span></div>`);$('#prev').hidden=true}
+$('#go').onclick=interpret;$('#q').addEventListener('keydown',e=>{if(e.key==='Enter')interpret()});
+</script></body></html>

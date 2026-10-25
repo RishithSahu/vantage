@@ -1,0 +1,20 @@
+{
+ "id": "heavy_truck_j1939",
+ "name": "Generic Heavy truck (SAE J1939)",
+ "year": 2019,
+ "region": "anywhere",
+ "powertrain": "diesel",
+ "class": "Heavy vehicle on the J1939 standard",
+ "decoder_installed": false,
+ "interfaces": [
+  "SAE J1939 on CAN 250 kbit/s, 29-bit identifiers, any source address",
+  "UDS diagnostic trouble codes",
+  "syslog from the telematics unit",
+  "NMEA 0183 GNSS"
+ ],
+ "notes": "Vantage has no decoder file for this model: J1939 parameter groups and their scales are the standard, so it learns them.",
+ "source": "SAE J1939-71",
+ "bound": 18,
+ "concepts": 18,
+ "extension": []
+}

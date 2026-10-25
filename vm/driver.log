@@ -1,0 +1,53 @@
+22:28:06 staged C:\Users\rishi\Rishith\TATA Elexi Teliport\vehiclegpt2\vm\stage\proj2.tgz 8623 KB
+22:28:06 QEMU: -M virt -cpu cortex-a55 -smp 2 -m 2048 -accel tcg,thread=multi -bios ...
+22:28:08 waiting for the guest to boot (software emulation: be patient) ...
+22:28:49 login prompt after 41 s
+22:28:54 $ uname -m; nproc; grep -m1 'CPU part' /proc/cpuinfo; grep -E 'MemTotal|MemAvailable' /proc/meminfo; ip -br addr  -> rc=0 in 0s
+22:28:54 $ ping -c1 -W3 10.0.2.2 >/dev/null 2>&1 || (for i in $(ls /sys/class/net | grep -v lo); do ip link set $i up; dh  -> rc=0 in 0s
+22:28:55 $ mkdir -p /data && (mountpoint -q /data || mount /dev/vdb /data) && ls /data | head  -> rc=0 in 0s
+22:28:58 $ mkdir -p /data/app && cd /data/app && rm -rf vantage && curl -s http://10.0.2.2:8000/vm/stage/proj2.tgz | tar   -> rc=0 in 3s
+22:29:07 $ cd /data/app/vantage && [ -f models/LFM2.5-350M-Q4_K_M.gguf ] || curl -s -o models/LFM2.5-350M-Q4_K_M.gguf htt  -> rc=0 in 9s
+22:29:11 $ /data/venv/bin/python -c 'import llama_cpp, numpy; print(llama_cpp.__version__, numpy.__version__)'  -> rc=0 in 4s
+22:29:11 guest llama-cpp-python: # 0.3.36 2.4.6
+22:29:12 $ sync; echo 3 > /proc/sys/vm/drop_caches; grep -E 'MemTotal|MemAvailable' /proc/meminfo  -> rc=0 in 1s
+22:29:42   ... waiting (30 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:30:12   ... waiting (60 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:30:42   ... waiting (90 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:31:13   ... waiting (121 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:31:43   ... waiting (151 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:32:13   ... waiting (181 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:32:44   ... waiting (211 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:33:14   ... waiting (242 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:33:44   ... waiting (272 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:34:14   ... waiting (302 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:34:45   ... waiting (332 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:35:15   ... waiting (363 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:35:45   ... waiting (393 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:36:16   ... waiting (423 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:36:46   ... waiting (454 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:37:16   ... waiting (484 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:37:46   ... waiting (514 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:38:17   ... waiting (544 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:38:47   ... waiting (575 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:39:17   ... waiting (605 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:39:47   ... waiting (635 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:40:18   ... waiting (665 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:40:48   ... waiting (696 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:41:18   ... waiting (726 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:41:49   ... waiting (756 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:42:19   ... waiting (787 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:42:49   ... waiting (817 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:43:19   ... waiting (847 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:43:50   ... waiting (877 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:44:20   ... waiting (908 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:44:50   ... waiting (938 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:45:20   ... waiting (968 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:45:51   ... waiting (998 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:46:21   ... waiting (1029 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:46:51   ... waiting (1059 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:47:21   ... waiting (1089 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:47:52   ... waiting (1119 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:48:22   ... waiting (1150 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:48:52   ... waiting (1180 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:49:22   ... waiting (1210 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'
+22:49:53   ... waiting (1241 s) for '__RC_(\\d+)__'; tail: '\r\n# llama_kv_cache: the V embeddings have different sizes across layers and FA is not enabled - padding V cache to 512\r\n'

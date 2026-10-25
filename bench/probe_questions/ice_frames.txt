@@ -1,0 +1,15 @@
+compare city and highway fuel use | compare fuel_rate op=mean cond=city vs=highway
+which trip used the most fuel | extreme fuel_rate op=max ent=trip
+which trip was the thirstiest this month | extreme fuel_rate op=max ent=trip
+how long was the engine idling this week | stat drive_mode op=duration cond=idling
+what is the tank size | spec fuel_level
+is this petrol or diesel | spec vehicle_model
+what is the check engine light status | health diagnostic_status
+why is the engine light on | why diagnostic_code
+battery voltage on a petrol car | now aux_battery_voltage
+did I run the tank dry | extreme fuel_level op=min
+is the fuel level dropping | trend fuel_level op=drop
+does speed affect fuel economy | stat fuel_rate op=corr c2=speed
+how do I save fuel | advice fuel_rate
+how many gears | spec gear
+what engine does it have | spec vehicle_model

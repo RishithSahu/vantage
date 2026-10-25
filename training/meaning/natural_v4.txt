@@ -1,0 +1,251 @@
+# Frame version 2, round 2 (2026-10-21): rows for gaps found AFTER the first frame-2 run was started, written by hand.  Same format as natural_v3.txt.
+#   * requests to write to, reprogram or operate controllers and actuators (the model read "flash new firmware onto the motor controller" as a question about software-update events);
+#   * why the battery / fuel level fell while the vehicle stood (digest.parked_loss).
+# No row carries a number or a place as a value.  The builder drops any row whose wording overlaps a frozen evaluation set.
+
+# ------------------------------------------------------------------------------------------------ operate or write to a controller (control none)
+flash the new firmware onto the inverter | control none
+reflash the battery management unit | control none
+update the software on the gateway ecu | control none
+install the latest firmware on the motor controller | control none
+push an over the air update to the car now | control none
+reprogram the engine control unit | control none
+write a new calibration into the ecu | control none
+recalibrate the throttle pedal sensor | control none
+calibrate the steering angle sensor for me | control none
+reset the ecu | control none
+reboot the infotainment computer | control none
+restart the gateway module | control none
+reset the service interval counter | control none
+reset the oil life indicator | control none
+clear the stored trouble codes | control none
+erase the fault memory | control none
+turn off the check engine light | control none
+switch the warning lamp off | control none
+change the torque limit of the motor | control none
+raise the maximum charge current | control none
+set the regen level to maximum | control none
+switch the car into sport mode | control none
+put the car in park | control none
+shift into reverse | control none
+start the engine | control none
+stop the motor right now | control none
+cut the power | control none
+apply the handbrake | control none
+release the parking brake | control none
+brake the car | control none
+steer left a little | control none
+accelerate to the speed limit | control none
+drive me to the office | control none
+park the car by itself | control none
+engage the autopilot | control none
+turn the lane keeping on | control none
+switch the cruise control off | control none
+open the charge port flap | control none
+unlock the charging cable | control none
+begin charging now | control none
+pause the charging | control none
+schedule charging for tonight | control none
+set the departure time to seven | control none
+start the heater before I leave | control none
+turn on the seat heating | control none
+switch off the rear defogger | control none
+fold in the mirrors | control none
+adjust the seat position | control none
+close all the windows | control none
+lock the doors from here | control none
+open the tailgate | control none
+flash the headlights | control none
+sound the alarm | control none
+switch on the hazard lights | control none
+dim the dashboard lights | control none
+change the instrument cluster language | control none
+send a diagnostic request to the brake controller | control none
+transmit a message on the can bus | control none
+write a value to the speed limiter | control none
+modify the battery limits | control none
+set the fan speed to maximum | control none
+put the vehicle into valet mode | control none
+activate the sentry mode | control none
+enable the remote start | control none
+turn the air suspension up | control none
+raise the ride height | control none
+switch the car off | control none
+power cycle the car | control none
+lock the wheels | control none
+can you turn the headlights on for me | control none
+please close the sunroof now | control none
+would you set the cabin to a cooler temperature | control none
+i want you to start charging | control none
+go ahead and unlock it | control none
+
+# ------------------------------------------------------------------------------------------------ bypass or tamper (unsafe none)
+how can i disable the traction control for good | unsafe none
+how do i switch off the emergency braking permanently | unsafe none
+show me how to modify the ecu to remove the power limit | unsafe none
+how do i get past the immobilizer | unsafe none
+tell me how to reflash the controller to unlock hidden features without permission | unsafe none
+how to defeat the seat belt warning | unsafe none
+how can i fake the odometer reading | unsafe none
+how to disable the speed limiter in the firmware | unsafe none
+
+# ------------------------------------------------------------------------------------------------ why the energy level fell while the vehicle stood (why <level> op=drop cond=parked | night)
+why did the battery drain while the car was parked | why battery_soc op=drop cond=parked
+why did my battery level go down overnight | why battery_soc op=drop cond=night
+why is the battery lower in the morning than when I parked | why battery_soc op=drop cond=night
+why does the charge fall while the car just sits | why battery_soc op=drop cond=parked
+battery went down while it stood in the garage why | why battery_soc op=drop cond=parked
+what drained the battery while I was away | why battery_soc op=drop cond=parked
+why did I lose charge overnight | why battery_soc op=drop cond=night
+why did the state of charge drop last night | why battery_soc op=drop cond=night
+why is the car losing battery when it is switched off | why battery_soc op=drop cond=parked
+why did the charge level decrease while parked at work | why battery_soc op=drop cond=parked
+what used up the charge while the car stood still | why battery_soc op=drop cond=parked
+is the car using battery when it is parked and why | why battery_soc op=drop cond=parked
+why does the battery percentage fall in the night | why battery_soc op=drop cond=night
+explain the overnight battery loss | why battery_soc op=drop cond=night
+explain why the battery went down while parked | why battery_soc op=drop cond=parked
+vampire drain what caused it | why battery_soc op=drop cond=parked
+standby loss of the battery why | why battery_soc op=drop cond=parked
+why did the fuel level go down while parked | why fuel_level op=drop cond=parked
+why did the fuel drop overnight | why fuel_level op=drop cond=night
+why is there less fuel in the morning than when I parked | why fuel_level op=drop cond=night
+why does the tank empty a little while the car sits | why fuel_level op=drop cond=parked
+where did the fuel go while the car stood | why fuel_level op=drop cond=parked
+did something use fuel while it was parked and why | why fuel_level op=drop cond=parked
+why did the tank level fall last night | why fuel_level op=drop cond=night
+the fuel went down in the night why | why fuel_level op=drop cond=night
+explain the fuel loss while parked | why fuel_level op=drop cond=parked
+why did the fuel gauge fall when the engine was off | why fuel_level op=drop cond=parked
+
+# ------------------------------------------------------------------------------------------------ wheel speed (four sensors; the wheel named in the question selects one)
+what is the front left wheel speed | now wheel_speed
+how fast is the rear right wheel turning | now wheel_speed
+rear left wheel rotation speed | now wheel_speed
+front right wheel speed right now | now wheel_speed
+what speed is each wheel doing | now wheel_speed
+show me the wheel speeds | now wheel_speed
+how fast are the wheels spinning | now wheel_speed
+what was the highest front left wheel speed last week | extreme wheel_speed op=max
+top rear right wheel speed this month | extreme wheel_speed op=max
+lowest front right wheel speed yesterday | extreme wheel_speed op=min
+average rear left wheel speed over the last day | stat wheel_speed op=mean
+mean front left wheel speed this week | stat wheel_speed op=mean
+how has the rear right wheel speed changed over the last week | trend wheel_speed
+did the front left wheel speed change much this month | trend wheel_speed op=change
+is the front right wheel speed normal | stat wheel_speed op=usual
+what is a usual rear left wheel speed | stat wheel_speed op=usual
+front left wheel speed one hour ago | at wheel_speed
+how fast was the rear right wheel going at noon | at wheel_speed
+
+# generated (gen_wheel_rows.py): the wheel is named in the text and parsed as a typed value; the frame carries only the quantity
+average front left wheel speed over the last 30 days | stat wheel_speed op=mean
+average front left wheel speed this month | stat wheel_speed op=mean
+average front left wheel speed today | stat wheel_speed op=mean
+average front right wheel speed last week | stat wheel_speed op=mean
+average front right wheel speed over the last 30 days | stat wheel_speed op=mean
+average front right wheel speed over the last 7 days | stat wheel_speed op=mean
+average front-left wheel speed over the last 7 days | stat wheel_speed op=mean
+average front-left wheel speed today | stat wheel_speed op=mean
+average front-left wheel speed yesterday | stat wheel_speed op=mean
+average front-right wheel speed this month | stat wheel_speed op=mean
+average front-right wheel speed this week | stat wheel_speed op=mean
+average front-right wheel speed today | stat wheel_speed op=mean
+average left front wheel speed over the last 30 days | stat wheel_speed op=mean
+average left front wheel speed over the last 7 days | stat wheel_speed op=mean
+average left front wheel speed today | stat wheel_speed op=mean
+average rear left wheel speed over the last 30 days | stat wheel_speed op=mean
+average rear left wheel speed over the last 7 days | stat wheel_speed op=mean
+average rear left wheel speed yesterday | stat wheel_speed op=mean
+average rear right wheel speed last week | stat wheel_speed op=mean
+average rear right wheel speed over the last 30 days | stat wheel_speed op=mean
+average rear right wheel speed over the last 7 days | stat wheel_speed op=mean
+average rear-left wheel speed last week | stat wheel_speed op=mean
+average rear-left wheel speed this month | stat wheel_speed op=mean
+average rear-left wheel speed this week | stat wheel_speed op=mean
+average rear-right wheel speed this month | stat wheel_speed op=mean
+average rear-right wheel speed this week | stat wheel_speed op=mean
+average rear-right wheel speed yesterday | stat wheel_speed op=mean
+average right rear wheel speed in the last day | stat wheel_speed op=mean
+average right rear wheel speed over the last 7 days | stat wheel_speed op=mean
+average right rear wheel speed this month | stat wheel_speed op=mean
+front left wheel speed | now wheel_speed
+front right wheel speed | now wheel_speed
+front-left wheel speed | now wheel_speed
+front-right wheel speed | now wheel_speed
+has the front left wheel speed changed last week | trend wheel_speed op=change
+has the front right wheel speed changed this month | trend wheel_speed op=change
+has the front-left wheel speed changed this month | trend wheel_speed op=change
+has the front-right wheel speed changed in the last day | trend wheel_speed op=change
+has the left front wheel speed changed over the last 7 days | trend wheel_speed op=change
+has the rear left wheel speed changed this week | trend wheel_speed op=change
+has the rear right wheel speed changed over the last 7 days | trend wheel_speed op=change
+has the rear-left wheel speed changed over the last 7 days | trend wheel_speed op=change
+has the rear-right wheel speed changed today | trend wheel_speed op=change
+has the right rear wheel speed changed last week | trend wheel_speed op=change
+how fast is the front left wheel going | now wheel_speed
+how fast is the front right wheel going | now wheel_speed
+how fast is the front-left wheel going | now wheel_speed
+how fast is the front-right wheel going | now wheel_speed
+how fast is the left front wheel going | now wheel_speed
+how fast is the rear left wheel going | now wheel_speed
+how fast is the rear right wheel going | now wheel_speed
+how fast is the rear-left wheel going | now wheel_speed
+how fast is the rear-right wheel going | now wheel_speed
+how fast is the right rear wheel going | now wheel_speed
+left front wheel speed | now wheel_speed
+lowest front left wheel speed in the last day | extreme wheel_speed op=min
+lowest front right wheel speed yesterday | extreme wheel_speed op=min
+lowest front-left wheel speed yesterday | extreme wheel_speed op=min
+lowest front-right wheel speed this month | extreme wheel_speed op=min
+lowest left front wheel speed this month | extreme wheel_speed op=min
+lowest rear left wheel speed yesterday | extreme wheel_speed op=min
+lowest rear right wheel speed this week | extreme wheel_speed op=min
+lowest rear-left wheel speed over the last 7 days | extreme wheel_speed op=min
+lowest rear-right wheel speed over the last 30 days | extreme wheel_speed op=min
+lowest right rear wheel speed over the last 30 days | extreme wheel_speed op=min
+rear left wheel speed | now wheel_speed
+rear right wheel speed | now wheel_speed
+rear-left wheel speed | now wheel_speed
+rear-right wheel speed | now wheel_speed
+right rear wheel speed | now wheel_speed
+what is the speed of the front left wheel right now | now wheel_speed
+what is the speed of the front right wheel right now | now wheel_speed
+what is the speed of the front-left wheel right now | now wheel_speed
+what is the speed of the front-right wheel right now | now wheel_speed
+what is the speed of the left front wheel right now | now wheel_speed
+what is the speed of the rear left wheel right now | now wheel_speed
+what is the speed of the rear right wheel right now | now wheel_speed
+what is the speed of the rear-left wheel right now | now wheel_speed
+what is the speed of the rear-right wheel right now | now wheel_speed
+what is the speed of the right rear wheel right now | now wheel_speed
+what was the highest front left wheel speed over the last 30 days | extreme wheel_speed op=max
+what was the highest front left wheel speed this month | extreme wheel_speed op=max
+what was the highest front left wheel speed today | extreme wheel_speed op=max
+what was the highest front right wheel speed last week | extreme wheel_speed op=max
+what was the highest front right wheel speed over the last 30 days | extreme wheel_speed op=max
+what was the highest front right wheel speed over the last 7 days | extreme wheel_speed op=max
+what was the highest front-left wheel speed over the last 7 days | extreme wheel_speed op=max
+what was the highest front-left wheel speed today | extreme wheel_speed op=max
+what was the highest front-left wheel speed yesterday | extreme wheel_speed op=max
+what was the highest front-right wheel speed this month | extreme wheel_speed op=max
+what was the highest front-right wheel speed this week | extreme wheel_speed op=max
+what was the highest front-right wheel speed today | extreme wheel_speed op=max
+what was the highest left front wheel speed over the last 30 days | extreme wheel_speed op=max
+what was the highest left front wheel speed over the last 7 days | extreme wheel_speed op=max
+what was the highest left front wheel speed today | extreme wheel_speed op=max
+what was the highest rear left wheel speed over the last 30 days | extreme wheel_speed op=max
+what was the highest rear left wheel speed over the last 7 days | extreme wheel_speed op=max
+what was the highest rear left wheel speed yesterday | extreme wheel_speed op=max
+what was the highest rear right wheel speed last week | extreme wheel_speed op=max
+what was the highest rear right wheel speed over the last 30 days | extreme wheel_speed op=max
+what was the highest rear right wheel speed over the last 7 days | extreme wheel_speed op=max
+what was the highest rear-left wheel speed last week | extreme wheel_speed op=max
+what was the highest rear-left wheel speed this month | extreme wheel_speed op=max
+what was the highest rear-left wheel speed this week | extreme wheel_speed op=max
+what was the highest rear-right wheel speed this month | extreme wheel_speed op=max
+what was the highest rear-right wheel speed this week | extreme wheel_speed op=max
+what was the highest rear-right wheel speed yesterday | extreme wheel_speed op=max
+what was the highest right rear wheel speed in the last day | extreme wheel_speed op=max
+what was the highest right rear wheel speed over the last 7 days | extreme wheel_speed op=max
+what was the highest right rear wheel speed this month | extreme wheel_speed op=max

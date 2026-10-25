@@ -1,0 +1,22 @@
+VERSION "Aster Volt S high-voltage battery CAN-FD (2 Mbit/s data phase)"
+
+NS_ :
+
+BS_:
+
+BU_: BMS CHG
+
+BO_ 512 BmsStatus: 16 BMS
+ SG_ Soc : 0|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ PackVolt : 16|16@1+ (0.1,0) [0|1000] "V" Vector__XXX
+ SG_ PackCurrent : 32|16@1- (0.1,0) [-3276.8|3276.7] "A" Vector__XXX
+ SG_ BattTemp : 48|16@1- (0.1,0) [-100|200] "degC" Vector__XXX
+ SG_ CellTempMax : 64|16@1- (0.1,0) [-100|200] "degC" Vector__XXX
+ SG_ CellTempMin : 80|16@1- (0.1,0) [-100|200] "degC" Vector__XXX
+ SG_ CellVoltMin : 96|16@1+ (0.001,0) [0|6] "V" Vector__XXX
+
+BO_ 784 Charger: 8 CHG
+ SG_ ChgKw : 7|16@0+ (0.1,0) [0|600] "kW" Vector__XXX
+ SG_ ChgState : 23|8@0+ (1,0) [0|3] "" Vector__XXX
+
+VAL_ 784 ChgState 0 "idle" 1 "charging" 2 "full" 3 "fault" ;

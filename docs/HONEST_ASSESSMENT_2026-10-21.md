@@ -1,0 +1,43 @@
+# Where we really are against the case study (honest assessment, 2026-10-21)
+
+> **Superseded the same night by `docs/SCORECARD.md`** (what was built, measured and re-scored after this was written).  Kept unchanged below because it is the baseline the scorecard is measured against.
+
+Written after re-reading the case-study PDF (three pages: background, challenge, key points, constraints, expected output, **evaluation criteria**) and every number we have.  Scores are out of 10 and are meant to be hard: 5 is "a student demo that works", 8 is "a team would deploy it after a trial".
+
+## 1. The PDF's evaluation criteria, one by one
+
+| Criterion (from the PDF) | Score | Why, with the evidence | What would raise it |
+|---|---|---|---|
+| **System architecture** (hardware + software, simulation and interface integrated) | **7** | Collectors -> single-writer runtime -> SQLite tiers -> typed resolver -> web/app UI exist and run end to end, now on two devices (laptop = car, Raspberry Pi = Vantage, kernel-limited to 2 GB / 2 cores).  But every vehicle is **simulated or a recording**; no bus of a real vehicle has ever fed it; SocketCAN, vsomeip and Binder clients were never run; safety isolation is a software boundary on one host with no safety argument. | One real capture through the platform; a partition/hypervisor design. |
+| **AI capability - understands natural-language queries** | **5.5** | Model-alone exact-frame accuracy is 90-95 % on **our own** sets, but (a) the sets were written by us, several were read for failures and trained against (hard_v1-v5), only ~490 questions are sealed; (b) it is **EV-centric**: on diesel and petrol vocabulary the model alone scored 36.8 % and 40.5 %, rule layers lifted that to 89.5 % / 75.7 %, so "plug and play" is carried by rules; (c) follow-ups: 18 % model-alone (a cue-list rule layer does the rest); (d) it cannot say correlation, "than usual", "A or B" at all (0 % on the new frame sets); (e) nobody but us has ever typed to it except the owner's few sessions. | A frame that can say these things, vocabulary learned for every powertrain, an independent question set. |
+| **AI capability - accuracy of responses and summaries** | **4.5** | Arithmetic is checked against plain SQL/numpy and the investigations against injected ground truth - that part is solid.  But our "end-to-end" metric is *text equality with what a perfect reader of the same question would have got*: it measures whether the question was read right, not whether the answer was useful or true to what was meant.  No human has graded free-form answers.  Answers are templated: the same sentence shapes come back for different questions ("Based on 6 samples..."), summaries are shallow, explanations are lists of associations. | Prompt-grounded composition, summary / trend / explanation answers that change with what was asked, a human-graded sample. |
+| **Data integration** (multiple protocols and sources) | **7** | CAN / CAN-FD (DBC), SOME/IP, Android VHAL, QNX/syslog, GNSS, camera features, UDS/OBD are decoded and stored; four vehicles that differ in buses, names and powertrain are plug-and-play from a data pack, and (new) the receiver adapts to whatever car it is sent.  All traffic is generated from recordings by our own emitter, so encoder and decoder were written by the same person and agree by construction. | Real captures; a second independent encoder. |
+| **Search & analytics - historical events, trends, anomalies** | **6.5** | Events, counts, trends, change points, extremes, comparisons, 32 investigation analyses, event-frequency tests: good on the 105-day EV world.  Anomaly ("unusual for this car") is only partly there; novel request shapes outside the 32 templates fall back to a single-frame answer. | Typical-baseline operator, multi-concept frames, learned analysis routing. |
+| **Search & analytics - explain causes** | **5** | Explanations are honest associations with recorded facts (never claimed causes) - the right stance - but thin: they come from templates, one cause line plus evidence. | Richer, question-specific explanations; counterfactual-free but narrative. |
+| **Edge performance - memory** | **8** | Measured **on the Pi**: 697 MB resident, peak 978 MB across five vehicles, kernel limit 2 GiB. | - |
+| **Edge performance - query latency** | **4** | Common and repeated questions 0.1-0.5 s, but a **new wording takes 3.7-6.2 s on the Pi** against the PDF's 2 s (grammar costs 1.9 s, adapter unmerged).  On the laptop 0.5-0.8 s hid this for weeks: ARM was never measured until yesterday. | Token-mask decoder, merged adapter (about 1.5 s reachable). |
+| **Edge performance - scalability to HPC** | **4.5** | Tiers change numbers only; measured on x86 and now one Pi; never an HPC or a second ARM board. | A measured second platform. |
+| **Privacy - local-only** | **8** | Nothing leaves the vehicle network; no cloud code path; Vantage binds only the vehicle interfaces. | - |
+| **Privacy - protection of vehicle and driver data** | **5** | Roles with scrypt passcodes, scrubbing, hash-chained audit log, signed (not encrypted) link.  **No encryption at rest, none on the link**, no per-driver profiles, no erasure on request beyond the driver's own button. | Encryption at rest and on the link. |
+| **Innovation & practicality - ease of deployment** | **6** | One command per device, a service that survives restarts and reboots, no per-car setup.  One Pi, one car, one week of use. | A vehicle trial. |
+| **Innovation & practicality - value for drivers, service engineers, fleet operators, validation teams** | **6** | Role pages and investigations exist and are sensible; all on simulated data; no user study, no operator or engineer has used it. | A user study. |
+
+**Overall: about 5.8 / 10 - a strong, honest prototype with an unproven claim.**  The architecture and the engineering discipline (honest "not recorded", read-only assistant, ablations that exposed our own rule layers) are the strong part.  The weak part is **proof**: almost everything is measured on data and questions we made ourselves.
+
+## 2. How good are our *evaluation methods*? 4.5 / 10
+
+What is good: exact-frame scoring is unambiguous; the layer ablation (model alone vs each rule layer) is the most honest thing we do and it found that three of our layers hurt; sealed sets exist; arithmetic and investigations are checked against independent ground truth; latency is measured on the real target now.
+
+What is not good - plainly:
+
+1. **We grade ourselves.**  The ontology, the gold frames, the training questions and the test questions all come from the same author (me, across sessions).  A model can reach 95 % on that and still fail a stranger.  The one set written by someone else (`VehicleGPT_500_QA.csv`) has **no gold labels**, so we only audit it for obviously broken answers (`bench/audit_answers.py`), never score it.
+2. **The test sets leaked into development.**  hard_v1-v5 were read for failures and fed back into training banks ("natural_hard*.txt"); only adv_v2/v3, sealed_v2/v3 (about 490 questions) were never read.  Gold for some questions is contested (hard_v4).
+3. **The unit of measure is the frame, not the answer.**  A right frame can produce a useless answer and a wrong frame can produce an acceptable one; strict text equality under-counts the second and says nothing about the first.
+4. **Almost no data other than the EV world.**  Diesel, petrol and the four recorded Case Study 5 files were added late and measured by small hand-made sets; the model-alone numbers there (37-40 %) were the real finding.
+5. **Refusal is under-measured.**  Sets treat "refuse" as one more label; a vehicle that records nothing but speed (the CS5 files) should refuse almost everything, and nothing scores that per dataset.
+6. **No confidence intervals, no repeated seeds,** sets of 62-290 questions (a point is +-3-6 %).
+7. **No human evaluation, no user study, no real vehicle, no long-run soak** (the Pi ran for about an hour).
+
+## 3. What was done about it on 2026-10-21 (see `docs/TRAINING_QUEUE.md` section 10)
+
+The next steps follow directly from the list above and are being worked on in this order: a wider frame (`when`, `style`, `c2`, `ref`, new acts for explain / summary / trend), vocabulary for every powertrain learned from each vehicle's own profile, a labelled **independent-wording** set from the other author's 500 questions, per-dataset answerability scoring (answer where the data exists, refuse where it does not), varied prompt-grounded answers, and a faster decoder so more slots do not cost latency on the Pi.

@@ -1,0 +1,24 @@
+{
+ "id": "aster_ev",
+ "name": "Aster C5 (synthetic maker)",
+ "year": 2025,
+ "region": "anywhere",
+ "powertrain": "bev",
+ "class": "Battery-electric crossover: the full-interface reference",
+ "decoder_installed": true,
+ "interfaces": [
+  "Three CAN buses (powertrain 500 kbit/s, battery CAN-FD, body 250 kbit/s)",
+  "UDS diagnostic trouble codes",
+  "SOME/IP notifications on automotive Ethernet (charging, ADAS, lane model, objects)",
+  "Android Vehicle HAL (secondary sources)",
+  "QNX slog2info logs",
+  "forward camera report (measurements)",
+  "NMEA 0183 GNSS"
+ ],
+ "notes": "A fictional maker's car designed to exercise every interface the case study names at once; its databases are written for the test bench.",
+ "source": "written for the test bench (vgpt/vehicle/packs)",
+ "bound": 51,
+ "concepts": 43,
+ "extension": [],
+ "profile_dir": "../../vehicle/packs/aster_ev"
+}

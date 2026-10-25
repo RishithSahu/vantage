@@ -1,0 +1,40 @@
+{
+ "id": "mg_zs_ev",
+ "name": "MG ZS EV (HSC2 platform)",
+ "year": 2022,
+ "region": "China / UK / India",
+ "powertrain": "bev",
+ "class": "Battery-electric SUV",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real MG HSC2 chassis database (accelerator, vehicle speed, brake pressure, gear, doors)",
+  "OBD-II service 01 (ambient temperature, control-module voltage)",
+  "UDS diagnostic trouble codes",
+  "logcat from the Android-based infotainment",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "battery, range, charging, tyres, odometer and ignition on a synthetic extension CAN"
+ ],
+ "notes": "",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): mg.dbc",
+ "bound": 24,
+ "concepts": 24,
+ "extension": [
+  "_charging_active",
+  "_ignition",
+  "battery_current",
+  "battery_soc",
+  "battery_temperature",
+  "battery_voltage",
+  "charging_power",
+  "coolant_flow",
+  "motor_temperature",
+  "odometer",
+  "reported_range",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

@@ -1,0 +1,94 @@
+# PLATFORM-v1: authored 2026-10-20 by Claude AFTER natural_platform.txt (the training bank) and BEFORE the adapter that uses it (full_v7) was built or trained.  90 questions about the vocabulary the plug-and-play
+# platform added to the ontology (ECU reset, unexpected shutdown, voltage dip, sensor conflict, emergency braking, CAN error, invalid reading, assistance state change, motor overtemperature, power derate,
+# brake temperature, steering torque ...) written in wordings that are not in the bank, plus 14 look-alike questions about OLDER concepts that the new words must not capture.  Never trained on.
+# Format: id | text | gold frame (compact) | expected behaviour in words.
+P001 | did one of the computers in the car restart on its own | events ecu_reset op=exists | an existence check on ECU resets
+P002 | anything rebooted lately | events ecu_reset op=exists | an existence check on ECU resets
+P003 | tell me how many times the ecu restarted in the past ten days | events ecu_reset op=count | a count of ECU resets
+P004 | total controller resets since the start of the month | events ecu_reset op=count | a count of ECU resets
+P005 | give me a list of the resets | events ecu_reset op=list | list the ECU resets
+P006 | which module was the last to reboot | events ecu_reset op=last | the latest ECU reset
+P007 | the reset before the most recent one | events ecu_reset op=list | list the ECU resets
+P008 | what led up to the last reboot of the unit | context ecu_reset | the context of the latest ECU reset
+P009 | explain why the ecu keeps resetting | why ecu_reset | the likely cause of ECU resets
+P010 | meaning of ecu reset | define ecu_reset | a definition of ECU reset
+P011 | has the vehicle shut down without me asking it to | events unexpected_shutdown op=exists | an existence check on unexpected shutdowns
+P012 | did the power cut out in the middle of a drive | events unexpected_shutdown op=exists | an existence check on unexpected shutdowns
+P013 | how many times has it switched itself off | events unexpected_shutdown op=count | a count of unexpected shutdowns
+P014 | frequency of sudden blackouts on the car | events unexpected_shutdown op=count | a count of unexpected shutdowns
+P015 | show the last time the car died on me | events unexpected_shutdown op=last | the latest unexpected shutdown
+P016 | give me all the shutdowns that were not planned | events unexpected_shutdown op=list | list the unexpected shutdowns
+P017 | what was recorded just before it lost power | context unexpected_shutdown | the context of the latest unexpected shutdown
+P018 | why did everything go dark | why unexpected_shutdown | the likely cause of the unexpected shutdown
+P019 | what do you mean by an unexpected shutdown | define unexpected_shutdown | a definition of unexpected shutdown
+P020 | did the twelve volt supply drop at some point | events voltage_dip op=exists | an existence check on voltage dips
+P021 | was there a power supply sag | events voltage_dip op=exists | an existence check on voltage dips
+P022 | how many dips in voltage did we get | events voltage_dip op=count | a count of voltage dips
+P023 | how many times has the supply gone below normal | events voltage_dip op=count | a count of voltage dips
+P024 | enumerate the voltage drops | events voltage_dip op=list | list the voltage dips
+P025 | when did the voltage last fall | events voltage_dip op=last | the latest voltage dip
+P026 | what was happening when the voltage fell | context voltage_dip | the context of the latest voltage dip
+P027 | reason for the supply dropping | why voltage_dip | the likely cause of voltage dips
+P028 | define voltage dip | define voltage_dip | a definition of voltage dip
+P029 | do any two readings contradict each other | events sensor_conflict op=exists | an existence check on sensor conflicts
+P030 | have the speed sources ever given different numbers | events sensor_conflict op=exists | an existence check on sensor conflicts
+P031 | how many conflicts between sensors happened | events sensor_conflict op=count | a count of sensor conflicts
+P032 | number of times the two speed signals disagreed | events sensor_conflict op=count | a count of sensor conflicts
+P033 | itemise the sensor disagreements | events sensor_conflict op=list | list the sensor conflicts
+P034 | last time two measurements did not agree | events sensor_conflict op=last | the latest sensor conflict
+P035 | what was going on when the readings differed | context sensor_conflict | the context of the latest sensor conflict
+P036 | why do two readings of the same thing differ | why sensor_conflict | the likely cause of sensor conflicts
+P037 | what is a conflict between sensors | define sensor_conflict | a definition of sensor conflict
+P038 | has the car ever slammed on the brakes by itself | events aeb_activation op=exists | an existence check on emergency braking
+P039 | did the pre collision system intervene | events aeb_activation op=exists | an existence check on emergency braking
+P040 | how many emergency brake interventions did we have | events aeb_activation op=count | a count of emergency braking
+P041 | how many times has the car stopped itself | events aeb_activation op=count | a count of emergency braking
+P042 | list all the times automatic braking acted | events aeb_activation op=list | list the emergency braking events
+P043 | when did the emergency braking last happen | events aeb_activation op=last | the latest emergency braking
+P044 | what was in front of the car when it braked automatically | context aeb_activation | the context of the latest emergency braking
+P045 | why did the system apply the brakes | why aeb_activation | the likely cause of emergency braking
+P046 | what is automatic emergency braking | define aeb_activation | a definition of AEB
+P047 | has the can network reported problems | events can_error op=exists | an existence check on CAN errors
+P048 | did communication fail on any bus | events can_error op=exists | an existence check on CAN errors
+P049 | how many network errors have been logged | events can_error op=count | a count of CAN errors
+P050 | number of bus fault episodes this month | events can_error op=count | a count of CAN errors
+P051 | list the times the bus had trouble | events can_error op=list | list the CAN errors
+P052 | when was the bus last in trouble | events can_error op=last | the latest CAN error
+P053 | what came before the communication faults | context can_error | the context of the latest CAN error
+P054 | why does the network produce error frames | why can_error | the likely cause of CAN errors
+P055 | meaning of can error | define can_error | a definition of CAN error
+P056 | were any readings discarded because they made no sense | events sensor_invalid_reading op=exists | an existence check on invalid readings
+P057 | how many readings were rejected as impossible | events sensor_invalid_reading op=count | a count of invalid readings
+P058 | list the discarded sensor values | events sensor_invalid_reading op=list | list the invalid readings
+P059 | when did a sensor last give a ridiculous value | events sensor_invalid_reading op=last | the latest invalid reading
+P060 | how many times did the lane assist change between on and off | events adas_state_change op=count | a count of assistance state changes
+P061 | when did the assistant last go from on to off | events adas_state_change op=last | the latest assistance state change
+P062 | did lane keeping keep toggling | events adas_state_change op=exists | an existence check on assistance state changes
+P063 | list every time the driver assistance changed mode | events adas_state_change op=list | list the assistance state changes
+P064 | has the motor ever run too hot | events overtemp_warning op=exists | an existence check on motor overtemperature
+P065 | how many times was the traction motor over its temperature limit | events overtemp_warning op=count | a count of motor overtemperature warnings
+P066 | when was the last time the drive motor overheated | events overtemp_warning op=last | the latest motor overtemperature warning
+P067 | what was happening before the motor got hot | context overtemp_warning | the context of the latest motor overtemperature
+P068 | has the car ever run in a reduced power mode | events power_derate op=exists | an existence check on power derates
+P069 | how many times did the power get limited | events power_derate op=count | a count of power derates
+P070 | when was the performance last cut back | events power_derate op=last | the latest power derate
+P071 | why was the output restricted | why power_derate | the likely cause of power derates
+P072 | how warm are the brake discs | now brake_temperature | the current brake temperature
+P073 | peak brake temperature during the last week | extreme brake_temperature op=max | the highest brake temperature
+P074 | what do you mean by brake temperature | define brake_temperature | a definition of brake temperature
+P075 | typical brake disc heat over the month | stat brake_temperature op=mean | the mean brake temperature
+P076 | how hard is the driver turning the wheel | now steering_torque | the current steering torque
+P077 | greatest steering torque so far | extreme steering_torque op=max | the highest steering torque
+P078 | what is the engine torque at the moment | now engine_torque | the current engine torque
+P079 | did a hard brake happen yesterday | events hard_braking op=exists | LOOK-ALIKE: an existence check on hard braking (an older concept)
+P080 | how many hard braking events this week | events hard_braking op=count | LOOK-ALIKE: a count of hard braking
+P081 | did the battery overheat last week | events battery_overheat_warning op=exists | LOOK-ALIKE: battery over-temperature, not motor over-temperature
+P082 | when did driver assistance last disengage | events adas_disengagement op=last | LOOK-ALIKE: ADAS disengagement, not a state change
+P083 | has a fault code been stored lately | events diagnostic_code op=exists | LOOK-ALIKE: diagnostic codes
+P084 | was the camera blocked this week | events camera_blocked op=exists | LOOK-ALIKE: camera blockage
+P085 | were there any warnings today | events any_warning op=exists | LOOK-ALIKE: any warning
+P086 | how many times did the tyre pressure warning come on | events tyre_pressure_warning op=count | LOOK-ALIKE: tyre pressure warning
+P087 | when did i last plug in to charge | events charging_session op=last | LOOK-ALIKE: charging sessions
+P088 | did the twelve volt battery ever get low | events low_12v_warning op=exists | LOOK-ALIKE: low 12 V warning, not a voltage dip
+P089 | how much charge is left | now battery_soc | LOOK-ALIKE: the current state of charge
+P090 | how hot is the battery pack | now battery_temperature | LOOK-ALIKE: the battery temperature, not the brakes

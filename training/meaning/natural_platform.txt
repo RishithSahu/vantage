@@ -1,0 +1,438 @@
+# Platform bank (authored by Claude, 2026-10-20, BEFORE platform_v1 was written, never from its sentences).  Source name `platform`.  Format as natural_a.txt:  text | act concept [op=..] [cond=..] [vs=..] [ent=..]
+# Why it exists: the ontology gained ten event words and a few signal words when the plug-and-play platform and the investigation engine were built (ECU reset, unexpected shutdown, voltage dip, sensor conflict,
+# emergency braking, CAN error, invalid reading, assistance state change, motor overtemperature, power derate; brake temperature, steering torque ...).  The v6 adapter has never seen them in a sentence.
+# These are training rows: never evaluation rows.  The builder's leakage filter (--eval-leak v7) drops any row at Jaccard >= 0.8 to a frozen set, platform_v1 included.
+# ---------------------------------------------------------------- ECU reset
+did any control unit restart today | events ecu_reset op=exists
+has an ecu reset happened this week | events ecu_reset op=exists
+any controller reboots lately | events ecu_reset op=exists
+how many times did an ecu reset | events ecu_reset op=count
+how many resets did the modules have last week | events ecu_reset op=count
+count of controller restarts this month | events ecu_reset op=count
+number of ecu reboots yesterday | events ecu_reset op=count
+list the ecu resets | events ecu_reset op=list
+show me every module reset from the last two weeks | events ecu_reset op=list
+which controllers restarted this week | events ecu_reset op=list
+when did a control unit last reboot | events ecu_reset op=last
+when was the latest ecu reset | events ecu_reset op=last
+the most recent watchdog reset | events ecu_reset op=last
+when was the first reset on record | events ecu_reset op=first
+what happened before the controller restarted | context ecu_reset
+what was going on just before the ecu reset | context ecu_reset
+signals around the last watchdog reset | context ecu_reset
+why did the module reboot | why ecu_reset
+what caused the ecu to reset | why ecu_reset
+why did the assist computer restart | why ecu_reset
+what is an ecu reset | define ecu_reset
+what does a watchdog reset mean | define ecu_reset
+did the infotainment unit reboot | events ecu_reset op=exists
+did the gateway restart on its own | events ecu_reset op=exists
+the adas computer rebooted didnt it | events ecu_reset op=exists
+# ---------------------------------------------------------------- unexpected shutdown
+did the car switch off by itself | events unexpected_shutdown op=exists
+has the vehicle ever shut down unexpectedly | events unexpected_shutdown op=exists
+did the car lose power while i was driving | events unexpected_shutdown op=exists
+any sudden power losses this month | events unexpected_shutdown op=exists
+did the system power down on its own | events unexpected_shutdown op=exists
+how many unexpected shutdowns have there been | events unexpected_shutdown op=count
+how often did the car cut out suddenly | events unexpected_shutdown op=count
+number of times it died while moving | events unexpected_shutdown op=count
+count the sudden shutdowns | events unexpected_shutdown op=count
+list the unexpected shutdowns | events unexpected_shutdown op=list
+show every time the car shut off by itself | events unexpected_shutdown op=list
+when did the car last shut down on its own | events unexpected_shutdown op=last
+when was the most recent power loss | events unexpected_shutdown op=last
+the latest unexpected shutdown | events unexpected_shutdown op=last
+what happened before the car shut down | context unexpected_shutdown
+what changed right before the power loss | context unexpected_shutdown
+what was the car doing when it cut out | context unexpected_shutdown
+signals before the sudden shutdown | context unexpected_shutdown
+why did the car shut off | why unexpected_shutdown
+what made the vehicle lose power | why unexpected_shutdown
+what caused the unexpected shutdown | why unexpected_shutdown
+what is an unexpected shutdown | define unexpected_shutdown
+what does it mean when the car shuts down unexpectedly | define unexpected_shutdown
+# ---------------------------------------------------------------- voltage dip
+were there any voltage dips | events voltage_dip op=exists
+did the 12 volt supply sag today | events voltage_dip op=exists
+has the supply voltage ever dipped | events voltage_dip op=exists
+any brownouts recently | events voltage_dip op=exists
+how many voltage dips did we have | events voltage_dip op=count
+how often did the 12 v rail drop | events voltage_dip op=count
+number of brownouts last week | events voltage_dip op=count
+count of supply sags this month | events voltage_dip op=count
+list the voltage dips | events voltage_dip op=list
+show me each time the supply voltage dropped | events voltage_dip op=list
+when was the last voltage dip | events voltage_dip op=last
+when did the supply last sag | events voltage_dip op=last
+the most recent brownout | events voltage_dip op=last
+how low did the voltage dip go | events voltage_dip op=list
+what happened before the voltage dip | context voltage_dip
+what was happening when the supply sagged | context voltage_dip
+signals around the brownout | context voltage_dip
+why did the voltage drop | why voltage_dip
+what causes the 12 v supply to dip | why voltage_dip
+what is a voltage dip | define voltage_dip
+what does a brownout mean | define voltage_dip
+# ---------------------------------------------------------------- sensor conflict
+did any two sensors disagree | events sensor_conflict op=exists
+were there conflicting readings from two sources | events sensor_conflict op=exists
+has the speed from the two sources ever differed | events sensor_conflict op=exists
+any mismatch between the can speed and the android speed | events sensor_conflict op=exists
+is there any sensor discrepancy on record | events sensor_conflict op=exists
+how many sensor conflicts have there been | events sensor_conflict op=count
+how many times did two sources disagree | events sensor_conflict op=count
+count the disagreements between sensors this month | events sensor_conflict op=count
+number of conflicting readings last week | events sensor_conflict op=count
+list the sensor conflicts | events sensor_conflict op=list
+show me when the sources disagreed | events sensor_conflict op=list
+list every time two readings did not match | events sensor_conflict op=list
+when did the sensors last disagree | events sensor_conflict op=last
+when was the latest conflict between two readings | events sensor_conflict op=last
+the most recent sensor mismatch | events sensor_conflict op=last
+what happened around the sensor disagreement | context sensor_conflict
+what was the car doing when the two readings differed | context sensor_conflict
+why did two sources report different values | why sensor_conflict
+what causes a speed mismatch between the buses | why sensor_conflict
+what is a sensor conflict | define sensor_conflict
+what does it mean when two sensors disagree | define sensor_conflict
+# ---------------------------------------------------------------- emergency braking
+did the car brake by itself | events aeb_activation op=exists
+has automatic emergency braking ever kicked in | events aeb_activation op=exists
+did aeb activate this week | events aeb_activation op=exists
+did the collision avoidance system step in | events aeb_activation op=exists
+any autonomous braking events | events aeb_activation op=exists
+how many times did emergency braking activate | events aeb_activation op=count
+how often did the car brake on its own | events aeb_activation op=count
+count of aeb interventions this month | events aeb_activation op=count
+number of automatic emergency stops | events aeb_activation op=count
+list the aeb activations | events aeb_activation op=list
+show every time emergency braking acted | events aeb_activation op=list
+when did the car last brake automatically | events aeb_activation op=last
+when was the latest aeb event | events aeb_activation op=last
+the most recent emergency braking intervention | events aeb_activation op=last
+what happened before the emergency braking | context aeb_activation
+what was the road like when aeb kicked in | context aeb_activation
+signals around the automatic braking | context aeb_activation
+why did the car brake automatically | why aeb_activation
+what triggered the emergency braking | why aeb_activation
+what is aeb | define aeb_activation
+what does automatic emergency braking do | define aeb_activation
+# ---------------------------------------------------------------- CAN error
+were there any can errors | events can_error op=exists
+did the bus report communication errors | events can_error op=exists
+any network faults on the can | events can_error op=exists
+did the body bus have errors | events can_error op=exists
+has a module lost communication | events can_error op=exists
+how many can errors were there | events can_error op=count
+how many communication errors this month | events can_error op=count
+count the bus error bursts | events can_error op=count
+number of times the network threw errors | events can_error op=count
+list the can errors | events can_error op=list
+show me every bus communication fault | events can_error op=list
+when was the last can error | events can_error op=last
+when did the bus last report a fault | events can_error op=last
+the latest communication error | events can_error op=last
+what happened before the bus errors | context can_error
+what was going on when the can errors started | context can_error
+why did the can bus have errors | why can_error
+what causes can error frames | why can_error
+what is a can error | define can_error
+what do bus error frames mean | define can_error
+# ---------------------------------------------------------------- invalid sensor reading
+did any sensor send an impossible value | events sensor_invalid_reading op=exists
+were there invalid readings | events sensor_invalid_reading op=exists
+any implausible sensor data lately | events sensor_invalid_reading op=exists
+has a reading ever been rejected as out of range | events sensor_invalid_reading op=exists
+how many invalid readings were dropped | events sensor_invalid_reading op=count
+how many bad sensor values did you reject | events sensor_invalid_reading op=count
+count of out of range readings this month | events sensor_invalid_reading op=count
+list the invalid sensor readings | events sensor_invalid_reading op=list
+show me the readings that were thrown away | events sensor_invalid_reading op=list
+when was the last invalid reading | events sensor_invalid_reading op=last
+the latest implausible value | events sensor_invalid_reading op=last
+what is an invalid sensor reading | define sensor_invalid_reading
+why would a sensor report an impossible value | why sensor_invalid_reading
+# ---------------------------------------------------------------- driver assistance state changes
+when did lane keeping switch off | events adas_state_change op=last
+when was driver assist last toggled | events adas_state_change op=last
+how many times did the assist turn on and off | events adas_state_change op=count
+how often did lane assist change state today | events adas_state_change op=count
+did the assist flip on and off repeatedly | events adas_state_change op=exists
+has lane keeping flapped | events adas_state_change op=exists
+list the times driver assistance switched state | events adas_state_change op=list
+show every lane assist on and off | events adas_state_change op=list
+what happened before the assist changed state | context adas_state_change
+why did the lane assist keep switching | why adas_state_change
+what is an assistance state change | define adas_state_change
+# ---------------------------------------------------------------- motor overtemperature
+did the motor ever overheat | events overtemp_warning op=exists
+has there been a motor overtemperature warning | events overtemp_warning op=exists
+was the drive unit too hot at any point | events overtemp_warning op=exists
+how many motor overheating warnings were there | events overtemp_warning op=count
+number of overtemperature warnings this month | events overtemp_warning op=count
+list the motor overtemperature warnings | events overtemp_warning op=list
+when did the motor last get too hot | events overtemp_warning op=last
+the latest overtemperature warning | events overtemp_warning op=last
+what happened before the motor overheated | context overtemp_warning
+why did the motor overheat | why overtemp_warning
+what causes the drive unit to overheat | why overtemp_warning
+what is an overtemperature warning | define overtemp_warning
+# ---------------------------------------------------------------- power derate
+did the car limit its power | events power_derate op=exists
+was the power ever reduced | events power_derate op=exists
+has the car gone into reduced power mode | events power_derate op=exists
+any torque limiting recently | events power_derate op=exists
+how many times was power derated | events power_derate op=count
+how often did the car cut my power | events power_derate op=count
+list the power derates | events power_derate op=list
+show every time the power was limited | events power_derate op=list
+when was the power last reduced | events power_derate op=last
+the latest derate | events power_derate op=last
+what happened before the power was limited | context power_derate
+why did the car limit my power | why power_derate
+why did it go into limp mode | why power_derate
+what is a power derate | define power_derate
+what does reduced power mode mean | define power_derate
+# ---------------------------------------------------------------- brake temperature and other signals added with the platform
+how hot are the brakes | now brake_temperature
+what is the brake disc temperature | now brake_temperature
+current brake temperature | now brake_temperature
+are the brakes overheating | now brake_temperature
+how hot did the brakes get on the last drive | extreme brake_temperature op=max
+the highest brake temperature this week | extreme brake_temperature op=max
+average brake temperature over the last month | stat brake_temperature op=mean
+brake temperature on the way down the hill | stat brake_temperature op=max
+what is brake temperature | define brake_temperature
+brake temperature trend over the last weeks | trend brake_temperature op=change
+how much torque is the steering applying | now steering_torque
+what is the steering torque | now steering_torque
+the highest steering torque this month | extreme steering_torque op=max
+what is the engine torque | now engine_torque
+the peak engine torque today | extreme engine_torque op=max
+what is the total acceleration | now acceleration_magnitude
+the strongest acceleration this week | extreme acceleration_magnitude op=max
+how tight was the sharpest turn | extreme turn_radius op=min
+what is the turning radius right now | now turn_radius
+what is the wind direction | now wind_direction
+# ---------------------------------------------------------------- sources and buses (the platform's own vocabulary)
+which bus had errors | events can_error op=list
+was any ecu unreachable | events can_error op=exists
+did a module drop off the network | events can_error op=exists
+were any control units restarting a lot | events ecu_reset op=count
+did anything reboot while the car was moving | events ecu_reset op=exists
+was there a power problem before the shutdown | context unexpected_shutdown
+did the voltage drop before the car died | context unexpected_shutdown
+did the speed readings from the two sources match | events sensor_conflict op=exists
+which readings did not agree | events sensor_conflict op=list
+did the emergency stop come with a hard brake | context aeb_activation
+how often did anything go wrong with communication | events can_error op=count
+# ---------------------------------------------------------------- ROUND 2 (2026-10-20, after the ontology gained: events as count series, text logs, sources, diagnostic status, provenance, charging ledger)
+# ---------------------------------------------------------------- how often: trends of an event
+are hard brakes becoming more frequent | trend hard_braking op=change
+has hard braking gone up or down lately | trend hard_braking op=change
+is harsh braking increasing | trend hard_braking op=change
+am i braking hard more than before | trend hard_braking op=change
+in which week did hard braking increase the most | trend hard_braking op=rise
+when did hard braking drop off the most | trend hard_braking op=drop
+has the number of adas disengagements gone up or down | trend adas_disengagement op=change
+is lane assist cutting out more often | trend adas_disengagement op=change
+are driver assistance dropouts getting worse | trend adas_disengagement op=change
+are fault codes appearing more often lately | trend diagnostic_code op=change
+is the number of diagnostic codes growing | trend diagnostic_code op=change
+which week had the biggest jump in fault codes | trend diagnostic_code op=rise
+are warnings becoming more common | trend any_warning op=change
+when did warnings fall the most | trend any_warning op=drop
+are tyre pressure warnings more frequent now | trend tyre_pressure_warning op=change
+is the camera getting blocked more often | trend camera_blocked op=change
+are ecu resets increasing | trend ecu_reset op=change
+are the controller reboots getting rarer | trend ecu_reset op=change
+are communication errors on the bus increasing | trend can_error op=change
+is the supply voltage dipping more often than before | trend voltage_dip op=change
+are sensor disagreements becoming more common | trend sensor_conflict op=change
+am i charging more often than i used to | trend charging_session op=change
+are the battery overheating warnings getting more frequent | trend battery_overheat_warning op=change
+has emergency braking activated more often recently | trend aeb_activation op=change
+# ---------------------------------------------------------------- how often: two periods or two conditions
+hard braking this week against last week | compare hard_braking op=count vs=period
+how many hard brakes this month compared with last month | compare hard_braking op=count vs=period
+adas disengagements this week versus the week before | compare adas_disengagement op=count vs=period
+how do this month's fault codes compare with last month's | compare diagnostic_code op=count vs=period
+did i get more warnings this week than last week | compare any_warning op=count vs=period
+tyre pressure warnings this month against last month | compare tyre_pressure_warning op=count vs=period
+camera blockages this week compared to last | compare camera_blocked op=count vs=period
+charging sessions this month versus the previous month | compare charging_session op=count vs=period
+ecu resets last week versus this week | compare ecu_reset op=count vs=period
+voltage dips this week against last week | compare voltage_dip op=count vs=period
+compare adas disengagements between highway and city driving | compare adas_disengagement op=count cond=highway vs=city
+are there more adas dropouts on the motorway than in town | compare adas_disengagement op=count cond=highway vs=city
+hard braking in the city versus on the motorway | compare hard_braking op=count cond=city vs=highway
+do i brake hard more in town or on the highway | compare hard_braking op=count cond=city vs=highway
+camera blockages while driving against while parked | compare camera_blocked op=count cond=driving vs=parked
+fault codes set while charging versus while driving | compare diagnostic_code op=count cond=charging vs=driving
+ecu resets at high speed against city driving | compare ecu_reset op=count cond=high_speed vs=city
+sensor conflicts on the highway compared with the city | compare sensor_conflict op=count cond=highway vs=city
+warnings in cold weather versus hot weather | compare any_warning op=count cond=cold vs=hot_weather
+# ---------------------------------------------------------------- how often: by day and by week
+which day had the most hard braking | extreme hard_braking op=max ent=day
+the day with the most hard brakes | extreme hard_braking op=max ent=day
+which day was the worst for harsh braking | extreme hard_braking op=max ent=day
+which day had the fewest hard braking events | extreme hard_braking op=min ent=day
+which week had the most adas disengagements | extreme adas_disengagement op=max ent=week
+the busiest week for fault codes | extreme diagnostic_code op=max ent=week
+which day had the most warnings | extreme any_warning op=max ent=day
+the day with the most diagnostic codes | extreme diagnostic_code op=max ent=day
+which week had the fewest warnings | extreme any_warning op=min ent=week
+which day did the camera get blocked the most | extreme camera_blocked op=max ent=day
+the day with the most tyre pressure warnings | extreme tyre_pressure_warning op=max ent=day
+on which day did the most ecu resets happen | extreme ecu_reset op=max ent=day
+on how many days did the car brake hard | events hard_braking op=count ent=day
+how many days had a warning | events any_warning op=count ent=day
+number of days with a fault code | events diagnostic_code op=count ent=day
+on how many days did the assist disengage | events adas_disengagement op=count ent=day
+how many weeks had a diagnostic code | events diagnostic_code op=count ent=week
+on how many days did the tyre warning come on | events tyre_pressure_warning op=count ent=day
+how many days did the camera get blocked | events camera_blocked op=count ent=day
+how many days did the car shut off unexpectedly | events unexpected_shutdown op=count ent=day
+# ---------------------------------------------------------------- the vehicle's text logs
+show me the log messages about the cooling pump | events service_log op=list
+what did the thermal manager log yesterday | events service_log op=list
+search the logs for watchdog | events service_log op=list
+find log lines that mention the gateway | events service_log op=list
+show the error lines from the power manager this week | events service_log op=list
+list what the battery management logged last night | events service_log op=list
+what did the qnx services report this morning | events service_log op=list
+any warnings in the system log about the camera | events service_log op=exists
+are there log entries mentioning voltage | events service_log op=exists
+did the diagnostic service log anything yesterday | events service_log op=exists
+how many log lines mention the pump | events service_log op=count
+count the log entries from the thermal manager | events service_log op=count
+how many warnings did the gateway log this month | events service_log op=count
+number of log messages about the coolant | events service_log op=count
+what is the latest log line about the battery | events service_log op=last
+the most recent log entry from the adas controller | events service_log op=last
+first log message about a reset | events service_log op=first
+when did the log first mention the pump | events service_log op=first
+what is the service log | define service_log
+what does the system log contain | define service_log
+# ---------------------------------------------------------------- cleared codes, software updates, silent sources
+when was a diagnostic code last cleared | events diagnostic_code_cleared op=last
+has a fault code ever been cleared | events diagnostic_code_cleared op=exists
+how many times were codes cleared | events diagnostic_code_cleared op=count
+list the times the fault memory was cleared | events diagnostic_code_cleared op=list
+when did the codes get erased | events diagnostic_code_cleared op=last
+who cleared the fault codes and when | events diagnostic_code_cleared op=last
+the first time a code was cleared | events diagnostic_code_cleared op=first
+what is a cleared diagnostic code | define diagnostic_code_cleared
+when was the software last updated | events software_update op=last
+has the vehicle ever been updated over the air | events software_update op=exists
+how many software updates have there been | events software_update op=count
+list the software updates | events software_update op=list
+when did the car get its last firmware update | events software_update op=last
+which version did the update install | events software_update op=last
+what happened before the software update | context software_update
+what is a software update | define software_update
+did any data source stop sending | events source_dropout op=exists
+has a bus ever gone silent | events source_dropout op=exists
+which bus went silent last week | events source_dropout op=list
+how many times did a source drop out | events source_dropout op=count
+count the bus dropouts this month | events source_dropout op=count
+when did a source last stop transmitting | events source_dropout op=last
+the first time a bus went quiet | events source_dropout op=first
+what happened before the bus went silent | context source_dropout
+why did the body bus drop out | why source_dropout
+did anything stop communicating while i was driving | events source_dropout op=exists
+did a source drop out on the highway | events source_dropout op=exists cond=highway
+how long was the body bus down in total | stat source_dropout op=duration
+the total time a data source was silent this month | stat source_dropout op=duration
+how long did the bus dropouts last altogether | stat source_dropout op=duration
+what is a source dropout | define source_dropout
+# ---------------------------------------------------------------- who reported it
+which subsystem has the most fault codes | extreme diagnostic_code op=max ent=source
+fault codes broken down by subsystem | events diagnostic_code op=count ent=source
+how many codes were set in each subsystem | events diagnostic_code op=count ent=source
+which part of the car throws the most diagnostic codes | extreme diagnostic_code op=max ent=source
+which ecu resets the most | extreme ecu_reset op=max ent=source
+which controller restarted most often | extreme ecu_reset op=max ent=source
+which units reset this month | events ecu_reset op=list ent=source
+resets per control unit | events ecu_reset op=count ent=source
+which bus dropped out the most | extreme source_dropout op=max ent=source
+which bus had the most communication errors | extreme can_error op=max ent=source
+what were the reasons the assist disengaged | events adas_disengagement op=count ent=source
+why does lane assist usually disengage | extreme adas_disengagement op=max ent=source
+which subsystem has the fewest fault codes | extreme diagnostic_code op=min ent=source
+# ---------------------------------------------------------------- the state of the diagnostic codes
+which diagnostic codes are active | health diagnostic_status
+list the active fault codes | health diagnostic_status
+how many fault codes are currently set | health diagnostic_status
+are there any open fault codes | health diagnostic_status
+what is the state of my diagnostic codes | health diagnostic_status
+which codes were cleared | health diagnostic_status
+did any code come back after being cleared | health diagnostic_status
+which diagnostic codes were set but never cleared | health diagnostic_status
+are there unresolved fault codes | health diagnostic_status
+is the diagnostic memory clean | health diagnostic_status
+show me the fault code status | health diagnostic_status
+which codes keep coming back | health diagnostic_status
+what is the diagnostic status | define diagnostic_status
+# ---------------------------------------------------------------- one code, typed
+show the p0a94 history | events diagnostic_code op=list
+how often does p0a94 occur | events diagnostic_code op=count
+when was p1a00 last set | events diagnostic_code op=last
+has u0140 ever been stored | events diagnostic_code op=exists
+the first time p0562 appeared | events diagnostic_code op=first
+how many times has c0752 been set | events diagnostic_code op=count
+history of the b1000 code | events diagnostic_code op=list
+did u0155 come back | events diagnostic_code op=exists
+# ---------------------------------------------------------------- where a measurement comes from
+which sources provide vehicle speed | spec speed
+where does the speed reading come from | spec speed
+is speed read from more than one source | spec speed
+what is the update rate of the speed signal | spec speed
+where does the battery temperature come from | spec battery_temperature
+which bus carries the motor temperature | spec motor_temperature
+how often is the state of charge updated | spec battery_soc
+how many sources report the outside temperature | spec ambient_temperature
+what unit and range does the pack voltage use | spec battery_voltage
+where does the lane confidence come from | spec lane_confidence
+what feeds the coolant flow reading | spec coolant_flow
+which message carries the pack current | spec battery_current
+# ---------------------------------------------------------------- charging sessions from the ledger
+how long did the last charging session take | events charging_session op=last
+when did the last charge finish | events charging_session op=last
+how many kwh did the last dc fast charge add | events charging_session op=last cond=fast_charging
+when did i last fast charge | events charging_session op=last cond=fast_charging
+how often do i fast charge | events charging_session op=count cond=fast_charging
+how many fast charges did i do this month | events charging_session op=count cond=fast_charging
+list my recent dc charges | events charging_session op=list cond=fast_charging
+did i fast charge last week | events charging_session op=exists cond=fast_charging
+when did the last slow charge finish | events charging_session op=last cond=not_fast_charging
+how many home charges this month | events charging_session op=count cond=not_fast_charging
+which charger location did i use most | extreme charging_session op=max ent=place
+where do i charge most often | extreme charging_session op=max ent=place
+the place i charged at least | extreme charging_session op=min ent=place
+did i charge last night | events charging_session op=exists
+# ---------------------------------------------------------------- an on / off state over time
+how much time was lane keeping on | stat adas_state op=duration
+what percentage of my driving used lane keeping | stat adas_state op=share
+share of the time driver assist was engaged | stat adas_state op=share
+how long was lane assist active last week | stat adas_state op=duration
+how much of the drive was the lane keeping engaged | stat adas_state op=share
+how long was the assistance system working today | stat adas_state op=duration
+# ---------------------------------------------------------------- limits on distances and confidences
+how often was the lead vehicle closer than 10 metres | stat lead_vehicle_distance op=count cond=threshold
+how long did the gap to the car ahead stay under 15 metres | stat lead_vehicle_distance op=duration cond=threshold
+how much of the time was the following distance below 20 metres | stat lead_vehicle_distance op=share cond=threshold
+how many times did the lane confidence fall below 0.5 | stat lane_confidence op=count cond=threshold
+how long was the lane confidence under 50 percent | stat lane_confidence op=duration cond=threshold
+# ---------------------------------------------------------------- readings that earlier versions misread
+how many resets did the gateway have | events ecu_reset op=count
+did the motor get power limited | events power_derate op=exists
+did the motor torque ever get limited | events power_derate op=exists
+how many times did aeb activate on the highway | events aeb_activation op=count cond=highway
+how often was the camera blocked during highway driving | events camera_blocked op=count cond=highway
+how many hard brakes did i do in the city | events hard_braking op=count cond=city
+adas disengagements on the motorway this week | events adas_disengagement op=count cond=highway
+fault codes set while charging | events diagnostic_code op=count cond=charging
+did the car shut down unexpectedly while driving | events unexpected_shutdown op=exists cond=driving
+did any ecu reset while i was driving | events ecu_reset op=exists cond=driving

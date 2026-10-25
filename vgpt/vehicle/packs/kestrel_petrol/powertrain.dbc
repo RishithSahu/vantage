@@ -1,0 +1,57 @@
+VERSION "Kestrel C3 1.5 petrol - powertrain CAN 500 kbit/s (11-bit)"
+
+NS_ :
+
+BS_:
+
+BU_: ECM TCM ABS BCM CLU
+
+BO_ 513 ENG_DATA: 8 ECM
+ SG_ EngSpeed : 0|16@1+ (0.25,0) [0|8000] "rpm" Vector__XXX
+ SG_ EngLoad : 16|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ ThrottlePos : 24|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ CoolantTemp : 32|8@1+ (1,-40) [-40|215] "degC" Vector__XXX
+ SG_ OilTemp : 40|8@1+ (1,-40) [-40|215] "degC" Vector__XXX
+
+BO_ 514 ENG_AIR: 8 ECM
+ SG_ MAP : 0|8@1+ (1,0) [0|255] "kPa" Vector__XXX
+ SG_ IntakeAirTemp : 8|8@1+ (1,-40) [-40|215] "degC" Vector__XXX
+ SG_ MAF : 16|16@1+ (0.01,0) [0|655] "g/s" Vector__XXX
+ SG_ BaroPress : 32|8@1+ (1,0) [0|255] "kPa" Vector__XXX
+
+BO_ 515 ENG_FUEL: 8 ECM
+ SG_ FuelRate : 0|16@1+ (0.01,0) [0|100] "L/h" Vector__XXX
+ SG_ FuelLevel : 16|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ FuelTrimST : 24|8@1+ (0.78125,-100) [-100|99.2] "%" Vector__XXX
+ SG_ FuelTrimLT : 32|8@1+ (0.78125,-100) [-100|99.2] "%" Vector__XXX
+
+BO_ 516 ENG_EXH: 8 ECM
+ SG_ Lambda : 0|16@1+ (0.001,0) [0|2] "" Vector__XXX
+ SG_ CatalystTemp : 16|16@1+ (0.1,-40) [-40|1000] "degC" Vector__XXX
+ SG_ IgnTiming : 32|8@1+ (0.5,-64) [-64|63.5] "deg" Vector__XXX
+
+BO_ 768 VEH_DYN: 8 ABS
+ SG_ VehSpeed : 0|16@1+ (0.01,0) [0|300] "km/h" Vector__XXX
+ SG_ BrakePedal : 16|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ SteerAngle : 24|16@1- (0.1,0) [-780|780] "deg" Vector__XXX
+ SG_ YawRate : 40|16@1- (0.01,0) [-120|120] "deg/s" Vector__XXX
+
+BO_ 769 VEH_ACC: 8 ABS
+ SG_ LatAcc : 0|16@1- (0.001,0) [-3|3] "g" Vector__XXX
+ SG_ LongAcc : 16|16@1- (0.001,0) [-3|3] "g" Vector__XXX
+
+BO_ 928 TPMS: 8 BCM
+ SG_ PressFL : 0|8@1+ (2,0) [0|510] "kPa" Vector__XXX
+ SG_ PressFR : 8|8@1+ (2,0) [0|510] "kPa" Vector__XXX
+ SG_ PressRL : 16|8@1+ (2,0) [0|510] "kPa" Vector__XXX
+ SG_ PressRR : 24|8@1+ (2,0) [0|510] "kPa" Vector__XXX
+ SG_ TyreTemp : 32|8@1+ (1,-40) [-40|215] "degC" Vector__XXX
+
+BO_ 936 BODY_ENV: 8 BCM
+ SG_ AmbientTemp : 0|8@1+ (0.5,-40) [-40|87] "degC" Vector__XXX
+ SG_ Batt12V : 8|16@1+ (0.001,0) [0|20] "V" Vector__XXX
+ SG_ Rain : 24|8@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 944 CLUSTER: 8 CLU
+ SG_ Odometer : 0|32@1+ (0.1,0) [0|999999] "km" Vector__XXX
+

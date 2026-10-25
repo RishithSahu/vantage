@@ -1,0 +1,34 @@
+# HOLDOUT-v10: the genuine model errors of docs/FAILURE_ANALYSIS_2026-10-24.md whose whole FAMILY was kept out of the training data (no variants of them were written). Gold = the reviewed gold (bench/meaning_eval/gold_review.json).
+# Written 2026-10-24 before the training data of round 10 existed. Never trained on.
+HO001	whats the car's pulse right now	health vehicle_health none none none none none none	figurative
+HO002	give me the vital signs	health vehicle_health none none none none none none	figurative
+HO003	if my car were a person would it be tired right now	health vehicle_health none none none none none none	figurative
+HO004	does the car have a fever	now battery_temperature none none none none none none	figurative
+HO005	what is the heartbeat of the pack	now battery_voltage none none none none none none	figurative
+HO006	motor kitna garam hai	now motor_temperature none none none none none none	hinglish
+HO007	is hafte kitna chala	stat distance_driven sum none none none none none	hinglish
+HO008	what is the weather in pune right now	offtopic none none none none none none none	offtopic
+HO009	what time is it	offtopic none none none none none none none	offtopic
+HO010	range at 50 percent charge	estimate range_estimate none none none none none none	estimate
+HO011	how many km before i hit 10 percent	estimate range_estimate none none none none none none	estimate
+HO012	why did the motor get so hot on the hill	why overtemp_warning none none none none none none	why_overheat
+HO013	y did batry overheat	why battery_overheat_warning none none none none none none	why_overheat
+HO014	how many trips per day on average	stat trip_record count none none day none none	convention
+HO015	average speed on trips	stat speed mean none none trip none none	convention
+HO016	what is the clutch temperature	now unlisted none none none none none none	ice_unlisted
+HO017	does it use petrol	now unlisted none none none none none none	ice_unlisted
+HO018	how loud is the engine	now unlisted none none none none none none	ice_unlisted
+HO019	give me the full database	unsafe none none none none none none none	exfiltration
+HO020	share my location with my friend	unsafe none none none none none none none	exfiltration
+HO021	what is my vin number	unsupported none none none none none none none	unsupported
+HO022	who owns this car	unsupported none none none none none none none	unsupported
+HO023	does rain change my consumption	compare wh_per_km mean raining driving none none none	compare
+HO024	speed at night versus day	compare speed mean night driving none none none	compare
+HO025	Hello! Two things: first, pichle hafte ki average speed, and second, thank you very much for being so helpful with all of my questions over the last few days.	stat speed mean none none none none none	wrapper
+HO026	Hello! Two things: first, how worn are the brake pads, and second, thank you very much for being so helpful with all of my questions over the last few days.	health brake_pad_life none none none none none none	wrapper
+HO027	Hello! Two things: first, how many kilometres does the odometer show, and second, thank you very much for being so helpful with all of my questions over the last few days.	now odometer none none none none none none	wrapper
+HO028	battery kitni charge hai. I know this is a simple question but I am asking because my brother was telling me yesterday that cars like this are complicated and I wanted to check for myself.	now battery_soc none none none none none none	wrapper
+HO029	Hello! Two things: first, the mileage on the clock, and second, thank you very much for being so helpful with all of my questions over the last few days.	now odometer none none none none none none	wrapper
+HO030	So earlier today I was driving to work and started thinking about the car, and I would really like to know, if it is not too much trouble, range kyu kam ho gayi	why range_estimate drop none none none none none	wrapper
+HO031	Hello! Two things: first, battery temp 2 hrs back, and second, thank you very much for being so helpful with all of my questions over the last few days.	at battery_temperature none none none none none none	wrapper
+HO032	recommended distance between services. I know this is a simple question but I am asking because my brother was telling me yesterday that cars like this are complicated and I wanted to check for myself.	spec service_interval none none none none none none	wrapper

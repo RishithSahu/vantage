@@ -1,0 +1,12 @@
+llama_adapter_lora_init_impl: lora for 'blk.11.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.12.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.14.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.15.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.17.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.18.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.2.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.20.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.22.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.23.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.4.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU
+llama_adapter_lora_init_impl: lora for 'blk.5.ffn_down.weight' cannot use buft 'CPU_REPACK', fallback to CPU

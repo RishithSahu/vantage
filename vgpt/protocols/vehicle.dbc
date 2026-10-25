@@ -1,0 +1,35 @@
+VERSION "VehicleGPT demo EV v2"
+
+NS_ :
+
+BS_:
+
+BU_: PT BMS THERM HVAC CHG
+
+BO_ 256 VehDyn: 8 PT
+ SG_ Speed : 0|16@1+ (0.01,0) [0|655.35] "km/h" Vector__XXX
+ SG_ Gear : 16|8@1+ (1,0) [0|8] "" Vector__XXX
+
+BO_ 512 BmsStatus: 16 BMS
+ SG_ Soc : 0|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ PackVolt : 16|16@1+ (0.1,0) [0|1000] "V" Vector__XXX
+ SG_ PackCurrent : 32|16@1- (0.1,0) [-3276.8|3276.7] "A" Vector__XXX
+ SG_ BattTemp : 48|16@1- (0.1,0) [-100|200] "degC" Vector__XXX
+ SG_ CellTempMax : 64|16@1- (0.1,0) [-100|200] "degC" Vector__XXX
+ SG_ CellTempMin : 80|16@1- (0.1,0) [-100|200] "degC" Vector__XXX
+ SG_ CellVoltMin : 96|16@1+ (0.001,0) [0|6] "V" Vector__XXX
+
+BO_ 528 Thermal: 8 THERM
+ SG_ CoolantFlow : 0|16@1+ (0.1,0) [0|100] "L/min" Vector__XXX
+ SG_ PumpRpm : 16|16@1+ (1,0) [0|8000] "rpm" Vector__XXX
+ SG_ MotorTemp : 32|16@1- (0.1,0) [-100|300] "degC" Vector__XXX
+
+BO_ 768 Climate: 8 HVAC
+ SG_ AmbTemp : 0|16@1- (0.1,0) [-100|100] "degC" Vector__XXX
+ SG_ HvacPower : 16|16@1+ (10,0) [0|10000] "W" Vector__XXX
+
+BO_ 784 Charger: 8 CHG
+ SG_ ChgKw : 7|16@0+ (0.1,0) [0|600] "kW" Vector__XXX
+ SG_ ChgState : 23|8@0+ (1,0) [0|3] "" Vector__XXX
+
+VAL_ 784 ChgState 0 "idle" 1 "charging" 2 "full" 3 "fault" ;

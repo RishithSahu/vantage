@@ -1,0 +1,36 @@
+{
+ "id": "chrysler_pacifica_phev",
+ "name": "Chrysler Pacifica Hybrid (2017)",
+ "year": 2017,
+ "region": "USA",
+ "powertrain": "petrol",
+ "class": "Plug-in hybrid minivan (simulated with the petrol drive)",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Chrysler Pacifica Hybrid (2017) database (accelerator_position, brake_pedal, brake_pressure, door_state, engine_rpm, engine_torque, gear, seatbelt_state, speed, steering_angle, steering_rate, steering_torque ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Android infotainment (logcat)",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 12 drafted, 166 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): chrysler_pacifica_2017_hybrid_generated.dbc",
+ "bound": 34,
+ "concepts": 34,
+ "extension": [
+  "ambient_temperature",
+  "aux_battery_voltage",
+  "barometric_pressure",
+  "cabin_temperature",
+  "engine_oil_temperature",
+  "fuel_level",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

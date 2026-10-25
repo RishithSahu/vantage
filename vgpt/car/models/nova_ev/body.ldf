@@ -1,0 +1,70 @@
+/* LIN 2.1 body network of the demonstration cars (written for the test bench) */
+LIN_description_file;
+LIN_protocol_version = "2.1";
+LIN_language_version = "2.1";
+LIN_speed = 19.2 kbps;
+
+Nodes {
+  Master: BCM, 5 ms, 0.1 ms;
+  Slaves: RAINLIGHT, SEATDRV, CLIMATE;
+}
+
+Signals {
+  RainIntensity: 4, 0, RAINLIGHT, BCM;
+  AmbientLight: 12, 0, RAINLIGHT, BCM;
+  TunnelDetected: 1, 0, RAINLIGHT, BCM;
+  SeatHeatLevel: 3, 0, SEATDRV, BCM;
+  SeatBelt: 1, 0, SEATDRV, BCM;
+  SeatPos: 8, 0, SEATDRV, BCM;
+  CabinTemp: 10, 0, CLIMATE, BCM;
+  CabinHumidity: 7, 0, CLIMATE, BCM;
+  FlapPos: 8, 0, CLIMATE, BCM;
+}
+
+Frames {
+  RainLight: 0x10, RAINLIGHT, 3 {
+    RainIntensity, 0;
+    AmbientLight, 4;
+    TunnelDetected, 16;
+  }
+  SeatDriver: 0x11, SEATDRV, 3 {
+    SeatHeatLevel, 0;
+    SeatBelt, 3;
+    SeatPos, 8;
+  }
+  ClimateSensor: 0x12, CLIMATE, 4 {
+    CabinTemp, 0;
+    CabinHumidity, 10;
+    FlapPos, 17;
+  }
+}
+
+Node_attributes {
+  RAINLIGHT { LIN_protocol = "2.1"; configured_NAD = 0x20; initial_NAD = 0x20; product_id = 0x1234, 0x0001, 0; response_error = TunnelDetected; P2_min = 50 ms; ST_min = 0 ms; N_As_timeout = 1000 ms; N_Cr_timeout = 1000 ms; configurable_frames { RainLight; } }
+  SEATDRV { LIN_protocol = "2.1"; configured_NAD = 0x21; initial_NAD = 0x21; product_id = 0x1234, 0x0002, 0; response_error = SeatBelt; P2_min = 50 ms; ST_min = 0 ms; N_As_timeout = 1000 ms; N_Cr_timeout = 1000 ms; configurable_frames { SeatDriver; } }
+  CLIMATE { LIN_protocol = "2.1"; configured_NAD = 0x22; initial_NAD = 0x22; product_id = 0x1234, 0x0003, 0; response_error = FlapPos; P2_min = 50 ms; ST_min = 0 ms; N_As_timeout = 1000 ms; N_Cr_timeout = 1000 ms; configurable_frames { ClimateSensor; } }
+}
+
+Schedule_tables {
+  Normal { RainLight delay 10 ms; SeatDriver delay 10 ms; ClimateSensor delay 10 ms; }
+}
+
+Signal_encoding_types {
+  RainEnc { physical_value, 0, 10, 1, 0, "level"; }
+  LuxEnc { physical_value, 0, 2047, 1, 0, "lux"; physical_value, 2048, 4095, 64, -129024, "lux"; }
+  FlagEnc { logical_value, 0, "off"; logical_value, 1, "on"; }
+  HeatEnc { logical_value, 0, "off"; logical_value, 1, "low"; logical_value, 2, "medium"; logical_value, 3, "high"; }
+  TempEnc { physical_value, 0, 1023, 0.1, -20, "degC"; }
+  HumEnc { physical_value, 0, 100, 1, 0, "%"; }
+  PosEnc { physical_value, 0, 255, 0.392157, 0, "%"; }
+}
+
+Signal_representation {
+  RainEnc: RainIntensity;
+  LuxEnc: AmbientLight;
+  FlagEnc: TunnelDetected, SeatBelt;
+  HeatEnc: SeatHeatLevel;
+  TempEnc: CabinTemp;
+  HumEnc: CabinHumidity;
+  PosEnc: SeatPos, FlapPos;
+}

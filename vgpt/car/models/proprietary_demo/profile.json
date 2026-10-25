@@ -1,0 +1,240 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "proprietary_demo",
+ "vehicle": {
+  "make": "Unknown OEM (dummy)",
+  "model": "PX-1 with a proprietary CAN",
+  "year": 2022,
+  "powertrain": "petrol",
+  "specs": {
+   "veh.tyre_spec_front": 230,
+   "veh.tyre_spec_rear": 230,
+   "veh.service_km": 15000,
+   "veh.sw": "px 1.0",
+   "veh.wheelbase_m": 2.65,
+   "veh.wheel_radius_m": 0.32,
+   "veh.rated_max_speed": 190,
+   "veh.seats": 5,
+   "veh.tank_l": 55,
+   "veh.model": "Unknown OEM (dummy) PX-1 with a proprietary CAN"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "px",
+   "type": "can",
+   "name": "Proprietary CAN 500 kbit/s (DUMMY decoder file: invented layouts)",
+   "dbc": "proprietary_dummy.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Linux telematics / infotainment (syslog)",
+   "format": "rfc3164"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  }
+ ],
+ "signals": [
+  {
+   "concept": "speed",
+   "from": "can:px/PX_MOTION.PxSpeed",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "engine_rpm",
+   "from": "can:px/PX_MOTION.PxEngine",
+   "unit": "rpm",
+   "rate_hz": 20
+  },
+  {
+   "concept": "accelerator_position",
+   "from": "can:px/PX_MOTION.PxThrottle",
+   "unit": "%",
+   "rate_hz": 20
+  },
+  {
+   "concept": "brake_pedal",
+   "from": "can:px/PX_MOTION.PxBrake",
+   "unit": "%",
+   "rate_hz": 20
+  },
+  {
+   "concept": "steering_angle",
+   "from": "can:px/PX_MOTION.PxSteer",
+   "unit": "deg",
+   "rate_hz": 20
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:px/PX_THERMAL.PxCoolant",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "engine_oil_temperature",
+   "from": "can:px/PX_THERMAL.PxOil",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "can:px/PX_THERMAL.PxOutside",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "fuel_level",
+   "from": "can:px/PX_THERMAL.PxFuel",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "can:px/PX_THERMAL.PxSupply",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:px/PX_WHEELS.PxTyreA",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:px/PX_WHEELS.PxTyreB",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:px/PX_WHEELS.PxTyreC",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:px/PX_WHEELS.PxTyreD",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "can:px/PX_STATE.PxOdometer",
+   "unit": "km",
+   "rate_hz": 1
+  },
+  {
+   "concept": "_ignition",
+   "from": "can:px/PX_STATE.PxKey",
+   "unit": "none",
+   "rate_hz": 5
+  }
+ ],
+ "events": [
+  {
+   "id": "overtemp",
+   "from": "signal:motor_temperature",
+   "when": ">105",
+   "hold_s": 10,
+   "type": "WARN_OVERTEMP",
+   "severity": "critical",
+   "detail": "Coolant above 105 °C ({value:.1f} °C)"
+  },
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

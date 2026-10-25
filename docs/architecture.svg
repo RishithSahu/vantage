@@ -1,0 +1,309 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1236" width="1600" height="1236" font-family="Segoe UI, system-ui, Helvetica, Arial, sans-serif">
+<defs><marker id="mp1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0b6fb8"/></marker><marker id="mp2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7b3fb5"/></marker><marker id="mp3" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="mp4" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e8449"/></marker><marker id="mn" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5b6475"/></marker></defs>
+<rect width="1600" height="1236" fill="#ffffff"/>
+<text x="24" y="40" font-size="25" fill="#1a1a2e" text-anchor="start" font-weight="700">Vantage - an on-device vehicle assistant that reads every bus, answers in plain language, and says WHY</text>
+<text x="24" y="64" font-size="14" fill="#445" text-anchor="start">Runs inside the car: no cloud, 2 GB, 2 ARM cores. The same build scales from the in-car board to a vehicle HPC. Every number below was measured; none is typed in.</text>
+<rect x="16" y="80" width="384" height="100" rx="12" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" />
+<circle cx="40" cy="106" r="15" fill="#0b6fb8"/>
+<text x="40" y="112" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">1</text>
+<text x="62" y="112" font-size="17" fill="#0b6fb8" text-anchor="start" font-weight="700">Multiple protocols</text>
+<text x="30" y="136" font-size="12.5" fill="#1a1a2e" text-anchor="start">9 bus families, recognised with no per-car setup;</text>
+<text x="30" y="152" font-size="12.5" fill="#1a1a2e" text-anchor="start">each decoder checked against an independent</text>
+<text x="30" y="168" font-size="12.5" fill="#1a1a2e" text-anchor="start">implementation (cantools, scapy, udsoncan, can-j1939 ...)</text>
+<rect x="412" y="80" width="384" height="100" rx="12" fill="#f3ecfa" stroke="#7b3fb5" stroke-width="1.6" />
+<circle cx="436" cy="106" r="15" fill="#7b3fb5"/>
+<text x="436" y="112" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">2</text>
+<text x="458" y="112" font-size="17" fill="#7b3fb5" text-anchor="start" font-weight="700">Explaining causes</text>
+<text x="426" y="136" font-size="12.5" fill="#1a1a2e" text-anchor="start">Sealed test, 74 planted faults: right cause 87.8 % first,</text>
+<text x="426" y="152" font-size="12.5" fill="#1a1a2e" text-anchor="start">95.9 % in the top 3; invented causes: 0.0 %.</text>
+<text x="426" y="168" font-size="12.5" fill="#1a1a2e" text-anchor="start">Recorded events: 322 / 322 traced to the planted cause.</text>
+<rect x="808" y="80" width="384" height="100" rx="12" fill="#fdecea" stroke="#c0392b" stroke-width="1.6" />
+<circle cx="832" cy="106" r="15" fill="#c0392b"/>
+<text x="832" y="112" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">3</text>
+<text x="854" y="112" font-size="17" fill="#c0392b" text-anchor="start" font-weight="700">Safety isolation</text>
+<text x="822" y="136" font-size="12.5" fill="#1a1a2e" text-anchor="start">Raspberry Pi 4, real kernel: 22 / 22 escape attempts refused;</text>
+<text x="822" y="152" font-size="12.5" fill="#1a1a2e" text-anchor="start">0 missed deadlines of a 100 Hz safety loop in 10 stress scenarios,</text>
+<text x="822" y="168" font-size="12.5" fill="#1a1a2e" text-anchor="start">worst wake-up delay 390 us against a 1000 us deadline.</text>
+<rect x="1204" y="80" width="384" height="100" rx="12" fill="#eafaf1" stroke="#1e8449" stroke-width="1.6" />
+<circle cx="1228" cy="106" r="15" fill="#1e8449"/>
+<text x="1228" y="112" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">4</text>
+<text x="1250" y="112" font-size="17" fill="#1e8449" text-anchor="start" font-weight="700">Scalability to a vehicle HPC</text>
+<text x="1218" y="136" font-size="12.5" fill="#1a1a2e" text-anchor="start">One build, 2 cores / 2 GB up to 6 worker processes:</text>
+<text x="1218" y="152" font-size="12.5" fill="#1a1a2e" text-anchor="start">5.23 -&gt; 12.82 answers/s; 16 cars into one hub at 1977 records/s;</text>
+<text x="1218" y="168" font-size="12.5" fill="#1a1a2e" text-anchor="start">the autoscaler adds workers and sheds load to hold 2 s.</text>
+<rect x="16" y="200" width="290" height="500" rx="10" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" />
+<circle cx="40" cy="224" r="15" fill="#0b6fb8"/>
+<text x="40" y="230" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">1</text>
+<text x="62" y="230" font-size="15" fill="#0b6fb8" text-anchor="start" font-weight="700">The vehicle: what it speaks</text>
+<rect x="28" y="246" width="266" height="34" rx="7" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" fill-opacity="0.9"/>
+<text x="38" y="261" font-size="13" fill="#1a1a2e" text-anchor="start" font-weight="700">CAN - CAN-FD (DBC)</text>
+<text x="38" y="275" font-size="10.5" fill="#445" text-anchor="start">checked against: cantools on 77 real-car DBCs</text>
+<rect x="28" y="286" width="266" height="34" rx="7" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" fill-opacity="0.9"/>
+<text x="38" y="301" font-size="13" fill="#1a1a2e" text-anchor="start" font-weight="700">SAE J1939 - BAM, RTS/CTS, DM1</text>
+<text x="38" y="315" font-size="10.5" fill="#445" text-anchor="start">checked against: can-j1939 library</text>
+<rect x="28" y="326" width="266" height="34" rx="7" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" fill-opacity="0.9"/>
+<text x="38" y="341" font-size="13" fill="#1a1a2e" text-anchor="start" font-weight="700">OBD-II - ISO-TP</text>
+<text x="38" y="355" font-size="10.5" fill="#445" text-anchor="start">checked against: python-can-isotp, 1-4095 B</text>
+<rect x="28" y="366" width="266" height="34" rx="7" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" fill-opacity="0.9"/>
+<text x="38" y="381" font-size="13" fill="#1a1a2e" text-anchor="start" font-weight="700">UDS (ISO 14229) - DTCs</text>
+<text x="38" y="395" font-size="10.5" fill="#445" text-anchor="start">checked against: udsoncan</text>
+<rect x="28" y="406" width="266" height="34" rx="7" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" fill-opacity="0.9"/>
+<text x="38" y="421" font-size="13" fill="#1a1a2e" text-anchor="start" font-weight="700">SOME/IP - Service Discovery</text>
+<text x="38" y="435" font-size="10.5" fill="#445" text-anchor="start">checked against: scapy</text>
+<rect x="28" y="446" width="266" height="34" rx="7" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" fill-opacity="0.9"/>
+<text x="38" y="461" font-size="13" fill="#1a1a2e" text-anchor="start" font-weight="700">Android VHAL properties</text>
+<text x="38" y="475" font-size="10.5" fill="#445" text-anchor="start">checked against: AOSP VehicleProperty</text>
+<rect x="28" y="486" width="266" height="34" rx="7" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" fill-opacity="0.9"/>
+<text x="38" y="501" font-size="13" fill="#1a1a2e" text-anchor="start" font-weight="700">NMEA 0183 GNSS</text>
+<text x="38" y="515" font-size="10.5" fill="#445" text-anchor="start">checked against: pynmea2</text>
+<rect x="28" y="526" width="266" height="34" rx="7" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" fill-opacity="0.9"/>
+<text x="38" y="541" font-size="13" fill="#1a1a2e" text-anchor="start" font-weight="700">Logs: logcat - syslog - slog2</text>
+<text x="38" y="555" font-size="10.5" fill="#445" text-anchor="start">checked against: published line formats</text>
+<rect x="28" y="566" width="266" height="34" rx="7" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" fill-opacity="0.9"/>
+<text x="38" y="581" font-size="13" fill="#1a1a2e" text-anchor="start" font-weight="700">Camera: JPEG - ADAS records</text>
+<text x="38" y="595" font-size="10.5" fill="#445" text-anchor="start">checked against: decode + schema tests</text>
+<text x="28" y="622" font-size="12" fill="#334" text-anchor="start">A new car needs no code: Vantage fingerprints</text>
+<text x="28" y="638" font-size="12" fill="#334" text-anchor="start">the wires, maps signals it is sure of and refuses</text>
+<text x="28" y="654" font-size="12" fill="#334" text-anchor="start">the rest (831 reviewed signals, 76 DBCs, 0 wrong).</text>
+<text x="28" y="680" font-size="12" fill="#0b6fb8" text-anchor="start" font-weight="700">J1939: 1785-byte transfers rebuilt from packets</text>
+<rect x="16" y="716" width="290" height="100" rx="10" fill="#fdecea" stroke="#c0392b" stroke-width="1.6" />
+<text x="28" y="740" font-size="14" fill="#c0392b" text-anchor="start" font-weight="700">Vehicle control and safety functions</text>
+<text x="28" y="760" font-size="12.5" fill="#1a1a2e" text-anchor="start">Brakes - steering - ADAS - airbags</text>
+<text x="28" y="776" font-size="12.5" fill="#1a1a2e" text-anchor="start">own cores, real-time priority, own memory;</text>
+<text x="28" y="792" font-size="12.5" fill="#1a1a2e" text-anchor="start">they never wait for the assistant</text>
+<text x="28" y="810" font-size="11" fill="#c0392b" text-anchor="start" font-style="italic">100 Hz loop, 200 us work, 1 ms deadline</text>
+<line x1="306" y1="330" x2="346" y2="330" stroke="#0b6fb8" stroke-width="3" marker-end="url(#mp1)"/>
+<text x="326" y="302" font-size="10.5" fill="#0b6fb8" text-anchor="middle" font-weight="700">listen-</text>
+<text x="326" y="314" font-size="10.5" fill="#0b6fb8" text-anchor="middle" font-weight="700">only</text>
+<g><rect x="311" y="398" width="30" height="20" rx="4" fill="#fff" stroke="#c0392b" stroke-width="1.6"/><text x="326" y="413" font-size="13" text-anchor="middle" fill="#c0392b" font-weight="700">TX</text><line x1="311" y1="418" x2="341" y2="398" stroke="#c0392b" stroke-width="2.4"/></g>
+<text x="326" y="436" font-size="10.5" fill="#c0392b" text-anchor="middle">never</text>
+<text x="326" y="448" font-size="10.5" fill="#c0392b" text-anchor="middle">sent</text>
+<line x1="326" y1="716" x2="326" y2="816" stroke="#c0392b" stroke-width="5"/>
+<text transform="rotate(-90 316 790)" x="316" y="790" font-size="11" font-weight="700" fill="#c0392b" text-anchor="middle">kernel wall</text>
+<rect x="346" y="200" width="1238" height="500" rx="14" fill="none" stroke="#c0392b" stroke-width="2.2" stroke-dasharray="7 5" />
+<rect x="360" y="190" width="650" height="24" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.6" />
+<circle cx="378" cy="202" r="15" fill="#c0392b"/>
+<text x="378" y="208" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">3</text>
+<text x="398" y="207" font-size="13.5" fill="#c0392b" text-anchor="start" font-weight="700">AI DOMAIN - a hardened sandbox the vehicle's functions cannot be hurt by</text>
+<rect x="362" y="224" width="152" height="18" rx="9" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+<text x="438" y="237" font-size="11" fill="#8e2a1f" text-anchor="middle">no network socket</text>
+<rect x="522" y="224" width="152" height="18" rx="9" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+<text x="598" y="237" font-size="11" fill="#8e2a1f" text-anchor="middle">no CAN / raw socket</text>
+<rect x="682" y="224" width="152" height="18" rx="9" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+<text x="758" y="237" font-size="11" fill="#8e2a1f" text-anchor="middle">no write to vehicle files</text>
+<rect x="842" y="224" width="152" height="18" rx="9" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+<text x="918" y="237" font-size="11" fill="#8e2a1f" text-anchor="middle">no real-time priority</text>
+<rect x="362" y="246" width="152" height="18" rx="9" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+<text x="438" y="259" font-size="11" fill="#8e2a1f" text-anchor="middle">no signals to other processes</text>
+<rect x="522" y="246" width="152" height="18" rx="9" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+<text x="598" y="259" font-size="11" fill="#8e2a1f" text-anchor="middle">no new privileges</text>
+<rect x="682" y="246" width="152" height="18" rx="9" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+<text x="758" y="259" font-size="11" fill="#8e2a1f" text-anchor="middle">only its 2 cores</text>
+<rect x="842" y="246" width="152" height="18" rx="9" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+<text x="918" y="259" font-size="11" fill="#8e2a1f" text-anchor="middle">memory and tasks capped</text>
+<text x="1012" y="238" font-size="11.5" fill="#8e2a1f" text-anchor="start">systemd unit: cgroup v2 cpuset, cpu, memory, pids; seccomp;</text>
+<text x="1012" y="253" font-size="11.5" fill="#8e2a1f" text-anchor="start">PrivateNetwork, read-only file system - 22 / 22 attempts refused on the Pi</text>
+<rect x="360" y="270" width="262" height="416" rx="10" fill="#f6f7f9" stroke="#5b6475" stroke-width="1.6" />
+<text x="374" y="292" font-size="15" fill="#1a1a2e" text-anchor="start" font-weight="700">Ingest (listen-only)</text>
+<rect x="374" y="304" width="234" height="48" rx="8" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" />
+<text x="386" y="324" font-size="13.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Receiver</text>
+<text x="386" y="342" font-size="11.5" fill="#445" text-anchor="start">one reader per wire, bounded queues</text>
+<line x1="491" y1="352" x2="491" y2="366" stroke="#0b6fb8" stroke-width="2" marker-end="url(#mp1)"/>
+<rect x="374" y="366" width="234" height="48" rx="8" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" />
+<text x="386" y="386" font-size="13.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Fingerprint</text>
+<text x="386" y="404" font-size="11.5" fill="#445" text-anchor="start">which car, which wiring</text>
+<line x1="491" y1="414" x2="491" y2="428" stroke="#0b6fb8" stroke-width="2" marker-end="url(#mp1)"/>
+<rect x="374" y="428" width="234" height="48" rx="8" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" />
+<text x="386" y="448" font-size="13.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Decoders + mapper</text>
+<text x="386" y="466" font-size="11.5" fill="#445" text-anchor="start">units, scaling, refuse-not-guess</text>
+<line x1="491" y1="476" x2="491" y2="490" stroke="#0b6fb8" stroke-width="2" marker-end="url(#mp1)"/>
+<rect x="374" y="490" width="234" height="48" rx="8" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" />
+<text x="386" y="510" font-size="13.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Event detectors</text>
+<text x="386" y="528" font-size="11.5" fill="#445" text-anchor="start">faults, resets, warnings, bursts</text>
+<line x1="491" y1="552" x2="491" y2="574" stroke="#5b6475" stroke-width="2" marker-end="url(#mn)"/>
+<path d="M382,590 a109,10 0 0 1 218,0 v62 a109,10 0 0 1 -218,0 z" fill="#fff4e6" stroke="#f58220" stroke-width="1.5"/><ellipse cx="491" cy="590" rx="109" ry="10" fill="#ffe6c8" stroke="#f58220" stroke-width="1.5"/>
+<text x="491" y="616" font-size="13.5" fill="#1a1a2e" text-anchor="middle" font-weight="700">Signal lake and events</text>
+<text x="491" y="633" font-size="11.5" fill="#445" text-anchor="middle">1 s tier + 1 min tier, SQLite</text>
+<text x="491" y="648" font-size="11.5" fill="#445" text-anchor="middle">weeks to years, searchable</text>
+<line x1="622" y1="620" x2="660" y2="620" stroke="#5b6475" stroke-width="2" marker-end="url(#mn)"/>
+<rect x="660" y="270" width="280" height="416" rx="10" fill="#f6f7f9" stroke="#5b6475" stroke-width="1.6" />
+<text x="674" y="292" font-size="15" fill="#1a1a2e" text-anchor="start" font-weight="700">Assistant (small language model)</text>
+<rect x="674" y="304" width="252" height="48" rx="8" fill="#f6f7f9" stroke="#5b6475" stroke-width="1.6" />
+<text x="686" y="324" font-size="13.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Question</text>
+<text x="686" y="342" font-size="11.5" fill="#445" text-anchor="start">typed or spoken, any wording</text>
+<line x1="800" y1="352" x2="800" y2="366" stroke="#5b6475" stroke-width="2" marker-end="url(#mn)"/>
+<rect x="674" y="366" width="252" height="48" rx="8" fill="#eaf3fb" stroke="#0b6fb8" stroke-width="1.6" />
+<text x="686" y="386" font-size="13.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Meaning model</text>
+<text x="686" y="404" font-size="11.5" fill="#445" text-anchor="start">Qwen2.5-0.5B, int8 on ONNX Runtime</text>
+<line x1="800" y1="414" x2="800" y2="428" stroke="#5b6475" stroke-width="2" marker-end="url(#mn)"/>
+<rect x="674" y="428" width="252" height="48" rx="8" fill="#f6f7f9" stroke="#5b6475" stroke-width="1.6" />
+<text x="686" y="448" font-size="13.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Typed query plan</text>
+<text x="686" y="466" font-size="11.5" fill="#445" text-anchor="start">validated against what the car records</text>
+<line x1="800" y1="476" x2="800" y2="490" stroke="#5b6475" stroke-width="2" marker-end="url(#mn)"/>
+<rect x="674" y="490" width="252" height="48" rx="8" fill="#f6f7f9" stroke="#5b6475" stroke-width="1.6" />
+<text x="686" y="510" font-size="13.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Executors</text>
+<text x="686" y="528" font-size="11.5" fill="#445" text-anchor="start">events - trends - anomalies - history</text>
+<line x1="800" y1="538" x2="800" y2="552" stroke="#5b6475" stroke-width="2" marker-end="url(#mn)"/>
+<rect x="674" y="552" width="252" height="48" rx="8" fill="#f6f7f9" stroke="#5b6475" stroke-width="1.6" />
+<text x="686" y="572" font-size="13.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Answer</text>
+<text x="686" y="590" font-size="11.5" fill="#445" text-anchor="start">numbers from data, never from the model</text>
+<text x="674" y="634" font-size="11.5" fill="#445" text-anchor="start">The model only reads the question;</text>
+<text x="674" y="649" font-size="11.5" fill="#445" text-anchor="start">every figure comes from the stored data.</text>
+<text x="674" y="672" font-size="11.5" fill="#1e8449" text-anchor="start" font-weight="700">Pi 4, 2 cores: meaning step 1.41 s median</text>
+<line x1="940" y1="360" x2="974" y2="360" stroke="#7b3fb5" stroke-width="2.6" marker-end="url(#mp2)"/>
+<line x1="940" y1="560" x2="974" y2="560" stroke="#7b3fb5" stroke-width="2.6" marker-end="url(#mp2)"/>
+<rect x="974" y="270" width="598" height="416" rx="10" fill="#f3ecfa" stroke="#7b3fb5" stroke-width="1.6" />
+<circle cx="998" cy="294" r="15" fill="#7b3fb5"/>
+<text x="998" y="300" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">2</text>
+<text x="1020" y="300" font-size="15.5" fill="#7b3fb5" text-anchor="start" font-weight="700">WHY ENGINE - explains causes, with evidence and honesty</text>
+<rect x="988" y="316" width="180" height="120" rx="8"  stroke="#7b3fb5" stroke-width="1.6" fill="#fff"/>
+<text x="1078" y="336" font-size="13.5" fill="#7b3fb5" text-anchor="middle" font-weight="700">DETECT</text>
+<text x="998" y="356" font-size="11.5" fill="#1a1a2e" text-anchor="start">change-points in the daily</text>
+<text x="998" y="372" font-size="11.5" fill="#1a1a2e" text-anchor="start">series: step, ramp, spike,</text>
+<text x="998" y="388" font-size="11.5" fill="#1a1a2e" text-anchor="start">end-of-period trend;</text>
+<text x="998" y="404" font-size="11.5" fill="#1a1a2e" text-anchor="start">permutation-tested, de-noised</text>
+<line x1="1168" y1="380" x2="1180" y2="380" stroke="#7b3fb5" stroke-width="2" marker-end="url(#mp2)"/>
+<rect x="1180" y="316" width="180" height="120" rx="8"  stroke="#7b3fb5" stroke-width="1.6" fill="#fff"/>
+<text x="1270" y="336" font-size="13.5" fill="#7b3fb5" text-anchor="middle" font-weight="700">ATTRIBUTE</text>
+<text x="1190" y="356" font-size="11.5" fill="#1a1a2e" text-anchor="start">physical trip model (speed^2,</text>
+<text x="1190" y="372" font-size="11.5" fill="#1a1a2e" text-anchor="start">climate power, cold, highway</text>
+<text x="1190" y="388" font-size="11.5" fill="#1a1a2e" text-anchor="start">share) to split causes;</text>
+<text x="1190" y="404" font-size="11.5" fill="#1a1a2e" text-anchor="start">20+ cause signatures;</text>
+<text x="1190" y="420" font-size="11.5" fill="#1a1a2e" text-anchor="start">event graph: reset -&gt; ADAS drop</text>
+<line x1="1360" y1="380" x2="1372" y2="380" stroke="#7b3fb5" stroke-width="2" marker-end="url(#mp2)"/>
+<rect x="1372" y="316" width="180" height="120" rx="8"  stroke="#7b3fb5" stroke-width="1.6" fill="#fff"/>
+<text x="1462" y="336" font-size="13.5" fill="#7b3fb5" text-anchor="middle" font-weight="700">JUDGE</text>
+<text x="1382" y="356" font-size="11.5" fill="#1a1a2e" text-anchor="start">competing hypotheses are scored</text>
+<text x="1382" y="372" font-size="11.5" fill="#1a1a2e" text-anchor="start">against each other and against</text>
+<text x="1382" y="388" font-size="11.5" fill="#1a1a2e" text-anchor="start">'no cause'; confidence is</text>
+<text x="1382" y="404" font-size="11.5" fill="#1a1a2e" text-anchor="start">calibrated; 'nothing changed'</text>
+<text x="1382" y="420" font-size="11.5" fill="#1a1a2e" text-anchor="start">is a valid answer</text>
+<rect x="988" y="446" width="570" height="148" rx="8"  stroke="#7b3fb5" stroke-width="1.6" fill="#fff"/>
+<text x="1000" y="464" font-size="12.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Q: "why has my coolant flow dropped over the last six weeks?"</text>
+<text x="1000" y="482.0" font-size="11.2" fill="#2a1a3d" text-anchor="start">Most likely cause: cooling pump or coolant circuit degradation since about 16 Jul (confidence 94 %).</text>
+<text x="1000" y="497.2" font-size="11.2" fill="#2a1a3d" text-anchor="start">Why: The pack's coolant flow has fallen well below what it was, so the pack and the motor shed less</text>
+<text x="1000" y="512.4" font-size="11.2" fill="#2a1a3d" text-anchor="start">heat at the same load.</text>
+<text x="1000" y="527.6" font-size="11.2" fill="#2a1a3d" text-anchor="start">Evidence:</text>
+<text x="1000" y="542.8" font-size="11.2" fill="#2a1a3d" text-anchor="start">coolant flow fell from 10.3 to 3.1 L/min (70 % lower)</text>
+<text x="1000" y="558.0" font-size="11.2" fill="#2a1a3d" text-anchor="start">To confirm: Read the coolant pump's commanded duty against measured flow; inspect the pump, the</text>
+<text x="1000" y="573.2" font-size="11.2" fill="#2a1a3d" text-anchor="start">coolant level and the lines for air or a blockage.</text>
+<text x="1000" y="588" font-size="10" fill="#6b5a80" text-anchor="start" font-style="italic">real output on cooling_pump_0 (dev set; pump planted to degrade from 16 Jul)</text>
+<rect x="988" y="604" width="570" height="70" rx="8"  stroke="#7b3fb5" stroke-width="1.6" fill="#fff"/>
+<text x="1000" y="622" font-size="12" fill="#7b3fb5" text-anchor="start" font-weight="700">Measured on histories with the cause planted and never read by the assistant</text>
+<text x="1000" y="640.0" font-size="11.2" fill="#1a1a2e" text-anchor="start">sealed test: 74 scenarios - first guess right 87.8 %, in top 3 95.9 %, invented cause 0.0 %;</text>
+<text x="1000" y="655.5" font-size="11.2" fill="#1a1a2e" text-anchor="start">recorded events (resets, bursts, dips, speed conflicts): 322 / 322 traced to the real cause.</text>
+<rect x="16" y="832" width="1568" height="388" rx="14" fill="#eafaf1" stroke="#1e8449" stroke-width="1.6" />
+<circle cx="40" cy="858" r="15" fill="#1e8449"/>
+<text x="40" y="864" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">4</text>
+<text x="62" y="864" font-size="16" fill="#1e8449" text-anchor="start" font-weight="700">AUTO-SCALING - one build, any machine: the plan is computed from the hardware, then corrected by measurement</text>
+<rect x="30" y="876" width="236" height="44" rx="8"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="40" y="895" font-size="13.5" fill="#1e8449" text-anchor="start" font-weight="700">1  Probe</text>
+<text x="40" y="912" font-size="10.8" fill="#445" text-anchor="start">cores, RAM, ISA, GPU</text>
+<line x1="266" y1="898" x2="292" y2="898" stroke="#1e8449" stroke-width="2" marker-end="url(#mp4)"/>
+<rect x="292" y="876" width="236" height="44" rx="8"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="302" y="895" font-size="13.5" fill="#1e8449" text-anchor="start" font-weight="700">2  Plan</text>
+<text x="302" y="912" font-size="10.8" fill="#445" text-anchor="start">contexts x threads, history, sessions</text>
+<line x1="528" y1="898" x2="554" y2="898" stroke="#1e8449" stroke-width="2" marker-end="url(#mp4)"/>
+<rect x="554" y="876" width="236" height="44" rx="8"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="564" y="895" font-size="13.5" fill="#1e8449" text-anchor="start" font-weight="700">3  Calibrate</text>
+<text x="564" y="912" font-size="10.8" fill="#445" text-anchor="start">measure the per-context thread knee</text>
+<line x1="790" y1="898" x2="816" y2="898" stroke="#1e8449" stroke-width="2" marker-end="url(#mp4)"/>
+<rect x="816" y="876" width="236" height="44" rx="8"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="826" y="895" font-size="13.5" fill="#1e8449" text-anchor="start" font-weight="700">4  Serve</text>
+<text x="826" y="912" font-size="10.8" fill="#445" text-anchor="start">worker processes, priority queue</text>
+<line x1="1052" y1="898" x2="1078" y2="898" stroke="#1e8449" stroke-width="2" marker-end="url(#mp4)"/>
+<rect x="1078" y="876" width="236" height="44" rx="8"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="1088" y="895" font-size="13.5" fill="#1e8449" text-anchor="start" font-weight="700">5  Autoscale</text>
+<text x="1088" y="912" font-size="10.8" fill="#445" text-anchor="start">p95 vs 2 s target, memory guard</text>
+<text x="30" y="944" font-size="12.5" fill="#1a1a2e" text-anchor="start" font-weight="700">The same plan code, given four different machines:</text>
+<rect x="30" y="952" width="374" height="138" rx="9"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="42" y="972" font-size="14" fill="#1e8449" text-anchor="start" font-weight="700">In-car board</text>
+<text x="392" y="972" font-size="11.5" fill="#445" text-anchor="end">2 ARM cores, 2 GB</text>
+<text x="42" y="992" font-size="11.5" fill="#1a1a2e" text-anchor="start">1 model context(s) x 2 thread(s) at start; grows to 1</text>
+<text x="42" y="1008" font-size="11.5" fill="#1a1a2e" text-anchor="start">4 people at once - 7 days at 1 s, 365 days per minute</text>
+<text x="42" y="1024" font-size="11.5" fill="#1a1a2e" text-anchor="start">1 ingest worker(s) for 1 vehicle(s); camera 2 fps</text>
+<text x="42" y="1040" font-size="11.5" fill="#1a1a2e" text-anchor="start">tier label: edge</text>
+<text x="42" y="1075" font-size="10.5" fill="#1e8449" text-anchor="start" font-style="italic">measured on the Raspberry Pi 4 limited to 2 cores</text>
+<rect x="416" y="952" width="374" height="138" rx="9"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="428" y="972" font-size="14" fill="#1e8449" text-anchor="start" font-weight="700">Raspberry Pi 4</text>
+<text x="778" y="972" font-size="11.5" fill="#445" text-anchor="end">4 cores, 3.7 GB</text>
+<text x="428" y="992" font-size="11.5" fill="#1a1a2e" text-anchor="start">1 model context(s) x 3 thread(s) at start; grows to 1</text>
+<text x="428" y="1008" font-size="11.5" fill="#1a1a2e" text-anchor="start">6 people at once - 12 days at 1 s, 444 days per minute</text>
+<text x="428" y="1024" font-size="11.5" fill="#1a1a2e" text-anchor="start">1 ingest worker(s) for 1 vehicle(s); camera 5 fps</text>
+<text x="428" y="1040" font-size="11.5" fill="#1a1a2e" text-anchor="start">tier label: edge+</text>
+<text x="428" y="1075" font-size="10.5" fill="#1e8449" text-anchor="start" font-style="italic">measured on the real board</text>
+<rect x="802" y="952" width="374" height="138" rx="9"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="814" y="972" font-size="14" fill="#1e8449" text-anchor="start" font-weight="700">Laptop / VM as HPC stand-in</text>
+<text x="1164" y="972" font-size="11.5" fill="#445" text-anchor="end">12 threads, 16 GB</text>
+<text x="814" y="992" font-size="11.5" fill="#1a1a2e" text-anchor="start">2 model context(s) x 2 thread(s) at start; grows to 5</text>
+<text x="814" y="1008" font-size="11.5" fill="#1a1a2e" text-anchor="start">20 people at once - 55 days at 1 s, 1095 days per minute</text>
+<text x="814" y="1024" font-size="11.5" fill="#1a1a2e" text-anchor="start">1 ingest worker(s) for 1 vehicle(s); camera 5 fps</text>
+<text x="814" y="1040" font-size="11.5" fill="#1a1a2e" text-anchor="start">tier label: hpc</text>
+<text x="814" y="1075" font-size="10.5" fill="#1e8449" text-anchor="start" font-style="italic">measured here (worker processes, hub, 3-year history)</text>
+<rect x="1188" y="952" width="374" height="138" rx="9"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="1200" y="972" font-size="14" fill="#1e8449" text-anchor="start" font-weight="700">Vehicle HPC</text>
+<text x="1550" y="972" font-size="11.5" fill="#445" text-anchor="end">32 cores, 64 GB, 16 cars</text>
+<text x="1200" y="992" font-size="11.5" fill="#1a1a2e" text-anchor="start">7 model context(s) x 2 thread(s) at start; grows to 15</text>
+<text x="1200" y="1008" font-size="11.5" fill="#1a1a2e" text-anchor="start">64 people at once - 60 days at 1 s, 1095 days per minute</text>
+<text x="1200" y="1024" font-size="11.5" fill="#1a1a2e" text-anchor="start">14 ingest worker(s) for 16 vehicle(s); camera 5 fps</text>
+<text x="1200" y="1040" font-size="11.5" fill="#1a1a2e" text-anchor="start">tier label: hpc</text>
+<text x="1200" y="1075" font-size="10.5" fill="#1e8449" text-anchor="start" font-style="italic">plan computed by the same code; not run on such a machine</text>
+<text x="30" y="1112" font-size="12.5" fill="#1a1a2e" text-anchor="start" font-weight="700">When load threatens 2 s the autoscaler first adds workers, then sheds in this order:</text>
+<rect x="30" y="1122" width="142" height="22" rx="11"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="101" y="1137" font-size="11" fill="#14602f" text-anchor="middle">pause analytics</text>
+<rect x="180" y="1122" width="142" height="22" rx="11"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="251" y="1137" font-size="11" fill="#14602f" text-anchor="middle">lower camera rate</text>
+<rect x="330" y="1122" width="142" height="22" rx="11"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="401" y="1137" font-size="11" fill="#14602f" text-anchor="middle">queue service + fleet</text>
+<rect x="480" y="1122" width="142" height="22" rx="11"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="551" y="1137" font-size="11" fill="#14602f" text-anchor="middle">refuse non-driver</text>
+<rect x="630" y="1122" width="142" height="22" rx="11"  stroke="#1e8449" stroke-width="1.6" fill="#fff"/>
+<text x="701" y="1137" font-size="11" fill="#14602f" text-anchor="middle">shorten answers</text>
+<text x="30" y="1164" font-size="12" fill="#1e8449" text-anchor="start" font-weight="700">A driver's question is never shed. When load falls the workers are released and the memory returns.</text>
+<text x="30" y="1182" font-size="11.5" fill="#445" text-anchor="start">Verified: autoscaler logic (29 tests, laptop and Pi), worker pool crash retry, sticky sessions, fleet receiver restart.</text>
+<text x="806" y="1112" font-size="11.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Pi 4 meaning step vs cores, s</text>
+<line x1="806" y1="1178" x2="1026" y2="1178" stroke="#9aa" stroke-width="1"/>
+<rect x="816.5" y="1136.0" width="34.1" height="42.0" rx="3" fill="#1e8449"/>
+<text x="833.5" y="1132.0" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">2.205</text>
+<text x="833.5" y="1192" font-size="11" fill="#445" text-anchor="middle">1 core</text>
+<rect x="871.5" y="1151.1" width="34.1" height="26.9" rx="3" fill="#1e8449"/>
+<text x="888.5" y="1147.0666666666666" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">1.414</text>
+<text x="888.5" y="1192" font-size="11" fill="#445" text-anchor="middle">2 core</text>
+<rect x="926.5" y="1154.3" width="34.1" height="23.7" rx="3" fill="#1e8449"/>
+<text x="943.5" y="1150.2857142857142" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">1.245</text>
+<text x="943.5" y="1192" font-size="11" fill="#445" text-anchor="middle">3 core</text>
+<rect x="981.5" y="1156.5" width="34.1" height="21.5" rx="3" fill="#1e8449"/>
+<text x="998.5" y="1152.5142857142857" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">1.128</text>
+<text x="998.5" y="1192" font-size="11" fill="#445" text-anchor="middle">4 core</text>
+<text x="1052" y="1112" font-size="11.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Laptop: answers/s vs workers</text>
+<line x1="1052" y1="1178" x2="1282" y2="1178" stroke="#9aa" stroke-width="1"/>
+<rect x="1062.9" y="1160.9" width="35.6" height="17.1" rx="3" fill="#1e8449"/>
+<text x="1080.75" y="1156.8658346333852" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">5.23</text>
+<text x="1080.75" y="1192" font-size="11" fill="#445" text-anchor="middle">1</text>
+<rect x="1120.4" y="1148.5" width="35.6" height="29.5" rx="3" fill="#1e8449"/>
+<text x="1138.25" y="1144.547581903276" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">8.99</text>
+<text x="1138.25" y="1192" font-size="11" fill="#445" text-anchor="middle">2</text>
+<rect x="1177.9" y="1138.7" width="35.6" height="39.3" rx="3" fill="#1e8449"/>
+<text x="1195.75" y="1134.7191887675508" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">11.99</text>
+<text x="1195.75" y="1192" font-size="11" fill="#445" text-anchor="middle">4</text>
+<rect x="1235.4" y="1136.0" width="35.6" height="42.0" rx="3" fill="#1e8449"/>
+<text x="1253.25" y="1132.0" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">12.82</text>
+<text x="1253.25" y="1192" font-size="11" fill="#445" text-anchor="middle">6</text>
+<text x="1308" y="1112" font-size="11.5" fill="#1a1a2e" text-anchor="start" font-weight="700">Cars into one hub: records/s</text>
+<line x1="1308" y1="1178" x2="1570" y2="1178" stroke="#9aa" stroke-width="1"/>
+<rect x="1318.0" y="1176.0" width="32.5" height="2.0" rx="3" fill="#1e8449"/>
+<text x="1334.1999999999998" y="1172" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">88</text>
+<text x="1334.1999999999998" y="1192" font-size="11" fill="#445" text-anchor="middle">1</text>
+<rect x="1370.4" y="1174.2" width="32.5" height="3.8" rx="3" fill="#1e8449"/>
+<text x="1386.6" y="1170.1760242792109" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">180</text>
+<text x="1386.6" y="1192" font-size="11" fill="#445" text-anchor="middle">2</text>
+<rect x="1422.8" y="1169.5" width="32.5" height="8.5" rx="3" fill="#1e8449"/>
+<text x="1438.9999999999998" y="1165.5022761760242" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">400</text>
+<text x="1438.9999999999998" y="1192" font-size="11" fill="#445" text-anchor="middle">4</text>
+<rect x="1475.2" y="1163.3" width="32.5" height="14.7" rx="3" fill="#1e8449"/>
+<text x="1491.3999999999999" y="1159.320182094082" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">691</text>
+<text x="1491.3999999999999" y="1192" font-size="11" fill="#445" text-anchor="middle">8</text>
+<rect x="1527.6" y="1136.0" width="32.5" height="42.0" rx="3" fill="#1e8449"/>
+<text x="1543.7999999999997" y="1132.0" font-size="11" fill="#1a1a2e" text-anchor="middle" font-weight="700">1977</text>
+<text x="1543.7999999999997" y="1192" font-size="11" fill="#445" text-anchor="middle">16</text>
+</svg>

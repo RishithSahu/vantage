@@ -1,0 +1,92 @@
+# Petrol / diesel everyday questions (one list for both; a question about a part the car does not have should say so)
+How much fuel is left?
+What is the fuel level?
+How many litres are in the tank?
+How far can I go on the fuel I have?
+What is my range?
+How much fuel did I use this week?
+What is my fuel economy?
+Fuel consumption in litres per 100 km this month
+How many km per litre did I get yesterday?
+How efficient was my last trip?
+When did I last refuel?
+How many times did I refuel this month?
+How much fuel did the last refuel add?
+What is the engine temperature?
+What is the coolant temperature?
+Did the engine overheat?
+Was the engine hot yesterday?
+What is the engine oil temperature?
+What is the oil pressure?
+What is the engine rpm?
+What was the highest rpm this week?
+Average rpm on the highway
+What gear am I in?
+How much time did I spend idling?
+How long was the engine idling today?
+What is the throttle position?
+How hard was I pressing the accelerator?
+What is the engine load?
+How is the engine doing?
+Is the engine healthy?
+Any engine warnings?
+Is the check engine light on?
+Why is the check engine light on?
+Which diagnostic codes are active?
+What does the last fault code mean?
+How many fault codes this month?
+What is the intake air temperature?
+What is the mass air flow?
+What is the manifold pressure?
+What is the long term fuel trim?
+What is the short term fuel trim?
+What is the oxygen sensor reading?
+What is the catalyst temperature?
+What is the exhaust temperature?
+What is the turbo boost pressure?
+How is the DPF?
+What is the soot load?
+Did the DPF regenerate?
+How much AdBlue is left?
+When do I need to refill AdBlue?
+What is the EGR position?
+What is the battery voltage?
+Is the 12 volt battery ok?
+How are my tyres?
+How worn are the brakes?
+When is my next service due?
+How many km since the last service?
+What is the odometer?
+How far did I drive today?
+How many trips this week?
+What was my longest trip?
+What was my average speed last week?
+What was my top speed this month?
+How many hard brakes this week?
+How many hard accelerations this week?
+How is my driving style?
+Give me a summary of the week
+Is anything unusual with the engine?
+Anything odd with the fuel consumption?
+Did my fuel economy get worse lately?
+Is my fuel consumption trending up?
+Is the fuel level dropping faster than usual?
+Compare my fuel consumption this week with last week
+Compare city and highway fuel consumption
+Does my fuel economy depend on speed?
+Correlation between rpm and fuel rate
+What is the cold start behaviour?
+How long does the engine take to warm up?
+Did I run out of fuel?
+Is the fuel level low?
+How do I save fuel?
+Tips to reduce fuel consumption
+What does the oil pressure warning mean?
+What is a DPF?
+What is AdBlue for?
+What is the difference between petrol and diesel consumption?
+Does this car have a turbo?
+Is this a petrol or a diesel?
+How many gears does it have?
+What is the tank size?
+What is the rated power of the engine?

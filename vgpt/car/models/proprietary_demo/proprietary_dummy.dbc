@@ -1,0 +1,31 @@
+VERSION "DUMMY DECODER FILE. Stands in for the CAN database of a manufacturer whose network is proprietary and whose database this project does not have. The identifiers and bit layouts below are INVENTED for the test bench; they are not any manufacturer's data. Replace this file with the real one when it is available."
+
+NS_ :
+
+BS_:
+
+BU_: PX1_ECU
+
+BO_ 2560 PX_MOTION: 8 PX1_ECU
+ SG_ PxSpeed : 0|16@1+ (0.01,0) [0|300] "km/h" Vector__XXX
+ SG_ PxEngine : 16|16@1+ (0.25,0) [0|8000] "rpm" Vector__XXX
+ SG_ PxThrottle : 32|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ PxBrake : 40|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ PxSteer : 48|16@1- (0.1,0) [-780|780] "deg" Vector__XXX
+
+BO_ 2561 PX_THERMAL: 8 PX1_ECU
+ SG_ PxCoolant : 0|8@1+ (1,-40) [-40|215] "degC" Vector__XXX
+ SG_ PxOil : 8|8@1+ (1,-40) [-40|215] "degC" Vector__XXX
+ SG_ PxOutside : 16|8@1+ (0.5,-40) [-40|87] "degC" Vector__XXX
+ SG_ PxFuel : 24|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ PxSupply : 32|12@1+ (0.01,0) [0|16] "V" Vector__XXX
+
+BO_ 2562 PX_WHEELS: 8 PX1_ECU
+ SG_ PxTyreA : 0|12@1+ (0.5,0) [0|600] "kPa" Vector__XXX
+ SG_ PxTyreB : 12|12@1+ (0.5,0) [0|600] "kPa" Vector__XXX
+ SG_ PxTyreC : 24|12@1+ (0.5,0) [0|600] "kPa" Vector__XXX
+ SG_ PxTyreD : 36|12@1+ (0.5,0) [0|600] "kPa" Vector__XXX
+
+BO_ 2563 PX_STATE: 8 PX1_ECU
+ SG_ PxOdometer : 0|24@1+ (0.1,0) [0|1000000] "km" Vector__XXX
+ SG_ PxKey : 24|1@1+ (1,0) [0|1] "" Vector__XXX

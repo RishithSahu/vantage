@@ -1,0 +1,562 @@
+[
+ {
+  "split": "field",
+  "q": "how much fuel is left",
+  "intent": "STATUS"
+ },
+ {
+  "split": "field",
+  "q": "how far can it go",
+  "intent": "STATUS"
+ },
+ {
+  "split": "field",
+  "q": "has my range dropped recentky",
+  "intent": "WHY_RANGE"
+ },
+ {
+  "split": "field",
+  "q": "has my range dropped recently",
+  "intent": "WHY_RANGE"
+ },
+ {
+  "split": "field",
+  "q": "how are my tyres",
+  "intent": "TYRES"
+ },
+ {
+  "split": "field",
+  "q": "why has my range dropped",
+  "intent": "WHY_RANGE"
+ },
+ {
+  "split": "field",
+  "q": "how much time have i spent in lane",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "field",
+  "q": "why am i weird",
+  "intent": "NONE"
+ },
+ {
+  "split": "field",
+  "q": "how will you rate my driving",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "field",
+  "q": "what can you  see in the camera right now",
+  "intent": "STATUS"
+ },
+ {
+  "split": "field",
+  "q": "which camera is not working",
+  "intent": "STATUS"
+ },
+ {
+  "split": "field",
+  "q": "where am i going",
+  "intent": "PLACES"
+ },
+ {
+  "split": "field",
+  "q": "hoiw can i travel to south asia",
+  "intent": "NONE"
+ },
+ {
+  "split": "field",
+  "q": "is it rainy",
+  "intent": "WEATHER"
+ },
+ {
+  "split": "field",
+  "q": "is it cloudy",
+  "intent": "WEATHER"
+ },
+ {
+  "split": "field",
+  "q": "how fast is my speed",
+  "intent": "STATUS"
+ },
+ {
+  "split": "field",
+  "q": "average speed?",
+  "intent": "SUMMARY"
+ },
+ {
+  "split": "field",
+  "q": "do i drive differently in cities than highways",
+  "intent": "COMPARE"
+ },
+ {
+  "split": "field",
+  "q": "where are we with the maintainance statur",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "field",
+  "q": "is my battery good",
+  "intent": "HEALTH"
+ },
+ {
+  "split": "field",
+  "q": "why is my engine not so good",
+  "intent": "HEALTH"
+ },
+ {
+  "split": "field",
+  "q": "what an i seeing now",
+  "intent": "STATUS"
+ },
+ {
+  "split": "dev",
+  "q": "Is my tyre pressure low?",
+  "intent": "TYRES"
+ },
+ {
+  "split": "dev",
+  "q": "Any tyre warnings this week?",
+  "intent": "TYRES"
+ },
+ {
+  "split": "dev",
+  "q": "Is it raining?",
+  "intent": "WEATHER"
+ },
+ {
+  "split": "dev",
+  "q": "Was it raining last week?",
+  "intent": "WEATHER"
+ },
+ {
+  "split": "dev",
+  "q": "Is my car ok?",
+  "intent": "HEALTH"
+ },
+ {
+  "split": "dev",
+  "q": "Any problems with the vehicle?",
+  "intent": "HEALTH"
+ },
+ {
+  "split": "dev",
+  "q": "When is my next service?",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "dev",
+  "q": "What is the odometer reading?",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "dev",
+  "q": "How many times did I brake hard last week?",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "dev",
+  "q": "How long did I drive yesterday?",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "dev",
+  "q": "Where is my car?",
+  "intent": "PLACES"
+ },
+ {
+  "split": "dev",
+  "q": "Where did I go yesterday?",
+  "intent": "PLACES"
+ },
+ {
+  "split": "test",
+  "q": "Which tyre is losing air?",
+  "intent": "TYRES"
+ },
+ {
+  "split": "test",
+  "q": "Do I have a puncture?",
+  "intent": "TYRES"
+ },
+ {
+  "split": "test",
+  "q": "Has it been wet lately?",
+  "intent": "WEATHER"
+ },
+ {
+  "split": "test",
+  "q": "Is it dark outside?",
+  "intent": "WEATHER"
+ },
+ {
+  "split": "test",
+  "q": "How is my battery health?",
+  "intent": "HEALTH"
+ },
+ {
+  "split": "test",
+  "q": "Is the coolant system fine?",
+  "intent": "HEALTH"
+ },
+ {
+  "split": "test",
+  "q": "How are my brakes?",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "test",
+  "q": "How worn are my brake pads?",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "test",
+  "q": "Do I need an oil change?",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "test",
+  "q": "Am I a smooth driver?",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "test",
+  "q": "How much of the motorway was lane assist active?",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "test",
+  "q": "Where did I park?",
+  "intent": "PLACES"
+ },
+ {
+  "split": "test",
+  "q": "Which trips did I make this week?",
+  "intent": "PLACES"
+ },
+ {
+  "split": "blind",
+  "q": "Are all four wheels at the right pressure?",
+  "intent": "TYRES"
+ },
+ {
+  "split": "blind",
+  "q": "How much of my driving this week was in the rain?",
+  "intent": "WEATHER"
+ },
+ {
+  "split": "blind",
+  "q": "Is everything alright with the car?",
+  "intent": "HEALTH"
+ },
+ {
+  "split": "blind",
+  "q": "What is the state of my 12 V battery?",
+  "intent": "HEALTH"
+ },
+ {
+  "split": "blind",
+  "q": "How many kilometres has the car done in total?",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "blind",
+  "q": "Do I accelerate too aggressively?",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "blind",
+  "q": "How many hours did I spend driving this week?",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "blind",
+  "q": "Where was I yesterday morning?",
+  "intent": "PLACES"
+ },
+ {
+  "split": "blind",
+  "q": "How much energy did regenerative braking recover this week?",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "keep",
+  "q": "What is my estimated range now?",
+  "intent": "STATUS"
+ },
+ {
+  "split": "keep",
+  "q": "Is the camera blocked right now?",
+  "intent": "STATUS"
+ },
+ {
+  "split": "keep",
+  "q": "How much did I charge last week?",
+  "intent": "EVENTS"
+ },
+ {
+  "split": "keep",
+  "q": "What happened before the battery overheating warning?",
+  "intent": "BEFORE_EVENT"
+ },
+ {
+  "split": "keep",
+  "q": "Compare energy consumption between city and highway driving.",
+  "intent": "COMPARE"
+ },
+ {
+  "split": "keep",
+  "q": "How many fault codes this month?",
+  "intent": "EVENTS"
+ },
+ {
+  "split": "none",
+  "q": "Play some music",
+  "intent": "NONE"
+ },
+ {
+  "split": "none",
+  "q": "Navigate to the airport",
+  "intent": "NONE"
+ },
+ {
+  "split": "none",
+  "q": "Will it rain tomorrow?",
+  "intent": "NONE"
+ },
+ {
+  "split": "none",
+  "q": "What is the capital of France?",
+  "intent": "NONE"
+ },
+ {
+  "split": "dialogue",
+  "q": "what can",
+  "intent": "HELP"
+ },
+ {
+  "split": "dialogue",
+  "q": "what can i ask you",
+  "intent": "HELP"
+ },
+ {
+  "split": "dialogue",
+  "q": "what do you know",
+  "intent": "HELP"
+ },
+ {
+  "split": "dialogue",
+  "q": "help",
+  "intent": "HELP"
+ },
+ {
+  "split": "dialogue",
+  "q": "what is a can bus",
+  "intent": "GLOSSARY"
+ },
+ {
+  "split": "dialogue",
+  "q": "what does tpms mean",
+  "intent": "GLOSSARY"
+ },
+ {
+  "split": "dialogue",
+  "q": "what is regenerative braking",
+  "intent": "GLOSSARY"
+ },
+ {
+  "split": "dialogue",
+  "q": "explain state of charge",
+  "intent": "GLOSSARY"
+ },
+ {
+  "split": "dialogue",
+  "q": "i want it in psi",
+  "intent": "UNITS"
+ },
+ {
+  "split": "dialogue",
+  "q": "show it in miles",
+  "intent": "UNITS"
+ },
+ {
+  "split": "dialogue",
+  "q": "fahrenheit please",
+  "intent": "UNITS"
+ },
+ {
+  "split": "dialogue",
+  "q": "Compare energy consumption between city and highway driving.",
+  "intent": "COMPARE"
+ },
+ {
+  "split": "dialogue",
+  "q": "what do you mean by more?",
+  "intent": "FOLLOWUP"
+ },
+ {
+  "split": "dialogue",
+  "q": "more what",
+  "intent": "FOLLOWUP"
+ },
+ {
+  "split": "dialogue",
+  "q": "which car is this",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "dialogue",
+  "q": "car name?",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "dialogue",
+  "q": "where are we",
+  "intent": "PLACES"
+ },
+ {
+  "split": "dialogue",
+  "q": "how many time i park car",
+  "intent": "PLACES"
+ },
+ {
+  "split": "dialogue",
+  "q": "what is my range",
+  "intent": "STATUS"
+ },
+ {
+  "split": "dialogue",
+  "q": "check the camera and tell if it looks cloudy",
+  "intent": "WEATHER"
+ },
+ {
+  "split": "dialogue",
+  "q": "how to attack a bus",
+  "intent": "NONE"
+ },
+ {
+  "split": "dialogue",
+  "q": "where to park here",
+  "intent": "NONE"
+ },
+ {
+  "split": "dialogue",
+  "q": "how to break fast",
+  "intent": "NONE"
+ },
+ {
+  "split": "gps",
+  "q": "where am i",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "how far is my home from here",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "how far is my school from here",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "how far is my car from here",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "how long to get to work",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "how far is work from home",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "what is the distance between school and gym",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "where is my school",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "what are my gps coordinates",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "how far is the gym",
+  "intent": "PLACES"
+ },
+ {
+  "split": "gps",
+  "q": "what speed should i drive at so that i get most mileage",
+  "intent": "DRIVING"
+ },
+ {
+  "split": "gps",
+  "q": "what is max speed of my car",
+  "intent": "SUMMARY"
+ },
+ {
+  "split": "gps",
+  "q": "how much has this car run",
+  "intent": "SERVICE"
+ },
+ {
+  "split": "gps",
+  "q": "what questions can you answer",
+  "intent": "HELP"
+ },
+ {
+  "split": "gps",
+  "q": "are you a gpt?",
+  "intent": "ABOUT"
+ },
+ {
+  "split": "gps",
+  "q": "how many gears does my car have",
+  "intent": "GLOSSARY"
+ },
+ {
+  "split": "gps",
+  "q": "is my car an ev",
+  "intent": "GLOSSARY"
+ },
+ {
+  "split": "gps",
+  "q": "what is the condition of my car pistons",
+  "intent": "GLOSSARY"
+ },
+ {
+  "split": "gps",
+  "q": "you are not good",
+  "intent": "FEEDBACK"
+ },
+ {
+  "split": "gps",
+  "q": "how many ppl are sitting in car",
+  "intent": "NONE"
+ },
+ {
+  "split": "gps",
+  "q": "how to start this car",
+  "intent": "NONE"
+ },
+ {
+  "split": "gps",
+  "q": "when did i buy my car",
+  "intent": "NONE"
+ },
+ {
+  "split": "gps",
+  "q": "how far is the nearest charging station",
+  "intent": "NONE"
+ }
+]

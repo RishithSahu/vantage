@@ -1,0 +1,36 @@
+{
+ "id": "nissan_xtrail_2017",
+ "name": "Nissan X-Trail (2017)",
+ "year": 2017,
+ "region": "Japan / global",
+ "powertrain": "petrol",
+ "class": "Compact SUV, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Nissan X-Trail (2017) database (accelerator_position, door_state, gear, headlight_state, seatbelt_state, steering_angle, steering_torque, wheel_speed_fl, wheel_speed_fr, wheel_speed_rl, wheel_speed_rr ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Linux telematics / infotainment (syslog)",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 11 drafted, 126 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): nissan_x_trail_2017_generated.dbc",
+ "bound": 35,
+ "concepts": 35,
+ "extension": [
+  "ambient_temperature",
+  "aux_battery_voltage",
+  "barometric_pressure",
+  "cabin_temperature",
+  "engine_oil_temperature",
+  "fuel_level",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

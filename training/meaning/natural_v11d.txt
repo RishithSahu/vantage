@@ -1,0 +1,291 @@
+# Round 11 (2026-10-24), file d: families found in the mistakes of the round-10 adapter on the new sets (sealed_v4, sealed_v5, ice_v1, wording_v1). No row copies a sealed question; each family is taught with different words and things.
+# @petrol / @diesel / @ev tag = the car type the row is for (see build_v2.py).
+
+# ------------------------------------------------------------------------------------------------ "the battery" as a charge level
+what percentage is the battery at | now battery_soc
+what does the battery level show right now | now battery_soc
+how full is the battery | now battery_soc
+how much charge is left in the pack | now battery_soc
+battery level please | now battery_soc
+what is the battery doing at the moment | now battery_soc
+how is the battery looking right now | now battery_soc
+what's the charge on the car | now battery_soc
+
+# ------------------------------------------------------------------------------------------------ workshop / service soon
+do I need to take the car in soon | estimate maintenance
+is it time for a service | estimate maintenance
+will the car need a garage visit this month | estimate maintenance
+should I book the car in for a check up | estimate maintenance
+when should I go to the workshop next | estimate maintenance
+is a service coming up | estimate maintenance
+
+# ------------------------------------------------------------------------------------------------ Hindi-English condition questions
+engine ka health kaisa hai | health motor_condition
+brakes theek hain kya | health brake_condition
+brake sahi hai na | health brake_condition
+gaadi ka tyre theek hai kya | health tyre_condition
+tyres ki condition kaisi hai | health tyre_condition
+battery ki condition kaisi hai | health battery_condition
+kya battery theek chal rahi hai | health battery_condition
+cooling system sahi hai kya | health cooling_condition
+gaadi theek hai na | health vehicle_health
+poori gaadi ka haal batao | health vehicle_health
+motor ka haal kaisa hai | health motor_condition
+12 volt battery theek hai kya | health aux_battery_condition
+
+# ------------------------------------------------------------------------------------------------ off topic, unsafe, social
+what will the weather be like tomorrow | offtopic none
+who won the cricket match yesterday | offtopic none
+book me a flight to delhi | offtopic none
+tell me a recipe for dinner | offtopic none
+what is the price of gold today | offtopic none
+what is the traffic like on the highway ahead | offtopic none
+find a restaurant near me | offtopic none
+play some music | offtopic none
+email my manager the trip report | unsafe none
+share this conversation with my friend | unsafe none
+turn off the collision warning permanently | unsafe none
+switch off the airbag warning for good | unsafe none
+disable the seat belt alarm forever | unsafe none
+forward my location to a stranger | unsafe none
+what else can you do | social none
+what other things can you tell me | social none
+anything else you can help with | social none
+thanks that is all | social none
+how are you today | social none
+
+# ------------------------------------------------------------------------------------------------ specs: capacity
+what is the battery capacity | spec battery_capacity
+how many kwh is the pack | spec battery_capacity
+size of the battery in kwh | spec battery_capacity
+how big is the traction battery | spec battery_capacity
+@petrol how big is the fuel tank | spec fuel_level
+@petrol what is the tank capacity | spec fuel_level
+@diesel how many litres does the tank take | spec fuel_level
+@diesel size of the diesel tank | spec fuel_level
+@petrol tank size | spec fuel_level
+
+# ------------------------------------------------------------------------------------------------ summary of a period
+what changed since last month | summary none vs=period
+what is different from the previous week | summary none vs=period
+how does this week compare overall with the one before | summary none vs=period
+give me the weekly summary | summary none
+a quick summary of this month | summary none
+summarise my week | summary none
+what happened this week in short | summary none
+the main points of the last few days | summary none
+give me a short report of my driving this month | summary none
+@petrol summary of the month | summary none
+@diesel give me the weekly summary of the truck | summary none
+
+# ------------------------------------------------------------------------------------------------ counts per trip vs counts of trips
+how many trips did I make last week | stat trip_record op=count ent=trip
+number of drives on monday | stat trip_record op=count ent=trip
+count of my trips this month | stat trip_record op=count ent=trip
+how many drives did I do today | stat trip_record op=count ent=trip
+how much regen did I get on the way to work | stat regen_energy op=sum ent=trip
+regen recovered on my last trip | stat regen_energy op=sum ent=trip
+how much energy did the drive home use | stat energy_used op=sum ent=trip
+energy used during the last journey | stat energy_used op=sum ent=trip
+total energy the trips used last month | stat energy_used op=sum
+total regen over all my drives this week | stat regen_energy op=sum
+
+# ------------------------------------------------------------------------------------------------ compare two readings of different things, correlation direction
+is the cabin hotter than the outside air | compare cabin_temperature op=mean c2=ambient_temperature
+is it warmer inside than outside | compare cabin_temperature op=mean c2=ambient_temperature
+is the pack warmer than the motor | compare battery_temperature op=mean c2=motor_temperature
+is the motor hotter than the battery | compare motor_temperature op=mean c2=battery_temperature
+does the outside temperature affect the range | stat ambient_temperature op=corr c2=range_estimate
+does the weather change my consumption | stat ambient_temperature op=corr c2=wh_per_km
+does speed change the energy use | stat speed op=corr c2=wh_per_km
+does the heater use change with the cold | stat ambient_temperature op=corr c2=hvac_power
+did the pack or the motor trigger more warnings | events battery_overheat_warning op=count c2=overtemp_warning
+which gave more alerts the tyres or the 12 volt | events tyre_pressure_warning op=count c2=low_12v_warning
+
+# ------------------------------------------------------------------------------------------------ usual / normal for me
+is my energy use today normal | stat wh_per_km op=usual
+is today's range normal for me | stat range_estimate op=usual
+is my speed today typical | stat speed op=usual
+is this week's distance usual for me | stat distance_driven op=usual
+is the motor temperature today what I normally get | stat motor_temperature op=usual
+@petrol is today's fuel use normal for me | stat fuel_rate op=usual
+@diesel is my fuel burn today typical | stat fuel_rate op=usual
+
+# ------------------------------------------------------------------------------------------------ duration in a state
+how long was the car parked yesterday | stat drive_mode op=duration cond=parked
+how long did I sit idling this week | stat drive_mode op=duration cond=idling
+time spent parked today | stat drive_mode op=duration cond=parked
+how many hours was the engine idling | stat drive_mode op=duration cond=idling
+how long was it charging yesterday | stat drive_mode op=duration cond=charging
+
+# ------------------------------------------------------------------------------------------------ thresholds
+did the charging power ever exceed 50 kw | stat charging_power op=count cond=threshold
+has the speed gone above 120 | stat speed op=count cond=threshold
+how many times did the current pass 200 amps | stat battery_current op=count cond=threshold
+when was the last time the 12 volt dropped under 11 | events voltage_dip op=last cond=threshold
+how many times did the motor pass 100 degrees | stat motor_temperature op=count cond=threshold
+
+# ------------------------------------------------------------------------------------------------ warning lamp / engine light
+is the engine light on | health diagnostic_status
+is there a check engine light | health diagnostic_status
+any warning lamp on the dash | health diagnostic_status
+is the cel lit | health diagnostic_status
+what is the check engine light for | why diagnostic_code
+why did the engine light come on | why diagnostic_code
+what caused the warning lamp | why diagnostic_code
+what do the engine fault codes mean | why diagnostic_code
+@petrol what is the engine warning about | why diagnostic_code
+
+# ------------------------------------------------------------------------------------------------ the engine, idling, fuel economy in a petrol or diesel car
+@petrol how long was the engine idling today | stat drive_mode op=duration cond=idling
+@diesel idle time of the engine this month | stat drive_mode op=duration cond=idling
+@petrol how thirsty is the car this week | stat fuel_rate op=mean
+@diesel how much fuel does it drink | stat fuel_rate op=mean
+@petrol what is my mileage | stat fuel_rate op=mean
+@diesel mileage this month | stat fuel_rate op=mean
+@petrol km per litre lately | stat fuel_rate op=mean
+@petrol fuel economy for the week | stat fuel_rate op=mean
+@diesel litres per 100 km this month | stat fuel_rate op=mean
+@petrol how much petrol did I use last week | stat fuel_rate op=sum
+@diesel how much diesel did I burn this month | stat fuel_rate op=sum
+@petrol which trip used the most fuel | extreme fuel_rate op=max ent=trip
+@diesel the thirstiest trip this month | extreme fuel_rate op=max ent=trip
+@petrol how much petrol is left | now fuel_level
+@diesel how much diesel do I have left | now fuel_level
+@petrol how far can I go on the fuel I have | estimate range_estimate
+@diesel how many km on the tank | estimate range_estimate
+@petrol how fast is the engine turning at idle | now engine_rpm
+@diesel what are the revs right now | now engine_rpm
+@petrol what do the fuel trims show | now short_term_fuel_trim
+@petrol what is the long term trim | now long_term_fuel_trim
+@petrol which fill put in the most | extreme fuel_level op=max
+@petrol is the engine running rough | anomaly motor_condition
+@diesel is the engine running smoothly | anomaly motor_condition
+@petrol does the engine sound rough | anomaly motor_condition
+@petrol how are the engine and the gearbox doing | health motor_condition
+@diesel engine and transmission health | health motor_condition
+@petrol will it start in the morning | health aux_battery_condition
+@diesel will the truck start tomorrow | health aux_battery_condition
+@petrol is the starter battery strong enough | health aux_battery_condition
+
+# ------------------------------------------------------------------------------------------------ diesel particulate filter
+@diesel how is the particulate filter | now dpf_soot_load
+@diesel how full is the dpf | now dpf_soot_load
+@diesel is the filter doing a regen right now | now dpf_regeneration
+@diesel is a dpf cleaning cycle running | now dpf_regeneration
+@diesel is the dpf soot going down | trend dpf_soot_load op=drop
+@diesel anything odd with the exhaust filter | anomaly dpf_soot_load
+@diesel is the particulate filter behaving normally | anomaly dpf_soot_load
+@diesel is the regeneration working | trend dpf_soot_load op=drop
+
+# ------------------------------------------------------------------------------------------------ things the car does not record (petrol, diesel)
+@petrol how loud is the exhaust | now unlisted
+@petrol how hot is the engine bay | now unlisted
+@petrol how long does the engine take to warm up | now unlisted
+@diesel how much load is on the truck | now unlisted
+@diesel what is the weight of the cargo | now unlisted
+@petrol what is the engine power rating | spec unlisted
+@diesel how many horsepower does the truck have | spec unlisted
+@petrol where is the nearest petrol station | control none
+@diesel find a diesel pump close by | control none
+@petrol how much is petrol per litre today | unsupported none
+@diesel what does diesel cost right now | unsupported none
+@petrol is this car petrol or diesel | spec vehicle_model
+@diesel which fuel does this vehicle use | spec vehicle_model
+
+# ------------------------------------------------------------------------------------------------ "is she running hot", "the old girl", lamps, news
+is she running hot | now motor_temperature
+is the old car running hot | now motor_temperature
+is the engine running hot | now motor_temperature
+how is the old car doing | health vehicle_health
+how is the old thing holding up | health vehicle_health
+what is the headline of this week | summary none
+the headlines for the month | summary none
+anything I should know before I leave | health briefing
+anything worth knowing before I drive off | health briefing
+any updates on the battery health | now battery_soh
+any news on the state of health | now battery_soh
+rank my trips by length | extreme distance_driven op=max ent=trip
+my longest trips first | extreme distance_driven op=max ent=trip
+what is going on with the cooling lately | health cooling_condition
+how has the cooling system been | health cooling_condition
+what is the matter with the coolant | health cooling_condition
+
+# ------------------------------------------------------------------------------------------------ "the number of X going up / down", "did X go up after"
+is the number of warnings going up | trend any_warning op=rise
+is the number of fault codes going down | trend diagnostic_code op=drop
+did the number of hard brakes go up after the update | trend hard_braking op=rise
+did the number of hard accelerations go down since last month | trend hard_acceleration op=drop
+has the number of shutdowns increased | trend unexpected_shutdown op=rise
+is the count of warning lights rising | trend any_warning op=rise
+are there more warnings now than before | trend any_warning op=rise
+are there fewer fault codes now than in the spring | trend diagnostic_code op=drop
+did the number of voltage dips go up lately | trend voltage_dip op=rise
+are my trips getting shorter or longer | trend distance_driven op=change ent=trip
+are my journeys getting longer | trend distance_driven op=rise ent=trip
+are my trips getting shorter | trend distance_driven op=drop ent=trip
+is the average trip length going up | trend distance_driven op=rise ent=trip
+did I make more trips this month than last month | compare trip_record op=count vs=period
+did my night driving increase | trend distance_driven op=rise cond=night
+am I driving more at night than before | trend distance_driven op=rise cond=night
+am I driving less on the highway than I used to | trend distance_driven op=drop cond=highway
+
+# ------------------------------------------------------------------------------------------------ rain against dry days, conditions against each other
+how does my consumption in the rain compare with dry days | compare wh_per_km op=mean cond=raining vs=driving
+consumption on the highway against the city | compare wh_per_km op=mean cond=highway vs=city
+is the pack hotter during fast charging than normal charging | compare battery_temperature op=mean cond=fast_charging vs=charging
+does the motor run hotter on the highway than in town | compare motor_temperature op=mean cond=highway vs=city
+how does energy use at night compare with the day | compare wh_per_km op=mean cond=night vs=driving
+
+# ------------------------------------------------------------------------------------------------ "usual / normal" for a period or a trip
+was last week's energy use normal for me | compare energy_used op=sum vs=typical
+is this month's distance higher than my usual month | compare distance_driven op=sum vs=typical
+was this week's mileage typical | compare distance_driven op=sum vs=typical
+did the battery heat up more than usual on my last trip | compare battery_temperature op=max vs=typical ent=trip
+was the motor hotter than usual on the last drive | compare motor_temperature op=max vs=typical ent=trip
+was the last charge normal | anomaly charging_session
+did my last charging session behave normally | anomaly charging_session
+is there anything unusual about my last trip | anomaly trip_record
+was my last trip normal | anomaly trip_record
+
+# ------------------------------------------------------------------------------------------------ habits
+which of my driving habits got worse lately | trend driving_style op=drop
+did my driving habits get better | trend driving_style op=rise
+am I driving more smoothly than before | trend driving_style op=rise
+am I braking harder than a month ago | trend hard_braking op=rise
+is my braking worse than last month | trend hard_braking op=rise
+is my braking better than before | trend hard_braking op=drop
+
+# ------------------------------------------------------------------------------------------------ petrol / diesel: direction words, engine temperature, starter battery, per-day fuel, regeneration
+@petrol is my fuel consumption getting worse over the months | trend fuel_rate op=rise
+@diesel is the fuel consumption getting worse | trend fuel_rate op=rise
+@petrol is my fuel economy improving | trend fuel_rate op=drop
+@diesel has my consumption got better since the service | trend fuel_rate op=drop
+@petrol am I burning more fuel than before | trend fuel_rate op=rise
+@diesel is the car getting thirstier | trend fuel_rate op=rise
+@petrol is the engine running hotter than it used to | trend motor_temperature op=rise
+@diesel is the engine temperature climbing | trend motor_temperature op=rise
+@petrol is the coolant temperature normal | anomaly motor_temperature
+@diesel is the engine temperature acting strange | anomaly motor_temperature
+@petrol what is the engine temperature | now motor_temperature
+@diesel is the coolant temperature okay | now motor_temperature
+@petrol is the starter battery getting weaker | trend aux_battery_voltage op=drop
+@diesel is the battery that starts the engine getting weak | trend aux_battery_voltage op=drop
+@petrol how is the starter battery | health aux_battery_condition
+@diesel is the starter battery voltage normal | anomaly aux_battery_voltage
+@petrol which day this month had the most fuel use | extreme fuel_rate op=max ent=day
+@diesel the day I burned the most diesel this month | extreme fuel_rate op=max ent=day
+@petrol which week used the least fuel | extreme fuel_rate op=min ent=week
+@diesel best week for fuel economy | extreme fuel_rate op=min ent=week
+@petrol was last week's fuel use normal for me | compare fuel_rate op=mean vs=typical
+@diesel is my consumption this week typical | compare fuel_rate op=mean vs=typical
+@petrol how long was the engine running yesterday | stat drive_mode op=duration cond=driving
+@diesel how many hours was the engine on this week | stat drive_mode op=duration cond=driving
+@diesel when was the last dpf regeneration | stat dpf_regeneration op=count
+@diesel when did the last regeneration happen | stat dpf_regeneration op=count
+@diesel how many regenerations this month | stat dpf_regeneration op=count
+@diesel has the filter regenerated this week | stat dpf_regeneration op=count
+@diesel list the recent filter regenerations | stat dpf_regeneration op=count
+@petrol am I braking harder than last month | trend hard_braking op=rise
+@diesel is my braking harder than before | trend hard_braking op=rise
+@petrol did the engine idle more than usual lately | stat drive_mode op=duration cond=idling

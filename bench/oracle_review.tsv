@@ -1,0 +1,20 @@
+# Review of the oracle-candidate sets (results/oracle_sets_for_review.txt), written by READING the sets only - no model output was consulted. Columns (TAB): id, kind, candidate description (or *), reason.
+# DROP     the candidate is not a fair alternative: it is rendered as code (the describe() fallback printed the IR) or it is a description-level near-synonym of the gold ("energy used" vs "energy consumption"), so the descriptions alone cannot separate them. Removed from the corrected scoring.
+# AMBIG    the QUESTION genuinely permits more than one of the offered readings (or the gold itself is questionable). Reported separately, excluded from the corrected denominator.
+# UNDERSPEC the gold description omits something the question states (the diagnostic then under-tests that distinction). Kept, listed.
+d007	DROP	when the largest change happened in energy used	near-synonym of energy consumption in words
+d025	DROP	the average energy used compared between on the motorway / highway and in city driving	near-synonym of energy consumption in words
+d039	DROP	op=exists t=cal:yesterday c=charging	rendered as code
+d051	DROP	op=exists t=cal:this_week c=sig:battery_temperature:gt:95:F	rendered as code
+d053	DROP	op=exists t=last:14:day c=sig:tyre_pressure:lt:30:psi	rendered as code
+d055	DROP	op=exists t=cal:yesterday c=sig:battery_soc:lt:20:%	rendered as code
+d115	DROP	op=exists t=last:7:day c=city	rendered as code
+d079	DROP	the total energy consumption yesterday	near-synonym of "total energy used" in words
+d097	DROP	what explains the change in energy used over the last 7 days	near-synonym of energy consumption in words
+d057	AMBIG	*	"can you tell me the cabin temperature" reads as the current value as well as whether it is recorded
+d083	AMBIG	*	"hard brakes last night" (no verb) permits a count and a list
+d091	AMBIG	*	a yes/no question ("at all"); the gold counts the events
+d037	UNDERSPEC	*	the question restricts to weekdays; the plan language has no weekday restriction, the gold omits it
+d045	UNDERSPEC	*	"which trip ... the most" asks for the top one; the gold description says only "ranking"
+d049	UNDERSPEC	*	"five most efficient city trips": the gold description omits the number and the city class
+d109	UNDERSPEC	*	"the shortest trip": the gold description omits "shortest" (one trip)

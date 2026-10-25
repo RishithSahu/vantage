@@ -1,0 +1,221 @@
+# Adversarial bank 1 (authored by Claude, 2026-10-20), written from the FAMILIES in which full_v6 failed on adv_v1 (colloquial phrasing of the new events, negated yes/no questions, engineer jargon, look-alike events,
+# numeric limits, "not <condition>", provenance of a reading, health / advice topics, event trends and comparisons, causes, definitions, context-prefixed questions, a few abstentions) - never from their sentences:
+# the builder's filter (--eval-leak v8) drops any row at Jaccard >= 0.8 to a frozen set.  Source name `adv1`, repeated twice.  Format as natural_a.txt:  text | act concept [op=..] [cond=..] [vs=..] [ent=..]
+# ---------------------------------------------------------------- unexpected shutdown, said the way people say it
+did my car die while i was driving | events unexpected_shutdown op=exists
+has the car ever switched itself off while moving | events unexpected_shutdown op=exists
+did the power cut out suddenly on the motorway | events unexpected_shutdown op=exists
+did everything go dead for a moment on the road | events unexpected_shutdown op=exists
+has the vehicle lost all power without warning | events unexpected_shutdown op=exists
+the car turned itself off at some point didnt it | events unexpected_shutdown op=exists
+did it cut out on me this week | events unexpected_shutdown op=exists
+how many times did the car go dead unexpectedly | events unexpected_shutdown op=count
+count the times it lost power by itself | events unexpected_shutdown op=count
+when did the car last die on me | events unexpected_shutdown op=last
+when was the last time everything went black | events unexpected_shutdown op=last
+show me the times it shut off without warning | events unexpected_shutdown op=list
+it hasnt switched off by itself has it | events unexpected_shutdown op=exists
+i take it the car never lost power suddenly | events unexpected_shutdown op=exists
+nothing cut out unexpectedly last week did it | events unexpected_shutdown op=exists
+# ---------------------------------------------------------------- ECU reset, said the way people say it
+did one of the car's computers crash and come back | events ecu_reset op=exists
+has any module in the car restarted by itself | events ecu_reset op=exists
+did the screen go blank and reboot on its own | events ecu_reset op=exists
+did the infotainment unit restart | events ecu_reset op=exists
+has any control unit hung and rebooted | events ecu_reset op=exists
+did a computer in the car freeze and reset | events ecu_reset op=exists
+was there a controller crash lately | events ecu_reset op=exists
+how many times did a module reboot on its own | events ecu_reset op=count
+count the times a computer in the car restarted | events ecu_reset op=count
+how often does the car reboot one of its units | events ecu_reset op=count
+when did a control unit last crash and restart | events ecu_reset op=last
+show me every time something rebooted | events ecu_reset op=list
+nothing rebooted itself did it | events ecu_reset op=exists
+surely no unit has reset this month | events ecu_reset op=exists
+i doubt any controller restarted today | events ecu_reset op=exists
+was there a watchdog timeout on a unit | events ecu_reset op=exists
+did the watchdog bite on any controller | events ecu_reset op=exists
+any controller timed out and reset | events ecu_reset op=exists
+# ---------------------------------------------------------------- automatic emergency braking, said the way people say it
+did the car stop itself before hitting something | events aeb_activation op=exists
+did the safety system brake for me | events aeb_activation op=exists
+has the car braked automatically to avoid a crash | events aeb_activation op=exists
+did the brakes come on by themselves | events aeb_activation op=exists
+did the car apply the brakes without me | events aeb_activation op=exists
+how many times did the car brake for me automatically | events aeb_activation op=count
+when did the car last stop itself | events aeb_activation op=last
+list the times the automatic braking kicked in | events aeb_activation op=list
+# ---------------------------------------------------------------- silent source / lost communication, said the way people say it
+did a box in the car stop talking to the others | events source_dropout op=exists
+did any unit go quiet on the network | events source_dropout op=exists
+has the car lost contact with one of its buses | events source_dropout op=exists
+did one of the data feeds cut out | events source_dropout op=exists
+did anything stop sending data while i was driving | events source_dropout op=exists
+how many times did a bus go quiet | events source_dropout op=count
+when did a unit last stop communicating | events source_dropout op=last
+list the times a data source dropped out | events source_dropout op=list
+did a controller drop off the network | events can_error op=exists
+has the network between the units had trouble | events can_error op=exists
+were there communication faults between the modules | events can_error op=exists
+how many times did the units lose communication | events can_error op=count
+# ---------------------------------------------------------------- tyre warning, camera, overheating - everyday phrasing
+did the tyre light come on | events tyre_pressure_warning op=exists
+has the flat tyre warning appeared | events tyre_pressure_warning op=exists
+did the car tell me a tyre was low | events tyre_pressure_warning op=exists
+has the low air light shown up lately | events tyre_pressure_warning op=exists
+how many times did the tyre light come on | events tyre_pressure_warning op=count
+did the car warn me that the camera was covered | events camera_blocked op=exists
+has the camera ever been covered or dirty | events camera_blocked op=exists
+has the pack ever got too hot | events battery_overheat_warning op=exists
+did the battery ever get dangerously warm | events battery_overheat_warning op=exists
+has the motor ever got too hot | events overtemp_warning op=exists
+did the motor overheat | events overtemp_warning op=exists
+did the drive motor go over its temperature limit | events overtemp_warning op=exists
+how many times did the motor run too hot | events overtemp_warning op=count
+the motor hasnt overheated has it | events overtemp_warning op=exists
+# ---------------------------------------------------------------- engineer vocabulary
+what did the car record around the last dtc | context diagnostic_code
+what was the car doing when the last fault code was stored | context diagnostic_code
+show the freeze frame for the last fault | context diagnostic_code
+any codes about lost communication | events diagnostic_code op=exists
+have any u codes been stored | events diagnostic_code op=exists
+list the stored dtcs | events diagnostic_code op=list
+which can messages carry the pack voltage | spec battery_voltage
+which message carries the motor speed | spec motor_rpm
+does the bms report the cell temperatures | spec cell_temperature_max
+does the vehicle report cell voltage | spec cell_voltage_min
+which bus does the speed come from | spec speed
+what is the bus load | unsupported none
+what is the can error rate in percent | unsupported none
+what is the round trip time between the units | unsupported none
+how many frames per second does the bus carry | unsupported none
+# ---------------------------------------------------------------- look-alikes: which of two neighbouring events
+did the lane keeping turn off | events adas_state_change op=exists
+did the lane keeping switch off | events adas_state_change op=exists
+how many times did driver assist change state | events adas_state_change op=count
+did the assist drop out | events adas_disengagement op=exists
+did the 12 volt supply sag | events voltage_dip op=exists
+did the 12 volt rail drop for a second | events voltage_dip op=exists
+did the low voltage supply dip | events voltage_dip op=exists
+has the 12 volt battery gone flat | events low_12v_warning op=exists
+did the auxiliary battery run low | events low_12v_warning op=exists
+how often did the 12 volt battery warn me | events low_12v_warning op=count
+was the fault memory wiped | events diagnostic_code_cleared op=exists
+when was the last code cleared | events diagnostic_code_cleared op=last
+when was a code last stored | events diagnostic_code op=last
+was the battery or the motor too hot | events overtemp_warning op=exists
+# ---------------------------------------------------------------- numeric limits: how often / how long / how much of the time
+how often was the speed above 130 | stat speed op=count cond=threshold
+how many times did the speed go over 100 | stat speed op=count cond=threshold
+how often did the pack temperature go above 40 | stat battery_temperature op=count cond=threshold
+how many times did the tyre pressure fall below 200 | stat tyre_pressure op=count cond=threshold
+how often did the 12 volt battery go under 12 volts | stat aux_battery_voltage op=count cond=threshold
+how many times was the car ahead closer than 10 metres | stat lead_vehicle_distance op=count cond=threshold
+how often did the gap to the vehicle in front drop under 6 metres | stat lead_vehicle_distance op=count cond=threshold
+how long was the speed over 120 | stat speed op=duration cond=threshold
+how long was the pack above 40 degrees | stat battery_temperature op=duration cond=threshold
+for how long was the coolant flow under 6 litres a minute | stat coolant_flow op=duration cond=threshold
+how long did the following distance stay below 15 metres | stat lead_vehicle_distance op=duration cond=threshold
+how long was the motor above 100 degrees | stat motor_temperature op=duration cond=threshold
+what share of the time was the pack above 35 degrees | stat battery_temperature op=share cond=threshold
+how much of the time was the speed under 20 | stat speed op=share cond=threshold
+what percentage of the drive was the lane confidence below 0.6 | stat lane_confidence op=share cond=threshold
+how often was the brake temperature above 300 | stat brake_temperature op=count cond=threshold
+# ---------------------------------------------------------------- "not <condition>"
+how many hard brakes when it was not raining | events hard_braking op=count cond=not_raining
+hard braking events on dry days | events hard_braking op=count cond=not_raining
+how many warnings did we get that were not at night | events any_warning op=count cond=not_night
+fault codes outside of charging | events diagnostic_code op=count cond=not_charging
+average consumption outside the city | stat wh_per_km op=mean cond=not_city
+average speed when the car was not charging | stat speed op=mean cond=not_charging
+pack temperature when not on the highway | stat battery_temperature op=mean cond=not_highway
+top speed while not in the city | extreme speed op=max cond=not_city
+how many disengagements when not on the motorway | events adas_disengagement op=count cond=not_highway
+camera blockages when it wasnt parked | events camera_blocked op=count cond=not_parked
+# ---------------------------------------------------------------- where a reading comes from, how often it updates
+where does the battery voltage come from | spec battery_voltage
+where is the motor speed taken from | spec motor_rpm
+which feed gives the outside temperature | spec ambient_temperature
+how often does the speed reading update | spec speed
+how often is the pack temperature refreshed | spec battery_temperature
+how many times a second is the state of charge sent | spec battery_soc
+how many sources report the tyre pressure | spec tyre_pressure
+what is the source of the coolant flow figure | spec coolant_flow
+# ---------------------------------------------------------------- health and advice topics
+should i be worried about anything | health vehicle_health
+is there anything wrong with the car | health vehicle_health
+is everything fine with the car | health vehicle_health
+do i need to get it serviced | advice maintenance
+do i have to take the car in soon | advice maintenance
+is it time to book a service | advice maintenance
+how are the tyres | health tyre_condition
+how is the motor doing | health motor_condition
+how is the cooling system | health cooling_condition
+is the 12 volt battery healthy | health aux_battery_condition
+# ---------------------------------------------------------------- frequency of an event over time, comparisons, days
+have hard brakes been going up | trend hard_braking op=change
+are hard brakes getting more common | trend hard_braking op=change
+are the warnings becoming rarer | trend any_warning op=change
+are the tyre warnings becoming less frequent | trend tyre_pressure_warning op=change
+are camera blockages getting rarer | trend camera_blocked op=change
+is the number of faults creeping up | trend diagnostic_code op=change
+have the resets been increasing | trend ecu_reset op=change
+which week had the sharpest rise in fault codes | trend diagnostic_code op=rise
+which week did the disengagements jump in | trend adas_disengagement op=rise
+in which week did hard braking shoot up | trend hard_braking op=rise
+when did the fault codes fall back the most | trend diagnostic_code op=drop
+do i get more hard brakes in town than on the motorway | compare hard_braking op=count cond=city vs=highway
+are there more disengagements on the highway than in the city | compare adas_disengagement op=count cond=highway vs=city
+more warnings this week than last week | compare any_warning op=count vs=period
+did i get more fault codes this month than last month | compare diagnostic_code op=count vs=period
+on how many days did a hard brake happen | events hard_braking op=count ent=day
+on how many days did we get a warning | events any_warning op=count ent=day
+how many days had a fault code | events diagnostic_code op=count ent=day
+which day had the most warnings | extreme any_warning op=max ent=day
+# ---------------------------------------------------------------- causes
+what made the voltage sag | why voltage_dip
+why did the 12 volt supply drop | why voltage_dip
+what causes the supply voltage to dip | why voltage_dip
+why did two sensors give different values | why sensor_conflict
+why did the two sources disagree | why sensor_conflict
+why did the can speed and the android speed not match | why sensor_conflict
+why is the consumption higher when it is cold | why wh_per_km op=rise cond=cold
+why does the car use more energy in the cold | why wh_per_km op=rise cond=cold
+why is the range worse in the cold | why range_estimate op=drop cond=cold
+why did the lane keeping let go so often | why adas_disengagement
+why did the car shut down unexpectedly | why unexpected_shutdown
+why did the controller restart | why ecu_reset
+why did the supply dip | why voltage_dip
+# ---------------------------------------------------------------- meanings and methods
+what is a source dropout | define source_dropout
+what does a source dropout mean in plain words | define source_dropout
+what does it mean when the car derates | define power_derate
+what does a power derate mean | define power_derate
+what does it mean when the power is limited | define power_derate
+what does state of health mean | define battery_soh
+what is the state of health number | define battery_soh
+what does regen mean | define regen_power
+what is an ecu reset in simple terms | define ecu_reset
+what does a voltage dip mean in simple words | define voltage_dip
+how do you work out the state of health | howto battery_soh
+how is the range worked out | howto range_estimate
+how is consumption calculated | howto wh_per_km
+# ---------------------------------------------------------------- a sentence of background in front of the real question
+the mechanic is asking when was the car last updated | events software_update op=last
+my garage wants to know when the software was last updated | events software_update op=last
+the dealer asked about the last firmware update when was it | events software_update op=last
+i am about to leave how long would a full charge take | estimate charge_time
+before i head out how long does it take to charge fully | estimate charge_time
+i am at the charger how long until it is full | estimate charge_time
+im in the car park how much charge is there | now battery_soc
+we just stopped for lunch how much range is left | estimate range_estimate
+sitting in traffic what is the pack temperature | now battery_temperature
+its freezing today what is the outside temperature | now ambient_temperature
+# ---------------------------------------------------------------- abstentions near the new vocabulary
+switch off the airbag warning light | unsafe none
+turn off the tyre pressure warning for good | unsafe none
+hide the fault codes from the dealer | unsafe none
+what colour are the seats | unsupported none
+what is the make of the infotainment screen | unsupported none
+which tyre brand is fitted | unsupported none
+what is the weather like tomorrow | offtopic none

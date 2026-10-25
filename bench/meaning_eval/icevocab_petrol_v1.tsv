@@ -1,0 +1,39 @@
+# ICEVOCAB_PETROL_V1: authored 2026-10-20 after full_v11 was final, before the vehicle-vocabulary layer was measured on this vehicle (petrol).  Never trained on.
+# Format: id <TAB> text <TAB> gold frame (act concept op cond vs ent) <TAB> tag.  'vehicle-vocabulary' = a signal only this vehicle declares; 'control' = must be left alone by the layer.
+P001	what is the manifold pressure	now intake_manifold_pressure none none none none	vehicle-vocabulary
+P002	intake manifold pressure	now intake_manifold_pressure none none none none	vehicle-vocabulary
+P003	what is the map sensor reading	now intake_manifold_pressure none none none none	vehicle-vocabulary
+P004	what is the intake air temperature	now intake_air_temperature none none none none	vehicle-vocabulary
+P005	how warm is the air going into the engine	now intake_air_temperature none none none none	vehicle-vocabulary
+P006	what is the mass air flow	now mass_air_flow none none none none	vehicle-vocabulary
+P007	how much air is the engine taking in	now mass_air_flow none none none none	vehicle-vocabulary
+P008	what is the short term fuel trim	now short_term_fuel_trim none none none none	vehicle-vocabulary
+P009	stft right now	now short_term_fuel_trim none none none none	vehicle-vocabulary
+P010	what is the long term fuel trim	now long_term_fuel_trim none none none none	vehicle-vocabulary
+P011	what is the ltft	now long_term_fuel_trim none none none none	vehicle-vocabulary
+P012	how far is the long term mixture correction	now long_term_fuel_trim none none none none	vehicle-vocabulary
+P013	what is the lambda	now lambda none none none none	vehicle-vocabulary
+P014	what is the air fuel ratio	now lambda none none none none	vehicle-vocabulary
+P015	what is the afr right now	now lambda none none none none	vehicle-vocabulary
+P016	how hot is the catalyst	now catalyst_temperature none none none none	vehicle-vocabulary
+P017	catalytic converter temperature	now catalyst_temperature none none none none	vehicle-vocabulary
+P018	what is the ignition timing	now ignition_timing none none none none	vehicle-vocabulary
+P019	what is the spark advance	now ignition_timing none none none none	vehicle-vocabulary
+P020	what is the engine oil temperature	now engine_oil_temperature none none none none	vehicle-vocabulary
+P021	how hot is the engine oil	now engine_oil_temperature none none none none	vehicle-vocabulary
+P022	what is the barometric pressure	now barometric_pressure none none none none	vehicle-vocabulary
+P023	highest catalyst temperature this week	extreme catalyst_temperature max none none none	vehicle-vocabulary
+P024	average long term fuel trim this month	stat long_term_fuel_trim mean none none none	vehicle-vocabulary
+P025	lowest manifold pressure this week	extreme intake_manifold_pressure min none none none	vehicle-vocabulary
+P026	what is my speed	now speed none none none none	control
+P027	how fast am i going	now speed none none none none	control
+P028	what is the tyre pressure	now tyre_pressure none none none none	control
+P029	what is the engine rpm	now engine_rpm none none none none	control
+P030	what is the engine load	now engine_load none none none none	control
+P031	how much fuel is left	now fuel_level none none none none	control
+P032	what is the engine oil level	now unlisted none none none none	control
+P033	how is the heated steering wheel	health unlisted none none none none	control
+P034	is the wheel alignment ok	health unlisted none none none none	control
+P035	how loud is the engine	now unlisted none none none none	control
+P036	what is the coolant reservoir level	now unlisted none none none none	control
+P037	how many cylinders does the engine have	spec unlisted none none none none	control

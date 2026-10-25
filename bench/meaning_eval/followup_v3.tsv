@@ -1,0 +1,31 @@
+# FOLLOWUP_V3: two-turn dialogues for the new acts.  Authored 2026-10-21 before the training data was built.  Never trained on.
+# Format: id <TAB> previous frame (8 words) <TAB> text <TAB> gold frame (8 words) <TAB> tag
+W001	summary none none none none none none none	and for the previous week	summary none none none none none none period	period
+W002	summary none none none none none none none	what about the whole month	summary none none none none none none period	period
+W003	summary none none none none none none none	do it for yesterday	summary none none none none none none period	period
+W004	summary none none none none none none none	same thing for the last ten days	summary none none none none none none period	period
+W005	summary none none none none none none none	and what has changed	summary none change none none none none period	period
+W006	summary none none none none none none none	how about the tyres	summary tyre_condition none none none none none concept	concept
+W007	summary none none none none none none none	and the battery	summary battery_condition none none none none none concept	concept
+W008	summary none none none none none none none	what about the warnings	summary any_warning none none none none none concept	concept
+W009	summary none none none none none none none	how did you get that	explain none none none none none none answer	answer
+W010	summary none change none none none none none	and the month before	summary none change none none none none period	period
+W011	summary none change none none none none none	just the last three days	summary none change none none none none period	period
+W012	summary none change none none none none none	is any of that unusual	anomaly none none none none none none concept	concept
+W013	anomaly none none none none none none none	and last month	anomaly none none none none none none period	period
+W014	anomaly none none none none none none none	just yesterday	anomaly none none none none none none period	period
+W015	anomaly none none none none none none none	check the battery temperature	anomaly battery_temperature none none none none none concept	concept
+W016	anomaly none none none none none none none	and the tyres	anomaly tyre_condition none none none none none concept	concept
+W017	anomaly battery_temperature none none none none none none	now the motor	anomaly motor_temperature none none none none none concept	concept
+W018	anomaly battery_temperature none none none none none none	over the last month	anomaly battery_temperature none none none none none period	period
+W019	stat battery_temperature usual none none none none none	and the motor temperature	stat motor_temperature usual none none none none concept	concept
+W020	stat speed usual none none none none none	what about the tyre pressure	stat tyre_pressure usual none none none none concept	concept
+W021	summary none none none none trip none none	why was it so hot	why battery_temperature rise none none trip none focus	focus
+W022	summary none none none none trip none none	what made it use so much energy	why wh_per_km rise none none trip none focus	focus
+W023	summary none none none none trip none none	was that one unusual	anomaly none none none none trip none focus	focus
+W024	why battery_temperature rise none none trip none none	and the motor	why motor_temperature rise none none trip none concept	concept
+W025	events hard_braking count none none none none none	summarise the whole week	summary none none none none none none none	fresh
+W026	stat speed mean none none none none none	give me an overview of last month	summary none none none none none none none	fresh
+W027	now battery_soc none none none none none none	anything unusual lately	anomaly none none none none none none none	fresh
+W028	extreme motor_temperature max none none none none none	what changed this week	summary none change none none none none none	fresh
+W029	now speed none none none none none none	what is the normal range of the pack temperature	stat battery_temperature usual none none none none none	fresh

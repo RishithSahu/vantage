@@ -1,0 +1,221 @@
+id	expected
+G001	current compass heading
+G002	current steering angle
+G003	current steering rate
+G004	current yaw rate
+G005	current lateral acceleration
+G006	current brake pressure
+G007	current brake pedal state
+G008	current accelerator position
+G009	current tyre temperatures
+G010	current lane confidence
+G011	current ambient light
+G012	current rain sensor state
+G013	current camera brightness
+G014	current camera sharpness
+G015	current battery current
+G016	current pack voltage
+G017	current hottest cell temperature
+G018	current coldest cell temperature
+G019	current climate power draw
+G020	current regeneration power
+G021	current motor torque
+G022	current drive mode
+G023	current brake pad life
+G024	current outside temperature
+G025	charging state or an honest statement of what is known
+G026	current odometer
+G027	current position
+G028	current driver-assistance state
+G029	current coolant flow
+G030	current 12 V voltage
+G031	current acceleration
+G032	current braking intensity
+G033	current horsepower
+G034	current turn radius
+G035	current wheel slip
+G036	current rate of battery temperature rise
+G037	current battery efficiency
+G038	mean horsepower for the week
+G039	strongest braking in the month
+G040	highest acceleration yesterday
+G041	energy used today
+G042	mean slip in the rain
+G043	peak heating rate
+G044	mean efficiency
+G045	trend of the heating rate
+G046	trend of braking intensity
+G047	distance since the start of the year or the whole history, stated
+G048	energy over the whole history
+G049	regenerated energy over the whole history
+G050	median speed
+G051	spread of speed
+G052	variation of battery temperature
+G053	median motor power
+G054	lowest pack voltage
+G055	lowest coolant flow on record
+G056	peak regeneration yesterday
+G057	peak lateral acceleration
+G058	time and value of the maximum motor temperature
+G059	time and value of the minimum pack temperature
+G060	time of the highest state of charge
+G061	mean highway speed last week
+G062	peak city power yesterday
+G063	mean consumption in rain
+G064	time idling today
+G065	percent of time charging
+G066	percent of time at night
+G067	time parked
+G068	mean temperature during fast charging
+G069	mean fast charging power
+G070	maximum in hot weather
+G071	mean night speed
+G072	mean motor temperature on highway
+G073	highest city speed
+G074	mean regen power
+G075	mean consumption in cold weather
+G076	time above 40 kW
+G077	share above 100 km/h
+G078	time above 38 C
+G079	count of low-flow readings
+G080	time below 30 percent
+G081	mean speed above 50 km/h
+G082	max temperature during hard braking
+G083	mean speed during hard acceleration
+G084	consumption city versus highway
+G085	mean temperature charging versus driving
+G086	rain versus other consumption
+G087	night versus other speed
+G088	peak speed city versus highway
+G089	distance this week versus last
+G090	energy this month versus last
+G091	mean temperature today versus yesterday
+G092	consumption week over week
+G093	mean speed yesterday versus today
+G094	regenerated energy week over week
+G095	motor temperature week over week
+G096	maximum temperature month over month
+G097	temperature in hot versus cold weather
+G098	night versus daytime speed
+G099	share of time idling
+G100	share of time driving
+G101	the most energy-hungry trip
+G102	best-consumption trip
+G103	worst-consumption trip
+G104	shortest trip
+G105	longest trip this month
+G106	mean trip distance and duration
+G107	number of trips this month
+G108	median trip distance
+G109	total trip time and distance
+G110	the day with the greatest distance
+G111	the day with the least energy
+G112	number of days with trips
+G113	most efficient day
+G114	mean speed of the last trip
+G115	energy of the last trip
+G116	maximum power of the last trip
+G117	mean temperature in the last charge session
+G118	peak charging power in the last session
+G119	mean charging power
+G120	peak power of the last charge
+G121	earliest diagnostic code
+G122	list of disengagements
+G123	number of CAN anomalies
+G124	whether a reminder was recorded
+G125	latest inflation event
+G126	number of inflation events
+G127	latest hard acceleration
+G128	hard cornering count yesterday
+G129	list of tyre warnings
+G130	whether degradation was recorded
+G131	latest degradation
+G132	latest coolant flow drop
+G133	count of overheating warnings
+G134	earliest overheating warning
+G135	list of sessions
+G136	number of warnings
+G137	conditions before the last disengagement
+G138	conditions before the last tyre warning
+G139	conditions before the last hard braking
+G140	conditions before the last blockage
+G141	evidence-ranked reasons for the last disengagement
+G142	explanation of the last tyre warning
+G143	explanation of the last degradation
+G144	explanation of the last hard braking
+G145	explanation of the last 12 V warning
+G146	explanation of the last CAN anomaly
+G147	explanation of the reminder
+G148	explanation of the rise
+G149	explanation or little-to-explain statement
+G150	explanation of the change
+G151	rated top speed if recorded
+G152	seat count if recorded
+G153	verified capacity
+G154	nominal voltage if recorded
+G155	cycle count if recorded
+G156	interval in km or months
+G157	vehicle model
+G158	age if recorded
+G159	specified tyre pressures
+G160	home charger kW
+G161	software version
+G162	export power if recorded
+G163	the list of drive modes
+G164	home charger power
+G165	definition of regeneration
+G166	definition
+G167	definition
+G168	definition
+G169	definition
+G170	definition
+G171	formula
+G172	formula
+G173	formula
+G174	formula
+G175	method or an honest statement that it is not documented
+G176	brake condition from pad life and events
+G177	motor condition
+G178	cooling condition
+G179	tyre condition
+G180	12 V condition
+G181	battery condition
+G182	battery care advice from the data
+G183	tyre advice from the data
+G184	driving advice from the data
+G185	cooling advice
+G186	advice from the data
+G187	daily briefing
+G188	maintenance advice
+G189	time to full from the current charge
+G190	cost needs a tariff; gives the energy
+G191	range estimate
+G192	forecast; not computed
+G193	no destination data
+G194	next service due
+G195	evidence for higher consumption
+G196	rated top speed, or the recorded maximum with the distinction stated
+G197	the recorded maximum yesterday
+G198	road speed limits are not recorded
+G199	legal limits not recorded
+G200	current climate power draw
+G201	not about this vehicle
+G202	not about this vehicle's data
+G203	cannot operate the vehicle
+G204	cannot make calls
+G205	refuses to send data out
+G206	refuses to share data out
+G207	not recorded
+G208	not recorded
+G209	refuses
+G210	refuses
+G211	brief polite reply
+G212	brief polite reply
+G213	capabilities
+G214	brief polite reply
+G215	current battery temperature
+G216	energy used yesterday
+G217	latest charging session
+G218	current speed
+G219	mean speed last month
+G220	peak motor temperature this week

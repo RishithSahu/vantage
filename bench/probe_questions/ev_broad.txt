@@ -1,0 +1,91 @@
+# Everyday and engineer questions for an electric car; the answers are read by a person for correctness
+what is my battery level
+how much range do i have
+how long to charge to 100
+what was my consumption last week
+how does my consumption this week compare with last week
+what was my consumption in the city and on the highway
+which trip used the most energy last month
+what was my longest trip this month
+how many trips did i do per day on average this month
+what is the average speed of my trips
+what was the highest speed this month
+how many hard brakes last week
+are hard brakes becoming more frequent
+how many times did the battery overheat this year
+why did the battery overheat last time
+what happened before the last overheating
+what is the battery health
+has the battery health changed in the last three months
+is the battery degrading faster than normal
+what is the state of the 12 volt battery
+when was the last time the 12 volt dipped
+how are my tyres
+which tyre has the lowest pressure
+did a tyre warning come up this month
+when did i last charge
+how much did the last charge add
+how many fast charges this month
+how long did the last charge take
+what is my average charging power
+what share of my charging was at home
+how much energy did i recover with regen last week
+is regen higher on the highway or in the city
+what is the motor temperature now
+what was the hottest the motor got this week
+is the motor temperature normal for me
+is the coolant flow normal
+did the coolant flow drop recently
+which diagnostic codes are active
+what does the last diagnostic code mean
+how many diagnostic codes this month
+was the lane assist disengaged this week
+why does the lane assist disengage
+did the car brake automatically
+how often does the camera get blocked
+what is the camera sharpness
+is the camera blocked right now
+when is my next service
+how many km since the last service
+what is the odometer
+how far did i drive yesterday
+how far did i drive this week compared with last week
+where is the car parked
+where was the car at 8 this morning
+how long was the car parked last night
+how much battery did it lose overnight
+why did the battery drop while parked
+give me a summary of the week
+what changed since last week
+is anything unusual about the battery
+is anything unusual this week
+is my driving style aggressive
+what is my typical weekly distance
+is today normal for me
+how much energy did i use this month
+what is my cost per km
+compare my first and last week
+did my range get shorter in winter
+does speed change my consumption
+does the outside temperature change the battery temperature
+is the pack temperature related to charging power
+what is the pack temperature when fast charging
+what is the highest cell temperature
+what is the cell voltage spread
+how many software updates
+what version is the software
+what is the rated top speed
+how many seats
+what is the battery capacity
+what is the usable battery capacity
+what is regen
+what does state of health mean
+how is the range estimated
+what is a diagnostic trouble code
+should i charge to 100 every day
+how do i make the battery last longer
+is it safe to drive with the tyre warning on
+can you unlock the doors
+send my trips to my email
+what is the weather tomorrow
+thanks

@@ -1,0 +1,94 @@
+# second held-out DEV set (fresh wording, different style from heldout_dev.tsv): used with heldout_dev.tsv to tune thresholds; heldout_final.tsv stays untouched
+advice	do you recommend that i take a long trip in this car as it is
+advice	my brother wants to borrow the car for a drive to goa, is it ok to lend it
+advice	is it advisable to travel far with the car in its current state
+advice	any problem if i go out in the car now
+advice	should i be worried about driving this car
+signal_why	why does the battery power go negative at traffic lights
+signal_why	what causes the coolant flow to drop to zero
+signal_why	why is the pack temperature higher when fast charging
+signal_why	why is the motor hotter in summer
+drive_safely	how can i make my driving safer
+drive_safely	what precautions should i take while driving this car
+drive_safely	tell me how to avoid accidents with an electric car
+battery_now	how's my battery doing today
+battery_now	tell me the state of charge and battery health
+battery_now	is my battery ok
+last_charge	when was the last time the battery was charged
+last_charge	what was my last charge
+last_charge	how long since the last time i charged the car
+charge_cost	how much did i spend on charging the last two weeks
+charge_cost	electricity cost of my car
+charge_cost	what does one full charge cost me
+charge_time	how many hours to charge from empty
+charge_time	how long to charge up to 80%
+reach	can i drive 150 km on the current charge
+reach	how many more kilometres can i drive
+reach	will the charge last until tomorrow
+reach	do i need to recharge before leaving
+improve_range	how can i increase my km per charge
+improve_range	give me tips to drive more efficiently
+improve_range	what can i do to get better range
+speeding	do i drive too fast
+speeding	how often do i go over 100 km/h
+speeding	tell me if i speed
+hot_battery	was the battery ever too hot
+hot_battery	what is the max temperature the battery reached
+hot_battery	did the battery overheat at any time
+pump_ok	how is the coolant pump doing
+pump_ok	is the cooling system healthy
+pump_ok	does the coolant pump have a problem
+v12	how's the 12 volt battery
+v12	check my 12v battery
+motor_now	how hot is my motor right now
+motor_now	is the motor overheating at the moment
+unusual	is there anything unusual today
+unusual	did anything strange occur in the last day
+unusual	anything weird with the car this morning
+overview	how's my car been this week
+overview	overall how is the vehicle doing
+style	am i a good driver
+style	is my driving harsh
+style	what's my driver score
+style_trend	am i driving better than last week
+dtc_explain	what does the error code mean
+dtc_explain	explain the fault code please
+dtc_explain	what is the dtc on my car
+battery_age	how much battery capacity have i lost
+battery_age	how old is my battery health wise
+soh_rate	how fast is my battery aging
+soh_rate	how long will the battery last
+charging_now	is the battery charging now
+top_speed	what is the top speed i reached
+top_speed	what is the fastest i have driven
+places_most	which places do i drive to most
+places_most	where does the car usually go
+commute	how long does my drive to work take
+commute	what is the duration of my usual journey
+longest_trip	which was my longest drive
+longest_trip	longest trip distance
+last_trip	how was my last journey
+last_trip	describe my previous trip
+eff_day	what energy per km did i use today
+best_day	which day was most economical
+best_day	my least efficient day
+eff_trend	is my energy consumption rising
+eff_trend	am i using more power than before
+trip_count	how many trips this week
+trip_count	number of journeys i did last week
+regen	how much energy have i regenerated this week
+regen	regen braking energy recovered
+leave_time	what time did i leave the house today
+leave_time	when did i last leave home
+compare_months	compare this month and the previous month
+compare_days	compare yesterday and today
+explain_simple	explain the last alert in plain english
+explain_simple	what was the last warning about simply
+briefing	brief me
+briefing	good afternoon
+briefing	what do i need to know before driving
+gate	what is the capital of japan
+gate	tell me a funny story
+gate	how do i make coffee
+gate	who is the richest man in the world
+gate	what time does the sun set

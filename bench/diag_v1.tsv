@@ -1,0 +1,32 @@
+# DIAGNOSTIC set v1 (author-written by Claude; development use only; unreviewed). Targets: state kept across follow-ups (KEEP), contradictory updates (CONTRA), specific sensors (SENS), omitted conditions (OMIT), stated period replaced by a default (DEFAULT).
+# Columns (TAB separated): id, family, question, gold IR, previous question (or -), previous gold IR (or -)
+g001	KEEP	same for last week	op=aggregate tgt=tyre_pressure_fl agg=mean t=last:7:day c=highway	average front-left tyre pressure on highway trips this week	op=aggregate tgt=tyre_pressure_fl agg=mean t=cal:this_week c=highway
+g002	KEEP	and for the day before	op=extreme tgt=speed agg=max t=cal:day_before_yesterday c=highway	highest speed on highway trips yesterday	op=extreme tgt=speed agg=max t=cal:yesterday c=highway
+g003	KEEP	what about this month	op=aggregate tgt=battery_temperature agg=mean t=cal:this_month c=charging	average battery temperature while charging this week	op=aggregate tgt=battery_temperature agg=mean t=cal:this_week c=charging
+g004	KEEP	and the highest	op=extreme tgt=battery_soc agg=max t=last:3:day	lowest battery charge in the last 3 days	op=extreme tgt=battery_soc agg=min t=last:3:day
+g005	KEEP	only last week	op=count t=last:7:day ev=HARSH_BRAKE	how many harsh brakes in the last 14 days	op=count t=last:14:day ev=HARSH_BRAKE
+g006	KEEP	and this week	op=aggregate tgt=speed agg=mean t=cal:this_week c=raining	average speed in the rain last week	op=aggregate tgt=speed agg=mean t=cal:last_week c=raining
+g007	KEEP	and yesterday	op=extreme tgt=motor_temperature agg=max t=cal:yesterday c=sig:speed:gt:60:km_per_h	peak motor temperature when above 60 km/h this month	op=extreme tgt=motor_temperature agg=max t=cal:this_month c=sig:speed:gt:60:km_per_h
+g008	KEEP	and the front right	op=aggregate tgt=tyre_pressure_fr agg=mean t=last:7:day	mean rear right tyre pressure in the last 7 days	op=aggregate tgt=tyre_pressure_rr agg=mean t=last:7:day
+g009	KEEP	now the same for last month	op=aggregate tgt=wh_per_km agg=mean t=last:30:day c=city	average energy per km on city trips this month	op=aggregate tgt=wh_per_km agg=mean t=cal:this_month c=city
+g010	KEEP	and how many were there	op=count t=cal:yesterday ev=HARSH_ACCEL	list the hard accelerations from yesterday	op=list_events t=cal:yesterday ev=HARSH_ACCEL evs=all
+g011	CONTRA	actually city only	op=aggregate tgt=wh_per_km agg=mean t=cal:this_month c=city	average energy per km on highway trips this month	op=aggregate tgt=wh_per_km agg=mean t=cal:this_month c=highway
+g012	CONTRA	without the rain restriction	op=aggregate tgt=speed agg=mean t=cal:this_week	average speed while raining this week	op=aggregate tgt=speed agg=mean t=cal:this_week c=raining
+g013	CONTRA	make that colder than 0	op=aggregate tgt=hvac_power agg=mean t=cal:this_week c=sig:ambient_temperature:lt:0	average hvac power when it is colder than 5 degrees outside this week	op=aggregate tgt=hvac_power agg=mean t=cal:this_week c=sig:ambient_temperature:lt:5
+g014	CONTRA	actually all trips	op=aggregate tgt=speed agg=mean t=cal:this_week	average speed on highway trips this week	op=aggregate tgt=speed agg=mean t=cal:this_week c=highway
+g015	CONTRA	change that to raining instead	op=aggregate tgt=speed agg=mean t=cal:this_week c=raining	average speed on highway trips this week	op=aggregate tgt=speed agg=mean t=cal:this_week c=highway
+g016	SENS	average front-left tyre pressure last week	op=aggregate tgt=tyre_pressure_fl agg=mean t=last:7:day	-	-
+g017	SENS	what is the rear right wheel speed now	op=current_value tgt=wheel_speed_rr t=now	-	-
+g018	SENS	front right tyre pressure this week	op=aggregate tgt=tyre_pressure_fr agg=mean t=cal:this_week	-	-
+g019	SENS	lowest rear left tyre pressure yesterday	op=extreme tgt=tyre_pressure_rl agg=min t=cal:yesterday	-	-
+g020	SENS	do you record the minimum cell temperature	op=capability tgt=cell_temperature_min t=all	-	-
+g021	OMIT	average speed on highway trips last week	op=aggregate tgt=speed agg=mean t=last:7:day c=highway	-	-
+g022	OMIT	how many times did it brake hard while raining this week	op=count t=cal:this_week ev=HARSH_BRAKE c=raining	-	-
+g023	OMIT	peak battery temperature while charging yesterday	op=extreme tgt=battery_temperature agg=max t=cal:yesterday c=charging	-	-
+g024	OMIT	average hvac power when it was below 5 degrees outside last week	op=aggregate tgt=hvac_power agg=mean t=last:7:day c=sig:ambient_temperature:lt:5	-	-
+g025	OMIT	average speed in the city this month	op=aggregate tgt=speed agg=mean t=cal:this_month c=city	-	-
+g026	DEFAULT	average battery temperature over the last 3 days	op=aggregate tgt=battery_temperature agg=mean t=last:3:day	-	-
+g027	DEFAULT	peak speed in the last 10 days	op=extreme tgt=speed agg=max t=last:10:day	-	-
+g028	DEFAULT	total energy used in the last 2 weeks	op=aggregate tgt=energy_used agg=sum t=last:2:week	-	-
+g029	DEFAULT	how many harsh accelerations in the last 20 days	op=count t=last:20:day ev=HARSH_ACCEL	-	-
+g030	DEFAULT	average speed on 15 September	op=aggregate tgt=speed agg=mean t=date:2026-09-15	-	-

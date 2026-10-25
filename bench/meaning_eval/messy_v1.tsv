@@ -1,0 +1,71 @@
+# MESSY-v1: held-out evaluation, noisy registers (typos, abbreviations, voice fillers, code-mixing, fragments). Authored before any training data existed; never trained on. Columns as novel_v1.tsv.
+M001	hey so like whats the battrey at	now battery_soc none none none none	voice
+M002	speedd now	now speed none none none none	typo
+M003	motr temp	now motor_temperature none none none none	typo
+M004	umm how hot is the pak rn	now battery_temperature none none none none	voice
+M005	charging power kw	now charging_power none none none none	terse
+M006	tell me the tire pressurs	now tyre_pressure none none none none	typo
+M007	how much jus is left	now battery_soc none none none none	slang
+M008	whats d coolant flow	now coolant_flow none none none none	slang
+M009	bhai speed kitni hai abhi	now speed none none none none	hinglish
+M010	gaadi ka motor temperature batao	now motor_temperature none none none none	hinglish
+M011	avg speed yesturday	stat speed mean none none none	typo
+M012	howmany kms did i do last wek	stat distance_driven sum none none none	typo
+M013	total enrgy used this mnth	stat energy_used sum none none none	typo
+M014	pls give me average consumpton for last 7 days	stat wh_per_km mean none none none	typo
+M015	how many trips this wk	stat trip_record count none none trip	slang
+M016	percent time parked yday	stat drive_mode share parked none none	slang
+M017	highest spd last month	extreme speed max none none none	typo
+M018	when was it the hotest	extreme battery_temperature max none none none	typo
+M019	lowest charge percent this wk	extreme battery_soc min none none none	slang
+M020	max tyre temp	extreme tyre_temperature max none none none	terse
+M021	has the batry been gettin hotter	trend battery_temperature rise none none none	typo
+M022	is range droping	trend range_estimate drop none none none	typo
+M023	effeciency trend	trend wh_per_km change none none none	typo
+M024	city vs hwy consumption	compare wh_per_km mean city highway none	slang
+M025	this wk vs last wk speed	compare speed mean none period none	slang
+M026	any adas dropouts yday	events adas_disengagement exists none none none	slang
+M027	how many hard brakes last wk	events hard_braking count none none none	slang
+M028	list dtcs pls	events diagnostic_code list none none none	slang
+M029	did batry overheet	events battery_overheat_warning exists none none none	typo
+M030	last plug in	events charging_session last none none none	slang
+M031	any tyre alerts	events tyre_pressure_warning exists none none none	terse
+M032	kal koi dtc aaya kya	events diagnostic_code exists none none none	hinglish
+M033	whats happend before the overheating	context battery_overheat_warning none none none none	typo
+M034	why did battry get so hot	why battery_overheat_warning none none none none	typo
+M035	y is range so low	why range_estimate drop none none none	slang
+M036	why's the motor warm	why motor_temperature none none none none	slang
+M037	range kyu kam ho gayi	why range_estimate drop none none none	hinglish
+M038	how many ppl can this car carry	spec seat_count none none none none	slang
+M039	battery size in kwh	spec battery_capacity none none none none	terse
+M040	max speed of the car as per spec	spec rated_max_speed none none none none	terse
+M041	charge cycle count	spec charge_cycles none none none none	terse
+M042	which sw version	spec software_version none none none none	slang
+M043	what is soh	define battery_soh none none none none	terse
+M044	whats regen	define regen_energy none none none none	slang
+M045	meaning of adas	define adas_state none none none none	terse
+M046	how2 calculate range	howto range_estimate none none none none	slang
+M047	shud i drive wid the warning on	advice vehicle_health none none none none	slang
+M048	tips for more range pls	advice range_estimate none none none none	slang
+M049	how r the tyres	health tyre_condition none none none none	slang
+M050	batry ok?	health battery_condition none none none none	typo
+M051	car sab theek hai kya	health vehicle_health none none none none	hinglish
+M052	brakes ok or not	health brake_condition none none none none	slang
+M053	how far can i go rn	estimate range_estimate none none none none	slang
+M054	time 2 full charge	estimate charge_time none none none none	slang
+M055	whens service due	estimate maintenance none none none none	typo
+M056	charging cost this mnth	estimate charge_cost none none none none	typo
+M057	hiya	social none none none none none	slang
+M058	thx a lot	social none none none none none	slang
+M059	lol who won ipl	offtopic none none none none none	slang
+M060	open the sunroof pls	control none none none none none	slang
+M061	how to fake the odo	unsafe none none none none none	slang
+M062	will it rain tmrw	unsupported none none none none none	slang
+M063	wiper fluid left	now unlisted none none none none	slang
+M064	tire tred depth	now tyre_tread_depth none none none none	typo
+M065	and last week	ambiguous none none none none none	terse
+M066	whats the soc	now battery_soc none none none none	slang
+M067	soh please	health battery_soh none none none none	terse
+M068	rpm at 9pm yday	at motor_rpm none none none none	slang
+M069	battery temp 2 hrs back	at battery_temperature none none none none	slang
+M070	motor power rn	now motor_power none none none none	slang

@@ -1,0 +1,382 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "subaru_crosstrek_hybrid",
+ "vehicle": {
+  "make": "Subaru",
+  "model": "Crosstrek Hybrid (2020)",
+  "year": 2020,
+  "powertrain": "petrol",
+  "specs": {
+   "veh.tyre_spec_front": 230,
+   "veh.tyre_spec_rear": 230,
+   "veh.service_km": 15000,
+   "veh.wheelbase_m": 2.67,
+   "veh.wheel_radius_m": 0.32,
+   "veh.rated_max_speed": 190,
+   "veh.seats": 5,
+   "veh.tank_l": 55,
+   "veh.sw": "ecu 1.0",
+   "veh.model": "Subaru Crosstrek Hybrid (2020)"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "subaru_global_2020_hybrid_generated",
+   "type": "can",
+   "name": "CAN 500 kbit/s (OEM database subaru_global_2020_hybrid_generated)",
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "ext",
+   "type": "can",
+   "name": "Crosstrek Hybrid (2020) extension CAN (SYNTHETIC: quantities the open database lacks)",
+   "dbc": "subaru_crosstrek_hybrid_ext.dbc",
+   "channel": "can1",
+   "bitrate": 500000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Linux telematics / infotainment (syslog)",
+   "format": "rfc3164"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  },
+  {
+   "id": "cam",
+   "type": "camera",
+   "name": "Forward camera (EyeSight)",
+   "cams": [
+    "front"
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "concept": "steering_angle",
+   "from": "can:subaru_global_2020_hybrid_generated/Steering.Steering_Angle",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "engine_rpm",
+   "from": "can:subaru_global_2020_hybrid_generated/Throttle.Engine_RPM",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "accelerator_position",
+   "from": "can:subaru_global_2020_hybrid_generated/Throttle.Throttle_Pedal",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "wheel_speed_fr",
+   "from": "can:subaru_global_2020_hybrid_generated/Wheel_Speeds.FR",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_rr",
+   "from": "can:subaru_global_2020_hybrid_generated/Wheel_Speeds.RR",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_fl",
+   "from": "can:subaru_global_2020_hybrid_generated/Wheel_Speeds.FL",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_rl",
+   "from": "can:subaru_global_2020_hybrid_generated/Wheel_Speeds.RL",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "steering_torque",
+   "from": "can:subaru_global_2020_hybrid_generated/Steering_Torque.Steer_Torque_Sensor",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "speed",
+   "from": "can:subaru_global_2020_hybrid_generated/Brake_Pedal.Speed",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "brake_pressure",
+   "from": "can:subaru_global_2020_hybrid_generated/ES_Brake.Brake_Pressure",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "door_state",
+   "from": "can:subaru_global_2020_hybrid_generated/BodyInfo.DOOR_OPEN_FL",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "wiper_state",
+   "from": "can:subaru_global_2020_hybrid_generated/BodyInfo.WIPERS",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "gear",
+   "from": "can:subaru_global_2020_hybrid_generated/Transmission.Gear",
+   "unit": "none",
+   "rate_hz": 10.0,
+   "map": {
+    "P": 0,
+    "R": -1,
+    "D": 1
+   },
+   "snap": true
+  },
+  {
+   "concept": "brake_pedal",
+   "from": "can:subaru_global_2020_hybrid_generated/Brake_Hybrid.Brake_Pedal",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "uds:diag/obd_coolant_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "engine_load",
+   "from": "uds:diag/obd_engine_load",
+   "unit": "%",
+   "rate_hz": 2
+  },
+  {
+   "concept": "intake_air_temperature",
+   "from": "uds:diag/obd_intake_air_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "mass_air_flow",
+   "from": "uds:diag/obd_maf",
+   "unit": "g/s",
+   "rate_hz": 2
+  },
+  {
+   "concept": "throttle_position",
+   "from": "uds:diag/obd_throttle",
+   "unit": "%",
+   "rate_hz": 2
+  },
+  {
+   "concept": "fuel_level",
+   "from": "uds:diag/obd_fuel_level",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "uds:diag/obd_ambient_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "uds:diag/obd_module_voltage",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "engine_oil_temperature",
+   "from": "uds:diag/obd_oil_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "fuel_rate",
+   "from": "uds:diag/obd_fuel_rate",
+   "unit": "L/h",
+   "rate_hz": 2
+  },
+  {
+   "concept": "barometric_pressure",
+   "from": "uds:diag/obd_barometric",
+   "unit": "kPa",
+   "rate_hz": 0.5
+  },
+  {
+   "concept": "intake_manifold_pressure",
+   "from": "uds:diag/obd_intake_map",
+   "unit": "kPa",
+   "rate_hz": 2
+  },
+  {
+   "concept": "ignition_timing",
+   "from": "uds:diag/obd_timing_advance",
+   "unit": "deg",
+   "rate_hz": 2
+  },
+  {
+   "concept": "short_term_fuel_trim",
+   "from": "uds:diag/obd_fuel_trim_st1",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "long_term_fuel_trim",
+   "from": "uds:diag/obd_fuel_trim_lt1",
+   "unit": "%",
+   "rate_hz": 0.5
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:ext/EXT_TPMS.TyrePressureFl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:ext/EXT_TPMS.TyrePressureFr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:ext/EXT_TPMS.TyrePressureRl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:ext/EXT_TPMS.TyrePressureRr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.TyreTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "can:ext/EXT_DATA_1HZ.Odometer",
+   "unit": "km",
+   "rate_hz": 1
+  },
+  {
+   "concept": "cabin_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.CabinTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  }
+ ],
+ "events": [
+  {
+   "id": "overtemp",
+   "from": "signal:motor_temperature",
+   "when": ">105",
+   "hold_s": 10,
+   "type": "WARN_OVERTEMP",
+   "severity": "critical",
+   "detail": "Coolant above 105 °C ({value:.1f} °C)"
+  },
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

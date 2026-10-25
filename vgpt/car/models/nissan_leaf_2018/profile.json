@@ -1,0 +1,355 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "nissan_leaf_2018",
+ "vehicle": {
+  "make": "Nissan",
+  "model": "Leaf (2018)",
+  "year": 2018,
+  "powertrain": "bev",
+  "specs": {
+   "veh.cap_kwh": 40,
+   "veh.soh": 98,
+   "veh.nominal_voltage": 360,
+   "veh.tyre_spec_front": 250,
+   "veh.tyre_spec_rear": 250,
+   "veh.service_km": 20000,
+   "veh.wheelbase_m": 2.7,
+   "veh.wheel_radius_m": 0.33,
+   "veh.gear_ratio": 9.0,
+   "veh.rated_max_speed": 144,
+   "veh.seats": 5,
+   "veh.home_charger_kw": 7.4,
+   "veh.sw": "ecu 1.0",
+   "veh.model": "Nissan Leaf (2018)"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "nissan_leaf_2018_generated",
+   "type": "can",
+   "name": "CAN 500 kbit/s (OEM database nissan_leaf_2018_generated)",
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "ext",
+   "type": "can",
+   "name": "Leaf (2018) extension CAN (SYNTHETIC: quantities the open database lacks)",
+   "dbc": "nissan_leaf_2018_ext.dbc",
+   "channel": "can1",
+   "bitrate": 500000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Android infotainment (logcat)",
+   "format": "logcat"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  },
+  {
+   "id": "cam",
+   "type": "camera",
+   "name": "Forward camera (ProPILOT)",
+   "cams": [
+    "front"
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "concept": "steering_angle",
+   "from": "can:nissan_leaf_2018_generated/STEER_ANGLE_SENSOR.STEER_ANGLE",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "steering_torque",
+   "from": "can:nissan_leaf_2018_generated/STEER_TORQUE_SENSOR.STEER_TORQUE_DRIVER",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "wheel_speed_rr",
+   "from": "can:nissan_leaf_2018_generated/WHEEL_SPEEDS_REAR.WHEEL_SPEED_RR",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_rl",
+   "from": "can:nissan_leaf_2018_generated/WHEEL_SPEEDS_REAR.WHEEL_SPEED_RL",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "seatbelt_state",
+   "from": "can:nissan_leaf_2018_generated/SEATBELT.SEATBELT_DRIVER_LATCHED",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "brake_pedal",
+   "from": "can:nissan_leaf_2018_generated/BRAKE_PEDAL.BRAKE_PEDAL",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "accelerator_position",
+   "from": "can:nissan_leaf_2018_generated/CRUISE_THROTTLE.GAS_PEDAL",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "wheel_speed_fr",
+   "from": "can:nissan_leaf_2018_generated/WHEEL_SPEEDS_FRONT.WHEEL_SPEED_FR",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_fl",
+   "from": "can:nissan_leaf_2018_generated/WHEEL_SPEEDS_FRONT.WHEEL_SPEED_FL",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "gear",
+   "from": "can:nissan_leaf_2018_generated/GEARBOX.GEAR_SHIFTER",
+   "unit": "none",
+   "rate_hz": 10.0,
+   "map": {
+    "B": 1,
+    "D": 1,
+    "N": 0,
+    "R": -1,
+    "P": 0
+   },
+   "snap": true
+  },
+  {
+   "concept": "door_state",
+   "from": "can:nissan_leaf_2018_generated/DOORS_LIGHTS.DOOR_OPEN_FL",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:ext/EXT_TPMS.TyrePressureFl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:ext/EXT_TPMS.TyrePressureFr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:ext/EXT_TPMS.TyrePressureRl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:ext/EXT_TPMS.TyrePressureRr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.TyreTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "can:ext/EXT_DATA_1HZ.Odometer",
+   "unit": "km",
+   "rate_hz": 1
+  },
+  {
+   "concept": "battery_soc",
+   "from": "can:ext/EXT_DATA_1HZ.BatterySoc",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "battery_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.BatteryTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:ext/EXT_DATA_1HZ_2.MotorTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "charging_power",
+   "from": "can:ext/EXT_DATA_1HZ_2.ChargingPower",
+   "unit": "kW",
+   "rate_hz": 1
+  },
+  {
+   "concept": "coolant_flow",
+   "from": "can:ext/EXT_DATA_1HZ_2.CoolantFlow",
+   "unit": "L/min",
+   "rate_hz": 1
+  },
+  {
+   "concept": "hvac_power",
+   "from": "can:ext/EXT_DATA_1HZ_2.HvacPower",
+   "unit": "W",
+   "rate_hz": 1
+  },
+  {
+   "concept": "cabin_temperature",
+   "from": "can:ext/EXT_DATA_1HZ_2.CabinTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "can:ext/EXT_DATA_1HZ_3.AmbientTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "can:ext/EXT_DATA_1HZ_3.AuxBatteryVoltage",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "battery_voltage",
+   "from": "can:ext/EXT_DATA_5HZ.BatteryVoltage",
+   "unit": "V",
+   "rate_hz": 5
+  },
+  {
+   "concept": "battery_current",
+   "from": "can:ext/EXT_DATA_5HZ.BatteryCurrent",
+   "unit": "A",
+   "rate_hz": 5
+  },
+  {
+   "concept": "reported_range",
+   "from": "can:ext/EXT_DATA_0_2HZ.ReportedRange",
+   "unit": "km",
+   "rate_hz": 0.2
+  },
+  {
+   "concept": "motor_torque",
+   "from": "can:ext/EXT_DATA_10HZ.MotorTorque",
+   "unit": "Nm",
+   "rate_hz": 10
+  },
+  {
+   "concept": "_charging_active",
+   "from": "can:ext/EXT_KEYSTATE.ChargingActive",
+   "unit": "none",
+   "rate_hz": 5
+  },
+  {
+   "concept": "_ignition",
+   "from": "can:ext/EXT_KEYSTATE.Ignition",
+   "unit": "none",
+   "rate_hz": 5
+  }
+ ],
+ "events": [
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

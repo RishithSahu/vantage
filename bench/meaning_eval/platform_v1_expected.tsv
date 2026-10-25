@@ -1,0 +1,91 @@
+id	expected
+P001	an existence check on ECU resets
+P002	an existence check on ECU resets
+P003	a count of ECU resets
+P004	a count of ECU resets
+P005	list the ECU resets
+P006	the latest ECU reset
+P007	list the ECU resets
+P008	the context of the latest ECU reset
+P009	the likely cause of ECU resets
+P010	a definition of ECU reset
+P011	an existence check on unexpected shutdowns
+P012	an existence check on unexpected shutdowns
+P013	a count of unexpected shutdowns
+P014	a count of unexpected shutdowns
+P015	the latest unexpected shutdown
+P016	list the unexpected shutdowns
+P017	the context of the latest unexpected shutdown
+P018	the likely cause of the unexpected shutdown
+P019	a definition of unexpected shutdown
+P020	an existence check on voltage dips
+P021	an existence check on voltage dips
+P022	a count of voltage dips
+P023	a count of voltage dips
+P024	list the voltage dips
+P025	the latest voltage dip
+P026	the context of the latest voltage dip
+P027	the likely cause of voltage dips
+P028	a definition of voltage dip
+P029	an existence check on sensor conflicts
+P030	an existence check on sensor conflicts
+P031	a count of sensor conflicts
+P032	a count of sensor conflicts
+P033	list the sensor conflicts
+P034	the latest sensor conflict
+P035	the context of the latest sensor conflict
+P036	the likely cause of sensor conflicts
+P037	a definition of sensor conflict
+P038	an existence check on emergency braking
+P039	an existence check on emergency braking
+P040	a count of emergency braking
+P041	a count of emergency braking
+P042	list the emergency braking events
+P043	the latest emergency braking
+P044	the context of the latest emergency braking
+P045	the likely cause of emergency braking
+P046	a definition of AEB
+P047	an existence check on CAN errors
+P048	an existence check on CAN errors
+P049	a count of CAN errors
+P050	a count of CAN errors
+P051	list the CAN errors
+P052	the latest CAN error
+P053	the context of the latest CAN error
+P054	the likely cause of CAN errors
+P055	a definition of CAN error
+P056	an existence check on invalid readings
+P057	a count of invalid readings
+P058	list the invalid readings
+P059	the latest invalid reading
+P060	a count of assistance state changes
+P061	the latest assistance state change
+P062	an existence check on assistance state changes
+P063	list the assistance state changes
+P064	an existence check on motor overtemperature
+P065	a count of motor overtemperature warnings
+P066	the latest motor overtemperature warning
+P067	the context of the latest motor overtemperature
+P068	an existence check on power derates
+P069	a count of power derates
+P070	the latest power derate
+P071	the likely cause of power derates
+P072	the current brake temperature
+P073	the highest brake temperature
+P074	a definition of brake temperature
+P075	the mean brake temperature
+P076	the current steering torque
+P077	the highest steering torque
+P078	the current engine torque
+P079	LOOK-ALIKE: an existence check on hard braking (an older concept)
+P080	LOOK-ALIKE: a count of hard braking
+P081	LOOK-ALIKE: battery over-temperature, not motor over-temperature
+P082	LOOK-ALIKE: ADAS disengagement, not a state change
+P083	LOOK-ALIKE: diagnostic codes
+P084	LOOK-ALIKE: camera blockage
+P085	LOOK-ALIKE: any warning
+P086	LOOK-ALIKE: tyre pressure warning
+P087	LOOK-ALIKE: charging sessions
+P088	LOOK-ALIKE: low 12 V warning, not a voltage dip
+P089	LOOK-ALIKE: the current state of charge
+P090	LOOK-ALIKE: the battery temperature, not the brakes

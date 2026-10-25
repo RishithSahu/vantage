@@ -1,0 +1,32 @@
+# trend_v1: written 2026-10-24 before the round-10 data existed; never trained on.
+
+ev | has the temperature of the pack been going up week after week | trend battery_temperature op=rise
+ev | over the last two months did my consumption fall | trend wh_per_km op=drop
+ev | is the range figure getting smaller over time | trend range_estimate op=drop
+ev | did the number of warnings change over the month | trend any_warning op=change
+ev | has the health of the battery moved at all this year | trend battery_soh op=change
+ev | how has my average speed developed | trend speed op=change
+ev | are hard brakes becoming rarer | trend hard_braking op=drop
+ev | are hard accelerations on the rise | trend hard_acceleration op=rise
+ev | is the coolant flow slipping gradually | trend coolant_flow op=drop
+ev | has the motor been getting hotter over the weeks | trend motor_temperature op=rise
+ev | is charging power increasing or decreasing over time | trend charging_power op=change
+ev | did my energy use per km improve after I changed the tyres | trend wh_per_km op=drop
+ev | is the tyre pressure sinking week by week | trend tyre_pressure op=drop
+ev | has regen recovery been going up | trend regen_energy op=rise
+ev | how did the daily distance evolve this month | trend distance_driven op=change
+ev | is the 12 volt voltage falling month on month | trend aux_battery_voltage op=drop
+ev | did the camera sharpness get worse over the weeks | trend camera_sharpness op=drop
+ev | is the state of charge at the end of the day getting lower | trend battery_soc op=drop
+ev | has the amount of energy per trip changed | trend energy_used op=change ent=trip
+ev | when did the consumption start to climb | trend wh_per_km op=rise
+ev | how did the pack temperature change over the last days | trend battery_temperature op=change
+ev | are diagnostic codes showing up more often now | trend diagnostic_code op=rise
+ev | is the battery degrading | trend battery_soh op=drop
+ev | is my range shrinking in the cold months | trend range_estimate op=drop
+petrol | is the fuel use climbing over the months | trend fuel_rate op=rise
+petrol | has the engine temperature been creeping up | trend motor_temperature op=rise
+petrol | is the oil temperature rising over the weeks | trend engine_oil_temperature op=rise
+petrol | did the long term trim change over the month | trend long_term_fuel_trim op=change
+diesel | is the soot load building up over time | trend dpf_soot_load op=rise
+diesel | has the adblue level been dropping | trend def_level op=drop

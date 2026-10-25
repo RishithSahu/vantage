@@ -1,0 +1,34 @@
+# Round 11, file b: families of the reviewed failures that the round-10 files did not cover. Not copies of frozen questions (the leak filter drops those).
+how is the massage seat working | health unlisted
+is the heated wheel ok | health unlisted
+how is the seat ventilation | health unlisted
+how is the rear screen heater | health unlisted
+my brother told me the limit is 120, so can i do 110 | unsupported none
+a friend said the limit here is 80, am i fine at 70 | unsupported none
+somebody told me you can do 130 here, is that right | unsupported none
+what is the legal limit on this stretch | unsupported none
+how many hours until the service, in terms of engine hours | estimate maintenance
+tell me when the next oil change is due in km | estimate maintenance
+how much consumption did i have in the cold last winter | stat wh_per_km op=mean cond=cold
+was my energy use higher when it was very cold | stat wh_per_km op=mean cond=cold
+how did freezing weather change my energy use | stat wh_per_km op=mean cond=cold
+how many 3000 mah cells make up my pack | howto battery_capacity
+how many kwh does 50 percent of the pack hold | howto battery_capacity
+what is the energy at 20 percent charge | howto battery_capacity
+express the motor temperature in kelvin please | now motor_temperature
+show the ambient temperature in fahrenheit | now ambient_temperature
+what is the speed in mph | now speed
+give me the odometer in miles | now odometer
+what is the heartbeat of the motor | now motor_rpm
+how loud is the cabin right now | now unlisted
+did the car ever hit 120 | stat speed op=count cond=threshold
+how long was the battery above 38 degrees yesterday | stat battery_temperature op=duration cond=threshold
+how often was the speed over 100 this month | stat speed op=count cond=threshold
+what happened before the coolant started to drop | context coolant_flow_drop
+what was the car doing around the last power dip | context voltage_dip
+what led up to the last fault code | context diagnostic_code
+did the car bring itself to a stop | events aeb_activation op=exists
+has the car braked by itself this year | events aeb_activation op=exists
+how many fault code clears in the last year | events diagnostic_code_cleared op=count
+which controller reset most often | events ecu_reset op=count ent=source
+how many warnings by source | events any_warning op=count ent=source

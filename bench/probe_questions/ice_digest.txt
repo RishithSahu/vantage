@@ -1,0 +1,7 @@
+give me a summary of the week | summary none
+what changed since last week | summary none op=change
+is anything unusual this week | anomaly none
+what is the usual fuel rate | stat fuel_rate op=usual
+how is my driving style | health driving_style
+how did the month go | summary none
+tell me about my last trip | summary none ent=trip

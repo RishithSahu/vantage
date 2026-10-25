@@ -1,0 +1,41 @@
+# Round 11 probe (2026-10-24): complicated questions for a petrol / diesel car. Read for correctness.
+is my fuel consumption getting worse over the months
+how much fuel did I use last week compared with the week before
+has the mileage changed since the last service
+what is the average fuel use per 100 km this month
+how many litres do I have left and how far will that take me
+is the engine running hotter than it used to
+is the oil temperature normal
+anything unusual with the engine this week
+did the engine idle more than usual lately
+what is my longest trip this month and how much fuel did it use
+are the warning lights showing up more often
+how are the fuel trims
+is the starter battery getting weaker
+what changed in my driving compared with last week
+was last week's fuel use normal for me
+which day this month had the most fuel use
+how does highway fuel use compare with city fuel use
+has the engine load changed over time
+do I need a service soon
+how is the car overall
+anything I should check before a long trip
+give me a summary of the month
+did anything strange happen last night
+why is my fuel consumption higher this week
+how many hard brakes did I have this week
+am I braking harder than last month
+how long was the engine running yesterday
+what was the highest oil temperature this month
+how much did the tank level drop on my last trip
+is the exhaust temperature normal
+is the dpf getting full
+is a regeneration needed
+how much adblue is left
+is the boost pressure normal
+how much soot is in the filter now compared with last week
+when did the last regeneration happen
+what do the fault codes mean
+is the coolant temperature okay
+how is the battery doing
+what is my average speed while driving

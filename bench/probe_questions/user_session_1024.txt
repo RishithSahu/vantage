@@ -1,0 +1,46 @@
+# The questions the owner asked the installed app (2026-10-24), in the order asked, plus the chips / lamps of the page. Read every answer.
+Any warnings this week?
+Why was the last warning raised?
+What happened before the last warning?
+where do i get this car
+how can you help me
+what is avg acc
+no no I want to know acceleration
+is thr car chargning
+how is the servicing?
+how fast are we going
+how fast can we go
+how much battery left
+how many trips per week
+When was the camera last blocked?
+when was the longest trip
+which year
+how is batety
+how is berty
+how much is batterys
+which side of the road should i drive
+which tyre is bad
+how are my tyres
+how is my car?
+how many trips in last week?
+how many trips in last month?
+how many trips in last 8 days?
+what were those 4 trips in that one day
+what was my longest trips about 4 days back?
+How is the cooling system?
+what is my tyre pressure?
+what should i do to increase mileage?
+is my driving safe?
+can you give me information about the cars recorded data?
+when was the last srevicing done?
+how much will battery percentage drop if i travel 50km
+what LLM do u run on?
+are you vantage?
+what is you name?
+how many people can fit in this car?
+is it raining?
+what is the outside temperature?
+where do i get this car?
+How am I driving?
+How long to charge to 80%?
+When did I last charge?

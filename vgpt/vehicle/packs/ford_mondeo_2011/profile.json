@@ -1,0 +1,343 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "ford_mondeo_2011",
+ "vehicle": {
+  "make": "Ford",
+  "model": "Mondeo 2.0 (CGEA 1.2, 2011)",
+  "year": 2011,
+  "powertrain": "petrol",
+  "specs": {
+   "veh.tyre_spec_front": 230,
+   "veh.tyre_spec_rear": 230,
+   "veh.service_km": 15000,
+   "veh.wheelbase_m": 2.85,
+   "veh.wheel_radius_m": 0.32,
+   "veh.rated_max_speed": 220,
+   "veh.seats": 5,
+   "veh.tank_l": 70,
+   "veh.sw": "ecu 1.0",
+   "veh.model": "Ford Mondeo 2.0 (CGEA 1.2, 2011)"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "ford_cgea1_2_ptcan_2011",
+   "type": "can",
+   "name": "CAN 500 kbit/s (OEM database ford_cgea1_2_ptcan_2011)",
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "ext",
+   "type": "can",
+   "name": "Mondeo 2.0 (CGEA 1.2, 2011) extension CAN (SYNTHETIC: quantities the open database lacks)",
+   "dbc": "ford_mondeo_2011_ext.dbc",
+   "channel": "can1",
+   "bitrate": 500000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Linux telematics / infotainment (syslog)",
+   "format": "rfc3164"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  }
+ ],
+ "signals": [
+  {
+   "concept": "steering_torque",
+   "from": "can:ford_cgea1_2_ptcan_2011/EPAS_INFO.SteeringColumnTorque",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "yaw_rate",
+   "from": "can:ford_cgea1_2_ptcan_2011/Yaw_Data.VehYaw_W_Actl",
+   "unit": "none",
+   "rate_hz": 20,
+   "scale": 57.29577951
+  },
+  {
+   "concept": "longitudinal_acceleration",
+   "from": "can:ford_cgea1_2_ptcan_2011/Accel_Data.VehLong_A_Actl",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "lateral_acceleration",
+   "from": "can:ford_cgea1_2_ptcan_2011/Accel_Data.VehLat_A_Actl",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "boost_pressure",
+   "from": "can:ford_cgea1_2_ptcan_2011/EngineData_1_CG1.TurboBoostPressure",
+   "unit": "none",
+   "rate_hz": 10.0,
+   "scale": 100.0
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "can:ford_cgea1_2_ptcan_2011/EONV_Status.EONV_BATT_VOLT",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:ford_cgea1_2_ptcan_2011/Tire_Pressure_Data.Tire_Press_RF_Data",
+   "unit": "none",
+   "rate_hz": 10.0,
+   "scale": 6.894757
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:ford_cgea1_2_ptcan_2011/Tire_Pressure_Data.Tire_Press_LF_Data",
+   "unit": "none",
+   "rate_hz": 10.0,
+   "scale": 6.894757
+  },
+  {
+   "concept": "odometer",
+   "from": "can:ford_cgea1_2_ptcan_2011/Cluster_Information.OdometerMasterValue",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "fuel_level",
+   "from": "can:ford_cgea1_2_ptcan_2011/Cluster_Information_3_CG1.FUEL_LVL_PER_MEAN",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "gps_speed",
+   "from": "can:ford_cgea1_2_ptcan_2011/GPS_Data_Nav_3_HS.GPS_Speed",
+   "unit": "none",
+   "rate_hz": 10.0,
+   "scale": 1.609344
+  },
+  {
+   "concept": "heading",
+   "from": "can:ford_cgea1_2_ptcan_2011/GPS_Data_Nav_3_HS.GPS_Heading",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "speed",
+   "from": "uds:diag/obd_speed",
+   "unit": "km/h",
+   "rate_hz": 5
+  },
+  {
+   "concept": "engine_rpm",
+   "from": "uds:diag/obd_rpm",
+   "unit": "rpm",
+   "rate_hz": 5
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "uds:diag/obd_coolant_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "engine_load",
+   "from": "uds:diag/obd_engine_load",
+   "unit": "%",
+   "rate_hz": 2
+  },
+  {
+   "concept": "intake_air_temperature",
+   "from": "uds:diag/obd_intake_air_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "mass_air_flow",
+   "from": "uds:diag/obd_maf",
+   "unit": "g/s",
+   "rate_hz": 2
+  },
+  {
+   "concept": "throttle_position",
+   "from": "uds:diag/obd_throttle",
+   "unit": "%",
+   "rate_hz": 2
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "uds:diag/obd_ambient_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "engine_oil_temperature",
+   "from": "uds:diag/obd_oil_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "fuel_rate",
+   "from": "uds:diag/obd_fuel_rate",
+   "unit": "L/h",
+   "rate_hz": 2
+  },
+  {
+   "concept": "barometric_pressure",
+   "from": "uds:diag/obd_barometric",
+   "unit": "kPa",
+   "rate_hz": 0.5
+  },
+  {
+   "concept": "intake_manifold_pressure",
+   "from": "uds:diag/obd_intake_map",
+   "unit": "kPa",
+   "rate_hz": 2
+  },
+  {
+   "concept": "ignition_timing",
+   "from": "uds:diag/obd_timing_advance",
+   "unit": "deg",
+   "rate_hz": 2
+  },
+  {
+   "concept": "short_term_fuel_trim",
+   "from": "uds:diag/obd_fuel_trim_st1",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "long_term_fuel_trim",
+   "from": "uds:diag/obd_fuel_trim_lt1",
+   "unit": "%",
+   "rate_hz": 0.5
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:ext/EXT_TPMS.TyrePressureRl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:ext/EXT_TPMS.TyrePressureRr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.TyreTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "cabin_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.CabinTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  }
+ ],
+ "events": [
+  {
+   "id": "overtemp",
+   "from": "signal:motor_temperature",
+   "when": ">105",
+   "hold_s": 10,
+   "type": "WARN_OVERTEMP",
+   "severity": "critical",
+   "detail": "Coolant above 105 °C ({value:.1f} °C)"
+  },
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

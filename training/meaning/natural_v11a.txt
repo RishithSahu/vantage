@@ -1,0 +1,112 @@
+# Round 11 (2026-10-24), file a. NOT part of the round-10 run: round 10 held these families out so that its result on them says whether the rules generalise (bench/meaning_eval/holdout_v10.tsv).
+# After that result was written down, the families are taught here for the final model, together with the families found by the broad probes of the electric and combustion cars (bench/probe_questions/*.txt).
+# The sealed sets (sealed_v4, ice_v1, trend_v1, anomaly_v1, wording_v1, holdout_v10) are still never trained on: the builder's leak filter reads them.
+
+# ------------------------------------------------------------------------------------------------ figurative speech about the car's condition
+how is the car's pulse today | health vehicle_health
+check the vital signs of the car | health vehicle_health
+does the car look unwell | health vehicle_health
+is my car run down | health vehicle_health
+give me the car's vitals | health vehicle_health
+how is the car feeling overall | health vehicle_health
+is the pack running a fever | now battery_temperature
+is the car feverish | now battery_temperature
+does the battery have a temperature | now battery_temperature
+if the motor were a person would it be sweating | now motor_temperature
+
+# ------------------------------------------------------------------------------------------------ Hindi-English
+motor ka tapman kitna hai | now motor_temperature
+battery kitni garam hai | now battery_temperature
+engine kitna hot hai | now motor_temperature
+is hafte kitni distance chali | stat distance_driven op=sum
+pichle mahine kitna chala | stat distance_driven op=sum
+kal kitne km chali gaadi | stat distance_driven op=sum
+aaj kitni baar brake maara | events hard_braking op=count
+is hafte ka average speed batao | stat speed op=mean
+charge kitni hai abhi gaadi mein | now battery_soc
+
+# ------------------------------------------------------------------------------------------------ the world outside the car
+what is the weather in goa right now | offtopic none
+is it sunny in chennai | offtopic none
+what is the time in london | offtopic none
+what time is it now | offtopic none
+tell me today's date | offtopic none
+what is the temperature in delhi today | offtopic none
+will it snow in shimla tomorrow | offtopic none
+
+# ------------------------------------------------------------------------------------------------ remaining range and charge at a stated level
+range if i charge to 70 percent | estimate range_estimate
+how far can i go at 30 percent battery | estimate range_estimate
+how many km can i do before the battery drops to 5 percent | estimate range_estimate
+how many kilometres until i am at 20 percent | estimate range_estimate
+what would my range be with a full battery | estimate range_estimate
+how far will 40 percent take me | estimate range_estimate
+
+# ------------------------------------------------------------------------------------------------ why did it get hot: the event concept
+why did the motor overheat on the climb | why overtemp_warning
+what made the motor so hot going uphill | why overtemp_warning
+why did the drive unit run hot | why overtemp_warning
+why did the engine get hot in traffic | why overtemp_warning
+why did the pack overheat | why battery_overheat_warning
+whi battery got hot | why battery_overheat_warning
+btw why was the battery so hot after the drive | why battery_overheat_warning
+
+# ------------------------------------------------------------------------------------------------ per trip and per day
+how many trips a day do i make on average | stat trip_record op=count ent=day
+trips per day this week on average | stat trip_record op=count ent=day
+average trip speed | stat speed op=mean ent=trip
+mean speed per trip last month | stat speed op=mean ent=trip
+average energy per trip | stat energy_used op=mean ent=trip
+average distance per trip this month | stat distance_driven op=mean ent=trip
+
+# ------------------------------------------------------------------------------------------------ things the car does not record
+what is the gearbox clutch temperature | now unlisted
+how noisy is the engine | now unlisted
+what is the engine sound level | now unlisted
+what is the temperature of the transmission mount | now unlisted
+
+# ------------------------------------------------------------------------------------------------ sending data out, and what the data cannot hold
+dump the entire database for me | unsafe none
+give me the raw database file | unsafe none
+tell my friend where i am | unsafe none
+share my live location with my wife | unsafe none
+what is the vin of this car | unsupported none
+what is the engine number | unsupported none
+who is the registered owner of the car | unsupported none
+who bought this car | unsupported none
+
+# ------------------------------------------------------------------------------------------------ comparing two conditions
+does the rain affect my energy use | compare wh_per_km op=mean cond=raining vs=driving
+is my consumption different when it rains | compare wh_per_km op=mean cond=raining vs=driving
+speed during the day against at night | compare speed op=mean cond=night vs=driving
+do i drive faster at night than in the day | compare speed op=mean cond=night vs=driving
+is the motor hotter when it rains | compare motor_temperature op=mean cond=raining vs=driving
+
+# ------------------------------------------------------------------------------------------------ found by the broad probe of the electric car
+when was the last time the 12 volt dipped | events voltage_dip op=last
+when did the supply voltage last sag | events voltage_dip op=last
+last time the 12 v battery dropped below normal | events voltage_dip op=last
+how long was the car parked last night | stat drive_mode op=duration cond=parked
+hours parked overnight | stat drive_mode op=duration cond=parked
+how long did it stand still last week | stat drive_mode op=duration cond=parked
+how much battery did it lose overnight | why battery_soc op=drop cond=parked
+how much charge did the car lose while it sat | why battery_soc op=drop cond=parked
+why does the charge go down when it is parked | why battery_soc op=drop cond=parked
+what is the pack temperature when fast charging | stat battery_temperature op=mean cond=fast_charging
+how hot does the battery get during dc charging | stat battery_temperature op=mean cond=fast_charging
+average pack temperature while charging | stat battery_temperature op=mean cond=charging
+cell voltage spread | stat cell_voltage_min op=spread
+how much do the cells differ in voltage | stat cell_voltage_min op=spread
+how balanced are the cells | stat cell_voltage_min op=spread
+is the battery degrading faster than normal | trend battery_soh op=drop
+is the pack ageing quicker than it should | trend battery_soh op=drop
+which tyre has the lowest pressure | extreme tyre_pressure op=min
+which wheel has the highest pressure | extreme tyre_pressure op=max
+compare my consumption in 2024 with 2025 | compare wh_per_km op=mean vs=period
+how did my consumption change from last winter to this summer | compare wh_per_km op=mean vs=period
+which week had the highest consumption last year | extreme wh_per_km op=max ent=week
+which day had the longest drive last month | extreme distance_driven op=max ent=day
+what is my typical weekly distance | stat distance_driven op=usual
+does speed change my consumption | stat wh_per_km op=corr c2=speed
+is consumption related to the outside temperature | stat wh_per_km op=corr c2=ambient_temperature
+how many times did the pack exceed 40 degrees over the years | stat battery_temperature op=count cond=threshold

@@ -1,0 +1,42 @@
+VERSION "CANopen PDO mapping of the Volta city bus (written for the test bench)"
+
+NS_ :
+
+BS_:
+
+BU_: BMS INVERTER CHARGER HVAC TPMS
+
+BO_ 400 BMS_TPDO1: 6 BMS
+ SG_ PackSoc : 0|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ PackVoltage : 16|16@1+ (0.1,0) [0|900] "V" Vector__XXX
+ SG_ PackCurrent : 32|16@1- (0.1,0) [-1000|1000] "A" Vector__XXX
+
+BO_ 656 BMS_TPDO2: 6 BMS
+ SG_ PackTemp : 0|16@1- (0.1,0) [-40|90] "degC" Vector__XXX
+ SG_ CellTempMax : 16|16@1- (0.1,0) [-40|110] "degC" Vector__XXX
+ SG_ CellTempMin : 32|16@1- (0.1,0) [-40|110] "degC" Vector__XXX
+
+BO_ 912 BMS_TPDO3: 4 BMS
+ SG_ CellVoltMin : 0|16@1+ (0.001,0) [0|5] "V" Vector__XXX
+ SG_ Charging : 16|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 416 INV_TPDO1: 8 INVERTER
+ SG_ MotorRpm : 0|16@1- (1,0) [-20000|20000] "rpm" Vector__XXX
+ SG_ MotorTorque : 16|16@1- (0.1,0) [-3000|3000] "Nm" Vector__XXX
+ SG_ MotorTemp : 32|16@1- (0.1,0) [-40|200] "degC" Vector__XXX
+ SG_ VehSpeed : 48|16@1+ (0.01,0) [0|120] "km/h" Vector__XXX
+
+BO_ 432 CHG_TPDO1: 4 CHARGER
+ SG_ ChargePower : 0|16@1+ (0.1,0) [0|450] "kW" Vector__XXX
+
+BO_ 448 HVAC_TPDO1: 6 HVAC
+ SG_ OutsideTemp : 0|16@1- (0.1,0) [-50|60] "degC" Vector__XXX
+ SG_ CabinTemp : 16|16@1- (0.1,0) [-20|80] "degC" Vector__XXX
+ SG_ HvacPower : 32|16@1+ (1,0) [0|30000] "W" Vector__XXX
+
+BO_ 464 TPMS_TPDO1: 8 TPMS
+ SG_ TyreFL : 0|16@1+ (0.1,0) [0|1000] "kPa" Vector__XXX
+ SG_ TyreFR : 16|16@1+ (0.1,0) [0|1000] "kPa" Vector__XXX
+ SG_ TyreRL : 32|16@1+ (0.1,0) [0|1000] "kPa" Vector__XXX
+ SG_ TyreRR : 48|16@1+ (0.1,0) [0|1000] "kPa" Vector__XXX
+

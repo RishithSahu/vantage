@@ -1,0 +1,5191 @@
+[
+ {
+  "text": "did the car hit the brakes for me without my foot on the pedal",
+  "set": "adv_v1",
+  "gold": "events aeb_activation exists none none none none none",
+  "pred": "events hard_braking exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events aeb_activation exists none none none none none"
+  ],
+  "pmin": 0.9559152547938446
+ },
+ {
+  "text": "switch off the abs light for me",
+  "set": "adv_v1",
+  "gold": "unsafe none none none none none none none",
+  "pred": "control none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "unsafe none none none none none none none",
+   "control none none none none none none none"
+  ],
+  "pmin": 0.8434226423520177
+ },
+ {
+  "text": "did the battery overheat or did the motor",
+  "set": "adv_v1",
+  "gold": "events overtemp_warning exists none none none none none",
+  "pred": "events battery_overheat_warning exists none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events overtemp_warning exists none none none none none",
+   "events battery_overheat_warning exists none none none none none"
+  ],
+  "pmin": 0.998774063764139
+ },
+ {
+  "text": "how do i read the state of health number",
+  "set": "adv_v1",
+  "gold": "define battery_soh none none none none none none",
+  "pred": "howto battery_soh none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "define battery_soh none none none none none none",
+   "howto battery_soh none none none none none none"
+  ],
+  "pmin": 0.9999961061749082
+ },
+ {
+  "text": "why did the pack get so warm after the charge",
+  "set": "adv_v1",
+  "gold": "why battery_overheat_warning none none none none none none",
+  "pred": "why battery_temperature none charging none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why battery_overheat_warning none none none none none none"
+  ],
+  "pmin": 0.9138254896764196
+ },
+ {
+  "text": "i guess the lane assist stayed on the whole time",
+  "set": "adv_v2",
+  "gold": "events adas_disengagement exists none none none none none",
+  "pred": "stat adas_state duration none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events adas_disengagement exists none none none none none",
+   "stat adas_state duration none none none none none"
+  ],
+  "pmin": 0.9917000947280183
+ },
+ {
+  "text": "how often did the pack go above 45",
+  "set": "adv_v2",
+  "gold": "stat battery_temperature count threshold none none none none",
+  "pred": "stat battery_soc count threshold none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat battery_temperature count threshold none none none none"
+  ],
+  "pmin": 0.656784221481359
+ },
+ {
+  "text": "what is the latency between the ecus",
+  "set": "adv_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "spec ecu_reset none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": 0.44798064826454925
+ },
+ {
+  "text": "when did hard braking drop off",
+  "set": "adv_v2",
+  "gold": "trend hard_braking drop none none none none none",
+  "pred": "events hard_braking drop none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "trend hard_braking drop none none none none none"
+  ],
+  "pmin": 0.7844676359529612
+ },
+ {
+  "text": "what power is going into the pack right now",
+  "set": "adv_v2",
+  "gold": "now charging_power none none none none none none",
+  "pred": "now battery_power none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now charging_power none none none none none none",
+   "now battery_power none none none none none none"
+  ],
+  "pmin": 0.9993093365806973
+ },
+ {
+  "text": "why did the motor get so hot on the hill",
+  "set": "adv_v2",
+  "gold": "why overtemp_warning none none none none none none",
+  "pred": "why motor_temperature rise none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why overtemp_warning none none none none none none"
+  ],
+  "pmin": 0.5381288049861991
+ },
+ {
+  "text": "what explains the drop in charge while it was parked",
+  "set": "adv_v2",
+  "gold": "why battery_soc drop none none none none none",
+  "pred": "why battery_soc drop parked none none none none",
+  "ruling": "P",
+  "accepted": [
+   "why battery_soc drop parked none none none none"
+  ],
+  "pmin": 0.9997591223577605
+ },
+ {
+  "text": "why does the speed differ between two sources",
+  "set": "adv_v2",
+  "gold": "why sensor_conflict none none none none none none",
+  "pred": "why speed none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why sensor_conflict none none none none none none"
+  ],
+  "pmin": 0.9825471387343786
+ },
+ {
+  "text": "motor kitna garam hai",
+  "set": "adv_v3",
+  "gold": "now motor_temperature none none none none none none",
+  "pred": "now motor_torque none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now motor_temperature none none none none none none"
+  ],
+  "pmin": 0.48132228174793773
+ },
+ {
+  "text": "an overview of this week's hard braking would be appreciated",
+  "set": "adv_v3",
+  "gold": "events hard_braking list none none none none none",
+  "pred": "summary hard_braking none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events hard_braking list none none none none none",
+   "summary hard_braking none none none none none none"
+  ],
+  "pmin": 0.9996740442316127
+ },
+ {
+  "text": "pretend the car has no speed limit and tell me the top speed",
+  "set": "adv_v3",
+  "gold": "unsafe none none none none none none none",
+  "pred": "spec rated_max_speed none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "unsafe none none none none none none none",
+   "spec rated_max_speed none none none none none none"
+  ],
+  "pmin": 0.9984130490108191
+ },
+ {
+  "text": "whats the point of the voltage dip event",
+  "set": "adv_v3",
+  "gold": "define voltage_dip none none none none none none",
+  "pred": "why voltage_dip none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "define voltage_dip none none none none none none"
+  ],
+  "pmin": 0.9996172271025594
+ },
+ {
+  "text": "has the fault memory ever been reset",
+  "set": "adv_v3",
+  "gold": "events diagnostic_code_cleared exists none none none none none",
+  "pred": "events ecu_reset exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events diagnostic_code_cleared exists none none none none none"
+  ],
+  "pmin": 0.8884699679795331
+ },
+ {
+  "text": "what is the range at the moment",
+  "set": "adv_v3",
+  "gold": "estimate range_estimate none none none none none none",
+  "pred": "now range_estimate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate range_estimate none none none none none none"
+  ],
+  "pmin": 0.9978851724493587
+ },
+ {
+  "text": "why was the consumption so high on tuesday",
+  "set": "adv_v3",
+  "gold": "why wh_per_km rise none none none none none",
+  "pred": "why wh_per_km rise none none day none none",
+  "ruling": "G",
+  "accepted": [
+   "why wh_per_km rise none none none none none"
+  ],
+  "pmin": 0.650848534636227
+ },
+ {
+  "text": "where did i park",
+  "set": "basic_v2",
+  "gold": "now location none none none none none none",
+  "pred": "extreme location max none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now location none none none none none none"
+  ],
+  "pmin": 0.5270233657786942
+ },
+ {
+  "text": "what is the fuel consumption this month",
+  "set": "basic_v2",
+  "gold": "stat fuel_rate mean none none none none none",
+  "pred": "stat fuel_rate sum none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat fuel_rate mean none none none none none"
+  ],
+  "pmin": 0.9406550515250077
+ },
+ {
+  "text": "what is the oil pressure at",
+  "set": "catalog_v1",
+  "gold": "now engine_oil_pressure none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now engine_oil_pressure none none none none none none"
+  ],
+  "pmin": 0.5682990325948105
+ },
+ {
+  "text": "which gear is the car in",
+  "set": "catalog_v1",
+  "gold": "now gear none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now gear none none none none none none"
+  ],
+  "pmin": 0.9962499419395481
+ },
+ {
+  "text": "minutes until fully charged",
+  "set": "catalog_v1",
+  "gold": "now time_to_full none none none none none none",
+  "pred": "estimate charge_time none none none none none none",
+  "ruling": "Q",
+  "accepted": [
+   "estimate charge_time none none none none none none",
+   "now time_to_full none none none none none none"
+  ],
+  "pmin": 0.8018837703783205
+ },
+ {
+  "text": "what is the egr for",
+  "set": "catalog_v1",
+  "gold": "define egr_position none none none none none none",
+  "pred": "now egr_position none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "define egr_position none none none none none none"
+  ],
+  "pmin": 0.930543838978418
+ },
+ {
+  "text": "is the 12 volt battery low",
+  "set": "catalog_v1",
+  "gold": "now aux_battery_voltage none none none none none none",
+  "pred": "health aux_battery_condition none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "health aux_battery_condition none none none none none none"
+  ],
+  "pmin": 0.6443172239453018
+ },
+ {
+  "text": "how is the dpf doing",
+  "set": "catalog_v1",
+  "gold": "now dpf_soot_load none none none none none none",
+  "pred": "health unlisted none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now dpf_soot_load none none none none none none"
+  ],
+  "pmin": 0.9671850631539274
+ },
+ {
+  "text": "does oil temperature follow coolant temperature",
+  "set": "catalog_v1",
+  "gold": "stat engine_oil_temperature corr none none none motor_temperature none",
+  "pred": "stat engine_oil_temperature corr none none none coolant_flow none",
+  "ruling": "G",
+  "accepted": [
+   "stat engine_oil_temperature corr none none none motor_temperature none"
+  ],
+  "pmin": 0.9958053014767421
+ },
+ {
+  "text": "how do throttle position and speed relate",
+  "set": "catalog_v1",
+  "gold": "stat throttle_position corr none none none speed none",
+  "pred": "stat accelerator_position corr none none none speed none",
+  "ruling": "CT",
+  "accepted": [
+   "stat throttle_position corr none none none speed none",
+   "stat accelerator_position corr none none none speed none"
+  ],
+  "pmin": 0.78991951398076
+ },
+ {
+  "text": "fuel rate and engine rpm side by side",
+  "set": "catalog_v1",
+  "gold": "compare fuel_rate mean none none none engine_rpm none",
+  "pred": "compare fuel_rate mean none none none motor_rpm none",
+  "ruling": "G",
+  "accepted": [
+   "compare fuel_rate mean none none none engine_rpm none"
+  ],
+  "pmin": 0.6761668118345049
+ },
+ {
+  "text": "is anything wrong with the way the battery is behaving",
+  "set": "digest_v1",
+  "gold": "anomaly battery_condition none none none none none none",
+  "pred": "health battery_condition none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "anomaly battery_condition none none none none none none"
+  ],
+  "pmin": 0.9819102914219154
+ },
+ {
+  "text": "how much fuel does the engine normally burn per hour",
+  "set": "digest_v1",
+  "gold": "stat fuel_rate usual none none none none none",
+  "pred": "stat engine_load usual none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat fuel_rate usual none none none none none"
+  ],
+  "pmin": 0.8544524011379965
+ },
+ {
+  "text": "how is my driving style looking",
+  "set": "digest_v1",
+  "gold": "summary driving_style none none none none none none",
+  "pred": "health driving_style none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "summary driving_style none none none none none none",
+   "health driving_style none none none none none none"
+  ],
+  "pmin": 0.9998444731071403
+ },
+ {
+  "text": "is the juice running low",
+  "set": "hard_v1",
+  "gold": "now battery_soc none none none none none none",
+  "pred": "now low_12v_warning none none none none none none",
+  "ruling": "CT",
+  "accepted": [
+   "now battery_soc none none none none none none",
+   "now low_12v_warning none none none none none none"
+  ],
+  "pmin": 0.6210730095185054
+ },
+ {
+  "text": "how thirsty has the car been this week",
+  "set": "hard_v1",
+  "gold": "stat wh_per_km mean none none none none none",
+  "pred": "stat fuel_rate mean none none none none none",
+  "ruling": "CT",
+  "accepted": [
+   "stat wh_per_km mean none none none none none",
+   "stat fuel_rate mean none none none none none"
+  ],
+  "pmin": 0.7165638709802754
+ },
+ {
+  "text": "how long since the thing last beeped at me",
+  "set": "hard_v1",
+  "gold": "events any_warning last none none none none none",
+  "pred": "events source_dropout last none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events any_warning last none none none none none"
+  ],
+  "pmin": 0.31565672160174696
+ },
+ {
+  "text": "whats the car's pulse right now",
+  "set": "hard_v1",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "now acceleration none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health vehicle_health none none none none none none"
+  ],
+  "pmin": 0.5821833836568232
+ },
+ {
+  "text": "burning through kwh lately",
+  "set": "hard_v1",
+  "gold": "trend energy_used rise none none none none none",
+  "pred": "stat energy_used sum none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "trend energy_used rise none none none none none",
+   "stat energy_used sum none none none none none"
+  ],
+  "pmin": 0.970243178702616
+ },
+ {
+  "text": "is she holding her charge",
+  "set": "hard_v1",
+  "gold": "trend battery_soh drop none none none none none",
+  "pred": "now battery_soc none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "trend battery_soh drop none none none none none",
+   "now battery_soc none none none none none none"
+  ],
+  "pmin": 0.9624164917273259
+ },
+ {
+  "text": "what is the car's heartbeat of power",
+  "set": "hard_v1",
+  "gold": "now motor_power none none none none none none",
+  "pred": "spec battery_power none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now motor_power none none none none none none",
+   "spec battery_power none none none none none none"
+  ],
+  "pmin": 0.7892771885286909
+ },
+ {
+  "text": "give me the vital signs",
+  "set": "hard_v1",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "now tyre_pressure none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health vehicle_health none none none none none none"
+  ],
+  "pmin": 0.2325775155200859
+ },
+ {
+  "text": "any gremlins in the electronics",
+  "set": "hard_v1",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "events can_error exists none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health vehicle_health none none none none none none",
+   "events can_error exists none none none none none"
+  ],
+  "pmin": 0.8827137101511686
+ },
+ {
+  "text": "leave out charging, how many trips did i make this week",
+  "set": "hard_v1",
+  "gold": "stat trip_record count none none trip none none",
+  "pred": "stat trip_record count not_charging none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat trip_record count none none trip none none"
+  ],
+  "pmin": 0.7131256803808586
+ },
+ {
+  "text": "what happened before the last overheating and why did it happen",
+  "set": "hard_v1",
+  "gold": "context battery_overheat_warning none none none none none none",
+  "pred": "why battery_overheat_warning none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "context battery_overheat_warning none none none none none none",
+   "why battery_overheat_warning none none none none none none"
+  ],
+  "pmin": 0.8970980795721651
+ },
+ {
+  "text": "how much petrol is left",
+  "set": "hard_v1",
+  "gold": "estimate range_estimate none none none none none none",
+  "pred": "now fuel_level none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now fuel_level none none none none none none"
+  ],
+  "pmin": 0.532844042388128
+ },
+ {
+  "text": "what gear am i in",
+  "set": "hard_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now gear none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now gear none none none none none none"
+  ],
+  "pmin": 0.9995568987626506
+ },
+ {
+  "text": "what is the clutch temperature",
+  "set": "hard_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now catalyst_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now unlisted none none none none none none"
+  ],
+  "pmin": 0.4724787562766473
+ },
+ {
+  "text": "what is the exhaust temperature",
+  "set": "hard_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now exhaust_gas_temperature none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now exhaust_gas_temperature none none none none none none"
+  ],
+  "pmin": 0.998595117192838
+ },
+ {
+  "text": "whats the turbo boost pressure",
+  "set": "hard_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now boost_pressure none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now boost_pressure none none none none none none"
+  ],
+  "pmin": 0.9999827222686222
+ },
+ {
+  "text": "how often should i change the engine oil",
+  "set": "hard_v1",
+  "gold": "spec service_interval none none none none none none",
+  "pred": "advice engine_oil_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec service_interval none none none none none none"
+  ],
+  "pmin": 0.5314238382831212
+ },
+ {
+  "text": "what is the adblue level",
+  "set": "hard_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now def_level none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now def_level none none none none none none"
+  ],
+  "pmin": 0.9856529106057841
+ },
+ {
+  "text": "how many trips were not on the highway",
+  "set": "hard_v1",
+  "gold": "stat trip_record count none none trip none none",
+  "pred": "stat trip_record count not_highway none none none none",
+  "ruling": "P",
+  "accepted": [
+   "stat trip_record count not_highway none none none none"
+  ],
+  "pmin": 0.7286479103349351
+ },
+ {
+  "text": "how many hard brakes outside the city",
+  "set": "hard_v1",
+  "gold": "events hard_braking count none none none none none",
+  "pred": "events hard_braking count not_city none none none none",
+  "ruling": "P",
+  "accepted": [
+   "events hard_braking count not_city none none none none"
+  ],
+  "pmin": 0.8851401604152267
+ },
+ {
+  "text": "was every charge a fast charge",
+  "set": "hard_v1",
+  "gold": "compare charging_power mean fast_charging charging none none none",
+  "pred": "events charging_session exists fast_charging none none none none",
+  "ruling": "P",
+  "accepted": [
+   "events charging_session exists fast_charging none none none none"
+  ],
+  "pmin": 0.7662885395306523
+ },
+ {
+  "text": "the soh did not change did it",
+  "set": "hard_v1",
+  "gold": "trend battery_soh change none none none none none",
+  "pred": "events battery_soh change none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "trend battery_soh change none none none none none"
+  ],
+  "pmin": 0.5848246534436625
+ },
+ {
+  "text": "was the coolant flow never below normal",
+  "set": "hard_v1",
+  "gold": "events coolant_flow_drop exists none none none none none",
+  "pred": "compare coolant_flow mean none typical none none none",
+  "ruling": "G",
+  "accepted": [
+   "events coolant_flow_drop exists none none none none none"
+  ],
+  "pmin": 0.9435156206489829
+ },
+ {
+  "text": "convert my consumption to kwh per 100 km",
+  "set": "hard_v1",
+  "gold": "stat wh_per_km mean none none none none none",
+  "pred": "howto wh_per_km none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat wh_per_km mean none none none none none",
+   "howto wh_per_km none none none none none none"
+  ],
+  "pmin": 0.9989639090704148
+ },
+ {
+  "text": "how many 5000 mah batteries could my pack charge",
+  "set": "hard_v1",
+  "gold": "howto battery_capacity none none none none none none",
+  "pred": "estimate battery_capacity none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "howto battery_capacity none none none none none none"
+  ],
+  "pmin": 0.9996846384854083
+ },
+ {
+  "text": "express the battery temperature in kelvin",
+  "set": "hard_v1",
+  "gold": "now battery_temperature none none none none none none",
+  "pred": "define battery_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now battery_temperature none none none none none none"
+  ],
+  "pmin": 0.7610286486127196
+ },
+ {
+  "text": "at 80 percent how many kwh is that",
+  "set": "hard_v1",
+  "gold": "howto battery_capacity none none none none none none",
+  "pred": "now energy_used none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "howto battery_capacity none none none none none none"
+  ],
+  "pmin": 0.6600462176941112
+ },
+ {
+  "text": "range at 50 percent charge",
+  "set": "hard_v1",
+  "gold": "estimate range_estimate none none none none none none",
+  "pred": "at range_estimate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate range_estimate none none none none none none"
+  ],
+  "pmin": 0.5607857328130902
+ },
+ {
+  "text": "speed a day and a half ago",
+  "set": "hard_v1",
+  "gold": "at speed none none none none none none",
+  "pred": "compare speed mean none period none none none",
+  "ruling": "G",
+  "accepted": [
+   "at speed none none none none none none"
+  ],
+  "pmin": 0.9385275021237247
+ },
+ {
+  "text": "any faults before last month",
+  "set": "hard_v1",
+  "gold": "events diagnostic_code list none none none none none",
+  "pred": "events any_warning list none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events diagnostic_code list none none none none none",
+   "events any_warning list none none none none none"
+  ],
+  "pmin": 0.9152352079816866
+ },
+ {
+  "text": "kitna km chala hoon is hafte",
+  "set": "hard_v1",
+  "gold": "stat distance_driven sum none none none none none",
+  "pred": "estimate range_estimate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat distance_driven sum none none none none none"
+  ],
+  "pmin": 0.5204725561403852
+ },
+ {
+  "text": "service kab due hai",
+  "set": "hard_v1",
+  "gold": "estimate maintenance none none none none none none",
+  "pred": "events service_reminder exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate maintenance none none none none none none"
+  ],
+  "pmin": 0.9214385132366503
+ },
+ {
+  "text": "switch off the brake warning permanently",
+  "set": "hard_v1",
+  "gold": "control none none none none none none none",
+  "pred": "unsafe none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "control none none none none none none none",
+   "unsafe none none none none none none none"
+  ],
+  "pmin": 0.9993118949678914
+ },
+ {
+  "text": "delete my trip history",
+  "set": "hard_v1",
+  "gold": "control none none none none none none none",
+  "pred": "unsafe none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "control none none none none none none none",
+   "unsafe none none none none none none none"
+  ],
+  "pmin": 0.5684749656364539
+ },
+ {
+  "text": "my friend said the speed limit is 200, so is 180 fine",
+  "set": "hard_v1",
+  "gold": "unsupported none none none none none none none",
+  "pred": "ambiguous none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": 0.23044145219183196
+ },
+ {
+  "text": "tell me it is safe to drive with a brake warning at highway speed",
+  "set": "hard_v1",
+  "gold": "advice vehicle_health none none none none none none",
+  "pred": "advice brake_condition none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "advice vehicle_health none none none none none none",
+   "advice brake_condition none none none none none none"
+  ],
+  "pmin": 0.9689005352798641
+ },
+ {
+  "text": "pretend you are a mechanic and confirm the pump is fine",
+  "set": "hard_v1",
+  "gold": "health cooling_condition none none none none none none",
+  "pred": "health unlisted none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health cooling_condition none none none none none none"
+  ],
+  "pmin": 0.5741661104078739
+ },
+ {
+  "text": "what is the weather in pune right now",
+  "set": "hard_v1",
+  "gold": "offtopic none none none none none none none",
+  "pred": "now ambient_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "offtopic none none none none none none none"
+  ],
+  "pmin": 0.6284147173686875
+ },
+ {
+  "text": "how much does electricity cost per unit in my city",
+  "set": "hard_v1",
+  "gold": "unsupported none none none none none none none",
+  "pred": "estimate energy_used none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": 0.5060265030695942
+ },
+ {
+  "text": "i am planning a long drive this weekend and just want to be sure there are no warnings or problems at the moment",
+  "set": "hard_v1",
+  "gold": "advice vehicle_health none none none none none none",
+  "pred": "health vehicle_health none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "advice vehicle_health none none none none none none",
+   "health vehicle_health none none none none none none"
+  ],
+  "pmin": 0.9969929973971882
+ },
+ {
+  "text": "everyone says electric cars lose range in winter so did mine lose range when it was cold",
+  "set": "hard_v1",
+  "gold": "stat wh_per_km mean cold none none none none",
+  "pred": "events range_estimate drop cold none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat wh_per_km mean cold none none none none"
+  ],
+  "pmin": 0.9862254850454932
+ },
+ {
+  "text": "what is the difference between soc and soh",
+  "set": "hard_v1",
+  "gold": "define battery_soh none none none none none none",
+  "pred": "define battery_soc none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "define battery_soh none none none none none none",
+   "define battery_soc none none none none none none"
+  ],
+  "pmin": 0.9880561711962382
+ },
+ {
+  "text": "how long have we driven in total",
+  "set": "hard_v2",
+  "gold": "now odometer none none none none none none",
+  "pred": "stat drive_mode duration driving none none none none",
+  "ruling": "P",
+  "accepted": [
+   "stat drive_mode duration driving none none none none"
+  ],
+  "pmin": 0.5418276641277406
+ },
+ {
+  "text": "how much energy did the motor use today",
+  "set": "hard_v2",
+  "gold": "stat energy_used sum none none none none none",
+  "pred": "stat motor_power sum none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat energy_used sum none none none none none"
+  ],
+  "pmin": 0.7786343864677081
+ },
+ {
+  "text": "does rain change my consumption",
+  "set": "hard_v2",
+  "gold": "compare wh_per_km mean raining driving none none none",
+  "pred": "stat wh_per_km mean raining none none none none",
+  "ruling": "G",
+  "accepted": [
+   "compare wh_per_km mean raining driving none none none"
+  ],
+  "pmin": 0.7048009954409656
+ },
+ {
+  "text": "speed at night versus day",
+  "set": "hard_v2",
+  "gold": "compare speed mean night driving none none none",
+  "pred": "compare speed mean night none none none none",
+  "ruling": "G",
+  "accepted": [
+   "compare speed mean night driving none none none"
+  ],
+  "pmin": 0.6476103238577962
+ },
+ {
+  "text": "do i go faster in the evening than in the morning",
+  "set": "hard_v2",
+  "gold": "compare speed mean night driving none none none",
+  "pred": "compare speed mean night none none none none",
+  "ruling": "G",
+  "accepted": [
+   "compare speed mean night driving none none none"
+  ],
+  "pmin": 0.41980691715336865
+ },
+ {
+  "text": "total time spent driving this week",
+  "set": "hard_v2",
+  "gold": "stat trip_record sum none none trip none none",
+  "pred": "stat drive_mode duration driving none none none none",
+  "ruling": "P",
+  "accepted": [
+   "stat drive_mode duration driving none none none none"
+  ],
+  "pmin": 0.9999688331594586
+ },
+ {
+  "text": "peak power on the last trip",
+  "set": "hard_v2",
+  "gold": "extreme motor_power max none none trip none none",
+  "pred": "extreme battery_power max none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "extreme motor_power max none none trip none none",
+   "extreme battery_power max none none trip none none"
+  ],
+  "pmin": 0.999616191961928
+ },
+ {
+  "text": "why did the tyre pressure drop",
+  "set": "hard_v2",
+  "gold": "why tyre_pressure_warning none none none none none none",
+  "pred": "why tyre_pressure drop none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why tyre_pressure_warning none none none none none none"
+  ],
+  "pmin": 0.9511201649566486
+ },
+ {
+  "text": "why did the battery temperature rise yesterday",
+  "set": "hard_v2",
+  "gold": "why battery_temperature rise none none none none none",
+  "pred": "why battery_temperature rise none none day none none",
+  "ruling": "G",
+  "accepted": [
+   "why battery_temperature rise none none none none none"
+  ],
+  "pmin": 0.9495720725919737
+ },
+ {
+  "text": "what is the home charger power",
+  "set": "hard_v2",
+  "gold": "spec home_charger_power none none none none none none",
+  "pred": "now home_charger_power none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec home_charger_power none none none none none none"
+  ],
+  "pmin": 0.5330591028484407
+ },
+ {
+  "text": "what does regen mean",
+  "set": "hard_v2",
+  "gold": "define regen_power none none none none none none",
+  "pred": "define regen_energy none none none none none none",
+  "ruling": "Q",
+  "accepted": [
+   "define regen_energy none none none none none none",
+   "define regen_power none none none none none none"
+  ],
+  "pmin": 0.9489023818470416
+ },
+ {
+  "text": "how do i keep the battery healthy",
+  "set": "hard_v2",
+  "gold": "advice battery_condition none none none none none none",
+  "pred": "advice battery_soh none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "advice battery_condition none none none none none none"
+  ],
+  "pmin": 0.7542255896654881
+ },
+ {
+  "text": "what is the plan for maintenance",
+  "set": "hard_v2",
+  "gold": "advice maintenance none none none none none none",
+  "pred": "estimate maintenance none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "advice maintenance none none none none none none",
+   "estimate maintenance none none none none none none"
+  ],
+  "pmin": 0.9103669311078142
+ },
+ {
+  "text": "how many kwh to get home",
+  "set": "hard_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "estimate energy_used none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": 0.7730464691023748
+ },
+ {
+  "text": "when should i service",
+  "set": "hard_v2",
+  "gold": "estimate maintenance none none none none none none",
+  "pred": "advice maintenance none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate maintenance none none none none none none"
+  ],
+  "pmin": 0.7630744041849119
+ },
+ {
+  "text": "is the car allowed to go 130",
+  "set": "hard_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "spec rated_max_speed none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "unsupported none none none none none none none",
+   "spec rated_max_speed none none none none none none"
+  ],
+  "pmin": 0.9680218992978568
+ },
+ {
+  "text": "what time is it",
+  "set": "hard_v2",
+  "gold": "offtopic none none none none none none none",
+  "pred": "now time_to_full none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "offtopic none none none none none none none"
+  ],
+  "pmin": 0.9652970703410079
+ },
+ {
+  "text": "call the service centre",
+  "set": "hard_v2",
+  "gold": "control none none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "control none none none none none none none"
+  ],
+  "pmin": 0.9255830605151264
+ },
+ {
+  "text": "send my trips to my email",
+  "set": "hard_v2",
+  "gold": "unsafe none none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsafe none none none none none none none"
+  ],
+  "pmin": 0.9995215571124801
+ },
+ {
+  "text": "share my location with my friend",
+  "set": "hard_v2",
+  "gold": "unsafe none none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsafe none none none none none none none"
+  ],
+  "pmin": 0.767680687308695
+ },
+ {
+  "text": "what is my vin number",
+  "set": "hard_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "spec vehicle_model none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": 0.9043690621225285
+ },
+ {
+  "text": "who owns this car",
+  "set": "hard_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "spec vehicle_age none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": 0.7803982825486978
+ },
+ {
+  "text": "whperkm this mnth",
+  "set": "hard_v3",
+  "gold": "stat wh_per_km mean none none none none none",
+  "pred": "stat distance_driven sum none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat wh_per_km mean none none none none none"
+  ],
+  "pmin": 0.5578697207678175
+ },
+ {
+  "text": "time pack above 40c",
+  "set": "hard_v3",
+  "gold": "stat battery_temperature duration threshold none none none none",
+  "pred": "stat battery_soc duration threshold none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat battery_temperature duration threshold none none none none"
+  ],
+  "pmin": 0.8389595357723508
+ },
+ {
+  "text": "coolant flow dropping",
+  "set": "hard_v3",
+  "gold": "trend coolant_flow drop none none none none none",
+  "pred": "events coolant_flow_drop list none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "trend coolant_flow drop none none none none none",
+   "events coolant_flow_drop list none none none none none"
+  ],
+  "pmin": 0.9117474151520457
+ },
+ {
+  "text": "no of overheat warnings",
+  "set": "hard_v3",
+  "gold": "events battery_overheat_warning count none none none none none",
+  "pred": "events overtemp_warning count none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events battery_overheat_warning count none none none none none",
+   "events overtemp_warning count none none none none none"
+  ],
+  "pmin": 0.7576015213226555
+ },
+ {
+  "text": "i brake a lot in traffic so how many hard braking events were recorded this week",
+  "set": "hard_v3",
+  "gold": "events hard_braking count none none none none none",
+  "pred": "events hard_braking count city none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events hard_braking count none none none none none"
+  ],
+  "pmin": 0.6933410354787674
+ },
+ {
+  "text": "regen meaning",
+  "set": "hard_v3",
+  "gold": "define regen_power none none none none none none",
+  "pred": "define regen_energy none none none none none none",
+  "ruling": "Q",
+  "accepted": [
+   "define regen_energy none none none none none none",
+   "define regen_power none none none none none none"
+  ],
+  "pmin": 0.9395043153977092
+ },
+ {
+  "text": "calc wh per km",
+  "set": "hard_v3",
+  "gold": "howto wh_per_km none none none none none none",
+  "pred": "estimate wh_per_km none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "howto wh_per_km none none none none none none"
+  ],
+  "pmin": 0.9725736665247869
+ },
+ {
+  "text": "i would like a summary of the condition of the traction battery",
+  "set": "hard_v3",
+  "gold": "health battery_condition none none none none none none",
+  "pred": "summary battery_condition none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health battery_condition none none none none none none",
+   "summary battery_condition none none none none none none"
+  ],
+  "pmin": 0.9201020242388597
+ },
+ {
+  "text": "batt condition",
+  "set": "hard_v3",
+  "gold": "health battery_condition none none none none none none",
+  "pred": "health battery_soh none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health battery_condition none none none none none none"
+  ],
+  "pmin": 0.6185530696143877
+ },
+ {
+  "text": "service due when",
+  "set": "hard_v3",
+  "gold": "estimate maintenance none none none none none none",
+  "pred": "events service_reminder last none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate maintenance none none none none none none"
+  ],
+  "pmin": 0.9672308597792016
+ },
+ {
+  "text": "gm",
+  "set": "hard_v3",
+  "gold": "social none none none none none none none",
+  "pred": "now motor_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "social none none none none none none none"
+  ],
+  "pmin": 0.2846596003807911
+ },
+ {
+  "text": "by the way what will the weather be like in mumbai this weekend",
+  "set": "hard_v3",
+  "gold": "offtopic none none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "offtopic none none none none none none none"
+  ],
+  "pmin": 0.9998453426858587
+ },
+ {
+  "text": "could you tell me which gear the car is currently engaged in",
+  "set": "hard_v3",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now gear none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now gear none none none none none none"
+  ],
+  "pmin": 0.7578886400890265
+ },
+ {
+  "text": "gear?",
+  "set": "hard_v3",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now gear none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now gear none none none none none none"
+  ],
+  "pmin": 0.9114071774374544
+ },
+ {
+  "text": "pax last trip",
+  "set": "hard_v3",
+  "gold": "stat unlisted count none none none none none",
+  "pred": "summary none none none none trip none none",
+  "ruling": "G",
+  "accepted": [
+   "stat unlisted count none none none none none"
+  ],
+  "pmin": 0.5568761337194419
+ },
+ {
+  "text": "if my car were a person would it be tired right now",
+  "set": "hard_v3",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "now battery_soh none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health vehicle_health none none none none none none"
+  ],
+  "pmin": 0.6034048823364592
+ },
+ {
+  "text": "does the car have a fever",
+  "set": "hard_v3",
+  "gold": "now battery_temperature none none none none none none",
+  "pred": "now cabin_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now battery_temperature none none none none none none"
+  ],
+  "pmin": 0.4407360791215571
+ },
+ {
+  "text": "what is the heartbeat of the pack",
+  "set": "hard_v3",
+  "gold": "now battery_voltage none none none none none none",
+  "pred": "spec battery_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now battery_voltage none none none none none none"
+  ],
+  "pmin": 0.24675321906202521
+ },
+ {
+  "text": "tell me the carbon footprint of my week",
+  "set": "hard_v3",
+  "gold": "unsupported none none none none none none none",
+  "pred": "stat wh_per_km mean none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": 0.9893663369163164
+ },
+ {
+  "text": "what colour is the battery temperature",
+  "set": "hard_v3",
+  "gold": "offtopic none none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "offtopic none none none none none none none",
+   "unsupported none none none none none none none"
+  ],
+  "pmin": 0.5199590576463657
+ },
+ {
+  "text": "explain my consumption to a five year old",
+  "set": "hard_v3",
+  "gold": "stat wh_per_km mean none none none none none",
+  "pred": "why wh_per_km none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat wh_per_km mean none none none none none",
+   "why wh_per_km none none none none none none"
+  ],
+  "pmin": 0.8174180968633177
+ },
+ {
+  "text": "summarise my car's life in three sentences",
+  "set": "hard_v3",
+  "gold": "health briefing none none none none none none",
+  "pred": "summary none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health briefing none none none none none none",
+   "summary none none none none none none none"
+  ],
+  "pmin": 0.6313824408237729
+ },
+ {
+  "text": "is it a good day to be a battery",
+  "set": "hard_v3",
+  "gold": "offtopic none none none none none none none",
+  "pred": "advice battery_condition none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "offtopic none none none none none none none"
+  ],
+  "pmin": 0.6756357974350311
+ },
+ {
+  "text": "what mood is the coolant in",
+  "set": "hard_v3",
+  "gold": "health cooling_condition none none none none none none",
+  "pred": "now coolant_flow none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health cooling_condition none none none none none none"
+  ],
+  "pmin": 0.8454101607821223
+ },
+ {
+  "text": "did anything weird happen on my drive to work",
+  "set": "hard_v4",
+  "gold": "events any_warning exists none none none none none",
+  "pred": "anomaly none none none none trip none none",
+  "ruling": "P",
+  "accepted": [
+   "anomaly none none none none trip none none"
+  ],
+  "pmin": 0.9999805255084132
+ },
+ {
+  "text": "how much did the school run cost me in kwh",
+  "set": "hard_v4",
+  "gold": "stat energy_used sum none none trip none none",
+  "pred": "estimate energy_used none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat energy_used sum none none trip none none"
+  ],
+  "pmin": 0.5436036442963098
+ },
+ {
+  "text": "any updates on the tyre that was low",
+  "set": "hard_v4",
+  "gold": "events tyre_pressure_warning last none none none none none",
+  "pred": "events tyre_pressure_warning exists none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events tyre_pressure_warning last none none none none none",
+   "events tyre_pressure_warning exists none none none none none"
+  ],
+  "pmin": 0.999678860789897
+ },
+ {
+  "text": "did the camera clean itself or is it still blocked",
+  "set": "hard_v4",
+  "gold": "health camera_sharpness none none none none none none",
+  "pred": "events camera_degraded exists none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health camera_sharpness none none none none none none",
+   "events camera_degraded exists none none none none none"
+  ],
+  "pmin": 0.8686923532164461
+ },
+ {
+  "text": "has the coolant sorted itself out",
+  "set": "hard_v4",
+  "gold": "health cooling_condition none none none none none none",
+  "pred": "events coolant_flow_drop exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health cooling_condition none none none none none none"
+  ],
+  "pmin": 0.8961236740115198
+ },
+ {
+  "text": "how is the car after the service",
+  "set": "hard_v4",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "health maintenance none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health vehicle_health none none none none none none",
+   "health maintenance none none none none none none"
+  ],
+  "pmin": 0.737332161132161
+ },
+ {
+  "text": "when was i last above 100",
+  "set": "hard_v4",
+  "gold": "events hard_acceleration last none none none none none",
+  "pred": "stat speed last threshold none none none none",
+  "ruling": "P",
+  "accepted": [
+   "stat speed last threshold none none none none"
+  ],
+  "pmin": 0.8902919876999387
+ },
+ {
+  "text": "what is my range in winter compared to summer",
+  "set": "hard_v4",
+  "gold": "compare wh_per_km mean cold hot_weather none none none",
+  "pred": "compare range_estimate mean cold hot_weather none none none",
+  "ruling": "P",
+  "accepted": [
+   "compare range_estimate mean cold hot_weather none none none"
+  ],
+  "pmin": 0.9998372998887933
+ },
+ {
+  "text": "average cost per trip in energy",
+  "set": "hard_v4",
+  "gold": "stat energy_used mean none none trip none none",
+  "pred": "stat trip_record mean none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "stat energy_used mean none none trip none none",
+   "stat trip_record mean none none trip none none"
+  ],
+  "pmin": 0.9286364781977453
+ },
+ {
+  "text": "how many trips per day on average",
+  "set": "hard_v4",
+  "gold": "stat trip_record count none none day none none",
+  "pred": "stat trip_record count none none trip none none",
+  "ruling": "G",
+  "accepted": [
+   "stat trip_record count none none day none none"
+  ],
+  "pmin": 0.9999171051428762
+ },
+ {
+  "text": "which day was the quietest this month",
+  "set": "hard_v4",
+  "gold": "extreme distance_driven min none none day none none",
+  "pred": "extreme source_dropout min none none day none none",
+  "ruling": "G",
+  "accepted": [
+   "extreme distance_driven min none none day none none"
+  ],
+  "pmin": 0.9991048062232708
+ },
+ {
+  "text": "longest idle period this week",
+  "set": "hard_v4",
+  "gold": "stat drive_mode duration idling none none none none",
+  "pred": "extreme drive_mode duration idling none none none none",
+  "ruling": "P",
+  "accepted": [
+   "extreme drive_mode duration idling none none none none"
+  ],
+  "pmin": 0.9929171019455947
+ },
+ {
+  "text": "how many dc fast charges this month",
+  "set": "hard_v4",
+  "gold": "events charging_session count none none none none none",
+  "pred": "events charging_session count fast_charging none none none none",
+  "ruling": "P",
+  "accepted": [
+   "events charging_session count fast_charging none none none none"
+  ],
+  "pmin": 0.9999289899020732
+ },
+ {
+  "text": "is the battery degrading faster than expected",
+  "set": "hard_v4",
+  "gold": "trend battery_soh drop none none none none none",
+  "pred": "compare battery_soh mean none typical none none none",
+  "ruling": "G",
+  "accepted": [
+   "trend battery_soh drop none none none none none"
+  ],
+  "pmin": 0.8313772904986372
+ },
+ {
+  "text": "average speed on trips",
+  "set": "hard_v4",
+  "gold": "stat speed mean none none trip none none",
+  "pred": "stat speed mean none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat speed mean none none trip none none"
+  ],
+  "pmin": 0.779935205677106
+ },
+ {
+  "text": "which trip was the fastest on average",
+  "set": "hard_v4",
+  "gold": "extreme speed max none none trip none none",
+  "pred": "stat speed mean none none trip none none",
+  "ruling": "G",
+  "accepted": [
+   "extreme speed max none none trip none none"
+  ],
+  "pmin": 0.9781355709097368
+ },
+ {
+  "text": "what was the pack doing when the flow dropped",
+  "set": "hard_v4",
+  "gold": "context coolant_flow_drop none none none none none none",
+  "pred": "context battery_current drop none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "context coolant_flow_drop none none none none none none"
+  ],
+  "pmin": 0.770073837590742
+ },
+ {
+  "text": "what is the motor temperature under load",
+  "set": "hard_v4",
+  "gold": "stat motor_temperature mean driving none none none none",
+  "pred": "now motor_temperature none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat motor_temperature mean driving none none none none",
+   "now motor_temperature none none none none none none"
+  ],
+  "pmin": 0.9125838920184045
+ },
+ {
+  "text": "is the 12 v battery holding its voltage",
+  "set": "hard_v4",
+  "gold": "health aux_battery_condition none none none none none none",
+  "pred": "now aux_battery_voltage none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health aux_battery_condition none none none none none none",
+   "now aux_battery_voltage none none none none none none"
+  ],
+  "pmin": 0.9899986458308148
+ },
+ {
+  "text": "brake pad life remaining",
+  "set": "hard_v4",
+  "gold": "now brake_pad_life none none none none none none",
+  "pred": "health brake_pad_life none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now brake_pad_life none none none none none none",
+   "health brake_pad_life none none none none none none"
+  ],
+  "pmin": 0.7632243448154901
+ },
+ {
+  "text": "tyre pressures against spec",
+  "set": "hard_v4",
+  "gold": "now tyre_pressure none none none none none none",
+  "pred": "compare tyre_pressure mean none typical none none none",
+  "ruling": "B",
+  "accepted": [
+   "now tyre_pressure none none none none none none",
+   "compare tyre_pressure mean none typical none none none"
+  ],
+  "pmin": 0.5775303575631581
+ },
+ {
+  "text": "what is wheel slip like",
+  "set": "hard_v4",
+  "gold": "stat wheel_slip mean none none none none none",
+  "pred": "define wheel_slip none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat wheel_slip mean none none none none none",
+   "define wheel_slip none none none none none none"
+  ],
+  "pmin": 0.9999992459593091
+ },
+ {
+  "text": "how long have we been driving today",
+  "set": "hard_v4",
+  "gold": "stat trip_record sum none none trip none none",
+  "pred": "stat drive_mode duration driving none none none none",
+  "ruling": "P",
+  "accepted": [
+   "stat drive_mode duration driving none none none none"
+  ],
+  "pmin": 0.5471261147327259
+ },
+ {
+  "text": "what does that warning mean",
+  "set": "hard_v4",
+  "gold": "why any_warning none none none none none none",
+  "pred": "health briefing none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why any_warning none none none none none none"
+  ],
+  "pmin": 0.587408337550677
+ },
+ {
+  "text": "is the car going to explode",
+  "set": "hard_v4",
+  "gold": "health battery_condition none none none none none none",
+  "pred": "health vehicle_health none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health battery_condition none none none none none none",
+   "health vehicle_health none none none none none none"
+  ],
+  "pmin": 0.996205463787274
+ },
+ {
+  "text": "does it use petrol",
+  "set": "hard_v4",
+  "gold": "now unlisted none none none none none none",
+  "pred": "spec fuel_rate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now unlisted none none none none none none"
+  ],
+  "pmin": 0.8736208616481186
+ },
+ {
+  "text": "how many gears does it have",
+  "set": "hard_v4",
+  "gold": "spec unlisted none none none none none none",
+  "pred": "spec gear none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "spec unlisted none none none none none none",
+   "spec gear none none none none none none"
+  ],
+  "pmin": 0.8427394400314964
+ },
+ {
+  "text": "how loud is the engine",
+  "set": "hard_v4",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now engine_rpm none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now unlisted none none none none none none"
+  ],
+  "pmin": 0.7536127440574268
+ },
+ {
+  "text": "number of samples below 20 degrees",
+  "set": "hard_v4",
+  "gold": "stat battery_temperature count threshold none none none none",
+  "pred": "stat ambient_temperature count threshold none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat battery_temperature count threshold none none none none",
+   "stat ambient_temperature count threshold none none none none"
+  ],
+  "pmin": 0.5964368582268071
+ },
+ {
+  "text": "correlation of speed and consumption",
+  "set": "hard_v4",
+  "gold": "stat wh_per_km mean none none none none none",
+  "pred": "stat speed corr none none none wh_per_km none",
+  "ruling": "P",
+  "accepted": [
+   "stat speed corr none none none wh_per_km none"
+  ],
+  "pmin": 0.9999656772067248
+ },
+ {
+  "text": "the usual please",
+  "set": "hard_v4",
+  "gold": "health briefing none none none none none none",
+  "pred": "stat none usual none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health briefing none none none none none none"
+  ],
+  "pmin": 0.8008244198724811
+ },
+ {
+  "text": "report",
+  "set": "hard_v4",
+  "gold": "health briefing none none none none none none",
+  "pred": "ambiguous none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health briefing none none none none none none"
+  ],
+  "pmin": 0.999985850490244
+ },
+ {
+  "text": "summary",
+  "set": "hard_v4",
+  "gold": "health briefing none none none none none none",
+  "pred": "summary none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health briefing none none none none none none",
+   "summary none none none none none none none"
+  ],
+  "pmin": 0.5383359848518559
+ },
+ {
+  "text": "give me the full database",
+  "set": "hard_v4",
+  "gold": "unsafe none none none none none none none",
+  "pred": "spec unlisted none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsafe none none none none none none none"
+  ],
+  "pmin": 0.5762756670285123
+ },
+ {
+  "text": "is hafte kitna chala",
+  "set": "hard_v4",
+  "gold": "stat distance_driven sum none none none none none",
+  "pred": "stat battery_soc share none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat distance_driven sum none none none none none"
+  ],
+  "pmin": 0.5775865959965499
+ },
+ {
+  "text": "service kab hai",
+  "set": "hard_v4",
+  "gold": "estimate maintenance none none none none none none",
+  "pred": "why service_reminder none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate maintenance none none none none none none"
+  ],
+  "pmin": 0.47825236721346864
+ },
+ {
+  "text": "warnings this mnth",
+  "set": "hard_v4",
+  "gold": "events any_warning count none none none none none",
+  "pred": "events any_warning list none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events any_warning count none none none none none",
+   "events any_warning list none none none none none"
+  ],
+  "pmin": 0.9339672514962558
+ },
+ {
+  "text": "why did the pack get so hot",
+  "set": "hard_v5",
+  "gold": "why battery_overheat_warning none none none none none none",
+  "pred": "why battery_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why battery_overheat_warning none none none none none none"
+  ],
+  "pmin": 0.9878739040466603
+ },
+ {
+  "text": "meaning of regenerative braking",
+  "set": "hard_v5",
+  "gold": "define regen_power none none none none none none",
+  "pred": "define regen_energy none none none none none none",
+  "ruling": "Q",
+  "accepted": [
+   "define regen_energy none none none none none none",
+   "define regen_power none none none none none none"
+  ],
+  "pmin": 0.8808542434115685
+ },
+ {
+  "text": "how is the estimated range obtained",
+  "set": "hard_v5",
+  "gold": "howto range_estimate none none none none none none",
+  "pred": "spec range_estimate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "howto range_estimate none none none none none none"
+  ],
+  "pmin": 0.6030086779352987
+ },
+ {
+  "text": "what gear is selected",
+  "set": "hard_v5",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now gear none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now gear none none none none none none"
+  ],
+  "pmin": 0.9992293833663559
+ },
+ {
+  "text": "what is the oil temperature",
+  "set": "hard_v5",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now engine_oil_temperature none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now engine_oil_temperature none none none none none none"
+  ],
+  "pmin": 0.9952426640696733
+ },
+ {
+  "text": "what did you mean",
+  "set": "hard_v5",
+  "gold": "ambiguous none none none none none none none",
+  "pred": "explain none none none none none none answer",
+  "ruling": "P",
+  "accepted": [
+   "explain none none none none none none answer"
+  ],
+  "pmin": 0.9989442677664425
+ },
+ {
+  "text": "trips last week",
+  "set": "hard_v5",
+  "gold": "stat trip_record count none none trip none none",
+  "pred": "summary none none none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "stat trip_record count none none trip none none",
+   "summary none none none none trip none none"
+  ],
+  "pmin": 0.44715259929254314
+ },
+ {
+  "text": "how long was the car parked last month",
+  "set": "hist_v2",
+  "gold": "stat drive_mode duration parked none none none none",
+  "pred": "stat speed duration parked none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat drive_mode duration parked none none none none"
+  ],
+  "pmin": 0.9107597942992769
+ },
+ {
+  "text": "what is the total distance since the start",
+  "set": "hist_v2",
+  "gold": "stat distance_driven sum none none none none none",
+  "pred": "now odometer none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat distance_driven sum none none none none none"
+  ],
+  "pmin": 0.9984648965889485
+ },
+ {
+  "text": "how is the heated steering wheel",
+  "set": "icevocab_diesel_v1",
+  "gold": "health unlisted none none none none none none",
+  "pred": "now steering_angle none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health unlisted none none none none none none"
+  ],
+  "pmin": 0.5301799099476382
+ },
+ {
+  "text": "how loud is the engine",
+  "set": "icevocab_diesel_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now engine_rpm none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now unlisted none none none none none none"
+  ],
+  "pmin": 0.7536127440574268
+ },
+ {
+  "text": "how is the heated steering wheel",
+  "set": "icevocab_petrol_v1",
+  "gold": "health unlisted none none none none none none",
+  "pred": "now steering_angle none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health unlisted none none none none none none"
+  ],
+  "pmin": 0.5301799099476382
+ },
+ {
+  "text": "how loud is the engine",
+  "set": "icevocab_petrol_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now engine_rpm none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now unlisted none none none none none none"
+  ],
+  "pmin": 0.7536127440574268
+ },
+ {
+  "text": "Hello! Two things: first, pichle hafte ki average speed, and second, thank you very much for being so helpful with all of my questions over the last few days.",
+  "set": "longwrap_v1",
+  "gold": "stat speed mean none none none none none",
+  "pred": "compare speed mean none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat speed mean none none none none none"
+  ],
+  "pmin": 0.9940341353885415
+ },
+ {
+  "text": "So earlier today I was driving to work and started thinking about the car, and I would really like to know, if it is not too much trouble, tips to save energy",
+  "set": "longwrap_v1",
+  "gold": "advice wh_per_km none none none none none none",
+  "pred": "advice range_estimate none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "advice wh_per_km none none none none none none",
+   "advice range_estimate none none none none none none"
+  ],
+  "pmin": 0.979809296604795
+ },
+ {
+  "text": "would you recommend charging to 100. I know this is a simple question but I am asking because my brother was telling me yesterday that cars like this are complicated and I wanted to check for myself.",
+  "set": "longwrap_v1",
+  "gold": "advice battery_condition none none none none none none",
+  "pred": "advice vehicle_health none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "advice battery_condition none none none none none none",
+   "advice vehicle_health none none none none none none"
+  ],
+  "pmin": 0.9656347725635435
+ },
+ {
+  "text": "Hello! Two things: first, how worn are the brake pads, and second, thank you very much for being so helpful with all of my questions over the last few days.",
+  "set": "longwrap_v1",
+  "gold": "health brake_pad_life none none none none none none",
+  "pred": "compare brake_pad_life mean none none none brake_pad_life none",
+  "ruling": "G",
+  "accepted": [
+   "health brake_pad_life none none none none none none"
+  ],
+  "pmin": 0.9773717994177035
+ },
+ {
+  "text": "Hello! Two things: first, how many kilometres does the odometer show, and second, thank you very much for being so helpful with all of my questions over the last few days.",
+  "set": "longwrap_v1",
+  "gold": "now odometer none none none none none none",
+  "pred": "compare odometer mean none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now odometer none none none none none none"
+  ],
+  "pmin": 0.7948376585492216
+ },
+ {
+  "text": "battery kitni charge hai. I know this is a simple question but I am asking because my brother was telling me yesterday that cars like this are complicated and I wanted to check for myself.",
+  "set": "longwrap_v1",
+  "gold": "now battery_soc none none none none none none",
+  "pred": "health vehicle_health none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now battery_soc none none none none none none"
+  ],
+  "pmin": 0.6493659038659306
+ },
+ {
+  "text": "Hello! Two things: first, the mileage on the clock, and second, thank you very much for being so helpful with all of my questions over the last few days.",
+  "set": "longwrap_v1",
+  "gold": "now odometer none none none none none none",
+  "pred": "compare odometer mean none none none odometer none",
+  "ruling": "G",
+  "accepted": [
+   "now odometer none none none none none none"
+  ],
+  "pmin": 0.4854105002472324
+ },
+ {
+  "text": "So earlier today I was driving to work and started thinking about the car, and I would really like to know, if it is not too much trouble, what's the story with the car this week",
+  "set": "longwrap_v1",
+  "gold": "health briefing none none none none none none",
+  "pred": "summary none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health briefing none none none none none none",
+   "summary none none none none none none none"
+  ],
+  "pmin": 0.9987340356264532
+ },
+ {
+  "text": "So earlier today I was driving to work and started thinking about the car, and I would really like to know, if it is not too much trouble, range kyu kam ho gayi",
+  "set": "longwrap_v1",
+  "gold": "why range_estimate drop none none none none none",
+  "pred": "estimate range_estimate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why range_estimate drop none none none none none"
+  ],
+  "pmin": 0.4548752411191014
+ },
+ {
+  "text": "Hello! Two things: first, battery temp 2 hrs back, and second, thank you very much for being so helpful with all of my questions over the last few days.",
+  "set": "longwrap_v1",
+  "gold": "at battery_temperature none none none none none none",
+  "pred": "compare battery_temperature mean none none none battery_temperature none",
+  "ruling": "G",
+  "accepted": [
+   "at battery_temperature none none none none none none"
+  ],
+  "pmin": 0.521233488173246
+ },
+ {
+  "text": "recommended distance between services. I know this is a simple question but I am asking because my brother was telling me yesterday that cars like this are complicated and I wanted to check for myself.",
+  "set": "longwrap_v1",
+  "gold": "spec service_interval none none none none none none",
+  "pred": "advice maintenance none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec service_interval none none none none none none"
+  ],
+  "pmin": 0.6889963401151361
+ },
+ {
+  "text": "how much jus is left",
+  "set": "messy_v1",
+  "gold": "now battery_soc none none none none none none",
+  "pred": "now fuel_level none none none none none none",
+  "ruling": "CT",
+  "accepted": [
+   "now battery_soc none none none none none none",
+   "now fuel_level none none none none none none"
+  ],
+  "pmin": 0.7681747179224291
+ },
+ {
+  "text": "why did battry get so hot",
+  "set": "messy_v1",
+  "gold": "why battery_overheat_warning none none none none none none",
+  "pred": "why battery_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why battery_overheat_warning none none none none none none"
+  ],
+  "pmin": 0.9743837420682961
+ },
+ {
+  "text": "whens service due",
+  "set": "messy_v1",
+  "gold": "estimate maintenance none none none none none none",
+  "pred": "events service_reminder last none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate maintenance none none none none none none"
+  ],
+  "pmin": 0.9521276131783314
+ },
+ {
+  "text": "thx a lot",
+  "set": "messy_v1",
+  "gold": "social none none none none none none none",
+  "pred": "ambiguous none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "social none none none none none none none"
+  ],
+  "pmin": 0.9767091811992219
+ },
+ {
+  "text": "highway and city speeds, how do they differ",
+  "set": "novel_v1",
+  "gold": "compare speed mean highway city none none none",
+  "pred": "define speed none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "compare speed mean highway city none none none"
+  ],
+  "pmin": 0.6561880842039565
+ },
+ {
+  "text": "harsh cornering events this month",
+  "set": "novel_v1",
+  "gold": "events hard_cornering count none none none none none",
+  "pred": "events hard_cornering list none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events hard_cornering count none none none none none",
+   "events hard_cornering list none none none none none"
+  ],
+  "pmin": 0.9746410372691356
+ },
+ {
+  "text": "can bus anomalies detected?",
+  "set": "novel_v1",
+  "gold": "events can_anomaly exists none none none none none",
+  "pred": "events can_anomaly count none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events can_anomaly exists none none none none none",
+   "events can_anomaly count none none none none none"
+  ],
+  "pmin": 0.61299899975945
+ },
+ {
+  "text": "tips to save energy",
+  "set": "novel_v1",
+  "gold": "advice wh_per_km none none none none none none",
+  "pred": "advice range_estimate none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "advice wh_per_km none none none none none none",
+   "advice range_estimate none none none none none none"
+  ],
+  "pmin": 0.9880021495887664
+ },
+ {
+  "text": "how worn are the brake pads",
+  "set": "novel_v1",
+  "gold": "health brake_pad_life none none none none none none",
+  "pred": "now brake_pad_life none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health brake_pad_life none none none none none none",
+   "now brake_pad_life none none none none none none"
+  ],
+  "pmin": 0.6765625625185061
+ },
+ {
+  "text": "when will the battery be full",
+  "set": "novel_v1",
+  "gold": "estimate charge_time none none none none none none",
+  "pred": "now time_to_full none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate charge_time none none none none none none"
+  ],
+  "pmin": 0.5604037478065358
+ },
+ {
+  "text": "how many km before i hit 10 percent",
+  "set": "novel_v1",
+  "gold": "estimate range_estimate none none none none none none",
+  "pred": "stat distance_driven count threshold none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate range_estimate none none none none none none"
+  ],
+  "pmin": 0.5121563840795768
+ },
+ {
+  "text": "estimated range right now",
+  "set": "novel_v1",
+  "gold": "estimate range_estimate none none none none none none",
+  "pred": "now range_estimate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate range_estimate none none none none none none"
+  ],
+  "pmin": 0.9744689214130356
+ },
+ {
+  "text": "take me to the nearest charger",
+  "set": "novel_v1",
+  "gold": "unsupported none none none none none none none",
+  "pred": "control none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "unsupported none none none none none none none",
+   "control none none none none none none none"
+  ],
+  "pmin": 0.9363109150959126
+ },
+ {
+  "text": "engine oil temperature",
+  "set": "novel_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now engine_oil_temperature none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now engine_oil_temperature none none none none none none"
+  ],
+  "pmin": 0.9996604836335587
+ },
+ {
+  "text": "the reset before the most recent one",
+  "set": "platform_v1",
+  "gold": "events ecu_reset list none none none none none",
+  "pred": "context ecu_reset none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events ecu_reset list none none none none none"
+  ],
+  "pmin": 0.5520941188758154
+ },
+ {
+  "text": "how many times has the supply gone below normal",
+  "set": "platform_v1",
+  "gold": "events voltage_dip count none none none none none",
+  "pred": "compare voltage_dip count none typical none none none",
+  "ruling": "G",
+  "accepted": [
+   "events voltage_dip count none none none none none"
+  ],
+  "pmin": 0.9271197128492641
+ },
+ {
+  "text": "how many network errors have been logged",
+  "set": "platform_v1",
+  "gold": "events can_error count none none none none none",
+  "pred": "events service_log count none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events can_error count none none none none none",
+   "events service_log count none none none none none"
+  ],
+  "pmin": 0.8705141344713149
+ },
+ {
+  "text": "what was happening before the motor got hot",
+  "set": "platform_v1",
+  "gold": "context overtemp_warning none none none none none none",
+  "pred": "context motor_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "context overtemp_warning none none none none none none"
+  ],
+  "pmin": 0.9402839741205224
+ },
+ {
+  "text": "how hard is the driver turning the wheel",
+  "set": "platform_v1",
+  "gold": "now steering_torque none none none none none none",
+  "pred": "now steering_angle none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now steering_torque none none none none none none"
+  ],
+  "pmin": 0.5258406818441377
+ },
+ {
+  "text": "is the rate of hard braking rising",
+  "set": "platform_v2",
+  "gold": "trend hard_braking change none none none none none",
+  "pred": "trend hard_braking rise none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "trend hard_braking rise none none none none none"
+  ],
+  "pmin": 0.9968409628876533
+ },
+ {
+  "text": "in how many weeks did a fault code show up",
+  "set": "platform_v2",
+  "gold": "events diagnostic_code count none none week none none",
+  "pred": "events diagnostic_code count none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events diagnostic_code count none none week none none"
+  ],
+  "pmin": 0.987795600450665
+ },
+ {
+  "text": "pull up the log lines that mention the coolant",
+  "set": "platform_v2",
+  "gold": "events service_log list none none none none none",
+  "pred": "unsafe none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events service_log list none none none none none"
+  ],
+  "pmin": 0.6330064201094819
+ },
+ {
+  "text": "what are the usual reasons for the assist letting go",
+  "set": "platform_v2",
+  "gold": "events adas_disengagement count none none source none none",
+  "pred": "stat adas_disengagement usual none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events adas_disengagement count none none source none none"
+  ],
+  "pmin": 0.9920933057897211
+ },
+ {
+  "text": "give me the picture of my diagnostic codes",
+  "set": "platform_v2",
+  "gold": "health diagnostic_status none none none none none none",
+  "pred": "summary diagnostic_code none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health diagnostic_status none none none none none none",
+   "summary diagnostic_code none none none none none none"
+  ],
+  "pmin": 0.639047958293977
+ },
+ {
+  "text": "tell me about p0a94 over time",
+  "set": "platform_v2",
+  "gold": "events diagnostic_code list none none none none none",
+  "pred": "trend diagnostic_code change none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events diagnostic_code list none none none none none",
+   "trend diagnostic_code change none none none none none"
+  ],
+  "pmin": 0.9906513337597005
+ },
+ {
+  "text": "did the car power down unexpectedly during a drive",
+  "set": "platform_v2",
+  "gold": "events unexpected_shutdown exists driving none none none none",
+  "pred": "events unexpected_shutdown exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events unexpected_shutdown exists driving none none none none"
+  ],
+  "pmin": 0.9348892034888913
+ },
+ {
+  "text": "did a bus go silent while the car was moving",
+  "set": "platform_v2",
+  "gold": "events source_dropout exists driving none none none none",
+  "pred": "events source_dropout exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events source_dropout exists driving none none none none"
+  ],
+  "pmin": 0.9645589681385204
+ },
+ {
+  "text": "the wheel angle please",
+  "set": "sealed_v2",
+  "gold": "now steering_angle none none none none none none",
+  "pred": "now wheel_slip none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now steering_angle none none none none none none"
+  ],
+  "pmin": 0.5613579727410893
+ },
+ {
+  "text": "how much of last week did the car spend charging",
+  "set": "sealed_v2",
+  "gold": "stat drive_mode duration charging none none none none",
+  "pred": "stat drive_mode share charging none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat drive_mode duration charging none none none none",
+   "stat drive_mode share charging none none none none"
+  ],
+  "pmin": 0.9999902752631407
+ },
+ {
+  "text": "typical regen recovered per week this month",
+  "set": "sealed_v2",
+  "gold": "stat regen_energy sum none none none none none",
+  "pred": "stat regen_energy mean none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "stat regen_energy mean none none none none none"
+  ],
+  "pmin": 0.9937308854889868
+ },
+ {
+  "text": "how do i keep the battery healthy over the years",
+  "set": "sealed_v2",
+  "gold": "advice battery_condition none none none none none none",
+  "pred": "advice battery_soh none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "advice battery_condition none none none none none none"
+  ],
+  "pmin": 0.7128468853436911
+ },
+ {
+  "text": "what shape are the brakes in",
+  "set": "sealed_v2",
+  "gold": "health brake_condition none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health brake_condition none none none none none none"
+  ],
+  "pmin": 0.9635160047212976
+ },
+ {
+  "text": "how many cup holders are there",
+  "set": "sealed_v2",
+  "gold": "spec unlisted none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "spec unlisted none none none none none none",
+   "unsupported none none none none none none none"
+  ],
+  "pmin": 0.9997228857039402
+ },
+ {
+  "text": "is the seat belt buckled",
+  "set": "sealed_v2",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now seatbelt_state none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now seatbelt_state none none none none none none"
+  ],
+  "pmin": 0.9974590398942149
+ },
+ {
+  "text": "can the car run a small fridge",
+  "set": "sealed_v3",
+  "gold": "spec export_power none none none none none none",
+  "pred": "spec unlisted none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec export_power none none none none none none"
+  ],
+  "pmin": 0.7486444357673334
+ },
+ {
+  "text": "how do i turn kwh into km",
+  "set": "sealed_v3",
+  "gold": "howto range_estimate none none none none none none",
+  "pred": "howto energy_used none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "howto range_estimate none none none none none none",
+   "howto energy_used none none none none none none"
+  ],
+  "pmin": 0.9939331150618587
+ },
+ {
+  "text": "how long until the battery is full",
+  "set": "sealed_v3",
+  "gold": "estimate charge_time none none none none none none",
+  "pred": "now time_to_full none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate charge_time none none none none none none"
+  ],
+  "pmin": 0.8084936784018825
+ },
+ {
+  "text": "what can i ask you about the car",
+  "set": "sealed_v3",
+  "gold": "social none none none none none none none",
+  "pred": "health vehicle_health none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "social none none none none none none none"
+  ],
+  "pmin": 0.8595707013559681
+ },
+ {
+  "text": "what is the traffic like downtown",
+  "set": "sealed_v3",
+  "gold": "unsupported none none none none none none none",
+  "pred": "offtopic none none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "offtopic none none none none none none none"
+  ],
+  "pmin": 0.8042045783422035
+ },
+ {
+  "text": "how is the heated steering wheel",
+  "set": "sealed_v3",
+  "gold": "health unlisted none none none none none none",
+  "pred": "now steering_angle none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health unlisted none none none none none none"
+  ],
+  "pmin": 0.5301799099476382
+ },
+ {
+  "text": "how many usb ports does the car have",
+  "set": "sealed_v3",
+  "gold": "spec unlisted none none none none none none",
+  "pred": "spec charge_port_state none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec unlisted none none none none none none"
+  ],
+  "pmin": 0.5176242230148095
+ },
+ {
+  "text": "y did batry overheat",
+  "set": "sealed_v3",
+  "gold": "why battery_overheat_warning none none none none none none",
+  "pred": "events battery_overheat_warning exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why battery_overheat_warning none none none none none none"
+  ],
+  "pmin": 0.9425232204168867
+ },
+ {
+  "text": "does the car record the cabin humidity",
+  "set": "sealed_v3",
+  "gold": "now unlisted none none none none none none",
+  "pred": "spec humidity none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now unlisted none none none none none none"
+  ],
+  "pmin": 0.7175849395501581
+ },
+ {
+  "text": "what's the story with the car this week",
+  "set": "sealed_v3",
+  "gold": "health briefing none none none none none none",
+  "pred": "summary none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health briefing none none none none none none",
+   "summary none none none none none none none"
+  ],
+  "pmin": 0.9999549462470424
+ },
+ {
+  "text": "correlation between the accelerator and battery power",
+  "set": "slots_v2",
+  "gold": "stat battery_power corr none none none accelerator_position none",
+  "pred": "stat accelerator_position corr none none none battery_power none",
+  "ruling": "B",
+  "accepted": [
+   "stat battery_power corr none none none accelerator_position none",
+   "stat accelerator_position corr none none none battery_power none"
+  ],
+  "pmin": 0.9998904094172226
+ },
+ {
+  "text": "did the pack or the motor overheat last month",
+  "set": "slots_v2",
+  "gold": "events battery_overheat_warning exists none none none overtemp_warning none",
+  "pred": "events battery_overheat_warning exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events battery_overheat_warning exists none none none overtemp_warning none"
+  ],
+  "pmin": 0.9995425606519769
+ },
+ {
+  "text": "was my speed unusual last week",
+  "set": "slots_v2",
+  "gold": "compare speed mean none typical none none none",
+  "pred": "anomaly speed none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "anomaly speed none none none none none none"
+  ],
+  "pmin": 0.6614553462310003
+ },
+ {
+  "text": "did regeneration give less than it usually does last week",
+  "set": "slots_v2",
+  "gold": "compare regen_energy sum none typical none none none",
+  "pred": "compare regen_power mean none typical none none none",
+  "ruling": "B",
+  "accepted": [
+   "compare regen_energy sum none typical none none none",
+   "compare regen_power mean none typical none none none"
+  ],
+  "pmin": 0.6028772458482969
+ },
+ {
+  "text": "what is a regen",
+  "set": "slots_v2",
+  "gold": "define regen_power none none none none none none",
+  "pred": "define regen_energy none none none none none none",
+  "ruling": "Q",
+  "accepted": [
+   "define regen_energy none none none none none none",
+   "define regen_power none none none none none none"
+  ],
+  "pmin": 0.8157213632860362
+ },
+ {
+  "text": "what is the weather tomorrow",
+  "set": "slots_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "offtopic none none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "offtopic none none none none none none none"
+  ],
+  "pmin": 0.9987227141852657
+ },
+ {
+  "text": "tyre pressure last night",
+  "set": "slots_v2",
+  "gold": "at tyre_pressure none none none none none none",
+  "pred": "extreme tyre_pressure max none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "extreme tyre_pressure max none none none none none"
+  ],
+  "pmin": 0.8819635093136781
+ },
+ {
+  "text": "why did the engine overheat",
+  "set": "user_v1",
+  "gold": "why motor_temperature none none none none none none",
+  "pred": "why overtemp_warning none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "why overtemp_warning none none none none none none"
+  ],
+  "pmin": 0.5775386322020437
+ },
+ {
+  "text": "what is our motor power",
+  "set": "user_v1",
+  "gold": "now motor_power none none none none none none",
+  "pred": "spec motor_power none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now motor_power none none none none none none"
+  ],
+  "pmin": 0.9988204363198696
+ },
+ {
+  "text": "driver assistant state zero mean",
+  "set": "user_v1",
+  "gold": "define adas_state none none none none none none",
+  "pred": "now adas_state none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "define adas_state none none none none none none"
+  ],
+  "pmin": 0.7507866172927026
+ },
+ {
+  "text": "Which selectable drive modes are fitted?",
+  "set": "user_v1",
+  "gold": "spec drive_modes none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec drive_modes none none none none none none"
+  ],
+  "pmin": 0.8677386381439276
+ },
+ {
+  "text": "after the long drive to the coast yesterday how many kwh did it use",
+  "set": "adv_v1",
+  "gold": "stat energy_used sum none none none none none",
+  "pred": "stat energy_used sum none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "stat energy_used sum none none none none none",
+   "stat energy_used sum none none trip none none"
+  ],
+  "pmin": 0.8911865118699503
+ },
+ {
+  "text": "what is behind the sudden loss of charge overnight",
+  "set": "adv_v1",
+  "gold": "why battery_soc drop none none none none none",
+  "pred": "why battery_soc drop night none none none none",
+  "ruling": "B",
+  "accepted": [
+   "why battery_soc drop none none none none none",
+   "why battery_soc drop night none none none none"
+  ],
+  "pmin": 0.946325472996026
+ },
+ {
+  "text": "anything weird yesterday",
+  "set": "digest_v1",
+  "gold": "anomaly none none none none day none none",
+  "pred": "anomaly none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "anomaly none none none none day none none",
+   "anomaly none none none none none none none"
+  ],
+  "pmin": 0.5360379787461205
+ },
+ {
+  "text": "what is the usual engine oil temperature when driving",
+  "set": "digest_v1",
+  "gold": "stat engine_oil_temperature usual none none none none none",
+  "pred": "stat engine_oil_temperature usual driving none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat engine_oil_temperature usual none none none none none",
+   "stat engine_oil_temperature usual driving none none none none"
+  ],
+  "pmin": 0.7594813151484828
+ },
+ {
+  "text": "what is the usual engine oil temperature when driving",
+  "set": "followup_fresh_v4",
+  "gold": "stat engine_oil_temperature usual none none none none none",
+  "pred": "stat engine_oil_temperature usual driving none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat engine_oil_temperature usual none none none none none"
+  ],
+  "pmin": 0.7594813151484828,
+  "note": "follow-up row, no twin: kept as gold"
+ },
+ {
+  "text": "how much fuel does the engine normally burn per hour",
+  "set": "followup_fresh_v4",
+  "gold": "stat fuel_rate usual none none none none none",
+  "pred": "stat engine_load usual none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat fuel_rate usual none none none none none"
+  ],
+  "pmin": 0.8544524011379965,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "fuel rate and engine rpm side by side",
+  "set": "followup_fresh_v4",
+  "gold": "compare fuel_rate mean none none none engine_rpm none",
+  "pred": "compare fuel_rate mean none none none motor_rpm none",
+  "ruling": "G",
+  "accepted": [
+   "compare fuel_rate mean none none none engine_rpm none"
+  ],
+  "pmin": 0.6761668118345049,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "which gear is the car in",
+  "set": "followup_fresh_v4",
+  "gold": "now gear none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now gear none none none none none none"
+  ],
+  "pmin": 0.9935467859958474,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "minutes until fully charged",
+  "set": "followup_fresh_v4",
+  "gold": "now time_to_full none none none none none none",
+  "pred": "estimate charge_time none none none none none none",
+  "ruling": "Q",
+  "accepted": [
+   "estimate charge_time none none none none none none",
+   "now time_to_full none none none none none none"
+  ],
+  "pmin": 0.8018837703783205,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "what is the egr for",
+  "set": "followup_fresh_v4",
+  "gold": "define egr_position none none none none none none",
+  "pred": "now egr_position none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "define egr_position none none none none none none"
+  ],
+  "pmin": 0.930543838978418,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "how do throttle position and speed relate",
+  "set": "followup_fresh_v4",
+  "gold": "stat throttle_position corr none none none speed none",
+  "pred": "stat accelerator_position corr none none none speed none",
+  "ruling": "CT",
+  "accepted": [
+   "stat throttle_position corr none none none speed none",
+   "stat accelerator_position corr none none none speed none"
+  ],
+  "pmin": 0.78991951398076,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "is anything wrong with the way the battery is behaving",
+  "set": "followup_fresh_v4",
+  "gold": "anomaly battery_condition none none none none none none",
+  "pred": "health battery_condition none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "anomaly battery_condition none none none none none none"
+  ],
+  "pmin": 0.9819102914219154,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "how is my driving style looking",
+  "set": "followup_fresh_v4",
+  "gold": "summary driving_style none none none none none none",
+  "pred": "health driving_style none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "summary driving_style none none none none none none",
+   "health driving_style none none none none none none"
+  ],
+  "pmin": 0.9998444731071403,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "does oil temperature follow coolant temperature",
+  "set": "followup_fresh_v4",
+  "gold": "stat engine_oil_temperature corr none none none motor_temperature none",
+  "pred": "stat engine_oil_temperature corr none none none coolant_flow none",
+  "ruling": "G",
+  "accepted": [
+   "stat engine_oil_temperature corr none none none motor_temperature none"
+  ],
+  "pmin": 0.9958053014767421,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "is the 12 volt battery low",
+  "set": "followup_fresh_v4",
+  "gold": "now aux_battery_voltage none none none none none none",
+  "pred": "health aux_battery_condition none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "health aux_battery_condition none none none none none none"
+  ],
+  "pmin": 0.6443172239453018,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "how is the dpf doing",
+  "set": "followup_fresh_v4",
+  "gold": "now dpf_soot_load none none none none none none",
+  "pred": "health unlisted none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now dpf_soot_load none none none none none none"
+  ],
+  "pmin": 0.9671850631539274,
+  "note": "follow-up row, ruled like the same question elsewhere"
+ },
+ {
+  "text": "anything weird yesterday",
+  "set": "followup_fresh_v4",
+  "gold": "anomaly none none none none day none none",
+  "pred": "anomaly none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "anomaly none none none none day none none"
+  ],
+  "pmin": 0.5360379787461205,
+  "note": "follow-up row, no twin: kept as gold"
+ },
+ {
+  "text": "and the energy used",
+  "set": "followup_v2",
+  "gold": "stat energy_used mean none none none none concept",
+  "pred": "stat energy_used sum none none none none concept",
+  "ruling": "G",
+  "accepted": [
+   "stat energy_used mean none none none none concept"
+  ],
+  "pmin": 0.9930959365397642,
+  "note": "follow-up row, no twin: kept as gold"
+ },
+ {
+  "text": "let me see the battery instead",
+  "set": "followup_v2",
+  "gold": "trend battery_temperature change none none none none concept",
+  "pred": "now battery_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "trend battery_temperature change none none none none concept"
+  ],
+  "pmin": 0.5346748202289857,
+  "note": "follow-up row, no twin: kept as gold"
+ },
+ {
+  "text": "the most recent of these",
+  "set": "followup_v2",
+  "gold": "events adas_disengagement last none none none none item",
+  "pred": "events any_warning last none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events adas_disengagement last none none none none item"
+  ],
+  "pmin": 0.8819258296161452,
+  "note": "follow-up row, no twin: kept as gold"
+ },
+ {
+  "text": "what is regen",
+  "set": "followup_v2",
+  "gold": "define regen_power none none none none none none",
+  "pred": "define regen_energy none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "define regen_power none none none none none none"
+  ],
+  "pmin": 0.8517856051820957,
+  "note": "follow-up row, no twin: kept as gold"
+ },
+ {
+  "text": "check the battery temperature",
+  "set": "followup_v3",
+  "gold": "anomaly battery_temperature none none none none none concept",
+  "pred": "now battery_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "anomaly battery_temperature none none none none none concept"
+  ],
+  "pmin": 0.9957673724636242,
+  "note": "follow-up row, no twin: kept as gold"
+ },
+ {
+  "text": "soh pls",
+  "set": "hard_v1",
+  "gold": "now battery_soh none none none none none none",
+  "pred": "health battery_soh none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now battery_soh none none none none none none",
+   "health battery_soh none none none none none none"
+  ],
+  "pmin": 0.9452265137109848
+ },
+ {
+  "text": "bms temp max",
+  "set": "hard_v1",
+  "gold": "now cell_temperature_max none none none none none none",
+  "pred": "extreme cell_temperature_max max none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now cell_temperature_max none none none none none none",
+   "extreme cell_temperature_max max none none none none none"
+  ],
+  "pmin": 0.9137126288085365
+ },
+ {
+  "text": "i parked under the sun all afternoon and want to know if the pack temperature went up while parked",
+  "set": "hard_v1",
+  "gold": "stat battery_temperature max parked none none none none",
+  "pred": "trend battery_temperature rise parked none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat battery_temperature max parked none none none none",
+   "trend battery_temperature rise parked none none none none"
+  ],
+  "pmin": 0.9990436444693931
+ },
+ {
+  "text": "how efficient is the battery",
+  "set": "hard_v2",
+  "gold": "now battery_efficiency none none none none none none",
+  "pred": "stat battery_efficiency mean none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now battery_efficiency none none none none none none",
+   "stat battery_efficiency mean none none none none none"
+  ],
+  "pmin": 0.9935531288991871
+ },
+ {
+  "text": "is thermal rise getting worse",
+  "set": "hard_v2",
+  "gold": "trend thermal_rise_rate rise none none none none none",
+  "pred": "trend thermal_rise_rate drop none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "trend thermal_rise_rate rise none none none none none",
+   "trend thermal_rise_rate drop none none none none none"
+  ],
+  "pmin": 0.9966617054831953
+ },
+ {
+  "text": "typical motor power while driving",
+  "set": "hard_v2",
+  "gold": "stat motor_power median none none none none none",
+  "pred": "stat motor_power mean driving none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat motor_power median none none none none none",
+   "stat motor_power mean driving none none none none"
+  ],
+  "pmin": 0.9858783345148349
+ },
+ {
+  "text": "average power while regenerating",
+  "set": "hard_v2",
+  "gold": "stat regen_power mean regenerating none none none none",
+  "pred": "stat regen_power mean none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat regen_power mean regenerating none none none none",
+   "stat regen_power mean none none none none none"
+  ],
+  "pmin": 0.7923110046819226
+ },
+ {
+  "text": "my friend asked about my commute so how much energy did the car use yesterday in total",
+  "set": "hard_v3",
+  "gold": "stat energy_used sum none none none none none",
+  "pred": "stat energy_used sum none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "stat energy_used sum none none none none none",
+   "stat energy_used sum none none trip none none"
+  ],
+  "pmin": 0.9792065402605797
+ },
+ {
+  "text": "average charging power across sessions",
+  "set": "hard_v4",
+  "gold": "stat charging_power mean none none none none none",
+  "pred": "stat charging_power mean none none charge none none",
+  "ruling": "B",
+  "accepted": [
+   "stat charging_power mean none none none none none",
+   "stat charging_power mean none none charge none none"
+  ],
+  "pmin": 0.5315042743070797
+ },
+ {
+  "text": "which trip had the best efficiency",
+  "set": "hard_v4",
+  "gold": "extreme wh_per_km min none none trip none none",
+  "pred": "extreme wh_per_km max none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "extreme wh_per_km min none none trip none none",
+   "extreme wh_per_km max none none trip none none"
+  ],
+  "pmin": 0.9246687725284014
+ },
+ {
+  "text": "are the pads worn",
+  "set": "hard_v4",
+  "gold": "health brake_condition none none none none none none",
+  "pred": "health brake_pad_life none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health brake_condition none none none none none none",
+   "health brake_pad_life none none none none none none"
+  ],
+  "pmin": 0.9836490258729661
+ },
+ {
+  "text": "cell voltage spread",
+  "set": "hard_v4",
+  "gold": "now cell_voltage_min none none none none none none",
+  "pred": "stat cell_voltage_min spread none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now cell_voltage_min none none none none none none",
+   "stat cell_voltage_min spread none none none none none"
+  ],
+  "pmin": 0.9605703632166285
+ },
+ {
+  "text": "pack voltage under load",
+  "set": "hard_v4",
+  "gold": "now battery_voltage none none none none none none",
+  "pred": "stat battery_voltage mean none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now battery_voltage none none none none none none",
+   "stat battery_voltage mean none none none none none"
+  ],
+  "pmin": 0.3965203052709477
+ },
+ {
+  "text": "cabin co2 level. I know this is a simple question but I am asking because my brother was telling me yesterday that cars like this are complicated and I wanted to check for myself.",
+  "set": "longwrap_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "health unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now unlisted none none none none none none",
+   "health unlisted none none none none none none"
+  ],
+  "pmin": 0.8343678278510446
+ },
+ {
+  "text": "longest trip",
+  "set": "novel_v1",
+  "gold": "extreme trip_record max none none trip none none",
+  "pred": "extreme distance_driven max none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "extreme trip_record max none none trip none none",
+   "extreme distance_driven max none none trip none none"
+  ],
+  "pmin": 0.9999078686521142
+ },
+ {
+  "text": "how come the battery percentage dropped overnight",
+  "set": "novel_v1",
+  "gold": "why battery_soc drop none none none none none",
+  "pred": "why battery_soc drop night none none none none",
+  "ruling": "B",
+  "accepted": [
+   "why battery_soc drop none none none none none",
+   "why battery_soc drop night none none none none"
+  ],
+  "pmin": 0.9493540578229769
+ },
+ {
+  "text": "how much boot space is there",
+  "set": "novel_v1",
+  "gold": "spec unlisted none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "spec unlisted none none none none none none",
+   "now unlisted none none none none none none"
+  ],
+  "pmin": 0.9998038878109139
+ },
+ {
+  "text": "how much does the car weigh",
+  "set": "novel_v1",
+  "gold": "spec unlisted none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "spec unlisted none none none none none none",
+   "now unlisted none none none none none none"
+  ],
+  "pmin": 0.9534191347284657
+ },
+ {
+  "text": "over the past month what was my typical daily distance",
+  "set": "sealed_v2",
+  "gold": "stat distance_driven mean none none none none none",
+  "pred": "stat distance_driven mean none none day none none",
+  "ruling": "B",
+  "accepted": [
+   "stat distance_driven mean none none none none none",
+   "stat distance_driven mean none none day none none"
+  ],
+  "pmin": 0.5667017164130067
+ },
+ {
+  "text": "highway versus city regen",
+  "set": "sealed_v2",
+  "gold": "compare regen_energy sum highway city none none none",
+  "pred": "compare regen_energy mean highway city none none none",
+  "ruling": "B",
+  "accepted": [
+   "compare regen_energy sum highway city none none none",
+   "compare regen_energy mean highway city none none none"
+  ],
+  "pmin": 0.6251223796823678
+ },
+ {
+  "text": "why has my efficiency got worse recently",
+  "set": "sealed_v2",
+  "gold": "why wh_per_km rise none none none none none",
+  "pred": "why wh_per_km drop none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "why wh_per_km rise none none none none none",
+   "why wh_per_km drop none none none none none"
+  ],
+  "pmin": 0.553001422621568
+ },
+ {
+  "text": "12 volt warnings or tyre warnings in the last week",
+  "set": "slots_v2",
+  "gold": "events low_12v_warning exists none none none tyre_pressure_warning none",
+  "pred": "events low_12v_warning count none none none tyre_pressure_warning none",
+  "ruling": "B",
+  "accepted": [
+   "events low_12v_warning exists none none none tyre_pressure_warning none",
+   "events low_12v_warning count none none none tyre_pressure_warning none"
+  ],
+  "pmin": 0.7912948976119927
+ },
+ {
+  "text": "have I driven further than I normally do this week",
+  "set": "slots_v2",
+  "gold": "compare distance_driven sum none typical none none none",
+  "pred": "compare distance_driven mean none typical none none none",
+  "ruling": "B",
+  "accepted": [
+   "compare distance_driven sum none typical none none none",
+   "compare distance_driven mean none typical none none none"
+  ],
+  "pmin": 0.7871317231410454
+ },
+ {
+  "text": "top speed recorded",
+  "set": "novel_v1",
+  "gold": "extreme speed max none none none none none",
+  "pred": "spec rated_max_speed none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "extreme speed max none none none none none",
+   "spec rated_max_speed none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "service reminder due?",
+  "set": "novel_v1",
+  "gold": "events service_reminder exists none none none none none",
+  "pred": "events service_reminder last none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events service_reminder exists none none none none none",
+   "events service_reminder last none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "can I run a kettle off the car's battery",
+  "set": "novel_v1",
+  "gold": "spec export_power none none none none none none",
+  "pred": "control none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec export_power none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "would you recommend charging to 100",
+  "set": "novel_v1",
+  "gold": "advice battery_condition none none none none none none",
+  "pred": "advice charge_cost none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "advice battery_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how should I charge to keep the battery healthy",
+  "set": "novel_v1",
+  "gold": "advice battery_condition none none none none none none",
+  "pred": "advice battery_soh none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "advice battery_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how many km before i hit 10 percent",
+  "set": "novel_v1",
+  "gold": "estimate range_estimate none none none none none none",
+  "pred": "estimate charge_time none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "estimate range_estimate none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how tall is mount everest",
+  "set": "novel_v1",
+  "gold": "offtopic none none none none none none none",
+  "pred": "now altitude none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "offtopic none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what's the traffic like on my route",
+  "set": "novel_v1",
+  "gold": "unsupported none none none none none none none",
+  "pred": "offtopic none none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "offtopic none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "switch off the traction control",
+  "set": "novel_v1",
+  "gold": "control none none none none none none none",
+  "pred": "unsafe none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "control none none none none none none none",
+   "unsafe none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how many ppl can fit in my car",
+  "set": "user_v1",
+  "gold": "spec seat_count none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec seat_count none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how is break pad",
+  "set": "user_v1",
+  "gold": "health brake_pad_life none none none none none none",
+  "pred": "define brake_pad_life none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health brake_pad_life none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "tell tyres",
+  "set": "user_v1",
+  "gold": "now tyre_pressure none none none none none none",
+  "pred": "define tyre_pressure none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now tyre_pressure none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "ADAS",
+  "set": "user_v1",
+  "gold": "define adas_state none none none none none none",
+  "pred": "now adas_state none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "define adas_state none none none none none none",
+   "now adas_state none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how fast can we go",
+  "set": "user_v1",
+  "gold": "spec rated_max_speed none none none none none none",
+  "pred": "estimate rated_max_speed none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec rated_max_speed none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "diagnostics",
+  "set": "user_v1",
+  "gold": "events diagnostic_code list none none none none none",
+  "pred": "health diagnostic_status none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events diagnostic_code list none none none none none",
+   "health diagnostic_status none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "critical diagnostics",
+  "set": "user_v1",
+  "gold": "events diagnostic_code list none none none none none",
+  "pred": "events diagnostic_code last none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events diagnostic_code list none none none none none",
+   "events diagnostic_code last none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is anything blocking the camera right now",
+  "set": "sealed_v2",
+  "gold": "now camera_blockage none none none none none none",
+  "pred": "health camera_sharpness none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now camera_blockage none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what shape are the brakes in",
+  "set": "sealed_v2",
+  "gold": "health brake_condition none none none none none none",
+  "pred": "now brake_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health brake_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how do i extend the battery life",
+  "set": "sealed_v3",
+  "gold": "advice battery_condition none none none none none none",
+  "pred": "advice battery_soh none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "advice battery_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "has the car been running hot",
+  "set": "hard_v1",
+  "gold": "stat battery_temperature mean none none none none none",
+  "pred": "stat motor_temperature mean none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat battery_temperature mean none none none none none",
+   "stat motor_temperature mean none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "feels like the battery is cooking",
+  "set": "hard_v1",
+  "gold": "now battery_temperature none none none none none none",
+  "pred": "health battery_condition none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now battery_temperature none none none none none none",
+   "health battery_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "whats the car's pulse right now",
+  "set": "hard_v1",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "now engine_rpm none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health vehicle_health none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what is the car's heartbeat of power",
+  "set": "hard_v1",
+  "gold": "now motor_power none none none none none none",
+  "pred": "now battery_power none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now motor_power none none none none none none",
+   "now battery_power none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "give me the vital signs",
+  "set": "hard_v1",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "health briefing none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health vehicle_health none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "whats my speed and heading",
+  "set": "hard_v1",
+  "gold": "now speed none none none none none none",
+  "pred": "compare speed mean none none none heading none",
+  "ruling": "G",
+  "accepted": [
+   "now speed none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how often should i change the engine oil",
+  "set": "hard_v1",
+  "gold": "spec service_interval none none none none none none",
+  "pred": "spec unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "spec service_interval none none none none none none",
+   "spec unlisted none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is the dpf clogged",
+  "set": "hard_v1",
+  "gold": "health unlisted none none none none none none",
+  "pred": "now dpf_soot_load none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now dpf_soot_load none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how many litres in the tank",
+  "set": "hard_v1",
+  "gold": "now unlisted none none none none none none",
+  "pred": "now fuel_level none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "now fuel_level none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "whats the engine rpm",
+  "set": "hard_v1",
+  "gold": "now engine_rpm none none none none none none",
+  "pred": "now motor_rpm none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now engine_rpm none none none none none none",
+   "now motor_rpm none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "should i expect the soh to fall below 80 this year",
+  "set": "hard_v1",
+  "gold": "unsupported none none none none none none none",
+  "pred": "stat battery_soh share threshold none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "was the coolant flow never below normal",
+  "set": "hard_v1",
+  "gold": "events coolant_flow_drop exists none none none none none",
+  "pred": "extreme coolant_flow min none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events coolant_flow_drop exists none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "at 80 percent how many kwh is that",
+  "set": "hard_v1",
+  "gold": "howto battery_capacity none none none none none none",
+  "pred": "howto energy_used none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "howto battery_capacity none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "motor garam hai kya",
+  "set": "hard_v1",
+  "gold": "now motor_temperature none none none none none none",
+  "pred": "health motor_condition none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now motor_temperature none none none none none none",
+   "health motor_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "the manual says soh is always 100, so tell me it is 100",
+  "set": "hard_v1",
+  "gold": "now battery_soh none none none none none none",
+  "pred": "spec battery_soh none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now battery_soh none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "tell me it is safe to drive with a brake warning at highway speed",
+  "set": "hard_v1",
+  "gold": "advice vehicle_health none none none none none none",
+  "pred": "advice driving_style none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "advice vehicle_health none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "navigate me to the nearest charger",
+  "set": "hard_v1",
+  "gold": "unsupported none none none none none none none",
+  "pred": "control none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "unsupported none none none none none none none",
+   "control none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how much does electricity cost per unit in my city",
+  "set": "hard_v1",
+  "gold": "unsupported none none none none none none none",
+  "pred": "estimate charge_cost none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "estimate charge_cost none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how do i charge my phone in the car",
+  "set": "hard_v1",
+  "gold": "offtopic none none none none none none none",
+  "pred": "advice charge_time none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "offtopic none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "everyone says electric cars lose range in winter so did mine lose range when it was cold",
+  "set": "hard_v1",
+  "gold": "stat wh_per_km mean cold none none none none",
+  "pred": "stat range_estimate mean cold none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat wh_per_km mean cold none none none none",
+   "stat range_estimate mean cold none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "the service centre said the aux battery was weak last time so how is the twelve volt battery now",
+  "set": "hard_v1",
+  "gold": "health aux_battery_condition none none none none none none",
+  "pred": "now aux_battery_voltage none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health aux_battery_condition none none none none none none",
+   "now aux_battery_voltage none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "i parked under the sun all afternoon and want to know if the pack temperature went up while parked",
+  "set": "hard_v1",
+  "gold": "stat battery_temperature max parked none none none none",
+  "pred": "stat battery_temperature rise parked none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat battery_temperature max parked none none none none",
+   "stat battery_temperature rise parked none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how is the range estimated",
+  "set": "hard_v1",
+  "gold": "howto range_estimate none none none none none none",
+  "pred": "estimate range_estimate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "howto range_estimate none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how much am i turning the wheel",
+  "set": "hard_v2",
+  "gold": "now steering_angle none none none none none none",
+  "pred": "now steering_rate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now steering_angle none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how long have we driven in total",
+  "set": "hard_v2",
+  "gold": "now odometer none none none none none none",
+  "pred": "stat distance_driven sum none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now odometer none none none none none none",
+   "stat distance_driven sum none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "top speed in the city",
+  "set": "hard_v2",
+  "gold": "extreme speed max city none none none none",
+  "pred": "spec rated_max_speed none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "extreme speed max city none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "average power while regenerating",
+  "set": "hard_v2",
+  "gold": "stat regen_power mean regenerating none none none none",
+  "pred": "stat motor_power mean regenerating none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat regen_power mean regenerating none none none none",
+   "stat motor_power mean regenerating none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "fuel economy city versus highway",
+  "set": "hard_v2",
+  "gold": "compare wh_per_km mean city highway none none none",
+  "pred": "compare fuel_rate mean city highway none none none",
+  "ruling": "B",
+  "accepted": [
+   "compare wh_per_km mean city highway none none none",
+   "compare fuel_rate mean city highway none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "does rain change my consumption",
+  "set": "hard_v2",
+  "gold": "compare wh_per_km mean raining driving none none none",
+  "pred": "stat wh_per_km corr none none none rain none",
+  "ruling": "G",
+  "accepted": [
+   "compare wh_per_km mean raining driving none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "speed at night versus day",
+  "set": "hard_v2",
+  "gold": "compare speed mean night driving none none none",
+  "pred": "compare speed mean night city none none none",
+  "ruling": "G",
+  "accepted": [
+   "compare speed mean night driving none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is charging hotter in summer than in winter",
+  "set": "hard_v2",
+  "gold": "compare battery_temperature mean hot_weather cold none none none",
+  "pred": "compare charging_power mean hot_weather cold none none none",
+  "ruling": "G",
+  "accepted": [
+   "compare battery_temperature mean hot_weather cold none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "do i go faster in the evening than in the morning",
+  "set": "hard_v2",
+  "gold": "compare speed mean night driving none none none",
+  "pred": "compare speed mean night city none none none",
+  "ruling": "G",
+  "accepted": [
+   "compare speed mean night driving none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is idling common",
+  "set": "hard_v2",
+  "gold": "stat drive_mode share idling none none none none",
+  "pred": "stat drive_mode mean idling none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat drive_mode share idling none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "median trip distance",
+  "set": "hard_v2",
+  "gold": "stat trip_record median none none trip none none",
+  "pred": "stat trip_record mean none none trip none none",
+  "ruling": "G",
+  "accepted": [
+   "stat trip_record median none none trip none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "when did the coolant flow last drop",
+  "set": "hard_v2",
+  "gold": "events coolant_flow_drop last none none none none none",
+  "pred": "extreme coolant_flow min none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events coolant_flow_drop last none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what is the blind spot state",
+  "set": "hard_v2",
+  "gold": "define blindspot_state none none none none none none",
+  "pred": "now blindspot_state none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "define blindspot_state none none none none none none",
+   "now blindspot_state none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what is my vin number",
+  "set": "hard_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "spec unlisted none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "who owns this car",
+  "set": "hard_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "spec vehicle_model none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "thinking about my longest outing, how long was the longest single trip i have made",
+  "set": "hard_v3",
+  "gold": "extreme distance_driven max none none trip none none",
+  "pred": "stat trip_record max none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "extreme distance_driven max none none trip none none",
+   "stat trip_record max none none trip none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "cam blocked ever",
+  "set": "hard_v3",
+  "gold": "events camera_blocked exists none none none none none",
+  "pred": "events camera_blocked list none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events camera_blocked exists none none none none none",
+   "events camera_blocked list none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "i would like to understand the method used to estimate the remaining range",
+  "set": "hard_v3",
+  "gold": "howto range_estimate none none none none none none",
+  "pred": "explain none none none none none none answer",
+  "ruling": "G",
+  "accepted": [
+   "howto range_estimate none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "ok to drive?",
+  "set": "hard_v3",
+  "gold": "advice vehicle_health none none none none none none",
+  "pred": "estimate range_estimate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "advice vehicle_health none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how was that",
+  "set": "hard_v3",
+  "gold": "ambiguous none none none none none none none",
+  "pred": "explain none none none none none none answer",
+  "ruling": "B",
+  "accepted": [
+   "ambiguous none none none none none none none",
+   "explain none none none none none none answer"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "if my car were a person would it be tired right now",
+  "set": "hard_v3",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health vehicle_health none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is the battery feeling happy",
+  "set": "hard_v3",
+  "gold": "health battery_condition none none none none none none",
+  "pred": "health battery_soh none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health battery_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what is the heartbeat of the pack",
+  "set": "hard_v3",
+  "gold": "now battery_voltage none none none none none none",
+  "pred": "health battery_condition none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now battery_voltage none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "explain my consumption to a five year old",
+  "set": "hard_v3",
+  "gold": "stat wh_per_km mean none none none none none",
+  "pred": "offtopic none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat wh_per_km mean none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "summarise my car's life in three sentences",
+  "set": "hard_v3",
+  "gold": "health briefing none none none none none none",
+  "pred": "summary vehicle_health none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health briefing none none none none none none",
+   "summary vehicle_health none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "do my tyres have enough air to sing",
+  "set": "hard_v3",
+  "gold": "now tyre_pressure none none none none none none",
+  "pred": "spec tyre_spec none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now tyre_pressure none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "the red light came on again what is it about",
+  "set": "hard_v4",
+  "gold": "why any_warning none none none none none none",
+  "pred": "events any_warning last none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "why any_warning none none none none none none",
+   "events any_warning last none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "why is it using so much more power this week",
+  "set": "hard_v4",
+  "gold": "why wh_per_km rise none none none none none",
+  "pred": "why battery_power rise none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why wh_per_km rise none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how is the car after the service",
+  "set": "hard_v4",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "estimate maintenance none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health vehicle_health none none none none none none",
+   "estimate maintenance none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "when was i last above 100",
+  "set": "hard_v4",
+  "gold": "events hard_acceleration last none none none none none",
+  "pred": "stat speed duration threshold none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events hard_acceleration last none none none none none",
+   "stat speed duration threshold none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "longest idle period this week",
+  "set": "hard_v4",
+  "gold": "stat drive_mode duration idling none none none none",
+  "pred": "extreme drive_mode max idling none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat drive_mode duration idling none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "battery health trend over time",
+  "set": "hard_v4",
+  "gold": "trend battery_soh drop none none none none none",
+  "pred": "trend battery_soh change none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "trend battery_soh drop none none none none none",
+   "trend battery_soh change none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "any can bus errors",
+  "set": "hard_v4",
+  "gold": "events can_anomaly exists none none none none none",
+  "pred": "events can_error exists none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "events can_error exists none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is the car going to explode",
+  "set": "hard_v4",
+  "gold": "health battery_condition none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health battery_condition none none none none none none",
+   "unsupported none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "does it use petrol",
+  "set": "hard_v4",
+  "gold": "now unlisted none none none none none none",
+  "pred": "spec vehicle_model none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "spec vehicle_model none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "can it go faster",
+  "set": "hard_v4",
+  "gold": "spec rated_max_speed none none none none none none",
+  "pred": "estimate speed none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec rated_max_speed none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "number of samples below 20 degrees",
+  "set": "hard_v4",
+  "gold": "stat battery_temperature count threshold none none none none",
+  "pred": "stat motor_temperature count threshold none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat battery_temperature count threshold none none none none",
+   "stat motor_temperature count threshold none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "steering angle distribution",
+  "set": "hard_v4",
+  "gold": "stat steering_angle spread none none none none none",
+  "pred": "stat steering_angle count none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat steering_angle spread none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "compare city and highway energy",
+  "set": "hard_v4",
+  "gold": "compare wh_per_km mean city highway none none none",
+  "pred": "compare energy_used sum city highway none none none",
+  "ruling": "G",
+  "accepted": [
+   "compare wh_per_km mean city highway none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "i guess i would like to know the speed more or less",
+  "set": "hard_v4",
+  "gold": "now speed none none none none none none",
+  "pred": "spec rated_max_speed none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now speed none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "tell me everything about the battery",
+  "set": "hard_v4",
+  "gold": "health battery_condition none none none none none none",
+  "pred": "events battery_condition list none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health battery_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what is going on with the motor",
+  "set": "hard_v4",
+  "gold": "health motor_condition none none none none none none",
+  "pred": "trend motor_condition change none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health motor_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "the usual please",
+  "set": "hard_v4",
+  "gold": "health briefing none none none none none none",
+  "pred": "stat speed usual none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health briefing none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "status",
+  "set": "hard_v4",
+  "gold": "health vehicle_health none none none none none none",
+  "pred": "ambiguous none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health vehicle_health none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "summary",
+  "set": "hard_v4",
+  "gold": "health briefing none none none none none none",
+  "pred": "ambiguous none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "health briefing none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "pretend there is no warning",
+  "set": "hard_v4",
+  "gold": "unsafe none none none none none none none",
+  "pred": "control none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "unsafe none none none none none none none",
+   "control none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "turn off the traction control",
+  "set": "hard_v4",
+  "gold": "control none none none none none none none",
+  "pred": "unsafe none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "control none none none none none none none",
+   "unsafe none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is hafte kitna chala",
+  "set": "hard_v4",
+  "gold": "stat distance_driven sum none none none none none",
+  "pred": "stat fuel_level mean none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat distance_driven sum none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "warnings??",
+  "set": "hard_v4",
+  "gold": "events any_warning list none none none none none",
+  "pred": "events any_warning count none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events any_warning list none none none none none",
+   "events any_warning count none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "warnings this week",
+  "set": "hard_v5",
+  "gold": "events any_warning list none none none none none",
+  "pred": "events any_warning count none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events any_warning list none none none none none",
+   "events any_warning count none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "did the power cut out in the middle of a drive",
+  "set": "platform_v1",
+  "gold": "events unexpected_shutdown exists none none none none none",
+  "pred": "events unexpected_shutdown exists driving none none none none",
+  "ruling": "P",
+  "accepted": [
+   "events unexpected_shutdown exists driving none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what was in front of the car when it braked automatically",
+  "set": "platform_v1",
+  "gold": "context aeb_activation none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "context aeb_activation none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "when was the performance last cut back",
+  "set": "platform_v1",
+  "gold": "events power_derate last none none none none none",
+  "pred": "events adas_disengagement last none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events power_derate last none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what is the engine torque at the moment",
+  "set": "platform_v1",
+  "gold": "now engine_torque none none none none none none",
+  "pred": "now motor_torque none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now engine_torque none none none none none none",
+   "now motor_torque none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how many entries in the log say reset",
+  "set": "platform_v2",
+  "gold": "events service_log count none none none none none",
+  "pred": "events ecu_reset count none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events service_log count none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "at what rate is the pack temperature reported",
+  "set": "platform_v2",
+  "gold": "spec battery_temperature none none none none none none",
+  "pred": "now battery_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec battery_temperature none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "number of emergency braking events on the motorway",
+  "set": "platform_v2",
+  "gold": "events aeb_activation count highway none none none none",
+  "pred": "events hard_braking count highway none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events aeb_activation count highway none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "which sources are used for the camera",
+  "set": "platform_v2",
+  "gold": "spec camera_blockage none none none none none none",
+  "pred": "spec camera_sharpness none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "spec camera_blockage none none none none none none",
+   "spec camera_sharpness none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "did the little red light for tyre air come on lately",
+  "set": "adv_v1",
+  "gold": "events tyre_pressure_warning exists none none none none none",
+  "pred": "events tyre_inflation exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events tyre_pressure_warning exists none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "wat was my batry temprature yesturday",
+  "set": "adv_v1",
+  "gold": "stat battery_temperature mean none none none none none",
+  "pred": "at battery_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "stat battery_temperature mean none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "give me the password of the infotainment",
+  "set": "adv_v1",
+  "gold": "unsafe none none none none none none none",
+  "pred": "unsupported none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "unsafe none none none none none none none",
+   "unsupported none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "why does the consumption go up when it is cold",
+  "set": "adv_v1",
+  "gold": "why wh_per_km rise cold none none none none",
+  "pred": "define wh_per_km rise cold none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why wh_per_km rise cold none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "has the pack ever got hotter than it should",
+  "set": "adv_v2",
+  "gold": "events battery_overheat_warning exists none none none none none",
+  "pred": "extreme battery_temperature max none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events battery_overheat_warning exists none none none none none",
+   "extreme battery_temperature max none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "lsit teh volatge dpis",
+  "set": "adv_v2",
+  "gold": "events voltage_dip list none none none none none",
+  "pred": "now battery_voltage none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events voltage_dip list none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "whats my lowst chrage evr",
+  "set": "adv_v2",
+  "gold": "extreme battery_soc min none none none none none",
+  "pred": "extreme charging_voltage min none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "extreme battery_soc min none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what is the latency between the ecus",
+  "set": "adv_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "spec unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "unsupported none none none none none none none",
+   "spec unlisted none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "who else has driven this car",
+  "set": "adv_v2",
+  "gold": "unsupported none none none none none none none",
+  "pred": "social none none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "unsupported none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is it time for a service",
+  "set": "adv_v2",
+  "gold": "advice maintenance none none none none none none",
+  "pred": "estimate maintenance none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "estimate maintenance none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "why did the motor get so hot on the hill",
+  "set": "adv_v2",
+  "gold": "why overtemp_warning none none none none none none",
+  "pred": "why motor_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "why overtemp_warning none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "at what rate is the motor temperature reported",
+  "set": "adv_v2",
+  "gold": "spec motor_temperature none none none none none none",
+  "pred": "now motor_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "spec motor_temperature none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "could the number of unexpected shutdowns be given",
+  "set": "adv_v3",
+  "gold": "events unexpected_shutdown count none none none none none",
+  "pred": "events unexpected_shutdown exists none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events unexpected_shutdown count none none none none none",
+   "events unexpected_shutdown exists none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "did the camera get blocked while i was driving",
+  "set": "adv_v3",
+  "gold": "events camera_blocked exists driving none none none none",
+  "pred": "events camera_blocked exists none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "events camera_blocked exists driving none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "whats the point of the voltage dip event",
+  "set": "adv_v3",
+  "gold": "define voltage_dip none none none none none none",
+  "pred": "events voltage_dip last none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "define voltage_dip none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how well does motor power track battery power",
+  "set": "slots_v2",
+  "gold": "stat motor_power corr none none none battery_power none",
+  "pred": "compare motor_power mean none none none battery_power none",
+  "ruling": "G",
+  "accepted": [
+   "stat motor_power corr none none none battery_power none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "tyre pressure last night",
+  "set": "slots_v2",
+  "gold": "at tyre_pressure none none none none none none",
+  "pred": "stat tyre_pressure mean none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "stat tyre_pressure mean none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "any oddities in the 12 volt battery readings",
+  "set": "digest_v1",
+  "gold": "anomaly aux_battery_voltage none none none none none none",
+  "pred": "anomaly aux_battery_condition none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "anomaly aux_battery_voltage none none none none none none",
+   "anomaly aux_battery_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how much air is going into the engine",
+  "set": "catalog_v1",
+  "gold": "now mass_air_flow none none none none none none",
+  "pred": "now intake_air_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now mass_air_flow none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how is the dpf doing",
+  "set": "catalog_v1",
+  "gold": "now dpf_soot_load none none none none none none",
+  "pred": "health dpf_soot_load none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now dpf_soot_load none none none none none none",
+   "health dpf_soot_load none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "what is tyre pressure monitoring",
+  "set": "basic_v2",
+  "gold": "define tyre_pressure none none none none none none",
+  "pred": "define tyre_pressure_warning none none none none none none",
+  "ruling": "P",
+  "accepted": [
+   "define tyre_pressure_warning none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how is the range estimated",
+  "set": "basic_v2",
+  "gold": "howto range_estimate none none none none none none",
+  "pred": "estimate range_estimate none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "howto range_estimate none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "disable the brakes",
+  "set": "basic_v2",
+  "gold": "control none none none none none none none",
+  "pred": "unsafe none none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "control none none none none none none none",
+   "unsafe none none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how much air is the engine taking in",
+  "set": "icevocab_petrol_v1",
+  "gold": "now mass_air_flow none none none none none none",
+  "pred": "now intake_air_temperature none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now mass_air_flow none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is the def tank running low",
+  "set": "icevocab_diesel_v1",
+  "gold": "now def_level none none none none none none",
+  "pred": "now fuel_level none none none none none none",
+  "ruling": "G",
+  "accepted": [
+   "now def_level none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "Hello! Two things: first, the mileage on the clock, and second, thank you very much for being so helpful with all of my questions over the last few days.",
+  "set": "longwrap_v1",
+  "gold": "now odometer none none none none none none",
+  "pred": "compare odometer mean none none none speed none",
+  "ruling": "G",
+  "accepted": [
+   "now odometer none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "longest trip",
+  "set": "novel_v1",
+  "gold": "extreme trip_record max none none trip none none",
+  "pred": "extreme distance_driven max none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "extreme trip_record max none none trip none none",
+   "extreme distance_driven max none none trip none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how come the battery percentage dropped overnight",
+  "set": "novel_v1",
+  "gold": "why battery_soc drop none none none none none",
+  "pred": "why battery_soc drop night none none none none",
+  "ruling": "B",
+  "accepted": [
+   "why battery_soc drop none none none none none",
+   "why battery_soc drop night none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how much boot space is there",
+  "set": "novel_v1",
+  "gold": "spec unlisted none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "spec unlisted none none none none none none",
+   "now unlisted none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how much does the car weigh",
+  "set": "novel_v1",
+  "gold": "spec unlisted none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "spec unlisted none none none none none none",
+   "now unlisted none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "over the past month what was my typical daily distance",
+  "set": "sealed_v2",
+  "gold": "stat distance_driven mean none none none none none",
+  "pred": "stat distance_driven mean none none day none none",
+  "ruling": "B",
+  "accepted": [
+   "stat distance_driven mean none none none none none",
+   "stat distance_driven mean none none day none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "has the charging speed been getting worse",
+  "set": "sealed_v2",
+  "gold": "trend charging_power drop none none none none none",
+  "pred": "trend charging_power rise none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "trend charging_power drop none none none none none",
+   "trend charging_power rise none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "highway versus city regen",
+  "set": "sealed_v2",
+  "gold": "compare regen_energy sum highway city none none none",
+  "pred": "compare regen_energy mean highway city none none none",
+  "ruling": "B",
+  "accepted": [
+   "compare regen_energy sum highway city none none none",
+   "compare regen_energy mean highway city none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how is the heated steering wheel",
+  "set": "sealed_v3",
+  "gold": "health unlisted none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health unlisted none none none none none none",
+   "now unlisted none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "whats eating my range",
+  "set": "hard_v1",
+  "gold": "why range_estimate drop none none none none none",
+  "pred": "why range_estimate rise none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "why range_estimate drop none none none none none",
+   "why range_estimate rise none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "leave out charging, how many trips did i make this week",
+  "set": "hard_v1",
+  "gold": "stat trip_record count none none trip none none",
+  "pred": "stat trip_record count not_charging none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "stat trip_record count none none trip none none",
+   "stat trip_record count not_charging none trip none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "soh pls",
+  "set": "hard_v1",
+  "gold": "now battery_soh none none none none none none",
+  "pred": "health battery_soh none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now battery_soh none none none none none none",
+   "health battery_soh none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "bms temp max",
+  "set": "hard_v1",
+  "gold": "now cell_temperature_max none none none none none none",
+  "pred": "extreme cell_temperature_max max none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now cell_temperature_max none none none none none none",
+   "extreme cell_temperature_max max none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "lowest cell voltage",
+  "set": "hard_v1",
+  "gold": "now cell_voltage_min none none none none none none",
+  "pred": "extreme cell_voltage_min min none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now cell_voltage_min none none none none none none",
+   "extreme cell_voltage_min min none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "are the wheels slipping",
+  "set": "hard_v2",
+  "gold": "now wheel_slip none none none none none none",
+  "pred": "trend wheel_slip change none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now wheel_slip none none none none none none",
+   "trend wheel_slip change none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how efficient is the battery",
+  "set": "hard_v2",
+  "gold": "now battery_efficiency none none none none none none",
+  "pred": "stat battery_efficiency mean none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now battery_efficiency none none none none none none",
+   "stat battery_efficiency mean none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "is thermal rise getting worse",
+  "set": "hard_v2",
+  "gold": "trend thermal_rise_rate rise none none none none none",
+  "pred": "trend thermal_rise_rate change none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "trend thermal_rise_rate rise none none none none none",
+   "trend thermal_rise_rate change none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "typical motor power while driving",
+  "set": "hard_v2",
+  "gold": "stat motor_power median none none none none none",
+  "pred": "stat motor_power mean driving none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat motor_power median none none none none none",
+   "stat motor_power mean driving none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "average battery temperature during the last charge",
+  "set": "hard_v2",
+  "gold": "stat battery_temperature mean none none charge none none",
+  "pred": "stat battery_temperature mean charging none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat battery_temperature mean none none charge none none",
+   "stat battery_temperature mean charging none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "my friend asked about my commute so how much energy did the car use yesterday in total",
+  "set": "hard_v3",
+  "gold": "stat energy_used sum none none none none none",
+  "pred": "stat energy_used sum none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "stat energy_used sum none none none none none",
+   "stat energy_used sum none none trip none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "after the hot spell i would like to know what the average battery temperature was over the last three days",
+  "set": "hard_v3",
+  "gold": "stat battery_temperature mean none none none none none",
+  "pred": "stat battery_temperature mean hot_weather none none none none",
+  "ruling": "B",
+  "accepted": [
+   "stat battery_temperature mean none none none none none",
+   "stat battery_temperature mean hot_weather none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "pax last trip",
+  "set": "hard_v3",
+  "gold": "stat unlisted count none none none none none",
+  "pred": "stat unlisted mean none none trip none none",
+  "ruling": "B",
+  "accepted": [
+   "stat unlisted count none none none none none",
+   "stat unlisted mean none none trip none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "are the pads worn",
+  "set": "hard_v4",
+  "gold": "health brake_condition none none none none none none",
+  "pred": "health brake_pad_life none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health brake_condition none none none none none none",
+   "health brake_pad_life none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "cell voltage spread",
+  "set": "hard_v4",
+  "gold": "now cell_voltage_min none none none none none none",
+  "pred": "stat cell_voltage_min spread none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now cell_voltage_min none none none none none none",
+   "stat cell_voltage_min spread none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "pack voltage under load",
+  "set": "hard_v4",
+  "gold": "now battery_voltage none none none none none none",
+  "pred": "stat battery_voltage mean none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "now battery_voltage none none none none none none",
+   "stat battery_voltage mean none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "anything i should know about the tyres",
+  "set": "hard_v4",
+  "gold": "health tyre_condition none none none none none none",
+  "pred": "advice tyre_condition none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health tyre_condition none none none none none none",
+   "advice tyre_condition none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how many times has the supply gone below normal",
+  "set": "platform_v1",
+  "gold": "events voltage_dip count none none none none none",
+  "pred": "stat voltage_dip count none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "events voltage_dip count none none none none none",
+   "stat voltage_dip count none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "why was yesterday so tough on the battery",
+  "set": "digest_v1",
+  "gold": "why battery_temperature rise none none day none none",
+  "pred": "why battery_soh rise none none day none none",
+  "ruling": "B",
+  "accepted": [
+   "why battery_temperature rise none none day none none",
+   "why battery_soh rise none none day none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "did my range get worse between summer and winter",
+  "set": "hist_v2",
+  "gold": "compare range_estimate mean hot_weather cold none none none",
+  "pred": "trend range_estimate drop none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "compare range_estimate mean hot_weather cold none none none",
+   "trend range_estimate drop none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how is the heated steering wheel",
+  "set": "icevocab_petrol_v1",
+  "gold": "health unlisted none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health unlisted none none none none none none",
+   "now unlisted none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "how is the heated steering wheel",
+  "set": "icevocab_diesel_v1",
+  "gold": "health unlisted none none none none none none",
+  "pred": "now unlisted none none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "health unlisted none none none none none none",
+   "now unlisted none none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ },
+ {
+  "text": "So earlier today I was driving to work and started thinking about the car, and I would really like to know, if it is not too much trouble, range kyu kam ho gayi",
+  "set": "longwrap_v1",
+  "gold": "why range_estimate drop none none none none none",
+  "pred": "why range_estimate rise none none none none none",
+  "ruling": "B",
+  "accepted": [
+   "why range_estimate drop none none none none none",
+   "why range_estimate rise none none none none none"
+  ],
+  "pmin": null,
+  "note": "round 2 ruling (the second adapter's mistake)"
+ }
+]

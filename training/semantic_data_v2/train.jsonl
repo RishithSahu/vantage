@@ -1,0 +1,267 @@
+{"text": "Give me the live electrical charging rate", "frame": "data now chargepower none"}
+{"text": "Explain the meaning of adaptive cruise", "frame": "define other driving adas"}
+{"text": "Report the current coolant flow", "frame": "data now coolant none"}
+{"text": "Return the greatest recorded charger power", "frame": "data maximum chargepower none"}
+{"text": "Report the current road velocity", "frame": "data now speed none"}
+{"text": "Calculate the mean state of charge for last week", "frame": "data average charge none"}
+{"text": "Summarise the typical pack temperature yesterday", "frame": "data average battery none"}
+{"text": "Find the lowest battery heat this month", "frame": "data minimum battery none"}
+{"text": "Which replacement tyres should the owner choose?", "frame": "advice other tyre none"}
+{"text": "Return the smallest recorded road velocity", "frame": "data minimum speed none"}
+{"text": "Find the peak energy consumption this month", "frame": "data maximum energy none"}
+{"text": "Find the lowest energy consumption this month", "frame": "data minimum energy none"}
+{"text": "Find the peak cooling circuit flow this month", "frame": "data maximum coolant none"}
+{"text": "Report the current electric drive unit", "frame": "data now motor none"}
+{"text": "Contrast city and highway operation", "frame": "data compare none none"}
+{"text": "Find the lowest traction motor temperature this month", "frame": "data minimum motor none"}
+{"text": "List the diagnostic trouble codes", "frame": "data events none fault"}
+{"text": "Give me the live EV engine", "frame": "data now motor none"}
+{"text": "Find the lowest EV engine this month", "frame": "data minimum motor none"}
+{"text": "Describe the trend in battery level", "frame": "data trend charge none"}
+{"text": "Return the smallest recorded traction motor temperature", "frame": "data minimum motor none"}
+{"text": "Find the peak battery level this month", "frame": "data maximum charge none"}
+{"text": "Report the current traction battery temperature", "frame": "data now battery none"}
+{"text": "Find the lowest external air temperature this month", "frame": "data minimum outside none"}
+{"text": "Return the smallest recorded power flowing into the pack", "frame": "data minimum chargepower none"}
+{"text": "How many fault records occurred?", "frame": "data events none fault"}
+{"text": "Report the current electrical charging rate", "frame": "data now chargepower none"}
+{"text": "Find the lowest pack temperature this month", "frame": "data minimum battery none"}
+{"text": "Find the peak charging speed this month", "frame": "data maximum chargepower none"}
+{"text": "Show how driving pace changed over the week", "frame": "data trend speed none"}
+{"text": "Return the smallest recorded energy consumption", "frame": "data minimum energy none"}
+{"text": "Calculate the mean outside temperature for last week", "frame": "data average outside none"}
+{"text": "Show how traction battery temperature changed over the week", "frame": "data trend battery none"}
+{"text": "Report the EV engine status", "frame": "data now motor none"}
+{"text": "Find the lowest traction battery temperature this month", "frame": "data minimum battery none"}
+{"text": "Summarise the typical power flowing into the pack yesterday", "frame": "data average chargepower none"}
+{"text": "Find the lowest vehicle speed this month", "frame": "data minimum speed none"}
+{"text": "Describe the trend in road velocity", "frame": "data trend speed none"}
+{"text": "Describe the trend in traction motor temperature", "frame": "data trend motor none"}
+{"text": "Return the smallest recorded electric drive unit", "frame": "data minimum motor none"}
+{"text": "Report the current energy consumption", "frame": "data now energy none"}
+{"text": "Give me the live external air temperature", "frame": "data now outside none"}
+{"text": "Summarise the typical charging speed yesterday", "frame": "data average chargepower none"}
+{"text": "Give me the live efficiency", "frame": "data now energy none"}
+{"text": "What does the term energy efficiency mean?", "frame": "define other energy none"}
+{"text": "Show how remaining battery percentage changed over the week", "frame": "data trend charge none"}
+{"text": "Return the greatest recorded electric drive unit", "frame": "data maximum motor none"}
+{"text": "Show how coolant flow changed over the week", "frame": "data trend coolant none"}
+{"text": "Return the smallest recorded battery heat", "frame": "data minimum battery none"}
+{"text": "Show how charging speed changed over the week", "frame": "data trend chargepower none"}
+{"text": "Show how electricity use changed over the week", "frame": "data trend energy none"}
+{"text": "Show how outside temperature changed over the week", "frame": "data trend outside none"}
+{"text": "Give me the live charger power", "frame": "data now chargepower none"}
+{"text": "Return the greatest recorded coolant flow", "frame": "data maximum coolant none"}
+{"text": "Explain the meaning of driver assistance", "frame": "define other driving adas"}
+{"text": "Return the smallest recorded electrical charging rate", "frame": "data minimum chargepower none"}
+{"text": "Calculate the mean motor heat for last week", "frame": "data average motor none"}
+{"text": "Give me the live battery level", "frame": "data now charge none"}
+{"text": "List the ECU warnings", "frame": "data events none fault"}
+{"text": "Calculate the mean cooling circuit flow for last week", "frame": "data average coolant none"}
+{"text": "Report the current external air temperature", "frame": "data now outside none"}
+{"text": "Find the peak external air temperature this month", "frame": "data maximum outside none"}
+{"text": "Report the current ambient temperature", "frame": "data now outside none"}
+{"text": "Summarise the typical driving pace yesterday", "frame": "data average speed none"}
+{"text": "Help choose higher-load tyres", "frame": "advice other tyre none"}
+{"text": "Describe the trend in battery heat", "frame": "data trend battery none"}
+{"text": "Which higher-load tyres should the owner choose?", "frame": "advice other tyre none"}
+{"text": "Find the peak road velocity this month", "frame": "data maximum speed none"}
+{"text": "Predict the duration from the present level to full", "frame": "estimate duration charge none"}
+{"text": "Report the current electricity use", "frame": "data now energy none"}
+{"text": "How many saved diagnostics occurred?", "frame": "data events none fault"}
+{"text": "Calculate the mean electric drive unit for last week", "frame": "data average motor none"}
+{"text": "Summarise the typical coolant flow yesterday", "frame": "data average coolant none"}
+{"text": "Show how traction motor temperature changed over the week", "frame": "data trend motor none"}
+{"text": "Show how pack temperature changed over the week", "frame": "data trend battery none"}
+{"text": "Summarise the typical electrical charging rate yesterday", "frame": "data average chargepower none"}
+{"text": "Find the lowest coolant flow this month", "frame": "data minimum coolant none"}
+{"text": "Return the smallest recorded vehicle speed", "frame": "data minimum speed none"}
+{"text": "Calculate the mean charger power for last week", "frame": "data average chargepower none"}
+{"text": "Return the smallest recorded ambient temperature", "frame": "data minimum outside none"}
+{"text": "Calculate the mean traction battery temperature for last week", "frame": "data average battery none"}
+{"text": "Describe the trend in electricity use", "frame": "data trend energy none"}
+{"text": "Calculate the mean road velocity for last week", "frame": "data average speed none"}
+{"text": "Give me the live vehicle speed", "frame": "data now speed none"}
+{"text": "Summarise the typical traction battery temperature yesterday", "frame": "data average battery none"}
+{"text": "Show how battery heat changed over the week", "frame": "data trend battery none"}
+{"text": "Calculate the mean battery heat for last week", "frame": "data average battery none"}
+{"text": "Give me the live driving pace", "frame": "data now speed none"}
+{"text": "Return the smallest recorded external air temperature", "frame": "data minimum outside none"}
+{"text": "Find the peak battery heat this month", "frame": "data maximum battery none"}
+{"text": "Recommend higher-load tyres", "frame": "advice other tyre none"}
+{"text": "Predict the minutes required to reach the target level", "frame": "estimate duration charge none"}
+{"text": "Define battery state of health", "frame": "define other health none"}
+{"text": "Predict the time remaining until full", "frame": "estimate duration charge none"}
+{"text": "Show how battery level changed over the week", "frame": "data trend charge none"}
+{"text": "Find the lowest electric drive unit this month", "frame": "data minimum motor none"}
+{"text": "Show how motor heat changed over the week", "frame": "data trend motor none"}
+{"text": "Return the smallest recorded EV engine", "frame": "data minimum motor none"}
+{"text": "Describe the trend in vehicle speed", "frame": "data trend speed none"}
+{"text": "Find the lowest power flowing into the pack this month", "frame": "data minimum chargepower none"}
+{"text": "Define regenerative braking", "frame": "define other driving none"}
+{"text": "Summarise the typical electric drive unit yesterday", "frame": "data average motor none"}
+{"text": "Return the smallest recorded motor heat", "frame": "data minimum motor none"}
+{"text": "Describe the trend in EV engine", "frame": "data trend motor none"}
+{"text": "Find the lowest driving pace this month", "frame": "data minimum speed none"}
+{"text": "Summarise the typical motor heat yesterday", "frame": "data average motor none"}
+{"text": "Give me the live battery heat", "frame": "data now battery none"}
+{"text": "Report the current battery heat", "frame": "data now battery none"}
+{"text": "Find the peak power flowing into the pack this month", "frame": "data maximum chargepower none"}
+{"text": "Summarise the typical charger power yesterday", "frame": "data average chargepower none"}
+{"text": "Report the current charging speed", "frame": "data now chargepower none"}
+{"text": "Calculate the mean ambient temperature for last week", "frame": "data average outside none"}
+{"text": "Describe the trend in electrical charging rate", "frame": "data trend chargepower none"}
+{"text": "Summarise the typical vehicle speed yesterday", "frame": "data average speed none"}
+{"text": "Calculate the mean electrical charging rate for last week", "frame": "data average chargepower none"}
+{"text": "Estimate the time remaining until full", "frame": "estimate duration charge none"}
+{"text": "Describe the trend in energy consumption", "frame": "data trend energy none"}
+{"text": "Recommend replacement tyres", "frame": "advice other tyre none"}
+{"text": "Report the current EV engine", "frame": "data now motor none"}
+{"text": "Find the lowest efficiency this month", "frame": "data minimum energy none"}
+{"text": "Show how electric drive unit changed over the week", "frame": "data trend motor none"}
+{"text": "Calculate the mean driving pace for last week", "frame": "data average speed none"}
+{"text": "Find the lowest remaining battery percentage this month", "frame": "data minimum charge none"}
+{"text": "Return the greatest recorded battery heat", "frame": "data maximum battery none"}
+{"text": "Describe the trend in traction battery temperature", "frame": "data trend battery none"}
+{"text": "Give me the live remaining battery percentage", "frame": "data now charge none"}
+{"text": "Report the current driving pace", "frame": "data now speed none"}
+{"text": "Describe the trend in external air temperature", "frame": "data trend outside none"}
+{"text": "Define energy efficiency", "frame": "define other energy none"}
+{"text": "How many diagnostic trouble codes occurred?", "frame": "data events none fault"}
+{"text": "Summarise the typical energy consumption yesterday", "frame": "data average energy none"}
+{"text": "Calculate the mean electricity use for last week", "frame": "data average energy none"}
+{"text": "Show how efficiency changed over the week", "frame": "data trend energy none"}
+{"text": "Show how EV engine changed over the week", "frame": "data trend motor none"}
+{"text": "Give me the live electricity use", "frame": "data now energy none"}
+{"text": "Return the smallest recorded state of charge", "frame": "data minimum charge none"}
+{"text": "Calculate the mean power flowing into the pack for last week", "frame": "data average chargepower none"}
+{"text": "Summarise the typical battery level yesterday", "frame": "data average charge none"}
+{"text": "Show how energy consumption changed over the week", "frame": "data trend energy none"}
+{"text": "Return the greatest recorded battery level", "frame": "data maximum charge none"}
+{"text": "Describe the trend in ambient temperature", "frame": "data trend outside none"}
+{"text": "Show how thermal-loop flow changed over the week", "frame": "data trend coolant none"}
+{"text": "Describe the trend in cooling circuit flow", "frame": "data trend coolant none"}
+{"text": "Give me the live thermal-loop flow", "frame": "data now coolant none"}
+{"text": "Calculate the mean charging speed for last week", "frame": "data average chargepower none"}
+{"text": "Find the peak vehicle speed this month", "frame": "data maximum speed none"}
+{"text": "Describe the trend in electric drive unit", "frame": "data trend motor none"}
+{"text": "Does the data contain wheel torque?", "frame": "capability other torque none"}
+{"text": "Give the present condition of the drive unit", "frame": "data now motor none"}
+{"text": "Return the greatest recorded energy consumption", "frame": "data maximum energy none"}
+{"text": "Return the greatest recorded electricity use", "frame": "data maximum energy none"}
+{"text": "Calculate the mean energy consumption for last week", "frame": "data average energy none"}
+{"text": "Return the smallest recorded pack temperature", "frame": "data minimum battery none"}
+{"text": "Give me the live outside temperature", "frame": "data now outside none"}
+{"text": "Report the current thermal-loop flow", "frame": "data now coolant none"}
+{"text": "Give me the live road velocity", "frame": "data now speed none"}
+{"text": "Find the lowest road velocity this month", "frame": "data minimum speed none"}
+{"text": "Calculate the mean pack temperature for last week", "frame": "data average battery none"}
+{"text": "Find the peak traction battery temperature this month", "frame": "data maximum battery none"}
+{"text": "Return the greatest recorded outside temperature", "frame": "data maximum outside none"}
+{"text": "Does the data contain motor torque?", "frame": "capability other torque none"}
+{"text": "Where might the owner source replacement tyres?", "frame": "advice other tyre none"}
+{"text": "Find the lowest cooling circuit flow this month", "frame": "data minimum coolant none"}
+{"text": "Estimate the minutes required to reach the target level", "frame": "estimate duration charge none"}
+{"text": "Find the peak traction motor temperature this month", "frame": "data maximum motor none"}
+{"text": "Define driver assistance", "frame": "define other driving adas"}
+{"text": "Return the greatest recorded EV engine", "frame": "data maximum motor none"}
+{"text": "Describe the trend in charger power", "frame": "data trend chargepower none"}
+{"text": "Define lane support", "frame": "define other driving adas"}
+{"text": "Describe the trend in pack temperature", "frame": "data trend battery none"}
+{"text": "Summarise the typical external air temperature yesterday", "frame": "data average outside none"}
+{"text": "Return the smallest recorded charger power", "frame": "data minimum chargepower none"}
+{"text": "Describe the trend in remaining battery percentage", "frame": "data trend charge none"}
+{"text": "Give me the live traction motor temperature", "frame": "data now motor none"}
+{"text": "Why is measured wheel torque unavailable?", "frame": "capability other torque none"}
+{"text": "Calculate the mean vehicle speed for last week", "frame": "data average speed none"}
+{"text": "Find the peak charger power this month", "frame": "data maximum chargepower none"}
+{"text": "Summarise the typical thermal-loop flow yesterday", "frame": "data average coolant none"}
+{"text": "Report the current cooling circuit flow", "frame": "data now coolant none"}
+{"text": "Summarise the typical ambient temperature yesterday", "frame": "data average outside none"}
+{"text": "Show how vehicle speed changed over the week", "frame": "data trend speed none"}
+{"text": "Report the current traction motor temperature", "frame": "data now motor none"}
+{"text": "Give me the live pack temperature", "frame": "data now battery none"}
+{"text": "What does the term regenerative braking mean?", "frame": "define other driving none"}
+{"text": "Return the greatest recorded pack temperature", "frame": "data maximum battery none"}
+{"text": "Give me the live ambient temperature", "frame": "data now outside none"}
+{"text": "Return the smallest recorded remaining battery percentage", "frame": "data minimum charge none"}
+{"text": "Return the smallest recorded battery level", "frame": "data minimum charge none"}
+{"text": "Report the current battery level", "frame": "data now charge none"}
+{"text": "Find the peak thermal-loop flow this month", "frame": "data maximum coolant none"}
+{"text": "Find the lowest charger power this month", "frame": "data minimum chargepower none"}
+{"text": "Find the lowest motor heat this month", "frame": "data minimum motor none"}
+{"text": "Give me the live electric drive unit", "frame": "data now motor none"}
+{"text": "Explain the meaning of lane support", "frame": "define other driving adas"}
+{"text": "Find the peak ambient temperature this month", "frame": "data maximum outside none"}
+{"text": "Summarise the typical state of charge yesterday", "frame": "data average charge none"}
+{"text": "Return the greatest recorded road velocity", "frame": "data maximum speed none"}
+{"text": "Find the lowest charging speed this month", "frame": "data minimum chargepower none"}
+{"text": "Describe the trend in driving pace", "frame": "data trend speed none"}
+{"text": "Describe the trend in coolant flow", "frame": "data trend coolant none"}
+{"text": "Return the greatest recorded traction battery temperature", "frame": "data maximum battery none"}
+{"text": "Return the greatest recorded charging speed", "frame": "data maximum chargepower none"}
+{"text": "Help choose replacement tyres", "frame": "advice other tyre none"}
+{"text": "Calculate the mean remaining battery percentage for last week", "frame": "data average charge none"}
+{"text": "Return the greatest recorded efficiency", "frame": "data maximum energy none"}
+{"text": "Which winter wheels should the owner choose?", "frame": "advice other tyre none"}
+{"text": "Report the current power flowing into the pack", "frame": "data now chargepower none"}
+{"text": "Report the current motor heat", "frame": "data now motor none"}
+{"text": "Report the current efficiency", "frame": "data now energy none"}
+{"text": "Find the lowest outside temperature this month", "frame": "data minimum outside none"}
+{"text": "Return the smallest recorded efficiency", "frame": "data minimum energy none"}
+{"text": "Find the peak pack temperature this month", "frame": "data maximum battery none"}
+{"text": "Return the greatest recorded ambient temperature", "frame": "data maximum outside none"}
+{"text": "Return the greatest recorded electrical charging rate", "frame": "data maximum chargepower none"}
+{"text": "Recommend performance rubber", "frame": "advice other tyre none"}
+{"text": "Summarise the typical traction motor temperature yesterday", "frame": "data average motor none"}
+{"text": "Show how ambient temperature changed over the week", "frame": "data trend outside none"}
+{"text": "Compare urban with motorway driving", "frame": "data compare none none"}
+{"text": "Find the peak EV engine this month", "frame": "data maximum motor none"}
+{"text": "Calculate the mean efficiency for last week", "frame": "data average energy none"}
+{"text": "Estimate the duration from the present level to full", "frame": "estimate duration charge none"}
+{"text": "Show how charger power changed over the week", "frame": "data trend chargepower none"}
+{"text": "Report the current charger power", "frame": "data now chargepower none"}
+{"text": "Show how state of charge changed over the week", "frame": "data trend charge none"}
+{"text": "Describe the trend in motor heat", "frame": "data trend motor none"}
+{"text": "Find the peak electricity use this month", "frame": "data maximum energy none"}
+{"text": "Find the peak remaining battery percentage this month", "frame": "data maximum charge none"}
+{"text": "Summarise the typical EV engine yesterday", "frame": "data average motor none"}
+{"text": "Find the peak efficiency this month", "frame": "data maximum energy none"}
+{"text": "Calculate the mean traction motor temperature for last week", "frame": "data average motor none"}
+{"text": "Calculate the mean battery level for last week", "frame": "data average charge none"}
+{"text": "Return the greatest recorded external air temperature", "frame": "data maximum outside none"}
+{"text": "Report the current outside temperature", "frame": "data now outside none"}
+{"text": "What does the term battery state of health mean?", "frame": "define other health none"}
+{"text": "Summarise the typical outside temperature yesterday", "frame": "data average outside none"}
+{"text": "Why is measured motor torque unavailable?", "frame": "capability other torque none"}
+{"text": "Describe the trend in thermal-loop flow", "frame": "data trend coolant none"}
+{"text": "Report the current state of charge", "frame": "data now charge none"}
+{"text": "Find the peak state of charge this month", "frame": "data maximum charge none"}
+{"text": "Summarise the typical battery heat yesterday", "frame": "data average battery none"}
+{"text": "Show how road velocity changed over the week", "frame": "data trend speed none"}
+{"text": "Describe the trend in outside temperature", "frame": "data trend outside none"}
+{"text": "Return the greatest recorded state of charge", "frame": "data maximum charge none"}
+{"text": "Give me the live energy consumption", "frame": "data now energy none"}
+{"text": "Find the lowest state of charge this month", "frame": "data minimum charge none"}
+{"text": "Find the peak coolant flow this month", "frame": "data maximum coolant none"}
+{"text": "Return the greatest recorded vehicle speed", "frame": "data maximum speed none"}
+{"text": "Define adaptive cruise", "frame": "define other driving adas"}
+{"text": "Where might the owner source performance rubber?", "frame": "advice other tyre none"}
+{"text": "Check the electric motor now", "frame": "data now motor none"}
+{"text": "Return the smallest recorded driving pace", "frame": "data minimum speed none"}
+{"text": "Return the greatest recorded driving pace", "frame": "data maximum speed none"}
+{"text": "Find the peak electrical charging rate this month", "frame": "data maximum chargepower none"}
+{"text": "Why is measured shaft torque unavailable?", "frame": "capability other torque none"}
+{"text": "Return the smallest recorded thermal-loop flow", "frame": "data minimum coolant none"}
+{"text": "Find the lowest electricity use this month", "frame": "data minimum energy none"}
+{"text": "Find the lowest thermal-loop flow this month", "frame": "data minimum coolant none"}
+{"text": "Find the lowest electrical charging rate this month", "frame": "data minimum chargepower none"}
+{"text": "Return the greatest recorded remaining battery percentage", "frame": "data maximum charge none"}
+{"text": "Find the peak outside temperature this month", "frame": "data maximum outside none"}
+{"text": "Summarise the typical cooling circuit flow yesterday", "frame": "data average coolant none"}
+{"text": "Report the current vehicle speed", "frame": "data now speed none"}
+{"text": "Calculate the mean EV engine for last week", "frame": "data average motor none"}
+{"text": "Help choose winter wheels", "frame": "advice other tyre none"}
+{"text": "Summarise the typical efficiency yesterday", "frame": "data average energy none"}
+{"text": "Show how cooling circuit flow changed over the week", "frame": "data trend coolant none"}
+{"text": "Give me the live coolant flow", "frame": "data now coolant none"}

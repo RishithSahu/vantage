@@ -1,0 +1,315 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "mg_zs_ev",
+ "vehicle": {
+  "make": "MG",
+  "model": "ZS EV (HSC2 platform)",
+  "year": 2022,
+  "powertrain": "bev",
+  "specs": {
+   "veh.cap_kwh": 51,
+   "veh.soh": 98,
+   "veh.nominal_voltage": 350,
+   "veh.tyre_spec_front": 250,
+   "veh.tyre_spec_rear": 250,
+   "veh.service_km": 10000,
+   "veh.sw": "imsmart 3.2",
+   "veh.wheelbase_m": 2.58,
+   "veh.wheel_radius_m": 0.32,
+   "veh.gear_ratio": 9.5,
+   "veh.rated_max_speed": 175,
+   "veh.seats": 5,
+   "veh.home_charger_kw": 7.0,
+   "veh.model": "MG ZS EV (HSC2 platform)"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "pt",
+   "type": "can",
+   "name": "HSC2 chassis CAN 500 kbit/s (OEM database mg)",
+   "dbc": "mg.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "ext",
+   "type": "can",
+   "name": "ZS EV (HSC2 platform) extension CAN (SYNTHETIC: quantities the open database lacks)",
+   "dbc": "mg_zs_ev_ext.dbc",
+   "channel": "can1",
+   "bitrate": 500000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Android infotainment (logcat)",
+   "format": "logcat"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  },
+  {
+   "id": "cam",
+   "type": "camera",
+   "name": "Forward camera",
+   "cams": [
+    "front"
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "concept": "accelerator_position",
+   "from": "can:pt/GW_HSC2_HCU_FrP00.EPTAccelActuPosHSC2",
+   "unit": "%",
+   "rate_hz": 20
+  },
+  {
+   "concept": "speed",
+   "from": "can:pt/SCS_HSC2_FrP19.VehSpdAvgHSC2",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "brake_pressure",
+   "from": "can:pt/SCS_HSC2_FrP09.BrkPdlDrvrAppdPrsHSC2",
+   "unit": "kPa",
+   "rate_hz": 20
+  },
+  {
+   "concept": "gear",
+   "from": "can:pt/GW_HSC2_ECM_FrP04.TrEstdGearHSC2",
+   "unit": "none",
+   "rate_hz": 10,
+   "map": {
+    "Park Gear": 0,
+    "Reverse Gear": -1,
+    "Neutral Gear": 0,
+    "First Gear": 1
+   }
+  },
+  {
+   "concept": "brake_pedal",
+   "from": "can:pt/EHBS_HSC2_FrP00.BrkPdlAppdHSC2",
+   "unit": "%",
+   "rate_hz": 20,
+   "map": {
+    "brake pedal not applied": 0,
+    "brake pedal applied": 100
+   },
+   "snap": true
+  },
+  {
+   "concept": "door_state",
+   "from": "can:pt/GW_HSC2_BCM_FrP04.DrvrDoorOpenStsHSC2",
+   "unit": "none",
+   "rate_hz": 5,
+   "map": {
+    "Driver Door Closed": 0,
+    "Driver Door Open": 1
+   },
+   "snap": true
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "uds:diag/obd_ambient_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "uds:diag/obd_module_voltage",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:ext/EXT_TPMS.TyrePressureFl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:ext/EXT_TPMS.TyrePressureFr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:ext/EXT_TPMS.TyrePressureRl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:ext/EXT_TPMS.TyrePressureRr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.TyreTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "can:ext/EXT_DATA_1HZ.Odometer",
+   "unit": "km",
+   "rate_hz": 1
+  },
+  {
+   "concept": "battery_soc",
+   "from": "can:ext/EXT_DATA_1HZ.BatterySoc",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "battery_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.BatteryTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:ext/EXT_DATA_1HZ_2.MotorTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "charging_power",
+   "from": "can:ext/EXT_DATA_1HZ_2.ChargingPower",
+   "unit": "kW",
+   "rate_hz": 1
+  },
+  {
+   "concept": "coolant_flow",
+   "from": "can:ext/EXT_DATA_1HZ_2.CoolantFlow",
+   "unit": "L/min",
+   "rate_hz": 1
+  },
+  {
+   "concept": "_ignition",
+   "from": "can:ext/EXT_KEYSTATE.Ignition",
+   "unit": "none",
+   "rate_hz": 5
+  },
+  {
+   "concept": "_charging_active",
+   "from": "can:ext/EXT_KEYSTATE.ChargingActive",
+   "unit": "none",
+   "rate_hz": 5
+  },
+  {
+   "concept": "battery_voltage",
+   "from": "can:ext/EXT_DATA_5HZ.BatteryVoltage",
+   "unit": "V",
+   "rate_hz": 5
+  },
+  {
+   "concept": "battery_current",
+   "from": "can:ext/EXT_DATA_5HZ.BatteryCurrent",
+   "unit": "A",
+   "rate_hz": 5
+  },
+  {
+   "concept": "reported_range",
+   "from": "can:ext/EXT_DATA_0_2HZ.ReportedRange",
+   "unit": "km",
+   "rate_hz": 0.2
+  }
+ ],
+ "events": [
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

@@ -1,0 +1,256 @@
+# Round 10 (2026-10-24): petrol and diesel questions, each row tagged with the car type the model is told (@petrol @diesel @ice = either of those two, @ev, @hybrid; no tag = the builder chooses).
+# The first block is the TWIN rows: the same words mean different concepts in an electric car and a combustion car, which is what the car-type line in the system prompt is for.
+#  C1  on a combustion car "rpm", "revs", "engine speed" is engine_rpm; "throttle" is throttle_position; "the battery" is the 12 V battery; "juice / gas / tank" is the fuel
+#  C2  tank content -> now fuel_level; tank size -> spec fuel_level; range on fuel -> estimate range_estimate; consumption -> stat fuel_rate (mean / sum)
+#  C3  the check-engine lamp -> health diagnostic_status; why it is on -> why diagnostic_code
+#  C4  "is this car petrol or diesel", "what engine" -> spec vehicle_model
+
+# ------------------------------------------------------------------------------------------------ twins: electric
+@ev what is the rpm | now motor_rpm
+@ev how fast is the motor spinning | now motor_rpm
+@ev current revs | now motor_rpm
+@ev highest rpm this week | extreme motor_rpm op=max
+@ev average rpm on the highway | stat motor_rpm op=mean cond=highway
+@ev correlation between rpm and power | stat motor_rpm op=corr c2=motor_power
+@ev how much throttle am i using | now accelerator_position
+@ev throttle position | now accelerator_position
+@ev battery voltage | now battery_voltage
+@ev what is the battery voltage right now | now battery_voltage
+@ev is the battery ok | health battery_condition
+@ev how is the battery | health battery_condition
+@ev how much juice is left | now battery_soc
+@ev how much gas is left | now battery_soc
+@ev how full is the tank | now battery_soc
+@ev is the tank low | now battery_soc
+@ev how thirsty is the car | stat wh_per_km op=mean
+@ev how efficient is the car | stat wh_per_km op=mean
+@ev engine temperature | now motor_temperature
+@ev tank size | spec battery_capacity
+@ev how big is the battery | spec battery_capacity
+@ev is the engine light on | health diagnostic_status
+@ev what gear am i in | now gear
+@ev economy this month | stat wh_per_km op=mean
+@ev consumption last week | stat wh_per_km op=mean
+
+# ------------------------------------------------------------------------------------------------ twins: combustion
+@ice what is the rpm | now engine_rpm
+@ice what are the revs | now engine_rpm
+@ice engine speed | now engine_rpm
+@ice current rpm | now engine_rpm
+@ice how fast is the engine spinning | now engine_rpm
+@ice highest rpm this week | extreme engine_rpm op=max
+@ice peak revs yesterday | extreme engine_rpm op=max
+@ice average rpm on the motorway | stat engine_rpm op=mean cond=highway
+@ice average revs while driving | stat engine_rpm op=mean cond=driving
+@ice how much throttle am i using | now throttle_position
+@ice throttle position | now throttle_position
+@ice throttle opening right now | now throttle_position
+@ice battery voltage | now aux_battery_voltage
+@ice what is the battery voltage right now | now aux_battery_voltage
+@ice is the battery ok | health aux_battery_condition
+@ice how is the battery | health aux_battery_condition
+@ice will it start in the morning | health aux_battery_condition
+@ice is the battery weak | health aux_battery_condition
+@ice starter battery health | health aux_battery_condition
+@ice voltage of the 12 volt | now aux_battery_voltage
+@ice how much juice is left | now fuel_level
+@ice how much gas is left | now fuel_level
+@ice how full is the tank | now fuel_level
+@ice is the tank low | now fuel_level
+@ice how thirsty is the car | stat fuel_rate op=mean
+@ice how efficient is the car | stat fuel_rate op=mean
+@ice economy this month | stat fuel_rate op=mean
+@ice consumption last week | stat fuel_rate op=mean
+@ice engine temperature | now motor_temperature
+@ice how hot is the engine | now motor_temperature
+@ice tank size | spec fuel_level
+@ice is the engine light on | health diagnostic_status
+@ice what gear am i in | now gear
+@ice how much power does the engine make | now engine_torque
+@ice engine load | now engine_load
+
+# ------------------------------------------------------------------------------------------------ C2 fuel
+@ice how many litres are left in the tank | now fuel_level
+@ice litres in the tank | now fuel_level
+@ice tank level | now fuel_level
+@ice fuel gauge reading | now fuel_level
+@ice fuel remaining | now fuel_level
+@ice am i low on fuel | now fuel_level
+@ice is the tank nearly empty | now fuel_level
+@petrol how much petrol is left | now fuel_level
+@petrol petrol level | now fuel_level
+@diesel how much diesel is left | now fuel_level
+@diesel diesel level | now fuel_level
+@ice how big is the fuel tank | spec fuel_level
+@ice tank capacity in litres | spec fuel_level
+@ice how many litres does the tank hold | spec fuel_level
+@ice size of the fuel tank | spec fuel_level
+@ice how far can i drive on the fuel left | estimate range_estimate
+@ice km left on this tank | estimate range_estimate
+@ice range on the current tank | estimate range_estimate
+@ice how many kilometres until empty | estimate range_estimate
+@ice distance to empty | estimate range_estimate
+@ice average fuel consumption last week | stat fuel_rate op=mean
+@ice litres per 100 km this month | stat fuel_rate op=mean
+@ice how many litres did i burn yesterday | stat fuel_rate op=sum
+@ice fuel used this week | stat fuel_rate op=sum
+@ice what economy did i get on the last trip | stat fuel_rate op=mean ent=trip
+@ice which trip used the most fuel | extreme fuel_rate op=max ent=trip
+@ice is the car drinking more than before | trend fuel_rate op=rise
+@ice has my fuel use gone up lately | trend fuel_rate op=rise
+@ice is the fuel economy getting worse | trend fuel_rate op=rise
+@ice has my fuel economy improved | trend fuel_rate op=drop
+@ice fuel burn compared with last week | compare fuel_rate op=mean vs=period
+@ice fuel consumption in the city versus the highway | compare fuel_rate op=mean cond=city vs=highway
+@ice does speed affect my fuel economy | stat fuel_rate op=corr c2=speed
+@ice does the rpm change the fuel rate | stat fuel_rate op=corr c2=engine_rpm
+@ice how much fuel does the engine burn per hour normally | stat fuel_rate op=usual
+@ice typical fuel rate while driving | stat fuel_rate op=usual
+@ice is my fuel consumption normal | stat fuel_rate op=usual
+@ice anything odd with my fuel use | anomaly fuel_rate
+@ice why is the car using more fuel | why fuel_rate op=rise
+@ice when did i last fill up | events charging_session op=last
+@ice how often do i refuel | events charging_session op=count
+@ice litres added at the last refuel | events charging_session op=last
+@ice how many times did i fill the tank this month | events charging_session op=count
+@ice did i ever run the tank dry | extreme fuel_level op=min
+@ice lowest fuel level this month | extreme fuel_level op=min
+@ice how low did the tank get | extreme fuel_level op=min
+@ice is the fuel level dropping faster than normal | trend fuel_level op=drop
+@ice tips to reduce fuel consumption | advice fuel_rate
+@ice how can i save fuel | advice fuel_rate
+@ice how do i drive more economically | advice fuel_rate
+
+# ------------------------------------------------------------------------------------------------ engine
+@ice how hot is the coolant | now motor_temperature
+@ice coolant temp | now motor_temperature
+@ice is the engine running hot | now motor_temperature
+@ice hottest the engine got this week | extreme motor_temperature op=max
+@ice did the engine overheat | events overtemp_warning op=exists
+@ice engine overheating warnings this month | events overtemp_warning op=count
+@ice oil temp | now engine_oil_temperature
+@ice engine oil temperature now | now engine_oil_temperature
+@ice how hot is the oil | now engine_oil_temperature
+@ice is the oil pressure ok | now engine_oil_pressure
+@ice oil pressure | now engine_oil_pressure
+@ice what does the oil pressure warning mean | define engine_oil_pressure
+@ice how often should i change the oil | spec service_interval
+@ice when is the oil change due | estimate maintenance
+@ice throttle opening | now throttle_position
+@ice engine load right now | now engine_load
+@ice how hard is the engine working | now engine_load
+@ice average engine load while driving | stat engine_load op=mean cond=driving
+@ice which gear is the car in | now gear
+@ice current gear | now gear
+@ice what gear is it in | now gear
+@ice how many gears does the gearbox have | spec gear
+@ice time spent idling this week | stat drive_mode op=duration cond=idling
+@ice how long was the engine idling yesterday | stat drive_mode op=duration cond=idling
+@ice share of time idling | stat drive_mode op=share cond=idling
+@ice how is the engine doing | health motor_condition
+@ice is the engine in good shape | health motor_condition
+@ice what is wrong with the engine | health motor_condition
+@ice is anything odd with the engine | anomaly motor_condition
+@ice engine temperature trend | trend motor_temperature op=change
+@ice intake air temperature | now intake_air_temperature
+@ice how warm is the air going into the engine | now intake_air_temperature
+@ice mass air flow | now mass_air_flow
+@ice maf reading | now mass_air_flow
+@ice manifold pressure | now intake_manifold_pressure
+@ice map sensor value | now intake_manifold_pressure
+@petrol long term fuel trim | now long_term_fuel_trim
+@petrol ltft now | now long_term_fuel_trim
+@petrol short term fuel trim | now short_term_fuel_trim
+@petrol stft | now short_term_fuel_trim
+@petrol oxygen sensor reading | now lambda
+@petrol what is the lambda | now lambda
+@petrol air fuel ratio | now lambda
+@petrol ignition timing | now ignition_timing
+@petrol spark advance | now ignition_timing
+@ice catalyst temperature | now catalyst_temperature
+@ice how hot is the catalytic converter | now catalyst_temperature
+@ice exhaust gas temperature | now exhaust_gas_temperature
+@ice how hot is the exhaust | now exhaust_gas_temperature
+@ice fuel rail pressure | now fuel_rail_pressure
+@ice engine hours | now engine_hours
+@ice how long has the engine run in total | now engine_hours
+@ice time since the engine started | now engine_run_time
+@ice engine torque | now engine_torque
+
+# ------------------------------------------------------------------------------------------------ C3 check engine light and codes
+@ice is the check engine light on | health diagnostic_status
+@ice engine warning lamp status | health diagnostic_status
+@ice is the malfunction lamp lit | health diagnostic_status
+@ice any engine light showing | health diagnostic_status
+@ice why is the engine light on | why diagnostic_code
+@ice what is making the check engine light come on | why diagnostic_code
+@ice reason for the engine warning lamp | why diagnostic_code
+@ice what does the check engine light mean | define diagnostic_code
+@ice any engine fault codes | events diagnostic_code op=list
+@ice which fault codes are stored | health diagnostic_status
+@ice how many fault codes this year | events diagnostic_code op=count
+@ice what does the last fault code mean | define diagnostic_code
+@ice was the fault code cleared | events diagnostic_code_cleared op=exists
+@ice any engine warnings | events any_warning op=exists
+@ice latest engine warning | events any_warning op=last
+
+# ------------------------------------------------------------------------------------------------ diesel
+@diesel how full is the dpf | now dpf_soot_load
+@diesel soot level | now dpf_soot_load
+@diesel is the particulate filter clogged | now dpf_soot_load
+@diesel how is the diesel particulate filter | now dpf_soot_load
+@diesel did the dpf regenerate recently | trend dpf_soot_load op=drop
+@diesel when was the last dpf regeneration | trend dpf_soot_load op=drop
+@diesel how many regenerations this month | trend dpf_soot_load op=drop
+@diesel adblue level | now def_level
+@diesel how much adblue is left | now def_level
+@diesel is the adblue low | now def_level
+@diesel when do i need to top up adblue | advice def_level
+@diesel how long will the adblue last | advice def_level
+@diesel egr valve position | now egr_position
+@diesel how open is the egr | now egr_position
+@diesel turbo boost | now boost_pressure
+@diesel boost pressure on the highway | stat boost_pressure op=mean cond=highway
+@diesel peak boost this week | extreme boost_pressure op=max
+@diesel exhaust temperature | now exhaust_gas_temperature
+@diesel what is a dpf | define dpf_soot_load
+@diesel what does adblue do | define def_level
+@diesel why does the dpf need to regenerate | define dpf_regeneration
+@diesel is the dpf getting worse | trend dpf_soot_load op=rise
+@diesel is anything odd with the dpf | anomaly dpf_soot_load
+@diesel the exhaust system condition | health motor_condition
+
+# ------------------------------------------------------------------------------------------------ C4 identity
+@ice is this car petrol or diesel | spec vehicle_model
+@ice what fuel does it take | spec vehicle_model
+@ice what engine does it have | spec vehicle_model
+@ice what type of car is this | spec vehicle_model
+@ev what type of car is this | spec vehicle_model
+@ice which model am i driving | spec vehicle_model
+@ice does this car have a turbo | spec unlisted
+@ice how long does the engine take to warm up | now unlisted
+@ice what is the cold start behaviour | now unlisted
+@ice how loud is the exhaust | now unlisted
+
+# ------------------------------------------------------------------------------------------------ the 12 volt battery on a combustion car
+@ice is the 12 volt battery low | health aux_battery_condition
+@ice 12 volt battery voltage | now aux_battery_voltage
+@ice did the 12 volt dip when starting | events voltage_dip op=exists
+@ice battery dead | health aux_battery_condition
+@ice why did the battery voltage drop | why voltage_dip
+@ice minimum battery voltage this week | extreme aux_battery_voltage op=min
+@ice average battery voltage while driving | stat aux_battery_voltage op=mean cond=driving
+
+# ------------------------------------------------------------------------------------------------ general questions on a combustion car (same frames as an electric car)
+@ice how many trips this week | stat trip_record op=count
+@ice how far did i drive today | stat distance_driven op=sum
+@ice what is my average speed | stat speed op=mean
+@ice any warnings today | events any_warning op=exists
+@ice how are my tyres | health tyre_condition
+@ice when is my next service due | estimate maintenance
+@ice how worn are the brakes | health brake_condition
+@ice give me a summary of the week | summary none
+@ice anything unusual this week | anomaly none
+@ice how is my driving style | health driving_style
+@ice what is the odometer | now odometer
+@ice how many hard brakes this week | events hard_braking op=count

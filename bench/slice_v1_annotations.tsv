@@ -1,0 +1,63 @@
+# Independent annotation of the frozen diagnostic slice v1 (bench/slice_v1.txt). Written by reading ONLY the question text (and, for follow-ups, the previous question), before looking at any gold interpretation or model output; it records what the person SAID, not what the evaluator's gold normalises it to.
+# Columns (TAB): id, requested result, statistic, interval phrase (verbatim), restriction phrase (verbatim), number(s) with unit, selection phrase, for follow-ups what changes, note.
+# requested result vocabulary: latest_value | summary | extreme | count | existence | list | time_share | comparison | change_timing | explanation | context | trend | ranking | relationship | capability | domain_check | refuse | unsupported ;  '-' = none stated.
+d001	explanation	-	over the past two weeks	-	-	-	-
+d003	explanation	-	-	-	-	-	-	"than it used to" is a comparison with the past, not a stated interval
+d005	explanation	-	last month	-	-	-	-	reference period of the comparison
+d007	change_timing	-	-	-	-	-	-
+d009	change_timing	-	-	-	-	-	-
+d011	trend	-	-	-	-	-	-
+d013	list	-	from yesterday	-	-	-	-
+d015	count	-	today	-	-	-	-
+d017	list	-	-	-	-	the last time	-	asks for the latest occurrence
+d019	list	-	this week	-	-	-	-
+d021	context	-	-	-	5 minutes	the last warning	-	window before the event
+d023	context	-	-	-	-	-	-
+d025	comparison	-	-	on the highway / in the city	-	-	-	two conditions compared
+d027	comparison	-	-	charging / driving	-	-	-	two conditions compared
+d029	comparison	mean	today / yesterday	-	-	-	-	two periods compared
+d031	latest_value	-	-	-	-	-	-
+d033	summary	mean	last week	-	-	-	-
+d035	extreme	max	in the past month	-	-	-	-
+d037	summary	mean	this month	on weekdays	-	-	-	"typical"; weekday restriction is stated
+d039	time_share	-	yesterday	charging	-	-	-
+d041	summary	sum	this month	-	-	-	-	energy recovered
+d043	summary	std	yesterday	-	-	-	-	"how variable"
+d045	ranking	-	last month	-	-	which trip ... most	-	top 1 by energy per km
+d047	summary	delta	-	-	-	my latest charging session	-
+d049	ranking	-	-	city	five	five most efficient city trips	-
+d051	time_share	-	this week	over 95 degrees fahrenheit	95 F	-	-	"how long" = duration in the state
+d053	time_share	-	in the last 14 days	below 30 psi	30 psi	-	-	"how often": share vs episode count is ambiguous in the wording
+d055	time_share	-	yesterday	below 20 percent	20 %	-	-	"count the minutes" = duration in the state
+d057	latest_value	-	-	-	-	-	-	polite request for the current value
+d059	capability	-	-	-	-	-	-
+d061	refuse	-	-	-	-	-	-	instruction to operate the vehicle
+d063	refuse	-	-	-	-	-	-	prompt injection
+d065	refuse	-	-	-	-	-	-	not about the vehicle
+d067	refuse	-	-	-	-	-	-	instruction to navigate (operate)
+d069	extreme	min	-	-	-	-	statistic: highest -> lowest
+d071	extreme	max	-	-	-	-	target: the motor	"same thing"
+d073	summary	sum	the last two weeks	-	-	-	interval: last week -> last two weeks
+d075	context	-	-	-	-	-	signal: the temperature	value at the time of the event; wording is ambiguous (a value inside the event window)
+d077	latest_value	-	rite now	-	-	-	-	typos
+d079	summary	sum	yesterdy	-	-	-	-	typos; energy used
+d081	extreme	min	in the last 3 days	-	-	-	-	typos
+d083	count	-	last night	-	-	-	-	fragment: "how many" is implied (a list would also be a reading)
+d085	extreme	max	yesterday	-	-	-	-	"at its worst"
+d087	summary	mean	-	-	-	-	-	"on average"
+d089	extreme	max	yesterday	-	-	-	-	"at its fastest"
+d091	existence	-	last week	-	-	-	-	"at all"
+d093	list	-	of the month	-	-	first warning	-	asks for the earliest occurrence
+d095	comparison	-	-	at night / during the day	-	-	-	two conditions compared
+d097	explanation	-	in the last week	-	-	-	-
+d099	summary	mean	this month	while charging above 50 kw	50 kW	-	-
+d101	capability	-	-	-	-	-	-
+d103	refuse	-	-	-	-	-	-	instruction to operate the vehicle
+d105	unsupported	-	next week	-	-	-	-	a prediction, not recorded data
+d107	summary	mean	-	-	-	-	statistic: highest -> average
+d109	ranking	-	last week	-	-	the shortest trip	-	top 1, shortest
+d111	latest_value	-	-	-	-	the front left (tyre)	-	a specific wheel
+d113	extreme	max	this month	-	-	-	-
+d115	time_share	-	last week	in the city	-	-	-
+d117	count	-	since last month	-	-	-	-
+d119	count	-	yesterday	-	-	-	-	typo

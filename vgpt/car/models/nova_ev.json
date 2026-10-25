@@ -1,0 +1,24 @@
+{
+ "id": "nova_ev",
+ "decoder_installed": true,
+ "bound": 47,
+ "concepts": 41,
+ "extension": 0,
+ "name": "Nova N7 Ethernet",
+ "year": 2026,
+ "region": "anywhere",
+ "powertrain": "bev",
+ "class": "Battery-electric saloon: CAN-FD, SOME/IP, Android VHAL, DoIP diagnostics, LIN body network",
+ "interfaces": [
+  "CAN-FD main bus and body CAN",
+  "SOME/IP on automotive Ethernet",
+  "Android Vehicle HAL",
+  "UDS over DoIP (ISO 13400): diagnostic trouble codes and data identifiers, announced with the VIN",
+  "LIN 2.1 body network (rain / light sensor, climate sensor, driver seat)",
+  "logcat / slog2info",
+  "NMEA 0183 GNSS",
+  "forward camera"
+ ],
+ "notes": "A fictional maker. The DoIP gateway and the LIN network are written for the test bench; the protocols are the real ones.",
+ "source": "written for the test bench (tools_make_protocol_cars.py)"
+}

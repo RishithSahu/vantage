@@ -1,0 +1,31 @@
+{
+ "id": "gwm_haval_h6_phev",
+ "name": "GWM Haval H6 PHEV (CAN-FD)",
+ "year": 2024,
+ "region": "China / global",
+ "powertrain": "petrol",
+ "class": "Plug-in hybrid SUV (simulated with the petrol drive)",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN-FD (500 kbit/s arbitration, 2 Mbit/s data, frames of 16 and 64 bytes): the real Haval H6 PHEV database",
+  "OBD-II service 01 over ISO 15765-4",
+  "UDS diagnostic trouble codes",
+  "logcat from the Android-based infotainment",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and ignition on a synthetic extension CAN"
+ ],
+ "notes": "A CAN-FD car: the frames are 16 and 64 bytes long.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): gwm_haval_h6_phev_2024.dbc",
+ "bound": 31,
+ "concepts": 31,
+ "extension": [
+  "_ignition",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

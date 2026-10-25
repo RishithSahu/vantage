@@ -1,0 +1,5 @@
+# Only for development: training the question classifier, running the benchmarks and the full test suite.
+-r requirements.txt
+scikit-learn>=1.3
+scipy>=1.10
+llama-cpp-python>=0.2.90

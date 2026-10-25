@@ -1,0 +1,42 @@
+{
+ "P0217": {
+  "text": "Engine coolant over-temperature condition",
+  "subsystem": "cooling",
+  "severity": "critical"
+ },
+ "P0299": {
+  "text": "Turbocharger underboost",
+  "subsystem": "air",
+  "severity": "warn"
+ },
+ "P2002": {
+  "text": "Diesel particulate filter efficiency below threshold",
+  "subsystem": "aftertreatment",
+  "severity": "warn"
+ },
+ "P0087": {
+  "text": "Fuel rail pressure too low",
+  "subsystem": "fuel",
+  "severity": "warn"
+ },
+ "P0562": {
+  "text": "System voltage low",
+  "subsystem": "power",
+  "severity": "warn"
+ },
+ "U0100": {
+  "text": "Lost communication with engine control module",
+  "subsystem": "network",
+  "severity": "warn"
+ },
+ "U0121": {
+  "text": "Lost communication with anti-lock brake system module",
+  "subsystem": "network",
+  "severity": "warn"
+ },
+ "C0750": {
+  "text": "Tyre pressure low - front left",
+  "subsystem": "tyres",
+  "severity": "warn"
+ }
+}

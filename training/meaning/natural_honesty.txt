@@ -1,0 +1,256 @@
+# Honesty bank (authored by Claude, 2026-10-18, after probing the opt-in MeaningBrain with the legacy "honesty / hallucination" questions of tests/test_qa.py and tests/test_qa2.py).
+# Format as natural_a.txt:  text | act concept [op=..] [cond=..] [vs=..] [ent=..]     Source name in build_meaning.py: `honesty` (kept separate from `feedback` so the ablation arms stay comparable).
+# Findings that produced it (model: models/meaning-lora-full.gguf): a request to PREDICT the next fault was read as `estimate maintenance` (answered with the service interval); "which manufacturer's
+# sensor caused the anomaly" as `why camera_sharpness`; "the CAN ID responsible for the overheating" as an event listing; "is this fault specific to this vehicle or common across the fleet" as
+# `spec vehicle_model`; "the vehicle's state when the radar detected the object" as `context can_anomaly`; a COUNTERFACTUAL ("would the fault still have occurred on a flat road") as `unsafe`
+# (the tamper refusal).  Each is a category of question the recorded data cannot answer, so the correct frame is `unsupported none` (or `now unlisted` for a named but unrecorded quantity).
+# Rows below are new wording for those categories plus near-boundary POSITIVE rows (so the model does not learn to refuse legitimate questions).  Training rows only; none is copied from an evaluation set
+# (the builder's leakage filter drops any row at Jaccard >= 0.8 to a frozen set, sealed_v3 included).
+# ---------------------------------------------------------------- A. predicting a fault, failure or any exact future event
+predict the exact time of the next fault | unsupported none
+when exactly will the next fault happen | unsupported none
+can you tell me when the next warning will come | unsupported none
+predict when the coolant pump will fail | unsupported none
+forecast the next breakdown | unsupported none
+when will something break next | unsupported none
+what time will the next warning light come on | unsupported none
+tell me exactly when the battery will overheat again | unsupported none
+will the tyre burst tomorrow | unsupported none
+what will happen to the motor in exactly 73 minutes | unsupported none
+what is going to fail next week | unsupported none
+how many days before the next fault occurs | unsupported none
+predict the date of my next breakdown | unsupported none
+which part will fail next | unsupported none
+when will my brakes stop working | unsupported none
+will i get a warning tomorrow | unsupported none
+can you foresee the next error code | unsupported none
+predict my next dtc | unsupported none
+predict the next time the camera gets blocked | unsupported none
+how long until the pump packs up | unsupported none
+guess when the next fault will show up | unsupported none
+estimate the minute the next fault appears | unsupported none
+what will the pack temperature be at 5 pm tomorrow | unsupported none
+will it overheat on my drive tomorrow | unsupported none
+next fault kab aayega | unsupported none
+agle fault ka exact time batao | unsupported none
+when is the next failure going to happen to my car | unsupported none
+predict next months faults | unsupported none
+forecast tomorrows warnings | unsupported none
+will the car break down this week | unsupported none
+tell me the exact hour the next error will be logged | unsupported none
+pridict the next fualt | unsupported none
+how soon will the next dtc be set | unsupported none
+# ---------------------------------------------------------------- B. a counterfactual or hypothetical about something that already happened
+would the fault still have occurred if the vehicle had been travelling on a flat road | unsupported none
+would the battery have overheated if i had driven slower | unsupported none
+what if i had charged at night instead would it still have happened | unsupported none
+if i had not used the ac would i have made it home | unsupported none
+could the warning have been avoided by driving differently | unsupported none
+would the pump have failed if i had serviced it earlier | unsupported none
+had i taken another route would the range have been enough | unsupported none
+can you prove that the last fault would not have happened under a different driving style | unsupported none
+would the tyre have lost pressure if i had parked somewhere else | unsupported none
+if the car were lighter would the overheating have occurred | unsupported none
+what would my efficiency have been if i had driven in eco mode | unsupported none
+if it had not rained would the camera still have been blocked | unsupported none
+would the dtc have been set had the road been smoother | unsupported none
+if i had left an hour earlier would the pack have stayed cool | unsupported none
+would the motor have overheated on a cooler day | unsupported none
+is it certain the overheating was caused by my driving and not the weather | unsupported none
+could a different tyre have prevented the puncture | unsupported none
+what would have happened if the fault had come on the motorway | unsupported none
+would the outcome be the same if the road was downhill | unsupported none
+if the road had been flat would the warning still have come | unsupported none
+if the last charge had been slower would the battery have stayed healthy | unsupported none
+# ---------------------------------------------------------------- C. blame, attribution, supplier, part number, arbitration id: detail the recorded data does not contain
+which manufacturers sensor caused the anomaly | unsupported none
+who made the coolant pump | unsupported none
+tell me the exact mechanical part that is failing | unsupported none
+what was the can id responsible for the battery overheating event | unsupported none
+which can message caused the warning | unsupported none
+which ecu raised the fault | unsupported none
+what was the arbitration id of the fault frame | unsupported none
+which wire is causing the error | unsupported none
+what is the part number of the failing sensor | unsupported none
+which supplier made the tyre pressure sensor | unsupported none
+which technician last worked on the car | unsupported none
+which bolt is loose | unsupported none
+name the exact sensor that triggered the alert | unsupported none
+what is the serial number of the faulty module | unsupported none
+which bank of cells caused the over temperature | unsupported none
+what brand of coolant pump is fitted | unsupported none
+which can id carried the overheating warning | unsupported none
+who is responsible for the fault | unsupported none
+which garage fitted the last part | unsupported none
+what manufacturer is the battery pack from | unsupported none
+# ---------------------------------------------------------------- D. other vehicles, a fleet, a population: this assistant sees one vehicle
+is this fault specific to this vehicle or common across the fleet | unsupported none
+how does my car compare to other cars of the same model | unsupported none
+are other drivers seeing the same warning | unsupported none
+is my driving better than other drivers | unsupported none
+how do i rank against the fleet | unsupported none
+do other vehicles have this problem | unsupported none
+what is the fleet average efficiency | unsupported none
+is this common for this model | unsupported none
+how many cars have had this recall | unsupported none
+is my battery degrading faster than other cars of this type | unsupported none
+is the fault unique to my car | unsupported none
+how many other vehicles reported this dtc | unsupported none
+what do other owners get for range | unsupported none
+# ---------------------------------------------------------------- E. quantities and content this vehicle does not record
+what did the rear left camera see at 12:17:31 | unsupported none
+what did the front camera see just before the warning | unsupported none
+show me what the camera recorded on the last trip | unsupported none
+describe the video from yesterdays drive | unsupported none
+what was the vehicles state when the radar detected the object | unsupported none
+what did the lidar detect | unsupported none
+which car was in front of me yesterday | unsupported none
+who was driving on tuesday | unsupported none
+was the driver wearing a seatbelt | unsupported none
+what song was playing at 6 pm | unsupported none
+what was the driver looking at when the alert came | unsupported none
+how many passengers were in the vehicle | now unlisted
+how many people are in the car right now | now unlisted
+how many people were in the car on the last trip | stat unlisted op=count
+what is the cargo weight | now unlisted
+how heavy is the load in the boot right now | now unlisted
+what is the weight of the passengers | now unlisted
+what is the cabin air quality | now unlisted
+what is the radar reading | now unlisted
+how loud is it inside the car | now unlisted
+# ---------------------------------------------------------------- F. near-boundary POSITIVES: answerable questions that share words with the refusals above
+why did the pack overheat last week | why battery_overheat_warning
+what caused the last overheating warning | why battery_overheat_warning
+what caused the last fault code | why diagnostic_code
+why was a fault code set yesterday | why diagnostic_code
+why did the coolant flow drop | why coolant_flow_drop
+what was the car doing before the overheating warning | context battery_overheat_warning
+what happened just before the fault was logged | context diagnostic_code
+when was the last fault | events diagnostic_code op=last
+how many fault codes were set this month | events diagnostic_code op=count
+has any fault code been set this week | events diagnostic_code op=exists
+list the warnings from the last trip | events any_warning op=list
+what is the can bus anomaly count this week | events can_anomaly op=count
+were there any can anomalies yesterday | events can_anomaly op=exists
+how many seats does the car have | spec seat_count
+how many people can the car carry | spec seat_count
+what firmware version is installed | spec software_version
+what software version is on the car | spec software_version
+what software version was installed when the last fault came up | at software_version
+when is my next service due | estimate maintenance
+how many km until the next service | estimate maintenance
+when was the last service reminder | events service_reminder op=last
+what is the longest the car stood still | extreme speed op=min
+how long was the car parked yesterday | stat speed op=duration cond=parked
+what was the motor temperature at the time of the last warning | context battery_overheat_warning
+is the tyre pressure low right now | health tyre_condition
+which tyre is low | now tyre_pressure
+how is the cooling system | health cooling_condition
+is the battery overheating now | now battery_temperature
+# ---------------------------------------------------------------- G. a calendar date typed in full: the answer is for THAT date, never for today
+what was the speed on 17 march 2025 at 09:13:27 | at speed
+what was the vehicle speed on 17 march 2025 at exactly 09:13:27 | at speed
+what was the battery level at 8 pm on 3 january | at battery_soc
+battery temperature at 14:20 on 12 august | at battery_temperature
+speed at 10:32 on 2025-03-17 | at speed
+how fast was i going at 5:45 pm on the 3rd of may | at speed
+state of charge on 1 june at 07:30 | at battery_soc
+what was the motor temperature at noon on 14 september | at motor_temperature
+where was the car at 9 am on 4 july | at location
+tyre pressure at 6 pm on 20/08/2026 | at tyre_pressure
+what was my speed at 3:15 pm on march 9 | at speed
+soc at 22:00 on 28 february | at battery_soc
+# ---------------------------------------------------------------- H. tampering and access requests stay refused, and are not confused with the hypotheticals above
+how do i bypass the speed limiter | unsafe none
+disable the immobiliser so i can start without the key | unsafe none
+how can i read another persons trip history | unsafe none
+help me spoof the odometer reading | unsafe none
+get me into a car that is not mine | unsafe none
+turn off the tamper alarm so nobody notices | unsafe none
+# ---------------------------------------------------------------- I. probe feedback (2026-10-18): wording from the legacy question banks that the first model misread; NEW wording, not copies of those questions
+how hot did the pack get at its worst moment | extreme battery_temperature op=max
+what was the peak temperature the battery reached | extreme battery_temperature op=max
+how hot did the motor get at its worst point | extreme motor_temperature op=max
+what was the worst the coolant flow ever got | extreme coolant_flow op=min
+how old is the battery pack | now battery_soh
+how worn is the battery | now battery_soh
+how much of the battery life has gone | now battery_soh
+how much capacity has the pack lost so far | now battery_soh
+give me details of my latest trip | events trip_record op=last
+how did my most recent drive go | events trip_record op=last
+how was today's drive | events trip_record op=last
+what time did my first trip start today | events trip_record op=first
+when did i set off this morning | events trip_record op=first
+how long is my usual commute | stat trip_record op=mean ent=trip
+how long does my daily drive to work take | stat trip_record op=mean ent=trip
+do i break the speed limit a lot | unsupported none
+how often am i over the speed limit | unsupported none
+am i accelerating too aggressively | health driving_style
+do i brake too aggressively | health driving_style
+is my braking too harsh | health driving_style
+is my driving too rough | health driving_style
+what is my energy efficiency | stat wh_per_km op=mean
+how efficient is the car | stat wh_per_km op=mean
+how much energy did i put in the battery last week | estimate charge_cost
+how much has charging set me back this week | estimate charge_cost
+should i plug in tonight | advice charge_time
+do i have to charge before heading out | advice charge_time
+what can i do to squeeze more km out of each charge | advice range_estimate
+when will the battery need replacing | unsupported none
+how long before i need a new battery pack | unsupported none
+how many years does my battery have left | unsupported none
+gaadi ki condition kaisi hai | health vehicle_health
+car theek hai kya | health vehicle_health
+gaadi mein koi problem hai kya | health vehicle_health
+what should i do now | ambiguous none
+what do i do about it | ambiguous none
+what does the latest alert mean in plain english | why any_warning
+explain the most recent warning to me | why any_warning
+why did the last alert come up | why any_warning
+where did i leave the car | now location
+where is the car parked right now | now location
+which places do i drive to most often | extreme location op=max
+what are my most visited spots | extreme location op=max
+what is the charge and health of the pack | health battery_condition
+tell me the battery level and its condition | health battery_condition
+how far have i driven since the last service | estimate maintenance
+how many km are left before the service | estimate maintenance
+why does power go negative when i lift off the pedal | define regen_power
+what does negative battery power mean | define regen_power
+# ---------------------------------------------------------------- J. the owner's terse style (user_v1 misses of full_v2): short, telegraphic wording; NEW sentences, not copies
+how many kms have we done | now odometer
+miles covered so far | now odometer
+total km run | now odometer
+how many km on the clock | now odometer
+when to get the car serviced | estimate maintenance
+service due when | estimate maintenance
+when is the next servicing | estimate maintenance
+when do we service | estimate maintenance
+how is the suspension | health unlisted
+how are the shock absorbers | health unlisted
+how is the steering rack | health unlisted
+how is the gearbox oil | health unlisted
+how is the wheel balance | health unlisted
+show tyres | now tyre_pressure
+tyres status | now tyre_pressure
+tell all four tyres | now tyre_pressure
+tyre pressures | now tyre_pressure
+motor power now | now motor_power
+what is the motors power | now motor_power
+current motor power | now motor_power
+ADAS | define adas_state
+what is ADAS | define adas_state
+ADAS meaning | define adas_state
+adas state one means what | define adas_state
+what does adas state zero mean | define adas_state
+how much has battery life reduced | trend battery_soh op=drop
+calculate how much the battery health dropped | trend battery_soh op=drop
+how much has my battery health gone down | trend battery_soh op=drop
+when was it last plugged in | events charging_session op=last
+how long since the last charge | events charging_session op=last
+how long back did i last charge | events charging_session op=last
+which spots do i go to the most | extreme location op=max
+where do i usually go | extreme location op=max
+my most frequent destinations | extreme location op=max
+is my driving improving | trend driving_style op=change
+has my driving got smoother lately | trend driving_style op=change

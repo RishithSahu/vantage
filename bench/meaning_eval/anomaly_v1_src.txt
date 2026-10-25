@@ -1,0 +1,27 @@
+# anomaly_v1: written 2026-10-24 before the round-10 data existed; never trained on.
+
+ev | is there anything out of the ordinary with the battery | anomaly battery_condition
+ev | any irregularities in the cooling circuit | anomaly cooling_condition
+ev | anything unusual about the brakes lately | anomaly brake_condition
+ev | does the motor behave oddly | anomaly motor_condition
+ev | are the tyres behaving unusually | anomaly tyre_condition
+ev | does the 12 volt show anything strange | anomaly aux_battery_condition
+ev | did the battery temperature do anything abnormal | anomaly battery_temperature
+ev | was yesterday's speed unusual | anomaly speed
+ev | is my consumption out of line with normal | anomaly wh_per_km
+ev | any strange charging sessions | anomaly charging_session
+ev | any unusual spikes this week | anomaly none
+ev | did anything strange show up on the car today | anomaly none
+ev | is the coolant flow behaving normally | anomaly coolant_flow
+ev | anything abnormal with tyre pressure | anomaly tyre_pressure
+ev | is the way I drive unusual compared with before | anomaly driving_style
+ev | anything off about the camera | anomaly camera_sharpness
+ev | were there irregularities in the supply voltage | anomaly aux_battery_voltage
+ev | does the regen look abnormal | anomaly regen_energy
+ev | is the motor temperature unusually high | anomaly motor_temperature
+ev | anything weird about trips this week | anomaly trip_record
+petrol | anything unusual with the engine temperature | anomaly motor_temperature
+petrol | is the fuel level behaving normally | anomaly fuel_level
+petrol | any abnormal engine behaviour lately | anomaly motor_condition
+diesel | is the soot level unusual | anomaly dpf_soot_load
+diesel | anything off with the adblue consumption | anomaly def_level

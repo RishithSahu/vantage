@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>VehicleGPT</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="VehicleGPT - ask your car about its own recorded data. Works offline on this computer."><meta name="color-scheme" content="dark"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%234fd1c5%27/%3E%3Cpath d=%27M6 18l2-5a2 2 0 012-1h12a2 2 0 012 1l2 5v5H6z%27 fill=%27%2304201d%27/%3E%3C/svg%3E">
+<style>
+:root{--bg:#070b11;--panel:#0f1620;--panel2:#131c28;--line:#1f2b3a;--txt:#e9eff7;--dim:#93a2b5;--faint:#64748a;--acc:#4fd1c5;--acc2:#3a7bd5;--ok:#3ddc84;--warn:#ffb020;--crit:#ff5a67;--info:#5aa9ff;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:radial-gradient(1200px 600px at 70% -10%,#0f1b2b 0%,var(--bg) 60%);color:var(--txt);font:16px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg{display:block}
+/* top bar */
+header{display:flex;align-items:center;gap:14px;padding:10px 20px;border-bottom:1px solid var(--line);background:#0a1018cc;backdrop-filter:blur(8px);flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:650;font-size:1.15rem;letter-spacing:.2px}
+.logo i{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;font-size:.82rem;border:1px solid var(--line);background:var(--panel);color:var(--dim);white-space:nowrap}
+.pill.good{color:#9be8df;border-color:#1c3a3d;background:#0d1e21}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--faint);flex:none}.dot.ok{background:var(--ok)}.dot.warn{background:var(--warn)}.dot.crit{background:var(--crit);animation:bl 1s infinite}
+@keyframes bl{50%{opacity:.3}}
+.grow{flex:1}
+select,.seg{background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--txt);font-size:.88rem}
+select{padding:7px 10px;max-width:260px}
+.seg{display:inline-flex;padding:3px}.seg button{padding:5px 12px;border-radius:8px;color:var(--dim);font-size:.85rem}.seg button.on{background:var(--acc);color:#04201d;font-weight:600}
+.ib{width:38px;height:38px;border-radius:11px;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center}.ib:hover{border-color:var(--acc)}
+.research-link{padding:8px 12px;border:1px solid var(--line);border-radius:10px;color:var(--dim);font-size:.84rem;text-decoration:none}.research-link:hover{border-color:var(--acc);color:var(--txt)}
+#clock{font-variant-numeric:tabular-nums;color:var(--dim);font-size:.9rem}
+/* layout */
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(300px,400px) minmax(0,1fr);gap:16px;padding:16px 20px}
+aside{overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding-right:4px;min-height:0}
+section#chat{display:flex;flex-direction:column;min-height:0;background:linear-gradient(180deg,var(--panel),#0c131c);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.card h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);font-weight:600;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+/* vehicle card */
+.speedrow{display:flex;align-items:flex-end;gap:12px}
+#spd{font-size:4.2rem;font-weight:300;line-height:.9;letter-spacing:-2px;font-variant-numeric:tabular-nums}
+#spdu{color:var(--dim);padding-bottom:6px}
+.gear{margin-left:auto;display:flex;gap:4px}.gear i{font-style:normal;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:var(--faint);font-weight:600;font-size:.9rem}.gear i.on{background:var(--acc);color:#04201d}
+#mode{color:var(--dim);font-size:.9rem;margin:2px 0 10px}
+.soc{display:flex;justify-content:space-between;align-items:baseline}.soc b{font-size:1.5rem}.soc span{color:var(--dim);font-size:.92rem}
+.bar{height:12px;border-radius:7px;background:#0a0f16;border:1px solid var(--line);overflow:hidden;margin:6px 0 12px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#2aa876,var(--acc));transition:width .5s}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:#0b1119;border:1px solid var(--line);border-radius:12px;padding:9px 12px;min-width:0}.tile small{display:block;color:var(--faint);font-size:.76rem}.tile b{font-size:1.2rem;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}.tile b u{font-size:.78rem;color:var(--dim);text-decoration:none;font-weight:400;margin-left:3px}
+.tile.warn b{color:var(--warn)}.tile.crit b{color:var(--crit)}
+.tyres{display:grid;grid-template-columns:1fr 1fr;gap:8px 28px;position:relative;padding:4px 0}
+.tyres div{background:#0b1119;border:1px solid var(--line);border-radius:10px;padding:6px 10px;text-align:center;font-variant-numeric:tabular-nums}.tyres small{display:block;color:var(--faint);font-size:.7rem}.tyres div.low{border-color:var(--crit);color:var(--crit)}
+.ev{display:flex;gap:10px;padding:8px 6px;border-radius:10px;cursor:pointer;align-items:flex-start;text-align:left;width:100%}.ev:hover{background:#ffffff08}.ev + .ev{border-top:1px solid #172130}
+.ev .dot{margin-top:6px}.ev b{display:block;font-size:.9rem;font-weight:600}.ev small{color:var(--dim);font-size:.8rem;display:block;overflow-wrap:anywhere}
+#cam{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;background:#000;display:block}
+.camrow{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap;color:var(--dim);font-size:.82rem}
+#map{width:100%;height:150px;border-radius:12px;background:#08101a;display:block}
+/* chat */
+#thread{flex:1;min-height:0;overflow-y:auto;padding:22px clamp(14px,3vw,36px);display:flex;flex-direction:column;gap:18px;scroll-behavior:smooth}
+.hello{margin:auto;max-width:720px;text-align:center;padding:10px}
+.hello h1{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:600;margin-bottom:6px}.hello p{color:var(--dim);margin-bottom:22px}
+.starts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;text-align:left}
+.start{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:.15s}.start:hover{border-color:var(--acc);transform:translateY(-1px)}.start b{display:block;font-size:.98rem}.start span{color:var(--dim);font-size:.84rem}
+.msg{display:flex;gap:12px;max-width:min(860px,100%)}
+.msg.u{align-self:flex-end;flex-direction:row-reverse}
+.msg .av{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;flex:none;margin-top:2px}
+.msg.u .bubble{background:#1d3a5c;border-radius:18px 18px 4px 18px;padding:10px 16px}
+.msg.a .bubble{background:var(--panel2);border:1px solid var(--line);border-radius:4px 18px 18px 18px;padding:14px 18px;min-width:0;flex:1}
+.lead{font-size:1.12rem;line-height:1.45;font-weight:500;overflow-wrap:anywhere}
+.verdict{display:inline-block;padding:3px 12px;border-radius:999px;font-size:.85rem;font-weight:650;margin-bottom:8px}.verdict.good{background:#0e2e1c;color:var(--ok);border:1px solid #1d5a38}.verdict.care{background:#33260a;color:var(--warn);border:1px solid #7a5a12}.verdict.bad{background:#3a1016;color:var(--crit);border:1px solid #8a2330}
+.rich{margin-top:8px;font-size:.98rem;overflow-wrap:anywhere}
+.rich ul,.rich ol{padding-left:1.15rem;margin:4px 0 6px}.rich li{margin:3px 0}.rich h5{font-size:.82rem;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);margin:10px 0 2px}.rich p{margin:4px 0;color:#cfd9e6}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:1px 8px;border-radius:999px;margin:0 6px 0 0;vertical-align:1px}.tag.p{background:#3a1016;color:var(--crit)}.tag.w{background:#33260a;color:var(--warn)}.tag.o{background:#0e2e1c;color:var(--ok)}
+.details{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;display:none}.details.open{display:block}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:#0b1119;font-size:.85rem;color:var(--dim);display:inline-flex;gap:6px;align-items:center}.btn:hover{border-color:var(--acc);color:var(--txt)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.chip{padding:6px 13px;border-radius:999px;background:#12304a33;border:1px solid #234a6b;font-size:.86rem;color:#bcd9f2}.chip:hover{background:#1a4468}
+.meta{margin-top:8px;font-size:.74rem;color:var(--faint)}
+.chartbox{margin-top:10px;position:relative}.chartbox svg{width:100%;height:auto}.chartbox small{display:block;color:var(--faint);font-size:.76rem;margin-top:4px}
+.tip{position:absolute;pointer-events:none;background:#000d;border:1px solid #2a3a4e;border-radius:8px;padding:6px 9px;font-size:.78rem;display:none;white-space:nowrap}
+.typing{display:flex;gap:5px;padding:6px 2px}.typing i{width:8px;height:8px;border-radius:50%;background:var(--dim);animation:ty 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}@keyframes ty{50%{opacity:.25;transform:translateY(-3px)}}
+.sys{align-self:center;color:var(--dim);font-size:.82rem;background:var(--panel);border:1px solid var(--line);padding:4px 14px;border-radius:999px}
+.alertmsg{border-color:#7a5a12!important;background:#241b09!important}
+/* composer */
+.composer{border-top:1px solid var(--line);padding:12px clamp(14px,3vw,36px) 14px;background:#0b121b}
+.row{display:flex;gap:10px;align-items:center}
+#q{flex:1;min-width:0;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:13px 20px;color:var(--txt);font-size:1.02rem;user-select:text}
+#q::placeholder{color:var(--faint)}
+.rb{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:var(--panel2);flex:none}
+.rb.go{background:var(--acc);border-color:var(--acc);color:#04201d}
+#mic.rec{background:var(--crit);border-color:var(--crit);color:#fff;animation:pulse 1.3s infinite}@keyframes pulse{0%{box-shadow:0 0 0 0 #ff5a6766}100%{box-shadow:0 0 0 16px #ff5a6700}}
+#stopSpeak{display:none;background:var(--crit);border-color:var(--crit);color:#fff}#stopSpeak.on{display:grid}
+.status{display:flex;gap:12px;align-items:center;margin-bottom:8px;min-height:22px;font-size:.84rem;color:var(--dim);flex-wrap:wrap}
+.status .hf{padding:3px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel2)}.status .hf.on{background:var(--acc);color:#04201d;border-color:var(--acc);font-weight:600}
+#live{color:var(--acc);font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+/* drawer */
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#0b121b;border-left:1px solid var(--line);z-index:50;transform:translateX(105%);transition:transform .25s;display:flex;flex-direction:column}
+#drawer.open{transform:none}
+#drawer .dh{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);font-weight:600}
+#drawer .db{overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:18px}
+.dgroup h6{font-size:.74rem;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);margin-bottom:8px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}.btns button{padding:7px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);font-size:.86rem}.btns button.on{background:var(--acc);color:#04201d;border-color:var(--acc);font-weight:600}
+.sc{display:block;width:100%;text-align:left;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);margin-bottom:6px}.sc.on{border-color:var(--acc)}.sc b{display:block;font-size:.92rem}.sc small{color:var(--dim);font-size:.78rem}
+.ck{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:#cfd9e6;margin-bottom:8px}.ck input{margin-top:4px;accent-color:var(--acc)}
+#scrim{position:fixed;inset:0;background:#0008;z-index:40;display:none}#scrim.open{display:block}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#000d;border:1px solid var(--line);padding:8px 18px;border-radius:999px;font-size:.9rem;z-index:60;display:none}
+.tabs{display:none}
+#conn{display:none;background:#3a1016;border-bottom:1px solid #8a2330;color:#ffb3ba;padding:8px 20px;text-align:center;font-size:.9rem}#conn.on{display:block}
+#ack{position:fixed;inset:0;background:#000b;z-index:80;display:none;align-items:center;justify-content:center;padding:16px}#ack.on{display:flex}
+#ack .box{max-width:560px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px 26px}#ack h2{font-size:1.25rem;margin-bottom:10px}#ack p{color:#cfd9e6;margin:8px 0;font-size:.95rem}#ack ul{margin:8px 0 14px 1.1rem;color:#cfd9e6;font-size:.93rem}#ack .go{background:var(--acc);color:#04201d;font-weight:650;padding:10px 22px;border-radius:999px}
+.fb{display:inline-flex;gap:4px;margin-left:auto}.fb button{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:#0b1119;display:grid;place-items:center;color:var(--dim)}.fb button:hover{border-color:var(--acc);color:var(--txt)}.fb button.on{background:var(--acc);color:#04201d;border-color:var(--acc)}
+.fbform{display:none;margin-top:8px}.fbform.on{display:flex;gap:8px}.fbform input{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px;color:var(--txt);font-size:.9rem}
+.acts{align-items:center}
+.disc{font-size:.72rem;color:var(--faint);text-align:center;margin-top:8px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:980px){
+  main{grid-template-columns:1fr;padding:10px}
+  aside{display:none}
+  body.showcar aside{display:flex}body.showcar section#chat{display:none}
+  .tabs{display:flex;border-top:1px solid var(--line);background:#0a1018}.tabs button{flex:1;padding:12px;color:var(--dim)}.tabs button.on{color:var(--acc);font-weight:600}
+  header{padding:8px 12px}.hidem{display:none}
+}
+</style></head><body>
+<noscript><p style="padding:24px;font-family:sans-serif">VehicleGPT needs JavaScript to run in your browser. Nothing is sent anywhere; the page only talks to the assistant on this computer.</p></noscript>
+<div id="conn" role="alert">Lost the connection to the assistant on this computer. Trying again...</div>
+<div id="ack" role="dialog" aria-modal="true" aria-labelledby="ackT"><div class="box"><h2 id="ackT">Before you start</h2>
+  <p>VehicleGPT answers questions about your vehicle's <b>recorded data</b>. It is an <b>advisory assistant, not a safety system</b>: it cannot see the car live, cannot control anything, and is no substitute for a workshop, the owner's manual or your own judgement.</p>
+  <ul><li>Everything runs on this computer; the assistant makes no internet connections.</li><li>The data shown here is a <b>simulated</b> vehicle history for demonstration.</li><li>The microphone button uses your <b>browser's</b> speech recognition (Chrome and Edge); depending on the browser that may send your voice to its vendor. Typing never leaves the computer.</li><li>The thumbs up / down buttons save your rating on this computer only.</li></ul>
+  <button class="go" id="ackGo">Got it</button></div></div>
+<header>
+  <div class="logo"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#04201d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-5a3 3 0 012.8-2h8.4A3 3 0 0119 8l2 5v4h-2M3 13v4h2m-2-4h18M7 17a2 2 0 104 0m4 0a2 2 0 104 0"/></svg></i>VehicleGPT</div>
+  <span class="pill good"><span class="dot ok"></span>On-device &middot; offline</span>
+  <span class="pill hidem" id="memPill" title="Memory used by the assistant process, against the 2 GB budget">&mdash;</span>
+  <span class="grow"></span>
+  <span id="clock" class="hidem"></span>
+  <a class="research-link hidem" href="/research">Research</a>
+  <select id="dsSel" class="hidem" aria-label="Vehicle"></select>
+  <span class="seg hidem" id="personaSeg"><button data-p="driver" class="on">Driver</button><button data-p="engineer">Engineer</button></span>
+  <button class="ib" id="gear" title="Settings and demo controls" aria-label="Settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></button>
+</header>
+<main>
+  <aside id="car">
+    <div class="card"><h4>Vehicle <span id="vname" style="text-transform:none;letter-spacing:0;color:var(--dim)"></span></h4>
+      <div class="speedrow"><b id="spd">0</b><span id="spdu">km/h</span><div class="gear" id="gearbox"><i>P</i><i>R</i><i>N</i><i>D</i></div></div>
+      <div id="mode"></div>
+      <div class="soc"><b id="socv">&mdash;</b><span id="rangev"></span></div>
+      <div class="bar"><i id="socbar" style="width:0"></i></div>
+      <div class="tiles">
+        <div class="tile" id="t_power"><small>Battery power</small><b>&mdash;</b></div>
+        <div class="tile" id="t_batt"><small>Pack temperature</small><b>&mdash;</b></div>
+        <div class="tile" id="t_flow"><small>Coolant flow</small><b>&mdash;</b></div>
+        <div class="tile" id="t_amb"><small>Outside</small><b>&mdash;</b></div>
+        <div class="tile" id="t_motor"><small>Motor</small><b>&mdash;</b></div>
+        <div class="tile" id="t_eff"><small>Recent efficiency</small><b>&mdash;</b></div>
+      </div></div>
+    <div class="card"><h4>Tyre pressure <span id="tpmsTag" style="text-transform:none;letter-spacing:0"></span></h4><div class="tyres" id="tyres"></div></div>
+    <div class="card"><h4>Alerts &amp; events <span style="text-transform:none;letter-spacing:0">tap one to ask about it</span></h4><div id="events"></div></div>
+    <div class="card"><h4>Front camera <span id="camState" class="pill" style="text-transform:none;letter-spacing:0"></span></h4><img id="cam" alt="Front camera"><div class="camrow" id="camInfo"></div></div>
+    <div class="card"><h4>Where <span id="place" style="text-transform:none;letter-spacing:0"></span></h4><canvas id="map" width="420" height="150"></canvas></div>
+  </aside>
+  <section id="chat">
+    <div id="thread" aria-live="polite"></div>
+    <div class="composer">
+      <div class="status"><button class="hf" id="hfBtn" type="button" title="After every answer the microphone opens again">Hands-free: off</button><span id="live"></span><span class="grow"></span><span id="pathHint"></span></div>
+      <div class="row">
+        <button class="rb" id="mic" title="Speak (voice to text)" aria-label="Speak"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></button>
+        <input id="q" placeholder="Ask about your car, or press the microphone..." autocomplete="off" spellcheck="false">
+        <button class="rb" id="stopSpeak" title="Stop speaking (Esc)" aria-label="Stop speaking"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button>
+        <button class="rb go" id="send" title="Send" aria-label="Send"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="disc">Advisory only - not a safety system and no substitute for a workshop or the owner's manual. Simulated data. <a href="#" id="aboutLink" style="color:inherit">About</a></div>
+    </div>
+  </section>
+</main>
+<nav class="tabs"><button id="tabChat" class="on">Assistant</button><button id="tabCar">Car</button></nav>
+<div id="scrim"></div>
+<div id="drawer" aria-label="Settings"><div class="dh">Settings and demo controls<button class="ib" id="dclose" aria-label="Close">&times;</button></div><div class="db">
+  <div class="dgroup"><h6>Voice</h6>
+    <label class="ck"><input type="checkbox" id="optSpeak"><span>Read every answer aloud (answers to a spoken question are always read aloud)</span></label>
+    <label class="ck"><input type="checkbox" id="optHands"><span>Hands-free conversation: the microphone reopens after each answer. Say &ldquo;stop&rdquo; or press Esc to interrupt, &ldquo;hands free off&rdquo; to leave.</span></label>
+    <label class="ck"><input type="checkbox" id="optAlerts" checked><span>Raise new warnings by itself and read them aloud</span></label>
+    <label class="ck"><input type="checkbox" id="optMic" checked><span>Microphone enabled (browser speech-to-text; the car's own recogniser in a real vehicle)</span></label></div>
+  <div class="dgroup"><h6>Units</h6><div class="btns" id="unitBtns"></div></div>
+  <div class="dgroup"><h6>Replay a moment from the history</h6><div id="scBtns"></div><div class="btns" id="spBtns" style="margin-top:8px"><button data-v="1" class="on">1&times;</button><button data-v="10">10&times;</button><button data-v="60">60&times;</button></div></div>
+  <div class="dgroup"><h6>Inject a camera fault</h6><div class="btns" id="faultBtns"><button data-f="none" class="on">None</button><button data-f="cover">Lens covered</button><button data-f="mud">Mud patch</button><button data-f="blur">Blur / fog</button><button data-f="glare">Sun glare</button><button data-f="dark">Tunnel</button></div></div>
+  <div class="dgroup"><h6>Camera source</h6><div class="btns" id="srcBtns"><button data-s="clip" class="on">Recorded drive</button><button data-s="webcam">My webcam</button><button data-s="file">Video file</button></div><input id="srcArg" placeholder="path to a video file" style="display:none;margin-top:8px;width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--txt)"><div style="margin-top:8px"><button class="btn" id="srcGo">Switch</button> <span id="srcMsg" class="meta"></span></div></div>
+  <div class="dgroup"><h6>System</h6><div id="sysInfo" class="meta" style="font-size:.84rem;color:var(--dim);line-height:1.7"></div><div style="margin-top:10px"><a class="btn" href="/headunit">Open the head-unit simulator view</a></div></div>
+</div></div>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S=null,persona='driver',UN={p:'kpa',d:'km',t:'c'},TZ=0,opt={speak:false,hands:false,alerts:true,mic:true};
+try{Object.assign(opt,JSON.parse(localStorage.getItem('vgpt_opt')||'{}'));opt.hands=false}catch(e){}
+const saveOpt=()=>{try{localStorage.setItem('vgpt_opt',JSON.stringify(opt))}catch(e){}};
+async function api(p,b){const r=await fetch(p,b===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});let j=null;try{j=await r.json()}catch(e){}if(!r.ok){const er=new Error((j&&j.error)||('HTTP '+r.status));er.id=j&&j.id;er.status=r.status;throw er}return j}
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',2600)}
+/* ---------- units + formats */
+const CV={spd:v=>UN.d==='mi'?v*0.621371:v,dist:v=>UN.d==='mi'?v*0.621371:v,temp:c=>UN.t==='f'?c*9/5+32:c,press:k=>UN.p==='psi'?k*0.145038:UN.p==='bar'?k/100:k};
+const LB={spd:()=>UN.d==='mi'?'mph':'km/h',dist:()=>UN.d==='mi'?'mi':'km',temp:()=>UN.t==='f'?'°F':'°C',press:()=>UN.p};
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const lt=ts=>new Date((ts+TZ)*1000),pad=n=>String(n).padStart(2,'0');
+const fmtT=ts=>{const d=lt(ts);return pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())},fmtD=ts=>{const d=lt(ts);return DAYS[d.getUTCDay()]+' '+d.getUTCDate()+' '+MON[d.getUTCMonth()]};
+/* ---------- live panel */
+function setTile(id,val,unit,cls){const t=$('#'+id);t.querySelector('b').innerHTML=val+(unit?'<u>'+unit+'</u>':'');t.className='tile '+(cls||'')}
+function render(){
+  const s=S,t=s.tele;TZ=s.tz||0;if(s.units)UN=s.units;
+  $('#clock').textContent=fmtD(s.sim_t)+' · '+fmtT(s.sim_t)+' (replay)';$('#vname').textContent=s.info.model+' · '+s.info.city;
+  $('#memPill').innerHTML='<b>'+s.sys.rss_mb+' MB</b> of '+s.sys.budget_mb+' MB';
+  if(t.ok){
+    $('#spd').textContent=Math.round(CV.spd(t.speed));$('#spdu').textContent=LB.spd();
+    $$('#gearbox i').forEach(i=>i.classList.toggle('on',i.textContent===t.gear));
+    $('#mode').textContent=['Parked','Driving · city','Driving · motorway','Charging · '+Math.abs(t.power_kw).toFixed(0)+' kW'][t.mode]||'';
+    $('#socv').textContent=t.soc.toFixed(0)+'%';$('#socbar').style.width=t.soc+'%';$('#rangev').textContent=t.range_km?'about '+Math.round(CV.dist(t.range_km))+' '+LB.dist()+' left':'';
+    setTile('t_power',t.power_kw.toFixed(1),'kW');setTile('t_batt',CV.temp(t.batt_c).toFixed(0),LB.temp(),t.batt_c>=52?'crit':t.batt_c>=45?'warn':'');
+    setTile('t_flow',t.flow.toFixed(1),'L/min',t.mode&&t.flow<4.5&&t.flow>0.2?'warn':'');setTile('t_amb',CV.temp(t.amb_c).toFixed(0),LB.temp());setTile('t_motor',CV.temp(t.motor_c).toFixed(0),LB.temp());
+    setTile('t_eff',t.wh_km?(UN.d==='mi'?(t.wh_km/0.621371).toFixed(0):t.wh_km.toFixed(0)):'—',t.wh_km?'Wh/'+LB.dist():'');
+    if(t.tyres)$('#tyres').innerHTML=t.tyres.map(w=>'<div class="'+(w.st!=='ok'?'low':'')+'"><small>'+esc(w.n)+'</small><b>'+CV.press(w.kpa).toFixed(UN.p==='kpa'?0:UN.p==='bar'?2:0)+'</b> '+LB.press()+'</div>').join('');
+    $('#tpmsTag').textContent=(t.tpms&&t.tpms.length)?'warning: '+t.tpms.join(', '):'';
+    if(t.pos)$('#place').textContent=(t.pos.near?'near '+t.pos.near:'')+(t.pos.km?' · '+CV.dist(t.pos.km).toFixed(1)+' '+LB.dist():'');
+  }else{
+    $('#spd').textContent='—';$('#spdu').textContent='';$('#mode').textContent='Live telemetry unavailable';
+    $$('#gearbox i').forEach(i=>i.classList.remove('on'));$('#socv').textContent='—';$('#socbar').style.width='0%';$('#rangev').textContent='';
+    ['t_power','t_batt','t_flow','t_amb','t_motor'].forEach(id=>setTile(id,'—',''));
+  }
+  const c=s.cam,cs=c.state==='OK'?'ok':c.state==='BLOCKED'?'crit':'warn';
+  $('#camState').innerHTML='<span class="dot '+cs+'"></span>'+esc(c.state==='OK'?'Clear':c.state.toLowerCase())+(c.reason?' · '+esc(c.reason):'');
+  $('#camInfo').innerHTML='<span>'+esc(c.source||'')+'</span><span>'+(c.fps||0)+' fps</span>'+(c.lane_conf!==undefined?'<span>lane confidence '+Math.round(c.lane_conf*100)+'%</span>':'');
+  $('#events').innerHTML=(s.events||[]).slice(0,6).map((e,i)=>{const n=EVNAME[e.type]||[e.type.replace(/_/g,' ').toLowerCase(),'info'];return '<button class="ev" data-i="'+i+'"><span class="dot '+(n[1]==='crit'?'crit':n[1]==='warn'?'warn':'ok')+'"></span><span><b>'+esc(n[0])+'</b><small>'+fmtD(e.ts)+' '+fmtT(e.ts)+' · '+esc(e.detail||'')+'</small></span></button>'}).join('')||'<small style="color:var(--dim)">Nothing recorded yet.</small>';
+  $$('#events .ev').forEach(b=>b.onclick=()=>{const e=s.events[+b.dataset.i];ask(EVQ[e.type]?EVQ[e.type](e):'what happened around '+fmtT(e.ts)+' on '+fmtD(e.ts))});
+  const sc=s.clock.scenario;$$('#scBtns .sc').forEach(b=>b.classList.toggle('on',b.dataset.sc===sc));$$('#spBtns button').forEach(b=>b.classList.toggle('on',+b.dataset.v===s.clock.speed));$$('#faultBtns button').forEach(b=>b.classList.toggle('on',b.dataset.f===c.fault));
+  $$('#unitBtns button').forEach(b=>b.classList.toggle('on',UN[b.dataset.k]===b.dataset.v));
+  $('#sysInfo').innerHTML='Assistant process: <b>'+s.sys.rss_mb+' MB</b> of '+s.sys.budget_mb+' MB budget<br>Language model: '+(s.sys.model?(s.sys.model.loaded?'loaded (only used when the rules are unsure)':'idle, not in memory'):'not used in this run')+'<br>History database: '+s.sys.db_mb+' MB &middot; '+esc(s.info.dataset);
+}
+const EVNAME={WARN_BATT_OVERTEMP:['Battery over-temperature','crit'],DTC_SET:['Trouble code','warn'],TPMS_LOW:['Tyre pressure low','warn'],CAMERA_BLOCKED:['Camera blocked','crit'],CAMERA_DEGRADED:['Camera degraded','warn'],CAMERA_RESTORED:['Camera restored','ok'],ADAS_DISENGAGE:['Lane assist off','warn'],CHARGE_START:['Charging started','ok'],TYRE_INFLATED:['Tyre inflated','ok'],LOW_12V:['12 V battery low','warn'],SERVICE_DUE:['Service due','warn']};
+const EVQ={WARN_BATT_OVERTEMP:e=>'why did the overheating warning on '+fmtD(e.ts)+' happen',DTC_SET:e=>'what could be causing the trouble code on '+fmtD(e.ts)+' at '+fmtT(e.ts),TPMS_LOW:e=>'which tyre is low',CAMERA_BLOCKED:e=>'was the camera blocked on '+fmtD(e.ts)};
+/* ---------- map */
+let trackT=0;
+async function drawMap(){if(Date.now()-trackT<6000)return;trackT=Date.now();let d;try{d=await api('/api/track?s=1800')}catch(e){return}
+  const cv=$('#map'),w=cv.clientWidth*2,h=cv.clientHeight*2;if(!w)return;cv.width=w;cv.height=h;const x=cv.getContext('2d');x.clearRect(0,0,w,h);const P=d.points||[];if(P.length<2){x.fillStyle='#64748a';x.font='24px sans-serif';x.fillText('No movement in the last 30 minutes',24,h/2);return}
+  const la=P.map(p=>p[0]),lo=P.map(p=>p[1]),k=Math.cos(la[0]*Math.PI/180),minLa=Math.min(...la),maxLa=Math.max(...la),minLo=Math.min(...lo),maxLo=Math.max(...lo);
+  const sc=Math.min((w-40)/(((maxLo-minLo)*k)||1e-5),(h-40)/((maxLa-minLa)||1e-5)),ox=(w-((maxLo-minLo)*k)*sc)/2,oy=(h-(maxLa-minLa)*sc)/2,X=p=>ox+(p[1]-minLo)*k*sc,Y=p=>h-oy-(p[0]-minLa)*sc;
+  x.lineWidth=5;x.lineJoin='round';x.strokeStyle='#4fd1c5';x.beginPath();P.forEach((p,i)=>i?x.lineTo(X(p),Y(p)):x.moveTo(X(p),Y(p)));x.stroke();
+  const e=P[P.length-1];x.fillStyle='#fff';x.beginPath();x.arc(X(e),Y(e),11,0,7);x.fill();x.fillStyle='#ff5a67';x.beginPath();x.arc(X(e),Y(e),6,0,7);x.fill()}
+/* ---------- rendering answers */
+function rich(text){
+  const L=text.split('\n');let h='',list=null;
+  const closeL=()=>{if(list){h+='</'+list+'>';list=null}};
+  const tag=t=>esc(t).replace(/^Needs attention - /,'<span class="tag p">needs attention</span> ').replace(/^Keep an eye on - /,'<span class="tag w">watch</span> ').replace(/^Suggestion: /,'<span class="tag o">suggestion</span> ').replace(/\[PROBLEM\]/g,'<span class="tag p">problem</span>').replace(/\[watch\]/g,'<span class="tag w">watch</span>').replace(/\[ok\]/g,'<span class="tag o">fine</span>');
+  for(let raw of L){const m=raw.match(/^\s*([-*•]|\d+\.)\s+(.*)$/);
+    if(m){const kind=/\d/.test(m[1])?'ol':'ul';if(list!==kind){closeL();h+='<'+kind+'>';list=kind}h+='<li>'+tag(m[2])+'</li>';continue}
+    closeL();const t=raw.trim();if(!t)continue;
+    if(/^[A-Z][^.]{2,60}:$/.test(t))h+='<h5>'+esc(t.slice(0,-1))+'</h5>';else h+='<p>'+tag(t)+'</p>'}
+  closeL();return h}
+const FOLLOW={ctx:['What evidence supports that?','Could there be another explanation?','What data are you missing?'],why_event:['What evidence supports that?','Could there be another explanation?','What would have prevented it?'],root_cause:['What evidence supports that?','What would prove that wrong?'],why_range2:['What evidence supports that conclusion?','Could there be another explanation?','What data are you missing?'],
+  briefing:['Is my car healthy?','What happened before the last warning?'],events:['What happened before it?'],health_summary:['What should I investigate first?'],trend:['Is that statistically significant?'],degrade:['How fast is the battery ageing?']};
+const FOLLOW_INTENT={HEALTH:['What should I investigate first?','Show the last diagnostic events'],BEFORE_EVENT:['What evidence supports that?','Could there be another explanation?'],WHY_RANGE:['What evidence supports that conclusion?','Could there be another explanation?'],STATUS:['How was my driving this week?'],TYRES:['Is any tyre leaking slowly?']};
+let lastSpeech='';
+function addUser(q){const m=document.createElement('div');m.className='msg u';m.innerHTML='<div class="bubble">'+esc(q)+'</div>';add(m)}
+function add(el){const th=$('#thread');const h=$('.hello');if(h)h.remove();th.appendChild(el);th.scrollTop=th.scrollHeight;return el}
+function sysMsg(t){const e=document.createElement('div');e.className='sys';e.textContent=t;add(e)}
+const AV='<div class="av"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#04201d" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"/></svg></div>';
+function answerEl(r,auto){
+  const el=document.createElement('div');el.className='msg a';const full=r.answer||'',brief=r.brief||full;
+  const small=persona==='engineer'&&!r.suggest&&full.length<=620&&full.split('\n').length>1; /* drivers get the direct answer; evidence stays behind Details */
+  const hasMore=!small&&full.length>brief.length+20&&full!==brief;
+  let lead='',body='',verdict='';
+  if(r.route==='briefing'){const first=full.split('\n')[0];const v=/OK to drive/.test(first)?(/watch/.test(first)?'care':'good'):/Drive with care/.test(first)?'care':'bad';verdict='<div class="verdict '+v+'">'+esc(first.replace(/^[^.]*\.\s*/,'').replace(/\.$/,''))+'</div>';lead='<div class="lead">'+esc(first.split('.')[0])+'.</div>';body='<div class="rich">'+rich(full.split('\n').slice(1).join('\n'))+'</div>'}
+  else if(small){const ls=full.split('\n');lead='<div class="lead">'+esc(ls[0])+'</div>';body='<div class="rich">'+rich(ls.slice(1).join('\n'))+'</div>'}
+  else lead='<div class="lead">'+esc(r.suggest?full.split('\n')[0]:brief)+'</div>';
+  const status=r.intent==='CLARIFY'?'needs clarification':r.intent==='SAFETY'?'not answered':'answered';
+  const chips=(r.suggest||FOLLOW[r.route]||FOLLOW_INTENT[r.intent]||[]).map(q=>'<button class="chip">'+esc(q)+'</button>').join('');
+  el.innerHTML=AV+'<div class="bubble">'+verdict+lead+body+(hasMore?'<div class="details rich">'+rich(full)+'</div>':'')+(r.anchor?'<div class="chartbox"></div>':'')+
+    '<div class="acts">'+(hasMore?'<button class="btn bd">Show details</button>':'')+(r.anchor?'<button class="btn bc">Signals around it</button>':'')+'<button class="btn bs" title="Read this answer aloud">Read aloud</button><span class="fb" role="group" aria-label="Was this answer helpful?"><button class="up" title="Helpful" aria-label="Helpful"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v9H4v-9zM7 11l4-8a2 2 0 012 2v4h6a2 2 0 012 2l-1 7a2 2 0 01-2 2H7"/></svg></button><button class="dn" title="Not helpful" aria-label="Not helpful"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(180deg)"><path d="M7 11v9H4v-9zM7 11l4-8a2 2 0 012 2v4h6a2 2 0 012 2l-1 7a2 2 0 01-2 2H7"/></svg></button></span></div><div class="fbform"><input maxlength="400" placeholder="What did you expect? (optional)" aria-label="What did you expect?"><button class="btn sendfb">Send</button></div>'+(chips?'<div class="chips">'+chips+'</div>':'')+
+    '<div class="meta">'+status+' in '+(r.ms.total>=1000?(r.ms.total/1000).toFixed(1)+' s':Math.round(r.ms.total)+' ms')+(r.understood?' · understood as “'+esc(r.understood)+'”':'')+'</div></div>';
+  const bd=el.querySelector('.bd');if(bd)bd.onclick=()=>{const d=el.querySelector('.details');d.classList.toggle('open');bd.textContent=d.classList.contains('open')?'Hide details':'Show details'};
+  const bc=el.querySelector('.bc');if(bc)bc.onclick=async()=>{const bx=el.querySelector('.chartbox');if(bx.innerHTML){bx.innerHTML='';bc.textContent='Signals around it';return}bc.textContent='Hide signals';bx.textContent='Loading...';try{drawChart(bx,await api('/api/evidence?ts='+r.anchor))}catch(e){bx.textContent='Chart unavailable'}};
+  el.querySelector('.bs').onclick=()=>speak(r.speech||brief);
+  const sendFb=async(rating,note)=>{try{await api('/api/feedback',{rating,q:r.__q||'',brief:brief,route:r.route||'',path:r.path||'',note:note||''});el.querySelector('.fb').innerHTML='<span class="meta" style="margin:0">Thanks - saved on this computer</span>';el.querySelector('.fbform').classList.remove('on')}catch(e){toast('Could not save feedback')}};
+  el.querySelector('.fb .up').onclick=()=>sendFb('up');el.querySelector('.fb .dn').onclick=()=>{el.querySelector('.fbform').classList.add('on');el.querySelector('.fbform input').focus()};
+  el.querySelector('.sendfb').onclick=()=>sendFb('down',el.querySelector('.fbform input').value);el.querySelector('.fbform input').addEventListener('keydown',e=>{if(e.key==='Enter')sendFb('down',e.target.value)});
+  $$('.chip',el).forEach(c=>c.onclick=()=>ask(c.textContent));
+  return el}
+/* ---------- evidence chart */
+function drawChart(box,d){
+  if(!d.ok){box.textContent=d.why||'No chart available';return}
+  const W=760,rowH=96,padL=44,padR=14,n=d.series.length,H=n*rowH+30,t0=d.t[0],t1=d.t[d.t.length-1],X=t=>padL+(t-t0)/(t1-t0||1)*(W-padL-padR),COL={batt:'#ff7a59',flow:'#4cc9f0',power:'#ffd166',speed:'#06d6a0'};
+  const conv=(s,v)=>s.key==='batt'?CV.temp(v):s.key==='speed'?CV.spd(v):v,unit=s=>s.key==='batt'?LB.temp():s.key==='speed'?LB.spd():s.unit;
+  let g='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Recorded signals around the event">';
+  d.series.forEach((s,i)=>{const v=s.v.map(x=>conv(s,x)),y0=i*rowH+4,lo=Math.min(...v),hi=Math.max(...v),ph=rowH-34,Y=x=>y0+20+ph-(x-lo)/((hi-lo)||1)*ph;
+    g+='<text x="'+padL+'" y="'+(y0+12)+'" fill="#93a2b5" font-size="12.5">'+s.label+' ('+unit(s)+')</text><rect x="'+padL+'" y="'+(y0+20)+'" width="'+(W-padL-padR)+'" height="'+ph+'" fill="#0b1119" stroke="#1f2b3a"/>';
+    g+='<text x="'+(padL-6)+'" y="'+(y0+30)+'" fill="#64748a" font-size="11" text-anchor="end">'+hi.toFixed(hi>99?0:1)+'</text><text x="'+(padL-6)+'" y="'+(y0+20+ph)+'" fill="#64748a" font-size="11" text-anchor="end">'+lo.toFixed(lo>99?0:1)+'</text>';
+    g+='<polyline fill="none" stroke="'+COL[s.key]+'" stroke-width="2" stroke-linejoin="round" points="'+d.t.map((t,k)=>X(t).toFixed(1)+','+Y(v[k]).toFixed(1)).join(' ')+'"/>'});
+  d.marks.forEach(m=>{const x=X(m.t),ev=m.t===0;g+='<line x1="'+x+'" x2="'+x+'" y1="20" y2="'+(H-22)+'" stroke="'+(ev?'#ff5a67':'#ffd166')+'" stroke-dasharray="5 4" stroke-width="1.5"/><text x="'+Math.min(Math.max(x+5,padL),W-170)+'" y="'+(H-8)+'" fill="'+(ev?'#ff9ba3':'#ffd166')+'" font-size="12">'+(ev?'event':esc(m.label))+'</text>'});
+  const lab=t=>t===0?'event':(Math.round(t/60)+' min');g+='<text x="'+padL+'" y="'+(H-8)+'" fill="#64748a" font-size="11">'+(d.marks.length>1?'':lab(t0))+'</text></svg><small>Recorded signals ('+(d.res===1?'1 Hz':'per-minute')+'), '+Math.round(-t0/60)+' min before to '+Math.round(t1/60)+' min after the event. Nothing here is estimated.</small><div class="tip"></div>';
+  box.innerHTML=g;const svg=box.querySelector('svg'),tip=box.querySelector('.tip');
+  svg.onmousemove=ev=>{const r=svg.getBoundingClientRect(),px=(ev.clientX-r.left)/r.width*W;if(px<padL||px>W-padR){tip.style.display='none';return}const t=t0+(px-padL)/(W-padL-padR)*(t1-t0);let k=0;for(let i=0;i<d.t.length;i++)if(Math.abs(d.t[i]-t)<Math.abs(d.t[k]-t))k=i;
+    tip.innerHTML=(d.t[k]===0?'event':(d.t[k]<0?Math.abs(Math.round(d.t[k]/6)/10)+' min before':Math.round(d.t[k]/6)/10+' min after'))+'<br>'+d.series.map(s=>s.label+': <b>'+conv(s,s.v[k]).toFixed(1)+' '+unit(s)+'</b>').join('<br>');tip.style.display='block';tip.style.left=Math.min(ev.clientX-box.getBoundingClientRect().left+12,box.clientWidth-190)+'px';tip.style.top=(ev.clientY-box.getBoundingClientRect().top+12)+'px'};
+  svg.onmouseleave=()=>tip.style.display='none'}
+/* ---------- speech out */
+let speaking=0,gen=0;
+function stopSpeech(){gen++;speaking=0;try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}$('#stopSpeak').classList.remove('on')}
+function speak(t,done){if(!window.speechSynthesis||!t){if(done)done();return}stopSpeech();lastSpeech=t;const parts=t.match(/[^.!?;:\n]+[.!?;:]?/g)||[t];speaking=parts.length;const g=gen;$('#stopSpeak').classList.add('on');
+  parts.forEach(x=>{const u=new SpeechSynthesisUtterance(x.trim());u.lang='en-US';u.rate=1.0;u.onend=u.onerror=()=>{if(g===gen&&--speaking<=0){$('#stopSpeak').classList.remove('on');if(done)done()}};speechSynthesis.speak(u)})}
+$('#stopSpeak').onclick=stopSpeech;document.addEventListener('keydown',e=>{if(e.key==='Escape')stopSpeech();if(e.key==='/'&&document.activeElement!==$('#q')){e.preventDefault();$('#q').focus()}});
+/* ---------- speech in (speech to text) + hands-free */
+let rec=null,handsOn=false;
+function setLive(t){$('#live').textContent=t||''}
+function listen(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){toast('Speech recognition is not available in this browser - type instead');return}
+  if(rec){rec.stop();return}stopSpeech();rec=new SR();rec.lang='en-US';rec.interimResults=true;let got=false;
+  rec.onstart=()=>{$('#mic').classList.add('rec');setLive('Listening...')};
+  rec.onend=()=>{$('#mic').classList.remove('rec');rec=null;if(!got)setLive('');if(!got&&opt.hands&&handsOn)setTimeout(()=>{if(opt.hands&&!rec&&!busy)listen()},400)};
+  rec.onerror=e=>{if(e.error==='not-allowed'||e.error==='service-not-allowed'){setHands(false);toast('Microphone blocked - allow it in the browser address bar')}else if(e.error!=='no-speech'&&e.error!=='aborted')toast('Voice: '+e.error)};
+  rec.onresult=e=>{const r=e.results[e.results.length-1],t=r[0].transcript.trim();setLive('“'+t+'”');if(!r.isFinal)return;got=true;const low=t.toLowerCase().replace(/[^a-z ]/g,'').trim();
+    if(/^(stop|cancel|be quiet|quiet|shut up|never mind|enough|pause)$/.test(low)){stopSpeech();setLive('');toast('Stopped');if(opt.hands&&handsOn)setTimeout(()=>{if(!rec)listen()},400);return}
+    if(/^hands ?free (off|mode off)$/.test(low)||/^(stop listening|goodbye|bye)$/.test(low)){setHands(false);setLive('');return}
+    setLive('');ask(t,true)};rec.start()}
+function setHands(on){opt.hands=on;handsOn=on;$('#optHands').checked=on;$('#hfBtn').classList.toggle('on',on);$('#hfBtn').textContent='Hands-free: '+(on?'on':'off');if(!on&&rec)try{rec.stop()}catch(e){}}
+function afterAnswer(spoke){if(!(opt.hands&&opt.mic))return;handsOn=true;if(!spoke)setTimeout(()=>{if(opt.hands&&!rec&&!busy)listen()},300)}
+if(!(window.SpeechRecognition||window.webkitSpeechRecognition)){$('#mic').disabled=true;$('#mic').title='Voice input needs Chrome or Edge - you can still type';$('#hfBtn').style.display='none'}
+$('#mic').onclick=()=>{if(!opt.mic){toast('Microphone is disabled in Settings');return}handsOn=opt.hands;listen()};
+$('#hfBtn').onclick=()=>{setHands(!opt.hands);if(opt.hands&&!rec)listen()};
+/* ---------- asking */
+let busy=false;
+async function ask(q,viaVoice,auto){q=(q||$('#q').value).trim();if(!q||busy)return;stopSpeech();busy=true;$('#q').value='';if(!auto)addUser(q);
+  const th=document.createElement('div');th.className='msg a';th.innerHTML=AV+'<div class="bubble"><div class="typing"><i></i><i></i><i></i></div></div>';add(th);
+  try{const r=await api('/api/ask',{q,persona});r.__q=q;const el=answerEl(r,auto);if(auto&&auto!=='brief')el.querySelector('.bubble').classList.add('alertmsg');th.replaceWith(el);$('#thread').scrollTop=$('#thread').scrollHeight;
+    const sp=opt.speak||viaVoice||auto==='alert';if(sp)speak(r.speech||r.brief||r.answer.split('\n')[0],()=>afterAnswer(false));afterAnswer(!!sp)
+  }catch(e){th.querySelector('.bubble').innerHTML='<div class="lead">'+(e.status===503?'The assistant is busy - please ask again in a moment.':e.status===500?'Something went wrong inside the assistant'+(e.id?' (reference '+esc(e.id)+')':'')+'. Please try again; if it keeps happening, quote the reference.':'I can\'t reach the assistant on this computer right now.')+'</div><div class="acts"><button class="btn retry">Try again</button></div>';const rb=th.querySelector('.retry');if(rb)rb.onclick=()=>{th.remove();ask(q,viaVoice,auto)}}
+  busy=false}
+$('#send').onclick=()=>ask();$('#q').addEventListener('keydown',e=>{if(e.key==='Enter')ask()});
+/* ---------- proactive alerts */
+const seenEv=new Set();let evInit=false,evKey='';
+const ALERT_Q={WARN_BATT_OVERTEMP:['Battery over-temperature warning','why did the last overheating warning happen'],DTC_SET:['New diagnostic trouble code','what is the last diagnostic trouble code and what could be causing it'],TPMS_LOW:['Tyre pressure warning','which tyre is low']};
+async function proactive(){const evs=(S&&S.events)||[],k=(S&&S.info&&S.info.dataset)||'';if(k!==evKey){evKey=k;evInit=false;seenEv.clear()}
+  const warn=evs.filter(e=>ALERT_Q[e.type]);const cur=new Set(warn.map(e=>e.type+e.ts));[...seenEv].forEach(i=>{if(!cur.has(i))seenEv.delete(i)});if(!evInit){warn.forEach(e=>seenEv.add(e.type+e.ts));evInit=true;return}
+  for(const e of warn){const id=e.type+e.ts;if(seenEv.has(id))continue;if(busy)return;seenEv.add(id);if(S.sim_t-e.ts>180||S.sim_t<e.ts||!opt.alerts)continue;
+    const a=ALERT_Q[e.type];sysMsg('Heads up — '+a[0]+' at '+fmtT(e.ts));toast(a[0]);await ask(a[1],false,'alert');return}}
+/* ---------- chat bootstrap */
+function hello(){const d=document.createElement('div');d.className='hello';d.innerHTML='<h1>How can I help with your car?</h1><p>I run entirely inside the vehicle &mdash; nothing leaves it. Ask in your own words, or press the microphone.</p><div class="starts">'+
+  [['Brief me','Pre-drive check: range, warnings, what to watch'],['Is my car healthy?','Every system, worst first'],['Why has my range dropped lately?','With the evidence and how sure I am'],['What happened before the last warning?','Signals around it, with a chart'],['How are my tyres?','Pressures and slow leaks'],['Identify any gradual degradation','Long-term drifts across the history']].map(x=>'<button class="start"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></button>').join('')+'</div>';
+  add(d);$$('.start',d).forEach(b=>b.onclick=()=>ask(b.querySelector('b').textContent))}
+/* ---------- settings drawer */
+const openD=o=>{$('#drawer').classList.toggle('open',o);$('#scrim').classList.toggle('open',o)};
+$('#gear').onclick=()=>openD(true);$('#dclose').onclick=$('#scrim').onclick=()=>openD(false);
+[['optSpeak','speak'],['optAlerts','alerts'],['optMic','mic']].forEach(([id,k])=>{$('#'+id).checked=!!opt[k];$('#'+id).onchange=e=>{opt[k]=e.target.checked;saveOpt()}});
+$('#optHands').onchange=e=>{setHands(e.target.checked);if(opt.hands&&!rec)listen()};
+$$('#personaSeg button').forEach(b=>b.onclick=()=>{persona=b.dataset.p;$$('#personaSeg button').forEach(x=>x.classList.toggle('on',x===b));toast(persona==='engineer'?'Engineer mode: answers include more evidence':'Driver mode')});
+$('#unitBtns').innerHTML=[['d','km','km'],['d','mi','miles'],['t','c','°C'],['t','f','°F'],['p','kpa','kPa'],['p','psi','psi'],['p','bar','bar']].map(u=>'<button data-k="'+u[0]+'" data-v="'+u[1]+'">'+u[2]+'</button>').join('');
+$$('#unitBtns button').forEach(b=>b.onclick=()=>{const u=Object.assign({},UN);u[b.dataset.k]=b.dataset.v;api('/api/units',u)});
+$$('#faultBtns button').forEach(b=>b.onclick=()=>api('/api/fault',{kind:b.dataset.f}));
+$$('#spBtns button').forEach(b=>b.onclick=()=>api('/api/playback',{speed:+b.dataset.v}));
+let srcSel='clip';$$('#srcBtns button').forEach(b=>b.onclick=()=>{srcSel=b.dataset.s;$$('#srcBtns button').forEach(x=>x.classList.toggle('on',x===b));$('#srcArg').style.display=srcSel==='clip'?'none':'block';$('#srcArg').placeholder=srcSel==='webcam'?'webcam index (usually 0)':'full path to a video file'});
+$('#srcGo').onclick=async()=>{const a=$('#srcArg').value.trim();const r=await api('/api/camera',srcSel==='webcam'?{source:'webcam',index:+(a||0)}:srcSel==='file'?{source:'file',path:a}:{source:'clip'});$('#srcMsg').textContent=r.ok?'Switched. The analyser recalibrates for ~2 s.':(r.error||'failed')};
+$('#tabChat').onclick=()=>{document.body.classList.remove('showcar');$('#tabChat').classList.add('on');$('#tabCar').classList.remove('on')};
+$('#tabCar').onclick=()=>{document.body.classList.add('showcar');$('#tabCar').classList.add('on');$('#tabChat').classList.remove('on');camOn()};
+function camOn(){const c=$('#cam');if(c.offsetParent!==null&&!c.src.includes('camera.mjpg'))c.src='/camera.mjpg'}
+async function init(){const r=await api('/api/state');S=r;
+  $('#scBtns').innerHTML=Object.entries(r.scenarios).map(([k,v])=>'<button class="sc" data-sc="'+k+'"><b>'+esc(v.name)+'</b><small>'+esc(v.desc)+'</small></button>').join('');
+  $$('#scBtns .sc').forEach(b=>b.onclick=()=>{api('/api/playback',{scenario:b.dataset.sc});toast('Replaying: '+r.scenarios[b.dataset.sc].name);openD(false)});
+  const d=await api('/api/datasets');$('#dsSel').innerHTML=d.datasets.map(x=>'<option value="'+x.name+'"'+(x.name===d.current?' selected':'')+'>'+esc(x.label)+'</option>').join('');
+  $('#dsSel').onchange=async e=>{toast('Loading vehicle history...');const r1=await api('/api/dataset',{name:e.target.value});if(r1.ok===false){toast('Could not load: '+(r1.error||''));return}$('#thread').innerHTML='';hello();const st=await api('/api/state');S=st;trackT=0;toast('Switched to '+st.info.model);setTimeout(()=>ask('Brief me',false,'brief'),400)};
+  hello();render();camOn();drawMap()}
+let failN=0;async function tick(){try{S=await api('/api/state');render();proactive();drawMap();camOn();failN=0;$('#conn').classList.remove('on')}catch(e){if(++failN>=3)$('#conn').classList.add('on')}setTimeout(tick,failN?2000:600)}
+(function(){let seen=false;try{seen=localStorage.getItem('vgpt_ack')==='1'}catch(e){}const a=$('#ack');if(!seen){a.classList.add('on');$('#ackGo').focus()}$('#ackGo').onclick=()=>{a.classList.remove('on');try{localStorage.setItem('vgpt_ack','1')}catch(e){}$('#q').focus()};$('#aboutLink').onclick=e=>{e.preventDefault();a.classList.add('on');$('#ackGo').focus()}})();
+init().then(()=>{tick();setTimeout(()=>ask('Brief me',false,'brief'),700)});
+</script></body></html>

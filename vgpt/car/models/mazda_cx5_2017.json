@@ -1,0 +1,36 @@
+{
+ "id": "mazda_cx5_2017",
+ "name": "Mazda CX-5 (2017)",
+ "year": 2017,
+ "region": "Japan / global",
+ "powertrain": "petrol",
+ "class": "Compact SUV, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Mazda CX-5 (2017) database (ambient_temperature, brake_pressure, engine_rpm, gear, lateral_acceleration, lead_vehicle_distance, longitudinal_acceleration, motor_temperature, parking_brake, speed, steering_angle, steering_rate ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Linux telematics / infotainment (syslog)",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 17 drafted, 497 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): mazda_2017.dbc",
+ "bound": 37,
+ "concepts": 37,
+ "extension": [
+  "ambient_temperature",
+  "aux_battery_voltage",
+  "barometric_pressure",
+  "cabin_temperature",
+  "engine_oil_temperature",
+  "fuel_level",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

@@ -1,0 +1,94 @@
+# held-out DEV set for everyday questions (route<TAB>question). Written fresh, in many styles (spoken, messy, typos). Used to iterate on the matching; heldout_final.tsv is the untouched test.
+advice	im planning to drive from here to hyderabad tomorrow, is the car good enough for that
+advice	is the vehicle in any condition to be driven right now
+advice	do i risk anything by taking the car out today
+advice	could i drive to work this morning or should i not
+advice	wil the car be ok for a long road trip
+signal_why	why is the kw number below zero sometimes
+signal_why	coolant flow is 0, why
+signal_why	why does the motor get so hot on the highway
+signal_why	how come the battery temp goes up when charging
+drive_safely	what do i need to remember to be safe on the road
+drive_safely	give me some advice to avoid crashes
+drive_safely	safe driving tips for my ev
+battery_now	whats the status of my batery
+battery_now	how healthy is the battery and how full
+battery_now	is the battery in good condition
+last_charge	when did i last charge the car
+last_charge	last time i plugged in
+last_charge	what was the previous charging session like
+charge_cost	how much would my charging have cost at 8 rupees per unit
+charge_cost	what's it costing me to charge this car
+charge_cost	money spent on electricity for the car this week
+charge_time	how long does it take to fill up to 100 percent
+charge_time	if i plug in now when will it be at 80
+reach	do i have enough charge for a 120 km drive
+reach	can i get to the next town on this battery
+reach	do i need to charge tonight
+reach	how much range have i got left
+improve_range	how do i make my battery last longer on a drive
+improve_range	tips for better efficiency please
+improve_range	whats the best way to save energy in this car
+speeding	am i driving above the speed limit
+speeding	do i go too fast on highways
+speeding	how much of my driving is above 110
+hot_battery	did my battery ever get overheated
+hot_battery	what was the highest battery temperature
+hot_battery	has the pack been dangerously warm
+pump_ok	is the cooling pump broken
+pump_ok	any issue with the coolant circulation
+pump_ok	how is the battery cooling doing
+v12	is my 12v battery weak
+v12	check the auxiliary battery voltage
+motor_now	whats the temp of the motor right now
+motor_now	is the motor getting too hot
+unusual	was there anything weird today
+unusual	did something unusual happen yesterday
+unusual	anything out of the ordinary today
+overview	how was my week driving
+overview	summary of this week please
+overview	give me a rundown of how the car has been doing
+style	how good a driver am i
+style	do i brake too aggressively
+style	am i accelerating too much
+style_trend	is my driving getting better or worse
+dtc_explain	what is this fault code
+dtc_explain	explain the dtc to me
+dtc_explain	what does p1a00 mean
+battery_age	how worn out is my battery
+battery_age	how much has battery capacity dropped
+soh_rate	how fast is the battery losing capacity
+soh_rate	when will i have to replace the battery
+charging_now	am i charging right now
+charging_now	is the car plugged in
+top_speed	what was my top speed
+top_speed	how fast have i gone at the maximum
+places_most	where do i usually drive to
+places_most	which places do i visit the most
+commute	what is my typical commute time
+commute	how long is my regular route
+longest_trip	what was my longest trip ever
+longest_trip	which journey was the farthest
+last_trip	how was my most recent drive
+eff_day	what was yesterday's energy per km
+best_day	which day was i most efficient
+best_day	on which day did i use the most energy
+eff_trend	am i using more energy than i used to
+eff_trend	has my consumption increased
+trip_count	how many trips did i take this week
+trip_count	number of drives last week
+regen	how much regen did i get this week
+regen	how much energy did braking recover
+leave_time	when did i last go out
+explain_simple	explain the last warning to me simply
+explain_simple	in simple words what was the last alert
+briefing	brief me please
+briefing	morning, what should i know
+briefing	good evening
+help	what kind of things can i ask you
+help	how do i use this
+foreign	battery kitni hai
+gate	what is the weather in london tomorrow
+gate	who is the president of the usa
+gate	how do i bake a cake
+gate	play my favourite song

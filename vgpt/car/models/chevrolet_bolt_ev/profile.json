@@ -1,0 +1,280 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "chevrolet_bolt_ev",
+ "vehicle": {
+  "make": "Chevrolet",
+  "model": "Bolt EV",
+  "year": 2021,
+  "powertrain": "bev",
+  "specs": {
+   "veh.cap_kwh": 65,
+   "veh.soh": 98,
+   "veh.nominal_voltage": 350,
+   "veh.tyre_spec_front": 250,
+   "veh.tyre_spec_rear": 250,
+   "veh.service_km": 12000,
+   "veh.sw": "hv 21.3",
+   "veh.wheelbase_m": 2.67,
+   "veh.wheel_radius_m": 0.33,
+   "veh.gear_ratio": 7.05,
+   "veh.rated_max_speed": 145,
+   "veh.seats": 5,
+   "veh.home_charger_kw": 7.2,
+   "veh.model": "Chevrolet Bolt EV"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "hv",
+   "type": "can",
+   "name": "High-voltage management CAN 500 kbit/s (OEM database gm_global_a_high_voltage_management)",
+   "dbc": "gm_global_a_high_voltage_management.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "ext",
+   "type": "can",
+   "name": "Bolt EV extension CAN (SYNTHETIC: quantities the open database lacks)",
+   "dbc": "chevrolet_bolt_ev_ext.dbc",
+   "channel": "can1",
+   "bitrate": 500000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4) with vendor data identifiers",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json",
+   "dids": {
+    "0xF1A0": {
+     "concept": "battery_soc",
+     "fmt": ">H",
+     "scale": 0.1,
+     "unit": "%",
+     "rate_hz": 1
+    },
+    "0xF1A1": {
+     "concept": "battery_current",
+     "fmt": ">h",
+     "scale": 0.1,
+     "unit": "A",
+     "rate_hz": 5
+    },
+    "0xF1A2": {
+     "concept": "reported_range",
+     "fmt": ">H",
+     "scale": 1.0,
+     "unit": "km",
+     "rate_hz": 0.2
+    },
+    "0xF1A3": {
+     "concept": "motor_temperature",
+     "fmt": ">H",
+     "scale": 0.1,
+     "unit": "C",
+     "rate_hz": 1
+    }
+   }
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Linux telematics / infotainment (syslog)",
+   "format": "rfc3164"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  },
+  {
+   "id": "cam",
+   "type": "camera",
+   "name": "Forward camera (Front Camera Module)",
+   "cams": [
+    "front"
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "concept": "battery_voltage",
+   "from": "can:hv/Pack_Stats.Pack_Voltage",
+   "unit": "V",
+   "rate_hz": 10
+  },
+  {
+   "concept": "battery_temperature",
+   "from": "can:hv/Battery_temp.Temp_A",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "charging_voltage",
+   "from": "can:hv/Charger_stats.HV_Voltage",
+   "unit": "V",
+   "rate_hz": 2
+  },
+  {
+   "concept": "charging_current",
+   "from": "can:hv/Charger_stats.Charger_HV_Current",
+   "unit": "A",
+   "rate_hz": 2
+  },
+  {
+   "concept": "_charging_active",
+   "from": "can:hv/AC_Stats.Mains_Voltage",
+   "unit": "none",
+   "rate_hz": 1,
+   "map": {
+    "Unplugged": 0,
+    "110V": 1,
+    "220V": 1
+   }
+  },
+  {
+   "concept": "speed",
+   "from": "uds:diag/obd_speed",
+   "unit": "km/h",
+   "rate_hz": 5
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "uds:diag/obd_ambient_temp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "uds:diag/obd_module_voltage",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:ext/EXT_TPMS.TyrePressureFl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:ext/EXT_TPMS.TyrePressureFr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:ext/EXT_TPMS.TyrePressureRl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:ext/EXT_TPMS.TyrePressureRr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.TyreTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "can:ext/EXT_DATA_1HZ.Odometer",
+   "unit": "km",
+   "rate_hz": 1
+  },
+  {
+   "concept": "_ignition",
+   "from": "can:ext/EXT_KEYSTATE.Ignition",
+   "unit": "none",
+   "rate_hz": 5
+  }
+ ],
+ "events": [
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

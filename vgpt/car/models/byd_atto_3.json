@@ -1,0 +1,39 @@
+{
+ "id": "byd_atto_3",
+ "name": "BYD Atto 3",
+ "year": 2023,
+ "region": "China / India / global",
+ "powertrain": "bev",
+ "class": "Battery-electric SUV",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real Atto 3 chassis database (wheel speeds, steering, pedals, gear, doors)",
+  "OBD-II service 01 (ambient temperature, control-module voltage)",
+  "UDS diagnostic trouble codes",
+  "logcat from the Android-based infotainment",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "battery, range, charging, tyres and odometer on a synthetic extension CAN"
+ ],
+ "notes": "The accelerator pedal signal is scaled as a 0-1 fraction (the database gives no unit).",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): byd_atto3.dbc",
+ "bound": 29,
+ "concepts": 29,
+ "extension": [
+  "_charging_active",
+  "battery_current",
+  "battery_soc",
+  "battery_temperature",
+  "battery_voltage",
+  "charging_power",
+  "coolant_flow",
+  "motor_temperature",
+  "odometer",
+  "reported_range",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

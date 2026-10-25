@@ -1,0 +1,234 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "aaos_reference_ev",
+ "vehicle": {
+  "make": "Android Automotive",
+  "model": "Reference EV (Vehicle HAL only)",
+  "year": 2024,
+  "powertrain": "bev",
+  "specs": {
+   "veh.cap_kwh": 66,
+   "veh.soh": 98,
+   "veh.nominal_voltage": 400,
+   "veh.tyre_spec_front": 250,
+   "veh.tyre_spec_rear": 250,
+   "veh.service_km": 20000,
+   "veh.sw": "aaos 14",
+   "veh.wheelbase_m": 2.74,
+   "veh.wheel_radius_m": 0.34,
+   "veh.gear_ratio": 9.0,
+   "veh.rated_max_speed": 180,
+   "veh.seats": 5,
+   "veh.home_charger_kw": 11,
+   "veh.model": "Android Automotive Reference EV (Vehicle HAL only)"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "hal",
+   "type": "vhal",
+   "name": "Android Vehicle HAL (AIDL, AOSP property ids)"
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Android infotainment (logcat)",
+   "format": "logcat"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  },
+  {
+   "id": "cam",
+   "type": "camera",
+   "name": "Surround view camera (AAOS camera service)",
+   "cams": [
+    "front"
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "concept": "speed",
+   "from": "vhal:hal/PERF_VEHICLE_SPEED",
+   "unit": "m/s",
+   "rate_hz": 5
+  },
+  {
+   "concept": "steering_angle",
+   "from": "vhal:hal/PERF_STEERING_ANGLE",
+   "unit": "deg",
+   "rate_hz": 5
+  },
+  {
+   "concept": "odometer",
+   "from": "vhal:hal/PERF_ODOMETER",
+   "unit": "km",
+   "rate_hz": 0.2
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "vhal:hal/ENV_OUTSIDE_TEMPERATURE",
+   "unit": "C",
+   "rate_hz": 0.2
+  },
+  {
+   "concept": "battery_soc",
+   "from": "vhal:hal/EV_BATTERY_LEVEL",
+   "unit": "%",
+   "rate_hz": 0.5,
+   "scale": 0.0015152
+  },
+  {
+   "concept": "reported_range",
+   "from": "vhal:hal/RANGE_REMAINING",
+   "unit": "m",
+   "rate_hz": 0.2,
+   "scale": 1.0
+  },
+  {
+   "concept": "charging_power",
+   "from": "vhal:hal/EV_BATTERY_INSTANTANEOUS_CHARGE_RATE",
+   "unit": "kW",
+   "rate_hz": 1,
+   "scale": 1e-06
+  },
+  {
+   "concept": "_ignition",
+   "from": "vhal:hal/IGNITION_STATE",
+   "unit": "none",
+   "rate_hz": 0.5,
+   "map": {
+    "4": 1,
+    "5": 1,
+    "3": 0,
+    "2": 0,
+    "1": 0
+   }
+  },
+  {
+   "concept": "_charging_active",
+   "from": "vhal:hal/EV_CHARGE_STATE",
+   "unit": "none",
+   "rate_hz": 0.5,
+   "map": {
+    "1": 1,
+    "3": 0,
+    "2": 0,
+    "4": 0
+   }
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "vhal:hal/TIRE_PRESSURE@1",
+   "unit": "kPa",
+   "rate_hz": 0.2
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "vhal:hal/TIRE_PRESSURE@2",
+   "unit": "kPa",
+   "rate_hz": 0.2
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "vhal:hal/TIRE_PRESSURE@4",
+   "unit": "kPa",
+   "rate_hz": 0.2
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "vhal:hal/TIRE_PRESSURE@8",
+   "unit": "kPa",
+   "rate_hz": 0.2
+  },
+  {
+   "concept": "parking_brake",
+   "from": "vhal:hal/PARKING_BRAKE_ON",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "gear",
+   "from": "vhal:hal/CURRENT_GEAR",
+   "unit": "none",
+   "rate_hz": 2,
+   "map": {
+    "4": 0,
+    "2": -1,
+    "1": 0,
+    "8": 1
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 250 kPa)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

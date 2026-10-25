@@ -1,0 +1,200 @@
+# Round-5 bank (authored by Claude, 2026-10-19), written from the FAMILIES in which full_v4 failed on bench/meaning_eval/hard_v2 (never from its sentences; the builder's leakage filter, --eval-leak v5, drops
+# any row at Jaccard >= 0.8 to hard_v2 or any other frozen set).  Source name `hard2`.  Format as natural_a.txt.
+# NOT trained on purpose: infotainment / phone / e-mail requests (`play the radio`, `call the service centre`, `send my trips to my email`).  Existing data labels them `unsupported`; hard_v2 gold used `control` / `unsafe`
+# for them, which is a label inconsistency in the evaluation set, reported as such rather than "fixed" by retraining.
+# ---------------------------------------------------------------- 1. a present-tense ask for a rarely used live signal is `now`, not a statistic
+what is the warmest cell right now | now cell_temperature_max
+which cell is hottest at the moment | now cell_temperature_max
+current maximum cell temperature | now cell_temperature_max
+what is the coolest cell right now | now cell_temperature_min
+current minimum cell temperature | now cell_temperature_min
+what is the weakest cell voltage at the moment | now cell_voltage_min
+current lowest cell voltage | now cell_voltage_min
+how much power is the regen returning at the moment | now regen_power
+is regen active and how strong is it | now regen_power
+how much energy is coming back from braking right now | now regen_power
+how many kilometres does the car have in total | now odometer
+what is the lifetime distance on the clock | now odometer
+what does the odometer say | now odometer
+which drive mode is selected | now drive_mode
+what mode am i in | now drive_mode
+is it in eco or sport | now drive_mode
+how quickly is the pack warming right now | now thermal_rise_rate
+is the battery heating up quickly at the moment | now thermal_rise_rate
+how efficiently is the battery delivering power right now | now battery_efficiency
+what is the battery to wheel efficiency now | now battery_efficiency
+is lane keeping on | now adas_state
+what is the driver assist doing at the moment | now adas_state
+what is the lane keeping state now | now adas_state
+is adaptive cruise engaged | now acc_state
+how many kilowatts is the climate system drawing | now hvac_power
+how much is the ac using right now | now hvac_power
+what is the heater costing me in power | now hvac_power
+how much battery power does the aircon take | now hvac_power
+# ---------------------------------------------------------------- 2. direction of a trend: "getting worse" is `rise` for heating and braking, `drop` for health and range
+is the heating rate climbing | trend thermal_rise_rate op=rise
+is the pack warming faster over time | trend thermal_rise_rate op=rise
+is the battery heating faster than it used to | trend thermal_rise_rate op=rise
+are my brakes getting more aggressive | trend braking_intensity op=rise
+is my braking getting stronger over the weeks | trend braking_intensity op=rise
+is my braking becoming gentler | trend braking_intensity op=drop
+has the motor temperature been going up | trend motor_temperature op=rise
+is the pack temperature creeping up over time | trend battery_temperature op=rise
+is consumption climbing | trend wh_per_km op=rise
+is the range shrinking over time | trend range_estimate op=drop
+is the coolant flow weakening | trend coolant_flow op=drop
+is the battery health sliding | trend battery_soh op=drop
+is regen getting weaker | trend regen_power op=drop
+has my speed been going down lately | trend speed op=drop
+# ---------------------------------------------------------------- 3. the last trip / charge: the concept is the quantity asked about, the entity is trip or charge
+highest motor power on my last drive | extreme motor_power op=max ent=trip
+peak power in the previous trip | extreme motor_power op=max ent=trip
+how much energy did the latest drive use | stat energy_used op=sum ent=trip
+energy used on the previous trip | stat energy_used op=sum ent=trip
+worst consumption trip this week | extreme wh_per_km op=max ent=trip
+which trip was the thirstiest | extreme wh_per_km op=max ent=trip
+least efficient drive this month | extreme wh_per_km op=max ent=trip
+most efficient drive this month | extreme wh_per_km op=min ent=trip
+average battery temperature in the previous charge | stat battery_temperature op=mean ent=charge
+highest charging power in the last session | extreme charging_power op=max ent=charge
+how much power did the previous charge reach | extreme charging_power op=max ent=charge
+was my last charge a dc fast one | extreme charging_power op=max ent=charge
+mean charging power of the previous session | stat charging_power op=mean ent=charge
+total driving time this week | stat trip_record op=sum ent=trip
+how many hours did i spend on trips this month | stat trip_record op=sum ent=trip
+how much distance did the last trip cover | stat distance_driven op=sum ent=trip
+# ---------------------------------------------------------------- 4. event grammar: before-an-event is `context`, a reason is `why`
+what happened in the minutes before the camera was blocked | context camera_blocked
+what was the car doing just prior to the lane assist switching off | context adas_disengagement
+what was going on right before the overheating warning | context battery_overheat_warning
+what led to the hard braking | context hard_braking
+why did the tyre warning come on | why tyre_pressure_warning
+why did the tyre pressure alert appear | why tyre_pressure_warning
+why did the 12 volt warning appear | why low_12v_warning
+what brought on the aux battery alert | why low_12v_warning
+why did the camera get blocked | why camera_blocked
+why did the adas switch off | why adas_disengagement
+# ---------------------------------------------------------------- 5. refusal categories: personal / general questions are `offtopic`, forecasts and unrecorded legal facts are `unsupported`
+what is my bank balance | offtopic none
+how much money is in my account | offtopic none
+what time is it now | offtopic none
+what is the date today | offtopic none
+tell me the latest news | offtopic none
+what is the share price of tata motors | offtopic none
+is it legal to drive at 130 here | unsupported none
+what is the legal limit on this stretch of road | unsupported none
+can i legally do 120 on this road | unsupported none
+how much energy will the drive home take | unsupported none
+how many kwh do i need for the trip to work | unsupported none
+how much charge will the drive to the airport use | unsupported none
+# ---------------------------------------------------------------- 6. definitions and plain explanations
+what does regen mean | define regen_power
+regen meaning | define regen_power
+what is regeneration | define regen_power
+what does the blind spot state show | define blindspot_state
+what is blindspot state | define blindspot_state
+what does the lane keeping state mean | define adas_state
+# ---------------------------------------------------------------- 7. topic health and advice
+tyre health | health tyre_condition
+how are my tyres holding up | health tyre_condition
+brake health | health brake_condition
+cooling health | health cooling_condition
+battery health summary | health battery_condition
+how can i brake more smoothly | advice driving_style
+tips for braking gently | advice driving_style
+what is the maintenance plan | advice maintenance
+maintenance plan please | advice maintenance
+# ---------------------------------------------------------------- 8. mixed-language questions that carry a period and an operation
+motor ka max temperature is hafte | extreme motor_temperature op=max
+battery ka average temperature kal | stat battery_temperature op=mean
+pichle mahine ka total distance | stat distance_driven op=sum
+is hafte kitni energy use hui | stat energy_used op=sum
+aaj ki top speed | extreme speed op=max
+kal kitne trips hue | stat trip_record op=count ent=trip
+pichle hafte ki average consumption | stat wh_per_km op=mean
+is mahine kitni baar charge kiya | events charging_session op=count
+# ---------------------------------------------------------------- 9. comparisons that need both sides
+is my consumption different in the rain | compare wh_per_km op=mean cond=raining vs=driving
+do i use more energy when it rains | compare wh_per_km op=mean cond=raining vs=driving
+highest temperature this month against last month | compare battery_temperature op=max vs=period
+maximum battery temperature now versus the previous month | compare battery_temperature op=max vs=period
+is the pack hotter when charging than when driving | compare battery_temperature op=mean cond=charging vs=driving
+# ---------------------------------------------------------------- 10. totals and typical values
+how much electricity did the car use today | stat energy_used op=sum
+energy consumed this week | stat energy_used op=sum
+usual motor power when moving | stat motor_power op=median
+median power draw of the motor | stat motor_power op=median
+average regen power while braking | stat regen_power op=mean cond=regenerating
+mean motor power while accelerating hard | stat motor_power op=mean cond=hard_acceleration
+# ---------------------------------------------------------------- 11. every rarely asked signal in its three most common forms (present value, typical value, extreme)
+how much lock is on the steering wheel | now steering_angle
+what is the steering angle at the moment | now steering_angle
+average steering angle this week | stat steering_angle op=mean
+largest steering angle yesterday | extreme steering_angle op=max
+how quickly is the steering being turned | now steering_rate
+fastest steering movement this week | extreme steering_rate op=max
+is the car rotating about its vertical axis | now yaw_rate
+highest yaw rate yesterday | extreme yaw_rate op=max
+how much sideways force is there right now | now lateral_acceleration
+average sideways acceleration this week | stat lateral_acceleration op=mean
+what is the brake line pressure | now brake_pressure
+highest brake pressure this week | extreme brake_pressure op=max
+average brake pressure last week | stat brake_pressure op=mean
+is the brake pedal pressed | now brake_pedal
+how often was the brake pedal pressed yesterday | stat brake_pedal op=count
+how far down is the throttle | now accelerator_position
+average throttle position today | stat accelerator_position op=mean
+how many degrees are the tyres right now | now tyre_temperature
+hottest tyre temperature this week | extreme tyre_temperature op=max
+average tyre temperature last week | stat tyre_temperature op=mean
+how sure is the lane detector | now lane_confidence
+lowest lane confidence this week | extreme lane_confidence op=min
+average lane confidence yesterday | stat lane_confidence op=mean
+how bright is the daylight right now | now light
+brightest it got this week | extreme light op=max
+is rain being detected | now rain
+how long did it rain last week | stat rain op=duration
+how bright is the camera image | now camera_brightness
+average camera sharpness last week | stat camera_sharpness op=mean
+lowest camera sharpness this month | extreme camera_sharpness op=min
+how blocked is the camera right now | now camera_blockage
+worst camera blockage this week | extreme camera_blockage op=max
+which way is the front of the car facing | now heading
+how much current is flowing from the battery | now battery_current
+average battery current this week | stat battery_current op=mean
+what is the pack voltage doing | now battery_voltage
+how much torque is the motor producing | now motor_torque
+peak torque this week | extreme motor_torque op=max
+how fast is the motor spinning | now motor_rpm
+how many revolutions per minute is the motor doing | now motor_rpm
+# ---------------------------------------------------------------- 12. owner-style gaps seen in user_v1 after full_v4 (new sentences)
+how many people can sit in the car | spec seat_count
+how many persons can this car seat | spec seat_count
+what is the passenger capacity | spec seat_count
+how many can travel in it | spec seat_count
+how far can this car go on a full charge | estimate range_estimate
+what is the distance this car can cover | estimate range_estimate
+how many km will it run | estimate range_estimate
+did the pack ever get too hot | events battery_overheat_warning op=exists
+did batry overheat ever | events battery_overheat_warning op=exists
+has the pack ever got hoy | events battery_overheat_warning op=exists
+show tyre pressures | now tyre_pressure
+give me the tyre readings | now tyre_pressure
+whats the motors power output | now motor_power
+motor power output at present | now motor_power
+what does the driver assistance state mean | define adas_state
+adas state means what | define adas_state
+explain adas | define adas_state
+fault codes | events diagnostic_code op=list
+show diagnostics | events diagnostic_code op=list
+list of trouble codes | events diagnostic_code op=list
+how do i improve my driving score | advice driving_style
+how can i get a better score | advice driving_style
+ways to raise my driving score | advice driving_style
+what is P1A00 | define diagnostic_code
+what does fault code P0A80 mean | define diagnostic_code
+explain the code C0750 | define diagnostic_code
+what is dtc B1234 | define diagnostic_code
+is the car charging at the moment | now charging_state
+am i currently plugged in and charging | now charging_state
+is charging in progress | now charging_state

@@ -1,0 +1,31 @@
+{
+ "id": "hongqi_hs5",
+ "name": "Hongqi HS5",
+ "year": 2021,
+ "region": "China",
+ "powertrain": "petrol",
+ "class": "Large SUV, petrol (a thin database leaning on the standards)",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the part of the Hongqi HS5 chassis database that is open (vehicle speed, brake switch)",
+  "OBD-II service 01 over ISO 15765-4 (engine data, temperatures, fuel)",
+  "UDS diagnostic trouble codes",
+  "syslog from the head unit",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and ignition on a synthetic extension CAN"
+ ],
+ "notes": "The open database publishes little more than the vehicle speed and the brake switch; everything else comes over OBD-II.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): hongqi_hs5.dbc",
+ "bound": 25,
+ "concepts": 25,
+ "extension": [
+  "_ignition",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

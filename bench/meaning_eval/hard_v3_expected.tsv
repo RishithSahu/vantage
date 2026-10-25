@@ -1,0 +1,221 @@
+id	expected
+R001	current speed
+R002	current speed
+R003	current state of charge
+R004	current state of charge
+R005	current battery temperature
+R006	current battery temperature
+R007	current motor temperature
+R008	current motor temperature
+R009	current motor power
+R010	current motor power
+R011	current odometer
+R012	current odometer
+R013	current 12 V voltage
+R014	current 12 V voltage
+R015	current tyre pressures
+R016	current tyre pressures
+R017	current position
+R018	current position
+R019	current coolant flow
+R020	current coolant flow
+R021	current outside temperature
+R022	current outside temperature
+R023	current battery health
+R024	current battery health
+R025	current regeneration power
+R026	current regeneration power
+R027	current motor rpm
+R028	current motor rpm
+R029	current climate power draw
+R030	current climate power draw
+R031	mean speed for the last week
+R032	mean speed for the last week
+R033	mean consumption this month
+R034	mean consumption this month
+R035	energy yesterday
+R036	energy yesterday
+R037	distance this week
+R038	distance this week
+R039	mean battery temperature
+R040	mean battery temperature
+R041	regenerated energy today
+R042	regenerated energy today
+R043	number of trips
+R044	number of trips
+R045	share of time above 100 km/h
+R046	share above 100 km/h
+R047	time above 40 C
+R048	time above 40 C
+R049	time parked
+R050	time parked
+R051	mean climate power
+R052	mean climate power
+R053	median motor power
+R054	median motor power
+R055	maximum speed this week
+R056	maximum speed this week
+R057	peak battery temperature
+R058	peak battery temperature
+R059	lowest state of charge
+R060	lowest state of charge
+R061	most efficient trip
+R062	most efficient trip
+R063	longest trip
+R064	longest trip
+R065	peak motor power
+R066	peak motor power
+R067	lowest coolant flow
+R068	lowest coolant flow
+R069	worst-consumption day
+R070	worst-consumption day
+R071	battery health trend
+R072	battery health trend
+R073	consumption trend
+R074	consumption trend
+R075	range trend
+R076	range trend
+R077	temperature trend
+R078	temperature trend
+R079	coolant flow trend
+R080	coolant flow trend
+R081	week-over-week consumption
+R082	week-over-week consumption
+R083	city versus highway speed
+R084	city versus highway speed
+R085	charging versus driving temperature
+R086	charging versus driving temperature
+R087	today versus yesterday distance
+R088	today versus yesterday distance
+R089	month-over-month energy
+R090	month-over-month energy
+R091	latest warning
+R092	latest warning
+R093	count of overheating warnings
+R094	count of overheating warnings
+R095	latest charging session
+R096	latest charging session
+R097	hard braking count
+R098	hard braking count
+R099	list of diagnostic codes
+R100	list of diagnostic codes
+R101	whether a blockage was recorded
+R102	whether a blockage was recorded
+R103	latest tyre warning
+R104	latest tyre warning
+R105	disengagement count
+R106	disengagement count
+R107	whether a 12 V warning was recorded
+R108	whether a 12 V warning was recorded
+R109	conditions before the warning
+R110	conditions before the warning
+R111	conditions before the code
+R112	conditions before the code
+R113	evidence-ranked reasons
+R114	evidence-ranked reasons
+R115	evidence-ranked reasons
+R116	evidence-ranked reasons
+R117	contributors to the range change
+R118	contributors to the range change
+R119	contributors to the consumption rise
+R120	contributors to the consumption rise
+R121	rated top speed
+R122	rated top speed
+R123	seat count
+R124	seat count
+R125	battery capacity
+R126	battery capacity
+R127	service interval
+R128	service interval
+R129	software version
+R130	software version
+R131	definition
+R132	definition
+R133	definition
+R134	definition
+R135	definition
+R136	definition
+R137	formula
+R138	formula
+R139	method
+R140	method
+R141	go / no-go from the charge level
+R142	go / no-go from the charge level
+R143	driving advice
+R144	driving advice
+R145	maintenance advice
+R146	maintenance advice
+R147	go / no-go summary with the limits of telemetry
+R148	go / no-go summary with the limits of telemetry
+R149	overall health
+R150	overall health
+R151	battery condition
+R152	battery condition
+R153	tyre condition
+R154	tyre condition
+R155	brake condition
+R156	brake condition
+R157	cooling condition
+R158	cooling condition
+R159	12 V condition
+R160	12 V condition
+R161	range estimate
+R162	range estimate
+R163	time to full
+R164	time to full
+R165	energy and a note that a tariff is needed
+R166	energy and a note that a tariff is needed
+R167	next service due
+R168	next service due
+R169	speed near that instant
+R170	speed near that instant
+R171	state of charge near that instant
+R172	state of charge near that instant
+R173	position near that time
+R174	position near that time
+R175	value near that instant
+R176	value near that instant
+R177	brief polite reply
+R178	brief polite reply
+R179	brief polite reply
+R180	brief polite reply
+R181	not about this vehicle
+R182	not about this vehicle
+R183	not about this vehicle
+R184	not about this vehicle
+R185	cannot predict
+R186	cannot predict
+R187	counterfactual
+R188	counterfactual
+R189	refuses
+R190	refuses
+R191	refuses
+R192	refuses
+R193	cannot change settings
+R194	cannot change settings
+R195	gear is not recorded
+R196	gear is not recorded
+R197	asks which quantity and period
+R198	asks which quantity and period
+R199	occupancy is not recorded
+R200	occupancy is not recorded
+R201	health summary (idiom)
+R202	battery condition (idiom)
+R203	pack temperature (idiom)
+R204	range estimate (idiom)
+R205	driving style summary (idiom)
+R206	pack voltage (idiom)
+R207	emissions are not computed from this data
+R208	not computed from this data
+R209	nonsense question
+R210	consumption statistic in simple words
+R211	overall health
+R212	briefing
+R213	nonsense question
+R214	tyre pressure (idiom)
+R215	cooling condition (idiom)
+R216	motor power (idiom)
+R217	whether warnings were recorded (idiom)
+R218	driving style summary
+R219	battery condition
+R220	driving style summary

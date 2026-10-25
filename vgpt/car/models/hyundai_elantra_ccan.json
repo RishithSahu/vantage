@@ -1,0 +1,29 @@
+{
+ "id": "hyundai_elantra_ccan",
+ "name": "Hyundai Elantra 2.0 (C-CAN)",
+ "year": 2016,
+ "region": "Korea / global",
+ "powertrain": "petrol",
+ "class": "Compact saloon, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real Hyundai chassis database (engine, ESP, steering, climate, body)",
+  "OBD-II service 01 over ISO 15765-4 CAN (fuel level, airflow, ...)",
+  "UDS diagnostic trouble codes",
+  "logcat from the Android infotainment unit",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure on a synthetic extension CAN"
+ ],
+ "notes": "",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): hyundai_2015_ccan.dbc",
+ "bound": 40,
+ "concepts": 40,
+ "extension": [
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

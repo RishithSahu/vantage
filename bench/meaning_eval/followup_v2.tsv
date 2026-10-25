@@ -1,0 +1,74 @@
+# FOLLOWUP_V2: two-turn dialogues for frame version 2.  Authored 2026-10-20 after full_v11 was final, before any version-2 training data.  Never trained on.
+# Format: id <TAB> previous frame (8 words) <TAB> text <TAB> gold frame (8 words) <TAB> tag
+U001	events hard_braking count none none none none none	same again for the week before	events hard_braking count none none none none period	period
+U002	events hard_braking count none none none none none	now do the month before that	events hard_braking count none none none none period	period
+U003	stat speed mean none none none none none	how about the day before yesterday	stat speed mean none none none none period	period
+U004	stat speed mean none none none none none	make it the past three days	stat speed mean none none none none period	period
+U005	extreme battery_temperature max none none none none none	only for this morning	extreme battery_temperature max none none none none period	period
+U006	extreme battery_temperature max none none none none none	go back two weeks instead	extreme battery_temperature max none none none none period	period
+U007	stat wh_per_km mean none none none none none	same question for last month	stat wh_per_km mean none none none none period	period
+U008	stat wh_per_km mean none none none none none	and over the whole of September	stat wh_per_km mean none none none none period	period
+U009	events adas_disengagement count none none none none none	since Monday	events adas_disengagement count none none none none period	period
+U010	events adas_disengagement count none none none none none	what about the weekend	events adas_disengagement count none none none none period	period
+U011	trend motor_temperature change none none none none none	this time over the last fortnight	trend motor_temperature change none none none none period	period
+U012	trend motor_temperature change none none none none none	restrict that to today	trend motor_temperature change none none none none period	period
+U013	stat tyre_pressure mean none none none none none	and a week earlier	stat tyre_pressure mean none none none none period	period
+U014	stat tyre_pressure mean none none none none none	repeat it for the last hour	stat tyre_pressure mean none none none none period	period
+U015	events charging_session list none none none none none	and the charges before those	events charging_session list none none none none period	period
+U016	events charging_session list none none none none none	for the last two months instead	events charging_session list none none none none period	period
+U017	stat speed mean none none none none none	what was it on Tuesday	stat speed mean none none none none period	period
+U018	events hard_braking count none none none none none	just yesterday please	events hard_braking count none none none none period	period
+U019	stat speed mean none none none none none	what about the motor temperature	stat motor_temperature mean none none none none concept	concept
+U020	stat speed mean none none none none none	and the battery power	stat battery_power mean none none none none concept	concept
+U021	extreme battery_temperature max none none none none none	same for the motor	extreme motor_temperature max none none none none concept	concept
+U022	extreme battery_temperature max none none none none none	how about the cell temperature	extreme cell_temperature_max max none none none none concept	concept
+U023	stat wh_per_km mean none none none none none	and the energy used	stat energy_used mean none none none none concept	concept
+U024	stat wh_per_km mean none none none none none	same thing for regen energy	stat regen_energy mean none none none none concept	concept
+U025	stat tyre_pressure mean none none none none none	do the ambient temperature too	stat ambient_temperature mean none none none none concept	concept
+U026	stat tyre_pressure mean none none none none none	and the 12 volt battery	stat aux_battery_voltage mean none none none none concept	concept
+U027	trend motor_temperature change none none none none none	let me see the battery instead	trend battery_temperature change none none none none concept	concept
+U028	trend motor_temperature change none none none none none	what about speed	trend speed change none none none none concept	concept
+U029	events hard_braking count none none none none none	and the hard accelerations	events hard_acceleration count none none none none concept	concept
+U030	events hard_braking count none none none none none	how about tyre warnings	events tyre_pressure_warning count none none none none concept	concept
+U031	events adas_disengagement count none none none none none	and the camera blocked events	events camera_blocked count none none none none concept	concept
+U032	events adas_disengagement count none none none none none	what about voltage dips	events voltage_dip count none none none none concept	concept
+U033	now battery_temperature none none none none none none	and the motor	now motor_temperature none none none none none concept	concept
+U034	now speed none none none none none none	and my battery power	now battery_power none none none none none concept	concept
+U035	events charging_session list none none none none none	what about the hard brakes	events hard_braking list none none none none concept	concept
+U036	stat hvac_power mean none none none none none	now the coolant flow	stat coolant_flow mean none none none none concept	concept
+U037	events battery_overheat_warning last none none none none none	why did it happen	why battery_overheat_warning none none none none none focus	focus
+U038	events battery_overheat_warning last none none none none none	how fast was I going then	at speed none none none none none focus	focus
+U039	events hard_braking last none none none none none	what was the speed at that moment	at speed none none none none none focus	focus
+U040	events hard_braking last none none none none none	what led up to it	context hard_braking none none none none none focus	focus
+U041	events adas_disengagement last none none none none none	what caused that	why adas_disengagement none none none none none focus	focus
+U042	events adas_disengagement last none none none none none	and the battery level back then	at battery_soc none none none none none focus	focus
+U043	events tyre_pressure_warning last none none none none none	and why was that	why tyre_pressure_warning none none none none none focus	focus
+U044	events tyre_pressure_warning last none none none none none	what was the outside temperature at the time	at ambient_temperature none none none none none focus	focus
+U045	events diagnostic_code last none none none none none	what was going on just before	context diagnostic_code none none none none none focus	focus
+U046	events camera_blocked last none none none none none	what explains it	why camera_blocked none none none none none focus	focus
+U047	events voltage_dip last none none none none none	how hot was the motor then	at motor_temperature none none none none none focus	focus
+U048	events ecu_reset last none none none none none	why did that occur	why ecu_reset none none none none none focus	focus
+U049	events hard_braking list none none none none none	which of those was the strongest	extreme hard_braking max none none none none item	item
+U050	events hard_braking list none none none none none	the latest one	events hard_braking last none none none none item	item
+U051	events hard_braking list none none none none none	and the first of them	events hard_braking first none none none none item	item
+U052	events adas_disengagement list none none none none none	the most recent of these	events adas_disengagement last none none none none item	item
+U053	events charging_session list none none none none none	which one delivered the most	extreme charging_session max none none none none item	item
+U054	events charging_session list none none none none none	the earliest	events charging_session first none none none none item	item
+U055	events tyre_pressure_warning list none none none none none	show me the last of them	events tyre_pressure_warning last none none none none item	item
+U056	events battery_overheat_warning list none none none none none	which was the hottest	extreme battery_overheat_warning max none none none none item	item
+U057	events camera_blocked list none none none none none	the one that lasted longest	extreme camera_blocked max none none none none item	item
+U058	events diagnostic_code list none none none none none	which came first	events diagnostic_code first none none none none item	item
+U059	events hard_braking count none none none none none	how did you get that	explain none none none none none none answer	answer
+U060	stat speed mean none none none none none	what is that based on	explain none none none none none none answer	answer
+U061	extreme battery_temperature max none none none none none	how sure are you of that number	explain none none none none none none answer	answer
+U062	events battery_overheat_warning last none none none none none	show me how you worked that out	explain none none none none none none answer	answer
+U063	stat wh_per_km mean none none none none none	which records did that come from	explain none none none none none none answer	answer
+U064	events charging_session list none none none none none	explain how you arrived at this	explain none none none none none none answer	answer
+U065	events hard_braking count none none none none none	how fast am I going	now speed none none none none none none	fresh
+U066	stat speed mean none none none none none	is my car okay	health vehicle_health none none none none none none	fresh
+U067	extreme battery_temperature max none none none none none	what is the tyre pressure	now tyre_pressure none none none none none none	fresh
+U068	stat wh_per_km mean none none none none none	how many hard brakes this week	events hard_braking count none none none none none	fresh
+U069	events adas_disengagement count none none none none none	when did I last charge	events charging_session last none none none none none	fresh
+U070	trend motor_temperature change none none none none none	thank you	social none none none none none none none	fresh
+U071	stat tyre_pressure mean none none none none none	what is regen	define regen_power none none none none none none	fresh
+U072	events charging_session list none none none none none	average speed last week	stat speed mean none none none none none	fresh

@@ -1,0 +1,86 @@
+# SLOTS_V2: single questions for frame version 2 (second quantity c2, vs=typical, act explain) + controls.  Authored 2026-10-20 after full_v11 was final, before any version-2 training data.  Never trained on.
+# Format: id <TAB> text <TAB> gold frame (act concept op cond vs ent c2 ref) <TAB> tag
+S001	does my battery power depend on how fast I drive	stat battery_power corr none none none speed none	corr
+S002	how closely does battery temperature follow the outside temperature	stat battery_temperature corr none none none ambient_temperature none	corr
+S003	is there a link between motor temperature and speed	stat motor_temperature corr none none none speed none	corr
+S004	do the heater power and the weather outside move together	stat hvac_power corr none none none ambient_temperature none	corr
+S005	correlation between the accelerator and battery power	stat battery_power corr none none none accelerator_position none	corr
+S006	is regeneration related to my speed	stat regen_power corr none none none speed none	corr
+S007	does coolant flow follow the battery temperature	stat coolant_flow corr none none none battery_temperature none	corr
+S008	do the tyre pressures change with the outside temperature	stat tyre_pressure corr none none none ambient_temperature none	corr
+S009	how strongly are battery and motor temperature tied together	stat battery_temperature corr none none none motor_temperature none	corr
+S010	does braking pressure scale with speed	stat brake_pressure corr none none none speed none	corr
+S011	is cornering force connected to speed	stat lateral_acceleration corr none none none speed none	corr
+S012	how well does motor power track battery power	stat motor_power corr none none none battery_power none	corr
+S013	do voltage and current in the pack move in step	stat battery_voltage corr none none none battery_current none	corr
+S014	is motor torque tied to how hard I press the pedal	stat motor_torque corr none none none accelerator_position none	corr
+S015	do the hottest cell and the pack temperature agree	stat cell_temperature_max corr none none none battery_temperature none	corr
+S016	is picture brightness related to the daylight	stat camera_brightness corr none none none light none	corr
+S017	over the last month, does battery power correlate with speed	stat battery_power corr none none none speed none	corr
+S018	any relationship between tyre temperature and speed this week	stat tyre_temperature corr none none none speed none	corr
+S019	put battery and motor temperature next to each other	compare battery_temperature mean none none none motor_temperature none	two
+S020	battery against motor temperature last week	compare battery_temperature mean none none none motor_temperature none	two
+S021	show me speed and battery power together for the month	compare speed mean none none none battery_power none	two
+S022	which ran hotter this week, the pack or the motor	compare battery_temperature max none none none motor_temperature none	two
+S023	tyre pressure and outside temperature side by side	compare tyre_pressure mean none none none ambient_temperature none	two
+S024	highest battery power and highest motor power this week	compare battery_power max none none none motor_power none	two
+S025	lowest battery voltage next to the lowest 12 volt voltage	compare battery_voltage min none none none aux_battery_voltage none	two
+S026	heater power versus motor power on average	compare hvac_power mean none none none motor_power none	two
+S027	how do coolant flow and battery temperature compare over the last day	compare coolant_flow mean none none none battery_temperature none	two
+S028	camera sharpness and camera brightness, last week	compare camera_sharpness mean none none none camera_brightness none	two
+S029	set regen power beside battery power for the past three days	compare regen_power mean none none none battery_power none	two
+S030	which got lower this month, motor rpm or speed	compare motor_rpm min none none none speed none	two
+S031	did the pack or the motor overheat last month	events battery_overheat_warning exists none none none overtemp_warning none	either
+S032	any tyre warnings or camera problems this week	events tyre_pressure_warning exists none none none camera_degraded none	either
+S033	was there a hard brake or a hard acceleration yesterday	events hard_braking exists none none none hard_acceleration none	either
+S034	how many ECU resets or unexpected shutdowns this month	events ecu_reset count none none none unexpected_shutdown none	either
+S035	did the camera get blocked or just degraded this week	events camera_blocked exists none none none camera_degraded none	either
+S036	12 volt warnings or tyre warnings in the last week	events low_12v_warning exists none none none tyre_pressure_warning none	either
+S037	how often did a voltage dip or a power derate happen	events voltage_dip count none none none power_derate none	either
+S038	did lane keeping drop out or did emergency braking trigger today	events adas_disengagement exists none none none aeb_activation none	either
+S039	is my battery temperature higher than it usually is	compare battery_temperature mean none typical none none none	typical
+S040	has the motor been running hotter than normal this week	compare motor_temperature mean none typical none none none	typical
+S041	was my speed unusual last week	compare speed mean none typical none none none	typical
+S042	is this week's energy use per km typical	compare wh_per_km mean none typical none none none	typical
+S043	did I brake hard more often than normal this week	compare hard_braking count none typical none none none	typical
+S044	is my tyre pressure lower than what it normally is	compare tyre_pressure mean none typical none none none	typical
+S045	did I charge more than usual this month	compare charging_session count none typical none none none	typical
+S046	is the cabin heater drawing more than it typically does	compare hvac_power mean none typical none none none	typical
+S047	are there more warnings than I would expect for this car	compare any_warning count none typical none none none	typical
+S048	was yesterday's top speed out of the ordinary	compare speed max none typical none none none	typical
+S049	is the coolant flow lower than its usual level	compare coolant_flow mean none typical none none none	typical
+S050	is the battery voltage in its normal range lately	compare battery_voltage mean none typical none none none	typical
+S051	is the battery temperature normal right now	now battery_temperature none none typical none none none	typical
+S052	is the motor temperature typical at the moment	now motor_temperature none none typical none none none	typical
+S053	is the highest battery temperature this week normal for me	compare battery_temperature max none typical none none none	typical
+S054	did regeneration give less than it usually does last week	compare regen_energy sum none typical none none none	typical
+S055	have I driven further than I normally do this week	compare distance_driven sum none typical none none none	typical
+S056	are ADAS disengagements above their usual rate	compare adas_disengagement count none typical none none none	typical
+S057	where did that number come from	explain none none none none none none answer	explain
+S058	what is that figure based on	explain none none none none none none answer	explain
+S059	walk me through how you worked that out	explain none none none none none none answer	explain
+S060	how sure are you about that	explain none none none none none none answer	explain
+S061	which data did you look at for that	explain none none none none none none answer	explain
+S062	can you show how you got it	explain none none none none none none answer	explain
+S063	explain what you just told me	explain none none none none none none answer	explain
+S064	what was the evidence for that answer	explain none none none none none none answer	explain
+S065	how fast am I going	now speed none none none none none none	control
+S066	what is the battery temperature	now battery_temperature none none none none none none	control
+S067	average motor temperature last week	stat motor_temperature mean none none none none none	control
+S068	how many hard brakes this week	events hard_braking count none none none none none	control
+S069	highest speed yesterday	extreme speed max none none none none none	control
+S070	compare this week with last week for energy per km	compare wh_per_km mean none period none none none	control
+S071	why did the range drop	why range_estimate drop none none none none none	control
+S072	when did I last charge	events charging_session last none none none none none	control
+S073	what is a regen	define regen_power none none none none none none	control
+S074	hello	social none none none none none none none	control
+S075	what is the tyre pressure	now tyre_pressure none none none none none none	control
+S076	is my car okay	health vehicle_health none none none none none none	control
+S077	how much does the battery hold	spec battery_capacity none none none none none none	control
+S078	what happened before the last warning	context any_warning none none none none none none	control
+S079	average speed on the highway	stat speed mean highway none none none none	control
+S080	turn on the heater	control none none none none none none none	control
+S081	what is the weather tomorrow	unsupported none none none none none none none	control
+S082	how does the pack temperature trend this month	trend battery_temperature change none none none none none	control
+S083	did the battery overheat	events battery_overheat_warning exists none none none none none	control
+S084	tyre pressure last night	at tyre_pressure none none none none none none	control

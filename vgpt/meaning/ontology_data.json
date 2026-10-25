@@ -1,0 +1,650 @@
+{
+ "version": 1,
+ "note": "Declarative vehicle ontology overlay. Signals, derived metrics and events come from vgpt/signal_registry.py; this file adds what the registry lacks: speech acts, operators, profile (spec) concepts, whole-subject topics, event words and where each profile fact is stored. NOTHING here is matched against user text: it is the vocabulary and the typing the learned interface predicts into and the resolver validates against.",
+ "acts": {
+  "now": {
+   "gloss": "current / live value of a measured quantity",
+   "kinds": [
+    "signal",
+    "derived",
+    "declared",
+    "entity"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "at": {
+   "gloss": "value of a measured quantity at one past instant or clock time",
+   "kinds": [
+    "signal",
+    "entity",
+    "spec",
+    "declared"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "stat": {
+   "gloss": "summary over a period: average, total, count, share of time, spread (for an event: how many, or how long it lasted in total)",
+   "kinds": [
+    "signal",
+    "derived",
+    "declared",
+    "entity",
+    "event"
+   ],
+   "ops": [
+    "mean",
+    "median",
+    "max",
+    "min",
+    "sum",
+    "count",
+    "share",
+    "duration",
+    "spread"
+   ]
+  },
+  "extreme": {
+   "gloss": "highest or lowest value over a period, or when it happened (for an event: the day or week with the most or fewest)",
+   "kinds": [
+    "signal",
+    "derived",
+    "declared",
+    "entity",
+    "event"
+   ],
+   "ops": [
+    "max",
+    "min"
+   ]
+  },
+  "trend": {
+   "gloss": "how a quantity (or how often an event happened) changed over a period, or where it rose or fell most",
+   "kinds": [
+    "signal",
+    "derived",
+    "declared",
+    "topic",
+    "event"
+   ],
+   "ops": [
+    "change",
+    "drop",
+    "rise"
+   ]
+  },
+  "compare": {
+   "gloss": "contrast two periods or two driving conditions (a quantity, or how often an event happened)",
+   "kinds": [
+    "signal",
+    "derived",
+    "declared",
+    "entity",
+    "event"
+   ],
+   "ops": [
+    "count",
+    "mean",
+    "max",
+    "min",
+    "sum",
+    "none"
+   ]
+  },
+  "events": {
+   "gloss": "list, count, check or date recorded events or warnings",
+   "kinds": [
+    "event",
+    "entity"
+   ],
+   "ops": [
+    "list",
+    "count",
+    "exists",
+    "last",
+    "first"
+   ]
+  },
+  "context": {
+   "gloss": "what happened before or around a recorded event",
+   "kinds": [
+    "event"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "why": {
+   "gloss": "cause or explanation of an event, a change or a state",
+   "kinds": [
+    "event",
+    "signal",
+    "derived",
+    "topic",
+    "declared"
+   ],
+   "ops": [
+    "none",
+    "drop",
+    "rise",
+    "change"
+   ]
+  },
+  "spec": {
+   "gloss": "a fixed specification, rating, capacity or setting of this vehicle - or, for a measured quantity, where it comes from (sources, rate, unit, range)",
+   "kinds": [
+    "spec",
+    "signal",
+    "derived",
+    "declared"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "define": {
+   "gloss": "meaning of a term or concept",
+   "kinds": [
+    "signal",
+    "derived",
+    "event",
+    "spec",
+    "topic",
+    "declared"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "howto": {
+   "gloss": "how to calculate, convert or do something (formula, method)",
+   "kinds": [
+    "signal",
+    "derived",
+    "event",
+    "spec",
+    "topic",
+    "declared"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "advice": {
+   "gloss": "recommendation or a go / no-go decision for the driver",
+   "kinds": [
+    "topic",
+    "signal",
+    "derived",
+    "event",
+    "declared"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "health": {
+   "gloss": "condition or status of a component or of the whole vehicle",
+   "kinds": [
+    "topic",
+    "signal",
+    "derived",
+    "declared"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "estimate": {
+   "gloss": "a derived or forecast quantity: range left, charging time or cost, trip energy",
+   "kinds": [
+    "derived",
+    "topic",
+    "spec"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "social": {
+   "gloss": "greeting, thanks, goodbye, who are you, what can you do",
+   "kinds": [
+    "any"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "offtopic": {
+   "gloss": "not about this vehicle",
+   "kinds": [
+    "any"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "unsupported": {
+   "gloss": "about the vehicle but cannot be computed from its recorded data",
+   "kinds": [
+    "any"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "control": {
+   "gloss": "an instruction to operate or change the vehicle",
+   "kinds": [
+    "any"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "unsafe": {
+   "gloss": "asks to bypass, tamper with, spoof or obtain someone else's data",
+   "kinds": [
+    "any"
+   ],
+   "ops": [
+    "none"
+   ]
+  },
+  "ambiguous": {
+   "gloss": "about the vehicle but the quantity, period or referent is missing",
+   "kinds": [
+    "any"
+   ],
+   "ops": [
+    "none"
+   ]
+  }
+ },
+ "ops": {
+  "none": "no operator",
+  "mean": "average",
+  "median": "median",
+  "max": "highest",
+  "min": "lowest",
+  "sum": "total",
+  "count": "how many",
+  "share": "percentage of time",
+  "duration": "how long in a state",
+  "spread": "variability",
+  "first": "earliest",
+  "last": "latest",
+  "change": "difference between start and end",
+  "drop": "largest decrease",
+  "rise": "largest increase",
+  "list": "show each one",
+  "exists": "did it happen at all"
+ },
+ "ents": {
+  "none": "no entity selection",
+  "trip": "a trip / drive",
+  "charge": "a charging session",
+  "day": "a calendar day",
+  "week": "a calendar week",
+  "source": "the reporting unit: a subsystem, an ECU, a bus or a reason",
+  "place": "a named place"
+ },
+ "cond_extra": {
+  "threshold": "a numeric limit is stated (above / below a number)"
+ },
+ "vs_extra": {
+  "period": "the second operand is another period"
+ },
+ "event_words": {
+  "ADAS_DISENGAGE": "adas_disengagement",
+  "WARN_BATT_OVERTEMP": "battery_overheat_warning",
+  "DTC_SET": "diagnostic_code",
+  "HARSH_BRAKE": "hard_braking",
+  "HARSH_ACCEL": "hard_acceleration",
+  "HARSH_CORNER": "hard_cornering",
+  "TPMS_LOW": "tyre_pressure_warning",
+  "TYRE_INFLATED": "tyre_inflation",
+  "LOW_12V": "low_12v_warning",
+  "SERVICE_DUE": "service_reminder",
+  "CAMERA_BLOCKED": "camera_blocked",
+  "CAMERA_DEGRADED": "camera_degraded",
+  "CHARGE_START": "charging_session",
+  "CAN_ANOMALY": "can_anomaly",
+  "ANY_WARNING": "any_warning",
+  "COOLANT_FLOW_DROP": "coolant_flow_drop",
+  "ECU_RESET": "ecu_reset",
+  "UNEXPECTED_SHUTDOWN": "unexpected_shutdown",
+  "VOLTAGE_DIP": "voltage_dip",
+  "SENSOR_CONFLICT": "sensor_conflict",
+  "AEB_ACTIVATION": "aeb_activation",
+  "CAN_ERROR": "can_error",
+  "SENSOR_INVALID": "sensor_invalid_reading",
+  "ADAS_STATE_CHANGE": "adas_state_change",
+  "WARN_OVERTEMP": "overtemp_warning",
+  "POWER_DERATE": "power_derate",
+  "DTC_CLEAR": "diagnostic_code_cleared",
+  "SW_UPDATE": "software_update",
+  "SOURCE_SILENT": "source_dropout",
+  "LOG_MESSAGE": "service_log"
+ },
+ "skip_registry": [
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "wheel_speed_fl",
+  "wheel_speed_fr",
+  "wheel_speed_rl",
+  "wheel_speed_rr",
+  "motor_power_estimate",
+  "gps_speed"
+ ],
+ "spec_concepts": {
+  "seat_count": {
+   "label": "seating capacity",
+   "gloss": "how many people the vehicle seats",
+   "meta": [
+    "veh.seats",
+    "veh.seating_capacity"
+   ],
+   "unit": "count",
+   "component": "vehicle",
+   "quantity": "count"
+  },
+  "battery_capacity": {
+   "label": "battery capacity",
+   "gloss": "usable energy the traction battery can store (kWh); not the charge level",
+   "meta": [
+    "veh.cap_kwh"
+   ],
+   "unit": "kWh",
+   "component": "battery",
+   "quantity": "energy"
+  },
+  "nominal_voltage": {
+   "label": "battery nominal voltage",
+   "gloss": "rated voltage of the traction battery pack",
+   "meta": [
+    "veh.nominal_voltage",
+    "veh.pack_voltage_nominal"
+   ],
+   "unit": "V",
+   "component": "battery",
+   "quantity": "voltage"
+  },
+  "charge_cycles": {
+   "label": "battery charge cycles",
+   "gloss": "number of full charge-discharge cycles the battery has completed",
+   "meta": [
+    "veh.charge_cycles",
+    "veh.battery_cycle_count"
+   ],
+   "unit": "count",
+   "component": "battery",
+   "quantity": "count"
+  },
+  "rated_max_speed": {
+   "label": "rated top speed",
+   "gloss": "the manufacturer's maximum speed rating, not an observed speed",
+   "meta": [
+    "veh.rated_max_speed",
+    "veh.max_speed_kmh"
+   ],
+   "unit": "km/h",
+   "component": "vehicle",
+   "quantity": "speed"
+  },
+  "service_interval": {
+   "label": "service interval",
+   "gloss": "distance or time between scheduled services",
+   "meta": [
+    "veh.service_km"
+   ],
+   "unit": "km",
+   "component": "vehicle",
+   "quantity": "distance"
+  },
+  "vehicle_model": {
+   "label": "vehicle model",
+   "gloss": "make, model and variant of this vehicle",
+   "meta": [
+    "veh.model"
+   ],
+   "unit": "none",
+   "component": "vehicle",
+   "quantity": "identity"
+  },
+  "vehicle_age": {
+   "label": "ownership age",
+   "gloss": "when the vehicle was bought or first registered, and how long ago",
+   "meta": [
+    "veh.purchase_date",
+    "veh.acquired_date"
+   ],
+   "unit": "none",
+   "component": "vehicle",
+   "quantity": "date"
+  },
+  "tyre_spec": {
+   "label": "tyre specification",
+   "gloss": "recommended tyre pressure and size",
+   "meta": [
+    "veh.tyre_spec_front",
+    "veh.tyre_spec_rear"
+   ],
+   "unit": "kPa",
+   "component": "tyre",
+   "quantity": "pressure"
+  },
+  "home_charger_power": {
+   "label": "home charger power",
+   "gloss": "rated power of the home charger",
+   "meta": [
+    "veh.home_charger_kw"
+   ],
+   "unit": "kW",
+   "component": "battery",
+   "quantity": "power"
+  },
+  "software_version": {
+   "label": "software version",
+   "gloss": "installed vehicle software version",
+   "meta": [
+    "veh.sw"
+   ],
+   "unit": "none",
+   "component": "vehicle",
+   "quantity": "identity"
+  },
+  "export_power": {
+   "label": "external power output",
+   "gloss": "whether the vehicle can power outside devices (V2L) and at what rating",
+   "meta": [
+    "veh.v2l_kw",
+    "veh.export_power_kw",
+    "veh.outlet_power_w"
+   ],
+   "unit": "kW",
+   "component": "battery",
+   "quantity": "power"
+  },
+  "drive_modes": {
+   "label": "selectable drive modes",
+   "gloss": "the drive modes the driver can select (configuration), not the observed driving state",
+   "meta": [
+    "veh.drive_modes"
+   ],
+   "unit": "none",
+   "component": "vehicle",
+   "quantity": "configuration"
+  }
+ },
+ "topic_concepts": {
+  "vehicle_health": {
+   "label": "overall vehicle condition",
+   "gloss": "overall condition, problems and what needs attention across the whole vehicle",
+   "default_act": "health"
+  },
+  "battery_condition": {
+   "label": "battery condition",
+   "gloss": "how the traction battery is doing overall: charge, temperature, health",
+   "default_act": "health"
+  },
+  "motor_condition": {
+   "label": "motor condition",
+   "gloss": "how the electric motor is doing: temperature and load",
+   "default_act": "health"
+  },
+  "cooling_condition": {
+   "label": "cooling system condition",
+   "gloss": "whether the coolant pump and thermal management are working",
+   "default_act": "health"
+  },
+  "tyre_condition": {
+   "label": "tyre condition",
+   "gloss": "state of all tyres: pressure and warnings",
+   "default_act": "health"
+  },
+  "brake_condition": {
+   "label": "brake condition",
+   "gloss": "state of the brakes: pad life and brake events",
+   "default_act": "health"
+  },
+  "aux_battery_condition": {
+   "label": "12 V battery condition",
+   "gloss": "state of the low-voltage auxiliary battery",
+   "default_act": "health"
+  },
+  "driving_style": {
+   "label": "driving style",
+   "gloss": "how smoothly or aggressively the car is driven, driving score",
+   "default_act": "stat"
+  },
+  "trip_record": {
+   "label": "trips",
+   "gloss": "recorded drives: count, last, longest, durations, commute",
+   "default_act": "stat",
+   "kind": "entity"
+  },
+  "location": {
+   "label": "location and places",
+   "gloss": "where the car is, saved and frequent places, heading",
+   "default_act": "now",
+   "kind": "entity"
+  },
+  "maintenance": {
+   "label": "maintenance and service",
+   "gloss": "service due, maintenance needs and how to look after the car",
+   "default_act": "estimate"
+  },
+  "briefing": {
+   "label": "vehicle briefing",
+   "gloss": "a short summary of the car's situation",
+   "default_act": "health"
+  },
+  "charge_cost": {
+   "label": "charging cost",
+   "gloss": "money spent on charging",
+   "default_act": "estimate"
+  },
+  "charge_time": {
+   "label": "charging time",
+   "gloss": "how long a charge will take or when it will be complete",
+   "default_act": "estimate"
+  },
+  "diagnostic_status": {
+   "label": "diagnostic code status",
+   "gloss": "which diagnostic trouble codes are active now, which were cleared, which came back after being cleared",
+   "default_act": "health"
+  }
+ },
+ "special_concepts": {
+  "unlisted": {
+   "label": "not in this vehicle's data model",
+   "gloss": "a measurable thing the vehicle ontology does not include (for example washer fluid, wheel alignment, cabin CO2)"
+  },
+  "none": {
+   "label": "no concept",
+   "gloss": "no vehicle concept (social, off-topic, unsafe, missing)"
+  }
+ },
+ "aggregate_signals": {
+  "tyre_pressure": [
+   "tyre_pressure_fl",
+   "tyre_pressure_fr",
+   "tyre_pressure_rl",
+   "tyre_pressure_rr"
+  ],
+  "wheel_speed": [
+   "wheel_speed_fl",
+   "wheel_speed_fr",
+   "wheel_speed_rl",
+   "wheel_speed_rr"
+  ]
+ },
+ "frame2": {
+  "note": "Frame version 2 = the six words of version 1 plus `c2` and `ref`, and a few more values.  Used only when a version-2 frame model is in use (VGPT_FRAME=2); version 1 words, grammar and prompt are untouched so the shipped adapter keeps working.  Vocabulary and typing only: nothing here is matched against user text.",
+  "extra_fields": [
+   "c2",
+   "ref"
+  ],
+  "acts": {
+   "explain": {
+    "gloss": "a question about the previous answer itself: how it was worked out, what it was based on, how sure it is",
+    "kinds": [
+     "any"
+    ],
+    "ops": [
+     "none"
+    ]
+   },
+   "summary": {
+    "gloss": "a digest of a period, a trip or a day: what happened, the totals, how it compares with before, what stands out; with op change: what changed since the period before",
+    "kinds": [
+     "any"
+    ],
+    "ops": [
+     "none",
+     "change"
+    ]
+   },
+   "anomaly": {
+    "gloss": "what is unusual for this vehicle: readings or events outside its own usual range or rate",
+    "kinds": [
+     "any"
+    ],
+    "ops": [
+     "none"
+    ]
+   }
+  },
+  "ops": {
+   "corr": "how strongly two quantities move together over a period",
+   "usual": "the normal range and pattern of a quantity, or how often an event usually happens"
+  },
+  "act_ops_extra": {
+   "stat": [
+    "corr",
+    "usual"
+   ],
+   "compare": [
+    "corr"
+   ]
+  },
+  "vs": {
+   "typical": "compared with the vehicle's own usual values (its history), not with another period"
+  },
+  "ref": {
+   "none": "the question stands on its own",
+   "period": "only the period changes from the previous question (and the week before that, what about yesterday)",
+   "concept": "only the quantity or event changes from the previous question (what about the motor temperature)",
+   "focus": "about the instant or event the previous answer picked out (why did it happen, how fast was I going then)",
+   "item": "picks one item out of the list the previous answer gave (which one was the longest, the latest)",
+   "answer": "about the previous answer itself (how did you get that)"
+  },
+  "c2_note": "the second quantity or event: for op corr, for two quantities side by side (compare), and for 'A or B' over two events; none otherwise"
+ }
+}

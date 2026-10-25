@@ -1,0 +1,404 @@
+# Natural-language bank A (authored by Claude, 2026-10-18, AFTER the evaluation sets were frozen and with no access to their outputs). Format:  text | act concept [op=..] [cond=..] [vs=..] [ent=..]
+# Defaults: op=none cond=none vs=none ent=none. These are training rows: never evaluation rows.
+# ---------------------------------------------------------------- now
+could you tell me what speed we are doing | now speed
+what's the number on the speedo | now speed
+am i over 80 right now | now speed
+how quick are we going at the moment | now speed
+speed check | now speed
+tell me my current velocity | now speed
+what is the state of charge | now battery_soc
+how many percent do we have left | now battery_soc
+what's the battery at | now battery_soc
+percentage left in the pack | now battery_soc
+is the battery nearly empty | now battery_soc
+how much power is left in the car | now battery_soc
+whats the charge level looking like | now battery_soc
+hey how much juice do we have | now battery_soc
+remaining charge please | now battery_soc
+can you read me the battery percentage | now battery_soc
+how hot is the battery | now battery_temperature
+what is the temperature of the pack at present | now battery_temperature
+battery heat level right now | now battery_temperature
+is the pack hot | now battery_temperature
+tell me the battery temp | now battery_temperature
+how warm is the traction battery | now battery_temperature
+how hot is the motor right now | now motor_temperature
+current motor heat | now motor_temperature
+what temp is the drive unit at | now motor_temperature
+read me the motor temperature | now motor_temperature
+motor temperature reading please | now motor_temperature
+how much power is the motor producing | now motor_power
+motor output in kw right now | now motor_power
+what's the mechanical power at the moment | now motor_power
+kw from the motor currently | now motor_power
+what is the motor doing power wise | now motor_power
+how many kilowatts is the pack discharging | now battery_power
+power flow of the battery now | now battery_power
+how much electricity is the car pulling right now | now battery_power
+current power consumption | now battery_power
+is the car drawing a lot of power | now battery_power
+what kw are we using | now battery_power
+battery kw | now battery_power
+how fast is the charger pushing power in | now charging_power
+charging kw right now | now charging_power
+what charging speed are we getting | now charging_power
+power going into the battery from the charger | now charging_power
+what is the charge rate at the moment | now charging_power
+how many kw is the charger giving | now charging_power
+what is the motor rpm | now motor_rpm
+rpm now | now motor_rpm
+how many revs is the motor doing | now motor_rpm
+current revs | now motor_rpm
+how fast is the motor spinning | now motor_rpm
+what torque is the motor producing | now motor_torque
+current motor torque in nm | now motor_torque
+torque reading | now motor_torque
+how much twisting force is the motor giving | now motor_torque
+is coolant flowing | now coolant_flow
+current coolant flow rate | now coolant_flow
+how much coolant is the pump moving now | now coolant_flow
+flow of the cooling pump | now coolant_flow
+coolant litres per minute | now coolant_flow
+cooling circuit flow at the moment | now coolant_flow
+how cold is it outside | now ambient_temperature
+what's the temperature outdoors | now ambient_temperature
+outside air temperature now | now ambient_temperature
+ambient temp | now ambient_temperature
+is it warm out there | now ambient_temperature
+how much pressure is in each tyre | now tyre_pressure
+what are the tyre psi values | now tyre_pressure
+current pressure in the tires | now tyre_pressure
+check my tire pressures | now tyre_pressure
+what's the pressure on all four tyres | now tyre_pressure
+tyre temperatures right now | now tyre_temperature
+how hot are the tyres | now tyre_temperature
+what is the voltage of the small battery | now aux_battery_voltage
+12v reading | now aux_battery_voltage
+auxiliary battery volts | now aux_battery_voltage
+how many volts is the pack at | now battery_voltage
+battery pack voltage now | now battery_voltage
+how many amps is the battery delivering | now battery_current
+current flowing through the pack | now battery_current
+how many kilometres has the car done in total | now odometer
+what does the odometer say | now odometer
+total distance on the clock | now odometer
+how much power is the climate control using | now hvac_power
+heater power draw now | now hvac_power
+aircon consumption at the moment | now hvac_power
+what compass direction are we heading | now heading
+which direction am i facing | now heading
+is it raining outside | now rain
+rain sensor status | now rain
+are the wipers needed because of rain | now rain
+how bright is it outside | now light
+is it dark out | now light
+what is the steering wheel angle | now steering_angle
+how far is the wheel turned | now steering_angle
+how hard am i pressing the accelerator | now accelerator_position
+throttle position now | now accelerator_position
+is the brake pedal pressed | now brake_pedal
+how much brake pressure is there | now brake_pressure
+how sharp is the camera image | now camera_sharpness
+is the camera view blocked | now camera_blockage
+how confident is the lane detection | now lane_confidence
+is driver assistance on | now adas_state
+is lane assist active now | now adas_state
+what mode is the car in | now drive_mode
+is the car parked or driving | now drive_mode
+are we charging | now charging_state
+is it plugged in | now charging_state
+what is the gearbox temperature | now transmission_temperature
+engine rpm | now engine_rpm
+how much fuel is in the tank | now fuel_level
+how much fuel do i have left | now fuel_level
+fuel burn rate | now fuel_rate
+how hot is it inside the cabin | now cabin_temperature
+how hard is the engine working | now engine_load
+what is the humidity | now humidity
+how windy is it | now wind_speed
+what is the horsepower the motor makes | now horsepower
+how many hp is it putting out | now horsepower
+current regen power | now regen_power
+how much is the car regenerating right now | now regen_power
+yaw rate now | now yaw_rate
+how much sideways g am i pulling | now lateral_acceleration
+how much forward acceleration right now | now longitudinal_acceleration
+what is the battery health | now battery_soh
+brake pad life remaining right now | now brake_pad_life
+current acceleration | now acceleration
+what is the distance to the vehicle ahead | now lead_vehicle_distance
+how much current is the 12 v battery giving | now aux_battery_voltage
+what is the lowest cell voltage | now cell_voltage_min
+hottest cell right now | now cell_temperature_max
+where are we right now | now location
+what is our position | now location
+# ---------------------------------------------------------------- at (instant in the past)
+what was the speed at 4 pm yesterday | at speed
+how fast was i going at noon today | at speed
+speed on tuesday at 9 in the morning | at speed
+battery percentage at 6 pm last night | at battery_soc
+how much charge did i have at midnight | at battery_soc
+charge level 45 minutes ago | at battery_soc
+what was the soc this morning at 7 | at battery_soc
+what was the pack temperature at 2 pm | at battery_temperature
+battery temp an hour ago | at battery_temperature
+how hot was the pack at 3 am | at battery_temperature
+motor temp at lunchtime yesterday | at motor_temperature
+motor temperature 20 minutes ago | at motor_temperature
+what was the rpm at 5:30 yesterday evening | at motor_rpm
+rpm on monday at 8 am | at motor_rpm
+what was the motor power at 11 last night | at motor_power
+power draw two minutes ago | at battery_power
+power at 6:15 this morning | at battery_power
+what was the outside temperature at 1 pm | at ambient_temperature
+ambient temperature at 6 am today | at ambient_temperature
+tyre pressure at 9 this morning | at tyre_pressure
+coolant flow at 4 pm yesterday | at coolant_flow
+what was the coolant flow an hour ago | at coolant_flow
+charging power at 7 pm last night | at charging_power
+what was the charging rate at 8:10 | at charging_power
+odometer reading on the 1st | at odometer
+what was the torque at 3 pm | at motor_torque
+12v voltage at 5 am | at aux_battery_voltage
+where was the car at 6 pm | at location
+where was i yesterday at 2 | at location
+heading at 10 am | at heading
+# ---------------------------------------------------------------- stat
+what's the mean speed over the last three days | stat speed op=mean
+average driving speed this month | stat speed op=mean
+how fast do i drive on average | stat speed op=mean
+my avg speed during the past week | stat speed op=mean
+typical speed on the motorway | stat speed op=mean cond=highway
+average speed in the city | stat speed op=mean cond=city
+average speed while it was dark | stat speed op=mean cond=night
+what was the average battery level last week | stat battery_soc op=mean
+mean soc over the past month | stat battery_soc op=mean
+average pack temperature during charging | stat battery_temperature op=mean cond=charging
+how hot does the battery usually get when driving | stat battery_temperature op=mean cond=driving
+average battery temp over the last 3 days | stat battery_temperature op=mean
+typical motor temperature on the highway | stat motor_temperature op=mean cond=highway
+average motor temp this week | stat motor_temperature op=mean
+mean charging rate last month | stat charging_power op=mean
+average kw while charging | stat charging_power op=mean
+average power draw while driving | stat battery_power op=mean cond=driving
+mean power draw on the motorway this week | stat battery_power op=mean cond=highway
+average outside temperature this week | stat ambient_temperature op=mean
+what has the weather temperature averaged lately | stat ambient_temperature op=mean
+average tyre pressure last two weeks | stat tyre_pressure op=mean
+average coolant flow while driving | stat coolant_flow op=mean cond=driving
+average climate power in winter | stat hvac_power op=mean cond=cold
+mean hvac usage this week | stat hvac_power op=mean
+average consumption last week | stat wh_per_km op=mean
+what's my mean wh per km this month | stat wh_per_km op=mean
+how efficient was i over the past 10 days | stat wh_per_km op=mean
+average efficiency in the city | stat wh_per_km op=mean cond=city
+average consumption on the highway | stat wh_per_km op=mean cond=highway
+my energy use per km in the rain | stat wh_per_km op=mean cond=raining
+how efficient am i at night | stat wh_per_km op=mean cond=night
+average consumption in cold weather | stat wh_per_km op=mean cond=cold
+how much energy did i consume this week | stat energy_used op=sum
+total electricity used in the past 30 days | stat energy_used op=sum
+kwh used yesterday | stat energy_used op=sum
+what's the energy spent over the last 7 days | stat energy_used op=sum
+how far did i drive in total this week | stat distance_driven op=sum
+distance covered yesterday | stat distance_driven op=sum
+how many kilometres did i cover last month | stat distance_driven op=sum
+total km over the past 14 days | stat distance_driven op=sum
+how many miles did i do today | stat distance_driven op=sum
+how much energy did regen give back this week | stat regen_energy op=sum
+total regenerated kwh last month | stat regen_energy op=sum
+how much did regenerative braking recover yesterday | stat regen_energy op=sum
+how many trips did i take this week | stat trip_record op=count ent=trip
+number of drives last month | stat trip_record op=count ent=trip
+count my trips from yesterday | stat trip_record op=count ent=trip
+how many days did i use the car this month | stat trip_record op=count ent=day
+how many separate drives did i do on tuesday | stat trip_record op=count ent=trip
+how long was an average trip last month | stat trip_record op=mean ent=trip
+mean trip distance | stat trip_record op=mean ent=trip
+what share of the time was the car parked last week | stat drive_mode op=share cond=parked
+how much of the time was i on the motorway | stat drive_mode op=share cond=highway
+percent of time in city traffic this month | stat drive_mode op=share cond=city
+how long was the car plugged in yesterday | stat drive_mode op=duration cond=charging
+total time spent charging this week | stat drive_mode op=duration cond=charging
+how many hours was it parked yesterday | stat drive_mode op=duration cond=parked
+how long was i driving on the highway last week | stat drive_mode op=duration cond=highway
+time spent in city driving today | stat drive_mode op=duration cond=city
+how long was the car standing still yesterday | stat drive_mode op=duration cond=idling
+for how long was the speed over 90 km/h last week | stat speed op=duration cond=threshold
+how many minutes was the battery above 45 degrees | stat battery_temperature op=duration cond=threshold
+what percent of the time was the motor over 80 degrees | stat motor_temperature op=share cond=threshold
+share of the time the charge was below 20 percent | stat battery_soc op=share cond=threshold
+how often does the battery drop under 30 percent | stat battery_soc op=share cond=threshold
+how long was the tyre pressure below 220 kpa | stat tyre_pressure op=duration cond=threshold
+median speed this week | stat speed op=median
+median battery temperature over the last month | stat battery_temperature op=median
+what was the middle value of consumption last week | stat wh_per_km op=median
+how steady was my speed this week | stat speed op=spread
+how much does the motor temperature vary | stat motor_temperature op=spread
+variation in coolant flow over the week | stat coolant_flow op=spread
+how consistent is my charging power | stat charging_power op=spread
+how stable is the battery temperature | stat battery_temperature op=spread
+what is my mean acceleration | stat acceleration op=mean
+how hard do i usually accelerate | stat acceleration op=mean
+average braking intensity last week | stat braking_intensity op=mean
+mean steering angle this week | stat steering_angle op=mean
+average lane confidence on the highway | stat lane_confidence op=mean cond=highway
+average camera sharpness yesterday | stat camera_sharpness op=mean
+how much of the time was driver assistance active | stat adas_state op=share
+how long was lane assist on this week | stat adas_state op=duration
+share of driving with the assist switched on | stat adas_state op=share
+average regen power while braking | stat regen_power op=mean
+average rpm on the highway | stat motor_rpm op=mean cond=highway
+average motor torque this week | stat motor_torque op=mean
+average 12 v voltage last week | stat aux_battery_voltage op=mean
+mean pack voltage | stat battery_voltage op=mean
+typical battery current while fast charging | stat battery_current op=mean cond=fast_charging
+mean heading | stat heading op=mean
+average horsepower used | stat horsepower op=mean
+how long did the heater run last week | stat hvac_power op=duration
+# ---------------------------------------------------------------- extreme
+what was the fastest i went last month | extreme speed op=max
+maximum speed reached today | extreme speed op=max
+how fast did i go on the motorway | extreme speed op=max cond=highway
+when did i hit my top speed | extreme speed op=max
+highest speed this month | extreme speed op=max
+what's the slowest i moved while driving | extreme speed op=min
+when was the battery most drained | extreme battery_soc op=min
+how low did the charge go this week | extreme battery_soc op=min
+what is the highest the battery has been charged to | extreme battery_soc op=max
+lowest soc in the last 30 days | extreme battery_soc op=min
+hottest the pack got this week | extreme battery_temperature op=max
+peak battery temperature yesterday | extreme battery_temperature op=max
+when did the pack reach its maximum temperature | extreme battery_temperature op=max
+coolest the battery has been | extreme battery_temperature op=min
+what's the maximum temp of the motor | extreme motor_temperature op=max
+how hot did the motor get during the trip | extreme motor_temperature op=max
+the most power the motor has produced | extreme motor_power op=max
+peak motor kw this week | extreme motor_power op=max
+highest rpm reached | extreme motor_rpm op=max
+maximum torque yesterday | extreme motor_torque op=max
+biggest power draw this week | extreme battery_power op=max
+greatest discharge power ever recorded | extreme battery_power op=max
+highest charging power i have seen | extreme charging_power op=max
+what was the fastest charging speed | extreme charging_power op=max
+slowest charge rate this month | extreme charging_power op=min
+the coldest temperature outside | extreme ambient_temperature op=min
+hottest day outside this month | extreme ambient_temperature op=max
+lowest tyre pressure this week | extreme tyre_pressure op=min
+highest tyre pressure recorded | extreme tyre_pressure op=max
+hottest the tyres have been | extreme tyre_temperature op=max
+the lowest 12 v voltage so far | extreme aux_battery_voltage op=min
+maximum coolant flow | extreme coolant_flow op=max
+lowest coolant flow this week | extreme coolant_flow op=min
+how hard was my hardest brake | extreme braking_intensity op=max
+strongest deceleration this week | extreme braking_intensity op=max
+my hardest acceleration | extreme acceleration op=max
+max regen power | extreme regen_power op=max
+largest regen recovery in one day | extreme regen_energy op=max ent=day
+which day did i use the most energy | extreme energy_used op=max ent=day
+which day was the most efficient | extreme wh_per_km op=min ent=day
+least efficient day this month | extreme wh_per_km op=max ent=day
+best consumption day last week | extreme wh_per_km op=min ent=day
+day with the worst efficiency | extreme wh_per_km op=max ent=day
+which trip used the most energy per km | extreme wh_per_km op=max ent=trip
+most efficient trip this month | extreme wh_per_km op=min ent=trip
+my longest drive | extreme distance_driven op=max ent=trip
+longest trip last month | extreme distance_driven op=max ent=trip
+shortest trip this week | extreme distance_driven op=min ent=trip
+which day did i drive the farthest | extreme distance_driven op=max ent=day
+what was the most km in one day | extreme distance_driven op=max ent=day
+the most extreme steering angle | extreme steering_angle op=max
+highest cell temperature seen | extreme cell_temperature_max op=max
+weakest cell voltage minimum | extreme cell_voltage_min op=min
+lowest brake pad life recorded | extreme brake_pad_life op=min
+max lateral g this week | extreme lateral_acceleration op=max
+lowest battery health reading | extreme battery_soh op=min
+the worst lane confidence | extreme lane_confidence op=min
+the most blocked the camera has been | extreme camera_blockage op=max
+highest cabin temperature | extreme cabin_temperature op=max
+top engine rpm | extreme engine_rpm op=max
+peak fuel rate | extreme fuel_rate op=max
+highest hvac draw | extreme hvac_power op=max
+highest speed in the rain | extreme speed op=max cond=raining
+max battery temperature while fast charging | extreme battery_temperature op=max cond=fast_charging
+highest power draw during hard acceleration | extreme battery_power op=max cond=hard_acceleration
+# ---------------------------------------------------------------- trend
+how has the speed changed over time | trend speed op=change
+how did my battery level change across the week | trend battery_soc op=change
+has the pack temperature been rising lately | trend battery_temperature op=rise
+is the battery getting hotter | trend battery_temperature op=rise
+is the motor running warmer than before | trend motor_temperature op=rise
+motor temperature trend over two weeks | trend motor_temperature op=change
+has charging power been dropping | trend charging_power op=drop
+is charging getting slower over the weeks | trend charging_power op=drop
+did the coolant flow fall this week | trend coolant_flow op=drop
+trend of coolant flow since last month | trend coolant_flow op=change
+how has my consumption evolved | trend wh_per_km op=change
+is my consumption increasing | trend wh_per_km op=rise
+is the car using more energy per km than before | trend wh_per_km op=rise
+did efficiency improve over the last month | trend wh_per_km op=change
+when did the efficiency fall the most | trend wh_per_km op=drop
+when was the biggest decrease in efficiency | trend wh_per_km op=drop
+find the point where consumption jumped the most | trend wh_per_km op=rise
+has my range been shrinking | trend range_estimate op=drop
+is the estimated range going down over time | trend range_estimate op=drop
+range trend for the past 14 days | trend range_estimate op=change
+is the battery losing capacity | trend battery_soh op=drop
+how fast is battery health declining | trend battery_soh op=drop
+battery health trend over the months | trend battery_soh op=change
+are my tyres losing pressure | trend tyre_pressure op=drop
+tyre pressure over the last month trend | trend tyre_pressure op=change
+is the brake pad wearing out fast | trend brake_pad_life op=drop
+brake pad life over time | trend brake_pad_life op=change
+is the 12 v voltage getting weaker | trend aux_battery_voltage op=drop
+trend of the outside temperature | trend ambient_temperature op=change
+has it been getting colder outside | trend ambient_temperature op=drop
+is my speed trending up | trend speed op=rise
+how has regen changed this month | trend regen_energy op=change
+did i recover less energy lately | trend regen_energy op=drop
+has my driving distance been going up | trend distance_driven op=rise
+how did my daily distance vary over the week | trend distance_driven op=change ent=day
+day by day battery temperature | trend battery_temperature op=change ent=day
+daily efficiency over the last two weeks | trend wh_per_km op=change ent=day
+daily energy use trend | trend energy_used op=change ent=day
+is the camera getting dirtier | trend camera_blockage op=rise
+camera sharpness trend | trend camera_sharpness op=change
+did lane confidence decline | trend lane_confidence op=drop
+how is the hvac power changing | trend hvac_power op=change
+has the cabin been getting hotter | trend cabin_temperature op=rise
+is fuel efficiency getting worse | trend wh_per_km op=change
+did the fuel level drop faster this week | trend fuel_level op=drop
+how has the thermal rise rate changed | trend thermal_rise_rate op=change
+largest jump in battery temperature | trend battery_temperature op=rise
+the sharpest fall in battery percentage | trend battery_soc op=drop
+biggest rise in motor power | trend motor_power op=rise
+# ---------------------------------------------------------------- compare
+compare consumption in the city and on the motorway | compare wh_per_km op=mean cond=city vs=highway
+which is more efficient city or highway | compare wh_per_km op=mean cond=city vs=highway
+energy per km highway versus city | compare wh_per_km op=mean cond=highway vs=city
+how does highway efficiency stack up against city driving | compare wh_per_km op=mean cond=highway vs=city
+city against freeway speed | compare speed op=mean cond=city vs=highway
+is the pack hotter when fast charging than when driving | compare battery_temperature op=mean cond=fast_charging vs=driving
+motor temperature on the highway versus in the city | compare motor_temperature op=mean cond=highway vs=city
+how does battery temperature differ between parked and driving | compare battery_temperature op=mean cond=parked vs=driving
+consumption in hot weather vs cold weather | compare wh_per_km op=mean cond=hot_weather vs=cold
+compare my efficiency in the rain and at night | compare wh_per_km op=mean cond=raining vs=night
+power draw in the city compared with the highway | compare battery_power op=mean cond=city vs=highway
+this week's average speed against last week's | compare speed op=mean vs=period
+how does this week compare with last week for energy used | compare energy_used op=sum vs=period
+compare my driving distance this month and last month | compare distance_driven op=sum vs=period
+energy consumption this month versus the previous one | compare wh_per_km op=mean vs=period
+was today more efficient than yesterday | compare wh_per_km op=mean vs=period
+how does yesterday's battery temperature compare with today's | compare battery_temperature op=mean vs=period
+compare charging power this week to last week | compare charging_power op=mean vs=period
+this week versus the week before for regen | compare regen_energy op=sum vs=period
+compare the highest speed this week and last | compare speed op=max vs=period
+is my range better than a month ago | compare range_estimate op=mean vs=period
+tyre pressure now compared to last week | compare tyre_pressure op=mean vs=period
+how does the first half of the week compare with the second | compare wh_per_km op=mean vs=period
+weekday against weekend consumption | compare wh_per_km op=mean vs=period
+morning versus evening energy use | compare energy_used op=sum vs=period
+how did last month's driving differ from this month's | compare distance_driven op=sum vs=period
+highway versus city driving distance | compare distance_driven op=sum cond=highway vs=city
+coolant flow during charging versus parked | compare coolant_flow op=mean cond=charging vs=parked

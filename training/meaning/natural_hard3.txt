@@ -1,0 +1,112 @@
+# Round-6 bank (authored by Claude, 2026-10-19 midday), written from the FAMILIES in which full_v5 failed on hard_v3 (robustness set) and hard_v4 (persona set); never from their sentences (the builder's leakage
+# filter, --eval-leak v6, drops any row at Jaccard >= 0.8 to hard_v4 or any other frozen set).  Source name `hard3`, repeated twice as often as the older banks.  Format as natural_a.txt.
+# Not trained on purpose: one-word requests such as `status`, `summary`, `report` (hard_v4 gold reads them as a health summary, but `ambiguous` is an equally defensible answer; the set's label is the contestable part).
+# ---------------------------------------------------------------- 1. fleet / reporting wording
+average energy per trip | stat energy_used op=mean ent=trip
+mean energy a trip takes | stat energy_used op=mean ent=trip
+trips per day on average | stat trip_record op=count ent=day
+how many days was the car used this month | stat trip_record op=count ent=day
+which day was the busiest for driving | extreme distance_driven op=max ent=day
+which day had the least driving | extreme distance_driven op=min ent=day
+the day with the shortest distance | extreme distance_driven op=min ent=day
+what share of the time was the vehicle in use | stat drive_mode op=share cond=driving
+how much of the week was the car working | stat drive_mode op=share cond=driving
+utilisation of the car this month | stat drive_mode op=share cond=driving
+how long was the longest idle stretch | stat drive_mode op=duration cond=idling
+total time spent idling this week | stat drive_mode op=duration cond=idling
+list the open faults | events diagnostic_code op=list
+show unresolved fault codes | events diagnostic_code op=list
+battery health trend over the months | trend battery_soh op=drop
+how is battery health changing over time | trend battery_soh op=drop
+which trip was fastest on average | extreme speed op=max ent=trip
+the trip with the highest average speed | extreme speed op=max ent=trip
+how many sessions per week on average | events charging_session op=count
+# ---------------------------------------------------------------- 2. mechanic and engineer wording
+pressure drop trend on the front right tyre | trend tyre_pressure op=drop
+is the rear tyre pressure falling over time | trend tyre_pressure op=drop
+variance of speed on the motorway | stat speed op=spread cond=highway
+spread of the battery temperature when charging | stat battery_temperature op=spread cond=charging
+number of readings below 15 degrees for the pack | stat battery_temperature op=count cond=threshold
+how many samples had the pack under 18 degrees | stat battery_temperature op=count cond=threshold
+time needed to accelerate from standstill to 90 | stat acceleration op=mean cond=threshold
+seconds to go from 0 to 80 km/h | stat acceleration op=mean cond=threshold
+rate of change of the pack temperature | now thermal_rise_rate
+how fast is the temperature of the pack changing | now thermal_rise_rate
+mean yaw rate while cornering hard | stat yaw_rate op=mean cond=hard_braking
+how are the pads | health brake_condition
+is the brake system worn | health brake_condition
+which tyre is losing pressure | health tyre_condition
+is any tyre going flat | health tyre_condition
+what set the last diagnostic trouble code | why diagnostic_code
+why was the fault code stored | why diagnostic_code
+conditions around the last fault code | context diagnostic_code
+the conditions when the dtc was stored | context diagnostic_code
+# ---------------------------------------------------------------- 3. driver wording
+how was my drive to work in terms of energy | stat wh_per_km op=mean ent=trip
+how efficient was the commute | stat wh_per_km op=mean ent=trip
+how much energy did the school run take | stat energy_used op=sum ent=trip
+what time did i arrive home yesterday | events trip_record op=last
+when did my last trip end | events trip_record op=last
+why is the car using more power this week | why wh_per_km op=rise
+why has my consumption gone up lately | why wh_per_km op=rise
+what is draining the battery overnight | why battery_soc op=drop
+why does the charge fall while parked | why battery_soc op=drop
+give me a quick rundown on the car before i go | health briefing
+quick status briefing before i leave | health briefing
+how is the car after its service | health vehicle_health
+is everything ok with the car since the garage visit | health vehicle_health
+is the battery fine after yesterday's heat | health battery_condition
+is the pack ok after the hot day | health battery_condition
+how much did the last charge add | events charging_session op=last
+did the pack get hot during the last fast charge | extreme battery_temperature op=max cond=fast_charging
+# ---------------------------------------------------------------- 4. trend wording without a question frame, abbreviations, counts
+range falling | trend range_estimate op=drop
+range is dropping | trend range_estimate op=drop
+coolant flow falling | trend coolant_flow op=drop
+coolant flow is getting lower | trend coolant_flow op=drop
+adas disengagements count | events adas_disengagement op=count
+count of adas switch offs | events adas_disengagement op=count
+whpkm last month | stat wh_per_km op=mean
+wh per km for the month | stat wh_per_km op=mean
+kwh used today | stat energy_used op=sum
+km today | stat distance_driven op=sum
+avg speed wk | stat speed op=mean
+warnings this month count | events any_warning op=count
+how to calc wh per km | howto wh_per_km
+how to calculate range | howto range_estimate
+how much power goes back into the battery when i brake | now regen_power
+how many kilowatts return to the pack under braking | now regen_power
+# ---------------------------------------------------------------- 5. Hinglish present values
+battery kitni charge hai | now battery_soc
+kitna charge bacha hai | now battery_soc
+battery ka percent batao | now battery_soc
+gaadi ki speed kitni hai | now speed
+abhi speed kitni hai | now speed
+motor ka temperature kitna hai | now motor_temperature
+tyre ka pressure kitna hai abhi | now tyre_pressure
+last warning kab thi | events any_warning op=last
+is mahine kitni warnings aayi | events any_warning op=count
+pichli charging kab hui | events charging_session op=last
+# ---------------------------------------------------------------- 6. refusals, boundaries and idioms
+pretend there is no warning | unsafe none
+say the car is fine whatever the data shows | unsafe none
+hide the warning from the owner | unsafe none
+stop the warning from showing on the dash | control none
+clear the fault light for me | control none
+whats the weather like today | offtopic none
+recommend a restaurant nearby | offtopic none
+suggest a movie for tonight | offtopic none
+is it ok | ambiguous none
+is that fine | ambiguous none
+does it use petrol | now unlisted
+does the car run on diesel | now unlisted
+who manufactured this car | spec vehicle_model
+which company makes this vehicle | spec vehicle_model
+is the battery going to catch fire | health battery_condition
+is the car safe or about to fail | health vehicle_health
+roll back the mileage | unsafe none
+turn the odometer back | unsafe none
+what is the state of the tyres at present | health tyre_condition
+gm | social none
+gn | social none
+yo | social none

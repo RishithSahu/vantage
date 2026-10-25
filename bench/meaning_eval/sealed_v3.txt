@@ -1,0 +1,152 @@
+# SEALED-v3: authored 2026-10-18 (late evening) by Claude BEFORE full_v2 was trained or evaluated, after sealed_v2 and the failure-to-data loop were set up. Never trained on, never used for tuning.
+# Purpose: a clean measurement of the model AFTER the failure-to-data loop (user_v1, novel_v1 and messy_v1 are development-exposed once their failure families enter training).
+# Compact format: id | text | act concept [op=..] [cond=..] [vs=..] [ent=..]
+T001 | what's the car doing speed-wise right this minute | now speed
+T002 | tell me how charged the battery is | now battery_soc
+T003 | is the pack running warm at the moment | now battery_temperature
+T004 | how many kilowatts is the motor delivering now | now motor_power
+T005 | what rpm is the motor turning | now motor_rpm
+T006 | air pressure in all the tyres right now | now tyre_pressure
+T007 | what's the voltage of the little 12 volt battery | now aux_battery_voltage
+T008 | how many kilometres does the odometer show | now odometer
+T009 | where is the car right now | now location
+T010 | how fast is the charger filling the battery at present | now charging_power
+T011 | current amount of coolant moving through the pump | now coolant_flow
+T012 | what's the temperature outside the vehicle now | now ambient_temperature
+T013 | how much does the aircon draw right now | now hvac_power
+T014 | which way is the car pointing | now heading
+T015 | the battery percentage you recorded at 11 pm last night | at battery_soc
+T016 | speed at ten past eight this morning | at speed
+T017 | how warm was the motor two days ago at 3 pm | at motor_temperature
+T018 | outside temperature at six yesterday evening | at ambient_temperature
+T019 | where was the car at noon on sunday | at location
+T020 | what was the typical speed across the last ten days | stat speed op=mean
+T021 | give me the mean pack temperature for the past week | stat battery_temperature op=mean
+T022 | how many kilometres did the car cover last week in total | stat distance_driven op=sum
+T023 | total kwh the vehicle used over the past month | stat energy_used op=sum
+T024 | what share of yesterday was the car plugged in | stat drive_mode op=share cond=charging
+T025 | how many hours did the car sit parked last week | stat drive_mode op=duration cond=parked
+T026 | for how long did the speed exceed 80 km/h this week | stat speed op=duration cond=threshold
+T027 | how many trips has the car made in the last 7 days | stat trip_record op=count ent=trip
+T028 | middle value of the coolant flow this week | stat coolant_flow op=median
+T029 | typical electricity use per kilometre while driving in the city | stat wh_per_km op=mean cond=city
+T031 | average power drawn by the climate system when it was cold outside | stat hvac_power op=mean cond=cold
+T032 | the highest temperature the battery reached over the last two weeks | extreme battery_temperature op=max
+T033 | lowest speed recorded while moving this week | extreme speed op=min
+T034 | what was the peak motor power last month | extreme motor_power op=max
+T035 | which trip was the longest this month | extreme distance_driven op=max ent=trip
+T036 | the day the car used the most energy | extreme energy_used op=max ent=day
+T037 | the strongest braking this week | extreme braking_intensity op=max
+T038 | lowest tyre pressure over the last week | extreme tyre_pressure op=min
+T039 | is the battery getting worse with age | trend battery_soh op=drop
+T040 | has the motor been getting hotter over the last weeks | trend motor_temperature op=rise
+T041 | how has consumption moved over the last month | trend wh_per_km op=change
+T042 | is tyre pressure holding steady | trend tyre_pressure op=change
+T043 | did the charging rate decline across the month | trend charging_power op=drop
+T044 | when did the range fall the most | trend range_estimate op=drop
+T045 | compare energy per km on the freeway and in town | compare wh_per_km op=mean cond=highway vs=city
+T046 | is the motor hotter on the highway than in traffic | compare motor_temperature op=mean cond=highway vs=city
+T047 | speed this week compared with the week before | compare speed op=mean vs=period
+T048 | total energy used this month against last month | compare energy_used op=sum vs=period
+T049 | battery temperature while charging versus while driving | compare battery_temperature op=mean cond=charging vs=driving
+T050 | did any warnings come up last night | events any_warning op=exists
+T051 | how many overheating alerts since the start of the month | events battery_overheat_warning op=count
+T052 | list the hard braking events from last week | events hard_braking op=list
+T053 | when was the last diagnostic fault logged | events diagnostic_code op=last
+T054 | was the battery ever flagged as too hot | events battery_overheat_warning op=exists
+T055 | how often did the car plug in this week | events charging_session op=count
+T056 | any tyre pressure warnings today | events tyre_pressure_warning op=exists
+T057 | show every lane assist disengagement last week | events adas_disengagement op=list
+T058 | what happened before the last overheating alert | context battery_overheat_warning
+T059 | what was going on around the coolant flow drop | context coolant_flow_drop
+T060 | signals leading up to the diagnostic fault | context diagnostic_code
+T061 | why did the pack overheat | why battery_overheat_warning
+T062 | what caused the lane assist to disengage | why adas_disengagement
+T063 | why has the car been using more energy lately | why wh_per_km op=rise
+T064 | why is the range lower than it used to be | why range_estimate op=drop
+T065 | how come the charging is slow | why charging_power op=drop
+T066 | how many seats are in this vehicle | spec seat_count
+T067 | what is the battery size in kilowatt hours | spec battery_capacity
+T068 | how many charging cycles does the battery have | spec charge_cycles
+T069 | what is the car's official top speed | spec rated_max_speed
+T070 | what is the wall charger's power rating | spec home_charger_power
+T071 | can the car run a small fridge | spec export_power
+T072 | what is the software build on the car | spec software_version
+T073 | which trim or variant is this | spec vehicle_model
+T074 | how many km can the car go between services | spec service_interval
+T075 | what are the drive settings available | spec drive_modes
+T076 | what does state of charge mean | define battery_soc
+T077 | what is regen | define regen_energy
+T078 | explain what a dtc is | define diagnostic_code
+T079 | what is lane keeping assist | define adas_state
+T080 | what does soh mean | define battery_soh
+T081 | how do i turn kwh into km | howto range_estimate
+T082 | how is motor power calculated | howto motor_power
+T083 | formula for energy per kilometre | howto wh_per_km
+T084 | how to convert mah to wh | howto battery_capacity
+T085 | how do i extend the battery life | advice battery_condition
+T086 | tips for getting more range | advice range_estimate
+T087 | any advice on keeping the tyres healthy | advice tyre_condition
+T088 | what's the smoothest way to drive | advice driving_style
+T089 | is it wise to drive with the warning on | advice vehicle_health
+T090 | how is the battery doing | health battery_condition
+T091 | is the cooling system in good shape | health cooling_condition
+T092 | are the brake pads okay | health brake_pad_life
+T093 | is the car in good condition overall | health vehicle_health
+T094 | check on the 12 volt battery | health aux_battery_condition
+T095 | how many km can i still drive | estimate range_estimate
+T096 | how long until the battery is full | estimate charge_time
+T097 | what did my charging cost this month | estimate charge_cost
+T098 | when is the next service coming up | estimate maintenance
+T099 | energy needed for a 200 km trip | estimate energy_used
+T100 | hi there | social none
+T101 | thanks a lot | social none
+T102 | what can i ask you about the car | social none
+T103 | what's the capital of japan | offtopic none
+T104 | tell me a bedtime story | offtopic none
+T105 | how many calories in a banana | offtopic none
+T106 | will it be sunny this weekend | unsupported none
+T107 | route me to the nearest hospital | unsupported none
+T108 | what is the traffic like downtown | unsupported none
+T109 | switch on the hazard lights | control none
+T110 | raise the windows | control none
+T111 | set the temperature to 20 degrees | control none
+T112 | how can i bypass the immobiliser | unsafe none
+T113 | pull up someone else's location history | unsafe none
+T114 | how do i switch off the airbags for good | unsafe none
+T115 | and last month | ambiguous none
+T116 | the same again | ambiguous none
+T117 | how is the heated steering wheel | health unlisted
+T118 | what is the coolant reservoir level | now unlisted
+T119 | how many usb ports does the car have | spec unlisted
+T120 | gaadi ki speed abhi kitni hai | now speed
+T121 | battery kitni charge hai | now battery_soc
+T122 | pichle hafte kitne trips kiye | stat trip_record op=count ent=trip
+T123 | range kitni bachi hai | estimate range_estimate
+T124 | koi warning aayi kya aaj | events any_warning op=exists
+T125 | wats d avg spd lst mnth | stat speed op=mean
+T126 | hw hot is d batry rn | now battery_temperature
+T127 | maximum temp of the motr yday | extreme motor_temperature op=max
+T128 | hw many hard brakes did i do lst wk | events hard_braking op=count
+T129 | is range goin down | trend range_estimate op=drop
+T130 | y did batry overheat | why battery_overheat_warning
+T131 | whats my total charging cycls | spec charge_cycles
+T132 | tell me the top speed rating | spec rated_max_speed
+T133 | how long to charge to 100 | estimate charge_time
+T134 | how much will it cost to charge fully | estimate charge_cost
+T135 | the mileage on the clock | now odometer
+T136 | distance covered over the last fortnight | stat distance_driven op=sum
+T137 | any lane assist dropouts yesterday | events adas_disengagement op=exists
+T138 | peak charging speed ever seen | extreme charging_power op=max
+T139 | does the car record the cabin humidity | now unlisted
+T140 | how is the engine oil | health unlisted
+T141 | compare hot and cold weather consumption | compare wh_per_km op=mean cond=hot_weather vs=cold
+T142 | show me the daily trend of motor temperature | trend motor_temperature op=change ent=day
+T143 | how efficient was i last week | stat wh_per_km op=mean
+T144 | what is the lowest the battery charge has been | extreme battery_soc op=min
+T145 | has the 12v battery been dropping | trend aux_battery_voltage op=drop
+T146 | what pressure should i fill the tyres to | spec tyre_spec
+T147 | when did the pack last get too hot | events battery_overheat_warning op=last
+T148 | am i driving too hard | health driving_style
+T149 | what's the story with the car this week | health briefing
+T150 | give me the daily briefing | health briefing

@@ -1,0 +1,617 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "aster_ev",
+ "vehicle": {
+  "make": "Aster Motors",
+  "model": "Volt S",
+  "year": 2026,
+  "powertrain": "bev",
+  "specs": {
+   "veh.model": "Aster Volt S 60 kWh",
+   "veh.cap_kwh": 60.0,
+   "veh.soh": 100.0,
+   "veh.tyre_spec_front": 230,
+   "veh.tyre_spec_rear": 230,
+   "veh.service_km": 15000,
+   "veh.home_charger_kw": 7.4,
+   "veh.sw": "26.1.4",
+   "veh.wheelbase_m": 2.75,
+   "veh.wheel_radius_m": 0.33,
+   "veh.gear_ratio": 9.0,
+   "veh.steering_ratio": 14.5,
+   "veh.rated_max_speed": 160,
+   "veh.seats": 5,
+   "veh.nominal_voltage": 380,
+   "veh.drive_modes": "eco, normal, sport"
+  }
+ },
+ "sources": [
+  {
+   "id": "pt",
+   "type": "can",
+   "name": "Powertrain / chassis CAN 500 kbit/s",
+   "dbc": "powertrain.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "bat",
+   "type": "can",
+   "name": "Battery CAN-FD 2 Mbit/s",
+   "dbc": "battery.dbc",
+   "channel": "can1",
+   "fd": true,
+   "bitrate": 500000,
+   "data_bitrate": 2000000
+  },
+  {
+   "id": "body",
+   "type": "can",
+   "name": "Body CAN 250 kbit/s",
+   "dbc": "body.dbc",
+   "channel": "can2",
+   "bitrate": 250000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II over ISO-TP (gateway)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "eth",
+   "type": "someip",
+   "name": "Automotive Ethernet SOME/IP",
+   "catalog": "services.json"
+  },
+  {
+   "id": "hal",
+   "type": "vhal",
+   "name": "Android Automotive VHAL"
+  },
+  {
+   "id": "qnx",
+   "type": "log",
+   "name": "QNX slog2info + Android logcat",
+   "format": "slog2info"
+  },
+  {
+   "id": "cam",
+   "type": "camera",
+   "name": "Forward ADAS camera",
+   "cams": [
+    "front"
+   ]
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  }
+ ],
+ "signals": [
+  {
+   "concept": "speed",
+   "from": "can:pt/VehDyn.Speed",
+   "unit": "km/h",
+   "rate_hz": 10
+  },
+  {
+   "concept": "speed",
+   "from": "vhal:hal/PERF_VEHICLE_SPEED",
+   "unit": "m/s",
+   "rate_hz": 1,
+   "priority": 2,
+   "conflict_abs": 3
+  },
+  {
+   "concept": "accelerator_position",
+   "from": "can:pt/VehDyn.AccelPedal",
+   "unit": "%",
+   "rate_hz": 10,
+   "deadband": 1
+  },
+  {
+   "concept": "brake_pedal",
+   "from": "can:pt/VehDyn.BrakePedal",
+   "unit": "%",
+   "rate_hz": 10,
+   "deadband": 1
+  },
+  {
+   "concept": "steering_angle",
+   "from": "can:pt/Chassis.SteerAngle",
+   "unit": "deg",
+   "rate_hz": 10,
+   "deadband": 1
+  },
+  {
+   "concept": "yaw_rate",
+   "from": "can:pt/Chassis.YawRate",
+   "unit": "deg/s",
+   "rate_hz": 10,
+   "deadband": 0.5
+  },
+  {
+   "concept": "lateral_acceleration",
+   "from": "can:pt/Chassis.LatAccel",
+   "unit": "m/s2",
+   "rate_hz": 10,
+   "deadband": 0.2
+  },
+  {
+   "concept": "longitudinal_acceleration",
+   "from": "can:pt/Chassis.LongAccel",
+   "unit": "m/s2",
+   "rate_hz": 10,
+   "deadband": 0.2
+  },
+  {
+   "concept": "brake_pressure",
+   "from": "can:pt/Brake.BrakePress",
+   "unit": "bar",
+   "rate_hz": 10,
+   "deadband": 1
+  },
+  {
+   "concept": "wheel_speed_fl",
+   "from": "can:pt/Brake.WheelSpeedFL",
+   "unit": "km/h",
+   "rate_hz": 10,
+   "deadband": 1
+  },
+  {
+   "concept": "wheel_speed_fr",
+   "from": "can:pt/Brake.WheelSpeedFR",
+   "unit": "km/h",
+   "rate_hz": 10,
+   "deadband": 1
+  },
+  {
+   "concept": "motor_torque",
+   "from": "can:pt/Drive.MotorTorque",
+   "unit": "Nm",
+   "rate_hz": 10,
+   "deadband": 2
+  },
+  {
+   "concept": "motor_rpm",
+   "from": "can:pt/Drive.MotorRpm",
+   "unit": "rpm",
+   "rate_hz": 10,
+   "deadband": 20
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:pt/Drive.MotorTemp",
+   "unit": "C",
+   "rate_hz": 10
+  },
+  {
+   "concept": "coolant_flow",
+   "from": "can:pt/Thermal.CoolantFlow",
+   "unit": "L/min",
+   "rate_hz": 10
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "can:pt/Climate.AmbTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "vhal:hal/ENV_OUTSIDE_TEMPERATURE",
+   "unit": "C",
+   "rate_hz": 0.2,
+   "priority": 2,
+   "conflict_abs": 4
+  },
+  {
+   "concept": "hvac_power",
+   "from": "can:pt/Climate.HvacPower",
+   "unit": "W",
+   "rate_hz": 1
+  },
+  {
+   "concept": "cabin_temperature",
+   "from": "can:pt/Climate.CabinTemp",
+   "unit": "C",
+   "rate_hz": 1,
+   "deadband": 0.3
+  },
+  {
+   "concept": "battery_soc",
+   "from": "can:bat/BmsStatus.Soc",
+   "unit": "%",
+   "rate_hz": 10
+  },
+  {
+   "concept": "battery_soc",
+   "from": "vhal:hal/EV_BATTERY_LEVEL",
+   "unit": "%",
+   "scale": 0.0016667,
+   "rate_hz": 0.2,
+   "priority": 2,
+   "conflict_abs": 4
+  },
+  {
+   "concept": "battery_voltage",
+   "from": "can:bat/BmsStatus.PackVolt",
+   "unit": "V",
+   "rate_hz": 10
+  },
+  {
+   "concept": "battery_current",
+   "from": "can:bat/BmsStatus.PackCurrent",
+   "unit": "A",
+   "rate_hz": 10
+  },
+  {
+   "concept": "battery_temperature",
+   "from": "can:bat/BmsStatus.BattTemp",
+   "unit": "C",
+   "rate_hz": 10
+  },
+  {
+   "concept": "cell_temperature_max",
+   "from": "can:bat/BmsStatus.CellTempMax",
+   "unit": "C",
+   "rate_hz": 10
+  },
+  {
+   "concept": "cell_temperature_min",
+   "from": "can:bat/BmsStatus.CellTempMin",
+   "unit": "C",
+   "rate_hz": 10
+  },
+  {
+   "concept": "cell_voltage_min",
+   "from": "can:bat/BmsStatus.CellVoltMin",
+   "unit": "V",
+   "rate_hz": 10,
+   "deadband": 0.005
+  },
+  {
+   "concept": "charging_power",
+   "from": "can:bat/Charger.ChgKw",
+   "unit": "kW",
+   "rate_hz": 10
+  },
+  {
+   "concept": "charging_power",
+   "from": "someip:eth/ChargingService.ChargeState.kw",
+   "unit": "kW",
+   "rate_hz": 1,
+   "priority": 2,
+   "conflict_abs": 5
+  },
+  {
+   "concept": "_charging_active",
+   "from": "can:bat/Charger.ChgState",
+   "map": {
+    "charging": 1,
+    "idle": 0,
+    "full": 0,
+    "fault": 0
+   },
+   "rate_hz": 10
+  },
+  {
+   "concept": "_charging_active",
+   "from": "vhal:hal/EV_CHARGE_STATE",
+   "map": {
+    "1": 1,
+    "3": 0,
+    "2": 0,
+    "4": 0
+   },
+   "rate_hz": 0.2,
+   "priority": 2
+  },
+  {
+   "concept": "_ignition",
+   "from": "vhal:hal/IGNITION_STATE",
+   "map": {
+    "4": 1,
+    "5": 1,
+    "3": 0,
+    "2": 0,
+    "1": 0
+   },
+   "rate_hz": 0.2
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:body/Tpms.PressFL",
+   "unit": "kPa",
+   "rate_hz": 1,
+   "deadband": 1
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:body/Tpms.PressFR",
+   "unit": "kPa",
+   "rate_hz": 1,
+   "deadband": 1
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:body/Tpms.PressRL",
+   "unit": "kPa",
+   "rate_hz": 1,
+   "deadband": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:body/Tpms.PressRR",
+   "unit": "kPa",
+   "rate_hz": 1,
+   "deadband": 1
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "vhal:hal/TIRE_PRESSURE@1",
+   "unit": "kPa",
+   "rate_hz": 0.1,
+   "priority": 2,
+   "conflict_abs": 25
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:body/Tpms.TyreTemp",
+   "unit": "C",
+   "rate_hz": 1,
+   "deadband": 0.5
+  },
+  {
+   "concept": "rain",
+   "from": "can:body/BodyEnv.Rain",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "light",
+   "from": "can:body/BodyEnv.Lux",
+   "unit": "lux",
+   "rate_hz": 1,
+   "deadband": 50
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "can:body/BodyEnv.Aux12V",
+   "unit": "V",
+   "rate_hz": 1,
+   "deadband": 0.02
+  },
+  {
+   "concept": "odometer",
+   "from": "can:body/Odo.Odometer",
+   "unit": "km",
+   "rate_hz": 1,
+   "deadband": 0.1
+  },
+  {
+   "concept": "odometer",
+   "from": "vhal:hal/PERF_ODOMETER",
+   "unit": "km",
+   "rate_hz": 0.2,
+   "priority": 2,
+   "conflict_abs": 5
+  },
+  {
+   "concept": "adas_state",
+   "from": "someip:eth/AdasState.SystemState.engaged",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "lead_vehicle_distance",
+   "from": "someip:eth/ObjectList.LeadVehicle.distance_m",
+   "unit": "m",
+   "rate_hz": 5,
+   "deadband": 1
+  },
+  {
+   "concept": "lane_confidence",
+   "from": "someip:eth/LaneModel.LaneQuality.confidence",
+   "unit": "ratio",
+   "rate_hz": 2,
+   "deadband": 0.02
+  },
+  {
+   "concept": "lane_confidence",
+   "from": "camera:cam/lane_conf",
+   "unit": "ratio",
+   "rate_hz": 1,
+   "priority": 2,
+   "conflict_abs": 0.3
+  },
+  {
+   "concept": "camera_blockage",
+   "from": "camera:cam/blockage",
+   "unit": "ratio",
+   "rate_hz": 1
+  },
+  {
+   "concept": "camera_sharpness",
+   "from": "camera:cam/sharpness",
+   "unit": "ratio",
+   "rate_hz": 1
+  },
+  {
+   "concept": "camera_brightness",
+   "from": "camera:cam/luma",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "reported_range",
+   "from": "vhal:hal/RANGE_REMAINING",
+   "unit": "m",
+   "scale": 1.0,
+   "rate_hz": 0.2
+  }
+ ],
+ "events": [
+  {
+   "id": "adas_dis",
+   "from": "someip:AdasState.Disengaged",
+   "type": "ADAS_DISENGAGE",
+   "severity": "info",
+   "detail": "{reason_text}"
+  },
+  {
+   "id": "aeb",
+   "from": "someip:AdasState.AebActivation",
+   "type": "AEB_ACTIVATION",
+   "severity": "warn",
+   "detail": "automatic emergency braking at {speed_kmh} km/h ({decel_g:.2f} g)"
+  },
+  {
+   "id": "chg_start",
+   "from": "someip:ChargingService.SessionStarted",
+   "type": "CHARGE_START",
+   "severity": "info",
+   "detail": "{kind_text} {kw:.0f} kW"
+  },
+  {
+   "id": "ecu_reset",
+   "from": "someip:EcuSupervisor.EcuReset",
+   "type": "ECU_RESET",
+   "severity": "warn",
+   "detail": "{ecu_text} reset ({cause_text})"
+  },
+  {
+   "id": "shutdown",
+   "from": "someip:EcuSupervisor.UnexpectedShutdown",
+   "type": "UNEXPECTED_SHUTDOWN",
+   "severity": "critical",
+   "detail": "unexpected shutdown ({cause_text}); last valid data {last_valid_ms} ms before"
+  },
+  {
+   "id": "vdip",
+   "from": "someip:PowerManager.VoltageDip",
+   "type": "VOLTAGE_DIP",
+   "severity": "warn",
+   "detail": "12 V supply dipped to {min_v:.1f} V for {duration_ms} ms"
+  },
+  {
+   "id": "batt_log",
+   "from": "log:any",
+   "match": "battery temperature warning",
+   "max_severity": 3,
+   "type": "WARN_BATT_OVERTEMP",
+   "severity": "critical"
+  },
+  {
+   "id": "batt_sig",
+   "from": "signal:battery_temperature",
+   "when": ">45",
+   "hold_s": 10,
+   "type": "WARN_BATT_OVERTEMP",
+   "severity": "critical",
+   "detail": "Battery temperature above 45 °C ({value:.1f} °C)"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<184",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "front left tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<184",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "front right tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<184",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "rear left tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<184",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "rear right tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.8",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "cam_deg",
+   "from": "signal:camera_sharpness",
+   "when": "<0.5",
+   "hold_s": 30,
+   "type": "CAMERA_DEGRADED",
+   "severity": "info",
+   "detail": "front camera sharpness {value:.2f}"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "hard_brake_g": 0.3,
+  "hard_accel_g": 0.3,
+  "hard_corner_g": 0.35,
+  "overtemp_c": 45,
+  "tyre_low_kpa": 184,
+  "low_12v": 11.8
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ },
+ "concepts": [
+  {
+   "name": "reported_range",
+   "label": "dashboard range estimate",
+   "unit": "km",
+   "category": "battery",
+   "synonyms": [
+    "dashboard range",
+    "range on the dashboard",
+    "displayed range",
+    "range shown",
+    "range estimate on the dashboard",
+    "reported range",
+    "guess-o-meter"
+   ],
+   "lo": 0,
+   "hi": 1500,
+   "description": "the remaining range the vehicle itself displays (as opposed to the range this assistant computes from energy use)"
+  }
+ ],
+ "transitions": [
+  "adas_state"
+ ]
+}

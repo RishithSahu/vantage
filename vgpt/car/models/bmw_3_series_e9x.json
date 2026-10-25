@@ -1,0 +1,29 @@
+{
+ "id": "bmw_3_series_e9x",
+ "name": "BMW 3 Series (E90 320i)",
+ "year": 2009,
+ "region": "Germany / global",
+ "powertrain": "petrol",
+ "class": "Compact saloon, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real BMW E9x powertrain database",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "syslog from the head unit",
+  "NMEA 0183 GNSS",
+  "tyre pressure and odometer on a synthetic extension CAN"
+ ],
+ "notes": "",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): bmw_e9x_e8x.dbc",
+ "bound": 29,
+ "concepts": 29,
+ "extension": [
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

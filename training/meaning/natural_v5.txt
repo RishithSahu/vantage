@@ -1,0 +1,181 @@
+# Frame version 2, round 2 (2026-10-21), part B: hand-written rows for the KINDS of mistake the first frame-2 run made on the frozen sets (digest_v1 85 %, catalog_v1 80 %, followup_v3 90 %, the ICE vocabulary sets 95 %).
+# The frozen questions themselves are not copied here and the builder drops any row whose wording matches one.  Same format as natural_v3.txt.  No row carries a number or a place as a value.
+
+# ------------------------------------------------------------------------------------------------ summary of a period, more ways to ask (summary none)
+tell me what the car has been getting up to | summary none
+bring me up to speed on how the car has been this week | summary none
+catch me up on the last few days of driving | summary none
+how did my week of driving go overall | summary none
+run me through what happened with the car recently | summary none
+give me the lowdown on the past week | summary none
+what has the car been doing lately | summary none
+let me know how the week went for the car | summary none
+a summary of my recent journeys please | summary none
+report on the last seven days | summary none
+how have the last few days been | summary none
+anything to report from this week | summary none
+what did the vehicle get through this month | summary none
+walk me through the month | summary none
+fill me in on last week | summary none
+what's the picture for the past fortnight | summary none
+how was this past week in the car | summary none
+how did the car get on this week | summary none
+overview of the last month of use please | summary none
+what have my trips been like lately | summary none
+what's been going on with the car | summary none
+recap the week for me | summary none
+how was the last seven days overall | summary none
+review my recent driving | summary none
+tell me about the last week on the road | summary none
+today in a nutshell | summary none ent=day
+recap today | summary none ent=day
+how has today been for the car | summary none ent=day
+give me today's summary | summary none ent=day
+summarise the day so far | summary none ent=day
+tell me about yesterday's driving | summary none ent=day
+what happened on the car yesterday | summary none ent=day
+what was special about my longest trip | summary none ent=trip
+what stood out on my last drive | summary none ent=trip
+tell me about my latest journey | summary none ent=trip
+describe my most recent trip | summary none ent=trip
+how did my shortest drive go | summary none ent=trip
+summarise the trip I just did | summary none ent=trip
+what happened on my longest journey | summary none ent=trip
+break down my last trip | summary none ent=trip
+
+# ------------------------------------------------------------------------------------------------ summary of a condition (summary <topic>)
+summarise how the battery is doing | summary battery_condition
+give me a summary of the battery | summary battery_condition
+overview of my battery health lately | summary battery_condition
+how has the battery been over the last weeks in short | summary battery_condition
+sum up the state of the tyres | summary tyre_condition
+summarise the tyre situation | summary tyre_condition
+give me an overview of the brakes | summary brake_condition
+how are the brakes doing overall | summary brake_condition
+summarise how i drive | summary driving_style
+how is my driving style looking lately | summary driving_style
+overall picture of my driving habits | summary driving_style
+give me an overall health picture of the car | summary vehicle_health
+summarise the condition of the whole vehicle | summary vehicle_health
+overall how healthy is the vehicle | summary vehicle_health
+sum up the cooling system | summary cooling_condition
+overview of the motor condition | summary motor_condition
+summary of the twelve volt battery | summary aux_battery_condition
+summarise the warnings this month | summary any_warning
+a summary of the faults lately | summary diagnostic_status
+how have the charging sessions been in short | summary charging_session
+
+# ------------------------------------------------------------------------------------------------ unusual (anomaly)
+any signals acting up lately | anomaly none
+are any readings behaving strangely | anomaly none
+has anything been off with the car this week | anomaly none
+anything odd about the vehicle recently | anomaly none
+is there anything abnormal in the last few days | anomaly none
+did anything strange happen yesterday | anomaly none ent=day
+anything weird about today | anomaly none ent=day
+was yesterday normal for the car | anomaly none ent=day
+is the battery behaving oddly | anomaly battery_condition
+is anything wrong with how the battery has been acting | anomaly battery_condition
+anything strange with the battery lately | anomaly battery_condition
+is the motor acting up | anomaly motor_condition
+is anything off with the cooling | anomaly cooling_condition
+anything unusual with the tyres | anomaly tyre_condition
+was the number of warnings unusual this week | anomaly any_warning
+were there more faults than normal lately | anomaly any_warning
+did the warnings look odd this month | anomaly any_warning
+is the warning count out of the ordinary | anomaly any_warning
+was the battery temperature unusual this week | anomaly battery_temperature
+is the motor temperature out of its normal range lately | anomaly motor_temperature
+anything unusual in the oil temperature | anomaly engine_oil_temperature
+is my energy use unusual | anomaly wh_per_km
+was the coolant flow strange this week | anomaly coolant_flow
+is the speed pattern unusual | anomaly speed
+
+# ------------------------------------------------------------------------------------------------ why one trip: the hot / high / costly premise carries op=rise (why X op=rise ent=trip)
+why did the motor get so hot on my last trip | why motor_temperature op=rise ent=trip
+why was the motor temperature so high on that drive | why motor_temperature op=rise ent=trip
+why did the battery heat up so much on my longest trip | why battery_temperature op=rise ent=trip
+why did the battery get hot on the most recent journey | why battery_temperature op=rise ent=trip
+why was the oil so hot on my last drive | why engine_oil_temperature op=rise ent=trip
+why did my last trip use so much energy | why wh_per_km op=rise ent=trip
+why was the consumption so high on the longest journey | why wh_per_km op=rise ent=trip
+why did the last drive cost so much power | why wh_per_km op=rise ent=trip
+why was the climate control so heavy on that trip | why hvac_power op=rise ent=trip
+why did the coolant flow drop so much on my last trip | why coolant_flow op=drop ent=trip
+why was it so thirsty on the last drive | why fuel_rate op=rise ent=trip
+why did the engine work so hard on the longest trip | why engine_load op=rise ent=trip
+why was the battery temperature up on the shortest trip | why battery_temperature op=rise ent=trip
+what made the motor run hot on the last trip | why motor_temperature op=rise ent=trip
+what pushed the energy use up on my longest drive | why wh_per_km op=rise ent=trip
+why was the last trip different | summary none ent=trip
+why did the longest trip stand out | summary none ent=trip
+what was behind how the last drive went | summary none ent=trip
+why was my shortest trip so odd | summary none ent=trip
+
+# ------------------------------------------------------------------------------------------------ follow-ups to the new acts
+summary none ent=trip >> why was it so hot | why battery_temperature op=rise ent=trip ref=focus
+summary none ent=trip >> why was it so warm in there | why battery_temperature op=rise ent=trip ref=focus
+summary none ent=trip >> what made it use so much energy | why wh_per_km op=rise ent=trip ref=focus
+summary none ent=trip >> why was the consumption high | why wh_per_km op=rise ent=trip ref=focus
+summary none ent=trip >> and why did the motor heat up | why motor_temperature op=rise ent=trip ref=focus
+summary none ent=trip >> why was it different from my other trips | summary none ent=trip ref=focus
+summary none ent=trip >> what was unusual about it | anomaly none ent=trip ref=focus
+anomaly none >> check the battery temperature | anomaly battery_temperature ref=concept
+anomaly none >> how about the battery | anomaly battery_condition ref=concept
+anomaly none >> and the motor temperature | anomaly motor_temperature ref=concept
+anomaly none >> what about the tyres | anomaly tyre_condition ref=concept
+anomaly none >> and the warnings | anomaly any_warning ref=concept
+anomaly none >> what about yesterday | anomaly none ent=day ref=period
+anomaly none >> and last month | anomaly none ref=period
+summary none >> check the battery temperature | summary battery_temperature ref=concept
+summary none >> and how is the motor | summary motor_condition ref=concept
+summary none >> and what about the tyres | summary tyre_condition ref=concept
+summary none >> go back one more week | summary none ref=period
+summary none >> the whole month then | summary none ref=period
+summary none op=change >> and the week before that | summary none op=change ref=period
+summary none op=change >> same but for the month | summary none op=change ref=period
+anomaly none >> and the week before | anomaly none ref=period
+
+# ------------------------------------------------------------------------------------------------ fuel, range and the like (ICE and EV wordings)
+how much fuel is left | now fuel_level
+how much fuel do i have left | now fuel_level
+what is left in the tank | now fuel_level
+fuel remaining | now fuel_level
+how full is the tank | now fuel_level
+is the tank nearly empty | now fuel_level
+how much petrol is in the car | now fuel_level
+how much diesel is left | now fuel_level
+how much gas is left | now fuel_level
+fuel gauge reading | now fuel_level
+how far can this car drive | estimate range_estimate
+how far can i still go | estimate range_estimate
+how much further can we travel | estimate range_estimate
+how many kilometres can i do before i need to refuel | estimate range_estimate
+distance left on what i have | estimate range_estimate
+how much can we still cover | estimate range_estimate
+how much juice is left | now battery_soc
+how much charge is left in the car | now battery_soc
+how much battery do i have | now battery_soc
+what is the battery level | now battery_soc
+
+# ------------------------------------------------------------------------------------------------ coolant temperature is the motor / engine temperature
+what is the coolant temperature | now motor_temperature
+how hot is the coolant | now motor_temperature
+engine coolant temperature | now motor_temperature
+coolant temp right now | now motor_temperature
+how hot is the engine | now motor_temperature
+what was the highest coolant temperature this week | extreme motor_temperature op=max
+did the coolant get hot last week | extreme motor_temperature op=max
+average coolant temperature over the last month | stat motor_temperature op=mean
+does the oil temperature follow the coolant temperature | stat engine_oil_temperature op=corr c2=motor_temperature
+does oil temp track the engine coolant temp | stat engine_oil_temperature op=corr c2=motor_temperature
+is the coolant temperature related to the speed | stat motor_temperature op=corr c2=speed
+coolant temperature against the boost pressure | compare motor_temperature op=mean c2=boost_pressure
+does the throttle opening follow the pedal | stat throttle_position op=corr c2=accelerator_position
+how do throttle opening and speed move together | stat throttle_position op=corr c2=speed
+is the intake air temperature related to the outside temperature | stat intake_air_temperature op=corr c2=ambient_temperature
+fuel use and engine speed together | compare fuel_rate op=mean c2=engine_rpm
+how do fuel rate and engine load compare | compare fuel_rate op=mean c2=engine_load
+engine rpm next to the vehicle speed | compare engine_rpm op=mean c2=speed
+boost pressure and engine load together | compare boost_pressure op=mean c2=engine_load
+exhaust temperature against engine load | compare exhaust_gas_temperature op=mean c2=engine_load

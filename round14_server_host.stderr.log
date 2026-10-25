@@ -1,0 +1,2 @@
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+VehicleGPT could not start: port 8765 is already in use (is VehicleGPT already running? try --port 8766)

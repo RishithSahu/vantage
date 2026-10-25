@@ -1,0 +1,21 @@
+{
+ "id": "rhino_diesel",
+ "name": "Rhino T4 2.8 TD (synthetic maker)",
+ "year": 2025,
+ "region": "anywhere",
+ "powertrain": "diesel",
+ "class": "Light diesel truck on SAE J1939 identifiers",
+ "decoder_installed": true,
+ "interfaces": [
+  "SAE J1939 on CAN 250 kbit/s (29-bit identifiers)",
+  "UDS diagnostic trouble codes",
+  "syslog from a telematics unit",
+  "NMEA 0183 GNSS"
+ ],
+ "notes": "A fictional maker's diesel truck whose CAN database uses real J1939 parameter groups.",
+ "source": "written for the test bench (vgpt/vehicle/packs)",
+ "bound": 31,
+ "concepts": 31,
+ "extension": [],
+ "profile_dir": "../../vehicle/packs/rhino_diesel"
+}

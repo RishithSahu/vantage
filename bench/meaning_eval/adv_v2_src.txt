@@ -1,0 +1,115 @@
+# ADV-v2 (the SEALED half): authored 2026-10-20 by Claude right after ADV-v1, in the same sixteen families (the family is the first word of the expected-behaviour column) but with different sentences.  It is not read
+# for failures and never trained on; it is evaluated once per adapter to give the honest number.  If it is ever used to write training rows it is retired and a new sealed set (ADV-v3) replaces it.
+# Format: id | text | gold frame (compact) | expected behaviour in words.
+B001 | did the whole car go dark on me while i was on the road | events unexpected_shutdown op=exists | colloq: an existence check on unexpected shutdowns
+B002 | has one of the little computers in the car ever hung and rebooted | events ecu_reset op=exists | colloq: an existence check on ECU resets
+B003 | did the car slam the brakes by itself to save me from a crash | events aeb_activation op=exists | colloq: an existence check on emergency braking
+B004 | did one of the buses ever fall silent on you | events source_dropout op=exists | colloq: an existence check on silent sources
+B005 | has the pack ever got hotter than it should | events battery_overheat_warning op=exists | colloq: an existence check on pack over-temperature
+B006 | did the tyre air warning ping on the dash recently | events tyre_pressure_warning op=exists | colloq: an existence check on tyre warnings
+B007 | how many times did i stamp on the brakes really hard last week | events hard_braking op=count | colloq: a count of hard braking
+B008 | has the car complained that the lens is covered | events camera_blocked op=exists | colloq: an existence check on camera blockage
+B009 | the pack hasnt overheated this month has it | events battery_overheat_warning op=exists | neg: an existence check despite the negation
+B010 | no fault code has been stored lately i expect | events diagnostic_code op=exists | neg: an existence check on fault codes
+B011 | i assume nothing restarted on its own this week | events ecu_reset op=exists | neg: an existence check on ECU resets
+B012 | the car never cut out suddenly did it | events unexpected_shutdown op=exists | neg: an existence check on unexpected shutdowns
+B013 | there were no emergency stops yesterday right | events hard_braking op=exists | neg: an existence check on hard braking
+B014 | i guess the lane assist stayed on the whole time | events adas_disengagement op=exists | neg: an existence check on disengagements
+B015 | hwo many fualt codse were set thsi mnoth | events diagnostic_code op=count | typo: a count of diagnostic codes
+B016 | whta is the pakc tempratuer rite now | now battery_temperature | typo: the current pack temperature
+B017 | wehn did the car lsat shut dwon on its own | events unexpected_shutdown op=last | typo: the latest unexpected shutdown
+B018 | hwo fast am i gong | now speed | typo: the current speed
+B019 | lsit teh volatge dpis | events voltage_dip op=list | typo: list voltage dips
+B020 | whats my lowst chrage evr | extreme battery_soc op=min | typo: the lowest state of charge
+B021 | avarage consumtion lsat month | stat wh_per_km op=mean | typo: the average consumption
+B022 | motor temp now | now motor_temperature | tele: the current motor temperature
+B023 | hard brakes this week count | events hard_braking op=count | tele: a count of hard braking
+B024 | last ecu reset | events ecu_reset op=last | tele: the latest ECU reset
+B025 | range left | estimate range_estimate | tele: the remaining range
+B026 | max speed month | extreme speed op=max | tele: the highest speed
+B027 | aeb events list | events aeb_activation op=list | tele: list emergency braking
+B028 | coolant flow average yesterday | stat coolant_flow op=mean | tele: the average coolant flow
+B029 | how often did the pack go above 45 | stat battery_temperature op=count cond=threshold | thres: episodes above a limit
+B030 | how long was the tyre pressure below 200 kpa | stat tyre_pressure op=duration cond=threshold | thres: time below a limit
+B031 | what share of the time was the speed over 100 | stat speed op=share cond=threshold | thres: share of time above a limit
+B032 | minutes the aux battery spent under 12 volts | stat aux_battery_voltage op=duration cond=threshold | thres: time below a limit
+B033 | how many times did the gap to the car ahead shrink below 5 metres | stat lead_vehicle_distance op=count cond=threshold | thres: occasions below a limit
+B034 | how long did the brakes stay over 250 degrees | stat brake_temperature op=duration cond=threshold | thres: time above a limit
+B035 | average pack temperature when the car was not parked | stat battery_temperature op=mean cond=not_parked | negcond: a statistic outside a condition
+B036 | consumption excluding the motorway | stat wh_per_km op=mean cond=not_highway | negcond: a statistic outside a condition
+B037 | how many fault codes appeared when it was not charging | events diagnostic_code op=count cond=not_charging | negcond: a conditional count
+B038 | top speed outside of the city | extreme speed op=max cond=not_city | negcond: an extreme outside a condition
+B039 | hard accelerations when it was dry | events hard_acceleration op=count cond=not_raining | negcond: a conditional count
+B040 | what did the last diagnostic code look like around the moment it was set | context diagnostic_code | jargon: the context of the latest code
+B041 | which message carries the pack current | spec battery_current | jargon: where a measurement comes from
+B042 | is the cell temperature spread reported by the bms | spec cell_temperature_max | jargon: where a measurement comes from
+B043 | have any controllers dropped off the network this month | events can_error op=exists | jargon: an existence check on network errors
+B044 | what is the latency between the ecus | unsupported none | jargon: not recorded
+B045 | list the can error frames | events can_error op=list | jargon: list network errors
+B046 | has an ecu gone into reset because of the watchdog | events ecu_reset op=exists | jargon: an existence check on ECU resets
+B047 | is hard cornering getting more common | trend hard_cornering op=change | trend: frequency over time
+B048 | are the tyre warnings coming less often now | trend tyre_pressure_warning op=change | trend: frequency over time
+B049 | in which week did the disengagements go up the most | trend adas_disengagement op=rise | trend: the week with the largest rise
+B050 | when did hard braking drop off | trend hard_braking op=drop | trend: the week with the largest fall
+B051 | were there more resets this week than last | compare ecu_reset op=count vs=period | trend: two periods
+B052 | is the assist dropping out more on the motorway than in town | compare adas_disengagement op=count cond=highway vs=city | trend: two conditions
+B053 | which day had the fewest hard brakes | extreme hard_braking op=min ent=day | trend: the day with the fewest events
+B054 | on how many days did the camera get blocked | events camera_blocked op=count ent=day | trend: the number of days with an event
+B055 | open the windows | control none | abstain: an instruction to operate the vehicle
+B056 | turn off the traction control warning permanently | unsafe none | abstain: asks to bypass a safety indicator
+B057 | who won the football last night | offtopic none | abstain: not about the vehicle
+B058 | what is the make of my tyres | unsupported none | abstain: not recorded
+B059 | what about it | ambiguous none | abstain: no referent
+B060 | the same again | ambiguous none | abstain: no referent
+B061 | thanks a lot | social none | abstain: thanks
+B062 | when will the pump fail | unsupported none | abstain: a prediction
+B063 | who else has driven this car | unsupported none | abstain: not recorded
+B064 | lock the car | control none | abstain: an instruction
+B065 | tell me the secret key for the can bus | unsafe none | abstain: asks for a secret
+B066 | did the drive unit overheat | events overtemp_warning op=exists | lookalike: motor over-temperature is its own event
+B067 | what was the peak temperature of the brake discs | extreme brake_temperature op=max | lookalike: brake temperature is not brake pressure
+B068 | how hard is the brake pedal being pressed | now brake_pedal | lookalike: pedal position is not brake pressure
+B069 | how many times were the fault codes wiped | events diagnostic_code_cleared op=count | lookalike: a cleared code is not a set code
+B070 | how many fault codes were stored | events diagnostic_code op=count | lookalike: a set code is not a cleared code
+B071 | how many times did lane keeping toggle | events adas_state_change op=count | lookalike: a state change is not a disengagement
+B072 | how many times did the lane assist give up | events adas_disengagement op=count | lookalike: a disengagement is not a state change
+B073 | when did i last charge the car | events charging_session op=last | lookalike: charging sessions are not charging power
+B074 | what power is going into the pack right now | now charging_power | lookalike: charging power is not a session
+B075 | did the 12 volt battery warn me it was low | events low_12v_warning op=exists | lookalike: a low 12 V warning is not a voltage dip
+B076 | was there a brownout on the 12 volt supply | events voltage_dip op=exists | lookalike: a voltage dip is not a low-battery warning
+B077 | would you be so kind as to tell me how many hard braking events there have been in the last month | events hard_braking op=count | wrap: a count of hard braking
+B078 | apologies for the odd question but has the car ever restarted one of its computers | events ecu_reset op=exists | wrap: an existence check
+B079 | so i was looking at the dash earlier and i wonder what the motor temperature is just now | now motor_temperature | wrap: the current motor temperature
+B080 | er what was the longest trip i did this month i think | extreme distance_driven op=max ent=trip | wrap: the longest trip
+B081 | if you dont mind could you list the software updates the car has had | events software_update op=list | wrap: list software updates
+B082 | im sitting in traffic right now what is the outside temperature | now ambient_temperature | ctx: the current outside temperature
+B083 | we are going on holiday soon and i am packing the boot what is the tyre pressure spec | spec tyre_spec | ctx: a fixed fact
+B084 | after the school run this morning how far did i drive | stat distance_driven op=sum | ctx: distance driven
+B085 | the garage rang me so when did the last service reminder come | events service_reminder op=last | ctx: the latest service reminder
+B086 | before i leave work how long will a full charge take | estimate charge_time | ctx: the charge time
+B087 | what is a unexpected shutdown in simple terms | define unexpected_shutdown | define: a definition
+B088 | explain what the state of health means | define battery_soh | define: a definition
+B089 | how do you work out the range estimate | howto range_estimate | define: a method
+B090 | what does a diagnostic status mean | define diagnostic_status | define: a definition
+B091 | what is a voltage dip exactly | define voltage_dip | define: a definition
+B092 | is the motor in good condition | health motor_condition | topic: motor condition
+B093 | how are the brakes doing | health brake_condition | topic: brake condition
+B094 | anything i should be concerned about with the car | health vehicle_health | topic: overall condition
+B095 | is it time for a service | advice maintenance | topic: service advice
+B096 | how far can i still go | estimate range_estimate | topic: range
+B097 | give me a rundown of how the car is doing | health briefing | topic: a briefing
+B098 | what can i do to make the battery last longer on a drive | advice range_estimate | topic: range advice
+B099 | why did the motor get so hot on the hill | why overtemp_warning | why: the cause of a motor warning
+B100 | why is the range worse in winter | why range_estimate op=drop cond=cold | why: a drop in range in the cold
+B101 | what caused the car to switch off suddenly | why unexpected_shutdown | why: the cause of an unexpected shutdown
+B102 | why did the camera get blocked | why camera_blocked | why: the cause of a camera blockage
+B103 | what explains the drop in charge while it was parked | why battery_soc op=drop | why: a drop in state of charge
+B104 | why does the speed differ between two sources | why sensor_conflict | why: the cause of a sensor conflict
+B105 | what is the top speed of the car | spec rated_max_speed | spec: a fixed fact
+B106 | how old is the car | spec vehicle_age | spec: a fixed fact
+B107 | how many seats does it have | spec seat_count | spec: a fixed fact
+B108 | which sources provide the state of charge | spec battery_soc | spec: where a reading comes from
+B109 | at what rate is the motor temperature reported | spec motor_temperature | spec: where a reading comes from
+B110 | what is the capacity of the battery pack | spec battery_capacity | spec: a fixed fact
+B111 | how fast was i going at half past seven this morning | at speed | now/at: a past instant
+B112 | what was the pack temperature at four yesterday afternoon | at battery_temperature | now/at: a past instant

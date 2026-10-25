@@ -1,0 +1,57 @@
+# third unseen set, written after sets 1 and 2 were used for tuning; not looked at while tuning. Measure: python bench/eval_everyday.py data/gen_courier.db bench/everyday_blind3.tsv
+advice	my family wants to drive 300 km this weekend, is the car up to it
+advice	can the car be driven safely at the moment
+advice	is it a bad idea to take it out on the highway today
+advice	should I leave the car at home given its condition
+advice	am I allowed to just keep driving normally
+signal_why	why does the battery power show a minus number when I lift off the pedal
+signal_why	why is the pump flow reading nothing while I'm parked
+signal_why	what makes the pack temperature rise during a fast charge
+drive_safely	what are the best habits for staying safe behind the wheel
+drive_safely	teach me to drive more safely
+battery_now	how's the charge and health of the battery
+battery_now	update me on the battery
+last_charge	when was the most recent time the car got charged
+last_charge	how long since I last charged
+reach	will I reach the office on the current charge
+reach	how many more kilometres can this charge give me
+reach	is it time to put the car on charge
+improve_range	how do I squeeze more kilometres out of the battery
+improve_range	give me eco driving advice
+charge_cost	how much has charging cost me recently
+charge_cost	what's the electricity bill for the car
+charge_time	how many minutes to charge up to 80
+speeding	do I tend to go too fast
+speeding	am I driving above the limit
+hot_battery	did the battery ever reach a dangerous temperature
+hot_battery	has the pack ever been very hot
+pump_ok	is my coolant circulation okay
+pump_ok	are there any issues with the battery cooling
+v12	is the 12 volt battery okay
+motor_now	is the motor overheating
+unusual	did anything odd happen on my drive today
+unusual	was there anything unusual yesterday
+overview	how did my week go
+overview	give me the summary of the last few days
+overview	how's everything with my car
+style	am I a calm driver or an aggressive one
+dtc_explain	explain this diagnostic code
+battery_age	how much has the battery aged
+charging_now	is the car currently charging
+top_speed	what is the fastest speed I've driven
+places_most	what are the places I go to most often
+commute	how long does my commute usually take
+longest_trip	what's the longest trip I've done
+last_trip	tell me about the most recent journey
+eff_day	what was my efficiency yesterday
+best_day	which day did I use the least energy per km
+eff_trend	has my energy consumption gone up recently
+trip_count	how many drives did I do this week
+regen	how much power did regenerative braking give back this week
+explain_simple	explain the latest warning in simple language
+briefing	good morning, anything I should know
+help	tell me what you can do
+smalltalk	hi
+smalltalk	thank you very much
+foreign	gaadi safe hai kya
+foreign	range kitna hai

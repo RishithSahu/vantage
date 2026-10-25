@@ -1,0 +1,20 @@
+{
+  "P1A00": {"text": "Battery coolant flow low (illustrative code)", "subsystem": "thermal", "severity": "warn"},
+  "P0562": {"text": "System voltage low", "subsystem": "power", "severity": "warn"},
+  "P0AFA": {"text": "Hybrid/EV battery system voltage low", "subsystem": "battery", "severity": "warn"},
+  "P0A7F": {"text": "Hybrid/EV battery pack deterioration", "subsystem": "battery", "severity": "warn"},
+  "P0AA6": {"text": "Hybrid/EV battery voltage system isolation fault", "subsystem": "battery", "severity": "critical"},
+  "P0A94": {"text": "DC/DC converter performance", "subsystem": "power", "severity": "warn"},
+  "C0750": {"text": "Tyre pressure low - front left (illustrative code)", "subsystem": "tyres", "severity": "warn"},
+  "C0751": {"text": "Tyre pressure low - front right (illustrative code)", "subsystem": "tyres", "severity": "warn"},
+  "C0752": {"text": "Tyre pressure low - rear left (illustrative code)", "subsystem": "tyres", "severity": "warn"},
+  "C0753": {"text": "Tyre pressure low - rear right (illustrative code)", "subsystem": "tyres", "severity": "warn"},
+  "U0100": {"text": "Lost communication with powertrain control module", "subsystem": "network", "severity": "warn"},
+  "U0121": {"text": "Lost communication with anti-lock brake system module", "subsystem": "network", "severity": "warn"},
+  "U0140": {"text": "Lost communication with body control module", "subsystem": "network", "severity": "warn"},
+  "U0155": {"text": "Lost communication with instrument panel cluster", "subsystem": "network", "severity": "warn"},
+  "U0415": {"text": "Invalid data received from anti-lock brake system module", "subsystem": "network", "severity": "warn"},
+  "B1000": {"text": "ECU internal fault", "subsystem": "electronics", "severity": "warn"},
+  "C1A10": {"text": "Forward camera misaligned or blocked (illustrative code)", "subsystem": "adas", "severity": "warn"},
+  "C1A20": {"text": "Forward radar performance degraded (illustrative code)", "subsystem": "adas", "severity": "warn"}
+}

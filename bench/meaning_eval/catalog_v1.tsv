@@ -1,0 +1,75 @@
+# CATALOG_V1: frame version 2 extended (summary / anomaly / usual / trip focus; universal-catalogue vocabulary).  Authored 2026-10-21 before the training data of these families was built.  Never trained on.
+# Format: id <TAB> text <TAB> gold frame (act concept op cond vs ent c2 ref) <TAB> tag
+C001	how hot is the oil in the engine	now engine_oil_temperature none none none none none none	catalog
+C002	what is the oil pressure at	now engine_oil_pressure none none none none none none	catalog
+C003	how far is the throttle open	now throttle_position none none none none none none	catalog
+C004	what is the turbo boost right now	now boost_pressure none none none none none none	catalog
+C005	current intake manifold pressure	now intake_manifold_pressure none none none none none none	catalog
+C006	how much air is going into the engine	now mass_air_flow none none none none none none	catalog
+C007	how warm is the air entering the engine	now intake_air_temperature none none none none none none	catalog
+C008	what is the atmospheric pressure	now barometric_pressure none none none none none none	catalog
+C009	what does the oxygen sensor say	now lambda none none none none none none	catalog
+C010	what is the short term trim at	now short_term_fuel_trim none none none none none none	catalog
+C011	current long term fuel trim	now long_term_fuel_trim none none none none none none	catalog
+C012	catalyst temperature now	now catalyst_temperature none none none none none none	catalog
+C013	what is the ignition advance	now ignition_timing none none none none none none	catalog
+C014	how hot are the exhaust gases	now exhaust_gas_temperature none none none none none none	catalog
+C015	how clogged is the diesel particulate filter	now dpf_soot_load none none none none none none	catalog
+C016	is the filter cleaning itself right now	now dpf_regeneration none none none none none none	catalog
+C017	how much AdBlue is in the tank	now def_level none none none none none none	catalog
+C018	what is the common rail pressure	now fuel_rail_pressure none none none none none none	catalog
+C019	what is the fuel temperature	now fuel_temperature none none none none none none	catalog
+C020	how far open is the EGR	now egr_position none none none none none none	catalog
+C021	how long since the engine started	now engine_run_time none none none none none none	catalog
+C022	total engine hours	now engine_hours none none none none none none	catalog
+C023	which gear is the car in	now gear none none none none none none	catalog
+C024	is the handbrake applied	now parking_brake none none none none none none	catalog
+C025	what is the altitude here	now altitude none none none none none none	catalog
+C026	is any door ajar	now door_state none none none none none none	catalog
+C027	am I wearing my seat belt	now seatbelt_state none none none none none none	catalog
+C028	are the lights on	now headlight_state none none none none none none	catalog
+C029	are the wipers going	now wiper_state none none none none none none	catalog
+C030	what is the inverter temperature	now inverter_temperature none none none none none none	catalog
+C031	highest individual cell voltage	now cell_voltage_max none none none none none none	catalog
+C032	how much current is the charger pushing	now charging_current none none none none none none	catalog
+C033	what is the charging voltage	now charging_voltage none none none none none none	catalog
+C034	what is the charge cap	now charge_limit none none none none none none	catalog
+C035	is the charging flap open	now charge_port_state none none none none none none	catalog
+C036	minutes until fully charged	now time_to_full none none none none none none	catalog
+C037	what range is the dashboard claiming	now reported_range none none none none none none	catalog
+C038	gearbox oil temperature	now transmission_temperature none none none none none none	catalog
+C039	what is the cooling system pressure	now coolant_pressure none none none none none none	catalog
+C040	what is the fuel delivery pressure	now fuel_pressure none none none none none none	catalog
+C041	peak oil temperature this week	extreme engine_oil_temperature max none none none none none	catalog
+C042	minimum oil pressure last month	extreme engine_oil_pressure min none none none none none	catalog
+C043	mean throttle opening yesterday	stat throttle_position mean none none none none none	catalog
+C044	highest boost last week	extreme boost_pressure max none none none none none	catalog
+C045	average manifold pressure over the week	stat intake_manifold_pressure mean none none none none none	catalog
+C046	hottest intake air this month	extreme intake_air_temperature max none none none none none	catalog
+C047	average lambda this week	stat lambda mean none none none none none	catalog
+C048	how has long term trim moved this month	trend long_term_fuel_trim change none none none none none	catalog
+C049	has the catalyst temperature fallen over the month	trend catalyst_temperature drop none none none none none	catalog
+C050	hottest exhaust last week	extreme exhaust_gas_temperature max none none none none none	catalog
+C051	how has the soot load moved this month	trend dpf_soot_load change none none none none none	catalog
+C052	lowest AdBlue level this week	extreme def_level min none none none none none	catalog
+C053	mean rail pressure last month	stat fuel_rail_pressure mean none none none none none	catalog
+C054	hottest inverter this month	extreme inverter_temperature max none none none none none	catalog
+C055	mean charging current this month	stat charging_current mean none none none none none	catalog
+C056	what is a normal barometric pressure here	stat barometric_pressure usual none none none none none	catalog
+C057	what does a lambda sensor measure	define lambda none none none none none none	catalog
+C058	what is a particulate filter	define dpf_soot_load none none none none none none	catalog
+C059	what is the egr for	define egr_position none none none none none none	catalog
+C060	what is fuel trim	define short_term_fuel_trim none none none none none none	catalog
+C061	what is manifold pressure	define intake_manifold_pressure none none none none none none	catalog
+C062	what is turbo boost	define boost_pressure none none none none none none	catalog
+C063	what is AdBlue for	define def_level none none none none none none	catalog
+C064	what does the throttle position sensor do	define throttle_position none none none none none none	catalog
+C065	is the engine oil temperature normal right now	now engine_oil_temperature none none typical none none none	catalog
+C066	was the boost pressure higher than usual this week	compare boost_pressure mean none typical none none none	catalog
+C067	did the exhaust temperature spike this week	extreme exhaust_gas_temperature max none none none none none	catalog
+C068	is the 12 volt battery low	now aux_battery_voltage none none none none none none	catalog
+C069	how is the dpf doing	now dpf_soot_load none none none none none none	catalog
+C070	does oil temperature follow coolant temperature	stat engine_oil_temperature corr none none none motor_temperature none	catalog
+C071	is boost related to engine load	stat boost_pressure corr none none none engine_load none	catalog
+C072	how do throttle position and speed relate	stat throttle_position corr none none none speed none	catalog
+C073	fuel rate and engine rpm side by side	compare fuel_rate mean none none none engine_rpm none	catalog

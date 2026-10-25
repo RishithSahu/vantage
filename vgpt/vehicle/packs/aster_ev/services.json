@@ -1,0 +1,18 @@
+{
+  "0x4A11": {"name": "AdasState", "interface_version": 1, "events": {
+    "0x8001": {"name": "SystemState", "fmt": ">BB", "fields": ["engaged", "level"]},
+    "0x8002": {"name": "Disengaged", "fmt": ">BH", "fields": ["reason", "speed_kmh"], "enums": {"reason": {"0": "driver override", "1": "lane marking lost", "2": "camera blocked", "3": "system limit", "4": "sensor conflict", "5": "radar fault"}}},
+    "0x8003": {"name": "AebActivation", "fmt": ">Hf", "fields": ["speed_kmh", "decel_g"]}}},
+  "0x4A12": {"name": "ObjectList", "interface_version": 1, "events": {
+    "0x8001": {"name": "LeadVehicle", "fmt": ">Hf", "fields": ["track_id", "distance_m"]}}},
+  "0x4A13": {"name": "LaneModel", "interface_version": 1, "events": {
+    "0x8001": {"name": "LaneQuality", "fmt": ">f", "fields": ["confidence"]}}},
+  "0x4B01": {"name": "ChargingService", "interface_version": 1, "events": {
+    "0x8001": {"name": "ChargeState", "fmt": ">Bf", "fields": ["state", "kw"], "enums": {"state": {"0": "idle", "1": "charging", "2": "full", "3": "fault"}}},
+    "0x8002": {"name": "SessionStarted", "fmt": ">Bf", "fields": ["kind", "kw"], "enums": {"kind": {"0": "AC", "1": "DC"}}}}},
+  "0x4C01": {"name": "EcuSupervisor", "interface_version": 1, "events": {
+    "0x8001": {"name": "EcuReset", "fmt": ">BB", "fields": ["ecu", "cause"], "enums": {"ecu": {"0": "ADAS domain controller", "1": "battery management", "2": "gateway", "3": "infotainment", "4": "body controller", "5": "thermal manager"}, "cause": {"0": "power-on", "1": "watchdog timeout", "2": "software request", "3": "brown-out"}}},
+    "0x8003": {"name": "UnexpectedShutdown", "fmt": ">BH", "fields": ["cause", "last_valid_ms"], "enums": {"cause": {"0": "unknown", "1": "12 V supply loss", "2": "watchdog timeout", "3": "high-voltage interlock"}}}}},
+  "0x4D01": {"name": "PowerManager", "interface_version": 1, "events": {
+    "0x8001": {"name": "VoltageDip", "fmt": ">Hf", "fields": ["duration_ms", "min_v"]}}}
+}

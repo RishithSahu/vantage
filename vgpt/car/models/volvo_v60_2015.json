@@ -1,0 +1,30 @@
+{
+ "id": "volvo_v60_2015",
+ "name": "Volvo V60 T5",
+ "year": 2015,
+ "region": "Sweden / global",
+ "powertrain": "petrol",
+ "class": "Estate, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real Volvo V60 powertrain database",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "syslog from the infotainment unit",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure and odometer on a synthetic extension CAN"
+ ],
+ "notes": "",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): volvo_v60_2015_pt.dbc",
+ "bound": 32,
+ "concepts": 32,
+ "extension": [
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

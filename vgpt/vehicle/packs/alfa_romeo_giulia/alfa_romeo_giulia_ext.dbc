@@ -1,0 +1,19 @@
+VERSION "SYNTHETIC extension for alfa_romeo_giulia: quantities the open-source database of this vehicle does not publish. NOT the manufacturer's data."
+
+NS_ :
+
+BS_:
+
+BU_: EXT
+
+BO_ 1791 EXT_TPMS: 8 EXT
+ SG_ TyrePressureFl : 0|16@1+ (0.1,0) [0|600] "kPa" Vector__XXX
+ SG_ TyrePressureFr : 16|16@1+ (0.1,0) [0|600] "kPa" Vector__XXX
+ SG_ TyrePressureRl : 32|16@1+ (0.1,0) [0|600] "kPa" Vector__XXX
+ SG_ TyrePressureRr : 48|16@1+ (0.1,0) [0|600] "kPa" Vector__XXX
+
+BO_ 1790 EXT_DATA_1HZ: 8 EXT
+ SG_ TyreTemperature : 0|12@1+ (0.1,-40) [-40|120] "C" Vector__XXX
+ SG_ Odometer : 12|24@1+ (0.1,0) [0|1e+06] "km" Vector__XXX
+ SG_ CabinTemperature : 36|10@1+ (0.1,-20) [-20|80] "C" Vector__XXX
+

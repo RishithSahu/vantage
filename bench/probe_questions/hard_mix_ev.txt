@@ -1,0 +1,53 @@
+# Round 11 probe (2026-10-24): complicated trend / anomaly / mixed questions for an electric car. Read for correctness.
+has my battery lost more health this year than last year
+is my consumption worse now than in the same weeks last year
+are my trips getting shorter or longer compared with last month
+did the number of hard brakes go up after the software update
+is the pack running hotter this month than it used to
+am I driving more aggressively than before
+has anything about the battery changed in the last three months
+is my charging getting slower over the months
+what has changed in my driving compared with last week
+was there anything unusual in my driving yesterday
+anything odd with the tyres or the battery this week
+is the 12 volt battery getting weaker month by month
+did the range drop faster than normal after the cold started
+is anything in the car behaving differently from how it usually does
+which of my habits got worse lately
+did my regen get worse in the last two months
+how has the average speed of my trips changed this year
+is the number of warnings going up
+are there more fault codes now than in the spring
+did the motor temperature rise over the past weeks
+is my efficiency better on weekends than weekdays
+how does my consumption in the rain compare with dry days
+was last week's energy use normal for me
+is the tyre pressure slowly dropping on any wheel
+has charging at home got slower than before
+how many hard brakes did I have each week this month
+which week this year was my worst for consumption
+what was my best week for efficiency
+is this month's distance higher than my usual month
+did anything strange happen to the car last night
+is the coolant flow lower than it used to be
+did the battery heat up more than usual on my last trip
+are there any signs the battery is ageing faster than expected
+how does my driving compare to the previous month in short
+tell me what is unusual about this week
+are my hard accelerations increasing or decreasing
+has the car been parked more than usual lately
+did I charge more often this month than last month
+why is my range lower this week
+is the battery temperature normal for this time of year
+how is the battery health trending
+should I be worried about anything on the car right now
+give me a health check of the whole car
+what are the top three things I should look at
+was the last charge normal
+did the car behave differently on the highway than usual
+is my braking worse than a month ago
+am I using more energy on the same route than before
+did my night driving increase
+is there a pattern in when the warnings appear
+did the number of trips per day change since last month
+what was strange about last week compared with the one before

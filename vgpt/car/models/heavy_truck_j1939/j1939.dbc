@@ -1,0 +1,50 @@
+VERSION ""
+
+NS_ :
+
+BS_:
+
+BU_: ECU
+
+BO_ 2565866240 J1939_61443: 8 ECU
+ SG_ SPN92_engine_load : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ SPN91_accelerator_position : 8|8@1+ (0.4,0) [0|0] "" Vector__XXX
+
+BO_ 2565866496 J1939_61444: 8 ECU
+ SG_ SPN190_engine_rpm : 24|16@1+ (0.125,0) [0|0] "" Vector__XXX
+ SG_ SPN513_engine_torque_percent : 16|8@1+ (1,-125) [0|0] "" Vector__XXX
+
+BO_ 2566804992 J1939_65110: 8 ECU
+ SG_ SPN1761_def_level : 0|8@1+ (0.4,0) [0|0] "" Vector__XXX
+
+BO_ 2566810624 J1939_65132: 8 ECU
+ SG_ SPN1624_speed : 48|16@1+ (0.00390625,0) [0|0] "" Vector__XXX
+
+BO_ 2566832384 J1939_65217: 8 ECU
+ SG_ SPN917_odometer : 0|32@1+ (0.005,0) [0|0] "" Vector__XXX
+
+BO_ 2566843904 J1939_65262: 8 ECU
+ SG_ SPN110_motor_temperature : 0|8@1+ (1,-40) [0|0] "" Vector__XXX
+ SG_ SPN175_engine_oil_temperature : 16|16@1+ (0.03125,-273) [0|0] "" Vector__XXX
+ SG_ SPN174_fuel_temperature : 8|8@1+ (1,-40) [0|0] "" Vector__XXX
+
+BO_ 2566844928 J1939_65266: 8 ECU
+ SG_ SPN51_throttle_position : 48|8@1+ (0.4,0) [0|0] "" Vector__XXX
+ SG_ SPN183_fuel_rate : 0|16@1+ (0.05,0) [0|0] "" Vector__XXX
+
+BO_ 2566845696 J1939_65269: 8 ECU
+ SG_ SPN172_intake_air_temperature : 40|8@1+ (1,-40) [0|0] "" Vector__XXX
+ SG_ SPN108_barometric_pressure : 0|8@1+ (0.5,0) [0|0] "" Vector__XXX
+ SG_ SPN171_ambient_temperature : 24|16@1+ (0.03125,-273) [0|0] "" Vector__XXX
+ SG_ SPN170_cabin_temperature : 8|16@1+ (0.03125,-273) [0|0] "" Vector__XXX
+
+BO_ 2566845952 J1939_65270: 8 ECU
+ SG_ SPN102_boost_pressure : 8|8@1+ (2,0) [0|0] "" Vector__XXX
+ SG_ SPN173_exhaust_gas_temperature : 40|16@1+ (0.03125,-273) [0|0] "" Vector__XXX
+
+BO_ 2566846208 J1939_65271: 8 ECU
+ SG_ SPN168_aux_battery_voltage : 48|16@1+ (0.05,0) [0|0] "" Vector__XXX
+
+BO_ 2566847488 J1939_65276: 8 ECU
+ SG_ SPN96_fuel_level : 8|8@1+ (0.4,0) [0|0] "" Vector__XXX
+

@@ -1,0 +1,112 @@
+# everyday driver questions (rules only, no language model) - every one must be answered, none may hit the clarify / out-of-domain gate on a generated vehicle
+do I need to charge
+can I make it 150 km
+will I get home on this charge
+how far can I go
+how much battery is left
+how many kilometres left
+is my car okay
+is everything fine with the car
+any problems
+any issues with my car
+what's wrong with my car
+why is the warning light on
+should I be worried
+is it safe to keep driving
+how is the car doing
+car status
+vehicle summary
+give me a summary of the week
+how was my week
+how was my drive
+how was my last trip
+tell me about my last trip
+what was my longest trip
+how far did I drive today
+how far did I drive yesterday
+how many trips did I make
+how much energy did I use today
+what's my average speed
+what's my average consumption
+what's my efficiency
+am I using more energy than usual
+why is my consumption high
+why is my range lower in winter
+does cold weather affect my range
+how does temperature affect my battery
+how hot is the battery
+how hot is the motor
+what's the outside temperature
+what's the battery temperature
+is the battery charging
+am I plugged in
+what's the charging speed
+how many times did I fast charge
+how much did I charge last week
+how much regen did I get
+am I braking too hard
+am I accelerating too hard
+how aggressive is my driving
+give me a driving score
+what is my driving score
+how are my tires
+are my tyres okay
+is any tyre low
+did I get a puncture
+is the camera working
+is the camera dirty
+did the lane assist work
+when was the camera last blocked
+what's wrong with the coolant
+why did the pack overheat
+what caused the warning
+when was the last warning
+how many warnings this month
+show me all faults
+what is P1A00
+what does that code mean
+is it dangerous
+can I still drive
+what should I do
+what should I check first
+do I need a service
+when was the last service
+how many km since service
+what's the odometer
+how old is the battery
+what is the battery health
+how much capacity have I lost
+will my battery last
+how fast is the battery degrading
+when will I need to replace the battery
+what's the car's top speed
+how fast did I go
+where am I
+where is my car parked
+where did I park
+where did I charge
+which places do I visit most
+how long was my commute
+what time did I leave home
+is my driving getting worse
+has my efficiency changed
+compare today with yesterday
+compare this month with last month
+did it rain on my trip
+was it raining
+is it dark outside
+how's my battery
+how efficient was I yesterday
+when did I last charge
+how much did I spend on charging
+am I driving too fast
+how can I improve my range
+was the battery ever hot
+how long to charge to 80%
+how is the 12V battery
+did anything unusual happen today
+which day was most efficient
+explain the last warning simply
+is the coolant pump ok
+what's my range
+how's the tyre pressure

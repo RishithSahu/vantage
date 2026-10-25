@@ -1,0 +1,45 @@
+# The same questions as owner_round2_1024.txt, put to a petrol or diesel car (and the electric words put to a fuel car).
+hello how are you
+What is my current fuel level?
+how much fuel is left
+What was my fuel level at 6 PM yesterday
+Which trip had the highest fuel consumption this month
+Compare my average fuel consumption this week with last week
+what is my fuel economy
+how much fuel did I use last week
+how much fuel did I use till now
+How many times have I started the engine yesterday
+how many times did I start the car this week
+What was my fuel level at the beginning and end of my last trip
+Compare fuel consumption across my last five trips
+what was my fuel consumption on each of my last 4 trips
+Which hour of the day has the highest average fuel consumption
+Has the frequency of hard braking increased this month
+Did anything unusual happen to the engine temperature today
+Is my engine temperature gradually increasing over time
+highest engine temp
+highest engine temp today
+Compare fuel consumption before and after my last service
+average fuel consumption since my last service
+When did my tyre pressure last fall below the recommended threshold
+How many kilometres did I drive last week
+How many trips did I make last week
+What was my highest speed 3 sundays ago
+what was highest speed on 11th october
+how many engine related issues till now
+how many warnings today
+Has my average driving range decreased over the last two weeks
+what is my range
+how much fuel will 50 km use
+how much will fuel drop if i travel 50km
+which trip had the highest fuel consumption
+what is my current battery level
+what is my state of charge
+Which trip had the highest battery consumption this month
+Compare my average battery consumption this week with last week
+what was my battery state of charge at the beginning and end of my last trip
+when did I last refuel
+when did I last charge
+how long to fill the tank
+how many litres per 100 km last month
+is my engine temperature normal

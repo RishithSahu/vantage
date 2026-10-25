@@ -1,0 +1,35 @@
+VERSION "SYNTHETIC extension for byd_atto_3: quantities the open-source database of this vehicle does not publish. NOT the manufacturer's data."
+
+NS_ :
+
+BS_:
+
+BU_: EXT
+
+BO_ 1791 EXT_TPMS: 8 EXT
+ SG_ TyrePressureFl : 0|16@1+ (0.1,0) [0|600] "kPa" Vector__XXX
+ SG_ TyrePressureFr : 16|16@1+ (0.1,0) [0|600] "kPa" Vector__XXX
+ SG_ TyrePressureRl : 32|16@1+ (0.1,0) [0|600] "kPa" Vector__XXX
+ SG_ TyrePressureRr : 48|16@1+ (0.1,0) [0|600] "kPa" Vector__XXX
+
+BO_ 1790 EXT_DATA_1HZ: 8 EXT
+ SG_ TyreTemperature : 0|12@1+ (0.1,-40) [-40|120] "C" Vector__XXX
+ SG_ Odometer : 12|24@1+ (0.1,0) [0|1e+06] "km" Vector__XXX
+ SG_ BatterySoc : 36|12@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ BatteryTemperature : 48|11@1+ (0.1,-40) [-40|90] "C" Vector__XXX
+
+BO_ 1789 EXT_DATA_1HZ_2: 8 EXT
+ SG_ MotorTemperature : 0|11@1+ (0.1,-40) [-40|200] "C" Vector__XXX
+ SG_ ChargingPower : 11|12@1+ (0.1,0) [0|300] "kW" Vector__XXX
+ SG_ CoolantFlow : 23|10@1+ (0.1,0) [0|60] "L/min" Vector__XXX
+
+BO_ 1788 EXT_DATA_5HZ: 8 EXT
+ SG_ BatteryVoltage : 0|14@1+ (0.05,0) [0|800] "V" Vector__XXX
+ SG_ BatteryCurrent : 14|16@1- (0.1,0) [-900|900] "A" Vector__XXX
+
+BO_ 1787 EXT_DATA_0_2HZ: 8 EXT
+ SG_ ReportedRange : 0|12@1+ (1,0) [0|1500] "km" Vector__XXX
+
+BO_ 1786 EXT_KEYSTATE: 8 EXT
+ SG_ ChargingActive : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+

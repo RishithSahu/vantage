@@ -1,0 +1,186 @@
+# Frame version 2, round 2 (2026-10-21), part C: the universal catalogue's quantities asked the way people ask, not the way the catalogue names them (catalog_v1 was 80 % after the first run:
+# unfamiliar quantities were read as `unlisted` or as the nearest familiar one).  Hand-written, varied, including descriptions that avoid the label words.  Frozen questions are not copied; the builder drops matches.
+
+# ------------------------------------------------------------------------------------------------ engine oil
+how hot is the engine oil | now engine_oil_temperature
+engine lubricant temperature | now engine_oil_temperature
+is the oil running hot | now engine_oil_temperature
+what is the temperature of the oil in the sump | now engine_oil_temperature
+highest oil temp this week | extreme engine_oil_temperature op=max
+average oil temperature over the last month | stat engine_oil_temperature op=mean
+has the oil temperature crept up lately | trend engine_oil_temperature op=change
+how is the oil pressure | now engine_oil_pressure
+oil pressure right now | now engine_oil_pressure
+what pressure is the oil at | now engine_oil_pressure
+lowest oil pressure last week | extreme engine_oil_pressure op=min
+has the oil pressure dropped over time | trend engine_oil_pressure op=change
+average lube oil pressure this month | stat engine_oil_pressure op=mean
+
+# ------------------------------------------------------------------------------------------------ throttle, air, pressure
+how far is the throttle open right now | now throttle_position
+how open is the throttle | now throttle_position
+throttle plate angle | now throttle_position
+highest throttle opening this week | extreme throttle_position op=max
+average throttle position while driving last week | stat throttle_position op=mean
+what is the air pressure outside | now barometric_pressure
+atmospheric pressure at the moment | now barometric_pressure
+what is the barometer reading | now barometric_pressure
+has the air pressure changed this week | trend barometric_pressure op=change
+what is the manifold pressure | now intake_manifold_pressure
+reading of the map sensor | now intake_manifold_pressure
+how much vacuum in the intake | now intake_manifold_pressure
+peak manifold pressure last week | extreme intake_manifold_pressure op=max
+how warm is the air going into the engine | now intake_air_temperature
+temperature of the intake air | now intake_air_temperature
+what is the iat | now intake_air_temperature
+how hot did the intake air get yesterday | extreme intake_air_temperature op=max
+average intake air temp this week | stat intake_air_temperature op=mean
+how much air is the engine breathing | now mass_air_flow
+how many grams of air per second | now mass_air_flow
+maf sensor reading | now mass_air_flow
+peak air flow last week | extreme mass_air_flow op=max
+average air flow into the engine this month | stat mass_air_flow op=mean
+
+# ------------------------------------------------------------------------------------------------ fuel system and mixture
+what is the short term fuel trim | now short_term_fuel_trim
+stft reading | now short_term_fuel_trim
+how much is the engine adding or pulling fuel right now | now short_term_fuel_trim
+average short term trim this week | stat short_term_fuel_trim op=mean
+what is the long term fuel trim | now long_term_fuel_trim
+ltft right now | now long_term_fuel_trim
+has the long term trim drifted | trend long_term_fuel_trim op=change
+is the engine running lean or rich over time | stat long_term_fuel_trim op=mean
+what is the air fuel ratio | now lambda
+lambda value right now | now lambda
+reading of the oxygen sensor | now lambda
+is the mixture rich or lean | now lambda
+average lambda last week | stat lambda op=mean
+how hot is the catalytic converter | now catalyst_temperature
+catalyst temperature | now catalyst_temperature
+cat temp right now | now catalyst_temperature
+hottest the catalyst got this week | extreme catalyst_temperature op=max
+what is the ignition timing | now ignition_timing
+spark advance right now | now ignition_timing
+how far advanced is the spark | now ignition_timing
+average spark timing this week | stat ignition_timing op=mean
+how warm is the fuel | now fuel_temperature
+temperature of the diesel in the lines | now fuel_temperature
+highest fuel temp last week | extreme fuel_temperature op=max
+what pressure is the common rail at | now fuel_rail_pressure
+rail pressure right now | now fuel_rail_pressure
+highest rail pressure this week | extreme fuel_rail_pressure op=max
+average rail pressure over the last month | stat fuel_rail_pressure op=mean
+what is the fuel pressure | now fuel_pressure
+pressure of the fuel supply | now fuel_pressure
+lowest fuel pressure this week | extreme fuel_pressure op=min
+
+# ------------------------------------------------------------------------------------------------ turbo, exhaust, emissions
+how much boost is the turbo making | now boost_pressure
+turbo pressure right now | now boost_pressure
+what is the boost | now boost_pressure
+peak boost last week | extreme boost_pressure op=max
+average boost pressure this month | stat boost_pressure op=mean
+how hot is the exhaust | now exhaust_gas_temperature
+exhaust temp right now | now exhaust_gas_temperature
+what is the egt | now exhaust_gas_temperature
+highest exhaust temperature last week | extreme exhaust_gas_temperature op=max
+has the exhaust temperature gone up this month | trend exhaust_gas_temperature op=change
+how much adblue is left | now def_level
+is the adblue tank low | now def_level
+urea level | now def_level
+how full is the diesel exhaust fluid tank | now def_level
+how fast is the adblue being used | trend def_level op=change
+how much soot is in the filter | now dpf_soot_load
+how loaded is the particulate filter | now dpf_soot_load
+how clogged is the dpf | now dpf_soot_load
+is the filter close to needing a clean | now dpf_soot_load
+how has the soot load changed this month | trend dpf_soot_load op=change
+is the filter burning off soot | now dpf_regeneration
+is the dpf regenerating | now dpf_regeneration
+is a regeneration running right now | now dpf_regeneration
+how many regenerations did it do this month | stat dpf_regeneration op=count
+what is the egr valve doing | now egr_position
+how open is the egr | now egr_position
+what does the egr do | define egr_position
+what is a dpf | define dpf_soot_load
+what is adblue for | define def_level
+what is boost pressure | define boost_pressure
+what does the lambda value tell me | define lambda
+what is long term fuel trim | define long_term_fuel_trim
+
+# ------------------------------------------------------------------------------------------------ engine load, time and gear
+what percent of full torque is the engine making | now engine_torque_percent
+engine torque as a percentage | now engine_torque_percent
+how long has the engine been running since it started | now engine_run_time
+time since the engine was started | now engine_run_time
+how many hours has the engine done in total | now engine_hours
+total engine running hours | now engine_hours
+what gear is it in | now gear
+which gear am i in right now | now gear
+current gear | now gear
+how much of the time was it in the top gear | stat gear op=share
+what was the gear an hour ago | at gear
+what does the gear indicator show | now gear
+
+# ------------------------------------------------------------------------------------------------ electric drive and charging
+how hot is the inverter | now inverter_temperature
+inverter temp right now | now inverter_temperature
+power electronics temperature | now inverter_temperature
+highest inverter temperature this week | extreme inverter_temperature op=max
+what is the top cell voltage | now cell_voltage_max
+highest cell voltage in the pack | now cell_voltage_max
+max cell voltage this week | extreme cell_voltage_max op=max
+how many amps is the charger pushing | now charging_current
+charge current right now | now charging_current
+peak charging current this week | extreme charging_current op=max
+what voltage is it charging at | now charging_voltage
+charger voltage | now charging_voltage
+what is the charge cap set to | now charge_limit
+what limit is the charging set to | now charge_limit
+to what level will it charge | now charge_limit
+how far will it charge up to | now charge_limit
+is the charging port open | now charge_port_state
+is the plug connected | now charge_port_state
+is the car plugged in | now charge_port_state
+is the charge flap closed | now charge_port_state
+how long until it is full | now time_to_full
+how many minutes of charging are left | now time_to_full
+time remaining on the charge | now time_to_full
+when will the charge finish | now time_to_full
+what range does the dashboard show | now reported_range
+the range the car displays | now reported_range
+range shown on the display | now reported_range
+how much range does the car itself say it has | now reported_range
+
+# ------------------------------------------------------------------------------------------------ chassis, body and the 12 volt side
+is the handbrake on | now parking_brake
+is the parking brake applied | now parking_brake
+is the electric parking brake engaged | now parking_brake
+how high above sea level am i | now altitude
+what is the elevation here | now altitude
+highest altitude of my trips this month | extreme altitude op=max
+is a door open | now door_state
+are all the doors shut | now door_state
+which door is ajar | now door_state
+is my seat belt on | now seatbelt_state
+is the belt fastened | now seatbelt_state
+is the seat belt warning on | now seatbelt_state
+are the headlights on | now headlight_state
+is the main beam on | now headlight_state
+are the lights on | now headlight_state
+are the wipers on | now wiper_state
+are the windscreen wipers running | now wiper_state
+how fast are the wipers going | now wiper_state
+how hot is the gearbox oil | now transmission_temperature
+transmission temperature right now | now transmission_temperature
+how warm is the gearbox | now transmission_temperature
+highest gearbox temperature last week | extreme transmission_temperature op=max
+what pressure is the cooling system at | now coolant_pressure
+coolant pressure right now | now coolant_pressure
+is the 12 volt battery ok | health aux_battery_condition
+how is the small battery | health aux_battery_condition
+what is the voltage of the 12 volt battery | now aux_battery_voltage
+how is the filter doing | health dpf_soot_load
+is the particulate filter healthy | health dpf_soot_load
+how is the turbo | health boost_pressure
+how is the oil | health engine_oil_pressure

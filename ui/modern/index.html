@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>VehicleGPT</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Ask your car about its own recorded data. Runs offline on this computer.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#10182b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2310182b'/%3E%3Cpath d='M8 21a9 9 0 0 1 16 0' fill='none' stroke='%234fd8e0' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M16 21l5-7' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>/* apply the saved look before first paint (no flash) */
+try{const p=JSON.parse(localStorage.getItem('vgpt.prefs')||'{}'),d=document.documentElement,t=p.theme||'auto';
+d.dataset.theme=t==='auto'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t;if(p.motion===false)d.dataset.motion='off'}catch(e){}</script>
+<link rel="stylesheet" href="/modern/app.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<linearGradient id="gLane" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--lane-a)"/><stop offset="1" style="stop-color:var(--lane-b)"/></linearGradient>
+<linearGradient id="gBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--body-a)"/><stop offset=".5" style="stop-color:var(--body-b)"/><stop offset="1" style="stop-color:var(--body-a)"/></linearGradient>
+<radialGradient id="gHalo" cx=".5" cy=".5" r=".5"><stop offset="0" style="stop-color:var(--blue);stop-opacity:.5"/><stop offset=".55" style="stop-color:var(--blue);stop-opacity:.14"/><stop offset="1" style="stop-color:var(--blue);stop-opacity:0"/></radialGradient>
+<symbol id="carSym" viewBox="0 0 100 200"><g class="car">
+<rect class="wheel" x="0" y="36" width="13" height="32" rx="4"/><rect class="wheel" x="87" y="36" width="13" height="32" rx="4"/><rect class="wheel" x="0" y="132" width="13" height="32" rx="4"/><rect class="wheel" x="87" y="132" width="13" height="32" rx="4"/>
+<path d="M50 4C77 4 90 22 90 56L90 148C90 184 77 198 50 198C23 198 10 184 10 148L10 56C10 22 23 4 50 4Z" fill="url(#gBody)"/>
+<path class="glass" d="M24 64C35 54 65 54 76 64L71 92L29 92Z"/><rect class="roof" x="27" y="94" width="46" height="44" rx="9"/><path class="glass" d="M29 140L71 140L75 158C64 166 36 166 25 158Z"/>
+<path class="lamp-f" d="M19 22Q28 13 39 16M81 22Q72 13 61 16"/><path class="lamp-r" d="M20 189Q30 193 41 191M80 189Q70 193 59 191"/>
+</g></symbol>
+</defs></svg>
+<a class="skip" href="#inp">Skip to the question box</a>
+<div class="app" id="app">
+  <header class="bar">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"><svg class="i"><use href="/modern/icons.svg#i-steering-wheel"/></svg></span>
+      <div class="bname"><b>VehicleGPT</b><small id="vname">Connecting</small></div>
+    </div>
+    <div class="hud" role="group" aria-label="Speed and gear">
+      <div class="hudrow"><span class="sl">Speed</span><b id="spdT">0</b><span class="sl" id="spdU">km/h</span>
+        <div class="gear" id="gear" role="img" aria-label="Gear"><span>P</span><span>R</span><span>N</span><span>D</span></div></div>
+      <div class="spdbar" id="spdbar" aria-hidden="true"></div>
+    </div>
+    <div class="ctl">
+      <span class="link" id="link" hidden data-s="wait" role="status"><i class="lkd" aria-hidden="true"></i><span class="lkt" id="lkT">Waiting for data</span></span>
+      <span class="off" title="Everything runs on this computer"><svg class="i s"><use href="/modern/icons.svg#i-shield-check"/></svg>On-device</span>
+      <button class="btn ghost sq" id="bMic" type="button" aria-pressed="false" aria-label="Listen for Vantage (voice input)"><svg class="i"><use href="/modern/icons.svg#i-microphone"/></svg></button>
+      <button class="btn ghost sq" id="bVoice" type="button" role="switch" aria-checked="false" aria-label="Read answers aloud"><svg class="i"><use href="/modern/icons.svg#i-speaker-high"/></svg></button>
+      <button class="btn ghost sq" id="bTheme" type="button" aria-label="Switch between light and dark"><svg class="i"><use href="/modern/icons.svg#i-moon" id="uTheme"/></svg></button>
+      <button class="btn ghost" id="bRole" type="button" aria-label="Who is using this vehicle: Driver"><svg class="i"><use id="uRole" href="/modern/icons.svg#i-user"/></svg><span class="t" id="tRole">Driver</span></button>
+      <button class="btn ghost" id="bPal" type="button" aria-label="Browse all questions (Ctrl K)"><svg class="i"><use href="/modern/icons.svg#i-magnifying-glass"/></svg><span class="t">Questions</span><kbd>Ctrl K</kbd></button>
+      <button class="btn ghost sq" id="bSet" type="button" aria-label="Settings"><svg class="i"><use href="/modern/icons.svg#i-sliders-horizontal"/></svg></button>
+    </div>
+    <div class="prog" id="amb" data-s="idle" aria-hidden="true"><i></i></div>
+  </header>
+
+  <nav class="rail" id="rail" aria-label="Pages">
+    <button type="button" data-p="ask" aria-current="page" style="--ri:var(--c-cyan)"><svg class="i"><use href="/modern/icons.svg#i-sparkle"/></svg><span>Ask</span></button>
+    <button type="button" data-p="car" style="--ri:var(--c-blue)"><svg class="i"><use href="/modern/icons.svg#i-car-profile"/></svg><span>Car</span><i class="dd" id="ddCar" role="img" aria-label=""></i></button>
+    <button type="button" data-p="energy" id="railEnergy" style="--ri:var(--c-green)"><svg class="i"><use id="railEnergyUse" href="/modern/icons.svg#i-battery-charging"/></svg><span id="railEnergyLab">Energy</span></button>
+    <button type="button" data-p="map" id="railMap" style="--ri:var(--c-sky)"><svg class="i"><use href="/modern/icons.svg#i-map-trifold"/></svg><span>Map</span></button>
+    <button type="button" data-p="cam" style="--ri:var(--c-orange)"><svg class="i"><use href="/modern/icons.svg#i-camera"/></svg><span>Camera</span><i class="dd" id="ddEv" role="img" aria-label=""></i></button>
+    <button type="button" data-p="service" hidden style="--ri:var(--c-orange)"><svg class="i"><use href="/modern/icons.svg#i-wrench"/></svg><span>Service</span></button>
+    <button type="button" data-p="fleet" hidden style="--ri:var(--c-green)"><svg class="i"><use href="/modern/icons.svg#i-truck"/></svg><span>Fleet</span></button>
+    <button type="button" data-p="validation" hidden style="--ri:var(--c-sky)"><svg class="i"><use href="/modern/icons.svg#i-list-magnifying-glass"/></svg><span>Validate</span></button>
+    <button type="button" data-p="privacy" style="--ri:var(--c-lime)"><svg class="i"><use href="/modern/icons.svg#i-shield-check"/></svg><span>Privacy</span></button>
+  </nav>
+
+  <main class="pages" id="pages">
+    <section class="page ask on" id="pg-ask" data-p="ask" aria-label="Ask your car">
+      <div class="chat">
+        <header class="ch"><h2>Ask your car</h2><span class="cs" id="cstat">Ready</span></header>
+        <div class="road" id="stream" role="log" aria-live="polite" aria-relevant="additions"><div class="lane" id="lane"></div></div>
+        <form class="composer" id="form" autocomplete="off">
+          <div class="acs" id="acs" aria-label="Suggestions"></div>
+          <label class="sr" for="inp">Your question</label>
+          <div class="box">
+            <textarea id="inp" rows="1" placeholder="Ask about your car" maxlength="600" enterkeyhint="send"></textarea>
+            <button class="btn primary send" id="send" type="submit" aria-label="Ask" disabled><svg class="i"><use href="/modern/icons.svg#i-arrow-up"/></svg></button>
+          </div>
+          <div class="foot"><span><kbd>Enter</kbd> to ask, <kbd>Shift</kbd> <kbd>Enter</kbd> for a new line, <kbd>/</kbd> to focus</span><span id="fmem">Runs offline</span></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="page car" id="pg-car" data-p="car" aria-label="Car">
+      <article class="card cluster" aria-label="Instrument cluster">
+        <header class="ch"><div><h2 id="mTitle">Vehicle</h2><p class="clock"><b id="clkT">-</b><span id="clkD"></span></p></div><span class="tag" id="modeTxt">Parked</span></header>
+        <svg class="gsvg" id="gSvg" viewBox="36 -4 488 258" role="img" aria-label="Speed on the left arc, battery charge on the right arc, tyre pressures around the car">
+          <path class="visor" d="M18 40Q280 -26 542 40"/><path class="visor" d="M18 212Q280 278 542 212"/>
+          <polygon class="lane" points="262,10 298,10 452,238 108,238" fill="url(#gLane)"/><path class="laneline" d="M262 10L108 238M298 10L452 238"/>
+          <path class="ring" id="ringL" d=""/><path class="ring" id="ringR" d=""/>
+          <g id="ticksL" class="arc"></g><g id="ticksR" class="arc"></g>
+          <ellipse cx="280" cy="150" rx="175" ry="104" fill="url(#gHalo)"/>
+          <use href="#carSym" x="245" y="54" width="70" height="140"/>
+          <text class="tp" id="tp0" x="226" y="94" text-anchor="end">-</text><text class="tp" id="tp1" x="334" y="94">-</text>
+          <text class="tp" id="tp2" x="226" y="170" text-anchor="end">-</text><text class="tp" id="tp3" x="334" y="170">-</text>
+        </svg>
+        <p class="legend"><span><i style="background:var(--blue)"></i>Speed</span><span id="legE"><i style="background:var(--c-green)"></i><b id="legEw">Battery</b></span><span id="legT">Numbers by the wheels are tyre pressure</span></p>
+        <p class="vsum" id="vSum"></p>
+      </article>
+      <article class="card readings" aria-label="Vehicle readings">
+        <header class="ch"><h2>Readings</h2><p class="loc"><svg class="i s"><use href="/modern/icons.svg#i-map-pin"/></svg><span id="place">Locating</span></p></header>
+        <div class="rows" id="rows"></div>
+      </article>
+      <article class="card lampc" aria-label="Warning lamps">
+        <header class="ch"><h2>Warning lamps</h2><span class="cs">Press one to ask about it</span></header>
+        <nav class="lamps" id="lamps" aria-label="Vehicle warning lamps. Press one to ask about it."></nav>
+      </article>
+    </section>
+
+    <section class="page energy" id="pg-energy" data-p="energy" aria-label="Energy">
+      <article class="card charge" aria-label="Battery and charging">
+        <div class="cg-t"><span class="cg-ic" aria-hidden="true"><svg class="i"><use id="cgIc" href="/modern/icons.svg#i-plug-charging"/></svg></span>
+          <div class="donut" role="meter" aria-label="Battery charge" aria-valuemin="0" aria-valuemax="100" id="socM"><svg viewBox="0 0 84 84" aria-hidden="true"><circle class="dt" cx="42" cy="42" r="34"/><circle class="dv" id="dArc" cx="42" cy="42" r="34" pathLength="100"/></svg><b><span id="soc">-</span><u>%</u></b></div></div>
+        <h3 id="cgTitle">Battery</h3><p class="cg-s" id="range">-</p>
+        <p class="cg-big"><b id="rangeBig">-</b><u id="rangeU">km</u></p><p class="cg-s" id="cgSub"></p>
+        <div class="cg-a"><button class="btn dark" id="bChg" type="button">How long to charge to 80%?</button><button class="btn dark light" id="bChg2" type="button">When did I last charge?</button></div>
+      </article>
+      <div class="charts" id="charts"></div>
+    </section>
+
+    <section class="page map" id="pg-map" data-p="map" aria-label="Map">
+      <article class="card navc" id="navCard" aria-label="Where the car is">
+        <svg id="mapSvg" viewBox="0 0 340 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="gRoute" gradientUnits="userSpaceOnUse" x1="0" y1="300" x2="0" y2="0"><stop offset="0" style="stop-color:var(--blue)"/><stop offset="1" style="stop-color:var(--accent)"/></linearGradient></defs><g id="mapG"></g></svg>
+        <div class="navt"><span class="nav-ic" aria-hidden="true"><svg class="i"><use href="/modern/icons.svg#i-compass"/></svg></span><div><p class="nv" id="place2">Locating</p><p class="ns" id="hdg">The last 30 minutes</p></div></div>
+        <div class="mapstats"><div><small>Distance</small><b id="mDist">-</b></div><div><small>Heading</small><b id="mHead">-</b></div><div><small>Speed</small><b id="mSpd">-</b></div></div>
+      </article>
+    </section>
+
+    <section class="page cam" id="pg-cam" data-p="cam" aria-label="Camera and events">
+      <article class="card camc" aria-label="Front camera">
+        <div class="camv"><img id="camImg" alt="Live front camera view" width="640" height="360"></div>
+        <p class="ctitle"><b>Front camera</b><span class="st" id="camSt"></span></p>
+        <p class="csub" id="camSrc">Camera</p>
+        <div class="cq"><div><small>Clear view<b id="cqV"></b></small><div class="meter"><i id="cqVb"></i></div></div><div><small>Sharpness<b id="cqS"></b></small><div class="meter"><i id="cqSb"></i></div></div><div><small>Lane lock<b id="cqL"></b></small><div class="meter"><i id="cqLb"></i></div></div></div>
+      </article>
+      <article class="card evc" aria-label="Recent events">
+        <header class="ch"><h2>Recent events</h2><span class="cs">Tap one to ask about it</span></header>
+        <div id="events"></div>
+      </article>
+    </section>
+    <section class="page role" id="pg-service" data-p="service" aria-label="Service report"><div class="rbody" id="rb-service"></div></section>
+    <section class="page role" id="pg-fleet" data-p="fleet" aria-label="Fleet overview"><div class="rbody" id="rb-fleet"></div></section>
+    <section class="page role" id="pg-validation" data-p="validation" aria-label="Validation"><div class="rbody" id="rb-validation"></div></section>
+    <section class="page role" id="pg-privacy" data-p="privacy" aria-label="Privacy and security"><div class="rbody" id="rb-privacy"></div></section>
+  </main>
+</div>
+
+<dialog class="sheet" id="sheet" aria-label="Settings">
+  <header><b>Settings</b><button class="btn ghost sq" id="bSetX" type="button" aria-label="Close settings"><svg class="i"><use href="/modern/icons.svg#i-x"/></svg></button></header>
+  <div class="tabs" role="tablist"><button class="tab" type="button" role="tab" aria-selected="true" data-t="look">Display</button><button class="tab" type="button" role="tab" aria-selected="false" data-t="units">Units and voice</button><button class="tab" type="button" role="tab" aria-selected="false" data-t="sim">Test track</button></div>
+  <div class="sbody" id="sbody"></div>
+</dialog>
+<dialog class="sheet" id="roles" aria-label="Who is using this vehicle"></dialog>
+<dialog class="sheet" id="expdlg" aria-label="Export"></dialog>
+<dialog class="sheet" id="cfmdlg" aria-label="Confirm"></dialog>
+<dialog class="palette" id="palette" aria-label="All questions">
+  <div class="in"><svg class="i"><use href="/modern/icons.svg#i-magnifying-glass"/></svg><label class="sr" for="palIn">Search questions</label><input id="palIn" placeholder="Search all questions" autocomplete="off"><kbd>Esc</kbd></div>
+  <ul id="palList" role="listbox"></ul>
+</dialog>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+  <div class="vpill" id="vpill" role="status" aria-live="polite" hidden data-s="listening"><span class="vlv" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="vtxt" id="vtxt">Listening</span><button type="button" class="btn ghost" id="bVStop" aria-label="Stop listening"><svg class="i"><use href="/modern/icons.svg#i-stop"/></svg><span>Stop</span></button></div>
+<script src="/modern/app.js" defer></script>
+<script src="/modern/voice.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+ "id": "luxgen_s5_2015",
+ "name": "Luxgen S5 (2015)",
+ "year": 2015,
+ "region": "Taiwan",
+ "powertrain": "petrol",
+ "class": "Compact saloon, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Luxgen S5 (2015) database (accelerator_position, motor_temperature, speed, steering_angle, throttle_position, wheel_speed_fl, wheel_speed_fr, wheel_speed_rl, wheel_speed_rr ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Linux telematics / infotainment (syslog)",
+  "NMEA 0183 GNSS",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 9 drafted, 50 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): luxgen_s5_2015.dbc",
+ "bound": 30,
+ "concepts": 30,
+ "extension": [
+  "ambient_temperature",
+  "aux_battery_voltage",
+  "barometric_pressure",
+  "cabin_temperature",
+  "engine_oil_temperature",
+  "fuel_level",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

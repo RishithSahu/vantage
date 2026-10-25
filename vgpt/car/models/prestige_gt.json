@@ -1,0 +1,22 @@
+{
+ "id": "prestige_gt",
+ "decoder_installed": true,
+ "bound": 42,
+ "concepts": 42,
+ "extension": 0,
+ "name": "Prestige GT V8 FlexRay",
+ "year": 2026,
+ "region": "anywhere",
+ "powertrain": "petrol",
+ "class": "Premium grand tourer, petrol: powertrain CAN, FlexRay chassis cluster, LIN body network",
+ "interfaces": [
+  "Powertrain CAN 500 kbit/s (OBD-style)",
+  "FlexRay chassis cluster 10 Mbit/s (wheel speeds, yaw, accelerations, steering angle, brake pressure)",
+  "LIN 2.1 body network",
+  "UDS / OBD-II diagnostics",
+  "syslog",
+  "NMEA 0183 GNSS"
+ ],
+ "notes": "A fictional maker. The FlexRay cluster description is written for the test bench; the protocol is the real one (specification 2.1).",
+ "source": "written for the test bench (tools_make_protocol_cars.py)"
+}

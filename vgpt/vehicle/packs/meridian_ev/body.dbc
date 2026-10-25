@@ -1,0 +1,23 @@
+VERSION "Meridian E5 body CAN 250 kbit/s"
+
+NS_ :
+
+BS_:
+
+BU_: BCM CLU
+
+BO_ 928 TpmsData: 8 BCM
+ SG_ TyrPres_FL_psi : 7|8@0+ (0.25,0) [0|63.75] "psi" Vector__XXX
+ SG_ TyrPres_FR_psi : 15|8@0+ (0.25,0) [0|63.75] "psi" Vector__XXX
+ SG_ TyrPres_RL_psi : 23|8@0+ (0.25,0) [0|63.75] "psi" Vector__XXX
+ SG_ TyrPres_RR_psi : 31|8@0+ (0.25,0) [0|63.75] "psi" Vector__XXX
+ SG_ TyrTemp_F : 39|8@0+ (1,-40) [-40|215] "degF" Vector__XXX
+
+BO_ 936 EnvSensors: 8 BCM
+ SG_ RainLvl : 7|8@0+ (1,0) [0|3] "" Vector__XXX
+ SG_ AmbLight_lux : 15|16@0+ (1,0) [0|65535] "lux" Vector__XXX
+ SG_ Batt12V : 31|16@0+ (0.001,0) [0|20] "V" Vector__XXX
+
+BO_ 944 Cluster: 8 CLU
+ SG_ Odometer_mi : 7|32@0+ (0.1,0) [0|400000] "mi" Vector__XXX
+

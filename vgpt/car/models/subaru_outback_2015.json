@@ -1,0 +1,35 @@
+{
+ "id": "subaru_outback_2015",
+ "name": "Subaru Outback (2015)",
+ "year": 2015,
+ "region": "USA / Japan / Australia",
+ "powertrain": "petrol",
+ "class": "Estate SUV, petrol boxer",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Subaru Outback (2015) database (accelerator_position, brake_pedal, brake_pressure, door_state, engine_oil_temperature, engine_rpm, engine_torque, gear, motor_temperature, speed, steering_angle, steering_torque ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Linux telematics / infotainment (syslog)",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 16 drafted, 136 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): subaru_outback_2015_generated.dbc",
+ "bound": 36,
+ "concepts": 36,
+ "extension": [
+  "ambient_temperature",
+  "aux_battery_voltage",
+  "barometric_pressure",
+  "cabin_temperature",
+  "fuel_level",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

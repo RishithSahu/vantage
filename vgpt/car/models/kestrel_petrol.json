@@ -1,0 +1,21 @@
+{
+ "id": "kestrel_petrol",
+ "name": "Kestrel C3 1.5 (synthetic maker)",
+ "year": 2024,
+ "region": "anywhere",
+ "powertrain": "petrol",
+ "class": "Petrol hatchback on an OBD-style powertrain CAN",
+ "decoder_installed": true,
+ "interfaces": [
+  "Powertrain CAN 500 kbit/s, 11-bit identifiers",
+  "UDS / OBD-II diagnostic trouble codes",
+  "syslog from a telematics unit",
+  "NMEA 0183 GNSS"
+ ],
+ "notes": "A fictional maker's petrol car with the data layout of an OBD-II-style network.",
+ "source": "written for the test bench (vgpt/vehicle/packs)",
+ "bound": 32,
+ "concepts": 32,
+ "extension": [],
+ "profile_dir": "../../vehicle/packs/kestrel_petrol"
+}

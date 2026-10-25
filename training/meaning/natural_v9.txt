@@ -1,0 +1,1687 @@
+# Frame version 2, round 9 (2026-10-23), written by gen_v9.py: basic questions x period words (relative, calendar years / months, long windows) x driving conditions.  Same format as natural_v3.txt.
+speed? | now speed
+tell me the speed right now | now speed
+speed now | now speed
+what is my speed at the moment | now speed
+vehicle speed now | now speed
+how is the vehicle speed | now speed
+what is my vehicle speed at the moment | now speed
+what is the vehicle speed | now speed
+what is my road speed at the moment | now speed
+tell me the road speed right now | now speed
+current road speed | now speed
+show me the road speed | now speed
+how is the battery level | now battery_soc
+battery level now | now battery_soc
+tell me the battery level right now | now battery_soc
+what is my battery level at the moment | now battery_soc
+what is the state of charge | now battery_soc
+what is my state of charge at the moment | now battery_soc
+current state of charge | now battery_soc
+how is the state of charge | now battery_soc
+battery charge? | now battery_soc
+what is my battery charge at the moment | now battery_soc
+current battery charge | now battery_soc
+how is the battery charge | now battery_soc
+battery temperature now | now battery_temperature
+how is the battery temperature | now battery_temperature
+what is the battery temperature | now battery_temperature
+what is my battery temperature at the moment | now battery_temperature
+pack temperature now | now battery_temperature
+tell me the pack temperature right now | now battery_temperature
+show me the pack temperature | now battery_temperature
+what is the pack temperature | now battery_temperature
+show me the motor temperature | now motor_temperature
+motor temperature? | now motor_temperature
+what is my motor temperature at the moment | now motor_temperature
+what is the motor temperature | now motor_temperature
+tell me the outside temperature right now | now ambient_temperature
+how is the outside temperature | now ambient_temperature
+what is my outside temperature at the moment | now ambient_temperature
+show me the outside temperature | now ambient_temperature
+show me the ambient temperature | now ambient_temperature
+what is the ambient temperature | now ambient_temperature
+ambient temperature now | now ambient_temperature
+how is the ambient temperature | now ambient_temperature
+show me the air temperature outside | now ambient_temperature
+air temperature outside now | now ambient_temperature
+air temperature outside? | now ambient_temperature
+what is the air temperature outside | now ambient_temperature
+current battery power | now battery_power
+what is my battery power at the moment | now battery_power
+what is the battery power | now battery_power
+battery power? | now battery_power
+what is the power draw | now battery_power
+current power draw | now battery_power
+show me the power draw | now battery_power
+how is the power draw | now battery_power
+what is the climate control power | now hvac_power
+how is the climate control power | now hvac_power
+current climate control power | now hvac_power
+climate control power? | now hvac_power
+what is the air conditioning power | now hvac_power
+air conditioning power? | now hvac_power
+tell me the air conditioning power right now | now hvac_power
+how is the air conditioning power | now hvac_power
+current coolant flow | now coolant_flow
+coolant flow now | now coolant_flow
+what is the coolant flow | now coolant_flow
+what is my coolant flow at the moment | now coolant_flow
+tyre pressure now | now tyre_pressure
+tell me the tyre pressure right now | now tyre_pressure
+what is the tyre pressure | now tyre_pressure
+show me the tyre pressure | now tyre_pressure
+how is the tyre pressures | now tyre_pressure
+tell me the tyre pressures right now | now tyre_pressure
+current tyre pressures | now tyre_pressure
+show me the tyre pressures | now tyre_pressure
+current 12 volt battery voltage | now aux_battery_voltage
+12 volt battery voltage? | now aux_battery_voltage
+what is the 12 volt battery voltage | now aux_battery_voltage
+show me the 12 volt battery voltage | now aux_battery_voltage
+current auxiliary battery voltage | now aux_battery_voltage
+what is my auxiliary battery voltage at the moment | now aux_battery_voltage
+what is the auxiliary battery voltage | now aux_battery_voltage
+tell me the auxiliary battery voltage right now | now aux_battery_voltage
+fuel level now | now fuel_level
+how is the fuel level | now fuel_level
+tell me the fuel level right now | now fuel_level
+what is the fuel level | now fuel_level
+what is the tank level | now fuel_level
+tank level now | now fuel_level
+tell me the tank level right now | now fuel_level
+what is my tank level at the moment | now fuel_level
+engine speed now | now engine_rpm
+what is my engine speed at the moment | now engine_rpm
+engine speed? | now engine_rpm
+tell me the engine speed right now | now engine_rpm
+what is the engine rpm | now engine_rpm
+engine rpm? | now engine_rpm
+what is my engine rpm at the moment | now engine_rpm
+current engine rpm | now engine_rpm
+current engine oil temperature | now engine_oil_temperature
+how is the engine oil temperature | now engine_oil_temperature
+tell me the engine oil temperature right now | now engine_oil_temperature
+what is my engine oil temperature at the moment | now engine_oil_temperature
+what is the oil temperature | now engine_oil_temperature
+what is my oil temperature at the moment | now engine_oil_temperature
+oil temperature now | now engine_oil_temperature
+tell me the oil temperature right now | now engine_oil_temperature
+how is the engine load | now engine_load
+show me the engine load | now engine_load
+engine load now | now engine_load
+what is the engine load | now engine_load
+what is my throttle position at the moment | now throttle_position
+current throttle position | now throttle_position
+how is the throttle position | now throttle_position
+show me the throttle position | now throttle_position
+current lane keeping confidence | now lane_confidence
+tell me the lane keeping confidence right now | now lane_confidence
+what is my lane keeping confidence at the moment | now lane_confidence
+what is the lane keeping confidence | now lane_confidence
+show me the lane detection confidence | now lane_confidence
+lane detection confidence? | now lane_confidence
+tell me the lane detection confidence right now | now lane_confidence
+lane detection confidence now | now lane_confidence
+what is the odometer | now odometer
+current odometer | now odometer
+odometer? | now odometer
+how is the odometer | now odometer
+current odometer reading | now odometer
+odometer reading? | now odometer
+odometer reading now | now odometer
+what is my odometer reading at the moment | now odometer
+how is the heading | now heading
+heading now | now heading
+what is my heading at the moment | now heading
+show me the heading | now heading
+how is the compass direction | now heading
+tell me the compass direction right now | now heading
+what is the compass direction | now heading
+what is my compass direction at the moment | now heading
+show me the wheel speeds | now wheel_speed
+wheel speeds? | now wheel_speed
+tell me the wheel speeds right now | now wheel_speed
+current wheel speeds | now wheel_speed
+range? | now range_estimate
+range now | now range_estimate
+what is my range at the moment | now range_estimate
+how is the range | now range_estimate
+how is the remaining range | now range_estimate
+current remaining range | now range_estimate
+what is my remaining range at the moment | now range_estimate
+remaining range? | now range_estimate
+what was the average speed in 2025 | stat speed op=mean
+what is the average speed over the last three years | stat speed op=mean
+mean speed in january 2026 | stat speed op=mean
+maximum speed in 2023 | extreme speed op=max
+peak speed last month | extreme speed op=max
+how high did the speed get in the last 90 days | extreme speed op=max
+what was the min speed yesterday | extreme speed op=min
+what was the lowest speed last weekend | extreme speed op=min
+has the speed been rising last month | trend speed op=rise
+is the speed going down in the past 2 weeks | trend speed op=drop
+how has the speed changed last month | trend speed op=change
+is the speed getting higher | trend speed op=rise
+is the speed dropping | trend speed op=drop
+what was the average vehicle speed yesterday | stat speed op=mean
+average vehicle speed yesterday | stat speed op=mean
+how was the vehicle speed this year on average | stat speed op=mean
+peak vehicle speed in the last 12 months | extreme speed op=max
+what was the max vehicle speed today | extreme speed op=max
+how high did the vehicle speed get last weekend | extreme speed op=max
+what was the min vehicle speed this month | extreme speed op=min
+smallest vehicle speed in march 2025 | extreme speed op=min
+has the vehicle speed been rising in january 2026 | trend speed op=rise
+is the vehicle speed going down in the past 2 weeks | trend speed op=drop
+how has the vehicle speed changed this month | trend speed op=change
+is the vehicle speed getting higher | trend speed op=rise
+is the vehicle speed dropping | trend speed op=drop
+what was the average road speed last week | stat speed op=mean
+mean road speed this week | stat speed op=mean
+what is the average road speed last year | stat speed op=mean
+what was the max road speed in january 2026 | extreme speed op=max
+peak road speed on friday | extreme speed op=max
+maximum road speed last weekend | extreme speed op=max
+how low did the road speed get in the past 6 months | extreme speed op=min
+minimum road speed in the last 90 days | extreme speed op=min
+has the road speed been rising in the past 2 weeks | trend speed op=rise
+is the road speed going down on friday | trend speed op=drop
+how has the road speed changed in the last 12 months | trend speed op=change
+is the road speed getting higher | trend speed op=rise
+is the road speed dropping | trend speed op=drop
+how was the battery level last week on average | stat battery_soc op=mean
+what is the average battery level throughout 2025 | stat battery_soc op=mean
+average battery level yesterday | stat battery_soc op=mean
+maximum battery level last weekend | extreme battery_soc op=max
+peak battery level over the last 2 years | extreme battery_soc op=max
+what was the highest battery level so far this year | extreme battery_soc op=max
+what was the lowest battery level on friday | extreme battery_soc op=min
+minimum battery level last weekend | extreme battery_soc op=min
+has the battery level been rising over the past 3 days | trend battery_soc op=rise
+is the battery level going down over the last three years | trend battery_soc op=drop
+how has the battery level changed today | trend battery_soc op=change
+is the battery level getting higher | trend battery_soc op=rise
+is the battery level dropping | trend battery_soc op=drop
+average state of charge this year | stat battery_soc op=mean
+how was the state of charge in october 2025 on average | stat battery_soc op=mean
+what is the average state of charge in january 2026 | stat battery_soc op=mean
+how high did the state of charge get last month | extreme battery_soc op=max
+what was the max state of charge in january 2026 | extreme battery_soc op=max
+what was the highest state of charge in march 2025 | extreme battery_soc op=max
+smallest state of charge in january 2026 | extreme battery_soc op=min
+what was the min state of charge this week | extreme battery_soc op=min
+has the state of charge been rising over the last 2 years | trend battery_soc op=rise
+is the state of charge going down today | trend battery_soc op=drop
+how has the state of charge changed in october 2025 | trend battery_soc op=change
+is the state of charge getting higher | trend battery_soc op=rise
+is the state of charge dropping | trend battery_soc op=drop
+how was the battery charge in 2023 on average | stat battery_soc op=mean
+what is the average battery charge in july 2024 | stat battery_soc op=mean
+mean battery charge in july 2024 | stat battery_soc op=mean
+how high did the battery charge get in october 2025 | extreme battery_soc op=max
+what was the highest battery charge in january 2026 | extreme battery_soc op=max
+maximum battery charge in 2023 | extreme battery_soc op=max
+what was the lowest battery charge since january | extreme battery_soc op=min
+minimum battery charge this month | extreme battery_soc op=min
+has the battery charge been rising last week | trend battery_soc op=rise
+is the battery charge going down last week | trend battery_soc op=drop
+how has the battery charge changed in the last 90 days | trend battery_soc op=change
+is the battery charge getting higher | trend battery_soc op=rise
+is the battery charge dropping | trend battery_soc op=drop
+what is the average battery temperature in march 2025 | stat battery_temperature op=mean
+how was the battery temperature during 2024 on average | stat battery_temperature op=mean
+what was the average battery temperature over the last 2 years | stat battery_temperature op=mean
+what was the highest battery temperature over the past 3 days | extreme battery_temperature op=max
+how high did the battery temperature get during 2024 | extreme battery_temperature op=max
+peak battery temperature this year | extreme battery_temperature op=max
+minimum battery temperature so far this year | extreme battery_temperature op=min
+what was the min battery temperature since january | extreme battery_temperature op=min
+has the battery temperature been rising in october 2025 | trend battery_temperature op=rise
+is the battery temperature going down in the last 12 months | trend battery_temperature op=drop
+how has the battery temperature changed in march 2025 | trend battery_temperature op=change
+is the battery temperature getting higher | trend battery_temperature op=rise
+is the battery temperature dropping | trend battery_temperature op=drop
+average pack temperature in the last 12 months | stat battery_temperature op=mean
+what was the average pack temperature this week | stat battery_temperature op=mean
+mean pack temperature in the last 12 months | stat battery_temperature op=mean
+what was the highest pack temperature in october 2025 | extreme battery_temperature op=max
+what was the max pack temperature this week | extreme battery_temperature op=max
+peak pack temperature this week | extreme battery_temperature op=max
+minimum pack temperature in the last 12 months | extreme battery_temperature op=min
+what was the lowest pack temperature on friday | extreme battery_temperature op=min
+has the pack temperature been rising last month | trend battery_temperature op=rise
+is the pack temperature going down this week | trend battery_temperature op=drop
+how has the pack temperature changed this week | trend battery_temperature op=change
+is the pack temperature getting higher | trend battery_temperature op=rise
+is the pack temperature dropping | trend battery_temperature op=drop
+what was the average motor temperature in march 2025 | stat motor_temperature op=mean
+mean motor temperature in january 2026 | stat motor_temperature op=mean
+what is the average motor temperature in january 2026 | stat motor_temperature op=mean
+what was the max motor temperature on friday | extreme motor_temperature op=max
+what was the highest motor temperature this week | extreme motor_temperature op=max
+maximum motor temperature in 2024 | extreme motor_temperature op=max
+what was the lowest motor temperature today | extreme motor_temperature op=min
+what was the min motor temperature this year | extreme motor_temperature op=min
+has the motor temperature been rising this year | trend motor_temperature op=rise
+is the motor temperature going down in october 2025 | trend motor_temperature op=drop
+how has the motor temperature changed this month | trend motor_temperature op=change
+is the motor temperature getting higher | trend motor_temperature op=rise
+is the motor temperature dropping | trend motor_temperature op=drop
+what is the average outside temperature last week | stat ambient_temperature op=mean
+how was the outside temperature during 2024 on average | stat ambient_temperature op=mean
+what was the average outside temperature in 2025 | stat ambient_temperature op=mean
+peak outside temperature in the last 7 days | extreme ambient_temperature op=max
+what was the max outside temperature over the past 3 days | extreme ambient_temperature op=max
+what was the highest outside temperature last week | extreme ambient_temperature op=max
+what was the lowest outside temperature last week | extreme ambient_temperature op=min
+smallest outside temperature this week | extreme ambient_temperature op=min
+has the outside temperature been rising over the last 2 years | trend ambient_temperature op=rise
+is the outside temperature going down this week | trend ambient_temperature op=drop
+how has the outside temperature changed in 2025 | trend ambient_temperature op=change
+is the outside temperature getting higher | trend ambient_temperature op=rise
+is the outside temperature dropping | trend ambient_temperature op=drop
+what was the average ambient temperature over the last 2 years | stat ambient_temperature op=mean
+how was the ambient temperature in july 2024 on average | stat ambient_temperature op=mean
+average ambient temperature in the last 7 days | stat ambient_temperature op=mean
+maximum ambient temperature today | extreme ambient_temperature op=max
+what was the highest ambient temperature in the past 2 weeks | extreme ambient_temperature op=max
+what was the max ambient temperature on friday | extreme ambient_temperature op=max
+smallest ambient temperature today | extreme ambient_temperature op=min
+minimum ambient temperature this year | extreme ambient_temperature op=min
+has the ambient temperature been rising in the past 2 weeks | trend ambient_temperature op=rise
+is the ambient temperature going down in the last 12 months | trend ambient_temperature op=drop
+how has the ambient temperature changed today | trend ambient_temperature op=change
+is the ambient temperature getting higher | trend ambient_temperature op=rise
+is the ambient temperature dropping | trend ambient_temperature op=drop
+what was the average air temperature outside during 2024 | stat ambient_temperature op=mean
+what is the average air temperature outside in the past 2 weeks | stat ambient_temperature op=mean
+how was the air temperature outside in march 2025 on average | stat ambient_temperature op=mean
+maximum air temperature outside yesterday | extreme ambient_temperature op=max
+peak air temperature outside in the past 6 months | extreme ambient_temperature op=max
+how high did the air temperature outside get in the past 2 weeks | extreme ambient_temperature op=max
+minimum air temperature outside yesterday | extreme ambient_temperature op=min
+what was the min air temperature outside last weekend | extreme ambient_temperature op=min
+has the air temperature outside been rising last month | trend ambient_temperature op=rise
+is the air temperature outside going down in 2025 | trend ambient_temperature op=drop
+how has the air temperature outside changed last weekend | trend ambient_temperature op=change
+is the air temperature outside getting higher | trend ambient_temperature op=rise
+is the air temperature outside dropping | trend ambient_temperature op=drop
+what is the average battery power over the last three years | stat battery_power op=mean
+what was the average battery power last week | stat battery_power op=mean
+average battery power today | stat battery_power op=mean
+maximum battery power last year | extreme battery_power op=max
+what was the max battery power in the last 12 months | extreme battery_power op=max
+what was the highest battery power in 2024 | extreme battery_power op=max
+how low did the battery power get during 2024 | extreme battery_power op=min
+what was the min battery power so far this year | extreme battery_power op=min
+has the battery power been rising during 2024 | trend battery_power op=rise
+is the battery power going down in 2026 | trend battery_power op=drop
+how has the battery power changed last year | trend battery_power op=change
+is the battery power getting higher | trend battery_power op=rise
+is the battery power dropping | trend battery_power op=drop
+average power draw in 2023 | stat battery_power op=mean
+what was the average power draw this year | stat battery_power op=mean
+how was the power draw this year on average | stat battery_power op=mean
+how high did the power draw get in 2026 | extreme battery_power op=max
+what was the max power draw last month | extreme battery_power op=max
+peak power draw in 2024 | extreme battery_power op=max
+how low did the power draw get in 2024 | extreme battery_power op=min
+what was the lowest power draw this week | extreme battery_power op=min
+has the power draw been rising last month | trend battery_power op=rise
+is the power draw going down in 2024 | trend battery_power op=drop
+how has the power draw changed in january 2026 | trend battery_power op=change
+is the power draw getting higher | trend battery_power op=rise
+is the power draw dropping | trend battery_power op=drop
+what was the average climate control power in the last 90 days | stat hvac_power op=mean
+average climate control power in 2025 | stat hvac_power op=mean
+how was the climate control power in the past 6 months on average | stat hvac_power op=mean
+peak climate control power this year | extreme hvac_power op=max
+what was the highest climate control power in the last 12 months | extreme hvac_power op=max
+how high did the climate control power get in the last 12 months | extreme hvac_power op=max
+how low did the climate control power get in the last 90 days | extreme hvac_power op=min
+minimum climate control power in january 2026 | extreme hvac_power op=min
+has the climate control power been rising on friday | trend hvac_power op=rise
+is the climate control power going down in 2024 | trend hvac_power op=drop
+how has the climate control power changed this week | trend hvac_power op=change
+is the climate control power getting higher | trend hvac_power op=rise
+is the climate control power dropping | trend hvac_power op=drop
+what was the average air conditioning power over the past 3 days | stat hvac_power op=mean
+what is the average air conditioning power over the last three years | stat hvac_power op=mean
+average air conditioning power since january | stat hvac_power op=mean
+maximum air conditioning power in the last 90 days | extreme hvac_power op=max
+what was the highest air conditioning power today | extreme hvac_power op=max
+peak air conditioning power in 2023 | extreme hvac_power op=max
+smallest air conditioning power this week | extreme hvac_power op=min
+minimum air conditioning power over the past 3 days | extreme hvac_power op=min
+has the air conditioning power been rising today | trend hvac_power op=rise
+is the air conditioning power going down throughout 2025 | trend hvac_power op=drop
+how has the air conditioning power changed in 2024 | trend hvac_power op=change
+is the air conditioning power getting higher | trend hvac_power op=rise
+is the air conditioning power dropping | trend hvac_power op=drop
+what was the average coolant flow in 2024 | stat coolant_flow op=mean
+how was the coolant flow last month on average | stat coolant_flow op=mean
+what is the average coolant flow in the last 90 days | stat coolant_flow op=mean
+what was the highest coolant flow so far this year | extreme coolant_flow op=max
+what was the max coolant flow in 2026 | extreme coolant_flow op=max
+maximum coolant flow in 2026 | extreme coolant_flow op=max
+smallest coolant flow in july 2024 | extreme coolant_flow op=min
+minimum coolant flow in the last 90 days | extreme coolant_flow op=min
+has the coolant flow been rising in 2025 | trend coolant_flow op=rise
+is the coolant flow going down in 2025 | trend coolant_flow op=drop
+how has the coolant flow changed in the past 2 weeks | trend coolant_flow op=change
+is the coolant flow getting higher | trend coolant_flow op=rise
+is the coolant flow dropping | trend coolant_flow op=drop
+average 12 volt battery voltage in october 2025 | stat aux_battery_voltage op=mean
+mean 12 volt battery voltage last month | stat aux_battery_voltage op=mean
+how was the 12 volt battery voltage last weekend on average | stat aux_battery_voltage op=mean
+how high did the 12 volt battery voltage get last month | extreme aux_battery_voltage op=max
+peak 12 volt battery voltage today | extreme aux_battery_voltage op=max
+maximum 12 volt battery voltage in 2023 | extreme aux_battery_voltage op=max
+what was the lowest 12 volt battery voltage in march 2025 | extreme aux_battery_voltage op=min
+what was the min 12 volt battery voltage in july 2024 | extreme aux_battery_voltage op=min
+has the 12 volt battery voltage been rising over the last three years | trend aux_battery_voltage op=rise
+is the 12 volt battery voltage going down on friday | trend aux_battery_voltage op=drop
+how has the 12 volt battery voltage changed in the past 6 months | trend aux_battery_voltage op=change
+is the 12 volt battery voltage getting higher | trend aux_battery_voltage op=rise
+is the 12 volt battery voltage dropping | trend aux_battery_voltage op=drop
+what is the average auxiliary battery voltage in 2023 | stat aux_battery_voltage op=mean
+what was the average auxiliary battery voltage this month | stat aux_battery_voltage op=mean
+average auxiliary battery voltage in july 2024 | stat aux_battery_voltage op=mean
+what was the max auxiliary battery voltage over the past 3 days | extreme aux_battery_voltage op=max
+how high did the auxiliary battery voltage get last month | extreme aux_battery_voltage op=max
+maximum auxiliary battery voltage in 2024 | extreme aux_battery_voltage op=max
+minimum auxiliary battery voltage since january | extreme aux_battery_voltage op=min
+what was the min auxiliary battery voltage in the last 12 months | extreme aux_battery_voltage op=min
+has the auxiliary battery voltage been rising yesterday | trend aux_battery_voltage op=rise
+is the auxiliary battery voltage going down in january 2026 | trend aux_battery_voltage op=drop
+how has the auxiliary battery voltage changed in the past 2 weeks | trend aux_battery_voltage op=change
+is the auxiliary battery voltage getting higher | trend aux_battery_voltage op=rise
+is the auxiliary battery voltage dropping | trend aux_battery_voltage op=drop
+mean fuel level last month | stat fuel_level op=mean
+what was the average fuel level in january 2026 | stat fuel_level op=mean
+how was the fuel level on friday on average | stat fuel_level op=mean
+what was the highest fuel level in 2024 | extreme fuel_level op=max
+what was the max fuel level in the last 7 days | extreme fuel_level op=max
+how high did the fuel level get since january | extreme fuel_level op=max
+smallest fuel level during 2024 | extreme fuel_level op=min
+minimum fuel level last year | extreme fuel_level op=min
+has the fuel level been rising in the last 7 days | trend fuel_level op=rise
+is the fuel level going down in july 2024 | trend fuel_level op=drop
+how has the fuel level changed in the last 7 days | trend fuel_level op=change
+is the fuel level getting higher | trend fuel_level op=rise
+is the fuel level dropping | trend fuel_level op=drop
+how was the tank level over the last three years on average | stat fuel_level op=mean
+what is the average tank level in january 2026 | stat fuel_level op=mean
+what was the average tank level yesterday | stat fuel_level op=mean
+maximum tank level yesterday | extreme fuel_level op=max
+what was the max tank level in 2025 | extreme fuel_level op=max
+peak tank level last weekend | extreme fuel_level op=max
+how low did the tank level get last year | extreme fuel_level op=min
+smallest tank level over the last 2 years | extreme fuel_level op=min
+has the tank level been rising since january | trend fuel_level op=rise
+is the tank level going down in the last 7 days | trend fuel_level op=drop
+how has the tank level changed in january 2026 | trend fuel_level op=change
+is the tank level getting higher | trend fuel_level op=rise
+is the tank level dropping | trend fuel_level op=drop
+what was the average engine speed this week | stat engine_rpm op=mean
+average engine speed during 2024 | stat engine_rpm op=mean
+mean engine speed in 2025 | stat engine_rpm op=mean
+maximum engine speed in july 2024 | extreme engine_rpm op=max
+peak engine speed last month | extreme engine_rpm op=max
+what was the max engine speed on friday | extreme engine_rpm op=max
+smallest engine speed throughout 2025 | extreme engine_rpm op=min
+what was the lowest engine speed in the past 6 months | extreme engine_rpm op=min
+has the engine speed been rising in january 2026 | trend engine_rpm op=rise
+is the engine speed going down in 2024 | trend engine_rpm op=drop
+how has the engine speed changed in the past 6 months | trend engine_rpm op=change
+is the engine speed getting higher | trend engine_rpm op=rise
+is the engine speed dropping | trend engine_rpm op=drop
+average engine rpm yesterday | stat engine_rpm op=mean
+how was the engine rpm in the last 90 days on average | stat engine_rpm op=mean
+what was the average engine rpm over the last three years | stat engine_rpm op=mean
+how high did the engine rpm get so far this year | extreme engine_rpm op=max
+peak engine rpm in 2024 | extreme engine_rpm op=max
+maximum engine rpm in 2023 | extreme engine_rpm op=max
+minimum engine rpm in 2023 | extreme engine_rpm op=min
+what was the min engine rpm in 2026 | extreme engine_rpm op=min
+has the engine rpm been rising yesterday | trend engine_rpm op=rise
+is the engine rpm going down this week | trend engine_rpm op=drop
+how has the engine rpm changed in 2026 | trend engine_rpm op=change
+is the engine rpm getting higher | trend engine_rpm op=rise
+is the engine rpm dropping | trend engine_rpm op=drop
+average engine oil temperature in the last 90 days | stat engine_oil_temperature op=mean
+what is the average engine oil temperature yesterday | stat engine_oil_temperature op=mean
+how was the engine oil temperature in 2024 on average | stat engine_oil_temperature op=mean
+peak engine oil temperature in the last 90 days | extreme engine_oil_temperature op=max
+how high did the engine oil temperature get in the last 7 days | extreme engine_oil_temperature op=max
+maximum engine oil temperature over the last 2 years | extreme engine_oil_temperature op=max
+smallest engine oil temperature over the last three years | extreme engine_oil_temperature op=min
+how low did the engine oil temperature get on friday | extreme engine_oil_temperature op=min
+has the engine oil temperature been rising last weekend | trend engine_oil_temperature op=rise
+is the engine oil temperature going down during 2024 | trend engine_oil_temperature op=drop
+how has the engine oil temperature changed throughout 2025 | trend engine_oil_temperature op=change
+is the engine oil temperature getting higher | trend engine_oil_temperature op=rise
+is the engine oil temperature dropping | trend engine_oil_temperature op=drop
+how was the oil temperature yesterday on average | stat engine_oil_temperature op=mean
+average oil temperature in 2026 | stat engine_oil_temperature op=mean
+what is the average oil temperature this month | stat engine_oil_temperature op=mean
+maximum oil temperature since january | extreme engine_oil_temperature op=max
+what was the max oil temperature last month | extreme engine_oil_temperature op=max
+peak oil temperature so far this year | extreme engine_oil_temperature op=max
+smallest oil temperature in july 2024 | extreme engine_oil_temperature op=min
+what was the lowest oil temperature in march 2025 | extreme engine_oil_temperature op=min
+has the oil temperature been rising in july 2024 | trend engine_oil_temperature op=rise
+is the oil temperature going down in the past 2 weeks | trend engine_oil_temperature op=drop
+how has the oil temperature changed in the past 2 weeks | trend engine_oil_temperature op=change
+is the oil temperature getting higher | trend engine_oil_temperature op=rise
+is the oil temperature dropping | trend engine_oil_temperature op=drop
+mean engine load today | stat engine_load op=mean
+how was the engine load in the last 7 days on average | stat engine_load op=mean
+what is the average engine load since january | stat engine_load op=mean
+what was the highest engine load throughout 2025 | extreme engine_load op=max
+what was the max engine load over the last three years | extreme engine_load op=max
+peak engine load last week | extreme engine_load op=max
+minimum engine load in the last 7 days | extreme engine_load op=min
+what was the lowest engine load this year | extreme engine_load op=min
+has the engine load been rising since january | trend engine_load op=rise
+is the engine load going down last week | trend engine_load op=drop
+how has the engine load changed in the past 2 weeks | trend engine_load op=change
+is the engine load getting higher | trend engine_load op=rise
+is the engine load dropping | trend engine_load op=drop
+mean throttle position today | stat throttle_position op=mean
+how was the throttle position last month on average | stat throttle_position op=mean
+what was the average throttle position in the past 6 months | stat throttle_position op=mean
+what was the max throttle position over the last 2 years | extreme throttle_position op=max
+maximum throttle position in 2025 | extreme throttle_position op=max
+peak throttle position in 2024 | extreme throttle_position op=max
+smallest throttle position in january 2026 | extreme throttle_position op=min
+minimum throttle position in the past 6 months | extreme throttle_position op=min
+has the throttle position been rising today | trend throttle_position op=rise
+is the throttle position going down this month | trend throttle_position op=drop
+how has the throttle position changed since january | trend throttle_position op=change
+is the throttle position getting higher | trend throttle_position op=rise
+is the throttle position dropping | trend throttle_position op=drop
+what is the tyre pressures | now tyre_pressure
+what is the pressure in my tyres | now tyre_pressure
+how are my tyre pressures | now tyre_pressure
+check my tyre pressure | now tyre_pressure
+are my tyres pumped up enough | now tyre_pressure
+how much energy did i use in the last 7 days | stat energy_used op=sum
+how much energy did i use this week | stat energy_used op=sum
+how much energy did i use yesterday | stat energy_used op=sum
+how much energy did i use | stat energy_used op=sum
+total energy used today | stat energy_used op=sum
+total energy used in the past 2 weeks | stat energy_used op=sum
+total energy used so far this year | stat energy_used op=sum
+total energy used during 2024 | stat energy_used op=sum
+total energy used | stat energy_used op=sum
+energy consumed in the last 90 days | stat energy_used op=sum
+energy consumed this year | stat energy_used op=sum
+energy consumed in 2025 | stat energy_used op=sum
+energy consumed | stat energy_used op=sum
+how many kwh did i use in january 2026 | stat energy_used op=sum
+how many kwh did i use on friday | stat energy_used op=sum
+how many kwh did i use in the last 90 days | stat energy_used op=sum
+how many kwh did i use throughout 2025 | stat energy_used op=sum
+how many kwh did i use | stat energy_used op=sum
+how much energy this week | stat energy_used op=sum
+how much energy last week | stat energy_used op=sum
+how much energy in the last 90 days | stat energy_used op=sum
+how much energy last year | stat energy_used op=sum
+how much energy over the last three years | stat energy_used op=sum
+how much energy so far this year | stat energy_used op=sum
+how far did i drive last month | stat distance_driven op=sum
+how far did i drive yesterday | stat distance_driven op=sum
+how far did i drive over the past 3 days | stat distance_driven op=sum
+how far did i drive in october 2025 | stat distance_driven op=sum
+how far did i drive | stat distance_driven op=sum
+total distance driven this month | stat distance_driven op=sum
+total distance driven in july 2024 | stat distance_driven op=sum
+total distance driven in october 2025 | stat distance_driven op=sum
+total distance driven over the last three years | stat distance_driven op=sum
+total distance driven | stat distance_driven op=sum
+how many kilometres did i drive last year | stat distance_driven op=sum
+how many kilometres did i drive in 2025 | stat distance_driven op=sum
+how many kilometres did i drive in the last 90 days | stat distance_driven op=sum
+how many kilometres did i drive in the past 6 months | stat distance_driven op=sum
+how many kilometres did i drive | stat distance_driven op=sum
+distance travelled in the last 7 days | stat distance_driven op=sum
+distance travelled during 2024 | stat distance_driven op=sum
+distance travelled over the last 2 years | stat distance_driven op=sum
+distance travelled in 2025 | stat distance_driven op=sum
+distance travelled | stat distance_driven op=sum
+how many km did i do since january | stat distance_driven op=sum
+how many km did i do in july 2024 | stat distance_driven op=sum
+how many km did i do during 2024 | stat distance_driven op=sum
+how many km did i do | stat distance_driven op=sum
+how much distance last year | stat distance_driven op=sum
+how much distance yesterday | stat distance_driven op=sum
+how much distance last month | stat distance_driven op=sum
+how much distance in january 2026 | stat distance_driven op=sum
+how much distance in 2024 | stat distance_driven op=sum
+how much distance in the past 2 weeks | stat distance_driven op=sum
+what was my consumption per km this year | stat wh_per_km op=mean
+what was my consumption per km in 2023 | stat wh_per_km op=mean
+what was my consumption per km last year | stat wh_per_km op=mean
+what was my consumption per km | stat wh_per_km op=mean
+average energy use per kilometre last weekend | stat wh_per_km op=mean
+average energy use per kilometre in january 2026 | stat wh_per_km op=mean
+average energy use per kilometre last year | stat wh_per_km op=mean
+average energy use per kilometre since january | stat wh_per_km op=mean
+average energy use per kilometre | stat wh_per_km op=mean
+how efficient was i on friday | stat wh_per_km op=mean
+how efficient was i last week | stat wh_per_km op=mean
+how efficient was i yesterday | stat wh_per_km op=mean
+how efficient was i during 2024 | stat wh_per_km op=mean
+how efficient was i | stat wh_per_km op=mean
+my efficiency in 2025 | stat wh_per_km op=mean
+my efficiency so far this year | stat wh_per_km op=mean
+my efficiency since january | stat wh_per_km op=mean
+my efficiency in the past 6 months | stat wh_per_km op=mean
+my efficiency | stat wh_per_km op=mean
+efficiency in the past 6 months | stat wh_per_km op=mean
+efficiency over the past 3 days | stat wh_per_km op=mean
+efficiency last year | stat wh_per_km op=mean
+efficiency in the past 2 weeks | stat wh_per_km op=mean
+efficiency in 2025 | stat wh_per_km op=mean
+efficiency this year | stat wh_per_km op=mean
+how far have i driven | stat distance_driven op=sum
+total distance driven ever | stat distance_driven op=sum
+how far have i driven ever | stat distance_driven op=sum
+total energy used ever | stat energy_used op=sum
+total distance driven in total | stat distance_driven op=sum
+how far have i driven in total | stat distance_driven op=sum
+total energy used in total | stat energy_used op=sum
+total distance driven over the whole history | stat distance_driven op=sum
+how far have i driven over the whole history | stat distance_driven op=sum
+total energy used over the whole history | stat energy_used op=sum
+total distance driven since the beginning | stat distance_driven op=sum
+how far have i driven since the beginning | stat distance_driven op=sum
+total energy used since the beginning | stat energy_used op=sum
+total distance driven so far | stat distance_driven op=sum
+how far have i driven so far | stat distance_driven op=sum
+total energy used so far | stat energy_used op=sum
+what is the total distance since the start | stat distance_driven op=sum
+how many kilometres in total | stat distance_driven op=sum
+lifetime distance driven | stat distance_driven op=sum
+how many journeys did i make today | stat trip_record op=count ent=trip
+how many trips did i take today | stat trip_record op=count ent=trip
+what is the longest distance in one trip today | extreme distance_driven op=max ent=trip
+biggest trip today | extreme distance_driven op=max ent=trip
+which was the longest drive today | extreme distance_driven op=max ent=trip
+what was my shortest trip today | extreme distance_driven op=min ent=trip
+my smallest journey today | extreme distance_driven op=min ent=trip
+which trip used the most energy today | extreme energy_used op=max ent=trip
+which trip was the most efficient today | extreme wh_per_km op=min ent=trip
+which trip was the least efficient today | extreme wh_per_km op=max ent=trip
+how long is my average trip today | stat trip_record op=mean ent=trip
+on how many days did i use the car today | stat trip_record op=count ent=day
+how many drives yesterday | stat trip_record op=count ent=trip
+how many trips did i take yesterday | stat trip_record op=count ent=trip
+my longest journey yesterday | extreme distance_driven op=max ent=trip
+what is the longest distance in one trip yesterday | extreme distance_driven op=max ent=trip
+what was my longest trip yesterday | extreme distance_driven op=max ent=trip
+shortest distance in one trip yesterday | extreme distance_driven op=min ent=trip
+which was the shortest drive yesterday | extreme distance_driven op=min ent=trip
+which trip used the most energy yesterday | extreme energy_used op=max ent=trip
+which trip was the most efficient yesterday | extreme wh_per_km op=min ent=trip
+worst consumption trip yesterday | extreme wh_per_km op=max ent=trip
+what was the average trip length yesterday | stat trip_record op=mean ent=trip
+how many days did i drive yesterday | stat trip_record op=count ent=day
+number of trips this week | stat trip_record op=count ent=trip
+how many journeys did i make this week | stat trip_record op=count ent=trip
+how far was my longest trip this week | extreme distance_driven op=max ent=trip
+what was my longest trip this week | extreme distance_driven op=max ent=trip
+biggest trip this week | extreme distance_driven op=max ent=trip
+what was my shortest trip this week | extreme distance_driven op=min ent=trip
+shortest distance in one trip this week | extreme distance_driven op=min ent=trip
+most energy hungry trip this week | extreme energy_used op=max ent=trip
+which trip was the most efficient this week | extreme wh_per_km op=min ent=trip
+what was my least efficient trip this week | extreme wh_per_km op=max ent=trip
+how long is my average trip this week | stat trip_record op=mean ent=trip
+on how many days did i use the car this week | stat trip_record op=count ent=day
+number of trips last week | stat trip_record op=count ent=trip
+how many trips did i take last week | stat trip_record op=count ent=trip
+biggest trip last week | extreme distance_driven op=max ent=trip
+how far was my longest trip last week | extreme distance_driven op=max ent=trip
+my longest journey last week | extreme distance_driven op=max ent=trip
+which was the shortest drive last week | extreme distance_driven op=min ent=trip
+my smallest journey last week | extreme distance_driven op=min ent=trip
+most energy hungry trip last week | extreme energy_used op=max ent=trip
+what was my most efficient trip last week | extreme wh_per_km op=min ent=trip
+what was my least efficient trip last week | extreme wh_per_km op=max ent=trip
+how long is my average trip last week | stat trip_record op=mean ent=trip
+on how many days did i use the car last week | stat trip_record op=count ent=day
+how many journeys did i make this month | stat trip_record op=count ent=trip
+how many drives this month | stat trip_record op=count ent=trip
+biggest trip this month | extreme distance_driven op=max ent=trip
+my longest journey this month | extreme distance_driven op=max ent=trip
+what is the longest distance in one trip this month | extreme distance_driven op=max ent=trip
+what was my shortest trip this month | extreme distance_driven op=min ent=trip
+my smallest journey this month | extreme distance_driven op=min ent=trip
+the trip that consumed the most this month | extreme energy_used op=max ent=trip
+which trip was the most efficient this month | extreme wh_per_km op=min ent=trip
+which trip was the least efficient this month | extreme wh_per_km op=max ent=trip
+how long is my average trip this month | stat trip_record op=mean ent=trip
+how many days did i drive this month | stat trip_record op=count ent=day
+how many trips did i take last month | stat trip_record op=count ent=trip
+how many drives last month | stat trip_record op=count ent=trip
+how far was my longest trip last month | extreme distance_driven op=max ent=trip
+my longest journey last month | extreme distance_driven op=max ent=trip
+what was my longest trip last month | extreme distance_driven op=max ent=trip
+shortest distance in one trip last month | extreme distance_driven op=min ent=trip
+what was my shortest trip last month | extreme distance_driven op=min ent=trip
+the trip that consumed the most last month | extreme energy_used op=max ent=trip
+which trip was the most efficient last month | extreme wh_per_km op=min ent=trip
+which trip was the least efficient last month | extreme wh_per_km op=max ent=trip
+what was the average trip length last month | stat trip_record op=mean ent=trip
+on how many days did i use the car last month | stat trip_record op=count ent=day
+how many drives in the last 7 days | stat trip_record op=count ent=trip
+how many times did i drive in the last 7 days | stat trip_record op=count ent=trip
+what was my longest trip in the last 7 days | extreme distance_driven op=max ent=trip
+biggest trip in the last 7 days | extreme distance_driven op=max ent=trip
+how far was my longest trip in the last 7 days | extreme distance_driven op=max ent=trip
+my smallest journey in the last 7 days | extreme distance_driven op=min ent=trip
+which was the shortest drive in the last 7 days | extreme distance_driven op=min ent=trip
+the trip that consumed the most in the last 7 days | extreme energy_used op=max ent=trip
+which trip was the most efficient in the last 7 days | extreme wh_per_km op=min ent=trip
+what was my least efficient trip in the last 7 days | extreme wh_per_km op=max ent=trip
+average distance per trip in the last 7 days | stat trip_record op=mean ent=trip
+on how many days did i use the car in the last 7 days | stat trip_record op=count ent=day
+how many times did i drive over the past 3 days | stat trip_record op=count ent=trip
+number of trips over the past 3 days | stat trip_record op=count ent=trip
+my longest journey over the past 3 days | extreme distance_driven op=max ent=trip
+what was my longest trip over the past 3 days | extreme distance_driven op=max ent=trip
+how far was my longest trip over the past 3 days | extreme distance_driven op=max ent=trip
+shortest distance in one trip over the past 3 days | extreme distance_driven op=min ent=trip
+my smallest journey over the past 3 days | extreme distance_driven op=min ent=trip
+most energy hungry trip over the past 3 days | extreme energy_used op=max ent=trip
+best economy trip over the past 3 days | extreme wh_per_km op=min ent=trip
+what was my least efficient trip over the past 3 days | extreme wh_per_km op=max ent=trip
+what was the average trip length over the past 3 days | stat trip_record op=mean ent=trip
+on how many days did i use the car over the past 3 days | stat trip_record op=count ent=day
+how many journeys did i make in the past 2 weeks | stat trip_record op=count ent=trip
+how many times did i drive in the past 2 weeks | stat trip_record op=count ent=trip
+what is the longest distance in one trip in the past 2 weeks | extreme distance_driven op=max ent=trip
+what was my longest trip in the past 2 weeks | extreme distance_driven op=max ent=trip
+my longest journey in the past 2 weeks | extreme distance_driven op=max ent=trip
+my smallest journey in the past 2 weeks | extreme distance_driven op=min ent=trip
+what was my shortest trip in the past 2 weeks | extreme distance_driven op=min ent=trip
+the trip that consumed the most in the past 2 weeks | extreme energy_used op=max ent=trip
+best economy trip in the past 2 weeks | extreme wh_per_km op=min ent=trip
+worst consumption trip in the past 2 weeks | extreme wh_per_km op=max ent=trip
+what was the average trip length in the past 2 weeks | stat trip_record op=mean ent=trip
+on how many days did i use the car in the past 2 weeks | stat trip_record op=count ent=day
+how many drives in 2023 | stat trip_record op=count ent=trip
+how many trips did i take in 2023 | stat trip_record op=count ent=trip
+my longest journey in 2023 | extreme distance_driven op=max ent=trip
+what is the longest distance in one trip in 2023 | extreme distance_driven op=max ent=trip
+which was the longest drive in 2023 | extreme distance_driven op=max ent=trip
+shortest distance in one trip in 2023 | extreme distance_driven op=min ent=trip
+which was the shortest drive in 2023 | extreme distance_driven op=min ent=trip
+most energy hungry trip in 2023 | extreme energy_used op=max ent=trip
+best economy trip in 2023 | extreme wh_per_km op=min ent=trip
+which trip was the least efficient in 2023 | extreme wh_per_km op=max ent=trip
+what was the average trip length in 2023 | stat trip_record op=mean ent=trip
+how many days did i drive in 2023 | stat trip_record op=count ent=day
+number of trips in 2024 | stat trip_record op=count ent=trip
+how many trips did i take in 2024 | stat trip_record op=count ent=trip
+biggest trip in 2024 | extreme distance_driven op=max ent=trip
+what was my longest trip in 2024 | extreme distance_driven op=max ent=trip
+how far was my longest trip in 2024 | extreme distance_driven op=max ent=trip
+what was my shortest trip in 2024 | extreme distance_driven op=min ent=trip
+my smallest journey in 2024 | extreme distance_driven op=min ent=trip
+most energy hungry trip in 2024 | extreme energy_used op=max ent=trip
+what was my most efficient trip in 2024 | extreme wh_per_km op=min ent=trip
+worst consumption trip in 2024 | extreme wh_per_km op=max ent=trip
+how long is my average trip in 2024 | stat trip_record op=mean ent=trip
+how many days did i drive in 2024 | stat trip_record op=count ent=day
+how many drives in 2025 | stat trip_record op=count ent=trip
+number of trips in 2025 | stat trip_record op=count ent=trip
+which was the longest drive in 2025 | extreme distance_driven op=max ent=trip
+what was my longest trip in 2025 | extreme distance_driven op=max ent=trip
+my longest journey in 2025 | extreme distance_driven op=max ent=trip
+what was my shortest trip in 2025 | extreme distance_driven op=min ent=trip
+shortest distance in one trip in 2025 | extreme distance_driven op=min ent=trip
+which trip used the most energy in 2025 | extreme energy_used op=max ent=trip
+best economy trip in 2025 | extreme wh_per_km op=min ent=trip
+which trip was the least efficient in 2025 | extreme wh_per_km op=max ent=trip
+how long is my average trip in 2025 | stat trip_record op=mean ent=trip
+on how many days did i use the car in 2025 | stat trip_record op=count ent=day
+number of trips in 2026 | stat trip_record op=count ent=trip
+how many times did i drive in 2026 | stat trip_record op=count ent=trip
+how far was my longest trip in 2026 | extreme distance_driven op=max ent=trip
+which was the longest drive in 2026 | extreme distance_driven op=max ent=trip
+what is the longest distance in one trip in 2026 | extreme distance_driven op=max ent=trip
+which was the shortest drive in 2026 | extreme distance_driven op=min ent=trip
+shortest distance in one trip in 2026 | extreme distance_driven op=min ent=trip
+the trip that consumed the most in 2026 | extreme energy_used op=max ent=trip
+which trip was the most efficient in 2026 | extreme wh_per_km op=min ent=trip
+worst consumption trip in 2026 | extreme wh_per_km op=max ent=trip
+how long is my average trip in 2026 | stat trip_record op=mean ent=trip
+how many days did i drive in 2026 | stat trip_record op=count ent=day
+how many drives last year | stat trip_record op=count ent=trip
+how many trips did i take last year | stat trip_record op=count ent=trip
+my longest journey last year | extreme distance_driven op=max ent=trip
+how far was my longest trip last year | extreme distance_driven op=max ent=trip
+which was the longest drive last year | extreme distance_driven op=max ent=trip
+which was the shortest drive last year | extreme distance_driven op=min ent=trip
+what was my shortest trip last year | extreme distance_driven op=min ent=trip
+the trip that consumed the most last year | extreme energy_used op=max ent=trip
+which trip was the most efficient last year | extreme wh_per_km op=min ent=trip
+worst consumption trip last year | extreme wh_per_km op=max ent=trip
+what was the average trip length last year | stat trip_record op=mean ent=trip
+on how many days did i use the car last year | stat trip_record op=count ent=day
+how many drives this year | stat trip_record op=count ent=trip
+how many trips did i take this year | stat trip_record op=count ent=trip
+biggest trip this year | extreme distance_driven op=max ent=trip
+what was my longest trip this year | extreme distance_driven op=max ent=trip
+what is the longest distance in one trip this year | extreme distance_driven op=max ent=trip
+shortest distance in one trip this year | extreme distance_driven op=min ent=trip
+my smallest journey this year | extreme distance_driven op=min ent=trip
+most energy hungry trip this year | extreme energy_used op=max ent=trip
+what was my most efficient trip this year | extreme wh_per_km op=min ent=trip
+what was my least efficient trip this year | extreme wh_per_km op=max ent=trip
+how long is my average trip this year | stat trip_record op=mean ent=trip
+how many days did i drive this year | stat trip_record op=count ent=day
+how many journeys did i make in march 2025 | stat trip_record op=count ent=trip
+how many trips did i take in march 2025 | stat trip_record op=count ent=trip
+what was my longest trip in march 2025 | extreme distance_driven op=max ent=trip
+how far was my longest trip in march 2025 | extreme distance_driven op=max ent=trip
+biggest trip in march 2025 | extreme distance_driven op=max ent=trip
+my smallest journey in march 2025 | extreme distance_driven op=min ent=trip
+shortest distance in one trip in march 2025 | extreme distance_driven op=min ent=trip
+most energy hungry trip in march 2025 | extreme energy_used op=max ent=trip
+best economy trip in march 2025 | extreme wh_per_km op=min ent=trip
+which trip was the least efficient in march 2025 | extreme wh_per_km op=max ent=trip
+what was the average trip length in march 2025 | stat trip_record op=mean ent=trip
+on how many days did i use the car in march 2025 | stat trip_record op=count ent=day
+how many times did i drive in july 2024 | stat trip_record op=count ent=trip
+how many trips did i take in july 2024 | stat trip_record op=count ent=trip
+how far was my longest trip in july 2024 | extreme distance_driven op=max ent=trip
+what is the longest distance in one trip in july 2024 | extreme distance_driven op=max ent=trip
+my longest journey in july 2024 | extreme distance_driven op=max ent=trip
+my smallest journey in july 2024 | extreme distance_driven op=min ent=trip
+what was my shortest trip in july 2024 | extreme distance_driven op=min ent=trip
+most energy hungry trip in july 2024 | extreme energy_used op=max ent=trip
+what was my most efficient trip in july 2024 | extreme wh_per_km op=min ent=trip
+worst consumption trip in july 2024 | extreme wh_per_km op=max ent=trip
+what was the average trip length in july 2024 | stat trip_record op=mean ent=trip
+on how many days did i use the car in july 2024 | stat trip_record op=count ent=day
+how many times did i drive in january 2026 | stat trip_record op=count ent=trip
+number of trips in january 2026 | stat trip_record op=count ent=trip
+what is the longest distance in one trip in january 2026 | extreme distance_driven op=max ent=trip
+what was my longest trip in january 2026 | extreme distance_driven op=max ent=trip
+biggest trip in january 2026 | extreme distance_driven op=max ent=trip
+which was the shortest drive in january 2026 | extreme distance_driven op=min ent=trip
+my smallest journey in january 2026 | extreme distance_driven op=min ent=trip
+which trip used the most energy in january 2026 | extreme energy_used op=max ent=trip
+what was my most efficient trip in january 2026 | extreme wh_per_km op=min ent=trip
+which trip was the least efficient in january 2026 | extreme wh_per_km op=max ent=trip
+average distance per trip in january 2026 | stat trip_record op=mean ent=trip
+how many days did i drive in january 2026 | stat trip_record op=count ent=day
+how many times did i drive in october 2025 | stat trip_record op=count ent=trip
+how many trips did i take in october 2025 | stat trip_record op=count ent=trip
+how far was my longest trip in october 2025 | extreme distance_driven op=max ent=trip
+what is the longest distance in one trip in october 2025 | extreme distance_driven op=max ent=trip
+which was the longest drive in october 2025 | extreme distance_driven op=max ent=trip
+shortest distance in one trip in october 2025 | extreme distance_driven op=min ent=trip
+my smallest journey in october 2025 | extreme distance_driven op=min ent=trip
+the trip that consumed the most in october 2025 | extreme energy_used op=max ent=trip
+which trip was the most efficient in october 2025 | extreme wh_per_km op=min ent=trip
+worst consumption trip in october 2025 | extreme wh_per_km op=max ent=trip
+average distance per trip in october 2025 | stat trip_record op=mean ent=trip
+on how many days did i use the car in october 2025 | stat trip_record op=count ent=day
+how many trips did i take in the last 12 months | stat trip_record op=count ent=trip
+how many drives in the last 12 months | stat trip_record op=count ent=trip
+which was the longest drive in the last 12 months | extreme distance_driven op=max ent=trip
+my longest journey in the last 12 months | extreme distance_driven op=max ent=trip
+what was my longest trip in the last 12 months | extreme distance_driven op=max ent=trip
+which was the shortest drive in the last 12 months | extreme distance_driven op=min ent=trip
+what was my shortest trip in the last 12 months | extreme distance_driven op=min ent=trip
+most energy hungry trip in the last 12 months | extreme energy_used op=max ent=trip
+which trip was the most efficient in the last 12 months | extreme wh_per_km op=min ent=trip
+worst consumption trip in the last 12 months | extreme wh_per_km op=max ent=trip
+what was the average trip length in the last 12 months | stat trip_record op=mean ent=trip
+on how many days did i use the car in the last 12 months | stat trip_record op=count ent=day
+how many trips did i take over the last 2 years | stat trip_record op=count ent=trip
+how many journeys did i make over the last 2 years | stat trip_record op=count ent=trip
+how far was my longest trip over the last 2 years | extreme distance_driven op=max ent=trip
+what was my longest trip over the last 2 years | extreme distance_driven op=max ent=trip
+biggest trip over the last 2 years | extreme distance_driven op=max ent=trip
+which was the shortest drive over the last 2 years | extreme distance_driven op=min ent=trip
+shortest distance in one trip over the last 2 years | extreme distance_driven op=min ent=trip
+the trip that consumed the most over the last 2 years | extreme energy_used op=max ent=trip
+which trip was the most efficient over the last 2 years | extreme wh_per_km op=min ent=trip
+what was my least efficient trip over the last 2 years | extreme wh_per_km op=max ent=trip
+average distance per trip over the last 2 years | stat trip_record op=mean ent=trip
+on how many days did i use the car over the last 2 years | stat trip_record op=count ent=day
+how many journeys did i make in the past 6 months | stat trip_record op=count ent=trip
+number of trips in the past 6 months | stat trip_record op=count ent=trip
+which was the longest drive in the past 6 months | extreme distance_driven op=max ent=trip
+my longest journey in the past 6 months | extreme distance_driven op=max ent=trip
+what was my longest trip in the past 6 months | extreme distance_driven op=max ent=trip
+which was the shortest drive in the past 6 months | extreme distance_driven op=min ent=trip
+what was my shortest trip in the past 6 months | extreme distance_driven op=min ent=trip
+which trip used the most energy in the past 6 months | extreme energy_used op=max ent=trip
+what was my most efficient trip in the past 6 months | extreme wh_per_km op=min ent=trip
+worst consumption trip in the past 6 months | extreme wh_per_km op=max ent=trip
+average distance per trip in the past 6 months | stat trip_record op=mean ent=trip
+how many days did i drive in the past 6 months | stat trip_record op=count ent=day
+how many drives in the last 90 days | stat trip_record op=count ent=trip
+how many trips did i take in the last 90 days | stat trip_record op=count ent=trip
+how far was my longest trip in the last 90 days | extreme distance_driven op=max ent=trip
+what was my longest trip in the last 90 days | extreme distance_driven op=max ent=trip
+which was the longest drive in the last 90 days | extreme distance_driven op=max ent=trip
+my smallest journey in the last 90 days | extreme distance_driven op=min ent=trip
+shortest distance in one trip in the last 90 days | extreme distance_driven op=min ent=trip
+most energy hungry trip in the last 90 days | extreme energy_used op=max ent=trip
+which trip was the most efficient in the last 90 days | extreme wh_per_km op=min ent=trip
+what was my least efficient trip in the last 90 days | extreme wh_per_km op=max ent=trip
+how long is my average trip in the last 90 days | stat trip_record op=mean ent=trip
+how many days did i drive in the last 90 days | stat trip_record op=count ent=day
+how many times did i drive since january | stat trip_record op=count ent=trip
+number of trips since january | stat trip_record op=count ent=trip
+what was my longest trip since january | extreme distance_driven op=max ent=trip
+how far was my longest trip since january | extreme distance_driven op=max ent=trip
+biggest trip since january | extreme distance_driven op=max ent=trip
+which was the shortest drive since january | extreme distance_driven op=min ent=trip
+shortest distance in one trip since january | extreme distance_driven op=min ent=trip
+which trip used the most energy since january | extreme energy_used op=max ent=trip
+best economy trip since january | extreme wh_per_km op=min ent=trip
+which trip was the least efficient since january | extreme wh_per_km op=max ent=trip
+what was the average trip length since january | stat trip_record op=mean ent=trip
+on how many days did i use the car since january | stat trip_record op=count ent=day
+how many times did i drive on friday | stat trip_record op=count ent=trip
+how many journeys did i make on friday | stat trip_record op=count ent=trip
+what was my longest trip on friday | extreme distance_driven op=max ent=trip
+biggest trip on friday | extreme distance_driven op=max ent=trip
+my longest journey on friday | extreme distance_driven op=max ent=trip
+my smallest journey on friday | extreme distance_driven op=min ent=trip
+what was my shortest trip on friday | extreme distance_driven op=min ent=trip
+which trip used the most energy on friday | extreme energy_used op=max ent=trip
+what was my most efficient trip on friday | extreme wh_per_km op=min ent=trip
+worst consumption trip on friday | extreme wh_per_km op=max ent=trip
+average distance per trip on friday | stat trip_record op=mean ent=trip
+how many days did i drive on friday | stat trip_record op=count ent=day
+number of trips last weekend | stat trip_record op=count ent=trip
+how many journeys did i make last weekend | stat trip_record op=count ent=trip
+how far was my longest trip last weekend | extreme distance_driven op=max ent=trip
+what was my longest trip last weekend | extreme distance_driven op=max ent=trip
+my longest journey last weekend | extreme distance_driven op=max ent=trip
+which was the shortest drive last weekend | extreme distance_driven op=min ent=trip
+what was my shortest trip last weekend | extreme distance_driven op=min ent=trip
+which trip used the most energy last weekend | extreme energy_used op=max ent=trip
+which trip was the most efficient last weekend | extreme wh_per_km op=min ent=trip
+what was my least efficient trip last weekend | extreme wh_per_km op=max ent=trip
+how long is my average trip last weekend | stat trip_record op=mean ent=trip
+how many days did i drive last weekend | stat trip_record op=count ent=day
+how many journeys did i make so far this year | stat trip_record op=count ent=trip
+how many trips did i take so far this year | stat trip_record op=count ent=trip
+which was the longest drive so far this year | extreme distance_driven op=max ent=trip
+how far was my longest trip so far this year | extreme distance_driven op=max ent=trip
+biggest trip so far this year | extreme distance_driven op=max ent=trip
+shortest distance in one trip so far this year | extreme distance_driven op=min ent=trip
+my smallest journey so far this year | extreme distance_driven op=min ent=trip
+most energy hungry trip so far this year | extreme energy_used op=max ent=trip
+best economy trip so far this year | extreme wh_per_km op=min ent=trip
+which trip was the least efficient so far this year | extreme wh_per_km op=max ent=trip
+average distance per trip so far this year | stat trip_record op=mean ent=trip
+on how many days did i use the car so far this year | stat trip_record op=count ent=day
+how many times did i drive over the last three years | stat trip_record op=count ent=trip
+how many drives over the last three years | stat trip_record op=count ent=trip
+which was the longest drive over the last three years | extreme distance_driven op=max ent=trip
+how far was my longest trip over the last three years | extreme distance_driven op=max ent=trip
+what is the longest distance in one trip over the last three years | extreme distance_driven op=max ent=trip
+my smallest journey over the last three years | extreme distance_driven op=min ent=trip
+which was the shortest drive over the last three years | extreme distance_driven op=min ent=trip
+which trip used the most energy over the last three years | extreme energy_used op=max ent=trip
+best economy trip over the last three years | extreme wh_per_km op=min ent=trip
+which trip was the least efficient over the last three years | extreme wh_per_km op=max ent=trip
+what was the average trip length over the last three years | stat trip_record op=mean ent=trip
+how many days did i drive over the last three years | stat trip_record op=count ent=day
+how many drives during 2024 | stat trip_record op=count ent=trip
+number of trips during 2024 | stat trip_record op=count ent=trip
+what is the longest distance in one trip during 2024 | extreme distance_driven op=max ent=trip
+what was my longest trip during 2024 | extreme distance_driven op=max ent=trip
+how far was my longest trip during 2024 | extreme distance_driven op=max ent=trip
+my smallest journey during 2024 | extreme distance_driven op=min ent=trip
+shortest distance in one trip during 2024 | extreme distance_driven op=min ent=trip
+which trip used the most energy during 2024 | extreme energy_used op=max ent=trip
+best economy trip during 2024 | extreme wh_per_km op=min ent=trip
+worst consumption trip during 2024 | extreme wh_per_km op=max ent=trip
+average distance per trip during 2024 | stat trip_record op=mean ent=trip
+how many days did i drive during 2024 | stat trip_record op=count ent=day
+how many trips did i take throughout 2025 | stat trip_record op=count ent=trip
+number of trips throughout 2025 | stat trip_record op=count ent=trip
+what was my longest trip throughout 2025 | extreme distance_driven op=max ent=trip
+my longest journey throughout 2025 | extreme distance_driven op=max ent=trip
+how far was my longest trip throughout 2025 | extreme distance_driven op=max ent=trip
+my smallest journey throughout 2025 | extreme distance_driven op=min ent=trip
+shortest distance in one trip throughout 2025 | extreme distance_driven op=min ent=trip
+most energy hungry trip throughout 2025 | extreme energy_used op=max ent=trip
+what was my most efficient trip throughout 2025 | extreme wh_per_km op=min ent=trip
+which trip was the least efficient throughout 2025 | extreme wh_per_km op=max ent=trip
+how long is my average trip throughout 2025 | stat trip_record op=mean ent=trip
+on how many days did i use the car throughout 2025 | stat trip_record op=count ent=day
+how many drives | stat trip_record op=count ent=trip
+number of trips | stat trip_record op=count ent=trip
+what is the longest distance in one trip | extreme distance_driven op=max ent=trip
+which was the longest drive | extreme distance_driven op=max ent=trip
+my longest journey | extreme distance_driven op=max ent=trip
+shortest distance in one trip | extreme distance_driven op=min ent=trip
+my smallest journey | extreme distance_driven op=min ent=trip
+most energy hungry trip | extreme energy_used op=max ent=trip
+best economy trip | extreme wh_per_km op=min ent=trip
+what was my least efficient trip | extreme wh_per_km op=max ent=trip
+what was the average trip length | stat trip_record op=mean ent=trip
+how many days did i drive | stat trip_record op=count ent=day
+how many trips did i take | stat trip_record op=count ent=trip
+how many times did i drive | stat trip_record op=count ent=trip
+biggest trip | extreme distance_driven op=max ent=trip
+what was my longest trip | extreme distance_driven op=max ent=trip
+which was the shortest drive | extreme distance_driven op=min ent=trip
+the trip that consumed the most | extreme energy_used op=max ent=trip
+which trip was the least efficient | extreme wh_per_km op=max ent=trip
+average distance per trip | stat trip_record op=mean ent=trip
+how many journeys did i make | stat trip_record op=count ent=trip
+how far was my longest trip | extreme distance_driven op=max ent=trip
+what was my shortest trip | extreme distance_driven op=min ent=trip
+on how many days did i use the car | stat trip_record op=count ent=day
+when was my last trip | events trip_record op=last
+when did i last drive | events trip_record op=last
+when did i last start the car | events trip_record op=last
+when did i last switch on the car | events trip_record op=last
+when did i last turn the car on | events trip_record op=last
+when did i last use the car | events trip_record op=last
+when was the car last driven | events trip_record op=last
+last time i drove | events trip_record op=last
+when was the last time i switched on my car | events trip_record op=last
+when did the last journey start | events trip_record op=last
+what time did my last trip begin | events trip_record op=last
+when did i last take the car out | events trip_record op=last
+when was my first trip | events trip_record op=first
+when did i first drive the car | events trip_record op=first
+when was the first journey on record | events trip_record op=first
+first trip ever | events trip_record op=first
+summarise my last trip | summary none ent=trip
+tell me about my last trip | summary none ent=trip
+how was my last drive | summary none ent=trip
+details of my last journey | summary none ent=trip
+number of hard braking events yesterday | events hard_braking op=count
+how many hard braking events last year | events hard_braking op=count
+how many hard braking events in 2024 | events hard_braking op=count
+how many hard braking events have there been | events hard_braking op=count
+how many hard braking events in total | events hard_braking op=count
+were there any hard braking events over the last 2 years | events hard_braking op=exists
+any hard braking events last week | events hard_braking op=exists
+show me the hard braking events in the last 12 months | events hard_braking op=list
+list the hard braking events throughout 2025 | events hard_braking op=list
+count the harsh brakes in 2023 | events hard_braking op=count
+number of harsh brakes over the past 3 days | events hard_braking op=count
+how many harsh brakes in the last 90 days | events hard_braking op=count
+how many harsh brakes have there been | events hard_braking op=count
+how many harsh brakes in total | events hard_braking op=count
+any harsh brakes over the last three years | events hard_braking op=exists
+were there any harsh brakes last year | events hard_braking op=exists
+list the harsh brakes yesterday | events hard_braking op=list
+show me the harsh brakes last year | events hard_braking op=list
+number of hard brakes in 2025 | events hard_braking op=count
+number of hard brakes in january 2026 | events hard_braking op=count
+count the hard brakes since january | events hard_braking op=count
+how many hard brakes have there been | events hard_braking op=count
+how many hard brakes in total | events hard_braking op=count
+were there any hard brakes over the last 2 years | events hard_braking op=exists
+did i get any hard brakes in the last 90 days | events hard_braking op=exists
+show me the hard brakes in 2024 | events hard_braking op=list
+what hard brakes did i have in march 2025 | events hard_braking op=list
+when was the last hard braking event | events hard_braking op=last
+when did the last hard braking event happen | events hard_braking op=last
+when was my most recent hard braking event | events hard_braking op=last
+last hard braking event | events hard_braking op=last
+when was the first hard braking event | events hard_braking op=first
+when was the first hard braking event ever | events hard_braking op=first
+when was the last hard braking event this year | events hard_braking op=last
+when was the last hard braking event in 2025 | events hard_braking op=last
+when was the last harsh braking event | events hard_braking op=last
+when did the last harsh braking event happen | events hard_braking op=last
+when was my most recent harsh braking event | events hard_braking op=last
+last harsh braking event | events hard_braking op=last
+when was the first harsh braking event | events hard_braking op=first
+when was the first harsh braking event ever | events hard_braking op=first
+when was the last harsh braking event this year | events hard_braking op=last
+when was the last harsh braking event in 2025 | events hard_braking op=last
+when was the last hard brake | events hard_braking op=last
+when did the last hard brake happen | events hard_braking op=last
+when was my most recent hard brake | events hard_braking op=last
+last hard brake | events hard_braking op=last
+when was the first hard brake | events hard_braking op=first
+when was the first hard brake ever | events hard_braking op=first
+when was the last hard brake this year | events hard_braking op=last
+when was the last hard brake in 2025 | events hard_braking op=last
+how many hard accelerations in 2024 | events hard_acceleration op=count
+how many hard accelerations over the past 3 days | events hard_acceleration op=count
+how many hard accelerations in 2026 | events hard_acceleration op=count
+how many hard accelerations have there been | events hard_acceleration op=count
+how many hard accelerations in total | events hard_acceleration op=count
+any hard accelerations in the last 90 days | events hard_acceleration op=exists
+any hard accelerations in the last 12 months | events hard_acceleration op=exists
+what hard accelerations did i have this week | events hard_acceleration op=list
+show me the hard accelerations last year | events hard_acceleration op=list
+number of harsh accelerations in the past 6 months | events hard_acceleration op=count
+count the harsh accelerations throughout 2025 | events hard_acceleration op=count
+how many harsh accelerations during 2024 | events hard_acceleration op=count
+how many harsh accelerations have there been | events hard_acceleration op=count
+how many harsh accelerations in total | events hard_acceleration op=count
+any harsh accelerations during 2024 | events hard_acceleration op=exists
+any harsh accelerations over the past 3 days | events hard_acceleration op=exists
+what harsh accelerations did i have so far this year | events hard_acceleration op=list
+show me the harsh accelerations during 2024 | events hard_acceleration op=list
+when was the last hard acceleration | events hard_acceleration op=last
+when did the last hard acceleration happen | events hard_acceleration op=last
+when was my most recent hard acceleration | events hard_acceleration op=last
+last hard acceleration | events hard_acceleration op=last
+when was the first hard acceleration | events hard_acceleration op=first
+when was the first hard acceleration ever | events hard_acceleration op=first
+when was the last hard acceleration this year | events hard_acceleration op=last
+when was the last hard acceleration in 2025 | events hard_acceleration op=last
+when was the last harsh acceleration | events hard_acceleration op=last
+when did the last harsh acceleration happen | events hard_acceleration op=last
+when was my most recent harsh acceleration | events hard_acceleration op=last
+last harsh acceleration | events hard_acceleration op=last
+when was the first harsh acceleration | events hard_acceleration op=first
+when was the first harsh acceleration ever | events hard_acceleration op=first
+when was the last harsh acceleration this year | events hard_acceleration op=last
+when was the last harsh acceleration in 2025 | events hard_acceleration op=last
+how many charging sessions in 2023 | events charging_session op=count
+how many charging sessions last year | events charging_session op=count
+count the charging sessions in 2023 | events charging_session op=count
+how many charging sessions have there been | events charging_session op=count
+how many charging sessions in total | events charging_session op=count
+any charging sessions this year | events charging_session op=exists
+did i get any charging sessions in the last 7 days | events charging_session op=exists
+show me the charging sessions in the last 7 days | events charging_session op=list
+what charging sessions did i have in the past 6 months | events charging_session op=list
+number of charges last year | events charging_session op=count
+count the charges in 2025 | events charging_session op=count
+count the charges in 2024 | events charging_session op=count
+how many charges have there been | events charging_session op=count
+how many charges in total | events charging_session op=count
+were there any charges on friday | events charging_session op=exists
+were there any charges this week | events charging_session op=exists
+list the charges so far this year | events charging_session op=list
+show me the charges in 2024 | events charging_session op=list
+when was the last charging session | events charging_session op=last
+when did the last charging session happen | events charging_session op=last
+when was my most recent charging session | events charging_session op=last
+last charging session | events charging_session op=last
+when was the first charging session | events charging_session op=first
+when was the first charging session ever | events charging_session op=first
+when was the last charging session this year | events charging_session op=last
+when was the last charging session in 2025 | events charging_session op=last
+when was the last charge | events charging_session op=last
+when did the last charge happen | events charging_session op=last
+when was my most recent charge | events charging_session op=last
+last charge | events charging_session op=last
+when was the first charge | events charging_session op=first
+when was the first charge ever | events charging_session op=first
+when was the last charge this year | events charging_session op=last
+when was the last charge in 2025 | events charging_session op=last
+how many warnings during 2024 | events any_warning op=count
+how many warnings last weekend | events any_warning op=count
+count the warnings over the past 3 days | events any_warning op=count
+how many warnings have there been | events any_warning op=count
+how many warnings in total | events any_warning op=count
+did i get any warnings this month | events any_warning op=exists
+any warnings in the past 6 months | events any_warning op=exists
+list the warnings in october 2025 | events any_warning op=list
+what warnings did i have during 2024 | events any_warning op=list
+number of alerts throughout 2025 | events any_warning op=count
+how many alerts last month | events any_warning op=count
+number of alerts last week | events any_warning op=count
+how many alerts have there been | events any_warning op=count
+how many alerts in total | events any_warning op=count
+did i get any alerts this month | events any_warning op=exists
+were there any alerts today | events any_warning op=exists
+list the alerts in july 2024 | events any_warning op=list
+list the alerts on friday | events any_warning op=list
+when was the last warning | events any_warning op=last
+when did the last warning happen | events any_warning op=last
+when was my most recent warning | events any_warning op=last
+last warning | events any_warning op=last
+when was the first warning | events any_warning op=first
+when was the first warning ever | events any_warning op=first
+when was the last warning this year | events any_warning op=last
+when was the last warning in 2025 | events any_warning op=last
+when was the last alert | events any_warning op=last
+when did the last alert happen | events any_warning op=last
+when was my most recent alert | events any_warning op=last
+last alert | events any_warning op=last
+when was the first alert | events any_warning op=first
+when was the first alert ever | events any_warning op=first
+when was the last alert this year | events any_warning op=last
+when was the last alert in 2025 | events any_warning op=last
+count the fault codes in the past 6 months | events diagnostic_code op=count
+count the fault codes over the last three years | events diagnostic_code op=count
+number of fault codes over the past 3 days | events diagnostic_code op=count
+how many fault codes have there been | events diagnostic_code op=count
+how many fault codes in total | events diagnostic_code op=count
+were there any fault codes in 2023 | events diagnostic_code op=exists
+were there any fault codes in 2026 | events diagnostic_code op=exists
+list the fault codes since january | events diagnostic_code op=list
+show me the fault codes on friday | events diagnostic_code op=list
+how many diagnostic codes over the last three years | events diagnostic_code op=count
+count the diagnostic codes last weekend | events diagnostic_code op=count
+number of diagnostic codes over the past 3 days | events diagnostic_code op=count
+how many diagnostic codes have there been | events diagnostic_code op=count
+how many diagnostic codes in total | events diagnostic_code op=count
+were there any diagnostic codes in 2025 | events diagnostic_code op=exists
+any diagnostic codes in the past 2 weeks | events diagnostic_code op=exists
+list the diagnostic codes today | events diagnostic_code op=list
+show me the diagnostic codes in 2023 | events diagnostic_code op=list
+when was the last fault code | events diagnostic_code op=last
+when did the last fault code happen | events diagnostic_code op=last
+when was my most recent fault code | events diagnostic_code op=last
+last fault code | events diagnostic_code op=last
+when was the first fault code | events diagnostic_code op=first
+when was the first fault code ever | events diagnostic_code op=first
+when was the last fault code this year | events diagnostic_code op=last
+when was the last fault code in 2025 | events diagnostic_code op=last
+when was the last diagnostic trouble code | events diagnostic_code op=last
+when did the last diagnostic trouble code happen | events diagnostic_code op=last
+when was my most recent diagnostic trouble code | events diagnostic_code op=last
+last diagnostic trouble code | events diagnostic_code op=last
+when was the first diagnostic trouble code | events diagnostic_code op=first
+when was the first diagnostic trouble code ever | events diagnostic_code op=first
+when was the last diagnostic trouble code this year | events diagnostic_code op=last
+when was the last diagnostic trouble code in 2025 | events diagnostic_code op=last
+how many tyre pressure warnings over the last 2 years | events tyre_pressure_warning op=count
+count the tyre pressure warnings in the last 12 months | events tyre_pressure_warning op=count
+how many tyre pressure warnings last week | events tyre_pressure_warning op=count
+how many tyre pressure warnings have there been | events tyre_pressure_warning op=count
+how many tyre pressure warnings in total | events tyre_pressure_warning op=count
+were there any tyre pressure warnings last month | events tyre_pressure_warning op=exists
+any tyre pressure warnings over the past 3 days | events tyre_pressure_warning op=exists
+what tyre pressure warnings did i have in july 2024 | events tyre_pressure_warning op=list
+what tyre pressure warnings did i have today | events tyre_pressure_warning op=list
+when was the last tyre pressure warning | events tyre_pressure_warning op=last
+when did the last tyre pressure warning happen | events tyre_pressure_warning op=last
+when was my most recent tyre pressure warning | events tyre_pressure_warning op=last
+last tyre pressure warning | events tyre_pressure_warning op=last
+when was the first tyre pressure warning | events tyre_pressure_warning op=first
+when was the first tyre pressure warning ever | events tyre_pressure_warning op=first
+when was the last tyre pressure warning this year | events tyre_pressure_warning op=last
+when was the last tyre pressure warning in 2025 | events tyre_pressure_warning op=last
+number of battery overheating warnings since january | events battery_overheat_warning op=count
+count the battery overheating warnings over the last 2 years | events battery_overheat_warning op=count
+number of battery overheating warnings this year | events battery_overheat_warning op=count
+how many battery overheating warnings have there been | events battery_overheat_warning op=count
+how many battery overheating warnings in total | events battery_overheat_warning op=count
+were there any battery overheating warnings over the last three years | events battery_overheat_warning op=exists
+any battery overheating warnings over the past 3 days | events battery_overheat_warning op=exists
+list the battery overheating warnings in july 2024 | events battery_overheat_warning op=list
+what battery overheating warnings did i have in 2024 | events battery_overheat_warning op=list
+when was the last battery overheating warning | events battery_overheat_warning op=last
+when did the last battery overheating warning happen | events battery_overheat_warning op=last
+when was my most recent battery overheating warning | events battery_overheat_warning op=last
+last battery overheating warning | events battery_overheat_warning op=last
+when was the first battery overheating warning | events battery_overheat_warning op=first
+when was the first battery overheating warning ever | events battery_overheat_warning op=first
+when was the last battery overheating warning this year | events battery_overheat_warning op=last
+when was the last battery overheating warning in 2025 | events battery_overheat_warning op=last
+count the adas disengagements today | events adas_disengagement op=count
+count the adas disengagements this week | events adas_disengagement op=count
+count the adas disengagements in october 2025 | events adas_disengagement op=count
+how many adas disengagements have there been | events adas_disengagement op=count
+how many adas disengagements in total | events adas_disengagement op=count
+were there any adas disengagements over the last 2 years | events adas_disengagement op=exists
+did i get any adas disengagements so far this year | events adas_disengagement op=exists
+what adas disengagements did i have today | events adas_disengagement op=list
+what adas disengagements did i have yesterday | events adas_disengagement op=list
+how many lane assist dropouts on friday | events adas_disengagement op=count
+count the lane assist dropouts in 2024 | events adas_disengagement op=count
+how many lane assist dropouts in 2024 | events adas_disengagement op=count
+how many lane assist dropouts have there been | events adas_disengagement op=count
+how many lane assist dropouts in total | events adas_disengagement op=count
+were there any lane assist dropouts last week | events adas_disengagement op=exists
+were there any lane assist dropouts throughout 2025 | events adas_disengagement op=exists
+what lane assist dropouts did i have last month | events adas_disengagement op=list
+what lane assist dropouts did i have in january 2026 | events adas_disengagement op=list
+when was the last adas disengagement | events adas_disengagement op=last
+when did the last adas disengagement happen | events adas_disengagement op=last
+when was my most recent adas disengagement | events adas_disengagement op=last
+last adas disengagement | events adas_disengagement op=last
+when was the first adas disengagement | events adas_disengagement op=first
+when was the first adas disengagement ever | events adas_disengagement op=first
+when was the last adas disengagement this year | events adas_disengagement op=last
+when was the last adas disengagement in 2025 | events adas_disengagement op=last
+when was the last lane assist dropout | events adas_disengagement op=last
+when did the last lane assist dropout happen | events adas_disengagement op=last
+when was my most recent lane assist dropout | events adas_disengagement op=last
+last lane assist dropout | events adas_disengagement op=last
+when was the first lane assist dropout | events adas_disengagement op=first
+when was the first lane assist dropout ever | events adas_disengagement op=first
+when was the last lane assist dropout this year | events adas_disengagement op=last
+when was the last lane assist dropout in 2025 | events adas_disengagement op=last
+how many ecu resets in 2026 | events ecu_reset op=count
+count the ecu resets since january | events ecu_reset op=count
+how many ecu resets in october 2025 | events ecu_reset op=count
+how many ecu resets have there been | events ecu_reset op=count
+how many ecu resets in total | events ecu_reset op=count
+did i get any ecu resets in the past 2 weeks | events ecu_reset op=exists
+did i get any ecu resets in the past 6 months | events ecu_reset op=exists
+what ecu resets did i have in the last 90 days | events ecu_reset op=list
+what ecu resets did i have today | events ecu_reset op=list
+when was the last ecu reset | events ecu_reset op=last
+when did the last ecu reset happen | events ecu_reset op=last
+when was my most recent ecu reset | events ecu_reset op=last
+last ecu reset | events ecu_reset op=last
+when was the first ecu reset | events ecu_reset op=first
+when was the first ecu reset ever | events ecu_reset op=first
+when was the last ecu reset this year | events ecu_reset op=last
+when was the last ecu reset in 2025 | events ecu_reset op=last
+how many unexpected shutdowns yesterday | events unexpected_shutdown op=count
+how many unexpected shutdowns over the past 3 days | events unexpected_shutdown op=count
+how many unexpected shutdowns this year | events unexpected_shutdown op=count
+how many unexpected shutdowns have there been | events unexpected_shutdown op=count
+how many unexpected shutdowns in total | events unexpected_shutdown op=count
+were there any unexpected shutdowns on friday | events unexpected_shutdown op=exists
+did i get any unexpected shutdowns today | events unexpected_shutdown op=exists
+list the unexpected shutdowns during 2024 | events unexpected_shutdown op=list
+what unexpected shutdowns did i have in march 2025 | events unexpected_shutdown op=list
+when was the last unexpected shutdown | events unexpected_shutdown op=last
+when did the last unexpected shutdown happen | events unexpected_shutdown op=last
+when was my most recent unexpected shutdown | events unexpected_shutdown op=last
+last unexpected shutdown | events unexpected_shutdown op=last
+when was the first unexpected shutdown | events unexpected_shutdown op=first
+when was the first unexpected shutdown ever | events unexpected_shutdown op=first
+when was the last unexpected shutdown this year | events unexpected_shutdown op=last
+when was the last unexpected shutdown in 2025 | events unexpected_shutdown op=last
+number of camera blockages last year | events camera_blocked op=count
+how many camera blockages today | events camera_blocked op=count
+number of camera blockages this week | events camera_blocked op=count
+how many camera blockages have there been | events camera_blocked op=count
+how many camera blockages in total | events camera_blocked op=count
+were there any camera blockages today | events camera_blocked op=exists
+were there any camera blockages so far this year | events camera_blocked op=exists
+show me the camera blockages in 2024 | events camera_blocked op=list
+what camera blockages did i have in the last 90 days | events camera_blocked op=list
+when was the last camera blockage | events camera_blocked op=last
+when did the last camera blockage happen | events camera_blocked op=last
+when was my most recent camera blockage | events camera_blocked op=last
+last camera blockage | events camera_blocked op=last
+when was the first camera blockage | events camera_blocked op=first
+when was the first camera blockage ever | events camera_blocked op=first
+when was the last camera blockage this year | events camera_blocked op=last
+when was the last camera blockage in 2025 | events camera_blocked op=last
+number of software updates over the past 3 days | events software_update op=count
+number of software updates since january | events software_update op=count
+how many software updates during 2024 | events software_update op=count
+how many software updates have there been | events software_update op=count
+how many software updates in total | events software_update op=count
+were there any software updates in the last 12 months | events software_update op=exists
+did i get any software updates last week | events software_update op=exists
+show me the software updates on friday | events software_update op=list
+list the software updates last week | events software_update op=list
+when was the last software update | events software_update op=last
+when did the last software update happen | events software_update op=last
+when was my most recent software update | events software_update op=last
+last software update | events software_update op=last
+when was the first software update | events software_update op=first
+when was the first software update ever | events software_update op=first
+when was the last software update this year | events software_update op=last
+when was the last software update in 2025 | events software_update op=last
+how many voltage dips since january | events voltage_dip op=count
+count the voltage dips last month | events voltage_dip op=count
+how many voltage dips in the past 6 months | events voltage_dip op=count
+how many voltage dips have there been | events voltage_dip op=count
+how many voltage dips in total | events voltage_dip op=count
+were there any voltage dips in the last 12 months | events voltage_dip op=exists
+were there any voltage dips so far this year | events voltage_dip op=exists
+list the voltage dips over the last three years | events voltage_dip op=list
+show me the voltage dips this week | events voltage_dip op=list
+when was the last voltage dip | events voltage_dip op=last
+when did the last voltage dip happen | events voltage_dip op=last
+when was my most recent voltage dip | events voltage_dip op=last
+last voltage dip | events voltage_dip op=last
+when was the first voltage dip | events voltage_dip op=first
+when was the first voltage dip ever | events voltage_dip op=first
+when was the last voltage dip this year | events voltage_dip op=last
+when was the last voltage dip in 2025 | events voltage_dip op=last
+how many low 12 volt battery warnings in march 2025 | events low_12v_warning op=count
+count the low 12 volt battery warnings throughout 2025 | events low_12v_warning op=count
+how many low 12 volt battery warnings in the last 7 days | events low_12v_warning op=count
+how many low 12 volt battery warnings have there been | events low_12v_warning op=count
+how many low 12 volt battery warnings in total | events low_12v_warning op=count
+did i get any low 12 volt battery warnings in 2025 | events low_12v_warning op=exists
+any low 12 volt battery warnings in 2024 | events low_12v_warning op=exists
+what low 12 volt battery warnings did i have in march 2025 | events low_12v_warning op=list
+show me the low 12 volt battery warnings throughout 2025 | events low_12v_warning op=list
+when was the last low 12 volt battery warning | events low_12v_warning op=last
+when did the last low 12 volt battery warning happen | events low_12v_warning op=last
+when was my most recent low 12 volt battery warning | events low_12v_warning op=last
+last low 12 volt battery warning | events low_12v_warning op=last
+when was the first low 12 volt battery warning | events low_12v_warning op=first
+when was the first low 12 volt battery warning ever | events low_12v_warning op=first
+when was the last low 12 volt battery warning this year | events low_12v_warning op=last
+when was the last low 12 volt battery warning in 2025 | events low_12v_warning op=last
+how does energy use the first half of 2025 compare with the second half of 2025 | compare energy_used op=sum vs=period
+how does energy use summer 2025 compare with winter 2025 | compare energy_used op=sum vs=period
+energy use this week versus last week | compare energy_used op=sum vs=period
+how does energy use 2024 compare with 2025 | compare energy_used op=sum vs=period
+energy use last month versus the month before | compare energy_used op=sum vs=period
+total energy used summer 2025 versus winter 2025 | compare energy_used op=sum vs=period
+total energy used this month versus last month | compare energy_used op=sum vs=period
+compare total energy used this year and last year | compare energy_used op=sum vs=period
+how does total energy used the first half of 2025 compare with the second half of 2025 | compare energy_used op=sum vs=period
+total energy used: 2024 against 2025 | compare energy_used op=sum vs=period
+compare distance driven this week and last week | compare distance_driven op=sum vs=period
+distance driven: this month against last month | compare distance_driven op=sum vs=period
+compare distance driven march 2025 and march 2026 | compare distance_driven op=sum vs=period
+distance driven summer 2025 versus winter 2025 | compare distance_driven op=sum vs=period
+distance driven this year versus last year | compare distance_driven op=sum vs=period
+kilometres driven: this month against last month | compare distance_driven op=sum vs=period
+compare kilometres driven the first half of 2025 and the second half of 2025 | compare distance_driven op=sum vs=period
+compare kilometres driven this week and last week | compare distance_driven op=sum vs=period
+how does kilometres driven summer 2025 compare with winter 2025 | compare distance_driven op=sum vs=period
+how does kilometres driven this year compare with last year | compare distance_driven op=sum vs=period
+consumption per km: 2024 against 2025 | compare wh_per_km op=mean vs=period
+consumption per km: this week against last week | compare wh_per_km op=mean vs=period
+consumption per km: the first half of 2025 against the second half of 2025 | compare wh_per_km op=mean vs=period
+how does consumption per km last month compare with the month before | compare wh_per_km op=mean vs=period
+consumption per km: march 2025 against march 2026 | compare wh_per_km op=mean vs=period
+efficiency: the first half of 2025 against the second half of 2025 | compare wh_per_km op=mean vs=period
+efficiency: summer 2025 against winter 2025 | compare wh_per_km op=mean vs=period
+efficiency 2024 versus 2025 | compare wh_per_km op=mean vs=period
+efficiency march 2025 versus march 2026 | compare wh_per_km op=mean vs=period
+efficiency: this month against last month | compare wh_per_km op=mean vs=period
+compare average speed this week and last week | compare speed op=mean vs=period
+average speed: summer 2025 against winter 2025 | compare speed op=mean vs=period
+average speed the first half of 2025 versus the second half of 2025 | compare speed op=mean vs=period
+average speed this month versus last month | compare speed op=mean vs=period
+average speed march 2025 versus march 2026 | compare speed op=mean vs=period
+battery temperature march 2025 versus march 2026 | compare battery_temperature op=mean vs=period
+battery temperature summer 2025 versus winter 2025 | compare battery_temperature op=mean vs=period
+battery temperature: last month against the month before | compare battery_temperature op=mean vs=period
+battery temperature this week versus last week | compare battery_temperature op=mean vs=period
+battery temperature: this year against last year | compare battery_temperature op=mean vs=period
+number of trips this year versus last year | compare trip_record op=count vs=period ent=trip
+how does number of trips march 2025 compare with march 2026 | compare trip_record op=count vs=period ent=trip
+number of trips: this week against last week | compare trip_record op=count vs=period ent=trip
+compare number of trips the first half of 2025 and the second half of 2025 | compare trip_record op=count vs=period ent=trip
+compare number of trips last month and the month before | compare trip_record op=count vs=period ent=trip
+compare trips taken this year and last year | compare trip_record op=count vs=period ent=trip
+trips taken: this month against last month | compare trip_record op=count vs=period ent=trip
+how does trips taken march 2025 compare with march 2026 | compare trip_record op=count vs=period ent=trip
+compare trips taken this week and last week | compare trip_record op=count vs=period ent=trip
+compare trips taken 2024 and 2025 | compare trip_record op=count vs=period ent=trip
+hard braking the first half of 2025 versus the second half of 2025 | compare hard_braking op=count vs=period
+hard braking: last month against the month before | compare hard_braking op=count vs=period
+hard braking this week versus last week | compare hard_braking op=count vs=period
+how does hard braking this year compare with last year | compare hard_braking op=count vs=period
+compare hard braking this month and last month | compare hard_braking op=count vs=period
+how does hard braking events summer 2025 compare with winter 2025 | compare hard_braking op=count vs=period
+how does hard braking events last month compare with the month before | compare hard_braking op=count vs=period
+hard braking events: this year against last year | compare hard_braking op=count vs=period
+hard braking events 2024 versus 2025 | compare hard_braking op=count vs=period
+how does hard braking events the first half of 2025 compare with the second half of 2025 | compare hard_braking op=count vs=period
+charging sessions: march 2025 against march 2026 | compare charging_session op=count vs=period
+how does charging sessions this month compare with last month | compare charging_session op=count vs=period
+compare charging sessions this year and last year | compare charging_session op=count vs=period
+compare charging sessions summer 2025 and winter 2025 | compare charging_session op=count vs=period
+charging sessions: last month against the month before | compare charging_session op=count vs=period
+how did 2024 compare with 2025 | summary none op=change
+how did this year compare with last year | summary none op=change
+what changed since last year | summary none op=change
+summarise 2025 | summary none
+how was my year | summary none
+give me a summary of 2024 | summary none
+how was my week | summary none
+summary of last month | summary none
+average speed on the highway in october 2025 | stat speed op=mean cond=highway
+average speed on the motorway during 2024 | stat speed op=mean cond=highway
+highest battery temperature on the motorway today | extreme battery_temperature op=max cond=highway
+highest battery temperature on the motorway in october 2025 | extreme battery_temperature op=max cond=highway
+average consumption per km on the highway this month | stat wh_per_km op=mean cond=highway
+average consumption per km on the motorway over the last 2 years | stat wh_per_km op=mean cond=highway
+energy used on the highway last year | stat energy_used op=sum cond=highway
+energy used on the highway over the last three years | stat energy_used op=sum cond=highway
+average climate control power on the highway last year | stat hvac_power op=mean cond=highway
+average climate control power on the highway on friday | stat hvac_power op=mean cond=highway
+distance driven on the motorway this year | stat distance_driven op=sum cond=highway
+distance driven on the highway this month | stat distance_driven op=sum cond=highway
+how many trips on the highway over the last three years | stat trip_record op=count cond=highway ent=trip
+how many hard braking events on the motorway in 2025 | events hard_braking op=count cond=highway
+average speed in city driving in the past 6 months | stat speed op=mean cond=city
+average speed in the city this week | stat speed op=mean cond=city
+highest battery temperature in the city over the last three years | extreme battery_temperature op=max cond=city
+highest battery temperature in city driving over the last three years | extreme battery_temperature op=max cond=city
+average consumption per km in city driving in 2026 | stat wh_per_km op=mean cond=city
+average consumption per km in city driving in the last 12 months | stat wh_per_km op=mean cond=city
+energy used in city driving in the last 12 months | stat energy_used op=sum cond=city
+energy used in city driving in 2026 | stat energy_used op=sum cond=city
+average climate control power in city driving in the past 6 months | stat hvac_power op=mean cond=city
+average climate control power in the city in january 2026 | stat hvac_power op=mean cond=city
+distance driven in city driving in the last 90 days | stat distance_driven op=sum cond=city
+distance driven in city driving last month | stat distance_driven op=sum cond=city
+how many trips in the city this week | stat trip_record op=count cond=city ent=trip
+how many hard braking events in city driving in the past 6 months | events hard_braking op=count cond=city
+average speed at night during 2024 | stat speed op=mean cond=night
+average speed at night last year | stat speed op=mean cond=night
+highest battery temperature after dark today | extreme battery_temperature op=max cond=night
+highest battery temperature after dark in the last 7 days | extreme battery_temperature op=max cond=night
+average consumption per km at night in 2026 | stat wh_per_km op=mean cond=night
+average consumption per km at night in 2023 | stat wh_per_km op=mean cond=night
+energy used at night in 2024 | stat energy_used op=sum cond=night
+energy used at night in the past 6 months | stat energy_used op=sum cond=night
+average climate control power at night over the last three years | stat hvac_power op=mean cond=night
+average climate control power at night this year | stat hvac_power op=mean cond=night
+distance driven after dark in 2026 | stat distance_driven op=sum cond=night
+distance driven after dark during 2024 | stat distance_driven op=sum cond=night
+how many trips at night in 2025 | stat trip_record op=count cond=night ent=trip
+how many hard braking events after dark over the last 2 years | events hard_braking op=count cond=night
+highest battery temperature while charging over the last 2 years | extreme battery_temperature op=max cond=charging
+highest battery temperature while charging this week | extreme battery_temperature op=max cond=charging
+average consumption per km while charging in the past 2 weeks | stat wh_per_km op=mean cond=charging
+average consumption per km while charging last month | stat wh_per_km op=mean cond=charging
+energy used while charging in the past 2 weeks | stat energy_used op=sum cond=charging
+energy used while charging over the past 3 days | stat energy_used op=sum cond=charging
+average climate control power while charging last week | stat hvac_power op=mean cond=charging
+average climate control power while charging over the last 2 years | stat hvac_power op=mean cond=charging
+how many trips while charging last year | stat trip_record op=count cond=charging ent=trip
+how many hard braking events while charging last weekend | events hard_braking op=count cond=charging
+average speed when it was raining in the last 12 months | stat speed op=mean cond=raining
+average speed in the rain in march 2025 | stat speed op=mean cond=raining
+highest battery temperature when it was raining in 2024 | extreme battery_temperature op=max cond=raining
+highest battery temperature in the rain this week | extreme battery_temperature op=max cond=raining
+average consumption per km when it was raining so far this year | stat wh_per_km op=mean cond=raining
+average consumption per km in the rain yesterday | stat wh_per_km op=mean cond=raining
+energy used when it was raining over the last three years | stat energy_used op=sum cond=raining
+energy used when it was raining in the last 12 months | stat energy_used op=sum cond=raining
+average climate control power in the rain in 2024 | stat hvac_power op=mean cond=raining
+average climate control power when it was raining today | stat hvac_power op=mean cond=raining
+distance driven in the rain over the past 3 days | stat distance_driven op=sum cond=raining
+distance driven when it was raining last year | stat distance_driven op=sum cond=raining
+how many trips in the rain during 2024 | stat trip_record op=count cond=raining ent=trip
+how many hard braking events when it was raining during 2024 | events hard_braking op=count cond=raining
+average speed when it was cold in the past 2 weeks | stat speed op=mean cond=cold
+average speed in cold weather over the last three years | stat speed op=mean cond=cold
+highest battery temperature in cold weather in the past 6 months | extreme battery_temperature op=max cond=cold
+highest battery temperature when it was cold in the past 6 months | extreme battery_temperature op=max cond=cold
+average consumption per km in cold weather in 2025 | stat wh_per_km op=mean cond=cold
+average consumption per km when it was cold last year | stat wh_per_km op=mean cond=cold
+energy used in cold weather in the past 6 months | stat energy_used op=sum cond=cold
+average climate control power in cold weather throughout 2025 | stat hvac_power op=mean cond=cold
+average climate control power when it was cold over the last three years | stat hvac_power op=mean cond=cold
+distance driven when it was cold in july 2024 | stat distance_driven op=sum cond=cold
+distance driven when it was cold in 2026 | stat distance_driven op=sum cond=cold
+how many trips in cold weather last month | stat trip_record op=count cond=cold ent=trip
+how many hard braking events in cold weather last week | events hard_braking op=count cond=cold
+average speed on hot days in 2026 | stat speed op=mean cond=hot_weather
+average speed on hot days in the last 90 days | stat speed op=mean cond=hot_weather
+highest battery temperature on hot days in march 2025 | extreme battery_temperature op=max cond=hot_weather
+highest battery temperature in hot weather throughout 2025 | extreme battery_temperature op=max cond=hot_weather
+average consumption per km in hot weather in 2026 | stat wh_per_km op=mean cond=hot_weather
+average consumption per km in hot weather this month | stat wh_per_km op=mean cond=hot_weather
+energy used on hot days in october 2025 | stat energy_used op=sum cond=hot_weather
+energy used in hot weather yesterday | stat energy_used op=sum cond=hot_weather
+average climate control power on hot days today | stat hvac_power op=mean cond=hot_weather
+average climate control power on hot days in march 2025 | stat hvac_power op=mean cond=hot_weather
+distance driven in hot weather over the last 2 years | stat distance_driven op=sum cond=hot_weather
+distance driven in hot weather so far this year | stat distance_driven op=sum cond=hot_weather
+how many trips in hot weather during 2024 | stat trip_record op=count cond=hot_weather ent=trip
+how many hard braking events on hot days in 2023 | events hard_braking op=count cond=hot_weather
+average speed at high speed yesterday | stat speed op=mean cond=high_speed
+average speed at high speed last weekend | stat speed op=mean cond=high_speed
+highest battery temperature at high speed over the last 2 years | extreme battery_temperature op=max cond=high_speed
+highest battery temperature at high speed yesterday | extreme battery_temperature op=max cond=high_speed
+average consumption per km at high speed throughout 2025 | stat wh_per_km op=mean cond=high_speed
+average consumption per km at high speed over the past 3 days | stat wh_per_km op=mean cond=high_speed
+energy used at high speed in the past 6 months | stat energy_used op=sum cond=high_speed
+energy used at high speed on friday | stat energy_used op=sum cond=high_speed
+average climate control power at high speed yesterday | stat hvac_power op=mean cond=high_speed
+average climate control power at high speed so far this year | stat hvac_power op=mean cond=high_speed
+distance driven at high speed over the last 2 years | stat distance_driven op=sum cond=high_speed
+distance driven at high speed in january 2026 | stat distance_driven op=sum cond=high_speed
+how many trips at high speed since january | stat trip_record op=count cond=high_speed ent=trip
+how many hard braking events at high speed over the past 3 days | events hard_braking op=count cond=high_speed
+highest battery temperature while standing still in the last 12 months | extreme battery_temperature op=max cond=idling
+highest battery temperature while standing still in the past 2 weeks | extreme battery_temperature op=max cond=idling
+average consumption per km while standing still throughout 2025 | stat wh_per_km op=mean cond=idling
+average consumption per km while standing still since january | stat wh_per_km op=mean cond=idling
+energy used while standing still in 2025 | stat energy_used op=sum cond=idling
+energy used while standing still in march 2025 | stat energy_used op=sum cond=idling
+average climate control power while standing still yesterday | stat hvac_power op=mean cond=idling
+average climate control power while standing still this month | stat hvac_power op=mean cond=idling
+how many trips while standing still in 2025 | stat trip_record op=count cond=idling ent=trip
+how many hard braking events while standing still over the last 2 years | events hard_braking op=count cond=idling
+highest battery temperature while parked this week | extreme battery_temperature op=max cond=parked
+highest battery temperature while parked in march 2025 | extreme battery_temperature op=max cond=parked
+average consumption per km while parked last week | stat wh_per_km op=mean cond=parked
+energy used while parked last year | stat energy_used op=sum cond=parked
+energy used while parked in the last 90 days | stat energy_used op=sum cond=parked
+average climate control power while parked last month | stat hvac_power op=mean cond=parked
+average climate control power while parked last week | stat hvac_power op=mean cond=parked
+how many trips while parked on friday | stat trip_record op=count cond=parked ent=trip
+how many hard braking events while parked in march 2025 | events hard_braking op=count cond=parked
+how long was the car parked in january 2026 | stat drive_mode op=duration cond=parked
+what share of in the last 12 months was the car parked | stat drive_mode op=share cond=parked
+how many hours was it parked over the last three years | stat drive_mode op=duration cond=parked
+what percentage of the time was it parked in the past 2 weeks | stat drive_mode op=share cond=parked
+how many hours was it parked in january 2026 | stat drive_mode op=duration cond=parked
+what percentage of the time was it parked in july 2024 | stat drive_mode op=share cond=parked
+how long was the car charging during 2024 | stat drive_mode op=duration cond=charging
+what percentage of the time was it charging over the past 3 days | stat drive_mode op=share cond=charging
+how many hours was it charging in october 2025 | stat drive_mode op=duration cond=charging
+what share of throughout 2025 was the car charging | stat drive_mode op=share cond=charging
+how long was the car charging so far this year | stat drive_mode op=duration cond=charging
+what percentage of the time was it charging in 2023 | stat drive_mode op=share cond=charging
+time spent driving today | stat drive_mode op=duration cond=driving
+what share of last week was the car driving | stat drive_mode op=share cond=driving
+how many hours was it driving over the past 3 days | stat drive_mode op=duration cond=driving
+what percentage of the time was it driving in october 2025 | stat drive_mode op=share cond=driving
+how many hours was it driving in the last 90 days | stat drive_mode op=duration cond=driving
+what share of so far this year was the car driving | stat drive_mode op=share cond=driving
+how long was the speed above 120 km/h during 2024 | stat speed op=duration cond=threshold
+how many times did the speed go above 120 km/h last month | stat speed op=count cond=threshold
+how long was the speed above 120 km/h in october 2025 | stat speed op=duration cond=threshold
+how many times did the speed go above 120 km/h this month | stat speed op=count cond=threshold
+how long was the speed above 120 km/h this year | stat speed op=duration cond=threshold
+how many times did the speed go above 120 km/h in 2024 | stat speed op=count cond=threshold
+how long was the speed faster than 100 km/h during 2024 | stat speed op=duration cond=threshold
+how many times did the speed go faster than 100 km/h in 2026 | stat speed op=count cond=threshold
+how long was the speed faster than 100 km/h last month | stat speed op=duration cond=threshold
+how many times did the speed go faster than 100 km/h in march 2025 | stat speed op=count cond=threshold
+how long was the speed faster than 100 km/h on friday | stat speed op=duration cond=threshold
+how many times did the speed go faster than 100 km/h in 2023 | stat speed op=count cond=threshold
+how long was the battery level below 10 percent so far this year | stat battery_soc op=duration cond=threshold
+how many times did the battery level go below 10 percent in the past 2 weeks | stat battery_soc op=count cond=threshold
+how long was the battery level below 10 percent during 2024 | stat battery_soc op=duration cond=threshold
+how many times did the battery level go below 10 percent in july 2024 | stat battery_soc op=count cond=threshold
+how long was the battery level below 10 percent this week | stat battery_soc op=duration cond=threshold
+how many times did the battery level go below 10 percent on friday | stat battery_soc op=count cond=threshold
+how long was the battery temperature above 40 degrees in march 2025 | stat battery_temperature op=duration cond=threshold
+how many times did the battery temperature go above 40 degrees last year | stat battery_temperature op=count cond=threshold
+how long was the battery temperature above 40 degrees this year | stat battery_temperature op=duration cond=threshold
+how many times did the battery temperature go above 40 degrees in 2026 | stat battery_temperature op=count cond=threshold
+how long was the battery temperature above 40 degrees in 2026 | stat battery_temperature op=duration cond=threshold
+how many times did the battery temperature go above 40 degrees in 2025 | stat battery_temperature op=count cond=threshold
+how many trips were longer than 100 km over the past 3 days | stat distance_driven op=count cond=threshold ent=trip
+trips over 100 km on friday | stat distance_driven op=count cond=threshold ent=trip
+how many trips were longer than 50 km on friday | stat distance_driven op=count cond=threshold ent=trip
+trips over 50 km in the last 90 days | stat distance_driven op=count cond=threshold ent=trip
+how many trips were longer than 200 km yesterday | stat distance_driven op=count cond=threshold ent=trip
+trips over 200 km in the past 6 months | stat distance_driven op=count cond=threshold ent=trip
+why did my range drop on friday | why range_estimate op=drop
+why did the range drop | why range_estimate op=drop
+why did my range go up in 2026 | why range_estimate op=rise
+why did the range go up | why range_estimate op=rise
+why did my range fall last year | why range_estimate op=drop
+why did the range fall | why range_estimate op=drop
+why did my range increase on friday | why range_estimate op=rise
+why did the range increase | why range_estimate op=rise
+why did my energy consumption drop in the last 90 days | why wh_per_km op=drop
+why did the energy consumption drop | why wh_per_km op=drop
+why did my energy consumption go up in 2025 | why wh_per_km op=rise
+why did the energy consumption go up | why wh_per_km op=rise
+why did my energy consumption fall in march 2025 | why wh_per_km op=drop
+why did the energy consumption fall | why wh_per_km op=drop
+why did my energy consumption increase in the past 6 months | why wh_per_km op=rise
+why did the energy consumption increase | why wh_per_km op=rise
+why did my consumption drop this week | why wh_per_km op=drop
+why did the consumption drop | why wh_per_km op=drop
+why did my consumption go up today | why wh_per_km op=rise
+why did the consumption go up | why wh_per_km op=rise
+why did my consumption fall in january 2026 | why wh_per_km op=drop
+why did the consumption fall | why wh_per_km op=drop
+why did my consumption increase this year | why wh_per_km op=rise
+why did the consumption increase | why wh_per_km op=rise
+why did my battery temperature drop since january | why battery_temperature op=drop
+why did the battery temperature drop | why battery_temperature op=drop
+why did my battery temperature go up in the past 2 weeks | why battery_temperature op=rise
+why did the battery temperature go up | why battery_temperature op=rise
+why did my battery temperature fall last month | why battery_temperature op=drop
+why did the battery temperature fall | why battery_temperature op=drop
+why did my battery temperature increase this month | why battery_temperature op=rise
+why did the battery temperature increase | why battery_temperature op=rise
+what is my typical weekly distance | stat distance_driven op=usual
+what is my typical daily energy use | stat energy_used op=usual
+what is my typical trip length | stat distance_driven op=usual
+how much fuel did i use last week | stat fuel_rate op=sum
+how much fuel did i use in 2025 | stat fuel_rate op=sum
+total fuel used this month | stat fuel_rate op=sum
+what is my average fuel consumption | stat fuel_rate op=mean
+how many litres per 100 km | stat fuel_rate op=mean
+how much fuel is left | now fuel_level
+when did i last refuel | events charging_session op=last
+disable the brakes | unsafe none
+turn off the brakes | unsafe none
+switch off the airbags | unsafe none
+disable the abs | unsafe none
+override the speed limiter | unsafe none
+turn off traction control for good | unsafe none
+remove the speed limit | unsafe none
+disable the seatbelt warning | unsafe none
+open the windows | control none
+turn on the air conditioning | control none
+lock the doors | control none
+set the cruise control to 100 | control none
+start the engine remotely | control none
+turn the heating on | control none
+play some music | control none
+navigate home | control none
+hello | social none
+hi there | social none
+thanks a lot | social none
+good morning | social none
+good evening | social none
+thank you | social none
+bye | social none
+hey vantage | social none
+tell me a joke | offtopic none
+what is the capital of france | offtopic none
+who won the match | offtopic none
+what is the meaning of life | offtopic none
+recommend a restaurant | offtopic none
+what is the weather in paris | offtopic none

@@ -1,0 +1,94 @@
+{
+ "seed": 0,
+ "database": "gen_courier_ext.db",
+ "generated": 26900,
+ "kept": {
+  "train": 17650,
+  "test_phrasing": 800,
+  "test_template": 800,
+  "val": 977,
+  "test_comp": 800,
+  "test_adv": 800,
+  "test_iid": 800
+ },
+ "dropped": {},
+ "outcomes": {
+  "answered": 18778,
+  "no_data": 7064,
+  "refused": 402,
+  "unsupported": 271,
+  "missing_data": 385
+ },
+ "ops": {
+  "rank": 1191,
+  "aggregate": 9602,
+  "none": 402,
+  "extreme": 2474,
+  "compare": 2441,
+  "correlation": 1251,
+  "explain_event": 271,
+  "event_context": 469,
+  "list_events": 1141,
+  "percent_time": 2504,
+  "current_value": 941,
+  "trend": 1812,
+  "count": 1660,
+  "capability": 741
+ },
+ "held_out": {
+  "comp_targets_x_predicates": [
+   [
+    "coolant_flow",
+    "hvac_power",
+    "motor_temperature"
+   ],
+   [
+    "charging",
+    "highway"
+   ]
+  ],
+  "comp_group_pairs": [
+   [
+    "cold",
+    "night"
+   ],
+   [
+    "highway",
+    "raining"
+   ],
+   [
+    "city",
+    "hot_weather"
+   ]
+  ],
+  "comp_rank": [
+   [
+    "trip",
+    "city"
+   ],
+   [
+    "trip",
+    "rainy"
+   ]
+  ],
+  "comp_agg_x_time": [
+   [
+    "median",
+    "this_month"
+   ],
+   [
+    "p95",
+    "last_month"
+   ],
+   [
+    "std",
+    "last_week"
+   ]
+  ],
+  "template_ids": [
+   3,
+   4
+  ],
+  "unseen_phrase_rule": "training/phrases.py UNSEEN_TARGET_PHRASES are used only in test_phrasing"
+ }
+}

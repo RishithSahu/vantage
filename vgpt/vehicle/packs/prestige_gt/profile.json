@@ -1,0 +1,558 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "prestige_gt",
+ "vehicle": {
+  "make": "Prestige",
+  "model": "GT V8 FlexRay",
+  "year": 2026,
+  "powertrain": "petrol",
+  "specs": {
+   "veh.model": "Prestige GT V8 FlexRay",
+   "veh.tyre_spec_front": 230,
+   "veh.tyre_spec_rear": 230,
+   "veh.service_km": 15000,
+   "veh.sw": "ecm 4.2",
+   "veh.wheelbase_m": 2.6,
+   "veh.wheel_radius_m": 0.31,
+   "veh.rated_max_speed": 185,
+   "veh.seats": 5,
+   "veh.tank_l": 50
+  }
+ },
+ "concepts": [
+  {
+   "name": "engine_oil_temperature",
+   "label": "engine oil temperature",
+   "unit": "C",
+   "category": "powertrain",
+   "synonyms": [
+    "oil temperature",
+    "oil temp",
+    "engine oil temp",
+    "engine oil temperature"
+   ],
+   "lo": -40,
+   "hi": 200
+  },
+  {
+   "name": "barometric_pressure",
+   "label": "barometric pressure",
+   "unit": "kPa",
+   "category": "environment",
+   "synonyms": [
+    "barometric pressure",
+    "air pressure",
+    "atmospheric pressure",
+    "baro pressure"
+   ],
+   "lo": 30,
+   "hi": 125
+  },
+  {
+   "name": "intake_manifold_pressure",
+   "label": "intake manifold pressure",
+   "unit": "kPa",
+   "category": "powertrain",
+   "synonyms": [
+    "intake manifold pressure",
+    "manifold pressure",
+    "map",
+    "manifold absolute pressure"
+   ],
+   "lo": 0,
+   "hi": 255
+  },
+  {
+   "name": "intake_air_temperature",
+   "label": "intake air temperature",
+   "unit": "C",
+   "category": "powertrain",
+   "synonyms": [
+    "intake air temperature",
+    "intake air temp",
+    "air intake temperature",
+    "iat"
+   ],
+   "lo": -40,
+   "hi": 215
+  },
+  {
+   "name": "mass_air_flow",
+   "label": "mass air flow",
+   "unit": "g/s",
+   "category": "powertrain",
+   "synonyms": [
+    "mass air flow",
+    "air flow",
+    "maf",
+    "airflow"
+   ],
+   "lo": 0,
+   "hi": 655
+  },
+  {
+   "name": "short_term_fuel_trim",
+   "label": "short-term fuel trim",
+   "unit": "%",
+   "category": "powertrain",
+   "synonyms": [
+    "short term fuel trim",
+    "short-term fuel trim",
+    "stft",
+    "fuel trim"
+   ],
+   "lo": -100,
+   "hi": 100
+  },
+  {
+   "name": "long_term_fuel_trim",
+   "label": "long-term fuel trim",
+   "unit": "%",
+   "category": "powertrain",
+   "synonyms": [
+    "long term fuel trim",
+    "long-term fuel trim",
+    "ltft"
+   ],
+   "lo": -100,
+   "hi": 100
+  },
+  {
+   "name": "lambda",
+   "label": "air-fuel ratio (lambda)",
+   "unit": "none",
+   "category": "powertrain",
+   "synonyms": [
+    "lambda",
+    "air fuel ratio",
+    "air-fuel ratio",
+    "afr",
+    "oxygen sensor"
+   ],
+   "lo": 0,
+   "hi": 2
+  },
+  {
+   "name": "catalyst_temperature",
+   "label": "catalyst temperature",
+   "unit": "C",
+   "category": "powertrain",
+   "synonyms": [
+    "catalyst temperature",
+    "catalytic converter temperature",
+    "cat temperature",
+    "catalyst temp",
+    "catalyst",
+    "catalytic converter"
+   ],
+   "lo": -40,
+   "hi": 1000
+  },
+  {
+   "name": "ignition_timing",
+   "label": "ignition timing",
+   "unit": "deg",
+   "category": "powertrain",
+   "synonyms": [
+    "ignition timing",
+    "spark timing",
+    "spark advance",
+    "timing advance"
+   ],
+   "lo": -64,
+   "hi": 64
+  }
+ ],
+ "sources": [
+  {
+   "id": "pt",
+   "type": "can",
+   "name": "Powertrain CAN 500 kbit/s (11-bit, OBD-II style)",
+   "dbc": "powertrain.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "tcu",
+   "type": "log",
+   "name": "Linux telematics unit (syslog)",
+   "format": "rfc3164"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS"
+  },
+  {
+   "id": "chassis",
+   "type": "flexray",
+   "name": "FlexRay chassis cluster, 10 Mbit/s, 5 ms cycle (wheel speeds, dynamics, brake)",
+   "description": "chassis.fx.json"
+  },
+  {
+   "id": "lin1",
+   "type": "lin",
+   "name": "LIN 2.1 body network, 19.2 kbit/s (rain / light, climate, driver seat)",
+   "ldf": "body.ldf",
+   "channel": "lin0",
+   "enhanced": true
+  }
+ ],
+ "signals": [
+  {
+   "concept": "speed",
+   "from": "can:pt/VEH_DYN.VehSpeed",
+   "unit": "km/h",
+   "rate_hz": 10
+  },
+  {
+   "concept": "engine_rpm",
+   "from": "can:pt/ENG_DATA.EngSpeed",
+   "unit": "rpm",
+   "rate_hz": 20
+  },
+  {
+   "concept": "engine_load",
+   "from": "can:pt/ENG_DATA.EngLoad",
+   "unit": "%",
+   "rate_hz": 10
+  },
+  {
+   "concept": "accelerator_position",
+   "from": "can:pt/ENG_DATA.ThrottlePos",
+   "unit": "%",
+   "rate_hz": 10
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:pt/ENG_DATA.CoolantTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "engine_oil_temperature",
+   "from": "can:pt/ENG_DATA.OilTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "fuel_rate",
+   "from": "can:pt/ENG_FUEL.FuelRate",
+   "unit": "L/h",
+   "rate_hz": 10
+  },
+  {
+   "concept": "fuel_level",
+   "from": "can:pt/ENG_FUEL.FuelLevel",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "intake_manifold_pressure",
+   "from": "can:pt/ENG_AIR.MAP",
+   "unit": "kPa",
+   "rate_hz": 10
+  },
+  {
+   "concept": "intake_air_temperature",
+   "from": "can:pt/ENG_AIR.IntakeAirTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "mass_air_flow",
+   "from": "can:pt/ENG_AIR.MAF",
+   "unit": "g/s",
+   "rate_hz": 10
+  },
+  {
+   "concept": "barometric_pressure",
+   "from": "can:pt/ENG_AIR.BaroPress",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "short_term_fuel_trim",
+   "from": "can:pt/ENG_FUEL.FuelTrimST",
+   "unit": "%",
+   "rate_hz": 5
+  },
+  {
+   "concept": "long_term_fuel_trim",
+   "from": "can:pt/ENG_FUEL.FuelTrimLT",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "lambda",
+   "from": "can:pt/ENG_EXH.Lambda",
+   "unit": "none",
+   "rate_hz": 10
+  },
+  {
+   "concept": "catalyst_temperature",
+   "from": "can:pt/ENG_EXH.CatalystTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "ignition_timing",
+   "from": "can:pt/ENG_EXH.IgnTiming",
+   "unit": "deg",
+   "rate_hz": 10
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:pt/TPMS.PressFL",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:pt/TPMS.PressFR",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:pt/TPMS.PressRL",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:pt/TPMS.PressRR",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:pt/TPMS.TyreTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "can:pt/BODY_ENV.AmbientTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "can:pt/BODY_ENV.Batt12V",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "can:pt/CLUSTER.Odometer",
+   "unit": "km",
+   "rate_hz": 1
+  },
+  {
+   "concept": "_ignition",
+   "from": "can:pt/ENG_DATA.EngSpeed",
+   "unit": "rpm",
+   "rate_hz": 20,
+   "when": ">300"
+  },
+  {
+   "concept": "wheel_speed_fl",
+   "from": "flexray:chassis/WheelSpeeds.FL",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_fr",
+   "from": "flexray:chassis/WheelSpeeds.FR",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_rl",
+   "from": "flexray:chassis/WheelSpeeds.RL",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_rr",
+   "from": "flexray:chassis/WheelSpeeds.RR",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "yaw_rate",
+   "from": "flexray:chassis/Dynamics.YawRate",
+   "unit": "deg/s",
+   "rate_hz": 20
+  },
+  {
+   "concept": "lateral_acceleration",
+   "from": "flexray:chassis/Dynamics.LatAcc",
+   "unit": "g",
+   "rate_hz": 20
+  },
+  {
+   "concept": "longitudinal_acceleration",
+   "from": "flexray:chassis/Dynamics.LongAcc",
+   "unit": "g",
+   "rate_hz": 20
+  },
+  {
+   "concept": "steering_angle",
+   "from": "flexray:chassis/Dynamics.SteerAngle",
+   "unit": "deg",
+   "rate_hz": 20
+  },
+  {
+   "concept": "brake_pressure",
+   "from": "flexray:chassis/Brake.Pressure",
+   "unit": "bar",
+   "rate_hz": 10
+  },
+  {
+   "concept": "brake_pedal",
+   "from": "flexray:chassis/Brake.PedalPos",
+   "unit": "%",
+   "rate_hz": 10
+  },
+  {
+   "concept": "brake_temperature",
+   "from": "flexray:chassis/Brake.DiscTempMax",
+   "unit": "C",
+   "rate_hz": 2
+  },
+  {
+   "concept": "rain",
+   "from": "lin:lin1/RainLight.RainIntensity",
+   "unit": "none",
+   "rate_hz": 2
+  },
+  {
+   "concept": "light",
+   "from": "lin:lin1/RainLight.AmbientLight",
+   "unit": "lux",
+   "rate_hz": 2
+  },
+  {
+   "concept": "cabin_temperature",
+   "from": "lin:lin1/ClimateSensor.CabinTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "humidity",
+   "from": "lin:lin1/ClimateSensor.CabinHumidity",
+   "unit": "%",
+   "rate_hz": 0.5
+  },
+  {
+   "concept": "seatbelt_state",
+   "from": "lin:lin1/SeatDriver.SeatBelt",
+   "unit": "none",
+   "rate_hz": 2,
+   "map": {
+    "on": 1,
+    "off": 0
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "overtemp",
+   "from": "signal:motor_temperature",
+   "when": ">105",
+   "hold_s": 10,
+   "type": "WARN_OVERTEMP",
+   "severity": "critical",
+   "detail": "Engine coolant above 105 °C ({value:.1f} °C)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "front left tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "front right tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "rear left tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "rear right tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

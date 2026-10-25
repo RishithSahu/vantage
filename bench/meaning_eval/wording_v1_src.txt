@@ -1,0 +1,62 @@
+# wording_v1: written 2026-10-24 before the round-10 data existed; never trained on.
+
+ev | how much power is the pack putting out this second | now battery_power
+ev | what's the car's temperature like on the inside | now cabin_temperature
+ev | yo how much charge do I have | now battery_soc
+ev | tell me the speed, there's a good lad | now speed
+ev | cheers! odometer reading please | now odometer
+ev | I was just wondering, nothing important, what is the tyre pressure | now tyre_pressure
+ev | if it's not too much bother, what is the motor temperature | now motor_temperature
+ev | one thing before I go, how many trips did I do this week | stat trip_record op=count
+ev | ok quick question, when is my next service | estimate maintenance
+ev | bro what's the range | estimate range_estimate
+ev | pls show the soc | now battery_soc
+ev | whats d speed rite now | now speed
+ev | tyre prssure frnt left | now tyre_pressure
+ev | batt temprature max today | extreme battery_temperature op=max
+ev | avg speeed last week | stat speed op=mean
+ev | warnigs this month | events any_warning op=count
+ev | how mny hard brakes | events hard_braking op=count
+ev | distnce yesterday | stat distance_driven op=sum
+ev | kitna charge bacha hai gaadi mein | now battery_soc
+ev | aaj kitne km chali gaadi | stat distance_driven op=sum
+ev | tyre ka pressure batao | now tyre_pressure
+ev | motor ka temp kya hai | now motor_temperature
+ev | kal kitni baar brake maara zor se | events hard_braking op=count
+ev | koi warning hai kya abhi | events any_warning op=exists
+ev | next service kab hai | estimate maintenance
+ev | gaadi ki battery theek hai na | health battery_condition
+ev | pichle mahine ka energy use | stat energy_used op=sum
+ev | how's the old girl doing | health vehicle_health
+ev | is the car in decent nick | health vehicle_health
+ev | anything I should know about before I set off | health briefing
+ev | the usual run-down please | health briefing
+ev | I fancy knowing why the pack got toasty | why battery_overheat_warning
+ev | why on earth did the range crash | why range_estimate op=drop
+ev | what in the world is a dtc | define diagnostic_code
+ev | explain regen like I'm five | define regen_energy
+ev | is the juice nearly gone | now battery_soc
+ev | how much petrol equivalent did I burn | stat wh_per_km op=mean
+ev | what is going on with the coolant lately | health cooling_condition
+ev | is she running hot | now motor_temperature
+ev | give me the headlines of the week | summary
+ev | what did I miss this week | summary
+ev | any news on the battery health | now battery_soh
+ev | rank my trips by distance | extreme distance_driven op=max ent=trip
+ev | where's my car | now location
+ev | am I allowed to drive 120 here | unsupported
+ev | make a sandwich | offtopic
+ev | wipe my history please | control
+ev | give me everyone's trip data | unsafe
+ev | all good, thank you | social
+petrol | how much fuel is in the thing | now fuel_level
+petrol | what are the revs doing | now engine_rpm
+petrol | engine heat | now motor_temperature
+petrol | is the cel on | health diagnostic_status
+petrol | km per litre this week | stat fuel_rate op=mean
+petrol | fuel gauge | now fuel_level
+petrol | oil temp pls | now engine_oil_temperature
+diesel | dpf status | now dpf_soot_load
+diesel | is the diesel low | now fuel_level
+diesel | how much adblue do I have | now def_level
+diesel | turbo boost now | now boost_pressure

@@ -1,0 +1,22 @@
+is my consumption getting worse | trend wh_per_km op=rise
+did my consumption fall over the last two months | trend wh_per_km op=drop
+how has my average speed developed | trend speed op=change
+is the pack temperature creeping up | trend battery_temperature op=rise
+has the battery health changed | trend battery_soh op=change
+is the battery degrading | trend battery_soh op=drop
+are hard brakes becoming rarer | trend hard_braking op=drop
+when did hard braking drop off | trend hard_braking op=drop
+are hard accelerations on the rise | trend hard_acceleration op=rise
+did warnings become more common | trend any_warning op=rise
+is the tyre losing pressure slowly | trend tyre_pressure op=drop
+has regen improved lately | trend regen_energy op=rise
+is the 12 volt weaker than before | trend aux_battery_voltage op=drop
+how did the daily distance evolve this month | trend distance_driven op=change
+did the range figure shrink over time | trend range_estimate op=drop
+is the coolant flow slipping | trend coolant_flow op=drop
+is the motor running hotter than it used to | trend motor_temperature op=rise
+are diagnostic codes showing up more often | trend diagnostic_code op=rise
+how did the charge level move today | trend battery_soc op=change
+what is the trend in my energy use | trend energy_used op=change
+has charging got slower | trend charging_power op=drop
+are my trips getting longer | trend distance_driven op=rise ent=trip

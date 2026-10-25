@@ -1,0 +1,32 @@
+{
+ "id": "hyundai_i30_2014",
+ "name": "Hyundai i30 (2014)",
+ "year": 2014,
+ "region": "Europe / Korea",
+ "powertrain": "petrol",
+ "class": "Compact hatchback, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Hyundai i30 (2014) database (ambient_temperature, engine_oil_temperature, engine_rpm, fuel_temperature, headlight_state, intake_air_temperature, lateral_acceleration, longitudinal_acceleration, motor_temperature, odometer, reported_range, speed ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Android infotainment (logcat)",
+  "NMEA 0183 GNSS",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 18 drafted, 397 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): hyundai_i30_2014.dbc",
+ "bound": 34,
+ "concepts": 34,
+ "extension": [
+  "aux_battery_voltage",
+  "barometric_pressure",
+  "cabin_temperature",
+  "fuel_level",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "note": "Where a meaning is executed that the typed query engine does not express as one query. DATA, not routing: the learned frame chose the key; this table only says which executor serves it. 'legacy' = the older deterministic route handlers, called with a machine-written canonical request (never with user text); they still contain keyword logic internally and are scheduled for migration (see docs/semantic_method.md section 7).",
+ "legacy": {
+  "health:vehicle_health": "is the vehicle healthy overall",
+  "health:battery_condition": "how is my battery doing",
+  "health:motor_condition": "is the motor temperature okay",
+  "health:cooling_condition": "is the cooling pump working",
+  "health:aux_battery_condition": "is my 12v battery weak",
+  "health:tyre_condition": "how are my tyres",
+  "health:brake_condition": "what is the condition of the brakes",
+  "health:brake_pad_life": "what is the condition of the brakes",
+  "health:driving_style": "how do i drive",
+  "health:briefing": "brief me",
+  "health:camera_sharpness": "is the camera working",
+  "stat:driving_style": "what is my driving score",
+  "advice:vehicle_health": "is it safe to keep driving",
+  "advice:maintenance": "how can i take care of my car",
+  "advice:range_estimate": "how can i get more range",
+  "advice:wh_per_km": "how can i get more range",
+  "advice:driving_style": "give me some advice to avoid crashes",
+  "advice:battery_condition": "how is my battery doing",
+  "advice:tyre_condition": "how are my tyres",
+  "advice:brake_condition": "what is the condition of the brakes",
+  "advice:motor_condition": "is the motor temperature okay",
+  "advice:cooling_condition": "is the cooling pump working",
+  "advice:aux_battery_condition": "is my 12v battery weak",
+  "estimate:range_estimate": "how far can i go",
+  "estimate:charge_time": "how long will it take to charge to {pct}%",
+  "estimate:charge_cost": "what did charging cost me this month",
+  "estimate:maintenance": "when is my next service due",
+  "estimate:energy_used": "how much energy does a {n} km trip need at my efficiency",
+  "estimate:distance_driven": "how many km does {n} kwh give me",
+  "estimate:battery_capacity": "how many {v1} mah batteries at {v2} v equal the remaining usable energy of the car",
+  "now:location": "where are we",
+  "why:vehicle_health": "why is the vehicle considered unhealthy",
+  "now:charging_state": "what is the charging power right now",
+  "now:charging_power": "what is the charging power right now",
+  "advice:charge_time": "do i need to charge now",
+  "advice:charge_cost": "do i need to charge now",
+  "advice:battery_soc": "do i need to charge now",
+  "extreme:location": "which places do i go to the most",
+  "trend:driving_style": "is my driving getting better",
+  "health:charging_state": "what is the charging power right now",
+  "stat:charging_state": "what is the charging power right now",
+  "estimate:charging_state": "what is the charging power right now",
+  "events:charging_state": "what is the charging power right now"
+ },
+ "legacy_defaults": {
+  "pct": "100",
+  "n": null,
+  "v1": null,
+  "v2": null
+ },
+ "spec_observed": {
+  "rated_max_speed": {
+   "concept": "speed",
+   "agg": "max",
+   "label": "highest speed recorded in the telemetry",
+   "unit": "km/h",
+   "note": "an observation, not a rating"
+  }
+ },
+ "formulas": {
+  "motor_power": "Motor mechanical power in kW = torque in N m x RPM / 9549. Use values from the same instant; battery electrical power is a different quantity.",
+  "motor_torque": "Torque in N m = 9549 x power in kW / RPM.",
+  "horsepower": "Horsepower = kW x 1.341 (1 hp = 0.746 kW); from torque: hp = torque in N m x RPM / 7120.",
+  "battery_capacity": "Energy in Wh = capacity in Ah x nominal pack voltage in V; mAh / 1000 = Ah; kWh = Wh / 1000. The nominal voltage is needed for the conversion; mAh alone is not an energy rating.",
+  "wh_per_km": "Energy consumption in Wh/km = energy used in Wh / distance in km; kWh per 100 km = Wh/km / 10. Lower is more efficient.",
+  "range_estimate": "Estimated range = state of charge x usable capacity / recent consumption (Wh/km). It is an estimate: speed, weather, climate use and load change it.",
+  "tyre_pressure": "1 psi = 6.895 kPa; 1 bar = 100 kPa = 14.5 psi. Read tyre pressures when the tyres are cold.",
+  "distance_driven": "1 mile = 1.609 km, so miles = km / 1.609; the distance driven is the integral of speed over time.",
+  "charge_time": "Charging time = energy needed in kWh / average charging power in kW; power tapers near full, so the last 10-20% takes longer.",
+  "charge_cost": "Cost = energy drawn from the wall in kWh x your electricity price per kWh; wall energy is about battery energy / 0.9.",
+  "battery_soc": "State of charge is estimated by the battery management system from voltage, current integration and calibration; it is not measured directly.",
+  "battery_soh": "State of health = present usable capacity / original capacity x 100.",
+  "energy_used": "Energy in kWh = power in kW x time in hours; the engine integrates battery power over the period (discharge only for energy used).",
+  "regen_energy": "Regenerated energy is the integral of negative battery power while the car is moving.",
+  "acceleration": "Acceleration = change in speed / time; 1 km/h per second = 0.278 m/s squared.",
+  "speed": "Speed in km/h = RPM x wheel circumference in m x 60 / (1000 x overall gear ratio).",
+  "diagnostic_code": "A diagnostic trouble code is read from the ECU through the diagnostic port or from the recorded events; its first letter names the system (P powertrain, C chassis, B body, U network).",
+  "service_reminder": "A service reminder is cleared by the workshop after the service; this assistant is read-only and cannot reset it.",
+  "driving_style": "The driving score starts at 100 and loses 2.5 points for each hard brake per 100 km above 3, 2.5 for each hard acceleration per 100 km above 2, 3 for each hard corner per 100 km above 1, and 0.3 for each percent of moving time above 110 km/h over 10 percent. It is a simple measure of smoothness built from recorded events, not an industry standard.",
+  "turn_radius": "Turning radius is derived directly when possible: R = wheelbase / tan(steering angle); otherwise R = speed / yaw rate; otherwise R = speed squared / lateral acceleration (speed in m/s).",
+  "wheel_slip": "Wheel slip = (mean wheel speed - vehicle speed) / vehicle speed. Positive slip means the wheels spin faster than the car moves.",
+  "thermal_rise_rate": "Thermal rise rate = change of battery temperature divided by time, in degrees Celsius per minute.",
+  "battery_efficiency": "Battery-to-wheel efficiency = motor mechanical power / battery electrical power."
+ },
+ "spec_notes": {
+  "battery_capacity": {
+   "if_missing_meta": [
+    "veh.nominal_voltage",
+    "veh.pack_voltage_nominal"
+   ],
+   "text": " This is an energy rating; a charge capacity in Ah or mAh would also need the nominal pack voltage, which this profile does not record."
+  }
+ }
+}

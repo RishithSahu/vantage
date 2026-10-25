@@ -1,0 +1,361 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "tesla_model_3",
+ "vehicle": {
+  "make": "Tesla",
+  "model": "Model 3 Long Range",
+  "year": 2020,
+  "powertrain": "bev",
+  "specs": {
+   "veh.cap_kwh": 75,
+   "veh.soh": 97,
+   "veh.nominal_voltage": 360,
+   "veh.tyre_spec_front": 290,
+   "veh.tyre_spec_rear": 290,
+   "veh.service_km": 20000,
+   "veh.sw": "2020.48",
+   "veh.wheelbase_m": 2.875,
+   "veh.wheel_radius_m": 0.34,
+   "veh.gear_ratio": 9.0,
+   "veh.rated_max_speed": 233,
+   "veh.seats": 5,
+   "veh.home_charger_kw": 11,
+   "veh.model": "Tesla Model 3 Long Range"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "party",
+   "type": "can",
+   "name": "Party / powertrain CAN 500 kbit/s (OEM database tesla_model3_party)",
+   "dbc": "tesla_model3_party.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "ext",
+   "type": "can",
+   "name": "Model 3 Long Range extension CAN (SYNTHETIC: quantities the open database lacks)",
+   "dbc": "tesla_model_3_ext.dbc",
+   "channel": "can1",
+   "bitrate": 500000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Linux telematics / infotainment (syslog)",
+   "format": "rfc3164"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  },
+  {
+   "id": "cam",
+   "type": "camera",
+   "name": "Forward camera (driver assistance)",
+   "cams": [
+    "front"
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "concept": "speed",
+   "from": "can:party/DI_speed.DI_vehicleSpeed",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "motor_torque",
+   "from": "can:party/DI_torque.DI_torqueActual",
+   "unit": "Nm",
+   "rate_hz": 20
+  },
+  {
+   "concept": "accelerator_position",
+   "from": "can:party/DI_systemStatus.DI_accelPedalPos",
+   "unit": "%",
+   "rate_hz": 20
+  },
+  {
+   "concept": "gear",
+   "from": "can:party/DI_systemStatus.DI_gear",
+   "unit": "none",
+   "rate_hz": 10,
+   "map": {
+    "DI_GEAR_P": 0,
+    "DI_GEAR_R": -1,
+    "DI_GEAR_N": 0,
+    "DI_GEAR_D": 1
+   }
+  },
+  {
+   "concept": "_ignition",
+   "from": "can:party/DI_systemStatus.DI_gear",
+   "unit": "none",
+   "rate_hz": 10,
+   "when": ">1.5"
+  },
+  {
+   "concept": "brake_pedal",
+   "from": "can:party/DI_systemStatus.DI_brakePedalState",
+   "unit": "%",
+   "rate_hz": 20,
+   "map": {
+    "OFF": 0,
+    "ON": 100
+   },
+   "snap": true
+  },
+  {
+   "concept": "wheel_speed_fl",
+   "from": "can:party/ESP_wheelSpeeds.ESP_wheelSpeedFrL",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_fr",
+   "from": "can:party/ESP_wheelSpeeds.ESP_wheelSpeedFrR",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_rl",
+   "from": "can:party/ESP_wheelSpeeds.ESP_wheelSpeedReL",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_rr",
+   "from": "can:party/ESP_wheelSpeeds.ESP_wheelSpeedReR",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "steering_angle",
+   "from": "can:party/SCCM_steeringAngleSensor.SCCM_steeringAngle",
+   "unit": "deg",
+   "rate_hz": 50
+  },
+  {
+   "concept": "steering_rate",
+   "from": "can:party/SCCM_steeringAngleSensor.SCCM_steeringAngleSpeed",
+   "unit": "deg/s",
+   "rate_hz": 50
+  },
+  {
+   "concept": "door_state",
+   "from": "can:party/UI_warning.anyDoorOpen",
+   "unit": "none",
+   "rate_hz": 2,
+   "map": {
+    "OPEN": 1,
+    "CLOSED": 0
+   }
+  },
+  {
+   "concept": "parking_brake",
+   "from": "can:party/DI_state.DI_parkBrakeState",
+   "unit": "none",
+   "rate_hz": 5,
+   "map": {
+    "RELEASED": 0,
+    "APPLIED": 1
+   }
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:ext/EXT_TPMS.TyrePressureFl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:ext/EXT_TPMS.TyrePressureFr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:ext/EXT_TPMS.TyrePressureRl",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:ext/EXT_TPMS.TyrePressureRr",
+   "unit": "kPa",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.TyreTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "can:ext/EXT_DATA_1HZ.Odometer",
+   "unit": "km",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "can:ext/EXT_DATA_1HZ.AuxBatteryVoltage",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.AmbientTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "battery_soc",
+   "from": "can:ext/EXT_DATA_1HZ_2.BatterySoc",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "battery_temperature",
+   "from": "can:ext/EXT_DATA_1HZ_2.BatteryTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:ext/EXT_DATA_1HZ_2.MotorTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "charging_power",
+   "from": "can:ext/EXT_DATA_1HZ_2.ChargingPower",
+   "unit": "kW",
+   "rate_hz": 1
+  },
+  {
+   "concept": "coolant_flow",
+   "from": "can:ext/EXT_DATA_1HZ_2.CoolantFlow",
+   "unit": "L/min",
+   "rate_hz": 1
+  },
+  {
+   "concept": "battery_voltage",
+   "from": "can:ext/EXT_DATA_5HZ.BatteryVoltage",
+   "unit": "V",
+   "rate_hz": 5
+  },
+  {
+   "concept": "battery_current",
+   "from": "can:ext/EXT_DATA_5HZ.BatteryCurrent",
+   "unit": "A",
+   "rate_hz": 5
+  },
+  {
+   "concept": "reported_range",
+   "from": "can:ext/EXT_DATA_0_2HZ.ReportedRange",
+   "unit": "km",
+   "rate_hz": 0.2
+  },
+  {
+   "concept": "_charging_active",
+   "from": "can:ext/EXT_KEYSTATE.ChargingActive",
+   "unit": "none",
+   "rate_hz": 5
+  }
+ ],
+ "events": [
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 290 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 290 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 290 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 290 kPa)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

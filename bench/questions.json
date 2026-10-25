@@ -1,0 +1,706 @@
+[
+ {
+  "split": "dev",
+  "q": "Why has my driving range reduced over the last two weeks?",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "dev",
+  "q": "Why does the car use more energy than before?",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "dev",
+  "q": "My car seems thirstier lately - any idea why?",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "dev",
+  "q": "Why am I getting fewer kilometres per charge these days?",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "test",
+  "q": "What's behind the drop in my range this month?",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "28"
+ },
+ {
+  "split": "test",
+  "q": "Explain why efficiency got worse recently",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "test",
+  "q": "Range is much shorter than in September, what changed?",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "28"
+ },
+ {
+  "split": "test",
+  "q": "Something is wrong - I barely get any distance out of a full battery, why?",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "dev",
+  "q": "What happened before the battery overheating warning?",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "Anything strange with the pack heat the last time I fast charged?",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "What led up to the temperature alert on the battery?",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "Walk me through what preceded the overheat warning",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "What caused the battery warning?",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "Before the pack got too hot, was anything unusual going on?",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "Why did the battery over-temperature alert come on?",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "Show me the lead-up to the thermal warning",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "Show all ADAS disengagement events from yesterday.",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "ADAS_DISENGAGE",
+  "w": "y"
+ },
+ {
+  "split": "dev",
+  "q": "Did the driver-assist quit on me yesterday?",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "ADAS_DISENGAGE",
+  "w": "y"
+ },
+ {
+  "split": "dev",
+  "q": "How many fault codes were logged in the last 28 days?",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "DTC_SET",
+  "w": "28"
+ },
+ {
+  "split": "dev",
+  "q": "List the charging sessions from the last week",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "CHARGE_START",
+  "w": "7"
+ },
+ {
+  "split": "test",
+  "q": "Were there any lane assist drop-outs yesterday?",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "ADAS_DISENGAGE",
+  "w": "y"
+ },
+ {
+  "split": "test",
+  "q": "Did the car throw any diagnostic trouble codes this month?",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "DTC_SET",
+  "w": "28"
+ },
+ {
+  "split": "test",
+  "q": "How many times did the camera get blocked in the last two weeks?",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "CAMERA_BLOCKED",
+  "w": "14"
+ },
+ {
+  "split": "test",
+  "q": "Any ADAS disengagements today?",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "ADAS_DISENGAGE",
+  "w": "t"
+ },
+ {
+  "split": "dev",
+  "q": "Compare energy consumption between city and highway driving.",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "Is town driving cheaper than motorway cruising?",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "Highway versus city efficiency?",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "Which uses more energy, urban driving or the highway?",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "How does my consumption differ between city streets and motorways?",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "Is my highway efficiency worse than in the city?",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "When did fuel efficiency show the largest drop?",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "Which day was my worst for energy use?",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "On what date did consumption jump the most?",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "What was the biggest day-over-day increase in energy use?",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "Find the day my mileage fell off a cliff",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "When was my efficiency at its lowest compared to the day before?",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "How has the battery temperature changed over the last two weeks?",
+  "intent": "TREND",
+  "metric": "batt_temp",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "dev",
+  "q": "How did my energy use change this month?",
+  "intent": "TREND",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "28"
+ },
+ {
+  "split": "test",
+  "q": "How has the outside temperature trended recently?",
+  "intent": "TREND",
+  "metric": "amb",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "test",
+  "q": "Has my coolant flow changed over the last 28 days?",
+  "intent": "TREND",
+  "metric": "coolant_flow",
+  "event": "-",
+  "w": "28"
+ },
+ {
+  "split": "dev",
+  "q": "What is my battery level right now?",
+  "intent": "STATUS",
+  "metric": "soc",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "What's the current coolant flow?",
+  "intent": "STATUS",
+  "metric": "coolant_flow",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "How much charge do I have left?",
+  "intent": "STATUS",
+  "metric": "soc",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "What's the battery temperature now?",
+  "intent": "STATUS",
+  "metric": "batt_temp",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "What's the capital of France?",
+  "intent": "NONE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "dev",
+  "q": "Play some music",
+  "intent": "NONE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "Tell me a joke",
+  "intent": "NONE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "test",
+  "q": "Book me a table for dinner",
+  "intent": "NONE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "How come I'm getting less mileage out of each charge than a month ago?",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "28"
+ },
+ {
+  "split": "blind",
+  "q": "Why is the car eating more power per km lately?",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "blind",
+  "q": "my range tanked recently. what's going on",
+  "intent": "WHY_RANGE",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "blind",
+  "q": "What was going on in the car right before the battery heat warning appeared?",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Give me the sequence of events ahead of the thermal alarm",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Why did the pack temperature alert trigger?",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Did lane keeping give up at any point yesterday?",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "ADAS_DISENGAGE",
+  "w": "y"
+ },
+ {
+  "split": "blind",
+  "q": "Count the DTCs stored over the past week",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "DTC_SET",
+  "w": "7"
+ },
+ {
+  "split": "blind",
+  "q": "How many charging sessions did I have in the last two weeks?",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "CHARGE_START",
+  "w": "14"
+ },
+ {
+  "split": "blind",
+  "q": "Has the front camera been obstructed in the past 28 days?",
+  "intent": "EVENTS",
+  "metric": "-",
+  "event": "CAMERA_BLOCKED",
+  "w": "28"
+ },
+ {
+  "split": "blind",
+  "q": "Motorway vs town consumption - which is worse?",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Do I use more energy on highways or in the city?",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Efficiency difference between urban and highway use?",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Which day did my energy use spike the most?",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "When was the sharpest deterioration in efficiency?",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Pinpoint the date with the biggest jump in kWh per km",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Has the battery been running hotter than before over the last 14 days?",
+  "intent": "TREND",
+  "metric": "batt_temp",
+  "event": "-",
+  "w": "14"
+ },
+ {
+  "split": "blind",
+  "q": "What's the trend in my cabin heating usage over the past week?",
+  "intent": "TREND",
+  "metric": "hvac",
+  "event": "-",
+  "w": "7"
+ },
+ {
+  "split": "blind",
+  "q": "What's the pack temperature at the moment?",
+  "intent": "STATUS",
+  "metric": "batt_temp",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Current state of charge?",
+  "intent": "STATUS",
+  "metric": "soc",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "how fast is the coolant flowing right now",
+  "intent": "STATUS",
+  "metric": "coolant_flow",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "What's the weather forecast for tomorrow?",
+  "intent": "NONE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Recommend a good restaurant nearby",
+  "intent": "NONE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "blind",
+  "q": "Translate 'good morning' into French",
+  "intent": "NONE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "Compare petrol consumption between city and highway driving",
+  "intent": "COMPARE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "how much peflol di i use yesterdey",
+  "intent": "USAGE",
+  "metric": "-",
+  "event": "-",
+  "w": "y"
+ },
+ {
+  "split": "field",
+  "q": "how much petrol did i use yesterday",
+  "intent": "USAGE",
+  "metric": "-",
+  "event": "-",
+  "w": "y"
+ },
+ {
+  "split": "field",
+  "q": "how much petrol did i use last",
+  "intent": "USAGE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "how much will you rate my driving skill",
+  "intent": "DRIVING",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "how much is tire pressure",
+  "intent": "TYRES",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "how was weathere yesterday",
+  "intent": "SUMMARY",
+  "metric": "amb",
+  "event": "-",
+  "w": "y"
+ },
+ {
+  "split": "field",
+  "q": "how was weather yesterday",
+  "intent": "WEATHER",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "what was the milage since last weekend",
+  "intent": "USAGE",
+  "metric": "-",
+  "event": "-",
+  "w": "sw"
+ },
+ {
+  "split": "field",
+  "q": "what was the milage since last refuel",
+  "intent": "USAGE",
+  "metric": "-",
+  "event": "-",
+  "w": "sc"
+ },
+ {
+  "split": "field",
+  "q": "how many breaks do you have",
+  "intent": "SERVICE",
+  "metric": "-",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "When did fuel efficiency show the drop",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "what is the expected range right now",
+  "intent": "STATUS",
+  "metric": "range",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "how far can we go now",
+  "intent": "STATUS",
+  "metric": "range",
+  "event": "-",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "What happened before the battery overheating warning",
+  "intent": "BEFORE_EVENT",
+  "metric": "-",
+  "event": "WARN_BATT_OVERTEMP",
+  "w": "-"
+ },
+ {
+  "split": "field",
+  "q": "When did fuel efficiency show the largest drop",
+  "intent": "LARGEST",
+  "metric": "energy_use",
+  "event": "-",
+  "w": "-"
+ }
+]

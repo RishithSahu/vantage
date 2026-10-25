@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>VehicleGPT Head Unit</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--bg:#06090d;--card:#111823;--card2:#0e141d;--line:#1d2837;--txt:#e8eef6;--dim:#8a98ab;--acc:#4fd1c5;--ok:#3ddc84;--warn:#ffb020;--crit:#ff4d5a;--info:#5aa9ff}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden;color:var(--txt);font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;-webkit-font-smoothing:antialiased;user-select:none}
+#stage{position:absolute;left:0;top:0;width:1920px;height:720px;transform-origin:0 0;background:radial-gradient(1200px 500px at 50% -10%,#101a28 0%,var(--bg) 60%);overflow:hidden;border-radius:6px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+svg{display:block}
+/* status bar */
+#sb{position:absolute;left:0;top:0;width:100%;height:64px;display:flex;align-items:center;padding:0 28px;gap:26px;border-bottom:1px solid var(--line);background:linear-gradient(#0c121a,#0a0f16)}
+#clock{font-size:34px;font-weight:600;letter-spacing:1px;font-variant-numeric:tabular-nums}
+#date{font-size:15px;color:var(--dim);line-height:1.1}
+.chip{display:flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;background:#0f1e22;border:1px solid #1c3a3d;color:#9be8df;font-size:15px}
+.chip.dim{background:var(--card);border-color:var(--line);color:var(--dim)}
+.sp{flex:1}
+.tt{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--dim);padding:6px 12px;border-radius:12px;border:1px solid transparent}
+.tt svg{width:26px;height:26px}
+.tt.ok{color:var(--ok)}.tt.warn{color:var(--warn);background:#2a1f08;border-color:#4a3510}.tt.crit{color:var(--crit);background:#2b0d12;border-color:#521a22}.tt.off{color:#475264}
+/* banner */
+#banner{position:absolute;left:20px;right:20px;top:72px;z-index:30;height:64px;border-radius:16px;display:none;align-items:center;gap:16px;padding:0 24px;font-size:21px;font-weight:600;box-shadow:0 10px 40px #0009}
+#banner small{font-weight:400;font-size:16px;opacity:.85;margin-left:6px}
+#banner.warn{display:flex;background:#33260a;border:1px solid #7a5a12;color:#ffd27a}#banner.crit{display:flex;background:#3a1016;border:1px solid #8a2330;color:#ffb3ba}#banner.ok{display:flex;background:#0e2e1c;border:1px solid #1f6a3e;color:#8df0b4}
+#banner button{margin-left:auto;font-size:15px;padding:8px 18px;border-radius:12px;background:#ffffff18}
+/* cards */
+.pg{position:absolute;display:none}
+.card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.p-drive #veh,.p-drive #camw,.p-drive #ast,.p-camera #camw,.p-assist #ast,.p-assist #veh,.p-alerts #alerts,.p-system #sys{display:flex}
+.p-drive #veh{left:20px;top:76px;width:520px;height:552px}.p-drive #camw{left:560px;top:76px;width:736px;height:552px}.p-drive #ast{left:1316px;top:76px;width:584px;height:552px}
+.p-camera #camw{left:20px;top:76px;width:736px;height:552px}.p-camera #camh{left:776px;top:76px;width:1124px;height:552px}
+.p-assist #ast{left:20px;top:76px;width:1220px;height:552px}.p-assist #veh{left:1260px;top:76px;width:640px;height:552px}
+.p-alerts #alerts,.p-system #sys{left:20px;top:76px;width:1880px;height:552px}
+.p-map #mapw,.p-map #mapi{display:flex}.p-map #mapw{left:20px;top:76px;width:1220px;height:552px;padding:0}.p-map #mapi{left:1260px;top:76px;width:640px;height:552px;flex-direction:column;padding:24px 28px;gap:10px}
+#mapc{width:100%;height:100%;display:block;background:#08101a}.mrowp{display:flex;justify-content:space-between;font-size:17px;padding:7px 0;border-bottom:1px solid #1a2535}.mrowp b{font-variant-numeric:tabular-nums}
+/* vehicle */
+#veh{flex-direction:column;padding:26px 30px;gap:16px}
+.spd{display:flex;align-items:flex-end;gap:14px}.spd b{font-size:150px;line-height:.82;font-weight:300;letter-spacing:-4px;font-variant-numeric:tabular-nums}.spd span{font-size:24px;color:var(--dim);padding-bottom:12px}
+.gear{margin-left:auto;display:flex;gap:6px;font-size:22px;font-weight:600}.gear i{font-style:normal;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;color:#4a586b}.gear i.on{background:var(--acc);color:#04201d}
+.modes{color:var(--dim);font-size:16px;margin-top:-4px}
+.soc{display:flex;flex-direction:column;gap:8px;margin-top:6px}.soc .row{display:flex;justify-content:space-between;align-items:baseline}.soc .row b{font-size:34px;font-weight:600}.soc .row span{font-size:18px;color:var(--dim)}
+.bar{height:18px;border-radius:9px;background:#0a0f16;border:1px solid var(--line);overflow:hidden}.bar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#2aa876,#4fd1c5);transition:width .5s}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:auto}
+.tile{background:#0b1119;border:1px solid var(--line);border-radius:16px;padding:13px 16px}.tile small{color:var(--dim);font-size:14px;display:block}.tile b{font-size:28px;font-weight:600;font-variant-numeric:tabular-nums}.tile u{text-decoration:none;color:var(--dim);font-size:15px;margin-left:4px}
+.tile.hot b{color:var(--warn)}
+/* camera */
+#camw{position:absolute;background:#000;border:1px solid var(--line);border-radius:24px;overflow:hidden}
+#cam{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#grid{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hud{position:absolute;left:16px;top:16px;display:flex;gap:10px;align-items:center}
+.pill{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#000a;backdrop-filter:blur(6px);font-size:15px;border:1px solid #ffffff22}
+.dot{width:11px;height:11px;border-radius:50%;background:var(--dim)}.dot.ok{background:var(--ok)}.dot.warn{background:var(--warn)}.dot.crit{background:var(--crit);animation:bl 1s infinite}
+@keyframes bl{50%{opacity:.25}}
+.hudr{position:absolute;right:16px;top:16px}
+.lane{position:absolute;left:16px;bottom:16px;right:16px;display:flex;gap:12px;align-items:center}
+.lane .pill{flex:0 0 auto}.lane .meter{flex:1;height:8px;border-radius:4px;background:#0008;overflow:hidden}.lane .meter i{display:block;height:100%;background:var(--acc);transition:width .4s}
+#camov{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:40px;background:#000b}
+#camov.crit,#camov.warn{display:flex}#camov h2{font-size:34px}#camov p{font-size:19px;color:#cdd6e2;max-width:520px}#camov.crit h2{color:var(--crit)}#camov.warn h2{color:var(--warn)}
+#camov.warn{background:#0000;justify-content:flex-end;padding-bottom:70px;background:linear-gradient(transparent 50%,#000c)}
+/* assistant */
+#ast{position:absolute;flex-direction:column}
+.ah{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.ah .ic{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#4fd1c5,#3a7bd5);display:grid;place-items:center}
+.ah h3{font-size:20px;font-weight:600}.ah small{display:block;color:var(--dim);font-size:13px;margin-top:1px}
+.seg{margin-left:auto;display:flex;background:#0a0f16;border:1px solid var(--line);border-radius:12px;padding:3px}.seg button{padding:6px 14px;border-radius:9px;font-size:14px;color:var(--dim)}.seg button.on{background:#1b2a3d;color:var(--txt)}
+#msgs{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px;user-select:text}
+#msgs::-webkit-scrollbar{width:6px}#msgs::-webkit-scrollbar-thumb{background:#243246;border-radius:3px}
+.m{max-width:92%;padding:12px 16px;border-radius:18px;font-size:17px;line-height:1.38;white-space:pre-wrap;word-wrap:break-word}
+.m.u{align-self:flex-end;background:#1d3a5c;border-bottom-right-radius:6px}.m.a{align-self:flex-start;background:#17212f;border:1px solid var(--line);border-bottom-left-radius:6px}
+.meta{display:block;margin-top:7px;font-size:12px;color:var(--dim);letter-spacing:.2px}
+.typing i{display:inline-block;width:8px;height:8px;margin:0 2px;border-radius:50%;background:var(--dim);animation:ty 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes ty{50%{transform:translateY(-5px);opacity:.4}}
+#chips{display:flex;gap:8px;padding:0 20px 10px;overflow-x:auto;white-space:nowrap}#chips::-webkit-scrollbar{display:none}
+#chips button{padding:8px 15px;border-radius:999px;font-size:14px;background:#0f1a27;border:1px solid #223249;color:#b8c7da;flex:0 0 auto}#chips button:hover{border-color:var(--acc);color:var(--txt)}
+.inp{display:flex;gap:10px;padding:0 20px 18px}
+.inp input{flex:1;height:54px;border-radius:27px;padding:0 24px;font-size:18px;background:#0a0f16;border:1px solid var(--line);color:var(--txt);outline:none;user-select:text}.inp input:focus{border-color:var(--acc)}.inp input:disabled{opacity:.45}
+.rb{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#16314a;border:1px solid #234a6b}.rb.go{background:var(--acc);border-color:var(--acc);color:#04201d}.rb.rec{background:var(--crit);border-color:var(--crit);animation:bl 1s infinite}.rb:disabled{opacity:.35}.chbtn{display:inline-block;margin:8px 0 0;padding:6px 12px;border-radius:14px;background:#16314a;border:1px solid #234a6b;color:var(--txt,#dfe9f3);font-size:14px;cursor:pointer}.chartbox{margin-top:8px}.chartbox svg{width:100%;height:auto;display:block}.chartbox small{opacity:.7;font-size:12px}.hf.on{background:var(--acc);color:#04201d}.rb.stop{display:none;background:var(--crit);border-color:var(--crit);color:#fff}.rb.stop.on{display:grid}
+.lock{display:none;margin:0 20px 12px;padding:10px 14px;border-radius:12px;background:#2a1f08;border:1px solid #4a3510;color:#ffd27a;font-size:14px}
+/* camera health */
+#camh{padding:26px 30px;gap:30px}.p-camera #camh{display:grid;grid-template-columns:540px 1fr}.c1,.c2{display:flex;flex-direction:column;gap:16px;min-height:0}
+.big{font-size:46px;font-weight:600;display:flex;align-items:center;gap:14px}.big small{font-size:18px;font-weight:400;color:var(--dim)}
+.mrow{display:grid;grid-template-columns:200px 1fr 56px;align-items:center;gap:14px;font-size:16px;color:#b8c7da}.mrow .bar{height:12px}.mrow b{text-align:right;font-variant-numeric:tabular-nums}
+.bar.lanebar i{background:linear-gradient(90deg,#2a6fd5,#4fd1c5)}.bar.bad i{background:linear-gradient(90deg,#d97a1d,#ff4d5a)}
+#spark{width:100%;height:90px;background:#0a0f16;border:1px solid var(--line);border-radius:14px}
+.evl{display:flex;flex-direction:column;gap:10px;overflow-y:auto;flex:1;min-height:0}
+.ev{display:flex;gap:14px;align-items:center;padding:10px 14px;background:#0b1119;border:1px solid var(--line);border-radius:14px;font-size:16px}
+.ev img{width:96px;height:72px;image-rendering:pixelated;border-radius:8px;border:1px solid var(--line);background:#000}.ev .th{width:96px;height:72px;border-radius:8px;border:1px dashed var(--line);display:grid;place-items:center;color:#475264;font-size:12px;flex:0 0 auto}
+.ev small{color:var(--dim);display:block;font-size:13px}.ev .tag{margin-left:auto;font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid}.tag.crit{color:var(--crit);border-color:#521a22}.tag.warn{color:var(--warn);border-color:#4a3510}.tag.info{color:var(--info);border-color:#1e3a5c}.tag.ok{color:var(--ok);border-color:#1f6a3e}
+.note{font-size:13px;color:var(--dim);line-height:1.45}
+#alerts,#sys{flex-direction:column;padding:26px 30px;gap:14px}
+h4{font-size:15px;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);font-weight:600}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;overflow-y:auto}
+/* dock */
+#dock{position:absolute;left:0;bottom:0;width:100%;height:80px;display:flex;align-items:center;justify-content:center;gap:14px;border-top:1px solid var(--line);background:linear-gradient(#0a0f16,#070a0f)}
+#dock button{position:relative;display:flex;align-items:center;gap:12px;height:54px;padding:0 30px;border-radius:18px;color:var(--dim);font-size:18px}
+#dock button.on{background:#14212f;color:var(--txt)}#dock button svg{width:28px;height:28px}
+#dock .badge{position:absolute;right:8px;top:2px;min-width:22px;height:22px;border-radius:11px;background:var(--crit);color:#fff;font-size:13px;display:none;place-items:center;font-weight:700}
+#benchbtn{position:absolute;right:24px;font-size:15px!important;color:var(--dim);border:1px dashed #2a3a50;height:44px!important;padding:0 16px!important}
+/* bench */
+#bench{position:absolute;right:0;top:64px;bottom:80px;width:520px;z-index:40;background:#0b1118f2;backdrop-filter:blur(10px);border-left:1px solid #2a3a50;padding:22px 26px;overflow-y:auto;transform:translateX(105%);transition:transform .25s;font-size:15px}
+#bench.open{transform:none}#bench h3{font-size:19px;margin-bottom:4px}#bench .sec{margin-top:18px}#bench .sec>div.l{color:var(--dim);font-size:13px;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:8px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}.btns button,.bx{padding:9px 14px;border-radius:11px;background:#14202e;border:1px solid #243246;font-size:14px}.btns button.on{background:var(--acc);color:#04201d;border-color:var(--acc)}.btns button:hover{border-color:var(--acc)}
+.bx{width:100%;outline:none;color:var(--txt);user-select:text}label.ck{display:flex;gap:10px;align-items:center;margin:6px 0;color:#c4d0df}label.ck input{width:18px;height:18px;accent-color:var(--acc)}
+#toast{position:absolute;left:50%;bottom:104px;transform:translateX(-50%);z-index:50;padding:12px 26px;border-radius:14px;background:#14212f;border:1px solid #2a3a50;font-size:17px;opacity:0;transition:opacity .3s;pointer-events:none}#toast.show{opacity:1}
+</style></head>
+<body>
+<div id="stage" class="p-drive">
+
+<header id="sb">
+  <div><div id="clock">--:--</div></div>
+  <div id="date">sim time<br>local</div>
+  <div class="chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Offline &middot; all processing on-device</div>
+  <div class="chip dim" id="outside">Outside --&deg;</div>
+  <div class="chip" id="rainChip" style="display:none"></div>
+  <div class="sp"></div>
+  <div class="tt off" id="ttLane" title="Lane keeping availability follows the front camera">
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 28L13 4M23 28L19 4"/><path d="M16 26v-4M16 18v-4M16 10v-3" stroke-dasharray="1 0"/></svg><span id="ttLaneTxt">Lane assist</span></div>
+  <div class="tt off" id="ttCam"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="17" height="12" rx="3"/><path d="M21 14l7-3v10l-7-3"/></svg><span id="ttCamTxt">Front camera</span></div>
+  <div class="tt off" id="ttTyre" title="Tyre-pressure monitoring"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9c3-3 15-3 18 0v10c0 5-3 8-9 8s-9-3-9-8z"/><path d="M16 12v6M16 21.5v.5"/></svg><span id="ttTyreTxt">Tyres</span></div>
+  <div class="tt off" id="ttBat"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="22" height="13" rx="3"/><path d="M28 14v5M12 13l-2 5h5l-2 4"/></svg><span id="ttBatTxt">Battery</span></div>
+</header>
+
+<div id="banner"></div>
+
+<section id="veh" class="pg card">
+  <div class="spd"><b id="spd">0</b><span id="spdu">km/h</span><div class="gear" id="gear"><i>P</i><i>R</i><i>N</i><i>D</i></div></div>
+  <div class="modes" id="modes">Parked</div>
+  <div class="modes" id="gps" style="margin-top:-8px;font-size:15px;color:#7f93ad"></div>
+  <div class="soc"><div class="row"><b id="socv">--%</b><span id="rangev">Range -- km</span></div><div class="bar"><i id="socbar" style="width:0"></i></div></div>
+  <div class="grid4">
+    <div class="tile"><small>Power</small><b id="pw">0.0</b><u>kW</u></div>
+    <div class="tile" id="tBat"><small>Battery temp</small><b id="bt">--</b><u id="btu">&deg;C</u></div>
+    <div class="tile"><small>Outside</small><b id="am">--</b><u id="amu">&deg;C</u></div>
+    <div class="tile"><small>Climate</small><b id="hv">0</b><u>W</u></div>
+    <div class="tile" id="tTyres" style="grid-column:1 / 3;padding:10px 16px"><small>Tyre pressure (<span id="tyu">kPa</span>)</small><div id="tyreRow" style="display:flex;justify-content:space-between;font-size:23px;font-weight:600;font-variant-numeric:tabular-nums"></div></div>
+  </div>
+</section>
+
+<section id="camw" class="pg">
+  <img id="cam" alt="front camera">
+  <canvas id="grid" width="640" height="480"></canvas>
+  <div class="hud"><div class="pill"><span class="dot" id="camdot"></span><span id="camlbl">Front camera</span></div><div class="pill" id="lowl" style="display:none">&#9790; Low light</div></div>
+  <div class="hud hudr"><div class="pill" id="camsrc" style="font-size:13px"></div></div>
+  <div class="lane"><div class="pill">Lane markings <b id="laneN">--</b></div><div class="meter"><i id="laneBar" style="width:0"></i></div></div>
+  <div id="camov"><h2 id="ovh"></h2><p id="ovp"></p></div>
+</section>
+
+<section id="ast" class="pg card">
+  <div class="ah"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 13a8 8 0 0116 0M8 13v4M12 10v10M16 13v4"/></svg></div>
+    <div><h3>VehicleGPT</h3><small>On-device &middot; rules + small language model &middot; no cloud</small></div>
+    <div class="seg" id="personaSeg"><button data-p="driver" class="on">Driver</button><button data-p="engineer">Engineer</button></div></div>
+  <div id="msgs"></div>
+  <div id="chips"></div>
+  <div class="lock" id="lockmsg">&#128274; Typing is locked while driving. Tap a suggestion or use the microphone.</div>
+  <div class="inp"><button class="rb" id="mic" title="Voice (see Test bench)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></button>
+    <input id="q" placeholder="Ask about your car..." autocomplete="off" spellcheck="false"><button class="rb stop" id="stopSpeak" title="Stop speaking (Esc)"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button><button class="rb go" id="send"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+</section>
+
+<section id="camh" class="pg card">
+ <div class="c1">
+  <div class="big"><span class="dot" id="chDot" style="width:20px;height:20px"></span><span id="chState">--</span><small id="chWhy"></small></div>
+  <div class="mrow"><span>Obstructed share of the view</span><div class="bar bad"><i id="mB" style="width:0"></i></div><b id="mBv">--</b></div>
+  <div class="mrow"><span>Sharpness (vs this camera's normal)</span><div class="bar"><i id="mS" style="width:0"></i></div><b id="mSv">--</b></div>
+  <div class="mrow"><span>Lane-marking confidence <em style="color:#5d6b7e;font-style:normal">(indicative)</em></span><div class="bar lanebar"><i id="mL" style="width:0"></i></div><b id="mLv">--</b></div>
+  <div class="mrow"><span>Scene brightness</span><div class="bar"><i id="mY" style="width:0"></i></div><b id="mYv">--</b></div>
+  <canvas id="spark" width="520" height="90"></canvas>
+  <div class="note">Privacy design: no video is ever stored &mdash; only per-minute quality metadata and, at a fault event, a 64&times;48 grey thumbnail. Analysis runs at 5 fps on the luma plane.</div>
+ </div>
+ <div class="c2">
+  <h4>Camera events <span style="letter-spacing:0;text-transform:none;color:#5d6b7e">&nbsp;(thumbnail = 64&times;48 grey, captured only at a fault)</span></h4>
+  <div class="evl" id="camEvents"></div>
+ </div>
+</section>
+
+<section id="mapw" class="pg card"><canvas id="mapc" width="1218" height="550"></canvas></section>
+<section id="mapi" class="pg card"><h4>GPS &middot; live position</h4><div id="mapinfo" style="font-size:18px;line-height:1.5"></div><h4 style="margin-top:8px">Saved places</h4><div id="mapplaces" style="overflow-y:auto;min-height:0"></div>
+  <div class="note">The GNSS receiver streams a fix every second while the car is awake; the map draws the last 30 minutes of that stream on an offline canvas (no map tiles, so roads are not drawn).</div></section>
+<section id="alerts" class="pg card"><h4>Vehicle events &amp; alerts (up to the current simulated time)</h4><div class="evl" id="allEvents"></div></section>
+
+<section id="sys" class="pg card">
+  <h4>Units</h4>
+  <div id="unitSeg" style="display:flex;gap:26px;align-items:center;flex-wrap:wrap"><div class="seg"><button data-k="d" data-v="km">km</button><button data-k="d" data-v="mi">miles</button></div>
+    <div class="seg"><button data-k="t" data-v="c">&deg;C</button><button data-k="t" data-v="f">&deg;F</button></div>
+    <div class="seg"><button data-k="p" data-v="kpa">kPa</button><button data-k="p" data-v="bar">bar</button><button data-k="p" data-v="psi">psi</button></div>
+    <span class="note">You can also just say &ldquo;I want it in psi&rdquo; or &ldquo;show it in miles&rdquo; to the assistant.</span></div>
+  <h4 style="margin-top:6px">System &middot; this host (laptop)</h4>
+  <div class="cols">
+    <div><div class="mrow" style="grid-template-columns:200px 1fr 120px"><span>Process memory (RSS)</span><div class="bar"><i id="rssBar" style="width:0"></i></div><b id="rssV">--</b></div>
+      <p class="note" style="margin-top:8px">Budget line = 2048 MB. This number includes OpenCV (stand-in for the car's video decoder), the web server and Python itself, so it is higher than the in-car assistant. The 2 GB / 2&times;A55 budget is verified separately inside the ARM VM: <b>assistant 650 MB RSS, min free 1662 MB</b>.</p></div>
+    <div class="note" id="sysList" style="font-size:16px;line-height:1.9;color:#c4d0df"></div>
+  </div>
+  <h4 style="margin-top:8px">Vehicle &amp; history</h4>
+  <div class="note" id="vehInfo" style="font-size:16px;line-height:1.8;color:#c4d0df"></div>
+  <h4 style="margin-top:8px">What is real in this demo</h4>
+  <div class="note" style="font-size:15px;line-height:1.7">Real: question understanding (rules + SLM), SQLite analytics, camera analyser (numpy only), ingest of camera metadata into the same store the assistant queries, event thumbnails.<br>
+  Stand-ins: video decoding (OpenCV on the laptop), telemetry replayed from the simulated 28-day history (NOT synchronised with the video), speech recognition (see Test bench), the lane-assist indicator (derived from camera state, not a real ADAS function).</div>
+</section>
+
+<nav id="dock">
+  <button data-pg="drive" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l2-6a3 3 0 012.8-2h6.4A3 3 0 0118 10l2 6v3h-3v-2H7v2H4z"/><circle cx="8" cy="13.5" r=".6"/><circle cx="16" cy="13.5" r=".6"/></svg>Drive</button>
+  <button data-pg="camera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="13" height="10" rx="2.5"/><path d="M16 10.5l5-2.5v8l-5-2.5"/></svg>Camera</button>
+  <button data-pg="map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.2-6-10a6 6 0 0112 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>Map</button>
+  <button data-pg="assist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0116 0M8 13v4M12 10v10M16 13v4"/></svg>Assistant</button>
+  <button data-pg="alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4zM10 21h4"/></svg>Alerts<span class="badge" id="badge">0</span></button>
+  <button data-pg="system"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>System</button>
+  <button id="benchbtn">&#9881; Test bench</button>
+</nav>
+
+<aside id="bench">
+  <h3>Test bench</h3><div class="note">Not part of the car UI &mdash; controls for you, the tester.</div>
+  <div class="sec"><div class="l">Vehicle &amp; history (generated from real weather and driving data)</div>
+    <select id="dsSel" class="bx"></select><div class="note" id="dsInfo" style="margin-top:6px"></div></div>
+  <div class="sec"><div class="l">Camera source</div>
+    <div class="btns" id="srcBtns"><button data-s="clip" class="on">Recorded drive</button><button data-s="webcam">My webcam</button><button data-s="file">Video file</button></div>
+    <div style="display:flex;gap:8px;margin-top:8px"><input class="bx" id="srcArg" placeholder="webcam index (0) or full path to a video file" style="flex:1"><button class="btns bx" id="srcGo" style="width:auto">Apply</button></div>
+    <div class="note" id="srcMsg" style="margin-top:6px"></div></div>
+  <div class="sec"><div class="l">Inject an optical fault (applied to the picture, then detected by the analyser)</div>
+    <div class="btns" id="faultBtns"><button data-f="none" class="on">None</button><button data-f="cover">Lens covered</button><button data-f="mud">Mud patch (half the view)</button><button data-f="blur">Blur / fog</button><button data-f="glare">Sun glare</button><button data-f="dark">Tunnel / dusk</button></div>
+    <div class="note" style="margin-top:6px">Expected: cover and mud &rarr; BLOCKED; blur and glare &rarr; DEGRADED; tunnel/dusk &rarr; <b>no fault</b> (just low light). With a webcam, simply cover it with your hand. Faults need ~1.5 s to confirm.</div></div>
+  <div class="sec"><div class="l">Simulated vehicle time (telemetry replay)</div>
+    <div class="btns" id="scBtns"></div><div class="note" id="scDesc" style="margin-top:6px"></div>
+    <div class="btns" id="spBtns" style="margin-top:8px"><button data-v="1" class="on">1&times;</button><button data-v="10">10&times;</button><button data-v="60">60&times;</button></div>
+    <div class="note" style="margin-top:6px">Changing the scenario clears the camera history so &ldquo;right now&rdquo; and &ldquo;today&rdquo; questions refer to what you do next.</div>
+    <div class="btns" style="margin-top:8px"><button id="resetCam">Clear camera history</button></div></div>
+  <div class="sec"><div class="l">Display &amp; interaction</div>
+    <label class="ck"><input type="checkbox" id="optGrid" checked>Show analysis overlay (regions that lost texture)</label>
+    <label class="ck"><input type="checkbox" id="optLock">Driving lockout: disable typing above 5 km/h</label>
+    <label class="ck"><input type="checkbox" id="optSpeak">Always speak answers aloud (answers to a spoken question are always read aloud; browser voice)</label>
+    <label class="ck"><input type="checkbox" id="optHands">Hands-free conversation (after each answer the microphone opens again; say "stop" or press Esc to interrupt; say "hands free off" to leave)</label>
+    <label class="ck"><input type="checkbox" id="optMic" checked>Microphone button (browser speech recognition &mdash; the speech-to-text step may use the browser vendor's cloud service; in a car this is the head unit's on-device recogniser)</label></div>
+  <div class="sec"><div class="l">Try these questions</div><div class="note" style="line-height:1.8">&ldquo;How are my tyres?&rdquo; &middot; &ldquo;Is it raining?&rdquo; &middot; &ldquo;Is my car healthy?&rdquo; &middot; &ldquo;When is my next service?&rdquo; &middot; &ldquo;How many times did I brake hard last week?&rdquo; &middot; &ldquo;Where did I go yesterday?&rdquo; &middot; &ldquo;Is the camera blocked right now?&rdquo; &middot; &ldquo;Was the camera blocked today?&rdquo; &middot; &ldquo;How was lane detection quality today?&rdquo; &middot; &ldquo;What's my range?&rdquo; &middot; &ldquo;Why has my range dropped over the last two weeks?&rdquo; &middot; &ldquo;What happened before the battery overheated?&rdquo; &middot; &ldquo;Compare motorway and city consumption&rdquo;</div></div>
+</aside>
+<div id="toast"></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const st=$('#stage');
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/720);st.style.transform='scale('+s+')';st.style.left=((innerWidth-1920*s)/2)+'px';st.style.top=((innerHeight-720*s)/2)+'px'}
+addEventListener('resize',fit);fit();
+let UN={p:'kpa',d:'km',t:'c'};const CV={spd:v=>UN.d==='mi'?v/1.609344:v,dist:k=>UN.d==='mi'?k/1.609344:k,temp:c=>UN.t==='f'?c*9/5+32:c,press:k=>UN.p==='psi'?k*0.145038:UN.p==='bar'?k/100:k};
+const LB={spd:()=>UN.d==='mi'?'mph':'km/h',dist:()=>UN.d==='mi'?'mi':'km',temp:()=>UN.t==='f'?'\u00b0F':'\u00b0C',press:()=>({psi:'psi',bar:'bar',kpa:'kPa'}[UN.p])};
+const PF=k=>{const v=CV.press(k);return UN.p==='psi'?v.toFixed(1):UN.p==='bar'?v.toFixed(2):Math.round(v)};
+let prevTpms=false,laneS=null,S=null,page='drive',persona='driver',opt={grid:true,lock:false,speak:false,mic:true,hands:false},prevCam=null,hist=[],bannerKey='',beepOK=false;
+const api=(p,b)=>fetch(p,b===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(r=>r.json());
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2600)}
+function beep(f){try{const c=beep.c||(beep.c=new (window.AudioContext||window.webkitAudioContext)());const o=c.createOscillator(),g=c.createGain();o.frequency.value=f||880;g.gain.value=.06;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.18)}catch(e){}}
+let TZ=0;function fmtT(t){const d=new Date((t+TZ)*1000),p=n=>String(n).padStart(2,'0');return p(d.getUTCHours())+':'+p(d.getUTCMinutes())}
+function fmtD(t){const d=new Date((t+TZ)*1000);return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getUTCDay()]+' '+d.getUTCDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getUTCMonth()]}
+function setPage(p){page=p;$('#banner').style.visibility=p==='camera'?'hidden':'visible';st.className='p-'+p;$$('#dock button[data-pg]').forEach(b=>b.classList.toggle('on',b.dataset.pg===p));if(p==='assist'||p==='drive')setTimeout(()=>{const m=$('#msgs');m.scrollTop=m.scrollHeight},30)}
+$$('#dock button[data-pg]').forEach(b=>b.onclick=()=>setPage(b.dataset.pg));
+$('#benchbtn').onclick=()=>$('#bench').classList.toggle('open');
+const CAMTXT={OK:['ok','Front camera \u00b7 OK'],CALIBRATING:['warn','Front camera \u00b7 calibrating'],BLOCKED:['crit','Front camera \u00b7 BLOCKED'],DEGRADED:['warn','Front camera \u00b7 DEGRADED']};
+const EVN={TPMS_LOW:['Tyre pressure low','warn'],TYRE_INFLATED:['Tyre pressure restored','ok'],LOW_12V:['12 V battery low','warn'],SERVICE_DUE:['Service due','info'],SW_UPDATE:['Software updated','info'],CAMERA_BLOCKED:['Front camera blocked','crit'],CAMERA_DEGRADED:['Front camera image degraded','warn'],CAMERA_RESTORED:['Front camera clear again','ok'],ADAS_DISENGAGE:['ADAS disengaged','info'],WARN_BATT_OVERTEMP:['Battery over-temperature','crit'],DTC_SET:['Diagnostic trouble code','warn'],CHARGE_START:['Charging started','info']};
+function evHTML(e,big){const n=EVN[e.type]||[e.type,'info'];const th=e.thumb?'<img src="/api/thumb?ts='+e.ts+'" alt="">':'<div class="th">no image</div>';
+  return '<div class="ev">'+(e.type.startsWith('CAMERA')?th:'')+'<div><b>'+esc(n[0])+'</b><small>'+fmtD(e.ts)+' '+fmtT(e.ts)+' &middot; '+esc(e.detail||'')+'</small></div><span class="tag '+n[1]+'">'+esc(e.sev||'')+'</span></div>'}
+function banner(k,cls,html,dismiss){const b=$('#banner');if(!k){b.className='';b.innerHTML='';bannerKey='';return}if(k===bannerKey)return;bannerKey=k;b.className=cls;b.innerHTML=html+(dismiss?'<button onclick="banner(0)">Dismiss</button>':'')}
+function render(){
+  const s=S,t=s.tele,c=s.cam;
+  TZ=s.tz||0;if(s.units){UN=s.units;$$('#unitSeg button').forEach(b=>b.classList.toggle('on',UN[b.dataset.k]===b.dataset.v))}$('#clock').textContent=fmtT(s.sim_t);$('#date').innerHTML=fmtD(s.sim_t)+'<br>'+esc((s.info&&s.info.city)||'simulated')+' &middot; local';
+  if(t.ok){
+    $('#spd').textContent=Math.round(CV.spd(t.speed));$('#spdu').textContent=LB.spd();$('#btu').textContent=LB.temp();$('#amu').textContent=LB.temp();$('#tyu').textContent=LB.press();$$('#gear i').forEach(i=>i.classList.toggle('on',i.textContent===t.gear));
+    $('#modes').textContent=['Parked','Driving \u00b7 city','Driving \u00b7 motorway','Charging \u00b7 '+Math.abs(t.power_kw).toFixed(0)+' kW'][t.mode]||'';
+    $('#socv').textContent=t.soc.toFixed(0)+'%';$('#socbar').style.width=t.soc+'%';$('#rangev').textContent=t.range_km?('Range ~'+Math.round(CV.dist(t.range_km))+' '+LB.dist()):'';
+    $('#pw').textContent=t.power_kw.toFixed(1);$('#bt').textContent=CV.temp(t.batt_c).toFixed(0);$('#am').textContent=CV.temp(t.amb_c).toFixed(1);$('#hv').textContent=t.hvac_w;$('#outside').innerHTML='Outside '+CV.temp(t.amb_c).toFixed(0)+'&deg;'+(UN.t==='f'?'F':'C');
+    $('#tBat').classList.toggle('hot',t.batt_c>=45);
+    if(t.pos){const p=t.pos;$('#gps').innerHTML='&#9678; '+(p.at?'At '+p.near:Math.round(CV.dist(p.km)*10)/10+' '+LB.dist()+' '+(p.compass||'')+' of '+p.near)+' &middot; '+Math.abs(p.lat).toFixed(4)+(p.lat>=0?' N':' S')+', '+Math.abs(p.lon).toFixed(4)+(p.lon>=0?' E':' W')}
+    const rc=$('#rainChip');if(t.sensors&&t.rain>0){rc.style.display='flex';rc.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 14a4 4 0 010-8 5 5 0 019.6 1.2A3.5 3.5 0 0116.5 14zM8 18l-1 2M12 18l-1 2M16 18l-1 2"/></svg>'+['','Light rain','Rain','Heavy rain'][t.rain]}else rc.style.display='none';
+    if(t.tyres){$('#tyreRow').innerHTML=t.tyres.map(w=>'<span style="color:'+(w.st==='ok'?'#e8eef6':w.st==='low'?'#ffb020':'#ff4d5a')+'"><i style="font-style:normal;font-size:12px;color:#8a98ab;margin-right:5px">'+{'front left':'FL','front right':'FR','rear left':'RL','rear right':'RR'}[w.n]+'</i>'+PF(w.kpa)+'</span>').join('');
+      const tt=$('#ttTyre'),bad=(t.tpms||[]).length>0;tt.className='tt '+(bad?'warn':'off');$('#ttTyreTxt').textContent=bad?'Tyre pressure low':'Tyres';
+      if(bad&&!prevTpms){banner('t','warn','<svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9c3-3 15-3 18 0v10c0 5-3 8-9 8s-9-3-9-8z"/><path d="M16 12v6M16 21.5v.5"/></svg>Tyre pressure low<small>'+t.tpms.join(', ')+' &mdash; check for a puncture and inflate</small>',true);beep(700)}
+      else if(!bad&&prevTpms&&bannerKey==='t')banner(0);
+      prevTpms=bad}
+    const bt=$('#ttBat');bt.className='tt '+(t.batt_c>=52?'crit':t.batt_c>=45?'warn':t.mode===3?'ok':'off');$('#ttBatTxt').textContent=t.mode===3?'Charging':t.batt_c>=45?'Battery '+t.batt_c.toFixed(0)+'\u00b0':'Battery';
+  }
+  const [cls,lbl]=CAMTXT[c.state]||['warn',c.state];
+  $('#camdot').className='dot '+cls;$('#camlbl').textContent=lbl;$('#camsrc').textContent=(c.source||'')+(c.fps?' \u00b7 '+c.fps+' fps':'');
+  $('#lowl').style.display=c.low_light?'flex':'none';
+  laneS=laneS===null?c.lane_conf:laneS*.8+c.lane_conf*.2;$('#laneN').textContent=Math.round(laneS*100)+'%';$('#laneBar').style.width=(laneS*100)+'%';
+  const ov=$('#camov');
+  if(c.error){ov.className='crit';$('#ovh').textContent='No camera signal';$('#ovp').textContent=c.error}
+  else if(c.state==='BLOCKED'){ov.className='crit';$('#ovh').textContent='Front camera blocked';$('#ovp').textContent='Lane keeping and other camera functions are unavailable. Clean the camera area of the windscreen.'}
+  else if(c.state==='DEGRADED'){ov.className='warn';$('#ovh').textContent='Front camera view reduced';$('#ovp').textContent=c.reason}
+  else ov.className='';
+  const tl=$('#ttLane'),tc=$('#ttCam');
+  if(c.state==='OK'){tl.className='tt ok';$('#ttLaneTxt').textContent='Lane assist ready';tc.className='tt ok';$('#ttCamTxt').textContent='Front camera'}
+  else if(c.state==='CALIBRATING'){tl.className='tt off';$('#ttLaneTxt').textContent='Lane assist';tc.className='tt off';$('#ttCamTxt').textContent='Calibrating'}
+    else {tl.className='tt '+(c.state==='BLOCKED'?'crit':'warn');$('#ttLaneTxt').textContent='Lane assist unavailable';tc.className='tt '+(c.state==='BLOCKED'?'crit':'warn');$('#ttCamTxt').textContent=c.state==='BLOCKED'?'Camera blocked':'Camera degraded'}
+  // transitions -> banner / toast / sound
+  if(prevCam!==c.state){
+    if(c.state==='BLOCKED'){banner('b','crit','<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg>Front camera blocked<small>Lane assist unavailable &mdash; clean the camera area</small>',true);beep(660)}
+    else if(c.state==='DEGRADED'){banner('d','warn','<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg>Front camera view reduced<small>'+esc(c.reason||'')+'</small>',true);beep(740)}
+    else if(c.state==='OK'&&(prevCam==='BLOCKED'||prevCam==='DEGRADED')){banner('r','ok','Front camera clear again<small>Lane assist available</small>');beep(990);setTimeout(()=>{if(bannerKey==='r')banner(0)},4000)}
+    else if(prevCam!==null&&c.state!=='CALIBRATING')banner(0);
+    prevCam=c.state}
+  // alerts
+  const act=((c.state==='BLOCKED'||c.state==='DEGRADED')?1:0)+(((t.tpms||[]).length)?1:0);const bd=$('#badge');bd.style.display=act?'grid':'none';bd.textContent=act;
+  if(page==='camera'||page==='alerts'){
+    $('#camEvents').innerHTML=s.events.filter(e=>e.type.startsWith('CAMERA')).map(evHTML).join('')||'<div class="note">No camera events yet. Try a fault from the Test bench, or cover your webcam.</div>';
+    $('#allEvents').innerHTML=s.events.map(evHTML).join('')||'<div class="note">No events.</div>'}
+  if(page==='camera'){
+    $('#chDot').className='dot '+cls;$('#chState').textContent=c.state==='OK'?'Clear':c.state==='CALIBRATING'?'Calibrating':c.state==='BLOCKED'?'Blocked':'Degraded';$('#chWhy').textContent=c.reason||(c.low_light?'low light (not a fault)':'');
+    const pc=(v)=>Math.round(v*100)+'%';$('#mB').style.width=Math.min(100,c.blocked_frac*100)+'%';$('#mBv').textContent=pc(c.blocked_frac);
+    $('#mS').style.width=Math.min(100,c.sharp_ratio*100)+'%';$('#mSv').textContent=Math.min(100,Math.round(c.sharp_ratio*100))+'%';
+    $('#mL').style.width=(laneS*100)+'%';$('#mLv').textContent=pc(laneS);$('#mY').style.width=(c.luma/255*100)+'%';$('#mYv').textContent=Math.round(c.luma)+'/255'}
+  if(page==='system'){
+    const i=s.info||{};$('#vehInfo').innerHTML='<b>'+esc(i.model||'')+'</b> &middot; '+esc(i.city||'')+' &middot; '+esc(i.driver||'')+(i.seed?' &middot; seed '+esc(String(i.seed)):'')+'<br>Story/fault set: '+esc((i.stories&&i.stories.length)?i.stories.join(', ').replace(/_/g,' '):'none planted')+'<br>Weather source: '+esc(i.weather||'')+'<br>Dataset file: '+esc(i.dataset||'');
+    const m=s.sys;$('#rssBar').style.width=Math.min(100,m.rss_mb/m.budget_mb*100)+'%';$('#rssV').textContent=m.rss_mb+' MB';
+    const mo=m.model;$('#sysList').innerHTML='Model: <b>'+(mo===null?'none (rules only)':mo.loaded?'loaded in memory':'unloaded (freed after 2 min idle)')+'</b>'+(mo&&mo.loads?' &middot; loads '+mo.loads+', last load '+mo.load_s+' s':'')+'<br>Camera analysis: <b>'+c.ms+' ms</b> per frame (laptop core), 5 fps<br>Live database: <b>'+m.db_mb+' MB</b> (copy of the 28-day history + live camera data)<br>Assistant busy: <b>'+(m.busy?'yes':'no')+'</b>'}
+  // hist for sparkline
+  hist.push([laneS,c.blocked_frac,c.sharp_ratio]);if(hist.length>150)hist.shift();if(page==='camera')spark();
+  grid(c);if(page==='map')drawMap();
+  // lockout
+  const lock=opt.lock&&t.ok&&t.speed>5;$('#q').disabled=lock;$('#lockmsg').style.display=lock?'block':'none';$('#q').placeholder=lock?'Locked while driving':'Ask about your car...';
+  $$('#scBtns button').forEach(b=>b.classList.toggle('on',b.dataset.sc===s.clock.scenario));$$('#spBtns button').forEach(b=>b.classList.toggle('on',+b.dataset.v===s.clock.speed));
+  $$('#faultBtns button').forEach(b=>b.classList.toggle('on',b.dataset.f===c.fault));
+}
+const KMV=111.2,PLC={home:'#4fd1c5',work:'#5aa9ff',other:'#8a98ab',far:'#b48cff'};let trk=null,trkT=0,trkBusy=false;
+function hav(a,b){const R=6371,r=Math.PI/180,dl=(b[0]-a[0])*r,dg=(b[1]-a[1])*r,h=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dg/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+function brg(a,b){const r=Math.PI/180,y=Math.sin((b[1]-a[1])*r)*Math.cos(b[0]*r),x=Math.cos(a[0]*r)*Math.sin(b[0]*r)-Math.sin(a[0]*r)*Math.cos(b[0]*r)*Math.cos((b[1]-a[1])*r);return (Math.atan2(y,x)/r+360)%360}
+const CP=['N','NE','E','SE','S','SW','W','NW'];const cmp=d=>CP[Math.floor(((d%360)+22.5)/45)%8];
+async function drawMap(){if(!trkBusy&&Date.now()-trkT>900){trkBusy=true;try{trk=await api('/api/track?s=1800');trkT=Date.now()}catch(e){}trkBusy=false}
+  const cv=$('#mapc'),x=cv.getContext('2d'),W=cv.width,H=cv.height;x.clearRect(0,0,W,H);if(!trk||!trk.ok){x.fillStyle='#8a98ab';x.font='22px sans-serif';x.fillText('No GPS fix yet',40,60);return}
+  const f=trk.fix,cur=[f.lat,f.lon],pts=trk.points,pl=trk.places;
+  let all=pts.concat([cur]);const tl=all.map(q=>hav(cur,q)),span=Math.max(2,...tl),pv=pl.filter(p=>hav(cur,[p.lat,p.lon])<=Math.max(12,2.5*span));pv.forEach(p=>all.push([p.lat,p.lon]));let la0=Math.min(...all.map(p=>p[0])),la1=Math.max(...all.map(p=>p[0])),lo0=Math.min(...all.map(p=>p[1])),lo1=Math.max(...all.map(p=>p[1]));
+  const cl=Math.cos((la0+la1)/2*Math.PI/180);let dy=Math.max(la1-la0,0.004),dx=Math.max((lo1-lo0)*cl,0.004);const pad=80,sc=Math.min((W-2*pad)/dx,(H-2*pad)/dy);
+  const P=p=>[W/2+((p[1]-(lo0+lo1)/2)*cl)*sc,H/2-(p[0]-(la0+la1)/2)*sc];
+  const kmpx=sc/KMV;let step=[0.5,1,2,5,10,20,50,100].find(s=>s*kmpx>120)||100;x.strokeStyle='#121c2a';x.lineWidth=1;x.fillStyle='#3a4a60';x.font='13px sans-serif';
+  for(let g=-W;g<2*W;g+=step*kmpx){x.beginPath();x.moveTo(((W/2)%(step*kmpx))+g,0);x.lineTo(((W/2)%(step*kmpx))+g,H);x.stroke()}for(let g=-H;g<2*H;g+=step*kmpx){x.beginPath();x.moveTo(0,((H/2)%(step*kmpx))+g);x.lineTo(W,((H/2)%(step*kmpx))+g);x.stroke()}
+  x.fillStyle='#9fb0c6';x.fillRect(24,H-30,step*kmpx,3);x.fillText(Math.round(CV.dist(step)*10)/10+' '+LB.dist(),24,H-38);
+  pv.forEach(p=>{const q=P([p.lat,p.lon]);x.beginPath();x.arc(q[0],q[1],8,0,7);x.fillStyle=PLC[p.kind]||'#8a98ab';x.globalAlpha=.9;x.fill();x.globalAlpha=1;x.fillStyle='#d6e0ee';x.font='15px sans-serif';x.fillText(p.name,q[0]+13,q[1]+5)});
+  if(pts.length>1){for(let i=1;i<pts.length;i++){const a=P(pts[i-1]),b=P(pts[i]);x.strokeStyle='rgba(79,209,197,'+(0.15+0.85*i/pts.length)+')';x.lineWidth=4;x.lineCap='round';x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke()}}
+  const c=P(cur);x.save();x.translate(c[0],c[1]);x.shadowColor='#4fd1c5';x.shadowBlur=18;
+  if(f.hdg!==null&&f.spd>3){x.rotate(f.hdg*Math.PI/180);x.fillStyle='#fff';x.beginPath();x.moveTo(0,-16);x.lineTo(11,13);x.lineTo(0,7);x.lineTo(-11,13);x.closePath();x.fill()}else{x.fillStyle='#fff';x.beginPath();x.arc(0,0,9,0,7);x.fill();x.fillStyle='#04201d';x.beginPath();x.arc(0,0,4,0,7);x.fill()}x.restore();
+  x.fillStyle='#8a98ab';x.font='bold 16px sans-serif';x.fillText('N',W-44,44);x.strokeStyle='#8a98ab';x.lineWidth=2;x.beginPath();x.moveTo(W-37,52);x.lineTo(W-37,84);x.moveTo(W-37,52);x.lineTo(W-43,62);x.moveTo(W-37,52);x.lineTo(W-31,62);x.stroke();
+  const near=pl.map(p=>({n:p.name,k:p.kind,d:hav(cur,[p.lat,p.lon]),b:brg(cur,[p.lat,p.lon])})).sort((a,b)=>a.d-b.d);
+  $('#mapinfo').innerHTML='<div class="mrowp"><span>Position</span><b>'+Math.abs(f.lat).toFixed(5)+(f.lat>=0?' N':' S')+', '+Math.abs(f.lon).toFixed(5)+(f.lon>=0?' E':' W')+'</b></div>'+
+    '<div class="mrowp"><span>Speed (GNSS)</span><b>'+(f.spd!==null?Math.round(CV.spd(f.spd))+' '+LB.spd():'--')+'</b></div>'+'<div class="mrowp"><span>Heading</span><b>'+(f.hdg!==null&&f.spd>3?Math.round(f.hdg)+'\u00b0 '+cmp(f.hdg):'parked')+'</b></div>'+
+    '<div class="mrowp"><span>Fix quality (HDOP)</span><b>'+(f.hdop!==null?f.hdop.toFixed(1):'--')+'</b></div>'+'<div class="mrowp"><span>Last fix</span><b>'+Math.max(0,Math.round(S.sim_t-f.ts))+' s ago'+(f.src==='gps'?'':' (per-minute log)')+'</b></div>';
+  $('#mapplaces').innerHTML=near.map(n=>'<div class="mrowp"><span><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+(PLC[n.k]||'#8a98ab')+';margin-right:8px"></i>'+n.n+'</span><b>'+(n.d<0.4?'here':(Math.round(CV.dist(n.d)*10)/10)+' '+LB.dist()+' '+cmp(n.b))+'</b></div>').join('')}
+function spark(){const cv=$('#spark'),x=cv.getContext('2d'),W=cv.width,H=cv.height;x.clearRect(0,0,W,H);x.strokeStyle='#1d2837';x.lineWidth=1;for(let i=1;i<4;i++){x.beginPath();x.moveTo(0,H*i/4);x.lineTo(W,H*i/4);x.stroke()}
+  [[0,'#4fd1c5'],[1,'#ff4d5a']].forEach(([k,col])=>{x.beginPath();x.strokeStyle=col;x.lineWidth=2;hist.forEach((h,i)=>{const px=i/149*W,py=H-6-Math.min(1,h[k])*(H-12);i?x.lineTo(px,py):x.moveTo(px,py)});x.stroke()});
+  x.fillStyle='#8a98ab';x.font='12px sans-serif';x.fillText('lane confidence (teal) \u00b7 obstructed share (red) \u2014 last 75 s',10,14)}
+function grid(c){const cv=$('#grid'),x=cv.getContext('2d');x.clearRect(0,0,640,480);if(!opt.grid||!c.lost||c.state==='OK'||c.state==='CALIBRATING')return;
+  const gy=c.lost.length,gx=c.lost[0].length,cw=640/gx,ch=(480*0.75)/gy;x.lineWidth=1;
+  for(let j=0;j<gy;j++)for(let i=0;i<gx;i++){if(c.lost[j][i]){x.fillStyle='rgba(255,77,90,.28)';x.fillRect(i*cw,j*ch,cw,ch);x.strokeStyle='rgba(255,77,90,.7)';x.strokeRect(i*cw+.5,j*ch+.5,cw-1,ch-1)}}}
+// ---------- assistant
+const msgs=$('#msgs');
+function add(cls,html){const d=document.createElement('div');d.className='m '+cls;d.innerHTML=html;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const CHIPS=['Brief me','Is my car healthy?','How are my tyres?','Is it raining?','Is the camera blocked right now?',"What's my range?",'How was my driving this week?','Where did I go yesterday?','When is my next service?','How much did I charge last week?','Why has my range dropped?','Was the camera blocked this month?','What happened before the battery overheated?','What evidence supports that?','Show the last 10 diagnostic events','What was the speed at 10:32:15?','Identify any gradual degradation','Anything unusual lately?','What should I investigate first?'];
+$('#chips').innerHTML=CHIPS.map(c=>'<button>'+esc(c)+'</button>').join('');$$('#chips button').forEach(b=>b.onclick=()=>ask(b.textContent));
+add('a','Hi, I\'m VehicleGPT. I run entirely inside the car, so nothing leaves it. Ask about how your car has been performing, or about the front camera. Try one of the suggestions below.');
+let busy=false,speaking=0,gen=0;
+function stopSpeech(){gen++;speaking=0;try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}$('#stopSpeak').classList.remove('on')}
+function speak(t,done){if(!window.speechSynthesis||!t){if(done)done();return}stopSpeech();const parts=t.match(/[^.!?;:\n]+[.!?;:]?/g)||[t];speaking=parts.length;const g=gen;$('#stopSpeak').classList.add('on');parts.forEach(x=>{const u=new SpeechSynthesisUtterance(x.trim());u.lang='en-US';u.rate=1.0;u.onend=u.onerror=()=>{if(g===gen&&--speaking<=0){$('#stopSpeak').classList.remove('on');if(done)done()}};speechSynthesis.speak(u)})}
+$('#stopSpeak').onclick=stopSpeech;document.addEventListener('keydown',e=>{if(e.key==='Escape')stopSpeech()});
+
+function drawChart(box,d){
+  if(!d.ok){box.textContent=d.why||'No chart available';return}
+  const W=640,rowH=78,pad=34,n=d.series.length,H=n*rowH+28,t0=d.t[0],t1=d.t[d.t.length-1],X=t=>pad+(t-t0)/(t1-t0||1)*(W-pad-10);
+  let g='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Signals around the event">';
+  d.series.forEach((s,i)=>{const y0=i*rowH+6,lo=Math.min(...s.v),hi=Math.max(...s.v),Y=v=>y0+rowH-22-(v-lo)/((hi-lo)||1)*(rowH-34);
+    g+='<text x="4" y="'+(y0+10)+'" fill="#9fb3c8" font-size="11">'+s.label+' ('+s.unit+')  '+lo.toFixed(1)+' - '+hi.toFixed(1)+'</text>';
+    g+='<rect x="'+pad+'" y="'+(y0+14)+'" width="'+(W-pad-10)+'" height="'+(rowH-36)+'" fill="none" stroke="#234a6b" stroke-width="1"/>';
+    g+='<polyline fill="none" stroke="'+(s.key==='batt'?'#ff7a59':s.key==='flow'?'#4cc9f0':s.key==='power'?'#ffd166':'#06d6a0')+'" stroke-width="1.8" points="'+d.t.map((t,k)=>X(t).toFixed(1)+','+Y(s.v[k]).toFixed(1)).join(' ')+'"/>'});
+  d.marks.forEach((m,i)=>{const x=X(m.t);g+='<line x1="'+x+'" x2="'+x+'" y1="4" y2="'+(H-22)+'" stroke="'+(m.t===0?'#ff4d4d':'#ffd166')+'" stroke-dasharray="4 3" stroke-width="1.4"/><text x="'+Math.min(x+4,W-150)+'" y="'+(H-8-(i%2)*0)+'" fill="'+(m.t===0?'#ff9b9b':'#ffd166')+'" font-size="11">'+(m.t===0?'event':m.label)+'</text>'});
+  g+='<text x="'+pad+'" y="'+(H-8)+'" fill="#7f95ab" font-size="11">'+Math.round(t0/60)+' min</text></svg><small>Recorded signals ('+(d.res===1?'1 Hz':'per-minute')+') around the event - nothing here is estimated.</small>';
+  box.innerHTML=g}
+let rec=null,handsOn=false;
+function listen(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){toast('Speech recognition is not available in this browser');return}
+  if(rec){rec.stop();return}stopSpeech();rec=new SR();rec.lang='en-US';let got=false;rec.onstart=()=>$('#mic').classList.add('rec');
+  rec.onend=()=>{$('#mic').classList.remove('rec');rec=null;if(!got&&opt.hands&&handsOn)setTimeout(()=>{if(opt.hands&&!rec&&!busy)listen()},400)};
+  rec.onerror=e=>{if(e.error==='not-allowed'||e.error==='service-not-allowed'){opt.hands=false;$('#optHands').checked=false;toast('Microphone blocked')}else if(e.error!=='no-speech'&&e.error!=='aborted')toast('Voice: '+e.error)};
+  rec.onresult=e=>{got=true;const t=e.results[0][0].transcript.trim();const low=t.toLowerCase().replace(/[^a-z ]/g,'').trim();
+    if(/^(stop|cancel|be quiet|quiet|shut up|never mind|enough|pause)$/.test(low)){stopSpeech();toast('Stopped');if(opt.hands&&handsOn)setTimeout(()=>{if(!rec)listen()},400);return}
+    if(/^hands ?free (off|mode off)$/.test(low)||/^(stop listening|goodbye|bye)$/.test(low)){opt.hands=false;handsOn=false;$('#optHands').checked=false;toast('Hands-free off');return}
+    ask(t,true)};rec.start()}
+function afterAnswer(spoke){if(!(opt.hands&&opt.mic))return;handsOn=true;if(!spoke)setTimeout(()=>{if(opt.hands&&!rec&&!busy)listen()},300)}
+async function ask(q,viaVoice,auto){q=(q||$('#q').value).trim();if(!q||busy)return;stopSpeech();busy=true;$('#q').value='';if(!auto)add('u',esc(q));const th=add('a typing','<i></i><i></i><i></i>');
+  try{const r=await api('/api/ask',{q,persona});th.className='m a';const status=r.intent==='CLARIFY'?'needs clarification':r.intent==='SAFETY'?'not answered':'answered';
+    const det=r.brief&&r.brief!==r.answer&&r.answer.length>r.brief.length+20;
+    th.innerHTML=esc(det?r.brief:r.answer)+(det?' <a class="more" href="#">Details</a><div class="det" style="display:none;margin-top:6px;opacity:.85;white-space:pre-wrap">'+esc(r.answer)+'</div>':'')+(r.anchor?'<div><a class="chbtn" href="#">Show the signals around it</a><div class="chartbox"></div></div>':'')+'<span class="meta">'+status+' in '+(r.ms.total>=1000?(r.ms.total/1000).toFixed(1)+' s':Math.round(r.ms.total)+' ms')+(r.understood?' \u00b7 understood as "'+esc(r.understood)+'"':'')+'</span>';
+    const cb=th.querySelector('.chbtn');if(cb)cb.onclick=async ev=>{ev.preventDefault();const bx=th.querySelector('.chartbox');if(bx.innerHTML){bx.innerHTML='';cb.textContent='Show the signals around it';return}cb.textContent='Hide the signals';bx.textContent='Loading...';try{drawChart(bx,await api('/api/evidence?ts='+r.anchor))}catch(e){bx.textContent='Chart unavailable'}};
+    const mo=th.querySelector('.more');if(mo)mo.onclick=ev=>{ev.preventDefault();const d=th.querySelector('.det');d.style.display=d.style.display==='none'?'block':'none';mo.textContent=d.style.display==='none'?'Details':'Hide details'};
+    const sp=(opt.speak||viaVoice||(auto&&opt.speak));if(sp)speak(r.speech||r.brief||r.answer.split('\n')[0],()=>afterAnswer(false));afterAnswer(!!sp)
+  }catch(e){th.className='m a';th.textContent='The assistant is not reachable.'}
+  busy=false;msgs.scrollTop=msgs.scrollHeight}
+$('#send').onclick=()=>ask();$$('#unitSeg button').forEach(b=>b.onclick=()=>{const u=Object.assign({},UN);u[b.dataset.k]=b.dataset.v;api('/api/units',u)});$('#q').addEventListener('keydown',e=>{if(e.key==='Enter')ask()});
+$$('#personaSeg button').forEach(b=>b.onclick=()=>{persona=b.dataset.p;$$('#personaSeg button').forEach(x=>x.classList.toggle('on',x===b));toast(persona==='engineer'?'Engineer mode: answers include evidence and timelines (service use)':'Driver mode')});
+// voice (optional, demo only)
+$('#mic').onclick=()=>{
+  if(!opt.mic){toast('Enable the microphone in Test bench (browser speech recognition may use a cloud service)');$('#bench').classList.add('open');return}
+  handsOn=opt.hands;listen()};
+// ---------- test bench
+function bindOpt(id,k){$(id).onchange=e=>{opt[k]=e.target.checked}}bindOpt('#optGrid','grid');bindOpt('#optLock','lock');bindOpt('#optSpeak','speak');bindOpt('#optMic','mic');bindOpt('#optHands','hands');
+$$('#faultBtns button').forEach(b=>b.onclick=()=>api('/api/fault',{kind:b.dataset.f}));
+$$('#spBtns button').forEach(b=>b.onclick=()=>api('/api/playback',{speed:+b.dataset.v}));
+$('#resetCam').onclick=()=>{api('/api/reset',{});toast('Camera history cleared')};
+let srcSel='clip';$$('#srcBtns button').forEach(b=>b.onclick=()=>{srcSel=b.dataset.s;$$('#srcBtns button').forEach(x=>x.classList.toggle('on',x===b));$('#srcArg').placeholder=srcSel==='webcam'?'webcam index (usually 0)':srcSel==='file'?'full path to a video file, e.g. C:\\\\Users\\\\you\\\\Videos\\\\drive.mp4':'';$('#srcArg').style.display=srcSel==='clip'?'none':'block'});
+$('#srcArg').style.display='none';
+$('#srcGo').onclick=async()=>{const a=$('#srcArg').value.trim();const body=srcSel==='webcam'?{source:'webcam',index:+(a||0)}:srcSel==='file'?{source:'file',path:a}:{source:'clip'};const r=await api('/api/camera',body);$('#srcMsg').textContent=r.ok?'Switched. The analyser recalibrates for ~2 s.':(r.error||'failed')};
+function loadScenarios(r){$('#scBtns').innerHTML=Object.entries(r.scenarios).map(([k,v])=>'<button data-sc="'+k+'">'+v.name+'</button>').join('');
+  $$('#scBtns button').forEach(b=>b.onclick=()=>{api('/api/playback',{scenario:b.dataset.sc});$('#scDesc').textContent=r.scenarios[b.dataset.sc].desc;toast('Scenario: '+r.scenarios[b.dataset.sc].name)})}
+async function init(){const r=await api('/api/state');loadScenarios(r);const d=await api('/api/datasets');
+  $('#dsSel').innerHTML=d.datasets.map(x=>'<option value="'+x.name+'"'+(x.name===d.current?' selected':'')+'>'+x.label+'  ('+x.name+')</option>').join('');
+  $('#dsSel').onchange=async e=>{toast('Loading vehicle history...');const r1=await api('/api/dataset',{name:e.target.value});if(r1.ok===false){toast('Could not load: '+(r1.error||''));return}
+    prevCam=null;prevTpms=false;banner(0);hist=[];const st=await api('/api/state');loadScenarios(st);$('#msgs').innerHTML='';add('a','Switched vehicle: '+st.info.model+' ('+st.info.city+', '+st.info.driver+'). Ask me anything about it.');toast('Vehicle loaded')};
+  $('#cam').src='/camera.mjpg'}
+const seenEv=new Set();let evInit=false,evKey='';
+const ALERT_Q={WARN_BATT_OVERTEMP:['Battery over-temperature warning','why did the last overheating warning happen'],DTC_SET:['New diagnostic trouble code','what is the last diagnostic trouble code and what could be causing it'],TPMS_LOW:['Tyre pressure warning','which tyre is low']};
+async function proactive(){const evs=(S&&S.events)||[],k=(S&&S.info&&S.info.dataset)||'';if(k!==evKey){evKey=k;evInit=false;seenEv.clear()}
+  const warn=evs.filter(e=>ALERT_Q[e.type]);const cur=new Set(warn.map(e=>e.type+e.ts));[...seenEv].forEach(i=>{if(!cur.has(i))seenEv.delete(i)});if(!evInit){warn.forEach(e=>seenEv.add(e.type+e.ts));evInit=true;return}
+  for(const e of warn){const id=e.type+e.ts;if(seenEv.has(id))continue;if(busy)return;seenEv.add(id);if(S.sim_t-e.ts>180||S.sim_t<e.ts)continue;
+    const a=ALERT_Q[e.type];add('a','<b>Heads up</b> — '+esc(a[0])+'. I am looking into it.');toast(a[0]);await ask(a[1],true,true);return}}
+async function tick(){try{S=await api('/api/state');render();proactive()}catch(e){}setTimeout(tick,500)}
+init().then(()=>{tick();setTimeout(()=>ask('Brief me',false,true),600)});
+</script></body></html>

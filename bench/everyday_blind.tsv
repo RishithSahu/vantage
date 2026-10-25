@@ -1,0 +1,68 @@
+# route<TAB>question - unseen phrasings of everyday questions (written before the examples were added to the fuzzy router; measure with bench/eval_everyday.py)
+advice	is it advised to go on a long trip
+advice	should I take the car on a road trip
+advice	can I go to the airport in this condition
+advice	is it okay to drive to the city today
+advice	is it fine to go out right now
+advice	would you recommend driving it today
+advice	am I good to go
+advice	is the car fit for a long journey
+advice	is it risky to drive like this
+advice	I asked if it's safe for me to go out or not
+advice	is it wise to take a long drive
+advice	can I keep driving with these warnings
+advice	is it advised for me to go out in this condition of the car
+signal_why	why is my battery power negative
+signal_why	why is the coolant flow zero
+signal_why	why does the motor temperature go up
+signal_why	why is the battery temperature rising while charging
+signal_why	what does negative power mean
+signal_why	why is my speed zero
+drive_safely	how do I drive this car safely
+drive_safely	any tips for driving safely
+drive_safely	how should I drive to be safe
+drive_safely	give me safe driving advice
+drive_safely	how can I be a safer driver
+help	what is a question about this vehicle
+help	what kind of questions can I ask
+help	what can you do
+help	how do I use you
+help	show me some examples
+battery_now	what's the state of my battery
+battery_now	tell me about the battery
+last_charge	when was the car last plugged in
+last_charge	what was my last charging session
+reach	will the battery get me to work
+reach	how much further can I drive
+improve_range	how do I get better mileage
+improve_range	ways to use less energy
+charge_cost	what does it cost to charge
+charge_cost	how much money did charging take
+speeding	do I go over the limit
+speeding	was I too fast
+pump_ok	is the cooling pump working
+pump_ok	any problem with the coolant
+unusual	did something odd happen today
+unusual	any weird stuff yesterday
+overview	how was this week for the car
+overview	give me a recap of my week
+style	how's my driving
+style	rate my driving
+dtc_explain	what is the fault code about
+battery_age	what's the age of my battery
+charging_now	is the car charging now
+top_speed	what's the fastest I've gone
+places_most	where do I usually go
+commute	how long is my usual drive
+longest_trip	which was my biggest trip
+eff_day	how many Wh per km did I use yesterday
+best_day	which was my greenest day
+hot_battery	did the pack ever get too warm
+v12	is the small battery fine
+motor_now	is the motor temperature okay
+smalltalk	hello
+smalltalk	thank you
+smalltalk	good job
+smalltalk	are you a robot
+foreign	bhai kya bol rahe ho bhai
+foreign	gaadi ka kya haal hai

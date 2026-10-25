@@ -1,0 +1,326 @@
+# Frame version 2, extended (2026-10-21): hand-written rows for the digest acts (summary, anomaly), the usual-behaviour operator, trip / day focus and the universal-catalogue vocabulary.
+# Authored BEFORE bench/meaning_eval/digest_v1.tsv and catalog_v1.tsv were frozen, with different wording; build_v2.py drops any row that overlaps those sets.
+# Format, one row per line:
+#   <text> | <act> <concept> [op=..] [cond=..] [vs=..] [ent=..] [c2=..] [ref=..]
+#   <previous frame spec> >> <text> | <spec>             a follow-up (the line before >> is the frame of the previously answered question)
+# No row carries a number or a place as a value: periods and picks are parsed from the text by vgpt/meaning/literals.py.
+
+# ------------------------------------------------------------------------------------------------ summary of a period (summary none)
+give me a rundown of my driving this week | summary none
+how has my week on the road been | summary none
+recap my drives for the month | summary none
+summarise what the car did last week | summary none
+a quick overview of the past few days please | summary none
+what did I do with the car lately | summary none
+tell me how the last fortnight went | summary none
+wrap up my recent driving | summary none
+sum up the week | summary none
+what is the story of the last seven days | summary none
+how did the vehicle get used this month | summary none
+walk me through my recent usage | summary none
+give me the highlights of the last month | summary none
+overview of how the car has been lately | summary none
+digest of my driving over the last couple of weeks | summary none
+can you brief me on the past week | summary none
+how was last week overall | summary none
+a short report on the month so far | summary none
+what happened with my car over the weekend | summary none
+total picture of this week's driving | summary none
+describe my last few days of driving | summary none
+how did the car do this past month | summary none
+give me the big picture for the last quarter | summary none
+anything I should know about how the car was used this week | summary none
+what did the car go through yesterday | summary none ent=day
+how was yesterday for the car | summary none ent=day
+summarise today so far | summary none ent=day
+tell me about my day of driving | summary none ent=day
+give me a summary of the last day | summary none ent=day
+how was the weekend for the car | summary none ent=day
+describe what happened on the car today | summary none ent=day
+recap yesterday's drive | summary none ent=day
+what stood out yesterday | summary none ent=day
+tell me about my last trip | summary none ent=trip
+summarise the most recent drive | summary none ent=trip
+how did my longest trip go | summary none ent=trip
+give me the details of my latest journey | summary none ent=trip
+sum up the last drive | summary none ent=trip
+what was my shortest trip like | summary none ent=trip
+describe the first trip of the week | summary none ent=trip
+overview of my most efficient drive | summary none ent=trip
+how did the last commute go | summary none ent=trip
+recap my previous journey | summary none ent=trip
+walk me through the last trip | summary none ent=trip
+
+# ------------------------------------------------------------------------------------------------ what changed (summary none op=change)
+what is different compared with the week before | summary none op=change
+anything new with the car since last week | summary none op=change
+how have things changed lately | summary none op=change
+what has moved in the last couple of weeks | summary none op=change
+what changed since last month | summary none op=change
+is anything different about the car this week | summary none op=change
+which things changed in the past few days | summary none op=change
+tell me what is different now compared with before | summary none op=change
+what is new this week against last week | summary none op=change
+list the changes in my car over the past fortnight | summary none op=change
+what shifted since the previous period | summary none op=change
+has anything about the vehicle changed lately | summary none op=change
+what has the car been doing differently | summary none op=change
+what is not the same as it was last week | summary none op=change
+point out what moved compared with last month | summary none op=change
+any changes worth knowing about since last week | summary none op=change
+how does this week differ from the one before | summary none op=change
+what's changed on the car recently | summary none op=change
+which readings moved this month | summary none op=change
+catch me up on what is different | summary none op=change
+what developments have there been in the car's data lately | summary none op=change
+tell me the differences between this month and the last | summary none op=change
+what is trending differently these days | summary none op=change
+changes since the last service please | summary none op=change
+what is the biggest change since last week | summary none op=change
+
+# ------------------------------------------------------------------------------------------------ what is unusual (anomaly)
+does anything look off lately | anomaly none
+any anomalies in my car this week | anomaly none
+anything strange in the data recently | anomaly none
+is there anything odd I should know about | anomaly none
+flag anything irregular from the last month | anomaly none
+did any readings behave strangely this week | anomaly none
+spot anything out of the ordinary for me | anomaly none
+what looks wrong in the numbers | anomaly none
+check the car for oddities | anomaly none
+were there any weird spikes lately | anomaly none
+look for outliers in my recent data | anomaly none
+which readings were abnormal this week | anomaly none
+find anything suspicious in the last few days | anomaly none
+any red flags in the data | anomaly none
+what stood out as peculiar this month | anomaly none
+scan my car for anything unexpected | anomaly none
+did something strange happen with the car recently | anomaly none
+what doesn't look right | anomaly none
+tell me about any glitches in the recent data | anomaly none
+are there irregularities in the vehicle's readings | anomaly none
+any funny readings lately | anomaly none
+is any signal behaving oddly | anomaly none
+show me what is abnormal this week | anomaly none
+was there anything unexpected in my data yesterday | anomaly none ent=day
+anything strange about today | anomaly none ent=day
+was my last trip unusual | anomaly none ent=trip
+did anything odd happen on my longest drive | anomaly none ent=trip
+was the latest journey out of the ordinary | anomaly none ent=trip
+any anomalies during the last commute | anomaly none ent=trip
+anything weird going on with my battery temperature lately | anomaly battery_temperature
+were there any spikes in the motor temperature this week | anomaly motor_temperature
+did the coolant flow do anything strange recently | anomaly coolant_flow
+any odd behaviour in the 12 volt battery | anomaly aux_battery_voltage
+any irregular tyre pressure readings this month | anomaly tyre_pressure
+look for oddities in the engine oil temperature | anomaly engine_oil_temperature
+did the fuel rate act strangely lately | anomaly fuel_rate
+anything off with the pack voltage | anomaly battery_voltage
+is anything abnormal about the charging lately | anomaly charging_power
+any weird speed readings recently | anomaly speed
+does anything look wrong with the battery | anomaly battery_condition
+anything odd with the tyres | anomaly tyre_condition
+anything unusual in the cooling system | anomaly cooling_condition
+is something off with the motor | anomaly motor_condition
+did the brakes do anything strange | anomaly brake_condition
+were there odd warnings recently | anomaly any_warning
+any strange diagnostic codes | anomaly diagnostic_code
+did hard braking get unusual this week | anomaly hard_braking
+
+# ------------------------------------------------------------------------------------------------ the usual behaviour of a quantity (stat X op=usual)
+how does my battery temperature normally behave | stat battery_temperature op=usual
+what is the usual range of the motor temperature | stat motor_temperature op=usual
+what is a typical speed for me | stat speed op=usual
+what is normal for the coolant flow | stat coolant_flow op=usual
+tell me the normal tyre pressure pattern | stat tyre_pressure op=usual
+what do my pack voltages usually look like | stat battery_voltage op=usual
+how high does the engine oil temperature normally get | stat engine_oil_temperature op=usual
+what is the typical fuel rate when I drive | stat fuel_rate op=usual
+how much power does the heater usually draw | stat hvac_power op=usual
+what is my usual 12 volt battery voltage | stat aux_battery_voltage op=usual
+describe the normal range of the battery power | stat battery_power op=usual
+what is the typical outside temperature around here | stat ambient_temperature op=usual
+how does the engine load usually look | stat engine_load op=usual
+typical engine rpm in my driving | stat engine_rpm op=usual
+what is the normal boost pressure | stat boost_pressure op=usual
+what is the usual exhaust temperature | stat exhaust_gas_temperature op=usual
+how much regenerative power do I normally get | stat regen_power op=usual
+what is normal for my accelerator use | stat accelerator_position op=usual
+what is the typical state of charge when I park | stat battery_soc op=usual
+how warm does the pack usually run | stat battery_temperature op=usual
+what do the tyre temperatures normally do | stat tyre_temperature op=usual
+typical manifold pressure for this car | stat intake_manifold_pressure op=usual
+usual DPF soot level | stat dpf_soot_load op=usual
+how does the fuel level usually behave over a week | stat fuel_level op=usual
+what is the normal climb rate of the motor temperature | stat motor_temperature op=usual
+how often does hard braking usually happen | stat hard_braking op=usual
+how many warnings do I normally get | stat any_warning op=usual
+what is the usual number of diagnostic codes | stat diagnostic_code op=usual
+how frequently do ADAS disengagements normally occur | stat adas_disengagement op=usual
+what is a normal count of charging sessions | stat charging_session op=usual
+how often do I normally see tyre warnings | stat tyre_pressure_warning op=usual
+typical amount of hard acceleration | stat hard_acceleration op=usual
+
+# ------------------------------------------------------------------------------------------------ why one trip stood out (why X ... ent=trip)
+why was the battery so hot on my longest trip | why battery_temperature op=rise ent=trip
+why did the motor get so warm on the last drive | why motor_temperature op=rise ent=trip
+what made my last trip use so much energy | why wh_per_km op=rise ent=trip
+why was the latest journey so inefficient | why wh_per_km op=rise ent=trip
+why did the engine run so hot on my biggest trip | why motor_temperature op=rise ent=trip
+what caused the high fuel use on the last drive | why fuel_rate op=rise ent=trip
+why was my most recent trip so thirsty | why fuel_rate op=rise ent=trip
+why did the coolant flow drop during the last trip | why coolant_flow op=drop ent=trip
+what explains the pack temperature on my first trip | why battery_temperature op=none ent=trip
+why did the oil run so hot on the long drive | why engine_oil_temperature op=rise ent=trip
+why was the heater drawing so much on the last journey | why hvac_power op=rise ent=trip
+why did the range fall so much on that long trip | why range_estimate op=drop ent=trip
+what happened to the battery power on my last drive | why battery_power op=none ent=trip
+why was the speed so low on the previous trip | why speed op=drop ent=trip
+why did the tyre pressure change during my last trip | why tyre_pressure op=none ent=trip
+why was the regen so weak on the most efficient trip | why regen_power op=drop ent=trip
+why did the charge level fall so fast on the last drive | why battery_soc op=drop ent=trip
+why was my shortest trip so costly in energy | why wh_per_km op=rise ent=trip
+why did the exhaust get so hot on the last run | why exhaust_gas_temperature op=rise ent=trip
+what made the engine load so high during the longest drive | why engine_load op=rise ent=trip
+why was yesterday so hard on the battery | why battery_temperature op=rise ent=day
+why did I use so much energy yesterday | why energy_used op=rise ent=day
+what made today's consumption so high | why wh_per_km op=rise ent=day
+why was the motor so hot today | why motor_temperature op=rise ent=day
+
+# ------------------------------------------------------------------------------------------------ summary of one quantity or event
+summarise my battery temperature this week | summary battery_temperature
+give me an overview of the motor temperature this month | summary motor_temperature
+how has my speed looked over the last week | summary speed
+overview of tyre pressure lately | summary tyre_pressure
+recap the state of charge over the past days | summary battery_soc
+summarise the coolant flow for the month | summary coolant_flow
+give me a picture of my energy use this week | summary wh_per_km
+overview of fuel consumption lately | summary fuel_rate
+how has the engine oil temperature been this month | summary engine_oil_temperature
+summarise the warnings I got | summary any_warning
+overview of hard braking over the last few weeks | summary hard_braking
+summarise the diagnostic codes this month | summary diagnostic_code
+recap my charging sessions | summary charging_session
+how have the ADAS disengagements been lately | summary adas_disengagement
+summarise the health of the battery | summary battery_condition
+overview of the cooling system lately | summary cooling_condition
+how have my tyres been | summary tyre_condition
+recap how the motor has been doing | summary motor_condition
+how has my driving style been this month | summary driving_style
+give me a summary of the vehicle's health | summary vehicle_health
+
+# ------------------------------------------------------------------------------------------------ follow-ups to the new acts
+summary none >> and the week before | summary none ref=period
+summary none >> what about last month | summary none ref=period
+summary none >> same for yesterday | summary none ref=period
+summary none >> now the month | summary none ref=period
+summary none >> how about the last three days | summary none ref=period
+summary none >> and what changed | summary none op=change ref=period
+summary none >> and the battery | summary battery_condition ref=concept
+summary none >> what about the tyres | summary tyre_condition ref=concept
+summary none >> and the motor temperature | summary motor_temperature ref=concept
+summary none >> how about the warnings | summary any_warning ref=concept
+summary none op=change >> and last month | summary none op=change ref=period
+summary none op=change >> same for the last three days | summary none op=change ref=period
+summary none op=change >> what about the week before | summary none op=change ref=period
+summary none op=change >> and was any of it unusual | anomaly none ref=concept
+anomaly none >> what about last month | anomaly none ref=period
+anomaly none >> and in the last three days | anomaly none ref=period
+anomaly none >> how about yesterday | anomaly none ref=period
+anomaly none >> and the battery temperature | anomaly battery_temperature ref=concept
+anomaly none >> what about the motor | anomaly motor_condition ref=concept
+anomaly none >> the tyres as well | anomaly tyre_condition ref=concept
+anomaly battery_temperature >> and the motor temperature | anomaly motor_temperature ref=concept
+anomaly battery_temperature >> what about last month | anomaly battery_temperature ref=period
+stat battery_temperature op=usual >> and the motor temperature | stat motor_temperature op=usual ref=concept
+stat battery_temperature op=usual >> what about the speed | stat speed op=usual ref=concept
+stat speed op=usual >> and the tyre pressure | stat tyre_pressure op=usual ref=concept
+stat motor_temperature op=usual >> over the last week only | stat motor_temperature op=usual ref=period
+summary none ent=trip >> and the one before it | summary none ent=trip ref=item
+summary none ent=trip >> why was it so hot | why battery_temperature op=rise ent=trip ref=focus
+summary none ent=trip >> why did it use so much energy | why wh_per_km op=rise ent=trip ref=focus
+summary none ent=trip >> was that unusual | anomaly none ent=trip ref=focus
+why battery_temperature op=rise ent=trip >> and the motor | why motor_temperature op=rise ent=trip ref=concept
+anomaly none >> why | explain none ref=answer
+summary none >> how did you work that out | explain none ref=answer
+summary none op=change >> what is that based on | explain none ref=answer
+
+# ------------------------------------------------------------------------------------------------ the universal catalogue: quantities every vehicle may have (the answer says whether THIS vehicle records them)
+what is the engine oil temperature | now engine_oil_temperature
+how hot is the lubricant | now engine_oil_temperature
+oil pressure right now | now engine_oil_pressure
+is the oil pressure ok | now engine_oil_pressure
+how open is the throttle | now throttle_position
+what is the throttle at | now throttle_position
+how much boost is the turbo making | now boost_pressure
+what is the turbo pressure | now boost_pressure
+what is the manifold pressure | now intake_manifold_pressure
+how much air is the engine drawing | now mass_air_flow
+what is the air flow reading | now mass_air_flow
+how warm is the intake air | now intake_air_temperature
+what is the air pressure outside | now barometric_pressure
+what is the lambda reading | now lambda
+what is the air fuel mixture | now lambda
+how are the fuel trims | now short_term_fuel_trim
+what is the long term trim | now long_term_fuel_trim
+how hot is the catalytic converter | now catalyst_temperature
+what is the spark advance | now ignition_timing
+how hot is the exhaust | now exhaust_gas_temperature
+what is the egt | now exhaust_gas_temperature
+how full is the particulate filter | now dpf_soot_load
+is the dpf regenerating | now dpf_regeneration
+how much adblue is left | now def_level
+what is the urea level | now def_level
+what is the fuel rail pressure | now fuel_rail_pressure
+how hot is the diesel in the tank | now fuel_temperature
+is the egr valve open | now egr_position
+how long has the engine been running | now engine_run_time
+how many hours are on the engine | now engine_hours
+what gear am I in | now gear
+which gear is engaged | now gear
+is the handbrake on | now parking_brake
+is the parking brake engaged | now parking_brake
+what altitude am I at | now altitude
+how high above sea level are we | now altitude
+is a door open | now door_state
+is the driver's seat belt fastened | now seatbelt_state
+are the headlights on | now headlight_state
+are the wipers running | now wiper_state
+how hot is the inverter | now inverter_temperature
+what is the highest cell voltage | now cell_voltage_max
+what is the charging current | now charging_current
+what voltage is the charger delivering | now charging_voltage
+what is the charge limit set to | now charge_limit
+is the charge port open | now charge_port_state
+how long until the battery is full | now time_to_full
+what range does the dashboard show | now reported_range
+what is the transmission temperature | now transmission_temperature
+what is the coolant pressure | now coolant_pressure
+what is the fuel pressure | now fuel_pressure
+highest oil temperature this week | extreme engine_oil_temperature op=max
+lowest oil pressure this month | extreme engine_oil_pressure op=min
+average throttle position yesterday | stat throttle_position op=mean
+peak boost pressure last week | extreme boost_pressure op=max
+average manifold pressure this week | stat intake_manifold_pressure op=mean
+highest intake air temperature this month | extreme intake_air_temperature op=max
+average lambda over the last week | stat lambda op=mean
+trend of the long term fuel trim this month | trend long_term_fuel_trim op=change
+did the catalyst temperature drop over the last month | trend catalyst_temperature op=drop
+highest exhaust temperature last week | extreme exhaust_gas_temperature op=max
+how has the DPF soot load changed this month | trend dpf_soot_load op=change
+lowest adblue level this week | extreme def_level op=min
+average fuel rail pressure last month | stat fuel_rail_pressure op=mean
+how much time did the engine run last week | stat engine_run_time op=sum
+average altitude on my trips | stat altitude op=mean
+highest inverter temperature this month | extreme inverter_temperature op=max
+average charging current this month | stat charging_current op=mean
+what is the barometric pressure usually | stat barometric_pressure op=usual
+how does the oil pressure normally behave | stat engine_oil_pressure op=usual
+define the lambda sensor | define lambda
+what is a DPF | define dpf_soot_load
+what does the egr valve do | define egr_position
+explain short term fuel trim | define short_term_fuel_trim
+what is manifold absolute pressure | define intake_manifold_pressure
+what is boost pressure | define boost_pressure
+what does AdBlue do | define def_level
+what is the throttle position sensor | define throttle_position

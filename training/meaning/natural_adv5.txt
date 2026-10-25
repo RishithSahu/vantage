@@ -1,0 +1,82 @@
+# Adversarial bank 5 (authored by Claude, 2026-10-20): REHEARSAL for the families on which the retrains of 2026-10-20 lost rows of the older development sets (hard_v1..hard_v4, user_v1) - power of the climate control, brake pad life, distance
+# driven in colloquial and mixed-language wording, consumption compared between conditions, off-topic questions, requests to dump data, the rated top speed, the state of the car after a service, the label of a single
+# fault-code class - and the three residual families of the readable half of adv_v1 (emergency braking said colloquially, "how often" over a limit, "do I need to book it in").  New sentences, never the sentences of an evaluation set
+# (the builder's filter, --eval-leak v12, drops any row at Jaccard >= 0.8).  Source name `adv5`, repeated twice.  Format as natural_a.txt:  text | act concept [op=..] [cond=..] [vs=..] [ent=..]
+# ---------------------------------------------------------------- climate power, brake pads
+how much power is the climate control drawing | now hvac_power
+what is the air conditioning using at the moment | now hvac_power
+power taken by the heater and ac | now hvac_power
+how many watts is the cabin heating pulling | now hvac_power
+what load does the hvac put on the battery | now hvac_power
+how much does the heater cost me in power | now hvac_power
+how much brake pad is left | now brake_pad_life
+remaining life of the brake pads | now brake_pad_life
+what is the pad life on the brakes | now brake_pad_life
+how worn are the brake pads in percent | now brake_pad_life
+are the brake pads worn out | health brake_condition
+are the brakes in good shape | health brake_condition
+how are the brakes | health brake_condition
+# ---------------------------------------------------------------- distance driven, plain and mixed-language
+how far have we driven today | stat distance_driven op=sum
+how many kilometres have we done so far today | stat distance_driven op=sum
+how far did i go this week | stat distance_driven op=sum
+distance covered since monday | stat distance_driven op=sum
+how many km did we cover on the weekend | stat distance_driven op=sum
+aaj kitni door chale | stat distance_driven op=sum
+is mahine kitne kilometre chale | stat distance_driven op=sum
+kal kitna chale the | stat distance_driven op=sum
+gaadi ka service kab hai | estimate maintenance
+next service kitne km mein hai | estimate maintenance
+service due kab hota hai | estimate maintenance
+battery kitni bachi hai abhi | now battery_soc
+kitni charge bachi hai | now battery_soc
+tyre mein hawa kitni hai | now tyre_pressure
+# ---------------------------------------------------------------- consumption compared between conditions
+compare energy use in the city with the highway | compare wh_per_km op=mean cond=city vs=highway
+city against motorway consumption | compare wh_per_km op=mean cond=city vs=highway
+how does consumption differ between town and highway driving | compare wh_per_km op=mean cond=city vs=highway
+compare the efficiency in winter and summer | compare wh_per_km op=mean cond=cold vs=hot_weather
+consumption in the cold against the heat | compare wh_per_km op=mean cond=cold vs=hot_weather
+does the car use more energy in winter than in summer | compare wh_per_km op=mean cond=cold vs=hot_weather
+compare the pack temperature when charging with when driving | compare battery_temperature op=mean cond=charging vs=driving
+battery temperature while charging against while driving | compare battery_temperature op=mean cond=charging vs=driving
+is the pack warmer parked than on the move | compare battery_temperature op=mean cond=parked vs=driving
+# ---------------------------------------------------------------- off-topic and data dumps
+who won the cricket match last night | offtopic none
+what was the football score yesterday | offtopic none
+who is the prime minister | offtopic none
+what is the capital of france | offtopic none
+tell me the latest news | offtopic none
+what are the lottery numbers | offtopic none
+dump the whole database | unsafe none
+export every record the car holds about me | unsafe none
+give me all the stored data of this car in one file | unsafe none
+send me the raw tables | unsafe none
+# ---------------------------------------------------------------- the rated top speed against the highest speed driven
+what is the top speed of this car | spec rated_max_speed
+what top speed is the car built for | spec rated_max_speed
+can the car go any faster than this | spec rated_max_speed
+is there a speed limiter in the car | spec rated_max_speed
+what speed does the car stop accelerating at | spec rated_max_speed
+what was the top speed i reached last week | extreme speed op=max
+my top speed yesterday | extreme speed op=max
+# ---------------------------------------------------------------- after a service
+how is the car doing after the workshop visit | health vehicle_health
+is everything fine since the garage looked at it | health vehicle_health
+did the service fix everything | health vehicle_health
+how is it running after the maintenance | health vehicle_health
+# ---------------------------------------------------------------- residual families of adv_v1 (readable half)
+did the car brake by itself without my foot on the pedal | events aeb_activation op=exists
+did the brakes come on automatically without me pressing them | events aeb_activation op=exists
+did the car hit the brakes on its own | events aeb_activation op=exists
+did it brake for an obstacle without any input from me | events aeb_activation op=exists
+how often was the pack hotter than 45 degrees | stat battery_temperature op=count cond=threshold
+how often did the speed go past 130 | stat speed op=count cond=threshold
+how often was the soc below 10 percent | stat battery_soc op=count cond=threshold
+how often did the tyre pressure drop under 190 | stat tyre_pressure op=count cond=threshold
+how often did the motor exceed 110 degrees | stat motor_temperature op=count cond=threshold
+do i need to take the car in for servicing | advice maintenance
+should i book the car in for a service | advice maintenance
+is it time to take it to the workshop | advice maintenance
+does it need a visit to the garage soon | advice maintenance
+do i have to bring it in soon | advice maintenance

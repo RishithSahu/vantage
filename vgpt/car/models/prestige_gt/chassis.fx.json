@@ -1,0 +1,116 @@
+{
+ "note": "A FIBEX-like description of the chassis FlexRay cluster of the demonstration car (written for the test bench): 10 Mbit/s, 5 ms communication cycle, static segment only.",
+ "cycle_ms": 5.0,
+ "frames": {
+  "WheelSpeeds": {
+   "slot": 10,
+   "base": 0,
+   "repetition": 2,
+   "words": 4,
+   "channel": "A",
+   "signals": [
+    {
+     "name": "FL",
+     "start": 0,
+     "len": 16,
+     "factor": 0.01,
+     "unit": "km/h"
+    },
+    {
+     "name": "FR",
+     "start": 16,
+     "len": 16,
+     "factor": 0.01,
+     "unit": "km/h"
+    },
+    {
+     "name": "RL",
+     "start": 32,
+     "len": 16,
+     "factor": 0.01,
+     "unit": "km/h"
+    },
+    {
+     "name": "RR",
+     "start": 48,
+     "len": 16,
+     "factor": 0.01,
+     "unit": "km/h"
+    }
+   ]
+  },
+  "Dynamics": {
+   "slot": 12,
+   "base": 1,
+   "repetition": 2,
+   "words": 4,
+   "channel": "A",
+   "signals": [
+    {
+     "name": "YawRate",
+     "start": 0,
+     "len": 16,
+     "factor": 0.01,
+     "offset": 0,
+     "signed": true,
+     "unit": "deg/s"
+    },
+    {
+     "name": "LatAcc",
+     "start": 16,
+     "len": 16,
+     "factor": 0.001,
+     "signed": true,
+     "unit": "g"
+    },
+    {
+     "name": "LongAcc",
+     "start": 32,
+     "len": 16,
+     "factor": 0.001,
+     "signed": true,
+     "unit": "g"
+    },
+    {
+     "name": "SteerAngle",
+     "start": 48,
+     "len": 16,
+     "factor": 0.1,
+     "signed": true,
+     "unit": "deg"
+    }
+   ]
+  },
+  "Brake": {
+   "slot": 20,
+   "base": 0,
+   "repetition": 4,
+   "words": 3,
+   "channel": "AB",
+   "signals": [
+    {
+     "name": "Pressure",
+     "start": 0,
+     "len": 16,
+     "factor": 0.1,
+     "unit": "bar"
+    },
+    {
+     "name": "PedalPos",
+     "start": 16,
+     "len": 16,
+     "factor": 0.01,
+     "unit": "%"
+    },
+    {
+     "name": "DiscTempMax",
+     "start": 32,
+     "len": 16,
+     "factor": 0.1,
+     "offset": -40,
+     "unit": "C"
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "id": "rivian_r1t",
+ "name": "Rivian R1T (primary actuator bus)",
+ "year": 2022,
+ "region": "USA",
+ "powertrain": "bev",
+ "class": "Battery-electric pickup truck",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Rivian R1T (primary actuator bus) database (accelerator_position, ambient_temperature, brake_pedal, door_state, odometer, parking_brake, speed, steering_rate, wheel_speed_fl, wheel_speed_fr, wheel_speed_rl, wheel_speed_rr ...)",
+  "OBD-II speed, ambient temperature and module voltage",
+  "UDS diagnostic trouble codes",
+  "Android infotainment (logcat)",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 12 drafted, 380 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): rivian_primary_actuator.dbc",
+ "bound": 31,
+ "concepts": 31,
+ "extension": [
+  "_charging_active",
+  "_ignition",
+  "aux_battery_voltage",
+  "battery_current",
+  "battery_soc",
+  "battery_temperature",
+  "battery_voltage",
+  "cabin_temperature",
+  "charging_power",
+  "coolant_flow",
+  "hvac_power",
+  "motor_temperature",
+  "motor_torque",
+  "reported_range",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

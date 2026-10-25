@@ -1,0 +1,92 @@
+# Round 13 (2026-10-24), file a: the families still wrong after round 12 among the OLDER (development) sets' genuine errors (fixed_283.py). Paraphrases only. The newer sealed sets (sealed_v7 above all) were not read for this file.
+
+# ------------------------------------------------------------------------------------------------ "why did X get hot" -> the warning event when the signal has one (R2)
+why did the pack get so hot after the fast charge | why battery_overheat_warning
+why did the battery overheat during charging | why battery_overheat_warning
+why was the pack so warm after that charge | why battery_overheat_warning
+what made the battery overheat | why battery_overheat_warning
+why did the battery overheat yesterday | why battery_overheat_warning
+battery overheated, why | why battery_overheat_warning
+why did the motor overheat on the climb | why overtemp_warning
+why did the motor get so hot going uphill | why overtemp_warning
+what made the motor overheat | why overtemp_warning
+why did the drive unit overheat today | why overtemp_warning
+
+# ------------------------------------------------------------------------------------------------ advice on keeping the battery healthy
+how can I keep the battery healthy | advice battery_condition
+how do I make the battery last | advice battery_condition
+how should I look after the battery | advice battery_condition
+what should I do to protect the battery | advice battery_condition
+how do I stop the battery wearing out | advice battery_condition
+how do I get the most years out of the battery | advice battery_condition
+tips to keep the battery in good shape over time | advice battery_condition
+what is the best way to treat the battery | advice battery_condition
+how can I make the pack live longer | advice battery_condition
+
+# ------------------------------------------------------------------------------------------------ information the car does not hold
+what is the registration number | unsupported none
+what is the chassis number of the car | unsupported none
+who is the registered owner | unsupported none
+where was this car manufactured | unsupported none
+what is my insurance policy number | unsupported none
+what is the delay between the control units | unsupported none
+how many hours of battery will the phone last | unsupported none
+how many kwh will it take to reach the airport | unsupported none
+how much energy do I need to get to the office | unsupported none
+will I reach my destination on this charge | unsupported none
+
+# ------------------------------------------------------------------------------------------------ outside the car, actions, the whole database
+what time is it now | offtopic none
+what is the time | offtopic none
+what day is it today | offtopic none
+what is the date | offtopic none
+call the workshop | control none
+phone roadside assistance | control none
+call my wife | control none
+dial the dealer | control none
+give me every record in the database | unsafe none
+dump all the stored data | unsafe none
+export the entire database to me | unsafe none
+
+# ------------------------------------------------------------------------------------------------ "the usual", short summaries
+the usual please | health briefing
+the usual | health briefing
+same as always | health briefing
+my usual summary | health briefing
+do the usual check | health briefing
+
+# ------------------------------------------------------------------------------------------------ Hindi-English distance
+is hafte kitne km chale | stat distance_driven op=sum
+aaj kitne km chale | stat distance_driven op=sum
+kal kitna chala | stat distance_driven op=sum
+pichle mahine kitna chala | stat distance_driven op=sum
+is mahine kitni distance chali | stat distance_driven op=sum
+
+# ------------------------------------------------------------------------------------------------ energy of one named trip, charge time, range now, gear
+how much energy did the trip to the office use | stat energy_used op=sum ent=trip
+what did the drive to the shop cost me in kwh | stat energy_used op=sum ent=trip
+how many kwh did the morning commute take | stat energy_used op=sum ent=trip
+how long until the pack is fully charged | estimate charge_time
+how long before the battery is full | estimate charge_time
+time until the charge is complete | estimate charge_time
+what range do I have right now | estimate range_estimate
+what is the range at this moment | estimate range_estimate
+how far can the car go at the moment | estimate range_estimate
+which gear am I in | now gear
+what gear is the car in | now gear
+current gear please | now gear
+is it in drive or reverse | now gear
+
+# ------------------------------------------------------------------------------------------------ figurative: the car's pulse and vital signs are its health
+what is the car's pulse | health vehicle_health
+is the car's pulse ok | health vehicle_health
+check the car's pulse | health vehicle_health
+give me the car's vital signs | health vehicle_health
+how are the car's vitals | health vehicle_health
+does the car look tired | health vehicle_health
+is the car feeling unwell | health vehicle_health
+what is the heartbeat of the car | health vehicle_health
+how is the pack's heartbeat | now battery_voltage
+does the pack have a fever | now battery_temperature
+is the pack feverish | now battery_temperature
+does the motor have a temperature | now motor_temperature

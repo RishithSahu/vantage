@@ -1,0 +1,101 @@
+id	expected
+F001	current state of charge
+F002	current speed
+F003	current battery temperature
+F004	current motor temperature
+F005	current motor power
+F006	current odometer
+F007	current 12 V voltage
+F008	current tyre pressures
+F009	current position
+F010	current coolant flow
+F011	current outside temperature
+F012	current battery health
+F013	current climate power draw
+F014	current motor rpm
+F015	current regeneration power
+F016	mean speed over 10 days
+F017	mean consumption
+F018	energy on that weekday
+F019	distance last week
+F020	mean battery temperature yesterday
+F021	regenerated energy
+F022	number of trips
+F023	share above 90 km/h
+F024	time above 3500 rpm
+F025	time parked
+F026	maximum speed
+F027	peak battery temperature
+F028	lowest state of charge
+F029	worst trip
+F030	longest trip
+F031	battery health trend
+F032	consumption trend
+F033	range trend
+F034	temperature trend
+F035	week-over-week
+F036	city versus highway
+F037	charging versus driving
+F038	today versus yesterday
+F039	latest warning
+F040	count of alerts
+F041	latest charging session
+F042	count of hard braking events
+F043	list of codes
+F044	whether a blockage was recorded
+F045	latest tyre warning
+F046	count of disengagements
+F047	conditions before the alert
+F048	conditions before the code
+F049	evidence-ranked reasons
+F050	evidence-ranked reasons
+F051	contributors to the range change
+F052	contributors to the rise
+F053	rated top speed
+F054	seat count
+F055	battery capacity
+F056	service interval
+F057	software version
+F058	nominal voltage
+F059	definition
+F060	definition
+F061	definition
+F062	formula
+F063	method
+F064	go / no-go from the charge level
+F065	driving advice
+F066	maintenance advice
+F067	summary with the limits of telemetry
+F068	overall health
+F069	battery condition
+F070	tyre condition
+F071	brake condition
+F072	cooling condition
+F073	12 V condition
+F074	motor condition
+F075	briefing
+F076	range estimate
+F077	time to full
+F078	energy and a note that a tariff is needed
+F079	next service due
+F080	speed near that instant
+F081	state of charge near that instant
+F082	position near that time
+F083	greeting
+F084	polite reply
+F085	not about this vehicle
+F086	not about this vehicle
+F087	cannot predict
+F088	counterfactual
+F089	refuses
+F090	refuses
+F091	cannot operate the vehicle
+F092	gear is not recorded
+F093	not recorded
+F094	asks what is meant
+F095	occupancy is not recorded
+F096	current state of charge
+F097	current battery temperature
+F098	maximum speed yesterday
+F099	number of trips
+F100	list of warnings

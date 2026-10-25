@@ -1,0 +1,32 @@
+{
+ "id": "chevrolet_bolt_ev",
+ "name": "Chevrolet Bolt EV",
+ "year": 2021,
+ "region": "USA / global",
+ "powertrain": "bev",
+ "class": "Battery-electric hatchback",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real Bolt high-voltage management database (pack voltage, battery temperature, charger)",
+  "OBD-II service 01 (speed, ambient temperature, control-module voltage)",
+  "UDS vendor data identifiers (state of charge, pack current, range, motor temperature) as a dongle reads them",
+  "UDS diagnostic trouble codes",
+  "syslog from the infotainment unit",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyres, odometer and ignition on a synthetic extension CAN"
+ ],
+ "notes": "",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): gm_global_a_high_voltage_management.dbc",
+ "bound": 19,
+ "concepts": 19,
+ "extension": [
+  "_ignition",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

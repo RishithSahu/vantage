@@ -1,0 +1,81 @@
+id	expected
+Q001	whether hard braking got more frequent
+Q002	whether disengagements got more frequent
+Q003	whether fault codes got more frequent
+Q004	the week with the largest rise in warnings
+Q005	the week with the largest fall
+Q006	counts in two weeks
+Q007	counts in two months
+Q008	counts and rates in two conditions
+Q009	counts and rates in two conditions
+Q010	counts and rates in two conditions
+Q011	the day with the most events
+Q012	the day with the most codes
+Q013	the week with the most warnings
+Q014	the day with the fewest warnings
+Q015	number of days with an event
+Q016	number of weeks with an event
+Q017	a log search by word
+Q018	a log listing by source
+Q019	existence in the logs
+Q020	a count of log lines
+Q021	the latest log line of a source
+Q022	the earliest matching log line
+Q023	a definition
+Q024	the latest cleared code
+Q025	existence of a clear
+Q026	a count of clears
+Q027	the latest software update
+Q028	a count of updates
+Q029	existence of a dropout
+Q030	a count of dropouts
+Q031	the latest dropout
+Q032	the context of the latest dropout
+Q033	a definition
+Q034	the total silent time
+Q035	the subsystem with the most codes
+Q036	a breakdown by subsystem
+Q037	the unit with the most resets
+Q038	the bus with the most dropouts
+Q039	a breakdown by reason
+Q040	the active codes
+Q041	active, cleared and recurring codes
+Q042	recurring codes
+Q043	never-cleared codes
+Q044	a definition
+Q045	the history of one code
+Q046	the count of one code
+Q047	the latest occurrence of one code
+Q048	existence of one code
+Q049	the sources of a measurement
+Q050	the sources of a measurement
+Q051	the rate and source
+Q052	the sources of a measurement
+Q053	the source of a measurement
+Q054	the latest charging session with its duration
+Q055	the latest fast charge with its energy
+Q056	the number of fast charges and a rate
+Q057	the latest fast charges
+Q058	the most used charging place
+Q059	existence of a charge
+Q060	the share of time with the state on
+Q061	the time with the state on
+Q062	episodes below a limit
+Q063	time below a limit
+Q064	a count of ECU resets
+Q065	existence of a power derate
+Q066	a conditional count
+Q067	a conditional count
+Q068	a conditional existence check
+Q069	a conditional existence check
+Q070	a conditional count
+Q071	LOOK-ALIKE: the latest set code, not a cleared one
+Q072	LOOK-ALIKE: a count of warnings
+Q073	LOOK-ALIKE: a plain existence check
+Q074	LOOK-ALIKE: a plain listing
+Q075	LOOK-ALIKE: context of a set code
+Q076	LOOK-ALIKE: cause of an over-temperature
+Q077	the sources of a camera measurement
+Q078	LOOK-ALIKE: the latest charging session
+Q079	LOOK-ALIKE: state changes, not time engaged
+Q080	LOOK-ALIKE: an ordinary statistic

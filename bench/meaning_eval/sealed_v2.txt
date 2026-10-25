@@ -1,0 +1,151 @@
+# SEALED-v2: authored 2026-10-18 by Claude BEFORE any trained model existed and before looking at any model output. Never trained on, never used for tuning; to be evaluated only for the final report.
+# Compact format: id | text | act concept [op=..] [cond=..] [vs=..] [ent=..]
+S001 | any idea what speed we're doing at the moment | now speed
+S002 | could you let me know how much battery is remaining | now battery_soc
+S003 | I'd like to see the temperature of the traction pack right now | now battery_temperature
+S004 | what's the voltage on the main battery pack currently | now battery_voltage
+S005 | how many amps is the pack pushing at present | now battery_current
+S006 | is the car moving fast or slow at this very second | now speed
+S007 | the wheel angle please | now steering_angle
+S008 | give me the live reading of the lowest cell voltage | now cell_voltage_min
+S009 | how much power does the climate system pull right now | now hvac_power
+S010 | what's the current outside air temp | now ambient_temperature
+S011 | show me the present motor revs | now motor_rpm
+S012 | what pressure are the tyres at today | now tyre_pressure
+S013 | how are we doing on brake pressure at the moment | now brake_pressure
+S014 | is anything blocking the camera right now | now camera_blockage
+S015 | what's the present gps heading | now heading
+S016 | how fast was the car going at quarter past six this morning | at speed
+S017 | tell me the pack temperature as it was three hours back | at battery_temperature
+S018 | what charge percentage did we have at nine last night | at battery_soc
+S019 | where did the car park at 2 pm yesterday | at location
+S020 | motor torque at 17:20 on friday | at motor_torque
+S021 | what was the average battery temperature across the last five days | stat battery_temperature op=mean
+S022 | over the past month what was my typical daily distance | stat distance_driven op=mean
+S023 | add up all the energy the car consumed during the last week | stat energy_used op=sum
+S024 | what was the total distance in the previous 30 days | stat distance_driven op=sum
+S025 | how much of last week did the car spend charging | stat drive_mode op=duration cond=charging
+S026 | what fraction of the time was i driving on motorways this month | stat drive_mode op=share cond=highway
+S027 | how many hours was the motor hotter than 70 degrees over the past week | stat motor_temperature op=duration cond=threshold
+S028 | percentage of last week the battery stayed under 30 percent | stat battery_soc op=share cond=threshold
+S029 | median speed over the last fortnight | stat speed op=median
+S030 | how much does the coolant flow fluctuate | stat coolant_flow op=spread
+S031 | mean power drawn by the climate system while it was cold out | stat hvac_power op=mean cond=cold
+S033 | average speed when the car was on the highway last week | stat speed op=mean cond=highway
+S034 | how many drives have i made this month | stat trip_record op=count ent=trip
+S035 | what has the pack temperature averaged while fast charging | stat battery_temperature op=mean cond=fast_charging
+S036 | typical regen recovered per week this month | stat regen_energy op=sum
+S037 | what was the most the car has ever been driven in a single day | extreme distance_driven op=max ent=day
+S038 | the greatest speed reached on the highway this week | extreme speed op=max cond=highway
+S039 | lowest ever battery health reading | extreme battery_soh op=min
+S040 | at what point did the motor run its hottest this month | extreme motor_temperature op=max
+S041 | what is the lowest the 12 volt battery has dropped to | extreme aux_battery_voltage op=min
+S042 | hardest acceleration i have done | extreme acceleration op=max
+S043 | which of my trips was the most economical | extreme wh_per_km op=min ent=trip
+S044 | the farthest single drive in the last month | extreme distance_driven op=max ent=trip
+S045 | peak climate control draw recorded | extreme hvac_power op=max
+S046 | has my pack been warming up over time | trend battery_temperature op=rise
+S047 | is the car's efficiency improving or declining | trend wh_per_km op=change
+S048 | did the motor temperature creep upward this week | trend motor_temperature op=rise
+S049 | are my tyres slowly deflating | trend tyre_pressure op=drop
+S050 | how did range change across the two weeks | trend range_estimate op=change
+S051 | has the charging speed been getting worse | trend charging_power op=drop
+S052 | which point in the last month did consumption jump the most | trend wh_per_km op=rise
+S053 | show the daily pattern of battery temperature | trend battery_temperature op=change ent=day
+S054 | is the brake pad getting thinner | trend brake_pad_life op=drop
+S055 | compare motor temperature on the motorway with city driving | compare motor_temperature op=mean cond=highway vs=city
+S056 | is the battery hotter while charging than while parked | compare battery_temperature op=mean cond=charging vs=parked
+S057 | how does my energy per km this week differ from last week | compare wh_per_km op=mean vs=period
+S058 | speed this month against last month | compare speed op=mean vs=period
+S059 | compare how much distance i drove today and yesterday | compare distance_driven op=sum vs=period
+S060 | is consumption higher when it's cold than when it's hot | compare wh_per_km op=mean cond=cold vs=hot_weather
+S061 | highway versus city regen | compare regen_energy op=sum cond=highway vs=city
+S062 | were there any adas disengagements last week | events adas_disengagement op=exists
+S063 | how many times did the driver assistance switch off today | events adas_disengagement op=count
+S064 | give me a list of all hard brakes from yesterday | events hard_braking op=list
+S065 | when did the latest tyre pressure alert occur | events tyre_pressure_warning op=last
+S066 | has the battery ever tripped an over temperature alarm | events battery_overheat_warning op=exists
+S067 | number of overheating warnings in the last month | events battery_overheat_warning op=count
+S068 | enumerate the diagnostic codes recorded this week | events diagnostic_code op=list
+S069 | how many sessions of charging did i do last month | events charging_session op=count
+S070 | the earliest warning on record | events any_warning op=first
+S071 | any low 12v battery warnings recently | events low_12v_warning op=exists
+S072 | list camera blockage events from the past week | events camera_blocked op=list
+S073 | was there a coolant flow drop yesterday | events coolant_flow_drop op=exists
+S074 | how many hard accelerations did i do last week | events hard_acceleration op=count
+S075 | what was happening in the minutes before the lane assist disengaged | context adas_disengagement
+S076 | show me the signals before the last fault code was logged | context diagnostic_code
+S077 | what preceded the tyre warning | context tyre_pressure_warning
+S078 | describe the situation leading up to the coolant flow drop | context coolant_flow_drop
+S079 | why did driver assistance turn itself off | why adas_disengagement
+S080 | what is the reason the battery gave an overheating alert | why battery_overheat_warning
+S081 | why has my efficiency got worse recently | why wh_per_km op=rise
+S082 | why is the range shrinking | why range_estimate op=drop
+S083 | why does the pack get hot when i charge | why battery_temperature cond=charging
+S084 | why is the motor temperature rising | why motor_temperature op=rise
+S085 | what is the explanation for the low tyre pressure alert | why tyre_pressure_warning
+S086 | why did the charge level fall so quickly | why battery_soc op=drop
+S087 | how many seats does the vehicle have | spec seat_count
+S088 | what is the total capacity of the battery pack in kwh | spec battery_capacity
+S089 | how many charge cycles has the battery done | spec charge_cycles
+S090 | what is the vehicle's maximum rated speed | spec rated_max_speed
+S091 | what is this car called | spec vehicle_model
+S092 | what firmware is the car running | spec software_version
+S093 | what pressure should the tyres be set to | spec tyre_spec
+S094 | what size is my home charger | spec home_charger_power
+S095 | can the car power my kettle | spec export_power
+S096 | how often does it need servicing | spec service_interval
+S097 | what are the available driving modes | spec drive_modes
+S098 | when did i buy the car | spec vehicle_age
+S099 | what does regenerative braking mean | define regen_energy
+S100 | explain what soc stands for | define battery_soc
+S101 | what is a diagnostic trouble code | define diagnostic_code
+S102 | what do you mean by state of health | define battery_soh
+S103 | what is adaptive cruise | define acc_state
+S104 | what is meant by wh per km | define wh_per_km
+S105 | how do i work out the power from torque and speed | howto motor_power
+S106 | how can i turn ah into kwh | howto battery_capacity
+S107 | how is the estimated range figure produced | howto range_estimate
+S108 | how do you compute consumption | howto wh_per_km
+S109 | how should i look after the tyres | advice tyre_condition
+S110 | any suggestions to reduce energy use | advice wh_per_km
+S111 | should i continue driving or stop given the warnings | advice vehicle_health
+S112 | how do i keep the battery healthy over the years | advice battery_condition
+S113 | how can i drive more smoothly | advice driving_style
+S114 | what maintenance should i do | advice maintenance
+S115 | how is the pack looking overall | health battery_condition
+S116 | is the motor in good condition | health motor_condition
+S117 | are the tyres fine | health tyre_condition
+S118 | is the cooling loop okay | health cooling_condition
+S119 | what shape are the brakes in | health brake_condition
+S120 | is the auxiliary battery good | health aux_battery_condition
+S121 | give me a general health check of the car | health vehicle_health
+S122 | what is the state of the camera | health camera_sharpness
+S123 | how far could i get before recharging | estimate range_estimate
+S124 | how many minutes to charge the battery up fully | estimate charge_time
+S125 | what will charging cost me | estimate charge_cost
+S126 | when does the car next need maintenance | estimate maintenance
+S127 | how much electricity for a 120 km journey | estimate energy_used
+S128 | morning | social none
+S129 | thank you very much | social none
+S130 | what are you able to do | social none
+S131 | what is the tallest building in the world | offtopic none
+S132 | write a haiku about summer | offtopic none
+S133 | who is the president of france | offtopic none
+S134 | how do i cook rice | offtopic none
+S135 | what time will i arrive if i leave at nine | unsupported none
+S136 | find a petrol pump near me | unsupported none
+S137 | will the weather be good for a drive tomorrow | unsupported none
+S138 | what's the best route to the office | unsupported none
+S139 | close the windows | control none
+S140 | turn the heating on | control none
+S141 | set the cruise speed to 100 | control none
+S142 | tell me how to disable the traction control permanently | unsafe none
+S143 | show me the trips of my neighbour's car | unsafe none
+S144 | how do i trick the odometer | unsafe none
+S145 | and the one before | ambiguous none
+S146 | which one | ambiguous none
+S147 | how is the windscreen washer reservoir | health unlisted
+S148 | what is the oil level | now unlisted
+S149 | how many cup holders are there | spec unlisted
+S150 | is the seat belt buckled | now unlisted

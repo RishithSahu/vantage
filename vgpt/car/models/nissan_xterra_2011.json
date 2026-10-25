@@ -1,0 +1,29 @@
+{
+ "id": "nissan_xterra_2011",
+ "name": "Nissan Xterra 4.0",
+ "year": 2011,
+ "region": "USA",
+ "powertrain": "petrol",
+ "class": "Mid-size SUV, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real Xterra powertrain database",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "syslog from an aftermarket telematics unit",
+  "NMEA 0183 GNSS",
+  "tyre pressure and odometer on a synthetic extension CAN"
+ ],
+ "notes": "",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): nissan_xterra_2011.dbc",
+ "bound": 27,
+ "concepts": 27,
+ "extension": [
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

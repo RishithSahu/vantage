@@ -1,0 +1,228 @@
+{
+ "what": "monotone map from the decoder's lowest token probability (pmin, over the tokens the decoder may allow) to the share of development questions read right at that score",
+ "x": [
+  0.269,
+  0.32,
+  0.329,
+  0.359,
+  0.388,
+  0.423,
+  0.431,
+  0.449,
+  0.4575,
+  0.4945,
+  0.526,
+  0.535,
+  0.538,
+  0.603,
+  0.6735,
+  0.7225,
+  0.7675000000000001,
+  0.8105,
+  0.86,
+  0.8885000000000001,
+  0.9325,
+  0.9655,
+  0.979,
+  0.989,
+  0.9924999999999999,
+  0.996,
+  0.999,
+  1.0
+ ],
+ "y": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.3333333333333333,
+  0.3333333333333333,
+  0.45454545454545453,
+  0.5,
+  0.5,
+  0.5581395348837209,
+  0.5714285714285714,
+  0.5789473684210527,
+  0.6,
+  0.6,
+  0.6428571428571429,
+  0.7407407407407407,
+  0.8352941176470589,
+  0.8717948717948718,
+  0.8809523809523809,
+  0.8928571428571429,
+  0.8947368421052632,
+  0.9435897435897436,
+  0.9516129032258065,
+  0.9773095623987034
+ ],
+ "report": {
+  "questions": 2989,
+  "fit_on": 1490,
+  "checked_on": 1499,
+  "accuracy_all": 0.9026430244228839,
+  "raw": {
+   "brier": 0.06605948954888781,
+   "ece": 0.04067469888492698
+  },
+  "calibrated": {
+   "brier": 0.0647687991620082,
+   "ece": 0.028638692967046853
+  },
+  "thresholds": [
+   {
+    "threshold": 0.2,
+    "half": "fit",
+    "withheld": 0.006040268456375839,
+    "wrong_caught": 0.050955414012738856,
+    "right_withheld": 0.0007501875468867217,
+    "accuracy_of_answered": 0.8993923024983119
+   },
+   {
+    "threshold": 0.2,
+    "half": "check",
+    "withheld": 0.0066711140760507,
+    "wrong_caught": 0.04477611940298507,
+    "right_withheld": 0.0029304029304029304,
+    "accuracy_of_answered": 0.9140362659503022
+   },
+   {
+    "threshold": 0.3,
+    "half": "fit",
+    "withheld": 0.006040268456375839,
+    "wrong_caught": 0.050955414012738856,
+    "right_withheld": 0.0007501875468867217,
+    "accuracy_of_answered": 0.8993923024983119
+   },
+   {
+    "threshold": 0.3,
+    "half": "check",
+    "withheld": 0.0066711140760507,
+    "wrong_caught": 0.04477611940298507,
+    "right_withheld": 0.0029304029304029304,
+    "accuracy_of_answered": 0.9140362659503022
+   },
+   {
+    "threshold": 0.4,
+    "half": "fit",
+    "withheld": 0.012080536912751677,
+    "wrong_caught": 0.08917197452229299,
+    "right_withheld": 0.003000750187546887,
+    "accuracy_of_answered": 0.9028532608695652
+   },
+   {
+    "threshold": 0.4,
+    "half": "check",
+    "withheld": 0.018679119412941963,
+    "wrong_caught": 0.11940298507462686,
+    "right_withheld": 0.008791208791208791,
+    "accuracy_of_answered": 0.919782460910945
+   },
+   {
+    "threshold": 0.5,
+    "half": "fit",
+    "withheld": 0.02080536912751678,
+    "wrong_caught": 0.14012738853503184,
+    "right_withheld": 0.006751687921980495,
+    "accuracy_of_answered": 0.9074708704592186
+   },
+   {
+    "threshold": 0.5,
+    "half": "check",
+    "withheld": 0.0266844563042028,
+    "wrong_caught": 0.17164179104477612,
+    "right_withheld": 0.012454212454212455,
+    "accuracy_of_answered": 0.9239204934886909
+   },
+   {
+    "threshold": 0.6,
+    "half": "fit",
+    "withheld": 0.07248322147651007,
+    "wrong_caught": 0.3503184713375796,
+    "right_withheld": 0.03975993998499625,
+    "accuracy_of_answered": 0.9261939218523878
+   },
+   {
+    "threshold": 0.6,
+    "half": "check",
+    "withheld": 0.08405603735823883,
+    "wrong_caught": 0.4253731343283582,
+    "right_withheld": 0.05054945054945055,
+    "accuracy_of_answered": 0.943918426802622
+   },
+   {
+    "threshold": 0.7,
+    "half": "fit",
+    "withheld": 0.11342281879194631,
+    "wrong_caught": 0.4968152866242038,
+    "right_withheld": 0.06826706676669167,
+    "accuracy_of_answered": 0.9401968205904617
+   },
+   {
+    "threshold": 0.7,
+    "half": "check",
+    "withheld": 0.12274849899933289,
+    "wrong_caught": 0.5746268656716418,
+    "right_withheld": 0.07838827838827839,
+    "accuracy_of_answered": 0.9566539923954372
+   }
+  ]
+ },
+ "sets": [
+  "adv_v1",
+  "adv_v2",
+  "adv_v3",
+  "anomaly_v1",
+  "anomaly_v2",
+  "basic_v2",
+  "catalog_v1",
+  "digest_v1",
+  "followup_fresh_v4",
+  "followup_v2",
+  "followup_v3",
+  "hard_v1",
+  "hard_v2",
+  "hard_v3",
+  "hard_v4",
+  "hard_v5",
+  "hist_v2",
+  "ice_v1",
+  "icevocab_diesel_v1",
+  "icevocab_petrol_v1",
+  "longwrap_v1",
+  "messy_v1",
+  "novel_v1",
+  "platform_v1",
+  "platform_v2",
+  "slots_v2",
+  "trend_v1",
+  "trend_v2",
+  "user_v1",
+  "wording_v1"
+ ],
+ "split": "crc32(question text) % 2: 0 fits, 1 checks",
+ "excluded": [
+  "sealed",
+  "holdout",
+  "acceptance",
+  "expected"
+ ],
+ "model": {
+  "loaded": true,
+  "class": "OrtFrameModel",
+  "backend": "onnxruntime-int8",
+  "frame": 2,
+  "decoder": "mask",
+  "provider": "CPUExecutionProvider",
+  "vehicle_hint": false,
+  "vehicle": null,
+  "ontology": 2
+ },
+ "adapter": "meaning-lora-frame2r12.gguf",
+ "adapter_sha256": "0075c7e57b12961edc11e17edfabc61353d0e0469890fad31608d5e112b402bf",
+ "made": "2026-10-25"
+}

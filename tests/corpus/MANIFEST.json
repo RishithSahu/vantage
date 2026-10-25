@@ -1,0 +1,224 @@
+{
+ "version": 1,
+ "made": "2026-10-25",
+ "window": {
+  "minute_days": 5,
+  "second_hours": 6,
+  "long_days": 30
+ },
+ "files": [
+  {
+   "name": "ev",
+   "file": "ev.db",
+   "kind": "ev",
+   "scenario": "electric",
+   "now": 1792360741,
+   "note": "the last days of the generated sample car 'ev'",
+   "rows": {
+    "sig_1m": 7201,
+    "sig_1s": 656,
+    "trips": 54,
+    "events": 170
+   },
+   "bytes": 2838528,
+   "sha256": "649881149e19c57a39ad4d1b8bf12940630f7268554690aff70670e1ece2496e",
+   "facts": {}
+  },
+  {
+   "name": "petrol",
+   "file": "petrol.db",
+   "kind": "petrol",
+   "scenario": "petrol",
+   "now": 1792364341,
+   "note": "the last days of the generated sample car 'petrol'",
+   "rows": {
+    "sig_1m": 7201,
+    "sig_1s": 5923,
+    "trips": 82,
+    "events": 218
+   },
+   "bytes": 9969664,
+   "sha256": "607121cfc9a5309379ac7ee5d68eaf771300fe196a1c27888b0d01d9efee02d1",
+   "facts": {}
+  },
+  {
+   "name": "diesel",
+   "file": "diesel.db",
+   "kind": "diesel",
+   "scenario": "diesel",
+   "now": 1792339141,
+   "note": "the last days of the generated sample car 'diesel'",
+   "rows": {
+    "sig_1m": 7201,
+    "sig_1s": 361,
+    "trips": 378,
+    "events": 464
+   },
+   "bytes": 7143424,
+   "sha256": "e678c445287b1bc92c8930acfe2aa37e71902b0b4e997f6d92ed0669f769a8f8",
+   "facts": {}
+  },
+  {
+   "name": "bus",
+   "file": "bus.db",
+   "kind": "ev",
+   "scenario": "protocol: J1939 bus",
+   "now": 1792385941,
+   "note": "the last days of the generated sample car 'bus'",
+   "rows": {
+    "sig_1m": 7201,
+    "sig_1s": 361,
+    "trips": 64,
+    "events": 50
+   },
+   "bytes": 2297856,
+   "sha256": "6a3f3059096ec16633d6cee2de775b0e6e61a2c3fdef63b1c0fda22a5e75aa8d",
+   "facts": {}
+  },
+  {
+   "name": "obd",
+   "file": "obd.db",
+   "kind": "petrol",
+   "scenario": "protocol: OBD-II / DBC",
+   "now": 1792360741,
+   "note": "the last days of the generated sample car 'obd'",
+   "rows": {
+    "sig_1m": 7201,
+    "sig_1s": 361,
+    "trips": 355,
+    "events": 1216
+   },
+   "bytes": 10158080,
+   "sha256": "235c30f7540c37995996ae2a5c92d466ff823bbc4cbc175ac1e5c0e3d8f5f886",
+   "facts": {}
+  },
+  {
+   "name": "prop",
+   "file": "prop.db",
+   "kind": "diesel",
+   "scenario": "protocol: proprietary CAN",
+   "now": 1792385941,
+   "note": "the last days of the generated sample car 'prop'",
+   "rows": {
+    "sig_1m": 7201,
+    "sig_1s": 1124,
+    "trips": 63,
+    "events": 194
+   },
+   "bytes": 6021120,
+   "sha256": "9144012471bd23711e7152201a483b38b5bda6656d9fab26f4012e483b062937",
+   "facts": {}
+  },
+  {
+   "name": "missing_signals",
+   "file": "missing_signals.db",
+   "kind": "ev",
+   "scenario": "missing signals",
+   "now": 1792360741,
+   "note": "the electric car without coolant flow or pack temperature",
+   "rows": {
+    "sig_1m": 7201,
+    "sig_1s": 656,
+    "trips": 54,
+    "events": 170
+   },
+   "bytes": 2826240,
+   "sha256": "a4e3d2950b3aaa26aea1746d04f787194ecdfb0fd8e6ea7d732103e8102927dd",
+   "facts": {
+    "missing": [
+     "coolant flow",
+     "battery temperature"
+    ]
+   }
+  },
+  {
+   "name": "faults",
+   "file": "faults.db",
+   "kind": "ev",
+   "scenario": "faults",
+   "now": 1792360741,
+   "note": "the electric car with exactly known injected events",
+   "rows": {
+    "sig_1m": 7201,
+    "sig_1s": 656,
+    "trips": 54,
+    "events": 175
+   },
+   "bytes": 2838528,
+   "sha256": "cb19d4c5426057997521a7f8a66ed4d151926930ebde0fb70e0b52a45615fb22",
+   "facts": {
+    "injected": {
+     "ECU_RESET": [
+      1792349940,
+      1792353540,
+      1792357140
+     ],
+     "DTC_SET": [
+      1792358940
+     ],
+     "TPMS_LOW": [
+      1792359540
+     ]
+    },
+    "ecu_resets_last_24h": 3
+   }
+  },
+  {
+   "name": "stale",
+   "file": "stale.db",
+   "kind": "ev",
+   "scenario": "stale data",
+   "now": 1792360741,
+   "note": "the electric car whose record ends two days before now",
+   "rows": {
+    "sig_1m": 4321,
+    "sig_1s": 0,
+    "trips": 48,
+    "events": 149
+   },
+   "bytes": 1851392,
+   "sha256": "717e85c733ae7d95985147c62c0c2c8f1a032287be873532ae79e5c98d4cd48a",
+   "facts": {
+    "original_end": 1792360740,
+    "record_ends": 1792187940,
+    "gap_days": 2
+   }
+  },
+  {
+   "name": "no_data",
+   "file": "no_data.db",
+   "kind": "none",
+   "scenario": "no data",
+   "now": 1792360741,
+   "note": "the electric car with every measurement and event removed",
+   "rows": {
+    "sig_1m": 0,
+    "sig_1s": 0,
+    "trips": 0,
+    "events": 0
+   },
+   "bytes": 184320,
+   "sha256": "6e4cc33598c7bdb29da66dc8850a362e99e964e32bcd07cf3e012c51333a0b9a",
+   "facts": {}
+  },
+  {
+   "name": "hybrid",
+   "file": "hybrid.db",
+   "kind": "hybrid",
+   "scenario": "hybrid (synthetic)",
+   "now": 1792364341,
+   "note": "a synthetic hybrid: the petrol car's engine and fuel with a folded traction-battery series",
+   "rows": {
+    "sig_1m": 7201,
+    "sig_1s": 5923,
+    "trips": 82,
+    "events": 218
+   },
+   "bytes": 9990144,
+   "sha256": "c4195764cbbb5d1efd89e3877a8251a56b0dfff808e13d532d62e7cca1ab2c7e",
+   "facts": {
+    "soc_last": 81.9
+   }
+  }
+ ]
+}

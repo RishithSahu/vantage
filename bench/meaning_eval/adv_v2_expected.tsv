@@ -1,0 +1,113 @@
+id	expected
+B001	colloq: an existence check on unexpected shutdowns
+B002	colloq: an existence check on ECU resets
+B003	colloq: an existence check on emergency braking
+B004	colloq: an existence check on silent sources
+B005	colloq: an existence check on pack over-temperature
+B006	colloq: an existence check on tyre warnings
+B007	colloq: a count of hard braking
+B008	colloq: an existence check on camera blockage
+B009	neg: an existence check despite the negation
+B010	neg: an existence check on fault codes
+B011	neg: an existence check on ECU resets
+B012	neg: an existence check on unexpected shutdowns
+B013	neg: an existence check on hard braking
+B014	neg: an existence check on disengagements
+B015	typo: a count of diagnostic codes
+B016	typo: the current pack temperature
+B017	typo: the latest unexpected shutdown
+B018	typo: the current speed
+B019	typo: list voltage dips
+B020	typo: the lowest state of charge
+B021	typo: the average consumption
+B022	tele: the current motor temperature
+B023	tele: a count of hard braking
+B024	tele: the latest ECU reset
+B025	tele: the remaining range
+B026	tele: the highest speed
+B027	tele: list emergency braking
+B028	tele: the average coolant flow
+B029	thres: episodes above a limit
+B030	thres: time below a limit
+B031	thres: share of time above a limit
+B032	thres: time below a limit
+B033	thres: occasions below a limit
+B034	thres: time above a limit
+B035	negcond: a statistic outside a condition
+B036	negcond: a statistic outside a condition
+B037	negcond: a conditional count
+B038	negcond: an extreme outside a condition
+B039	negcond: a conditional count
+B040	jargon: the context of the latest code
+B041	jargon: where a measurement comes from
+B042	jargon: where a measurement comes from
+B043	jargon: an existence check on network errors
+B044	jargon: not recorded
+B045	jargon: list network errors
+B046	jargon: an existence check on ECU resets
+B047	trend: frequency over time
+B048	trend: frequency over time
+B049	trend: the week with the largest rise
+B050	trend: the week with the largest fall
+B051	trend: two periods
+B052	trend: two conditions
+B053	trend: the day with the fewest events
+B054	trend: the number of days with an event
+B055	abstain: an instruction to operate the vehicle
+B056	abstain: asks to bypass a safety indicator
+B057	abstain: not about the vehicle
+B058	abstain: not recorded
+B059	abstain: no referent
+B060	abstain: no referent
+B061	abstain: thanks
+B062	abstain: a prediction
+B063	abstain: not recorded
+B064	abstain: an instruction
+B065	abstain: asks for a secret
+B066	lookalike: motor over-temperature is its own event
+B067	lookalike: brake temperature is not brake pressure
+B068	lookalike: pedal position is not brake pressure
+B069	lookalike: a cleared code is not a set code
+B070	lookalike: a set code is not a cleared code
+B071	lookalike: a state change is not a disengagement
+B072	lookalike: a disengagement is not a state change
+B073	lookalike: charging sessions are not charging power
+B074	lookalike: charging power is not a session
+B075	lookalike: a low 12 V warning is not a voltage dip
+B076	lookalike: a voltage dip is not a low-battery warning
+B077	wrap: a count of hard braking
+B078	wrap: an existence check
+B079	wrap: the current motor temperature
+B080	wrap: the longest trip
+B081	wrap: list software updates
+B082	ctx: the current outside temperature
+B083	ctx: a fixed fact
+B084	ctx: distance driven
+B085	ctx: the latest service reminder
+B086	ctx: the charge time
+B087	define: a definition
+B088	define: a definition
+B089	define: a method
+B090	define: a definition
+B091	define: a definition
+B092	topic: motor condition
+B093	topic: brake condition
+B094	topic: overall condition
+B095	topic: service advice
+B096	topic: range
+B097	topic: a briefing
+B098	topic: range advice
+B099	why: the cause of a motor warning
+B100	why: a drop in range in the cold
+B101	why: the cause of an unexpected shutdown
+B102	why: the cause of a camera blockage
+B103	why: a drop in state of charge
+B104	why: the cause of a sensor conflict
+B105	spec: a fixed fact
+B106	spec: a fixed fact
+B107	spec: a fixed fact
+B108	spec: where a reading comes from
+B109	spec: where a reading comes from
+B110	spec: a fixed fact
+B111	now/at: a past instant
+B112	now/at: a past instant

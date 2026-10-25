@@ -1,0 +1,218 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "heavy_truck_j1939",
+ "vehicle": {
+  "make": "Generic",
+  "model": "Heavy truck (SAE J1939)",
+  "year": 2019,
+  "powertrain": "diesel",
+  "specs": {
+   "veh.tyre_spec_front": 800,
+   "veh.tyre_spec_rear": 800,
+   "veh.service_km": 30000,
+   "veh.sw": "tcu 3.2",
+   "veh.wheelbase_m": 3.6,
+   "veh.wheel_radius_m": 0.5,
+   "veh.rated_max_speed": 120,
+   "veh.seats": 2,
+   "veh.tank_l": 300,
+   "veh.model": "Generic Heavy truck (SAE J1939)"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "j1939",
+   "type": "can",
+   "name": "SAE J1939 (250 kbit/s, 29-bit, any source address)",
+   "dbc": "j1939.dbc",
+   "channel": "can0",
+   "bitrate": 250000,
+   "j1939": true
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Linux telematics / infotainment (syslog)",
+   "format": "rfc3164"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  }
+ ],
+ "signals": [
+  {
+   "concept": "engine_load",
+   "from": "can:j1939/J1939_61443.SPN92_engine_load",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "accelerator_position",
+   "from": "can:j1939/J1939_61443.SPN91_accelerator_position",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "engine_rpm",
+   "from": "can:j1939/J1939_61444.SPN190_engine_rpm",
+   "unit": "none",
+   "rate_hz": 5
+  },
+  {
+   "concept": "engine_torque_percent",
+   "from": "can:j1939/J1939_61444.SPN513_engine_torque_percent",
+   "unit": "none",
+   "rate_hz": 5
+  },
+  {
+   "concept": "def_level",
+   "from": "can:j1939/J1939_65110.SPN1761_def_level",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "speed",
+   "from": "can:j1939/J1939_65132.SPN1624_speed",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "can:j1939/J1939_65217.SPN917_odometer",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:j1939/J1939_65262.SPN110_motor_temperature",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "engine_oil_temperature",
+   "from": "can:j1939/J1939_65262.SPN175_engine_oil_temperature",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "fuel_rate",
+   "from": "can:j1939/J1939_65266.SPN183_fuel_rate",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "intake_air_temperature",
+   "from": "can:j1939/J1939_65269.SPN172_intake_air_temperature",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "barometric_pressure",
+   "from": "can:j1939/J1939_65269.SPN108_barometric_pressure",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "can:j1939/J1939_65269.SPN171_ambient_temperature",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "boost_pressure",
+   "from": "can:j1939/J1939_65270.SPN102_boost_pressure",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "exhaust_gas_temperature",
+   "from": "can:j1939/J1939_65270.SPN173_exhaust_gas_temperature",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "can:j1939/J1939_65271.SPN168_aux_battery_voltage",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "fuel_level",
+   "from": "can:j1939/J1939_65276.SPN96_fuel_level",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "_ignition",
+   "from": "can:j1939/J1939_61444.SPN190_engine_rpm",
+   "unit": "none",
+   "rate_hz": 5,
+   "when": ">300"
+  }
+ ],
+ "events": [
+  {
+   "id": "overtemp",
+   "from": "signal:motor_temperature",
+   "when": ">105",
+   "hold_s": 10,
+   "type": "WARN_OVERTEMP",
+   "severity": "critical",
+   "detail": "Coolant above 105 °C ({value:.1f} °C)"
+  },
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

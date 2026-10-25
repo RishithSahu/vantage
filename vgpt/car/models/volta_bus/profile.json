@@ -1,0 +1,256 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "volta_bus",
+ "vehicle": {
+  "make": "Volta",
+  "model": "CityBus 12 m",
+  "year": 2026,
+  "powertrain": "bev",
+  "specs": {
+   "veh.model": "Volta CityBus 12 m 350 kWh",
+   "veh.cap_kwh": 350.0,
+   "veh.soh": 100.0,
+   "veh.nominal_voltage": 650,
+   "veh.tyre_spec_front": 800,
+   "veh.tyre_spec_rear": 800,
+   "veh.service_km": 20000,
+   "veh.home_charger_kw": 150.0,
+   "veh.sw": "1.8.0",
+   "veh.wheelbase_m": 5.9,
+   "veh.wheel_radius_m": 0.5,
+   "veh.gear_ratio": 14.0,
+   "veh.rated_max_speed": 80,
+   "veh.seats": 38
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "co",
+   "type": "can",
+   "canopen": true,
+   "name": "CANopen drive and battery network, 250 kbit/s (CiA 301; PDO mapping, heartbeat, emergency, SDO)",
+   "dbc": "volta_canopen.dbc",
+   "channel": "can0",
+   "bitrate": 250000,
+   "nodes": [
+    "0x10",
+    "0x20",
+    "0x30",
+    "0x40",
+    "0x50"
+   ],
+   "od": {
+    "0x2000:0": {
+     "node": "0x20",
+     "concept": "odometer",
+     "fmt": "<I",
+     "scale": 0.1,
+     "unit": "km",
+     "rate_hz": 0.2
+    },
+    "0x2001:0": {
+     "node": "0x10",
+     "concept": "aux_battery_voltage",
+     "fmt": "<H",
+     "scale": 0.001,
+     "unit": "V",
+     "rate_hz": 0.5
+    }
+   }
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "logs",
+   "type": "log",
+   "name": "Linux telematics unit (syslog)",
+   "format": "rfc3164"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  }
+ ],
+ "signals": [
+  {
+   "concept": "battery_soc",
+   "from": "can:co/BMS_TPDO1.PackSoc",
+   "unit": "%",
+   "rate_hz": 5
+  },
+  {
+   "concept": "battery_voltage",
+   "from": "can:co/BMS_TPDO1.PackVoltage",
+   "unit": "V",
+   "rate_hz": 5
+  },
+  {
+   "concept": "battery_current",
+   "from": "can:co/BMS_TPDO1.PackCurrent",
+   "unit": "A",
+   "rate_hz": 5
+  },
+  {
+   "concept": "battery_temperature",
+   "from": "can:co/BMS_TPDO2.PackTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "cell_temperature_max",
+   "from": "can:co/BMS_TPDO2.CellTempMax",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "cell_temperature_min",
+   "from": "can:co/BMS_TPDO2.CellTempMin",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "cell_voltage_min",
+   "from": "can:co/BMS_TPDO3.CellVoltMin",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "_charging_active",
+   "from": "can:co/BMS_TPDO3.Charging",
+   "unit": "none",
+   "rate_hz": 5
+  },
+  {
+   "concept": "motor_rpm",
+   "from": "can:co/INV_TPDO1.MotorRpm",
+   "unit": "rpm",
+   "rate_hz": 20
+  },
+  {
+   "concept": "motor_torque",
+   "from": "can:co/INV_TPDO1.MotorTorque",
+   "unit": "Nm",
+   "rate_hz": 20
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:co/INV_TPDO1.MotorTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "speed",
+   "from": "can:co/INV_TPDO1.VehSpeed",
+   "unit": "km/h",
+   "rate_hz": 20
+  },
+  {
+   "concept": "charging_power",
+   "from": "can:co/CHG_TPDO1.ChargePower",
+   "unit": "kW",
+   "rate_hz": 1
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "can:co/HVAC_TPDO1.OutsideTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "cabin_temperature",
+   "from": "can:co/HVAC_TPDO1.CabinTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "hvac_power",
+   "from": "can:co/HVAC_TPDO1.HvacPower",
+   "unit": "W",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:co/TPMS_TPDO1.TyreFL",
+   "unit": "kPa",
+   "rate_hz": 1,
+   "valid": [
+    0,
+    1000
+   ]
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:co/TPMS_TPDO1.TyreFR",
+   "unit": "kPa",
+   "rate_hz": 1,
+   "valid": [
+    0,
+    1000
+   ]
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:co/TPMS_TPDO1.TyreRL",
+   "unit": "kPa",
+   "rate_hz": 1,
+   "valid": [
+    0,
+    1000
+   ]
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:co/TPMS_TPDO1.TyreRR",
+   "unit": "kPa",
+   "rate_hz": 1,
+   "valid": [
+    0,
+    1000
+   ]
+  },
+  {
+   "concept": "_ignition",
+   "from": "can:co/INV_TPDO1.MotorRpm",
+   "unit": "rpm",
+   "rate_hz": 5,
+   "when": ">-30000"
+  }
+ ],
+ "events": [
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  },
+  {
+   "id": "overtemp",
+   "from": "signal:battery_temperature",
+   "when": ">55",
+   "hold_s": 30,
+   "type": "WARN_BATT_OVERTEMP",
+   "severity": "critical",
+   "detail": "Pack at {value:.1f} degC"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 700,
+  "low_12v": 22.0
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

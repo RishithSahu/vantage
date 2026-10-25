@@ -1,0 +1,30 @@
+{
+ "id": "mercedes_e350_w212",
+ "name": "Mercedes-Benz E 350 (W212)",
+ "year": 2010,
+ "region": "Germany / global",
+ "powertrain": "petrol",
+ "class": "Executive saloon, petrol V6",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real Mercedes E-Class chassis database (wheel speeds, steering, pedals, doors, belts)",
+  "OBD-II service 01 over ISO 15765-4 CAN (vehicle speed, engine speed, temperatures, fuel)",
+  "UDS diagnostic trouble codes",
+  "slog2info from the QNX head unit",
+  "NMEA 0183 GNSS",
+  "tyre pressure, odometer and ignition state on a synthetic extension CAN"
+ ],
+ "notes": "",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): mercedes_benz_e350_2010.dbc",
+ "bound": 33,
+ "concepts": 33,
+ "extension": [
+  "_ignition",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

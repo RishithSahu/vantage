@@ -1,0 +1,27 @@
+# Generated, large or private: kept on this computer, never in the repository.
+# data, models and results are described by hashes (tests/testdata_manifest.json, RELEASE.json), not stored here.
+/data/
+/models/
+/results/
+/logs_*.txt
+/training/out/
+/training/meaning/data/
+/training/qp/
+/deploy/windows/build/
+/deploy/windows/dist/
+/deploy/windows/work/
+/vm/stage/
+/.oracle_venv/
+/.test-tmp/
+/.hypothesis/
+/.pytest_cache/
+/.devenv/
+__pycache__/
+*.pyc
+*.db-wal
+*.db-shm
+*.tmp
+/RELEASE.json
+# the small test corpus IS tracked (tests/corpus/*.db, 54 MB, with its MANIFEST.json); other databases are not
+*.db
+!/tests/corpus/*.db

@@ -1,0 +1,27 @@
+# Tasks for the interpretation-review study. A participant is given the GOAL in plain words (never a question to type) and phrases their own question; the prototype proposes an interpretation, they review/edit/run it and say whether the answer is what they wanted. Gold = the intended typed query (the evaluator's IR text), used only to score correctness AUTOMATICALLY next to the participant's own verdict. Category = what the task stresses. Database: data/gen_courier_ext.db (the same vehicle as the development set); the sealed acceptance questions are not used.
+# columns (TAB): task, category, goal shown to the participant, gold IR
+t01	everyday	Find out how hot the battery got at its worst yesterday.	op=extreme tgt=battery_temperature agg=max t=cal:yesterday
+t02	everyday	Find out how many times you braked hard last night.	op=count ev=HARSH_BRAKE t=cal:last_night
+t03	everyday	Find out your average speed over the last 7 days.	op=aggregate tgt=speed agg=mean t=last:7:day
+t04	unfamiliar wording	You want to know whether the car's range estimate has been getting worse over the last two weeks.	op=trend tgt=range_estimate t=last:2:week
+t05	unfamiliar wording	Find out how much electricity the car used in total yesterday.	op=aggregate tgt=energy_used agg=sum t=cal:yesterday
+t06	restriction	Find the average battery temperature while charging this month.	op=aggregate tgt=battery_temperature agg=mean t=cal:this_month c=charging
+t07	threshold	Find out what share of the last 14 days the tyre pressure was below 30 psi.	op=percent_time t=last:14:day c=sig:tyre_pressure:lt:30:psi
+t08	selection	Find the average speed on your two longest trips.	op=aggregate tgt=speed agg=mean t=all sel=trip:distance_driven:desc:2:-
+t09	comparison	Compare the average speed today with yesterday.	op=compare tgt=speed agg=mean t=cal:today t2=cal:yesterday
+t10	explanation	Ask why the cabin temperature went up in the last 10 days.	op=explain_change tgt=cabin_temperature t=last:10:day
+t11	event context	Look at what was happening just before the last tyre-pressure warning.	op=event_context ev=TPMS_LOW evs=last
+t12	missing sensor	Ask for the engine oil pressure (this vehicle does not record it).	op=unresolved
+t13	capability	Find out whether the car records wheel speed at the front left.	op=capability tgt=wheel_speed_fl
+t14	follow-up (first part t14a, then t14b)	t14a: find the number of hard accelerations yesterday. t14b: now ask the same for the day before.	op=count ev=HARSH_ACCEL t=cal:day_before_yesterday
+t15	follow-up restriction	t15a: average motor temperature over the last 5 days. t15b: now only on the highway.	op=aggregate tgt=motor_temperature agg=mean t=last:5:day c=highway
+t16	not about the car	Ask the assistant to turn the heated seats on.	op=none
+cs1	case-study scenario 1	Find out why your driving range has dropped over the last two weeks.	op=explain_change tgt=range_estimate t=last:2:week
+cs2	case-study scenario 2	Find out when your energy efficiency (consumption per kilometre) got worst - the largest drop.	op=detect_change tgt=wh_per_km t=all
+cs3	case-study scenario 3	List every time the lane-keeping / driver-assistance system disengaged yesterday.	op=list_events t=cal:yesterday ev=ADAS_DISENGAGE evs=all
+cs4	case-study scenario 4	See what was happening just before the battery overheating warning.	op=event_context ev=WARN_BATT_OVERTEMP evs=last
+cs5	case-study scenario 5	Compare energy consumption on city driving with highway driving.	op=compare tgt=wh_per_km agg=mean t=last:7:day grp=city,highway
+t17	changed vehicle mapping	First switch the vehicle in the 'Vehicle' list of the head-unit page (/headunit) to the cold-climate vehicle, then find the average battery temperature yesterday.	op=aggregate tgt=battery_temperature agg=mean t=cal:yesterday
+own1	own goal	Think of something you would really like to know about this vehicle's recent history and ask it. Write your goal in the goal box first.	
+own2	own goal	Think of something you would like to compare or check about this vehicle. Write your goal in the goal box first.	
+own3	own goal	Ask something you expect the assistant NOT to be able to answer. Write your goal in the goal box first.	

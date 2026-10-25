@@ -1,0 +1,24 @@
+{
+ "id": "meridian_ev",
+ "name": "Meridian E2 (synthetic maker)",
+ "year": 2025,
+ "region": "anywhere",
+ "powertrain": "bev",
+ "class": "Battery-electric saloon with a CAN-FD main bus",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN-FD main bus plus a body CAN",
+  "UDS diagnostic trouble codes",
+  "SOME/IP notifications",
+  "Android Vehicle HAL",
+  "QNX slog2info logs",
+  "forward camera report",
+  "NMEA 0183 GNSS"
+ ],
+ "notes": "A second fictional maker with a different bus layout from Aster, to show the same Vantage reading both.",
+ "source": "written for the test bench (vgpt/vehicle/packs)",
+ "bound": 42,
+ "concepts": 39,
+ "extension": [],
+ "profile_dir": "../../vehicle/packs/meridian_ev"
+}

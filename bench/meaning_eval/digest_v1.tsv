@@ -1,0 +1,96 @@
+# DIGEST_V1: frame version 2 extended (summary / anomaly / usual / trip focus; universal-catalogue vocabulary).  Authored 2026-10-21 before the training data of these families was built.  Never trained on.
+# Format: id <TAB> text <TAB> gold frame (act concept op cond vs ent c2 ref) <TAB> tag
+D001	what has my car been through this week	summary none none none none none none none	summary
+D002	walk me through the past seven days of driving	summary none none none none none none none	summary
+D003	brief me on the month	summary none none none none none none none	summary
+D004	how did I use the vehicle lately	summary none none none none none none none	summary
+D005	a snapshot of the last ten days	summary none none none none none none none	summary
+D006	tell me what the car has been up to	summary none none none none none none none	summary
+D007	sum up my driving since the start of the month	summary none none none none none none none	summary
+D008	quick recap of the past fortnight	summary none none none none none none none	summary
+D009	give me the story of this week	summary none none none none none none none	summary
+D010	how have my last few weeks looked	summary none none none none none none none	summary
+D011	report on my recent journeys	summary none none none none none none none	summary
+D012	fill me in on the week	summary none none none none none none none	summary
+D013	what is the overall picture for the past month	summary none none none none none none none	summary
+D014	describe how the car behaved over the weekend	summary none none none none none none none	summary
+D015	so how was last week	summary none none none none none none none	summary
+D016	give me an account of the last few days	summary none none none none none none none	summary
+D017	headline numbers for my driving this month please	summary none none none none none none none	summary
+D018	what should I take away from the last seven days	summary none none none none none none none	summary
+D019	run through the recent period for me	summary none none none none none none none	summary
+D020	an overview of everything that happened this week	summary none none none none none none none	summary
+D021	what is different about the car versus last month	summary none change none none none none none	changes
+D022	did anything shift this week compared with last	summary none change none none none none none	changes
+D023	tell me what has moved lately	summary none change none none none none none	changes
+D024	what has gone up or down recently	summary none change none none none none none	changes
+D025	anything that has changed since the week before	summary none change none none none none none	changes
+D026	which readings are not what they were last month	summary none change none none none none none	changes
+D027	how is this fortnight different from the previous one	summary none change none none none none none	changes
+D028	compare the whole picture of this week with the last and tell me what changed	summary none change none none none none none	changes
+D029	what has the car started doing differently	summary none change none none none none none	changes
+D030	highlight the differences since last week	summary none change none none none none none	changes
+D031	what's moved in my numbers	summary none change none none none none none	changes
+D032	were there any notable changes this month	summary none change none none none none none	changes
+D033	is there anything unusual going on with the car	anomaly none none none none none none none	anomaly
+D034	did the vehicle do anything unexpected this week	anomaly none none none none none none none	anomaly
+D035	check my data for anything fishy	anomaly none none none none none none none	anomaly
+D036	any signals acting up lately	anomaly none none none none none none none	anomaly
+D037	what stands out as strange in the last month	anomaly none none none none none none none	anomaly
+D038	were there any peculiar readings	anomaly none none none none none none none	anomaly
+D039	look through my recent data for anything abnormal	anomaly none none none none none none none	anomaly
+D040	tell me about any unexpected spikes	anomaly none none none none none none none	anomaly
+D041	anything that looks like a fault in the data lately	anomaly none none none none none none none	anomaly
+D042	do you see any outliers this week	anomaly none none none none none none none	anomaly
+D043	anything weird yesterday	anomaly none none none none day none none	anomaly
+D044	did my longest drive have anything strange in it	anomaly none none none none trip none none	anomaly
+D045	was the last journey normal or odd	anomaly none none none none trip none none	anomaly
+D046	anything strange in the motor temperature this month	anomaly motor_temperature none none none none none none	anomaly
+D047	did the battery temperature do anything odd this week	anomaly battery_temperature none none none none none none	anomaly
+D048	look for unusual tyre pressure readings	anomaly tyre_pressure none none none none none none	anomaly
+D049	has the coolant flow behaved strangely	anomaly coolant_flow none none none none none none	anomaly
+D050	is the engine oil temperature showing anything odd	anomaly engine_oil_temperature none none none none none none	anomaly
+D051	any oddities in the 12 volt battery readings	anomaly aux_battery_voltage none none none none none none	anomaly
+D052	is anything wrong with the way the battery is behaving	anomaly battery_condition none none none none none none	anomaly
+D053	anything off about the tyres lately	anomaly tyre_condition none none none none none none	anomaly
+D054	did the warnings look unusual this week	anomaly any_warning none none none none none none	anomaly
+D055	what is the normal operating range of the pack temperature	stat battery_temperature usual none none none none none	usual
+D056	how does the motor temperature typically run	stat motor_temperature usual none none none none none	usual
+D057	what speed do I usually drive at	stat speed usual none none none none none	usual
+D058	what are normal values for the coolant flow	stat coolant_flow usual none none none none none	usual
+D059	typical tyre pressure for my car	stat tyre_pressure usual none none none none none	usual
+D060	how much does the battery voltage normally vary	stat battery_voltage usual none none none none none	usual
+D061	what is the usual engine oil temperature when driving	stat engine_oil_temperature usual none none none none none	usual
+D062	how much fuel does the engine normally burn per hour	stat fuel_rate usual none none none none none	usual
+D063	normal climate control power draw	stat hvac_power usual none none none none none	usual
+D064	what is typical for the engine load	stat engine_load usual none none none none none	usual
+D065	how often does hard braking normally happen to me	stat hard_braking usual none none none none none	usual
+D066	what is the typical number of warnings per week	stat any_warning usual none none none none none	usual
+D067	what range does my 12 volt battery usually sit in	stat aux_battery_voltage usual none none none none none	usual
+D068	normal outside temperature where I drive	stat ambient_temperature usual none none none none none	usual
+D069	why was the pack so warm on the longest drive	why battery_temperature rise none none trip none none	trip
+D070	what made the last journey so energy hungry	why wh_per_km rise none none trip none none	trip
+D071	why did the motor get hot on my most recent trip	why motor_temperature rise none none trip none none	trip
+D072	what explains the high fuel burn on the latest drive	why fuel_rate rise none none trip none none	trip
+D073	why was the oil so hot on that big trip	why engine_oil_temperature rise none none trip none none	trip
+D074	why did the range collapse during the last trip	why range_estimate drop none none trip none none	trip
+D075	why was the coolant flow low on the previous drive	why coolant_flow drop none none trip none none	trip
+D076	why was yesterday so tough on the battery	why battery_temperature rise none none day none none	trip
+D077	tell me how the longest trip went	summary none none none none trip none none	trip
+D078	go over my last drive	summary none none none none trip none none	trip
+D079	what was special about my shortest journey	summary none none none none trip none none	trip
+D080	describe the most efficient trip I made	summary none none none none trip none none	trip
+D081	how did yesterday go for the car	summary none none none none day none none	trip
+D082	recap today for me	summary none none none none day none none	trip
+D083	how has the battery temperature been this week	summary battery_temperature none none none none none none	concept
+D084	give me a picture of the motor temperature this month	summary motor_temperature none none none none none none	concept
+D085	overview of how my speed has been	summary speed none none none none none none	concept
+D086	summarise the tyre pressure situation	summary tyre_pressure none none none none none none	concept
+D087	how did the state of charge go over the week	summary battery_soc none none none none none none	concept
+D088	rundown of my fuel use lately	summary fuel_rate none none none none none none	concept
+D089	overview of the hard braking this month	summary hard_braking none none none none none none	concept
+D090	how have the warnings been	summary any_warning none none none none none none	concept
+D091	summarise how the battery is doing	summary battery_condition none none none none none none	concept
+D092	how has the cooling system been lately	summary cooling_condition none none none none none none	concept
+D093	how is my driving style looking	summary driving_style none none none none none none	concept
+D094	overall health picture of the vehicle	summary vehicle_health none none none none none none	concept

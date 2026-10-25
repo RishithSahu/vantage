@@ -1,0 +1,115 @@
+# Round 12 (2026-10-24), file a: families from the mistakes of the round-10 adapter on sealed_v6 and the 90-question probe (hard_mix_*). Paraphrased: no row copies a sealed question (the builder's leak filter also checks).
+# Used only if a round-12 patch is trained; written before the round-11 result was known.
+
+# ------------------------------------------------------------------------------------------------ range "at this rate", forecasts
+what range will I get if I carry on like this | estimate range_estimate
+how far will I get at this pace | estimate range_estimate
+will I make it to the next town on this charge | estimate range_estimate
+how far can I go if I keep this speed | estimate range_estimate
+@petrol how far will I get at my current driving | estimate range_estimate
+@diesel what distance can I cover if I drive like this | estimate range_estimate
+
+# ------------------------------------------------------------------------------------------------ money we do not record
+how much did I spend on tolls | unsupported none
+what did the parking cost me | unsupported none
+how much was my last fine | unsupported none
+how much did the garage charge for the service | unsupported none
+how much did the insurance cost this year | unsupported none
+what did I pay for the last fill up | unsupported none
+how much is the road tax | unsupported none
+
+# ------------------------------------------------------------------------------------------------ faults are diagnostic codes, warnings are warnings
+did the car throw any faults this week | events diagnostic_code op=exists
+are there any fault codes stored | events diagnostic_code op=exists
+list this month's fault codes | events diagnostic_code op=list
+which faults came up recently | events diagnostic_code op=list
+how many faults did it log last week | events diagnostic_code op=count
+have any dtcs been set | events diagnostic_code op=exists
+did any warning light come on this week | events any_warning op=exists
+list the warnings of the last few days | events any_warning op=list
+how many warnings did I get this month | events any_warning op=count
+
+# ------------------------------------------------------------------------------------------------ service timing is a forecast
+when should I get the oil changed | estimate maintenance
+when is the next oil change | estimate maintenance
+how soon should I service the car | estimate maintenance
+when do the brakes need doing | estimate maintenance
+when is my next inspection | estimate maintenance
+how long until the next service | estimate maintenance
+
+# ------------------------------------------------------------------------------------------------ advice: driving, saving energy, saving fuel
+how can I drive more smoothly | advice driving_style
+how do I improve my driving score | advice driving_style
+how can I be easier on the car | advice driving_style
+what is the best way to drive for efficiency | advice driving_style
+@petrol how can I burn less petrol | advice fuel_rate
+@diesel how do I save diesel | advice fuel_rate
+@petrol give me tips to improve my mileage | advice fuel_rate
+how do I use less energy | advice wh_per_km
+how can I get more range | advice range_estimate
+
+# ------------------------------------------------------------------------------------------------ how am I driving
+was my driving smooth this week | health driving_style
+how efficient was my driving lately | health driving_style
+rate how I drove today | health driving_style
+am I a gentle driver | health driving_style
+
+# ------------------------------------------------------------------------------------------------ specs and readings of the engine
+@petrol how many horsepower does the engine make | spec horsepower
+@diesel what is the engine's power output | spec horsepower
+@petrol what is the engine torque right now | now engine_torque
+@diesel how much torque is it making | now engine_torque
+@petrol how many hours has the motor been running overall | now engine_hours
+@diesel total engine hours | now engine_hours
+
+# ------------------------------------------------------------------------------------------------ economy words of petrol and diesel cars
+@petrol kilometres per litre | stat fuel_rate op=mean
+@diesel what is my km per litre | stat fuel_rate op=mean
+@petrol average mileage this week | stat fuel_rate op=mean
+@diesel how many litres per hundred km did I use | stat fuel_rate op=mean
+@diesel consumption per hour of work | stat fuel_rate op=mean
+@petrol fuel burned per hour | stat fuel_rate op=mean
+@diesel how much diesel per hour | stat fuel_rate op=mean
+@petrol how many km did I do this week | stat distance_driven op=sum
+@diesel distance covered this week | stat distance_driven op=sum
+
+# ------------------------------------------------------------------------------------------------ diesel after-treatment
+@diesel how many times did the filter regenerate | stat dpf_regeneration op=count
+@diesel count of dpf cleaning cycles this month | stat dpf_regeneration op=count
+@diesel is the adblue running low | now def_level
+@diesel do I need to top up adblue | now def_level
+@diesel is the soot filter healthy | health dpf_soot_load
+@diesel is the turbo okay | health motor_condition
+@diesel any exhaust warnings | events diagnostic_code op=exists
+
+# ------------------------------------------------------------------------------------------------ air pressure in the tyres vs the atmosphere
+how much air is in the tyres | now tyre_pressure
+what is the pressure in each tyre | now tyre_pressure
+are my tyres properly inflated | now tyre_pressure
+what is the atmospheric pressure | now barometric_pressure
+what is the barometric pressure here | now barometric_pressure
+
+# ------------------------------------------------------------------------------------------------ small things
+how much brake pad is left | now brake_pad_life
+how worn are the pads | now brake_pad_life
+did the 12 volt fall under 11.5 last week | events voltage_dip op=exists
+has the 12 volt dropped lately | events voltage_dip op=exists
+which tyre is low | now tyre_pressure
+
+# ------------------------------------------------------------------------------------------------ one line per day / week (a breakdown, not a total)
+how far did I drive each week this month | stat distance_driven op=sum ent=week
+distance for every week of last month | stat distance_driven op=sum ent=week
+weekly distance over the last two months | stat distance_driven op=sum ent=week
+my kilometres by week this month | stat distance_driven op=sum ent=week
+km per week lately | stat distance_driven op=sum ent=week
+how many km did I do each day last week | stat distance_driven op=sum ent=day
+daily distance for the last ten days | stat distance_driven op=sum ent=day
+distance by day this week | stat distance_driven op=sum ent=day
+how much energy did I use each day this week | stat energy_used op=sum ent=day
+energy used per day over the last two weeks | stat energy_used op=sum ent=day
+kwh used each week this month | stat energy_used op=sum ent=week
+weekly energy use over the last two months | stat energy_used op=sum ent=week
+my consumption for each week this month | stat wh_per_km op=mean ent=week
+weekly efficiency over the last two months | stat wh_per_km op=mean ent=week
+consumption day by day this week | stat wh_per_km op=mean ent=day
+what was my efficiency on each day last week | stat wh_per_km op=mean ent=day

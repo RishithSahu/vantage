@@ -1,0 +1,845 @@
+{
+ "note": "Word lists of the investigation planner (vgpt/investigate).  The frame model reads ONE short question; a service engineer's request is several sentences naming a goal, an anchor, signals, windows and the shape of the answer.  These lists let the planner read that structure: which analysis is wanted (cues), what the request names (phrases) and what a pattern in the data may mean (hypotheses).  They are data, inspectable and testable (tests/test_investigate.py scores them on the owner's own 85 prompts).  INTERIM: each list is a candidate for a trained multi-slot frame (docs/TRAINING_QUEUE.md).",
+ "templates": {
+  "incident": [
+   "reconstruct",
+   "timeline",
+   "preceding",
+   "immediately before",
+   "incident report",
+   "what changed",
+   "earliest abnormal",
+   "earliest observed",
+   "earliest deviation",
+   "cross system",
+   "sequence of state changes",
+   "reconstruct the sequence",
+   "investigate the latest",
+   "investigate the most recent",
+   "what happened before",
+   "confirmed facts from",
+   "distinguish confirmed",
+   "following five minutes",
+   "following 5 minutes",
+   "smallest set of relevant",
+   "complete incident report",
+   "latest major fault",
+   "initial abnormal condition"
+  ],
+  "cooccur": [
+   "coincide",
+   "of one another",
+   "occurred together",
+   "appeared together",
+   "at the same time",
+   "alongside",
+   "trigger",
+   "correlate the timestamps",
+   "shared signals",
+   "which subsystem reported the first",
+   "several adas related warnings",
+   "multiple warnings",
+   "within two minutes",
+   "within 30 seconds",
+   "timestamp order",
+   "affected subsystems",
+   "related based on timestamp"
+  ],
+  "leadtime": [
+   "lead time",
+   "before a warning was generated",
+   "became abnormal before",
+   "repeatedly occur before",
+   "precede",
+   "preceded",
+   "first anomaly",
+   "predictor",
+   "pattern repeats",
+   "how consistently",
+   "candidate pattern",
+   "followed by two or more",
+   "one abnormal signal is followed"
+  ],
+  "compare_periods": [
+   "previous seven days",
+   "versus the previous",
+   "compared with the previous",
+   "contributed most to the difference",
+   "changes in driving behavior",
+   "last seven days of city driving",
+   "compare my last seven days"
+  ],
+  "trip_outliers": [
+   "trips where",
+   "unusually high despite",
+   "similar distances",
+   "similar distance and duration",
+   "side by side timeline",
+   "trips with no recorded faults",
+   "trips that contained",
+   "against the ten trips",
+   "ten most recent trips",
+   "two trips of similar",
+   "two trips with similar"
+  ],
+  "adas": [
+   "adas performance",
+   "disengagement frequency",
+   "adas status changed",
+   "adas related",
+   "adas incidents",
+   "adas disengaged",
+   "every adas disengagement",
+   "five most unusual adas",
+   "adas across city",
+   "disengagement rate",
+   "adas disengagement in the last"
+  ],
+  "health": [
+   "health summary",
+   "health report",
+   "subsystem level",
+   "rank the findings",
+   "sufficient evidence for escalation",
+   "worsening trends",
+   "which fault should a service engineer",
+   "rank the active and recurring faults",
+   "evidence backed health",
+   "separate active faults",
+   "engineering significance"
+  ],
+  "fault_history": [
+   "chronological history",
+   "recurring faults",
+   "first occurrence",
+   "persisted or returned",
+   "last five occurrences",
+   "inactive periods",
+   "recovery events",
+   "unresolved questions",
+   "most important unanswered",
+   "history of recurring"
+  ],
+  "conditions": [
+   "particular combination",
+   "under which",
+   "conditions associated",
+   "consistent across",
+   "only during long journeys",
+   "not short trips",
+   "intermittent",
+   "what conditions",
+   "what distinguishes",
+   "continued rising",
+   "driving conditions under which"
+  ],
+  "discrepancy": [
+   "conflicting values",
+   "two sources",
+   "discrepancy",
+   "disagree",
+   "dashboard reported",
+   "did not record a corresponding",
+   "ordering inconsistencies",
+   "delayed reports",
+   "update intervals",
+   "reporting inconsistency",
+   "genuine discrepancy",
+   "without a corresponding dashboard warning",
+   "conflicting states",
+   "missing intervals",
+   "without a corresponding",
+   "reported status changed while"
+  ],
+  "thermal_stop": [
+   "after the vehicle stopped",
+   "continued rising after",
+   "rise continued",
+   "heat soak",
+   "kept rising after"
+  ],
+  "cold_start": [
+   "cold start",
+   "cold start behavior",
+   "warm up duration",
+   "successful trips and trips with anomalies"
+  ],
+  "range_drop": [
+   "range estimate dropped",
+   "estimated remaining range keeps fluctuating",
+   "revised prediction",
+   "dropped by 15",
+   "range estimate keeps",
+   "remaining range keeps"
+  ],
+  "similar": [
+   "similar to the latest",
+   "closest match",
+   "earlier incidents provide",
+   "events similar",
+   "search the historical logs for events similar"
+  ],
+  "change_explain": [
+   "why has my",
+   "explain the largest unexpected reduction",
+   "range decreased",
+   "range reduced",
+   "driving range decrease",
+   "decreased over the last",
+   "largest unexpected reduction in estimated range",
+   "identify when it began"
+  ],
+  "efficiency_onset": [
+   "exact time when",
+   "began deteriorating",
+   "efficiency began",
+   "which measurable vehicle signals changed first",
+   "signals changed first"
+  ],
+  "trend_vs_outliers": [
+   "deteriorated gradually",
+   "caused by one or two",
+   "one or two unusual trips",
+   "quantify the trend",
+   "identify the largest contributors"
+  ],
+  "energy_attribution": [
+   "additional energy i used",
+   "prolonged idling",
+   "aggressive acceleration",
+   "show the calculation method",
+   "assumptions and confidence"
+  ],
+  "frequency_trend": [
+   "become more frequent",
+   "more frequent over",
+   "counts and rates",
+   "equivalent time periods",
+   "account for differences in driving distance"
+  ],
+  "largest_change": [
+   "largest unexplained change",
+   "unexplained change in vehicle behavior",
+   "largest change in vehicle behavior"
+  ],
+  "joint_change": [
+   "changed unusually at the same time",
+   "independent changes",
+   "supports a common explanation",
+   "timeline supports a common explanation"
+  ],
+  "correlate_changes": [
+   "correlate sudden changes",
+   "sudden changes in energy consumption",
+   "strongest matching incidents",
+   "direct evidence from correlation",
+   "distinguish direct evidence"
+  ],
+  "thermal_rise": [
+   "rises unusually fast",
+   "unusually fast during high power",
+   "temperature changes with current",
+   "high power driving"
+  ],
+  "recovery": [
+   "return to its previous baseline",
+   "return to baseline",
+   "remained abnormal",
+   "after recovery",
+   "flag any parameter that remained",
+   "measured performance return"
+  ],
+  "spike_or_trend": [
+   "brief spike",
+   "sustained thermal trend",
+   "sustained trend",
+   "spike or part of",
+   "abnormal temperature reading",
+   "brief spike"
+  ],
+  "dtc_cycle": [
+   "warning disappeared",
+   "after restarting the vehicle",
+   "fault became inactive",
+   "logs simply stopped reporting",
+   "stopped reporting it"
+  ],
+  "group_warnings": [
+   "group warnings",
+   "share a common cause",
+   "order each group",
+   "first abnormal measurement rather than"
+  ],
+  "best_conditions": [
+   "best efficiency",
+   "consistently achieves its best",
+   "driving conditions under which",
+   "best efficiency compare city and highway"
+  ],
+  "occurrences": [
+   "last five occurrences",
+   "last 5 occurrences",
+   "occurrences of this fault",
+   "compare the last five",
+   "most severe incident"
+  ],
+  "unanswered": [
+   "most important unanswered",
+   "unanswered diagnostic question",
+   "single additional measurement",
+   "competing explanations"
+  ],
+  "event_summary": [
+   "summarize all events related to",
+   "group repeated patterns",
+   "most and least severe",
+   "leading explanations"
+  ],
+  "status_vs_signal": [
+   "status changed while",
+   "remained nearly constant",
+   "reported status changed",
+   "potential reporting inconsistency"
+  ]
+ },
+ "priority": [
+  "range_drop",
+  "thermal_stop",
+  "cold_start",
+  "spike_or_trend",
+  "dtc_cycle",
+  "recovery",
+  "thermal_rise",
+  "group_warnings",
+  "status_vs_signal",
+  "discrepancy",
+  "efficiency_onset",
+  "energy_attribution",
+  "trend_vs_outliers",
+  "frequency_trend",
+  "largest_change",
+  "joint_change",
+  "correlate_changes",
+  "best_conditions",
+  "unanswered",
+  "occurrences",
+  "event_summary",
+  "change_explain",
+  "cooccur",
+  "leadtime",
+  "trip_outliers",
+  "similar",
+  "fault_history",
+  "adas",
+  "conditions",
+  "health",
+  "compare_periods",
+  "incident"
+ ],
+ "phrases": {
+  "cooling system": {
+   "concepts": [
+    "coolant_flow",
+    "battery_temperature"
+   ],
+   "events": []
+  },
+  "cooling system signals": {
+   "concepts": [
+    "coolant_flow"
+   ],
+   "events": []
+  },
+  "cooling behavior": {
+   "concepts": [
+    "coolant_flow"
+   ],
+   "events": []
+  },
+  "cooling commands": {
+   "concepts": [
+    "coolant_flow"
+   ],
+   "events": []
+  },
+  "ecu events": {
+   "concepts": [],
+   "events": [
+    "ECU_RESET",
+    "CAN_ERROR"
+   ]
+  },
+  "ecu resets": {
+   "concepts": [],
+   "events": [
+    "ECU_RESET"
+   ]
+  },
+  "ecu errors": {
+   "concepts": [],
+   "events": [
+    "ECU_RESET",
+    "CAN_ERROR",
+    "DTC_SET"
+   ]
+  },
+  "diagnostic logs": {
+   "concepts": [],
+   "events": [
+    "DTC_SET"
+   ]
+  },
+  "diagnostic log": {
+   "concepts": [],
+   "events": [
+    "DTC_SET"
+   ]
+  },
+  "diagnostic fault": {
+   "concepts": [],
+   "events": [
+    "DTC_SET"
+   ]
+  },
+  "diagnostic events": {
+   "concepts": [],
+   "events": [
+    "DTC_SET"
+   ]
+  },
+  "diagnostic entries": {
+   "concepts": [],
+   "events": [
+    "DTC_SET"
+   ]
+  },
+  "communication errors": {
+   "concepts": [],
+   "events": [
+    "CAN_ERROR"
+   ]
+  },
+  "communication fault": {
+   "concepts": [],
+   "events": [
+    "CAN_ERROR"
+   ]
+  },
+  "communication inconsistencies": {
+   "concepts": [],
+   "events": [
+    "CAN_ERROR",
+    "SENSOR_CONFLICT"
+   ]
+  },
+  "sensor faults": {
+   "concepts": [],
+   "events": [
+    "SENSOR_CONFLICT",
+    "SENSOR_INVALID",
+    "DTC_SET"
+   ]
+  },
+  "sensor anomaly": {
+   "concepts": [],
+   "events": [
+    "SENSOR_CONFLICT",
+    "SENSOR_INVALID"
+   ]
+  },
+  "vehicle warning": {
+   "concepts": [],
+   "events": [
+    "ANY_WARNING"
+   ]
+  },
+  "vehicle warnings": {
+   "concepts": [],
+   "events": [
+    "ANY_WARNING"
+   ]
+  },
+  "warnings": {
+   "concepts": [],
+   "events": [
+    "ANY_WARNING"
+   ]
+  },
+  "warning": {
+   "concepts": [],
+   "events": [
+    "ANY_WARNING"
+   ]
+  },
+  "powertrain warning": {
+   "concepts": [],
+   "events": [
+    "WARN_OVERTEMP",
+    "POWER_DERATE",
+    "WARN_BATT_OVERTEMP"
+   ]
+  },
+  "powertrain faults": {
+   "concepts": [],
+   "events": [
+    "DTC_SET",
+    "WARN_OVERTEMP",
+    "POWER_DERATE"
+   ]
+  },
+  "powertrain fault": {
+   "concepts": [],
+   "events": [
+    "DTC_SET",
+    "WARN_OVERTEMP",
+    "POWER_DERATE"
+   ]
+  },
+  "reduced acceleration": {
+   "concepts": [],
+   "events": [
+    "POWER_DERATE"
+   ]
+  },
+  "voltage fluctuations": {
+   "concepts": [
+    "aux_battery_voltage"
+   ],
+   "events": [
+    "VOLTAGE_DIP"
+   ]
+  },
+  "voltage": {
+   "concepts": [
+    "battery_voltage",
+    "aux_battery_voltage"
+   ],
+   "events": []
+  },
+  "current": {
+   "concepts": [
+    "battery_current"
+   ],
+   "events": []
+  },
+  "driver inputs": {
+   "concepts": [
+    "accelerator_position",
+    "brake_pedal",
+    "steering_angle"
+   ],
+   "events": []
+  },
+  "system status": {
+   "concepts": [
+    "adas_state"
+   ],
+   "events": []
+  },
+  "adas status": {
+   "concepts": [
+    "adas_state"
+   ],
+   "events": [
+    "ADAS_STATE_CHANGE"
+   ]
+  },
+  "unexpected shutdown": {
+   "concepts": [],
+   "events": [
+    "UNEXPECTED_SHUTDOWN"
+   ]
+  },
+  "unexpected vehicle shutdown": {
+   "concepts": [],
+   "events": [
+    "UNEXPECTED_SHUTDOWN"
+   ]
+  },
+  "environmental data": {
+   "concepts": [
+    "ambient_temperature",
+    "rain",
+    "light"
+   ],
+   "events": []
+  },
+  "road conditions": {
+   "concepts": [
+    "rain",
+    "ambient_temperature"
+   ],
+   "events": []
+  },
+  "auxiliary loads": {
+   "concepts": [
+    "hvac_power"
+   ],
+   "events": []
+  },
+  "auxiliary system": {
+   "concepts": [
+    "hvac_power"
+   ],
+   "events": []
+  },
+  "hvac usage": {
+   "concepts": [
+    "hvac_power"
+   ],
+   "events": []
+  },
+  "speed patterns": {
+   "concepts": [
+    "speed"
+   ],
+   "events": []
+  },
+  "braking": {
+   "concepts": [
+    "brake_pressure"
+   ],
+   "events": [
+    "HARSH_BRAKE"
+   ]
+  },
+  "acceleration": {
+   "concepts": [
+    "longitudinal_acceleration"
+   ],
+   "events": [
+    "HARSH_ACCEL"
+   ]
+  },
+  "range estimate": {
+   "concepts": [
+    "reported_range",
+    "range_estimate"
+   ],
+   "events": []
+  },
+  "estimated range": {
+   "concepts": [
+    "reported_range",
+    "range_estimate"
+   ],
+   "events": []
+  },
+  "remaining range": {
+   "concepts": [
+    "reported_range",
+    "range_estimate"
+   ],
+   "events": []
+  },
+  "estimated remaining range": {
+   "concepts": [
+    "reported_range",
+    "range_estimate"
+   ],
+   "events": []
+  },
+  "displayed range": {
+   "concepts": [
+    "reported_range"
+   ],
+   "events": []
+  },
+  "driving range": {
+   "concepts": [
+    "range_estimate"
+   ],
+   "events": []
+  },
+  "battery warning": {
+   "concepts": [],
+   "events": [
+    "WARN_BATT_OVERTEMP"
+   ]
+  },
+  "battery warnings": {
+   "concepts": [],
+   "events": [
+    "WARN_BATT_OVERTEMP"
+   ]
+  },
+  "battery overheating": {
+   "concepts": [],
+   "events": [
+    "WARN_BATT_OVERTEMP"
+   ]
+  },
+  "adas disengagement": {
+   "concepts": [],
+   "events": [
+    "ADAS_DISENGAGE"
+   ]
+  },
+  "adas disengagements": {
+   "concepts": [],
+   "events": [
+    "ADAS_DISENGAGE"
+   ]
+  }
+ },
+ "anchors": {
+  "latest major": "critical",
+  "major fault": "critical",
+  "major warning": "critical",
+  "most severe": "critical",
+  "unusual": "rare",
+  "unexpected": "latest",
+  "latest": "latest",
+  "most recent": "latest",
+  "last": "latest",
+  "first": "first",
+  "this fault": "focus",
+  "this warning": "focus",
+  "the fault": "focus",
+  "that fault": "focus"
+ },
+ "default_signals": {
+  "thermal": [
+   "battery_temperature",
+   "battery_current",
+   "battery_voltage",
+   "coolant_flow",
+   "motor_temperature",
+   "speed",
+   "ambient_temperature",
+   "battery_soc"
+  ],
+  "adas": [
+   "speed",
+   "adas_state",
+   "lane_confidence",
+   "lead_vehicle_distance",
+   "camera_blockage",
+   "steering_angle",
+   "brake_pressure"
+  ],
+  "power": [
+   "aux_battery_voltage",
+   "battery_voltage",
+   "speed",
+   "battery_current",
+   "motor_torque",
+   "coolant_flow"
+  ],
+  "powertrain": [
+   "motor_temperature",
+   "motor_torque",
+   "speed",
+   "battery_current",
+   "battery_temperature",
+   "ambient_temperature",
+   "coolant_flow",
+   "accelerator_position"
+  ],
+  "network": [
+   "speed",
+   "aux_battery_voltage",
+   "tyre_pressure_fl",
+   "light",
+   "odometer"
+  ],
+  "generic": [
+   "speed",
+   "battery_temperature",
+   "battery_current",
+   "coolant_flow",
+   "motor_temperature",
+   "aux_battery_voltage"
+  ]
+ },
+ "event_family": {
+  "WARN_BATT_OVERTEMP": "thermal",
+  "WARN_OVERTEMP": "powertrain",
+  "POWER_DERATE": "powertrain",
+  "DTC_SET": "generic",
+  "ADAS_DISENGAGE": "adas",
+  "ADAS_STATE_CHANGE": "adas",
+  "AEB_ACTIVATION": "adas",
+  "ECU_RESET": "power",
+  "UNEXPECTED_SHUTDOWN": "power",
+  "VOLTAGE_DIP": "power",
+  "LOW_12V": "power",
+  "CAN_ERROR": "network",
+  "SENSOR_CONFLICT": "generic",
+  "TPMS_LOW": "generic",
+  "CAMERA_BLOCKED": "adas",
+  "CAMERA_DEGRADED": "adas"
+ },
+ "hypotheses": [
+  {
+   "signal": "coolant_flow",
+   "direction": "down",
+   "say": "reduced coolant flow (pump or circuit degradation)",
+   "check": "coolant pump current and speed, pump DTCs, coolant level"
+  },
+  {
+   "signal": "battery_temperature",
+   "direction": "up",
+   "say": "heat generated by high battery power (fast charge or sustained high-power driving) that the cooling circuit did not remove",
+   "check": "coolant flow during the same interval, charging power, ambient temperature"
+  },
+  {
+   "signal": "motor_temperature",
+   "direction": "up",
+   "say": "motor thermal load (sustained high speed or torque, warm ambient)",
+   "check": "motor cooling circuit, torque history, ambient temperature"
+  },
+  {
+   "signal": "aux_battery_voltage",
+   "direction": "down",
+   "say": "12 V supply instability (weak 12 V battery or DC/DC converter)",
+   "check": "12 V battery rest voltage, DC/DC converter DTCs"
+  },
+  {
+   "signal": "battery_voltage",
+   "direction": "down",
+   "say": "pack voltage sag under high current",
+   "check": "cell voltage spread, pack current, state of charge"
+  },
+  {
+   "signal": "lane_confidence",
+   "direction": "down",
+   "say": "degraded lane-marking visibility (worn markings, roadworks, rain, glare)",
+   "check": "camera blockage and sharpness, weather, road works on the route"
+  },
+  {
+   "signal": "camera_blockage",
+   "direction": "up",
+   "say": "an obstructed forward camera (dirt, rain splash, snow)",
+   "check": "windscreen condition, camera self-test"
+  },
+  {
+   "signal": "lead_vehicle_distance",
+   "direction": "down",
+   "say": "a closing gap to the vehicle ahead",
+   "check": "radar object list, driver braking input"
+  },
+  {
+   "signal": "tyre_pressure_fl",
+   "direction": "down",
+   "say": "a slow tyre leak",
+   "check": "tyre inspection, pressure history of the wheel"
+  },
+  {
+   "signal": "speed",
+   "direction": "up",
+   "say": "high-speed operation that raises thermal and electrical load",
+   "check": "route type and speed limit"
+  }
+ ],
+ "next_measurement": {
+  "P0A94": "the DC/DC converter's own input / output voltage, current and housing temperature (the vehicle records none of them), logged at 1 Hz around each occurrence",
+  "P1A00": "the coolant pump's electrical current and speed, to tell a failing pump from a blocked circuit",
+  "P0562": "the 12 V rail voltage at 100 Hz during start-up and the DC/DC converter's enable state",
+  "WARN_BATT_OVERTEMP": "the hottest cell's temperature and the pack inlet / outlet coolant temperatures, to tell a hot cell from a pack-wide rise",
+  "WARN_OVERTEMP": "the motor winding temperature (separately from the housing) and the inverter temperature",
+  "ADAS_DISENGAGE": "camera frames and radar object lists for the 10 seconds before each disengagement (the vehicle keeps only camera metadata, no pixels)",
+  "UNEXPECTED_SHUTDOWN": "the 12 V rail and the high-voltage contactor state at 100 Hz in a ring buffer that survives the power loss",
+  "ECU_RESET": "the reset cause register and the last boot log of the ECU that reset"
+ }
+}

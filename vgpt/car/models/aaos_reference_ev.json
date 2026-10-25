@@ -1,0 +1,21 @@
+{
+ "id": "aaos_reference_ev",
+ "name": "Android Automotive Reference EV (Vehicle HAL only)",
+ "year": 2024,
+ "region": "anywhere",
+ "powertrain": "bev",
+ "class": "Battery-electric car whose only app-visible data path is the Android Vehicle HAL",
+ "decoder_installed": false,
+ "interfaces": [
+  "Android Vehicle HAL properties (speed, steering, odometer, outside temperature, battery energy, range, charge rate, ignition, charge state, tyre pressures, gear)",
+  "VIN as the INFO_VIN property",
+  "logcat",
+  "NMEA 0183 GNSS",
+  "surround camera pictures (JPEG)"
+ ],
+ "notes": "On Android Automotive an app sees the vehicle only through CarPropertyManager (the Vehicle HAL); the property ids and units are the AOSP standard, so Vantage needs no decoder file for this model.",
+ "source": "AOSP hardware/interfaces/automotive/vehicle (VehicleProperty.aidl)",
+ "bound": 15,
+ "concepts": 15,
+ "extension": []
+}

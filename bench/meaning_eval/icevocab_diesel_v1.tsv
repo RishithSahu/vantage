@@ -1,0 +1,40 @@
+# ICEVOCAB_DIESEL_V1: authored 2026-10-20 after full_v11 was final, before the vehicle-vocabulary layer was measured on this vehicle (diesel).  Never trained on.
+# Format: id <TAB> text <TAB> gold frame (act concept op cond vs ent) <TAB> tag.  'vehicle-vocabulary' = a signal only this vehicle declares; 'control' = must be left alone by the layer.
+D001	what is the adblue level	now def_level none none none none	vehicle-vocabulary
+D002	how full is the adblue tank	now def_level none none none none	vehicle-vocabulary
+D003	is the def tank running low	now def_level none none none none	vehicle-vocabulary
+D004	diesel exhaust fluid level	now def_level none none none none	vehicle-vocabulary
+D005	how much soot is in the particulate filter	now dpf_soot_load none none none none	vehicle-vocabulary
+D006	how clogged is the dpf	now dpf_soot_load none none none none	vehicle-vocabulary
+D007	dpf soot load	now dpf_soot_load none none none none	vehicle-vocabulary
+D008	is the dpf regenerating right now	now dpf_regeneration none none none none	vehicle-vocabulary
+D009	is the particulate filter burning off soot	now dpf_regeneration none none none none	vehicle-vocabulary
+D010	what is the boost pressure	now boost_pressure none none none none	vehicle-vocabulary
+D011	how much turbo boost am i getting	now boost_pressure none none none none	vehicle-vocabulary
+D012	turbo pressure right now	now boost_pressure none none none none	vehicle-vocabulary
+D013	how hot is the exhaust	now exhaust_gas_temperature none none none none	vehicle-vocabulary
+D014	what is the exhaust gas temperature	now exhaust_gas_temperature none none none none	vehicle-vocabulary
+D015	egt right now	now exhaust_gas_temperature none none none none	vehicle-vocabulary
+D016	what is the fuel rail pressure	now fuel_rail_pressure none none none none	vehicle-vocabulary
+D017	common rail pressure	now fuel_rail_pressure none none none none	vehicle-vocabulary
+D018	what is the engine oil temperature	now engine_oil_temperature none none none none	vehicle-vocabulary
+D019	how hot is the engine oil	now engine_oil_temperature none none none none	vehicle-vocabulary
+D020	what is the barometric pressure	now barometric_pressure none none none none	vehicle-vocabulary
+D021	how warm is the fuel	now fuel_temperature none none none none	vehicle-vocabulary
+D022	fuel temperature	now fuel_temperature none none none none	vehicle-vocabulary
+D023	highest boost pressure this week	extreme boost_pressure max none none none	vehicle-vocabulary
+D024	highest exhaust temperature yesterday	extreme exhaust_gas_temperature max none none none	vehicle-vocabulary
+D025	average engine oil temperature this week	stat engine_oil_temperature mean none none none	vehicle-vocabulary
+D026	lowest adblue level this month	extreme def_level min none none none	vehicle-vocabulary
+D027	what is my speed	now speed none none none none	control
+D028	how fast am i going	now speed none none none none	control
+D029	what is the tyre pressure	now tyre_pressure none none none none	control
+D030	what is the engine rpm	now engine_rpm none none none none	control
+D031	what is the engine load	now engine_load none none none none	control
+D032	how much fuel is left	now fuel_level none none none none	control
+D033	what is the engine oil level	now unlisted none none none none	control
+D034	how is the heated steering wheel	health unlisted none none none none	control
+D035	is the wheel alignment ok	health unlisted none none none none	control
+D036	how loud is the engine	now unlisted none none none none	control
+D037	what is the coolant reservoir level	now unlisted none none none none	control
+D038	how many cylinders does the engine have	spec unlisted none none none none	control

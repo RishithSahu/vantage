@@ -1,0 +1,90 @@
+# FINAL held-out test for everyday questions: written once, never used for tuning (run with --quiet so the misses are not looked at). route<TAB>question
+advice	we are thinking of a family trip of about 400 km, does the car look fit for it
+advice	given everything that is wrong with it, should i be driving this car
+advice	is it sensible to go out in it this afternoon
+advice	can i go ahead and use the car for my errands today
+advice	would you say the car is safe enough for the highway
+signal_why	why is my power reading a negative number when i come off the throttle
+signal_why	whats the reason the coolant flow shows nothing when the car is parked
+signal_why	why does the pack get warmer during dc charging
+signal_why	why is the motor temperature so high after a long drive
+drive_safely	any recommendations for driving more safely
+drive_safely	how should i drive so that i dont get into an accident
+drive_safely	what are the key safe driving habits
+battery_now	how's the battery looking
+battery_now	give me the battery status
+battery_now	what is the charge level and health of my battery
+last_charge	when did the car last get charged
+last_charge	tell me about the most recent charge
+last_charge	how long ago did i last plug in
+charge_cost	how much has charging cost this week
+charge_cost	what is my electricity spend on the car
+charge_cost	what did i pay to charge the car
+charge_time	how long will it take to charge to 90 percent
+charge_time	how soon will the battery be full
+reach	can the car cover 180 km on what is in the battery
+reach	am i going to make it home on this charge
+reach	should i charge before my next trip
+reach	how far can i still drive
+improve_range	what should i change to get more km from each charge
+improve_range	how can i be more energy efficient while driving
+improve_range	any tips for increasing my range
+speeding	do i exceed the speed limit often
+speeding	how fast do i drive on the motorway
+hot_battery	has the battery ever overheated
+hot_battery	how hot did the battery get at the worst point
+hot_battery	was there a time the pack got too hot
+pump_ok	is the coolant pump working properly
+pump_ok	is there a problem with the cooling system
+pump_ok	how's the cooling
+v12	how is the twelve volt battery
+v12	is the 12 v battery ok
+motor_now	how hot is the electric motor
+motor_now	is the drive motor temperature normal
+unusual	did anything strange happen today
+unusual	was there something odd with the car yesterday
+unusual	did the car do anything unexpected today
+overview	give me a summary of the last week
+overview	how has the week been for the car
+overview	tell me how the car has been doing in general
+style	how smooth is my driving
+style	do i accelerate too hard
+style_trend	has my driving improved lately
+dtc_explain	what does this trouble code mean
+dtc_explain	can you explain the error code
+dtc_explain	what is the fault code that showed up
+battery_age	what is the battery's state of health
+soh_rate	how long until i need a new battery
+charging_now	is the car charging at the moment
+charging_now	are we plugged in right now
+top_speed	what is the highest speed i have reached
+top_speed	how fast was my fastest drive
+places_most	which places do i go to the most
+commute	how long is my daily commute
+commute	what is my usual route and how long does it take
+longest_trip	what is the longest trip i have taken
+longest_trip	which was my biggest drive
+last_trip	how did my latest trip go
+eff_day	how efficient was my driving today
+best_day	which day was my most efficient
+best_day	what was my worst day for energy use
+eff_trend	am i using more electricity than before
+eff_trend	has my energy use gone up lately
+trip_count	how many drives did i make this week
+trip_count	count my trips for last week
+regen	how much energy did regenerative braking recover
+regen	what is my regen this week
+leave_time	when did i leave the house
+leave_time	what time did i depart this morning
+compare_months	how does this month compare with last month
+compare_days	how did today compare to yesterday
+explain_simple	explain the latest warning in plain words
+explain_simple	what does the last alert mean in simple terms
+briefing	give me a quick briefing
+help	what are you able to do for me
+help	what can i ask
+gate	what is the capital of germany
+gate	recommend me a good film
+gate	how many calories are in a banana
+gate	sing me a song
+gate	who won the football world cup

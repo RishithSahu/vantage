@@ -1,0 +1,20 @@
+{
+ "id": "generic_obd_dongle",
+ "name": "Generic Petrol car with an OBD-II dongle",
+ "year": 2018,
+ "region": "anywhere",
+ "powertrain": "petrol",
+ "class": "Any combustion car seen only through its OBD-II port",
+ "decoder_installed": false,
+ "interfaces": [
+  "OBD-II service 01 over ISO 15765-4 CAN: the only data this model has",
+  "UDS diagnostic trouble codes",
+  "syslog from the dongle",
+  "NMEA 0183 GNSS (the dongle's own receiver)"
+ ],
+ "notes": "No manufacturer database exists for this model: Vantage has no decoder file for it and learns what OBD-II (SAE J1979 over ISO 15765-4) allows.",
+ "source": "SAE J1979 / ISO 15031-5",
+ "bound": 17,
+ "concepts": 17,
+ "extension": []
+}

@@ -1,0 +1,63 @@
+A1	Did my speed ever exceed 60 km/h last week?
+A2	Was my average speed above 60 km/h last week?
+A3	For how many minutes was my speed above 60 km/h last week?
+A4	What percentage of my moving time was spent above 60 km/h, excluding charging?
+A5	How many separate times did my speed rise above 60 km/h yesterday?
+A6	Was my average speed in the second half of last week higher than in the first half?
+A7	On which days was the battery temperature above 50°C for at least five continuous minutes?
+A8	Did coolant flow remain below 2 L/min continuously for ten minutes?
+A9	How many times did the coolant flow fall by more than 20% relative to its preceding ten-minute average?
+A10	Was the vehicle above 60 km/h for more time on the highway than in the city last week?
+B1	How many complete days was the vehicle parked all day in the last two weeks?
+B2	On which days was the car parked for the entire recorded day?
+B3	How many days was the vehicle parked at least 20 hours?
+B4	What was the longest continuous time the car remained parked, excluding gaps in the data?
+B5	How much time was the car moving while it was not charging?
+B6	How many hours was the vehicle both parked and charging last week?
+B7	How many hours was it not parked and not charging last week?
+C1	What was my 90th-percentile speed last week?
+C2	Compare the median city speed with the median highway speed over the same 14 days.
+C3	What were my p10, p50, p90 and p95 battery temperatures over the last week?
+C4	Was the 90th-percentile motor temperature higher during charging than while driving?
+C5	Give me the median and interquartile range of my speed, excluding stationary readings.
+C6	Was the maximum speed higher than the 95th-percentile speed last week?
+D1	How many hard-braking events happened in the city while the car was not charging over the last 14 days?
+D2	List hard accelerations on the highway, excluding events that happened while parked.
+D3	How many battery-temperature warnings happened while charging, but not while the vehicle was moving?
+D4	Were there any coolant faults when the car was not parked?
+D5	How many tyre-pressure warnings occurred in the city but not on the highway?
+D6	Show faults that occurred after the last charging session but before the first trip the next day.
+D7	Count hard braking events only on trips where average energy consumption exceeded 180 Wh/km.
+D8	How many city trips had no hard-braking events at all?
+E1	Was average coolant flow in the last three days at least 20% lower than in the first three days of the same 14-day period?
+E2	What was the largest difference between battery and motor temperature each day last week?
+E3	On which day was the difference between battery and motor temperature greatest?
+E4	What was the range between the highest and lowest coolant-flow values while the car was moving?
+E5	Which was greater: the increase in average battery temperature overnight or the increase during daytime?
+E6	For each trip, compare energy consumption with the average consumption of all trips in the same city/highway category.
+E7	Which weekday had the highest average speed, and how much higher was it than the lowest weekday?
+E8	Compare the last three charging sessions with the three before them, by average power and total energy added.
+E9	Which tyre had the largest pressure deviation from the recommended value, and by how many kPa?
+E10	What was the gap between my maximum speed and my 90th-percentile speed during city driving last week?
+F1	How many kWh did I use over 250 km if my efficiency was 152 Wh/km?
+F2	Was my battery above 45°C for more than 300 seconds yesterday?
+F3	How long was the pack above 50°C between 23:50 yesterday and 00:20 today?
+F4	What was the average coolant flow from 10:00 until, but not including, 11:00?
+F5	Compare the two hours immediately before charging began with the two hours immediately after it ended.
+F6	How many minutes passed between the last over-temperature warning and the next recorded trip?
+G1	was batery temp higher dan motor temp yestaday nite
+G2	how long wuz speeed more than 60, not when chargeing
+G3	show the days coolant was at its lowest, not the individual lowest samples
+G4	did battery temp ever cross fifty, or only sit near it?
+G5	exclude trips that never had any braking events
+G6	don't count warnings that weren't during charging
+G7	how much less efficient was city driving compared with motorway driving, if any
+G8	excluding the most recent trip, which trip had the worst energy consumption per km?
+H1	How certain are you that the coolant-flow fault is still active?
+H2	The dashboard says 3.2 L/min, but your previous answer said 2.0. Which value is correct?
+H3	The trip ledger says 25 kWh of regeneration, but integrating the power samples yields 1.2 kWh. Which figure should we report?
+H4	Can you prove that battery degradation was zero in the last month?
+H5	What was the temperature at exactly 14:03:17 if no sample was recorded then?
+H6	Did the car definitely overheat because coolant flow was low?
+H7	Which of my faults are confirmed, current and supported by more than one independent signal?
+H8	Calculate my 99.9th-percentile battery temperature and tell me whether I should stop driving because of it.

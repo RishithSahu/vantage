@@ -1,0 +1,290 @@
+# NOVEL-v1: held-out evaluation for the meaning front end. Authored (by Claude) BEFORE any training data for it existed; never used for training, prompt design, glossary entries or thresholds.
+# FROZEN once the sha256 in novel_v1.sha256 is written. Columns: id <TAB> question <TAB> gold frame (act concept op cond vs ent) <TAB> register
+# Registers: plain | terse | typo | slang | voice | hinglish | long. Gold frames follow the conventions in docs/semantic_method.md section 4.
+N001	what's my speed right now	now speed none none none none	plain
+N002	how fast am i going	now speed none none none none	plain
+N003	current battery percentage?	now battery_soc none none none none	terse
+N004	how much charge is left in the battery	now battery_soc none none none none	plain
+N005	battery level pls	now battery_soc none none none none	terse
+N006	what temp is the battery at	now battery_temperature none none none none	plain
+N007	motor temperature at the moment	now motor_temperature none none none none	plain
+N008	tell me how many kW the motor is putting out	now motor_power none none none none	plain
+N009	how much power is the battery giving at this moment	now battery_power none none none none	plain
+N010	what's the charging rate	now charging_power none none none none	terse
+N011	how fast is it charging	now charging_power none none none none	plain
+N012	what's the coolant flow reading	now coolant_flow none none none none	plain
+N013	outside temperature now	now ambient_temperature none none none none	terse
+N014	tyre pressures	now tyre_pressure none none none none	terse
+N015	voltage of the 12v battery	now aux_battery_voltage none none none none	plain
+N016	whats the odo reading	now odometer none none none none	slang
+N017	current motor rpm	now motor_rpm none none none none	terse
+N018	how much is the AC using now	now hvac_power none none none none	slang
+N019	which way am I heading	now heading none none none none	plain
+N020	steering angle right now	now steering_angle none none none none	terse
+N021	is it raining	now rain none none none none	plain
+N022	batery temprature now	now battery_temperature none none none none	typo
+N023	uh what is the torque the motor is making	now motor_torque none none none none	voice
+N024	lane confidence value currently	now lane_confidence none none none none	plain
+N025	hw fast m i goin rn	now speed none none none none	typo
+N026	wats my batry perctage	now battery_soc none none none none	typo
+N027	gaadi ki battery kitni bachi hai	now battery_soc none none none none	hinglish
+N028	battery temperature kya hai abhi	now battery_temperature none none none none	hinglish
+N030	what was my speed at 3pm yesterday	at speed none none none none	plain
+N031	battery level at 8 this morning	at battery_soc none none none none	plain
+N032	how hot was the battery two hours ago	at battery_temperature none none none none	plain
+N033	what was the rpm yesterday at 10:00 night	at motor_rpm none none none none	plain
+N034	tyre pressure 3 days ago at noon	at tyre_pressure none none none none	terse
+N035	charge percent 30 min back	at battery_soc none none none none	slang
+N036	motor temp at 18:45 on Tuesday	at motor_temperature none none none none	plain
+N037	outside temp at midnight	at ambient_temperature none none none none	terse
+N038	coolant flow ten minutes ago	at coolant_flow none none none none	terse
+N039	power draw at 7am today	at battery_power none none none none	terse
+N040	average speed last week	stat speed mean none none none	terse
+N041	what was my mean battery temperature over the past 3 days	stat battery_temperature mean none none none	plain
+N042	typical charging power this month	stat charging_power mean none none none	plain
+N043	total distance i drove yesterday	stat distance_driven sum none none none	plain
+N044	how much energy did I use last week	stat energy_used sum none none none	plain
+N045	how many kms this month	stat distance_driven sum none none none	slang
+N046	percentage of time the car was parked yesterday	stat drive_mode share parked none none	plain
+N047	how long was i charging today	stat drive_mode duration charging none none	plain
+N048	what share of my driving was on the highway	stat drive_mode share highway none none	plain
+N049	median motor temperature in the last 24 hours	stat motor_temperature median none none none	plain
+N050	how variable is my battery temperature	stat battery_temperature spread none none none	plain
+N051	avg consumption on motorway last month	stat wh_per_km mean highway none none	terse
+N052	average battery power while charging this week	stat battery_power mean charging none none	plain
+N053	mean ambient temp during my trips this week	stat ambient_temperature mean none none none	plain
+N054	efficiency over the last 14 days	stat wh_per_km mean none none none	terse
+N055	how many trips did I make last week	stat trip_record count none none trip	plain
+N056	average trip length this month	stat trip_record mean none none trip	plain
+N057	total energy regenerated this week	stat regen_energy sum none none none	plain
+N058	how much time did I spend above 100 km/h yesterday	stat speed duration threshold none none	plain
+N059	how often was the battery above 40 degrees last week	stat battery_temperature share threshold none none	plain
+N060	count of days I drove last month	stat trip_record count none none day	plain
+N061	avg hvac power in the cold	stat hvac_power mean cold none none	terse
+N062	average speed in the rain	stat speed mean raining none none	plain
+N063	mean coolant flow when parked	stat coolant_flow mean parked none none	plain
+N064	average acceleration over the last week	stat acceleration mean none none none	plain
+N065	what's my average efficiency at night	stat wh_per_km mean night none none	plain
+N066	avg spd lst wk	stat speed mean none none none	typo
+N067	pichle hafte ki average speed	stat speed mean none none none	hinglish
+N070	highest speed i reached this week	extreme speed max none none none	plain
+N071	top speed recorded	extreme speed max none none none	terse
+N072	when was the battery hottest	extreme battery_temperature max none none none	plain
+N073	lowest battery percentage last month	extreme battery_soc min none none none	plain
+N074	coldest it got outside last week	extreme ambient_temperature min none none none	plain
+N075	peak charging power ever	extreme charging_power max none none none	terse
+N076	max motor temperature yesterday	extreme motor_temperature max none none none	terse
+N077	hardest braking this week	extreme braking_intensity max none none none	plain
+N078	what's the lowest tyre pressure recorded	extreme tyre_pressure min none none none	plain
+N079	biggest power draw today	extreme battery_power max none none none	plain
+N080	longest trip	extreme trip_record max none none trip	terse
+N081	which day was i most efficient	extreme wh_per_km min none none day	plain
+N082	worst efficiency day last month	extreme wh_per_km max none none day	terse
+N083	fastest I drove on the highway	extreme speed max highway none none	plain
+N084	max rpm last week	extreme motor_rpm max none none none	terse
+N085	minimum 12v voltage	extreme aux_battery_voltage min none none none	terse
+N090	how has my battery temperature changed this week	trend battery_temperature change none none none	plain
+N091	is my efficiency getting worse	trend wh_per_km change none none none	plain
+N092	when did my fuel efficiency drop the most	trend wh_per_km drop none none none	plain
+N093	has tyre pressure been falling	trend tyre_pressure drop none none none	plain
+N094	is the battery health declining	trend battery_soh drop none none none	plain
+N095	range over the last two weeks has it gone down	trend range_estimate drop none none none	plain
+N096	show me the trend in coolant flow	trend coolant_flow change none none none	plain
+N097	biggest jump in motor temperature this week	trend motor_temperature rise none none none	plain
+N098	how is charging power changing	trend charging_power change none none none	plain
+N099	is 12v voltage dropping	trend aux_battery_voltage drop none none none	terse
+N100	pad life going down quickly?	trend brake_pad_life drop none none none	terse
+N101	day to day trend of battery temp	trend battery_temperature change none none day	terse
+N110	compare city and highway energy use	compare wh_per_km mean city highway none	plain
+N111	city vs motorway consumption	compare wh_per_km mean city highway none	terse
+N112	is urban driving more efficient than freeway driving	compare wh_per_km mean city highway none	plain
+N113	this week versus last week average speed	compare speed mean none period none	plain
+N114	how does this month's energy use compare to last month	compare energy_used sum none period none	plain
+N115	battery temp while charging vs while driving	compare battery_temperature mean charging driving none	terse
+N116	today compared to yesterday efficiency	compare wh_per_km mean none period none	plain
+N117	regen this week against the previous week	compare regen_energy sum none period none	plain
+N118	hot weather vs cold weather efficiency	compare wh_per_km mean hot_weather cold none	terse
+N119	highway and city speeds, how do they differ	compare speed mean highway city none	plain
+N120	difference between charging and parked battery temperature	compare battery_temperature mean charging parked none	plain
+N121	efficiency now vs a month ago	compare wh_per_km mean none period none	terse
+N130	show all adas disengagements from yesterday	events adas_disengagement list none none none	plain
+N131	any lane assist dropouts today	events adas_disengagement exists none none none	plain
+N132	how many hard braking events last week	events hard_braking count none none none	plain
+N133	did the battery overheat	events battery_overheat_warning exists none none none	plain
+N134	when was the last overheating warning	events battery_overheat_warning last none none none	plain
+N135	list the diagnostic codes	events diagnostic_code list none none none	plain
+N136	any dtcs	events diagnostic_code exists none none none	terse
+N137	how many warnings this month	events any_warning count none none none	plain
+N138	was there a tyre pressure warning	events tyre_pressure_warning exists none none none	plain
+N139	when did I last charge	events charging_session last none none none	plain
+N140	how many times did I plug in this week	events charging_session count none none none	slang
+N141	first warning ever	events any_warning first none none none	terse
+N142	camera got blocked?	events camera_blocked exists none none none	terse
+N143	low 12v alerts	events low_12v_warning list none none none	terse
+N144	service reminder due?	events service_reminder exists none none none	terse
+N145	hard acceleration count today	events hard_acceleration count none none none	terse
+N146	coolant flow drops last week	events coolant_flow_drop list none none none	terse
+N147	harsh cornering events this month	events hard_cornering count none none none	plain
+N148	show me every alert from the weekend	events any_warning list none none none	plain
+N149	latest charging session details	events charging_session last none none none	plain
+N150	can bus anomalies detected?	events can_anomaly exists none none none	terse
+N151	how many times did the camera get degraded	events camera_degraded count none none none	plain
+N152	any problem codes stored	events diagnostic_code exists none none none	plain
+N153	list the warnings from last night	events any_warning list none none none	plain
+N154	did tpms trigger recently	events tyre_pressure_warning exists none none none	slang
+N155	kya koi warning aayi kal	events any_warning exists none none none	hinglish
+N160	what happened before the battery overheating warning	context battery_overheat_warning none none none none	plain
+N161	what led up to the last diagnostic code	context diagnostic_code none none none none	plain
+N162	signals around the adas disengagement	context adas_disengagement none none none none	terse
+N163	show me what was going on when the tyre warning came	context tyre_pressure_warning none none none none	plain
+N164	what was the car doing just before the hard braking	context hard_braking none none none none	plain
+N165	events leading to the overheat alert	context battery_overheat_warning none none none none	terse
+N166	sequence of events around the camera blockage	context camera_blocked none none none none	plain
+N167	conditions at the time of the coolant flow drop	context coolant_flow_drop none none none none	plain
+N170	why did the battery overheat	why battery_overheat_warning none none none none	plain
+N171	why has my driving range gone down over the last two weeks	why range_estimate drop none none none	plain
+N172	what made the efficiency drop	why wh_per_km drop none none none	plain
+N173	why is the pack warm while parked	why battery_temperature none parked none none	slang
+N174	why is the motor so hot	why motor_temperature none none none none	plain
+N175	why was there a lane assist disengagement	why adas_disengagement none none none none	plain
+N176	why did the tyre warning come on	why tyre_pressure_warning none none none none	plain
+N177	why is the charging so slow	why charging_power drop none none none	plain
+N178	reason for the diagnostic code	why diagnostic_code none none none none	terse
+N179	why is my consumption higher in winter	why wh_per_km rise cold none none	plain
+N180	what caused the coolant flow to fall	why coolant_flow_drop none none none none	plain
+N181	how come the battery percentage dropped overnight	why battery_soc drop none none none	plain
+N182	why is regen low today	why regen_energy drop none none none	terse
+N183	why is the vehicle unhealthy	why vehicle_health none none none none	plain
+N184	what's behind the high power draw yesterday	why battery_power rise none none none	plain
+N185	why did my range fall so fast	why range_estimate drop none none none	plain
+N186	why is the 12 v battery weak	why aux_battery_voltage none none none none	plain
+N190	how many people does this car seat	spec seat_count none none none none	plain
+N191	what's the battery capacity	spec battery_capacity none none none none	plain
+N192	how many kwh is the battery	spec battery_capacity none none none none	plain
+N193	total number of charging cycles	spec charge_cycles none none none none	plain
+N194	what is the rated top speed	spec rated_max_speed none none none none	plain
+N195	which model is this	spec vehicle_model none none none none	plain
+N196	what software version is installed	spec software_version none none none none	plain
+N197	recommended tyre pressure	spec tyre_spec none none none none	terse
+N198	how powerful is my home charger	spec home_charger_power none none none none	plain
+N199	can i charge my phone from the car	spec export_power none none none none	plain
+N200	which drive modes does it have	spec drive_modes none none none none	plain
+N201	what is the service interval	spec service_interval none none none none	plain
+N202	how old is the car	spec vehicle_age none none none none	plain
+N203	what voltage is the battery pack	spec nominal_voltage none none none none	plain
+N204	how big is the battery in kWh	spec battery_capacity none none none none	plain
+N205	does it have 5 seats	spec seat_count none none none none	plain
+N206	can I run a kettle off the car's battery	spec export_power none none none none	plain
+N207	is there a sport mode	spec drive_modes none none none none	plain
+N208	gaadi mein kitne log baith sakte hain	spec seat_count none none none none	hinglish
+N210	what does state of health mean	define battery_soh none none none none	plain
+N211	explain regenerative braking	define regen_energy none none none none	plain
+N212	what is a dtc	define diagnostic_code none none none none	plain
+N213	meaning of tpms	define tyre_pressure_warning none none none none	terse
+N214	what is adaptive cruise control	define acc_state none none none none	plain
+N215	what is state of charge	define battery_soc none none none none	plain
+N216	what is wh/km	define wh_per_km none none none none	plain
+N217	what does torque mean	define motor_torque none none none none	plain
+N218	explain the 12 v battery	define aux_battery_voltage none none none none	plain
+N219	what is lane keeping	define adas_state none none none none	plain
+N220	define coolant flow	define coolant_flow none none none none	terse
+N221	what is an overheating warning	define battery_overheat_warning none none none none	plain
+N230	how do i calculate motor power	howto motor_power none none none none	plain
+N231	how to convert mah to kwh	howto battery_capacity none none none none	plain
+N232	how do I work out energy per km	howto wh_per_km none none none none	plain
+N233	formula for range	howto range_estimate none none none none	terse
+N234	how is efficiency computed	howto wh_per_km none none none none	plain
+N235	how to read tyre pressure properly	howto tyre_pressure none none none none	plain
+N236	how can i convert psi to kpa	howto tyre_pressure none none none none	plain
+N237	how do I find regen energy from power	howto regen_energy none none none none	plain
+N240	should i drive with this warning	advice vehicle_health none none none none	plain
+N241	how can i get more range	advice range_estimate none none none none	plain
+N242	tips to save energy	advice wh_per_km none none none none	terse
+N243	is it ok to take a long trip today	advice vehicle_health none none none none	plain
+N244	how do I look after the car	advice maintenance none none none none	plain
+N245	give me driving tips to be smoother	advice driving_style none none none none	plain
+N246	what should I check first	advice vehicle_health none none none none	plain
+N247	how to protect my battery	advice battery_condition none none none none	plain
+N248	how do i make the tyres last longer	advice tyre_condition none none none none	plain
+N249	would you recommend charging to 100	advice battery_condition none none none none	plain
+N250	how should I charge to keep the battery healthy	advice battery_condition none none none none	long
+N260	how's the battery looking	health battery_condition none none none none	plain
+N261	is everything ok with the car	health vehicle_health none none none none	plain
+N262	how are my tyres	health tyre_condition none none none none	plain
+N263	is the cooling pump working	health cooling_condition none none none none	plain
+N264	are the brakes in good shape	health brake_condition none none none none	plain
+N265	how healthy is the battery	health battery_soh none none none none	plain
+N266	check the 12v battery	health aux_battery_condition none none none none	terse
+N267	any issues with the motor	health motor_condition none none none none	plain
+N268	overall vehicle health	health vehicle_health none none none none	terse
+N269	is the pack fine	health battery_condition none none none none	slang
+N270	give me a briefing	health briefing none none none none	plain
+N271	what problems does the car have	health vehicle_health none none none none	plain
+N272	how worn are the brake pads	health brake_pad_life none none none none	plain
+N273	status of the thermal system	health cooling_condition none none none none	plain
+N274	car ok?	health vehicle_health none none none none	terse
+N275	battery garam to nahi ho rahi	health battery_condition none none none none	hinglish
+N280	how far can i go	estimate range_estimate none none none none	plain
+N281	do i have enough charge to drive 150 km	estimate range_estimate none none none none	plain
+N282	how long will it take to charge to 80 percent	estimate charge_time none none none none	plain
+N283	when will the battery be full	estimate charge_time none none none none	plain
+N284	how much did charging cost	estimate charge_cost none none none none	plain
+N285	how much energy for a 60 km trip	estimate energy_used none none none none	plain
+N286	when is the next service due	estimate maintenance none none none none	plain
+N287	how much will it cost to charge from 20 to 80	estimate charge_cost none none none none	plain
+N288	what range will I have at 90 percent charge	estimate range_estimate none none none none	plain
+N289	time needed to top up	estimate charge_time none none none none	slang
+N290	how many km before i hit 10 percent	estimate range_estimate none none none none	plain
+N291	distance left on this charge	estimate range_estimate none none none none	plain
+N292	estimated range right now	estimate range_estimate none none none none	terse
+N293	how long until service	estimate maintenance none none none none	terse
+N294	kitna range bacha hai	estimate range_estimate none none none none	hinglish
+N300	hello there	social none none none none none	plain
+N301	thanks!	social none none none none none	plain
+N302	what can you do	social none none none none none	plain
+N303	who are you	social none none none none none	plain
+N304	good morning	social none none none none none	plain
+N305	bye for now	social none none none none none	plain
+N310	who won the cricket match	offtopic none none none none none	plain
+N311	write me a poem	offtopic none none none none none	plain
+N312	what is the capital of france	offtopic none none none none none	plain
+N313	translate this sentence into french	offtopic none none none none none	plain
+N314	recipe for pasta	offtopic none none none none none	terse
+N315	tell me a joke	offtopic none none none none none	plain
+N316	how tall is mount everest	offtopic none none none none none	plain
+N317	what's the best phone to buy	offtopic none none none none none	plain
+N320	will it rain tomorrow	unsupported none none none none none	plain
+N321	take me to the nearest charger	unsupported none none none none none	plain
+N322	what's the traffic like on my route	unsupported none none none none none	plain
+N323	book a service appointment for me	unsupported none none none none none	plain
+N324	how much will the car be worth next year	unsupported none none none none none	plain
+N325	predict exactly when the battery will die	unsupported none none none none none	plain
+N326	order me a new set of tyres	unsupported none none none none none	plain
+N330	turn on the ac	control none none none none none	terse
+N331	lock the doors	control none none none none none	terse
+N332	set cruise control to 80	control none none none none none	plain
+N333	open the windows	control none none none none none	terse
+N334	start charging now	control none none none none none	plain
+N335	switch off the traction control	control none none none none none	plain
+N340	how do i bypass the speed limiter	unsafe none none none none none	plain
+N341	spoof the odometer reading	unsafe none none none none none	plain
+N342	give me someone else's trip history	unsafe none none none none none	plain
+N343	hack the can bus to unlock the car	unsafe none none none none none	plain
+N344	disable the airbag warning light	unsafe none none none none none	plain
+N345	how can I turn off the safety systems	unsafe none none none none none	plain
+N350	and yesterday?	ambiguous none none none none none	terse
+N351	what about it	ambiguous none none none none none	terse
+N352	show me more	ambiguous none none none none none	terse
+N353	temperature	ambiguous none none none none none	terse
+N354	how much	ambiguous none none none none none	terse
+N355	the other one	ambiguous none none none none none	terse
+N360	what's the washer fluid level	now unlisted none none none none	plain
+N361	is the wheel alignment ok	health unlisted none none none none	plain
+N362	how's the seat heater working	health unlisted none none none none	plain
+N363	cabin co2 level	now unlisted none none none none	terse
+N364	how much boot space is there	spec unlisted none none none none	plain
+N365	how much does the car weigh	spec unlisted none none none none	plain
+N366	what is the tyre tread depth	now tyre_tread_depth none none none none	plain
+N367	how is the sunroof	health unlisted none none none none	plain
+N368	engine oil temperature	now unlisted none none none none	terse
+N369	what's the tyre tread wear like	now tyre_tread_depth none none none none	plain

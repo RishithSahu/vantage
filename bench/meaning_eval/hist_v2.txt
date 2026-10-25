@@ -1,0 +1,61 @@
+# HIST-v2: questions over a multi-year history: calendar years and months, long relative windows, two periods, and a time condition mixed with a driving condition, a count, a ranking or a trend.  Authored 2026-10-23 before any training on them.
+# Format: question | act concept [op= cond= vs= ent= c2= ref=]
+how many trips did i take in 2024 | stat trip_record op=count ent=trip
+how far did i drive in march 2025 | stat distance_driven op=sum
+what was my average speed in july 2025 | stat speed op=mean
+total energy used in 2025 | stat energy_used op=sum
+how many charging sessions in the last 12 months | events charging_session op=count
+how many hard braking events did i have in 2024 | events hard_braking op=count
+what was the highest speed i reached in 2025 | extreme speed op=max
+what was my longest trip in 2024 | extreme distance_driven op=max ent=trip
+what was the lowest battery level in january 2026 | extreme battery_soc op=min
+how many unexpected shutdowns have there ever been | events unexpected_shutdown op=count
+when was the first unexpected shutdown | events unexpected_shutdown op=first
+when was the last battery overheating warning this year | events battery_overheat_warning op=last
+list the fault codes from march 2025 | events diagnostic_code op=list
+how many warnings in the last 6 months | events any_warning op=count
+which day in 2025 had the most hard braking | extreme hard_braking op=max ent=day
+has my energy consumption increased over the last 2 years | trend wh_per_km op=rise
+is the battery health declining over the last three years | trend battery_soh op=drop
+has my average speed changed since 2024 | trend speed op=change
+did my range get worse between summer and winter | compare range_estimate op=mean cond=hot_weather vs=cold
+compare my energy use in 2024 and 2025 | compare energy_used op=sum vs=period
+compare the distance driven in 2024 with 2025 | compare distance_driven op=sum vs=period
+how does this year compare with last year for hard braking | compare hard_braking op=count vs=period
+was i more efficient in summer or winter | compare wh_per_km op=mean cond=hot_weather vs=cold
+how does my consumption on the highway compare with the city over the last year | compare wh_per_km op=mean cond=highway vs=city
+how many trips at night in 2025 | stat trip_record op=count cond=night ent=trip
+average speed on the highway in march 2025 | stat speed op=mean cond=highway
+how much energy did i use in the city last month | stat energy_used op=sum cond=city
+what was the highest battery temperature while fast charging in 2025 | extreme battery_temperature op=max cond=fast_charging
+average battery temperature in cold weather last winter | stat battery_temperature op=mean cond=cold
+how many times did i brake hard in the rain in 2025 | events hard_braking op=count cond=raining
+what percentage of 2025 did i spend charging | stat drive_mode op=share cond=charging
+how long was the car parked last month | stat drive_mode op=duration cond=parked
+how many hours did i spend driving in 2024 | stat drive_mode op=duration cond=driving
+how much time did i spend above 120 km/h in 2025 | stat speed op=duration cond=threshold
+how many times did the battery go below 10 percent in 2024 | stat battery_soc op=count cond=threshold
+why did my consumption go up in 2025 | why wh_per_km op=rise
+why did my range drop last winter | why range_estimate op=drop
+what happened before the last unexpected shutdown | context unexpected_shutdown
+what happened before the first battery overheating warning | context battery_overheat_warning
+summarise 2025 | summary none
+what changed since last year | summary none op=change
+anything unusual in march 2025 | anomaly none
+what is my typical weekly distance | stat distance_driven op=usual
+is this month's consumption higher than usual | compare wh_per_km op=mean vs=typical
+what was the average outside temperature in 2024 | stat ambient_temperature op=mean
+how many days did it rain in 2025 | stat rain op=count ent=day
+how many fast charges did i do in 2025 | events charging_session op=count cond=fast_charging
+how many trips were longer than 100 km in 2024 | stat distance_driven op=count cond=threshold ent=trip
+what was the average trip length in 2025 | stat trip_record op=mean ent=trip
+what is the total distance since the start | stat distance_driven op=sum
+how many days did i drive in the last 3 months | stat trip_record op=count ent=day
+what was my most efficient trip ever | extreme wh_per_km op=min ent=trip
+what was my least efficient trip last year | extreme wh_per_km op=max ent=trip
+how many ecu resets in total | events ecu_reset op=count
+how many camera blockages in the last year | events camera_blocked op=count
+was there a software update in 2025 | events software_update op=exists
+how many diagnostic codes were cleared last year | events diagnostic_code_cleared op=count
+is hard braking becoming more common this year | trend hard_braking op=change
+how has my tyre pressure changed over the last year | trend tyre_pressure op=change

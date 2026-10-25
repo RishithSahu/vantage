@@ -1,0 +1,69 @@
+# Case Study 5 - requirement-to-evidence table
+
+Source: *Case Study 5, Natural Language Vehicle Information using On-Device SLM/LLM (VehicleGPT)*. Status words used below:
+**Implemented** = code that runs and is covered by a test or a measured result in this repository.
+**Replayed** = implemented decoding/ingestion, but the bus traffic is a recorded or generated replay, not a live vehicle.
+**Proposed** = design only; no code path has been exercised.
+**Open** = required and not yet demonstrated.
+Nothing here is a claim about production readiness. Numbers are from `results/` and `VANTAGE_STATUS.md` (one source revision, hash `d12507ef45486c64`) and are configuration-specific; where a figure comes from the laptop it says so. The **product configuration** is `vgpt.product.make_brain` (no model on the answer path); the frozen selector and the Qwen-LoRA are experimental comparators.
+
+## 1. Constraints stated in the case study
+
+| Requirement | Status | Evidence | Limits / what is missing |
+|---|---|---|---|
+| Operate without cloud dependency | Implemented | Every component is local: `ui/server.py` binds `127.0.0.1` only and has a DNS-rebinding / cross-site guard (`tests/test_ui.py`); no network call exists in `vgpt/` outside the dev-only weather download in `datagen.py` (not part of the assistant) | The weather download in the data *generator* needs the network unless `--offline`; the assistant never calls it |
+| Local SLM/LLM that "understands user questions" | Implemented as optional experimental configurations; **contribution not demonstrated; not in the product configuration** | The product configuration (deterministic rules + candidate generator + clarification-first policy) does the work. Compared on the same questions (`VANTAGE_STATUS.md` sections 4-5): a frozen LFM2.5-350M (Q4_K_M, 229 MB) choosing among generator candidates and the earlier Qwen2.5-0.5B + LoRA whole-query model | The frozen selector answers more directly (dev 78 vs 73 correct) but is wrong more often (11 vs 6 wrong answers dev; 53 vs 27 final) and fails the pre-registered criteria against the product baseline; it is disabled and not tuned further. The Qwen-LoRA gives more directly correct answers (dev 84, final 151 vs 73 and 132) with more wrong ones (9 and 40 vs 6 and 27), ignores conversation history through its interface, and its model path exceeds 2 s at p95 on the laptop. A retrieval + frozen LFM2.5-1.2B understanding layer (`VANTAGE_STATUS.md` section 13) was built next to it: alone it is far weaker (dev 41 / final 73 correct) and about 4 s per model question on 2 laptop cores (never under 2 s); as a hybrid (rules first, model for the rest) it gives 80 / 142 against 73 / 132, which makes the SLM requirement partly met, with a modest measured contribution; the whole simulated target (2 GB job, 700 MB OS ballast, ingest) peaks at 1,792 MB; no ARM figure. The case study asks for an SLM/LLM; the no-model configuration is a control, and this repository does not yet show a model that earns its place |
+| ~2 GB RAM, ~2 ARM A5x cores | **Open (ARM)** / measured on x86 | Process memory: product configuration 45 MB after load, 104 MB at the end of the 120-question run; with the frozen selector loaded 414 MB / 482 MB (`results/perf_final*.json`); tests and benchmarks are pinned to 2 cores (`tools_pin.py`); `vm/driver.py` boots an ARM64 Cortex-A55 x2, 2048 MB QEMU guest and loads the model (llama-cpp-python 0.3.36) | **No ARM latency or memory number exists for the current configurations.** The first prompt-state build under emulation (the earlier whole-schema prompt) had not finished after ~20 minutes when the run was stopped on request. QEMU is deferred; results from it, when obtained, are emulation timings |
+| Response time under 2 s for common queries | Measured on x86 for the product and selector configurations; **not measured on ARM** | Local, 2 pinned cores, 120 dev questions (`results/perf_final*.json`). **Product (no model):** common queries (100) mean 17.5 ms, p95 70 ms, max 188 ms; all 120 mean 23 ms, p95 105 ms, max 309 ms; none over 2 s. **Frozen selector (experimental):** common queries mean 229 ms, p95 1.14 s, max 1.39 s; model path mean 820 ms, p95 1.21 s; none over 2 s. **Qwen-LoRA whole-query path (experimental comparator):** p95 2.4 s (dev) and 2.5 s (final) in the evaluation runs, above 2 s | "Common queries" were defined before the run as the families LK, EVT, THR, CMP, SEL, CAP, FU, MSY, REF (`VANTAGE_STATUS.md` section 8). The figures are laptop figures; nothing here estimates ARM timings, which remain an open requirement |
+| Historical data searchable for several weeks | Implemented | Tiered store (1 Hz recent window, 1-minute, daily, trip/charge ledgers, events): 28-day generated histories; retention behaviour is tested by deleting tiers (`tests/test_retention.py`) | Histories are generated 28 days; a longer real history has not been loaded. Retention policy numbers for a real vehicle are a proposal |
+| Safety-critical functions isolated from the AI | Software boundary: **Implemented and tested**. Vehicle-level isolation: **Proposed, not built** | Tested on one host: the assistant opens the store `mode=ro` + `PRAGMA query_only`; SQL is compiled only from a whitelist and every statement is re-checked read-only (`vgpt/query_planner.py`, `tests/test_qc.py`); adapters are read-only consumers (cannot transmit); the ingest daemon is the only writer; control requests in any word order are refused by a gate before interpretation and never reach an analytic route (`tests/test_product.py`, `tests/test_qa.py`); log text is neutralised (injection test); the model has no tool that can act | Isolation here is process/database level on one host. ECU-level partitioning (hypervisor, separate SoC domain), a hardware one-way gateway / data diode and ASIL-rated separation are **Proposed** and untested |
+
+## 2. "Key points your solution should address"
+
+| Point | Status | Evidence |
+|---|---|---|
+| How driving scenarios and error-condition sequences are recreated | Replayed / generated | Seeded vehicle-life generator with injected stories (cooling-pump failure, tyre leak, roof box, weak 12 V battery, roadworks, dirty windscreen) on real weather and real speed traces (`vgpt/datagen*.py`); counterfactual twin histories for causal checks (`bench/counterfactual*.py`); recorded dashcam clip for the camera path. CARLA is **Proposed** (the same replay interface would be fed) |
+| Vehicle data collection from CAN / CAN-FD | Replayed | `vgpt/protocols/canframes.py`, `dbc.py` (DBC database `vehicle.dbc`), ISO-TP and UDS (DTCs), OBD-II mode 01; `tests/test_protocols.py`; ingest from a recorded frame stream (`data/replay.pkl`, `real_can.db`). SocketCAN / PEAK readers are **Proposed** |
+| SOME/IP services | Replayed | `vgpt/protocols/someip.py` incl. service discovery; service catalog `services.json`; a vsomeip subscriber or Ethernet tap is **Proposed** |
+| Android Vehicle HAL | Replayed | `vgpt/protocols/vhal.py` with real AOSP property ids and units (`vhal_props.json`); a Binder client is **Proposed** |
+| QNX services / logs | Replayed | log adapter for `slog2info`, logcat and syslog lines; log text is stored as data and neutralised before it can reach an answer (`neutralise`, `tests/test_qc.py` injection test). A live QNX reader is **Proposed** |
+| ADAS | Replayed | ADAS state and disengagement events through SOME/IP and DBC signals; ADAS_DISENGAGE events are queryable (fixture `gen_demo`) |
+| Camera feeds | Implemented (metadata only) | `vgpt/camera.py` computes blockage / sharpness / brightness from frames of a recorded dashcam clip (`tests/test_camera.py`); **no pixels are stored**; no scene understanding is claimed |
+| Diagnostic logs | Replayed | DTC set/clear events, UDS responses, log search (FTS) |
+| GNSS | Replayed | NMEA 0183 parser (`tests/test_gnss.py`) |
+| Real-time and historical retention | Implemented | Real-time path: ingest daemon with lag reporting (`vgpt/ingestd.py --speed 1`); history: tiered store with ageing from 1 Hz to 1-minute to daily, evidence contracts state the resolution an answer used |
+| Generic JSON input alone is **not** counted as protocol coverage | - | The table above lists only decoders that parse native wire formats; the generic schema overlay (`vgpt/schema_overlay.py`) describes storage, not buses |
+
+## 3. Expected output (seven headings) - where each is written
+
+| Heading | Where | Status |
+|---|---|---|
+| High-level system architecture | `DESIGN.md` (current architecture merged), `docs/architecture.svg` | Written; DESIGN.md describes the product configuration, the pipeline, the model roles and the tested vs proposed isolation |
+| Vehicle data collection strategy | `vgpt/adapters.py`, `vgpt/ingestd.py`, section 2 above | Implemented for replay; transports proposed |
+| SLM/LLM selection rationale | `DESIGN.md` section 3, `VANTAGE_STATUS.md` sections 4-5 | The LFM2.5-350M was chosen by size/architecture and a *frozen* comparison and did not win on accuracy; the product configuration uses no model. See DESIGN.md section 3 |
+| Search and retrieval workflow | command / fuel / status gates -> rules -> interpretation contract (support + coverage) -> clarification-first policy with deterministic candidates (every generator reading confirmed, "neither of these" always offered) -> validator -> capability -> whitelisted SQL planner -> executor -> evidence contract -> composer -> answer verifier. Older engines answer only non-typed intents and present-state status/health summaries (not covered by the typed checks) | Implemented |
+| Historical data storage approach | `vgpt/store.py`, `docs/signal_ontology.md` | Implemented |
+| Edge deployment architecture | `vm/driver.py` (QEMU), `bench/run_guest_v2.py`; x86 pinned-core measurements | ARM **Open** |
+| User interaction design | `ui/` (local web UI with evidence chips), clarification questions offering concrete readings, disclosure of defaults, evidence class on every answer | Implemented; no user study |
+
+## 4. Evaluation criteria and the evidence for each
+
+| Criterion | Evidence | Honest summary |
+|---|---|---|
+| System architecture | this table, `DESIGN.md` | Complete on paper; hardware components other than a laptop/QEMU are proposed |
+| AI capability - understand queries | dev set 120 questions (author-written, repeatedly inspected), diagnostic 30, conversations 18 scripted, final set 308 (regression data), sealed acceptance draft 114 (unreviewed, never run) | Rules alone: 77 of 120 dev and 137 of 308 final correct. Product configuration: 73 and 132 correct directly, fewer wrong answers (6 and 27 vs 8 and 38) because it answers less and asks more; 86 of its 135 final-set clarifications contain no intended reading (oracle upper bound after one turn: 95 and 181). Real user success unmeasured |
+| AI capability - accuracy of responses | evaluator tested against deliberately wrong predictions (`tests/test_evaluator.py`); executor checked against plain SQL/numpy (`tests/test_reference.py`, `tests/test_windows.py`) | Arithmetic and windowing are independently verified; interpretation accuracy is the weaker part |
+| Data integration | section 2 | Replayed, not live |
+| Search - historical events, trends, anomalies | operators `list_events` (paged, full retrieval), `count`, `trend`, `detect_change`; tests | Change-point p-values are exploratory (serial correlation) |
+| Search - explain causes | `explain_change`, `explain_event`; counterfactual scoring `bench/eval_attribution*.py` | An unrecorded cause stays in the "unexplained" part by a median 0.70 (13 twins, 0.52 in two-cause families); a recorded gradual driver can absorb credit (flagged when it moves with the period). **Associated, not causal** |
+| Edge performance - memory | 45-104 MB process (product configuration) and 414-482 MB (with the frozen selector loaded), x86 | ARM whole-guest memory **Open** |
+| Edge performance - latency | section 1 (configuration-specific) | ARM **Open** |
+| Edge performance - scalability RPi -> HPC | Proposed | Nothing was run on a Raspberry Pi or an HPC |
+| Privacy & security - local only | section 1 | Implemented |
+| Privacy & security - protection of vehicle and driver data | loopback-only server, read-only store, text fields neutralised, feedback file capped, location data stays in the local store | Encryption at rest and per-user access control are **Proposed** |
+| Practicality - ease of deployment | `tools_release.py` builds a zip and self-tests it in a clean environment (inherited from VehicleGPT 1.1; not re-run for VANTAGE) | Not re-verified for this revision |
+| Value for drivers / service engineers / fleets / validation | answer families and explanations; schema overlay for other vehicles | Demonstrated on generated histories only |
+
+## 5. The five example questions
+
+Answered verbatim, with the scripted reply "1" shown where the assistant asks a clarification, in `results/five_questions.md` (produced by `bench/five_questions.py` through the product configuration `make_brain`, no model) on two generated histories; the route, interpreted query, evidence class and verifier status of each are in `results/route_audit.md`. All ten runs use the typed pipeline. Behaviour visible in those answers: the history has no ADAS disengagements on one vehicle (the answer says none were recorded); "fuel efficiency" is **not** silently answered as energy efficiency - the assistant says this electric vehicle records no fuel data, offers average energy consumption (Wh/km) as a reading, and answers it only after the person accepts ("neither of these" is always an option); "before the warning" states its ten-minute interval and excludes the warning itself; the range explanation states its basis and uses association wording ("model-based estimate, not a measurement").

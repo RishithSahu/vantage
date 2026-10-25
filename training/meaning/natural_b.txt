@@ -1,0 +1,268 @@
+# Natural-language bank B (authored by Claude after the evaluation sets were frozen). Format: text | act concept [op=..] [cond=..] [vs=..] [ent=..]
+# ---------------------------------------------------------------- events
+show me all the adas disengagements from last week | events adas_disengagement op=list
+list every time lane assist switched itself off | events adas_disengagement op=list
+how often did driver assistance cut out today | events adas_disengagement op=count
+number of adas disengagements this month | events adas_disengagement op=count
+did the lane keeping disengage on its own yesterday | events adas_disengagement op=exists
+has driver assist ever dropped out | events adas_disengagement op=exists
+when did lane assist last switch off | events adas_disengagement op=last
+the first time adas disengaged | events adas_disengagement op=first
+how many hard stops did i make this week | events hard_braking op=count
+count the emergency braking events yesterday | events hard_braking op=count
+list my harsh brakes from the last trip | events hard_braking op=list
+did i brake hard at all today | events hard_braking op=exists
+when was my last hard brake | events hard_braking op=last
+how many harsh accelerations last week | events hard_acceleration op=count
+list the times i floored it | events hard_acceleration op=list
+any rapid acceleration events yesterday | events hard_acceleration op=exists
+did i take any corners too hard | events hard_cornering op=exists
+how many hard cornering events this week | events hard_cornering op=count
+when was the last harsh cornering | events hard_cornering op=last
+did the pack overheat last week | events battery_overheat_warning op=exists
+has the battery ever been flagged as too hot | events battery_overheat_warning op=exists
+was there a battery overheating alert this month | events battery_overheat_warning op=exists
+how many overheating warnings have there been | events battery_overheat_warning op=count
+list all the over temperature warnings | events battery_overheat_warning op=list
+when did the battery last get too hot | events battery_overheat_warning op=last
+when was the first overheating warning | events battery_overheat_warning op=first
+show the overheating alerts from the past two weeks | events battery_overheat_warning op=list
+any fault codes right now | events diagnostic_code op=exists
+are there any dtcs stored | events diagnostic_code op=exists
+show me the error codes | events diagnostic_code op=list
+what trouble codes has the car logged | events diagnostic_code op=list
+how many diagnostic codes were set this month | events diagnostic_code op=count
+when was the last fault code stored | events diagnostic_code op=last
+diagnostic events from yesterday | events diagnostic_code op=list
+have any codes popped up lately | events diagnostic_code op=exists
+was a tyre pressure alert raised last week | events tyre_pressure_warning op=exists
+how many times did the tpms light come on | events tyre_pressure_warning op=count
+list the low tyre pressure warnings | events tyre_pressure_warning op=list
+when was the last tyre warning | events tyre_pressure_warning op=last
+did the 12 v battery warn about low voltage | events low_12v_warning op=exists
+how many low 12v alerts this month | events low_12v_warning op=count
+when did the last 12 v warning appear | events low_12v_warning op=last
+is a service reminder active | events service_reminder op=exists
+when did the service reminder last show | events service_reminder op=last
+was the camera blocked at any point | events camera_blocked op=exists
+how many camera blockages last week | events camera_blocked op=count
+list the times the camera was obstructed | events camera_blocked op=list
+did the camera quality degrade | events camera_degraded op=exists
+how many times was the camera degraded this month | events camera_degraded op=count
+when was the last time i charged the car | events charging_session op=last
+how many charging sessions did i have last month | events charging_session op=count
+list all my charges this week | events charging_session op=list
+did i plug in yesterday | events charging_session op=exists
+show the details of my last charge | events charging_session op=last
+my first charging session on record | events charging_session op=first
+how many times did i charge this week | events charging_session op=count
+any can bus intrusions | events can_anomaly op=exists
+how many can anomalies were detected | events can_anomaly op=count
+list the bus attacks seen | events can_anomaly op=list
+how many alerts have there been this week | events any_warning op=count
+show me all warnings since monday | events any_warning op=list
+have there been any warnings today | events any_warning op=exists
+what was the last alert | events any_warning op=last
+when did the first warning happen | events any_warning op=first
+did coolant flow collapse at any point | events coolant_flow_drop op=exists
+list the times the coolant flow dropped | events coolant_flow_drop op=list
+how many coolant flow drops were there | events coolant_flow_drop op=count
+when did the coolant flow last drop | events coolant_flow_drop op=last
+did the tyre get inflated recently | events tyre_inflation op=exists
+alerts from the last 24 hours | events any_warning op=list
+anything flagged overnight | events any_warning op=exists
+# ---------------------------------------------------------------- context
+what was happening in the lead up to the overheating alert | context battery_overheat_warning
+show me the events just before the pack got too hot | context battery_overheat_warning
+what happened prior to the battery warning | context battery_overheat_warning
+walk me through the minutes before the over temperature alert | context battery_overheat_warning
+conditions before the last fault code | context diagnostic_code
+what was the car doing before the dtc was set | context diagnostic_code
+what signals changed around the error code | context diagnostic_code
+what preceded the lane assist disengagement | context adas_disengagement
+show me the data around when adas switched off | context adas_disengagement
+what happened right before driver assist cut out | context adas_disengagement
+how was the car behaving before the tyre alert | context tyre_pressure_warning
+what happened around the tyre pressure warning | context tyre_pressure_warning
+what led to the hard braking event | context hard_braking
+speed and brake data around the emergency stop | context hard_braking
+what was happening just before the harsh acceleration | context hard_acceleration
+what was going on around the camera blockage | context camera_blocked
+conditions just prior to the 12 v warning | context low_12v_warning
+what happened before the charging session started | context charging_session
+signals leading up to the coolant flow drop | context coolant_flow_drop
+what was the lead up to the last warning | context any_warning
+chain of events before the alert | context any_warning
+what happened before the can anomaly | context can_anomaly
+what was the state of things before the service reminder | context service_reminder
+# ---------------------------------------------------------------- why
+why did the pack get so hot | why battery_overheat_warning
+what caused the overheating alert | why battery_overheat_warning
+explain the battery overheat warning | why battery_overheat_warning
+why did the battery warn me about temperature | why battery_overheat_warning
+why was that diagnostic code set | why diagnostic_code
+what does the fault code point to as a cause | why diagnostic_code
+why did lane assist switch off | why adas_disengagement
+what made driver assistance disengage | why adas_disengagement
+why did the tyre pressure warning appear | why tyre_pressure_warning
+what triggered the 12 v warning | why low_12v_warning
+why did the camera get blocked | why camera_blocked
+why did i brake so hard | why hard_braking
+what caused the coolant flow to drop | why coolant_flow_drop
+why did the cooling flow collapse | why coolant_flow_drop
+why has my range dropped lately | why range_estimate op=drop
+what is making the range go down | why range_estimate op=drop
+why do i get less distance now than before | why range_estimate op=drop
+why is the estimated range so short today | why range_estimate op=drop
+why is my efficiency so poor | why wh_per_km op=rise
+what's causing the high consumption | why wh_per_km op=rise
+why did my energy use go up this week | why wh_per_km op=rise
+why has efficiency fallen over the last month | why wh_per_km op=drop
+why is the consumption worse in the city | why wh_per_km op=rise cond=city
+why is the battery temperature high when parked | why battery_temperature cond=parked
+why does the pack heat up while charging | why battery_temperature cond=charging
+why is the battery so warm | why battery_temperature
+why is the battery temperature rising | why battery_temperature op=rise
+why is the motor temperature high | why motor_temperature
+what is heating the motor up | why motor_temperature op=rise
+why is the motor running hot on the highway | why motor_temperature cond=highway
+why is charging so slow today | why charging_power op=drop
+why is the charge rate lower than usual | why charging_power op=drop
+why did the battery percentage fall so fast | why battery_soc op=drop
+why did i lose charge overnight | why battery_soc op=drop
+why is battery health declining | why battery_soh op=drop
+why has the battery lost capacity | why battery_soh op=drop
+why are the tyres losing pressure | why tyre_pressure op=drop
+why is regen giving back less | why regen_energy op=drop
+why is the 12v battery low | why aux_battery_voltage op=drop
+why is power draw so high | why battery_power op=rise
+what explains the big power draw yesterday | why battery_power op=rise
+why is the cooling flow low | why coolant_flow op=drop
+why does the coolant flow stop when parked | why coolant_flow cond=parked
+why is the climate control using so much | why hvac_power op=rise
+why did speed drop on that road | why speed op=drop
+why is the vehicle considered unhealthy | why vehicle_health
+why does the car say there are problems | why vehicle_health
+why is the battery flagged as a problem | why battery_condition
+why are the brakes marked worn | why brake_condition
+why is the motor flagged | why motor_condition
+why is the cooling system in trouble | why cooling_condition
+why is there a problem with the tyres | why tyre_condition
+why is my driving score low | why driving_style
+# ---------------------------------------------------------------- spec
+how many people can sit in this car | spec seat_count
+is this a five seater | spec seat_count
+what is the passenger capacity | spec seat_count
+how many can this vehicle carry | spec seat_count
+seats in the vehicle | spec seat_count
+how many kilowatt hours does the battery hold | spec battery_capacity
+what is the size of the battery pack | spec battery_capacity
+usable battery capacity | spec battery_capacity
+how much energy can the pack store | spec battery_capacity
+what is the capacity of the battery in amp hours | spec battery_capacity
+how many cycles has the battery been through | spec charge_cycles
+number of battery charge cycles so far | spec charge_cycles
+how many full charges has the pack had | spec charge_cycles
+what is the charge cycle count | spec charge_cycles
+what is the nominal pack voltage | spec nominal_voltage
+what voltage does the main battery run at | spec nominal_voltage
+what is the manufacturer's top speed for this car | spec rated_max_speed
+how fast is this car supposed to be able to go | spec rated_max_speed
+rated maximum speed | spec rated_max_speed
+what is the speed limit the car is built for | spec rated_max_speed
+what is the service interval in kilometres | spec service_interval
+how often should i service the car | spec service_interval
+how many km between services | spec service_interval
+which car is this exactly | spec vehicle_model
+what is the make and model | spec vehicle_model
+tell me about this vehicle's model and variant | spec vehicle_model
+when was this car bought | spec vehicle_age
+how long have i owned the car | spec vehicle_age
+what is the age of the vehicle | spec vehicle_age
+what tyre pressure should i run | spec tyre_spec
+what is the specified pressure for my tyres | spec tyre_spec
+what is the correct psi for the front tyres | spec tyre_spec
+what size are the tyres | spec tyre_spec
+what is the rating of my home charger | spec home_charger_power
+how many kw does my wallbox deliver | spec home_charger_power
+which software version does the car run | spec software_version
+what firmware is on the car | spec software_version
+is the car able to power a laptop | spec export_power
+can i plug an appliance into the car | spec export_power
+does it support vehicle to load | spec export_power
+how many drive modes are there | spec drive_modes
+what driving modes can i choose from | spec drive_modes
+does the car have an eco mode | spec drive_modes
+how big is the boot | spec unlisted
+what is the towing capacity | spec unlisted
+how much does the car weigh | spec unlisted
+what colour is the car | spec unlisted
+how long is the warranty | spec unlisted
+what is the ground clearance | spec unlisted
+what are the dimensions of the car | spec unlisted
+# ---------------------------------------------------------------- define
+what is regenerative braking | define regen_energy
+how does regen work | define regen_energy
+what do you mean by state of charge | define battery_soc
+explain soc to me | define battery_soc
+what is soh | define battery_soh
+what's battery health in simple terms | define battery_soh
+what does dtc stand for | define diagnostic_code
+what is a trouble code | define diagnostic_code
+what is tpms | define tyre_pressure_warning
+what does the tyre pressure warning mean | define tyre_pressure_warning
+what is adas | define adas_state
+what does driver assistance do | define adas_state
+what is adaptive cruise control | define acc_state
+what is aeb | define aeb_state
+what is a blind spot warning | define blindspot_state
+what does lane keeping mean | define adas_state
+what is a lane departure warning | define lane_departure
+what is wh per km | define wh_per_km
+what does efficiency mean for an ev | define wh_per_km
+what is torque | define motor_torque
+what is rpm | define motor_rpm
+what is horsepower | define horsepower
+what is coolant flow and why does it matter | define coolant_flow
+what is the 12 volt battery for | define aux_battery_voltage
+what is the traction battery | define battery_condition
+what is a charging session | define charging_session
+what does hvac mean | define hvac_power
+what is a can bus | define can_anomaly
+what is battery capacity | define battery_capacity
+what is a battery cycle | define charge_cycles
+what does odometer mean | define odometer
+what is yaw rate | define yaw_rate
+what is wheel slip | define wheel_slip
+what is a battery overheating warning | define battery_overheat_warning
+what is thermal management | define cooling_condition
+what is brake pad wear | define brake_pad_life
+what is tyre tread depth | define tyre_tread_depth
+what is range in an electric car | define range_estimate
+what is the difference between kw and kwh | define charging_power
+what is the difference between soc and soh | define battery_soc
+# ---------------------------------------------------------------- howto
+how do i calculate power from torque and rpm | howto motor_power
+how is motor power worked out | howto motor_power
+how do i convert kw to hp | howto horsepower
+how to turn mah into kwh | howto battery_capacity
+how do i convert ah to kwh | howto battery_capacity
+how is range calculated | howto range_estimate
+how do i estimate how far i can go | howto range_estimate
+how do i compute wh per km | howto wh_per_km
+how is consumption calculated | howto wh_per_km
+how do you measure efficiency | howto wh_per_km
+how do i convert psi to bar | howto tyre_pressure
+how should i check tyre pressure | howto tyre_pressure
+how do i convert km to miles | howto distance_driven
+how do i work out charging time | howto charge_time
+how is charging time estimated | howto charge_time
+how do i calculate charging cost | howto charge_cost
+how is state of charge measured | howto battery_soc
+how is battery health calculated | howto battery_soh
+how to compute energy from power and time | howto energy_used
+how is regen energy calculated | howto regen_energy
+how do i read the dtc | howto diagnostic_code
+how can i reset the service reminder | howto service_reminder
+how to calculate acceleration from speed | howto acceleration
+how do you get speed from rpm | howto speed

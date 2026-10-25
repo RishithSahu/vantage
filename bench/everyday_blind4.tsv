@@ -1,0 +1,55 @@
+# fourth unseen set (written last, never used for tuning - the honest generalisation number). Measure: python bench/eval_everyday.py data/gen_courier.db bench/everyday_blind4.tsv
+advice	is the vehicle in a state where I can go on a long drive
+advice	would you let me take the car to another city right now
+advice	do I need to worry before driving it today
+advice	is it dangerous to drive with the current problems
+signal_why	why does the power go below zero sometimes
+signal_why	why is it that the coolant isn't flowing when the car is off
+signal_why	why do the pack temperatures climb when I charge quickly
+drive_safely	what can I do to be a more careful driver
+drive_safely	any advice so I stay out of accidents
+battery_now	what is going on with my battery
+battery_now	how does the battery look
+last_charge	when was the last time the battery was topped up
+last_charge	what happened in my previous charge
+reach	how many km do I have before I need to charge
+reach	is there enough juice to get home
+reach	can I go 100 km without charging
+improve_range	what changes would give me longer range
+improve_range	help me use less energy per km
+charge_cost	how much did all my charging come to
+charge_cost	what are my energy costs
+charge_time	how long till the battery reaches 100
+speeding	do I drive faster than I should
+speeding	how often am I over 120
+hot_battery	has the battery temperature ever been alarming
+pump_ok	is my coolant pump alright
+pump_ok	is the thermal management working
+v12	how is the low voltage battery
+motor_now	how warm is the traction motor
+unusual	did anything unexpected happen today
+unusual	has the car done anything strange today
+overview	tell me how this week went
+overview	what's happened with the car lately
+style	am I driving smoothly
+style	what's my driving rating
+dtc_explain	what does this error code stand for
+battery_age	how much life is left in the battery
+charging_now	is the charger plugged in at the moment
+top_speed	what is the highest speed the car has hit
+places_most	where does the car go the most
+commute	how much time do I spend on my usual trip
+longest_trip	which drive was the longest
+last_trip	what did I do on my last drive
+eff_day	how thrifty was I yesterday
+best_day	which day had the best efficiency
+eff_trend	is the car using more energy these days
+trip_count	how many trips have I done this week
+regen	how much energy have I recovered by braking
+explain_simple	what was the last warning about, in simple terms
+briefing	morning, brief me
+help	what questions should I ask
+smalltalk	hello there
+smalltalk	nice one
+foreign	range kitna bacha hai
+foreign	safe hai kya gaadi chalana

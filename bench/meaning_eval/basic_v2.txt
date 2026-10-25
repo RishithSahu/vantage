@@ -1,0 +1,141 @@
+# BASIC-v2: plain everyday questions of every kind (current value, statistic, extreme, count, last/first, trend, comparison, why, spec, definition, health, small talk, refusals) with the common period words.  Authored 2026-10-23 before any training
+# on them.  Format: question | act concept [op= cond= vs= ent= c2= ref=]   (the period is a VALUE parsed by literals.py, never a slot)
+what is my speed | now speed
+how fast am i going right now | now speed
+what is the battery level | now battery_soc
+how much charge do i have left | now battery_soc
+how much battery is left | now battery_soc
+what is the battery temperature | now battery_temperature
+how hot is the battery right now | now battery_temperature
+what is the motor temperature | now motor_temperature
+how are my tyre pressures | now tyre_pressure
+what is the tyre pressure | now tyre_pressure
+what is my estimated range | estimate range_estimate
+how far can i go on this charge | estimate range_estimate
+what is the outside temperature | now ambient_temperature
+how cold is it outside | now ambient_temperature
+what is the odometer reading | now odometer
+how many kilometres has the car done in total | now odometer
+what is the 12 volt battery voltage | now aux_battery_voltage
+what is the coolant flow | now coolant_flow
+is the car charging | now charging_state
+what is the charging power | now charging_power
+what is the average speed today | stat speed op=mean
+what was my average speed yesterday | stat speed op=mean
+what was the average battery temperature last week | stat battery_temperature op=mean
+what is the average outside temperature this week | stat ambient_temperature op=mean
+average motor temperature last month | stat motor_temperature op=mean
+what was the total distance driven last week | stat distance_driven op=sum
+how far did i drive yesterday | stat distance_driven op=sum
+how many kilometres did i drive this month | stat distance_driven op=sum
+how much energy did i use yesterday | stat energy_used op=sum
+total energy used last week | stat energy_used op=sum
+what is my average energy consumption per km this month | stat wh_per_km op=mean
+how efficient was i last week | stat wh_per_km op=mean
+how many trips did i take this week | stat trip_record op=count ent=trip
+how many trips did i make yesterday | stat trip_record op=count ent=trip
+number of trips last month | stat trip_record op=count ent=trip
+what was my highest speed last week | extreme speed op=max
+what is the top speed i reached this month | extreme speed op=max
+what was the highest battery temperature yesterday | extreme battery_temperature op=max
+what was the lowest battery level this week | extreme battery_soc op=min
+what was the lowest outside temperature last month | extreme ambient_temperature op=min
+what was my longest trip last week | extreme distance_driven op=max ent=trip
+which trip used the most energy this month | extreme energy_used op=max ent=trip
+what was my shortest trip yesterday | extreme distance_driven op=min ent=trip
+how many hard braking events last week | events hard_braking op=count
+how many times did i brake hard yesterday | events hard_braking op=count
+how many harsh accelerations this month | events hard_acceleration op=count
+how many charging sessions did i have this month | events charging_session op=count
+how many times did i charge last week | events charging_session op=count
+when did i last charge the car | events charging_session op=last
+when was my last charge | events charging_session op=last
+when was the first charging session | events charging_session op=first
+were there any warnings this week | events any_warning op=exists
+any warnings today | events any_warning op=exists
+show me the warnings from last week | events any_warning op=list
+list all the warnings this month | events any_warning op=list
+how many warnings did i get last month | events any_warning op=count
+any fault codes this week | events diagnostic_code op=exists
+list the diagnostic trouble codes from last week | events diagnostic_code op=list
+how many fault codes this month | events diagnostic_code op=count
+when was the last fault code | events diagnostic_code op=last
+was there a tyre pressure warning last week | events tyre_pressure_warning op=exists
+when was the last battery overheating warning | events battery_overheat_warning op=last
+how many times did the battery overheat this month | events battery_overheat_warning op=count
+did the adas disengage yesterday | events adas_disengagement op=exists
+how many adas disengagements last week | events adas_disengagement op=count
+how many ecu resets have there been | events ecu_reset op=count
+when was the last unexpected shutdown | events unexpected_shutdown op=last
+has the camera been blocked this week | events camera_blocked op=exists
+when did i last start the car | events trip_record op=last
+when was my last trip | events trip_record op=last
+when did my last trip start | events trip_record op=last
+is my battery temperature going up | trend battery_temperature op=rise
+has my energy consumption increased over the last month | trend wh_per_km op=rise
+is my range getting worse | trend range_estimate op=drop
+how has my tyre pressure changed over the past two weeks | trend tyre_pressure op=change
+how did the outside temperature change this week | trend ambient_temperature op=change
+is the battery health dropping | trend battery_soh op=drop
+are hard braking events becoming more frequent | trend hard_braking op=change
+has my average speed changed lately | trend speed op=change
+compare this week and last week energy use | compare energy_used op=sum vs=period
+how does this month compare with last month for distance | compare distance_driven op=sum vs=period
+compare my city and highway consumption | compare wh_per_km op=mean cond=city vs=highway
+is the battery hotter when charging or driving | compare battery_temperature op=mean cond=charging vs=driving
+how does my speed this week compare with last week | compare speed op=mean vs=period
+why did my range drop | why range_estimate op=drop
+why is the battery temperature high | why battery_temperature
+why did my energy consumption go up | why wh_per_km op=rise
+why was my last trip so inefficient | why wh_per_km op=rise ent=trip
+what is the battery capacity | spec battery_capacity
+what is the rated top speed | spec rated_max_speed
+how many seats does the car have | spec seat_count
+what model is this car | spec vehicle_model
+which software version is installed | spec software_version
+what is the service interval | spec service_interval
+what is regenerative braking | define regen_energy
+what does the state of charge mean | define battery_soc
+what is a diagnostic trouble code | define diagnostic_code
+what is tyre pressure monitoring | define tyre_pressure
+how is regen braking calculated | howto regen_energy
+how is the range estimated | howto range_estimate
+how is my car doing | health vehicle_health
+is my car ok | health vehicle_health
+is the battery healthy | health battery_soh
+how are my tyres | health tyre_condition
+are my brakes ok | health brake_condition
+how was my week | summary none
+give me a summary of today | summary none ent=day
+summarise my last trip | summary none ent=trip
+tell me about my last trip | summary none ent=trip
+what happened this week | summary none
+anything unusual this week | anomaly none
+brief me | health briefing
+hello | social none
+thanks | social none
+good morning | social none
+tell me a joke | offtopic none
+what is the capital of france | offtopic none
+who won the cricket match | offtopic none
+open the windows | control none
+turn on the air conditioning | control none
+lock the doors | control none
+disable the brakes | control none
+how do i turn off the airbags permanently | unsafe none
+asdf qwerty | ambiguous none
+what about it | ambiguous none
+how fast was i going at 3 pm yesterday | at speed
+what was the battery level at 8 am today | at battery_soc
+where is the car | now location
+where did i park | now location
+what is the fuel level | now fuel_level
+what is the engine speed | now engine_rpm
+what is the engine oil temperature | now engine_oil_temperature
+how much fuel did i use last week | stat fuel_rate op=sum
+what is the fuel consumption this month | stat fuel_rate op=mean
+what is the lane keeping confidence | now lane_confidence
+is it raining | now rain
+how bright is it outside | now light
+what is the heading | now heading
+what are the wheel speeds | now wheel_speed

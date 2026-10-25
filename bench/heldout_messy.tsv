@@ -1,0 +1,68 @@
+# held-out set of MESSY input: typos, speech-to-text slips, filler words, run-on sentences. Written once; measured with --quiet.
+advice	umm so is it like ok to take the car on a long drive or no
+advice	i dont know if i should drive it, is it safe
+advice	car is giving warnings can i still go to work
+advice	whether the vehical is fit for a long trip
+signal_why	why is the pwer negative when i brake
+signal_why	why coolent flow is zero
+signal_why	why is my motor temprature so high
+drive_safely	how to drive safly in this car
+drive_safely	give me some tips to be a safer drivr
+battery_now	hows the batery
+battery_now	uh battery status pls
+battery_now	what is the helth of my batery
+last_charge	when did i charge last time
+last_charge	last charging was when
+charge_cost	how much money i spent on charging
+charge_cost	charging cost this week pls
+charge_time	how much time to charge it fully
+charge_time	how long charging take to 80
+reach	can i reach 100 km with this charge
+reach	do i need to charge now or later
+reach	how much km i can still drive
+improve_range	how to get more range from this car
+improve_range	tips to save battery while driving pls
+speeding	am i overspeeding
+speeding	do i drive faster then the limit
+hot_battery	did battery get too hot ever
+hot_battery	maximum temprature of the battery
+pump_ok	is coolant pump ok
+pump_ok	cooling system is it working fine
+v12	is 12 volt battery fine
+motor_now	motor temprature now
+unusual	anything wierd today
+unusual	did the car do anything strange yesterday or not
+overview	give me weekly report of the car
+overview	how was my week with the car
+style	how is my driving style
+style	am i a rash driver
+dtc_explain	what is this error code about
+dtc_explain	explain me the dtc
+battery_age	how old is my battary
+battery_age	how much has my battery degraded till now
+charging_now	is it charging now
+charging_now	car is plugged in or not
+top_speed	what was the maximum speed i did
+top_speed	how fast i went at max
+places_most	where all do i go regularly
+commute	how long is my daily travel to office
+longest_trip	which was the longest trip i did
+last_trip	tell me abt my last trip
+eff_day	what was my efficiency yesterday
+best_day	best day for efficiency
+eff_trend	is my consumption increasing
+trip_count	how many trips i did this week
+regen	how much regen i got
+leave_time	when did i leave home today
+compare_days	compare today and yesterday
+explain_simple	explain last warning in simple english
+briefing	good morning brief me
+help	what can i ask you
+smalltalk	thanks a lot
+smalltalk	hi there
+foreign	gadi kaisi hai
+foreign	battery kitni bachi hai bhai
+gate	whats the weather like in mumbai
+gate	tell me something funny
+gate	who is the prime minister of india
+gate	how to make biryani

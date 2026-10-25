@@ -1,0 +1,196 @@
+# Feedback bank (authored by Claude, 2026-10-18, during the failure-to-data loop; docs/semantic_method.md section 7). Format as natural_a.txt:  text | act concept [op=..] [cond=..] [vs=..] [ent=..]
+# These are training rows, never evaluation rows. Each row is NEW wording for a meaning that models/meaning-lora-full.gguf got wrong on a development set (novel_v1, messy_v1, user_v1); none is a copy of
+# an evaluation question (build_meaning.py drops any row at Jaccard >= 0.8 to any frozen set, sealed_v2 included, and counts them in manifest.json). sealed_v2 was NOT read while writing this file.
+# Section 1 was appended by `tools_triage.py --batch ... --apply`: the rows the v1 model actually got wrong. Section 2 holds the confusable family's other side (rows the v1 model already got right),
+# written by hand so a pair such as odometer / distance driven is taught from both directions.
+# ---------------------------------------------------------------- section 1: rows the v1 model got wrong (tools_triage.py --apply)
+what is the mileage of this car | now odometer
+total kilometres the car has done so far | now odometer
+mileage so far | now odometer
+what distance do we have left | estimate range_estimate
+how much petrol is left in the tank | estimate range_estimate
+how much fuel do we have left | estimate range_estimate
+what is the output of the home charging unit | spec home_charger_power
+what is making the 12 volt battery weak | why aux_battery_voltage
+what is an aux battery used for | define aux_battery_voltage
+how can i keep my car running well | advice maintenance
+mean acceleration from 40 to 60 km per hour | stat acceleration op=mean cond=threshold
+how quickly do i accelerate between 10 and 30 kph | stat acceleration op=mean cond=threshold
+average acceleration when going from 50 to 80 km/h | stat acceleration op=mean cond=threshold
+what was the avg speed on the last drive | stat speed op=mean ent=trip
+best efficiency trip last month | extreme wh_per_km op=min ent=trip
+coolant flow drops yesterday | events coolant_flow_drop op=list
+battery soh ok | health battery_soh
+how long 2 charge fully | estimate charge_time
+# ---------------------------------------------------------------- section 1b: also wrong in v1; triage flagged an unfamiliar word and suggested a glossary line, but the words are ordinary English or
+# a plain Hinglish function word, so the fix written is a training row (no glossary meaning was invented)
+how much has this vehicle run in its lifetime | now odometer
+how many kms have we put on the car | now odometer
+kitne km chal chuki hai gaadi | now odometer
+how many miles has the car covered since new | now odometer
+total distance travelled by the vehicle till date | now odometer
+how fast can she go flat out | spec rated_max_speed
+how fast could the car go if i floored it | spec rated_max_speed
+how much diesel remains | estimate range_estimate
+how many kilowatts can my home charger deliver | spec home_charger_power
+power rating of our wallbox | spec home_charger_power
+how strong is the charging point in my garage | spec home_charger_power
+how much power does the charger at home supply | spec home_charger_power
+how powerful is the wall charger we installed | spec home_charger_power
+can i use the car as a power bank for my camping lights | spec export_power
+why is my small battery so weak | why aux_battery_voltage
+why is the auxiliary battery feeble | why aux_battery_voltage
+reason the 12v battery voltage is poor | why aux_battery_voltage
+describe the auxiliary battery | define aux_battery_voltage
+tell me about the small 12 v battery | define aux_battery_voltage
+switch off the seatbelt warning permanently | unsafe none
+how can i stop the check engine light from ever coming on | unsafe none
+turn off the abs warning light for good | unsafe none
+mute the collision warning for good | unsafe none
+stop the dashboard from showing the battery fault | unsafe none
+keep the stability control light off permanently | unsafe none
+gaadi mein kitna charge bacha hai | now battery_soc
+charge kitna reh gaya | now battery_soc
+kya aaj koi warning aayi thi | events any_warning op=exists
+tyre ki koi alert aayi kya kal | events tyre_pressure_warning op=exists
+koi fault code aaya hai kya | events diagnostic_code op=exists
+kya parso koi dtc aaya tha | events diagnostic_code op=exists
+kya battery kabhi overheat hui | events battery_overheat_warning op=exists
+battery ka haal kaisa hai | health battery_condition
+battery zyada garam to nahi hui | health battery_condition
+kya battery theek hai | health battery_condition
+range itni kam kyun hai | why range_estimate op=drop
+range kyun gir gayi | why range_estimate op=drop
+range kaise ghat gayi | why range_estimate op=drop
+motor kitna garam hai abhi | now motor_temperature
+pichle hafte kitne km chalaye | stat distance_driven op=sum
+kal kitni baar hard brake lagaya | events hard_braking op=count
+when do i take the car to the garage next | estimate maintenance
+tips for keeping the vehicle in good shape | advice maintenance
+what should i do to take care of the car | advice maintenance
+what is the projected range at the moment | estimate range_estimate
+range remaining currently | estimate range_estimate
+current range figure | estimate range_estimate
+estimate of the distance left right now | estimate range_estimate
+what range do we have at this moment | estimate range_estimate
+compare urban and expressway driving | compare wh_per_km op=mean cond=city vs=highway
+what is the difference between driving in town and on the freeway | compare wh_per_km op=mean cond=city vs=highway
+how does highway driving differ from city driving | compare wh_per_km op=mean cond=highway vs=city
+is hot weather driving different from cold weather driving | compare wh_per_km op=mean cond=hot_weather vs=cold
+difference between charging and parked motor temperature | compare motor_temperature op=mean cond=charging vs=parked
+difference between driving and charging battery temperature | compare battery_temperature op=mean cond=driving vs=charging
+acceleration while moving between 30 and 50 mph | stat acceleration op=mean cond=threshold
+average consumption from 6 days ago to 8 days ago | stat wh_per_km op=mean
+mean consumption during the previous drive | stat wh_per_km op=mean ent=trip
+average motor temperature since the last trip | stat motor_temperature op=mean ent=trip
+my best efficiency day | extreme wh_per_km op=min ent=day
+energy used this week versus last week | compare energy_used op=sum vs=period
+compare my energy consumption this month with the previous month | compare energy_used op=sum vs=period
+how does regen this month stack up against last month | compare regen_energy op=sum vs=period
+recuperated energy this week compared with last week | compare regen_energy op=sum vs=period
+consumption across the past 3 weeks | stat wh_per_km op=mean
+coolant flow dips this month | events coolant_flow_drop op=list
+would you advise charging to full | advice battery_condition
+how much have the pads worn down | health brake_pad_life
+which smartphone should i buy | offtopic none
+explain the adas state value | define adas_state
+why did the engine get so hot | why motor_temperature
+what made the engine overheat | why motor_temperature
+# ---------------------------------------------------------------- section 2: the other side of each confusable family (v1 already right; kept so the pair is taught from both directions)
+how many miles are on the clock | now odometer
+lifetime distance reading | now odometer
+what did the odometer show at noon yesterday | at odometer
+how many miles did we do this week | stat distance_driven op=sum
+kms covered yesterday | stat distance_driven op=sum
+how far have we driven over the last 3 days | stat distance_driven op=sum
+miles driven this month | stat distance_driven op=sum
+how many kilometres did I travel today | stat distance_driven op=sum
+what top speed can the vehicle reach | spec rated_max_speed
+what is the maximum speed it can do | spec rated_max_speed
+highest speed this car is capable of | spec rated_max_speed
+what's the fastest we can drive | spec rated_max_speed
+maximum velocity of the vehicle | spec rated_max_speed
+the fastest this car will go | spec rated_max_speed
+how far can we go on what is left | estimate range_estimate
+how far can the car go on a full charge | estimate range_estimate
+how many more km can we cover | estimate range_estimate
+how much further can we drive | estimate range_estimate
+how far will this charge take us | estimate range_estimate
+what is the wattage of the wall charger at home | spec home_charger_power
+what size is my home charger in kw | spec home_charger_power
+how much power can the car supply to my devices | spec export_power
+what is the maximum output of the car's power socket | spec export_power
+can i run a power tool from the car | spec export_power
+can the vehicle power a small fridge | spec export_power
+does the car have an outlet for appliances | spec export_power
+how many watts can i draw from the car for gadgets | spec export_power
+why does the 12 v battery keep draining | why aux_battery_voltage op=drop
+why did the 12 volt battery voltage fall | why aux_battery_voltage op=drop
+what does the 12 volt battery do | define aux_battery_voltage
+what is the 12v battery in an ev | define aux_battery_voltage
+explain what the 12 volt battery is for | define aux_battery_voltage
+how healthy is the 12 volt battery | health aux_battery_condition
+is the aux battery in good shape | health aux_battery_condition
+check the 12 v battery condition | health aux_battery_condition
+what voltage is the 12 v battery at now | now aux_battery_voltage
+make the tyre pressure warning lamp go away without fixing it | unsafe none
+get rid of the brake warning light on the dash without repairing it | unsafe none
+how do i deactivate the airbag indicator | unsafe none
+how to clear a fault warning so the dealer cannot see it | unsafe none
+raise the fan speed | control none
+switch the seat heater on | control none
+close all the windows please | control none
+turn off the interior light | control none
+dim the dashboard screen | control none
+turn the volume up | control none
+put the heater on low | control none
+open the sunroof halfway | control none
+defrost the windscreen | control none
+lock the car | control none
+battery kitne percent hai abhi | now battery_soc
+abhi battery level batao | now battery_soc
+aaj ki average speed kitni rahi | stat speed op=mean
+tyre pressure kitna hai | now tyre_pressure
+gaadi ka range kitna bacha hai | estimate range_estimate
+gaadi theek hai kya | health vehicle_health
+motor power reading | now motor_power
+what is the power from the motor at this moment | now motor_power
+when should the car next go in for a service | estimate maintenance
+when is my next servicing due | estimate maintenance
+how many km until the next service | estimate maintenance
+how long before it needs servicing | estimate maintenance
+how do i look after my car properly | advice maintenance
+how many more km on the present charge | estimate range_estimate
+how does the battery temperature differ between driving and parked | compare battery_temperature op=mean cond=driving vs=parked
+mean speed between 2 days ago and 4 days ago | stat speed op=mean
+average battery temperature from 1 week ago to 2 weeks ago | stat battery_temperature op=mean
+average speed on my last trip | stat speed op=mean ent=trip
+the worst consumption day this month | extreme wh_per_km op=max ent=day
+worst efficiency trip this week | extreme wh_per_km op=max ent=trip
+day with the highest consumption | extreme wh_per_km op=max ent=day
+trip with the lowest consumption | extreme wh_per_km op=min ent=trip
+did i use more energy this week than last | compare energy_used op=sum vs=period
+wh/km over the last 5 days | stat wh_per_km op=mean
+average efficiency over the previous 9 days | stat wh_per_km op=mean
+tyre pressure warnings last week | events tyre_pressure_warning op=list
+hard braking events yesterday | events hard_braking op=list
+camera blockages this week | events camera_blocked op=list
+adas disengagements last month | events adas_disengagement op=list
+is it a good idea to charge up to 100 percent | advice battery_condition
+should i top up to full every time | advice battery_condition
+what charge limit do you suggest for daily use | advice battery_condition
+state of my brake pads | health brake_pad_life
+are the pads nearly done | health brake_pad_life
+soh status | health battery_soh
+check soh pls | health battery_soh
+recommend a good laptop | offtopic none
+what is a nice gift for my wife | offtopic none
+suggest a movie for tonight | offtopic none
+what does adas state 2 mean | define adas_state
+meaning of driver assistance state 0 | define adas_state
+why is the motor running hot | why motor_temperature
+did the batery get hott | events battery_overheat_warning op=exists
+was the batry overheting | events battery_overheat_warning op=exists
+btry overheated? | events battery_overheat_warning op=exists
+time to full chrg | estimate charge_time
+hrs to full charge | estimate charge_time

@@ -1,0 +1,20 @@
+{
+ "id": "proprietary_demo",
+ "name": "Unknown OEM (dummy) PX-1 with a proprietary CAN",
+ "year": 2022,
+ "region": "anywhere",
+ "powertrain": "petrol",
+ "class": "Car whose CAN database is not public: the decoder file is a DUMMY",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: a proprietary network, described here by a DUMMY decoder file",
+  "UDS diagnostic trouble codes",
+  "syslog",
+  "NMEA 0183 GNSS"
+ ],
+ "notes": "Proprietary CAN needs its manufacturer's decoder file, which this project does not have. proprietary_dummy.dbc is a placeholder with invented identifiers and layouts; delete the decoder file from Vantage's decoders folder to see the link stay 'unidentified'.",
+ "source": "invented (vgpt/vehicle/dbc_synthetic/proprietary_dummy.dbc)",
+ "bound": 16,
+ "concepts": 16,
+ "extension": []
+}

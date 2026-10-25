@@ -1,0 +1,31 @@
+{
+  "counts": {
+    "train": 272,
+    "val": 140,
+    "test_comp": 42
+  },
+  "template_overlap_train_val": [],
+  "composition_overlap_train_test_comp": [],
+  "held_templates": [
+    "advice.2",
+    "advice.3",
+    "capability.2",
+    "definition.2",
+    "estimate.2",
+    "event-list.2",
+    "mode-compare.2",
+    "motor-status.2",
+    "telemetry.average.2",
+    "telemetry.maximum.2",
+    "telemetry.minimum.2",
+    "telemetry.now.2",
+    "telemetry.trend.2"
+  ],
+  "held_compositions": [
+    "data:average:coolant:none",
+    "data:maximum:charge:none",
+    "data:minimum:motor:none",
+    "data:trend:chargepower:none"
+  ],
+  "generator_sha256": "877db0b21c9015945cef26bbb15de279cf1dfa33c6c0103e247bd7e766babcad"
+}

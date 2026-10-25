@@ -1,0 +1,196 @@
+# Frame version 2: hand-written rows for the two new slots (c2, ref) and the new values (op=corr, vs=typical, act=explain).
+# Authored 2026-10-20 AFTER bench/meaning_eval/slots_v2.tsv and followup_v2.tsv were frozen (SHA-256 in their .sha256 files); the wording is deliberately different from those sets, and build_v2.py drops any row that overlaps them.
+# Format, one row per line:
+#   <text> | <act> <concept> [op=..] [cond=..] [vs=..] [ent=..] [c2=..] [ref=..]                       a single question
+#   <previous frame spec> >> <text> | <spec>                                                          a follow-up: the line before >> is the frame of the previously answered question
+# Never contains a number or a place that is a value: values (periods, thresholds) are parsed from the text by vgpt/meaning/literals.py.
+
+# ------------------------------------------------------------------------------------------------ two quantities: a relationship (stat <X> op=corr c2=<Y>)
+are battery power and the accelerator connected | stat battery_power op=corr c2=accelerator_position
+does the motor get hotter when I drive faster | stat motor_temperature op=corr c2=speed
+how much does the cabin heater draw when it is cold outside | stat hvac_power op=corr c2=ambient_temperature
+is my regeneration influenced by the speed I am doing | stat regen_power op=corr c2=speed
+do my tyre pressures go up and down with the weather | stat tyre_pressure op=corr c2=ambient_temperature
+check whether the pack temperature rises along with the motor | stat battery_temperature op=corr c2=motor_temperature
+does braking harder at higher speed show up in the brake pressure | stat brake_pressure op=corr c2=speed
+what is the relationship between motor torque and the pedal | stat motor_torque op=corr c2=accelerator_position
+how much of the battery current follows the motor power | stat battery_current op=corr c2=motor_power
+is the coolant flow linked to how hot the pack gets | stat coolant_flow op=corr c2=battery_temperature
+does steering angle change with speed on my trips | stat steering_angle op=corr c2=speed
+when the road gets brighter does the camera picture get brighter too | stat camera_brightness op=corr c2=light
+how tightly is battery voltage tied to state of charge | stat battery_voltage op=corr c2=battery_soc
+are the motor rpm and the speed in step over the last week | stat motor_rpm op=corr c2=speed
+is yaw rate related to lateral acceleration this month | stat yaw_rate op=corr c2=lateral_acceleration
+does an increase in outside temperature lower the battery power used for heating | stat hvac_power op=corr c2=ambient_temperature
+do the hottest cell and the motor heat up together | stat cell_temperature_max op=corr c2=motor_temperature
+correlation of speed with battery power for the past ten days | stat speed op=corr c2=battery_power
+is there any pattern between tyre temperature and the pressure reading | stat tyre_temperature op=corr c2=tyre_pressure
+what is the correlation coefficient between pack temperature and ambient temperature | stat battery_temperature op=corr c2=ambient_temperature
+
+# ------------------------------------------------------------------------------------------------ two quantities side by side (compare <X> c2=<Y>)
+show the motor and pack temperature together for yesterday | compare motor_temperature op=mean c2=battery_temperature
+give me battery power next to motor power this month | compare battery_power op=mean c2=motor_power
+speed and heater power, average for the week, in one answer | compare speed op=mean c2=hvac_power
+what were the peaks of motor temperature and battery temperature last week | compare motor_temperature op=max c2=battery_temperature
+the minimum of battery voltage and of the 12 volt voltage lately | compare battery_voltage op=min c2=aux_battery_voltage
+lay out ambient temperature and tyre pressure for me | compare ambient_temperature op=mean c2=tyre_pressure
+how are the coolant flow and the pack temperature doing this week | compare coolant_flow op=mean c2=battery_temperature
+highest speed and highest motor rpm last month | compare speed op=max c2=motor_rpm
+both brake pressure and speed on average over the weekend | compare brake_pressure op=mean c2=speed
+pack temperature versus cell temperature on average | compare battery_temperature op=mean c2=cell_temperature_max
+regen power and battery power over the last three days | compare regen_power op=mean c2=battery_power
+camera sharpness together with camera brightness for today | compare camera_sharpness op=mean c2=camera_brightness
+which was lower this week, tyre pressure or ambient temperature | compare tyre_pressure op=min c2=ambient_temperature
+steering angle and yaw rate averaged over a month | compare steering_angle op=mean c2=yaw_rate
+
+# ------------------------------------------------------------------------------------------------ one of two events (events <E> c2=<F>)
+has there been an overheating warning for the pack or for the motor | events battery_overheat_warning op=exists c2=overtemp_warning
+did either the camera get blocked or a tyre warning come up lately | events camera_blocked op=exists c2=tyre_pressure_warning
+count the hard brakes together with the hard accelerations this week | events hard_braking op=count c2=hard_acceleration
+anything like an ecu reset or a power derate last month | events ecu_reset op=exists c2=power_derate
+how many times did lane keeping give up or the emergency brake fire | events adas_disengagement op=count c2=aeb_activation
+was there a low 12 volt warning or a voltage dip this week | events low_12v_warning op=exists c2=voltage_dip
+how often did the unit go silent or the vehicle shut down unexpectedly | events source_dropout op=count c2=unexpected_shutdown
+did a tyre inflate or lose pressure recently | events tyre_inflation op=exists c2=tyre_pressure_warning
+number of sensor conflicts and invalid readings in total | events sensor_conflict op=count c2=sensor_invalid_reading
+a can error or a can anomaly, did either appear | events can_error op=exists c2=can_anomaly
+
+# ------------------------------------------------------------------------------------------------ the vehicle's own usual values (vs=typical)
+is the pack warmer than I would expect for this car | compare battery_temperature op=mean vs=typical
+does my motor usually run this hot | compare motor_temperature op=mean vs=typical
+is the average speed this week out of character | compare speed op=mean vs=typical
+have I been using more energy per kilometre than my usual | compare wh_per_km op=mean vs=typical
+is the number of hard brakes normal for this week | compare hard_braking op=count vs=typical
+are my tyres at a pressure that is normal for them | compare tyre_pressure op=mean vs=typical
+was last month's charging out of the ordinary | compare charging_session op=count vs=typical
+is the heater load abnormal lately | compare hvac_power op=mean vs=typical
+is the amount of warnings unusual this month | compare any_warning op=count vs=typical
+was the top motor temperature of the week within what is normal | compare motor_temperature op=max vs=typical
+does the coolant flow look normal against my history | compare coolant_flow op=mean vs=typical
+how does this week's regen energy compare with a normal week | compare regen_energy op=sum vs=typical
+is the distance I covered this week typical | compare distance_driven op=sum vs=typical
+did the camera give more problems than it normally does | compare camera_degraded op=count vs=typical
+is the pack temperature right now what you would expect | now battery_temperature vs=typical
+is my speed at this moment normal for me | now speed vs=typical
+is the 12 volt battery voltage usual at the moment | now aux_battery_voltage vs=typical
+is the cabin heater running more than normal today | compare hvac_power op=mean vs=typical
+are ecu resets more common than they should be | compare ecu_reset op=count vs=typical
+is the lowest battery voltage this week unusual | compare battery_voltage op=min vs=typical
+
+# ------------------------------------------------------------------------------------------------ a question about the answer just given (explain, ref=answer)
+how did you work that out | explain none ref=answer
+what did you base that answer on | explain none ref=answer
+why should I believe that number | explain none ref=answer
+tell me how you got this | explain none ref=answer
+how reliable is what you just said | explain none ref=answer
+what is the source of that figure | explain none ref=answer
+can you justify that answer | explain none ref=answer
+what data is behind that | explain none ref=answer
+how was that calculated | explain none ref=answer
+show me your reasoning | explain none ref=answer
+how certain is that result | explain none ref=answer
+what did you look at to answer that | explain none ref=answer
+
+# ------------------------------------------------------------------------------------------------ follow-ups: only the period changes (ref=period)
+events hard_braking op=count >> and how about a month ago | events hard_braking op=count ref=period
+events hard_braking op=count >> let us see the previous seven days | events hard_braking op=count ref=period
+events hard_braking op=count >> repeat for last weekend | events hard_braking op=count ref=period
+stat speed op=mean >> what was that over the last two weeks | stat speed op=mean ref=period
+stat speed op=mean >> try the same for today | stat speed op=mean ref=period
+stat speed op=mean >> I meant the week before | stat speed op=mean ref=period
+extreme battery_temperature op=max >> what about last month instead | extreme battery_temperature op=max ref=period
+extreme battery_temperature op=max >> and in the days before that | extreme battery_temperature op=max ref=period
+extreme motor_temperature op=max >> for the past 24 hours please | extreme motor_temperature op=max ref=period
+stat wh_per_km op=mean >> now the week before that one | stat wh_per_km op=mean ref=period
+stat wh_per_km op=mean >> how did it look on Sunday | stat wh_per_km op=mean ref=period
+trend battery_temperature op=change >> and across the whole year so far | trend battery_temperature op=change ref=period
+trend motor_temperature op=change >> shorter, just the last few days | trend motor_temperature op=change ref=period
+events adas_disengagement op=count >> and the two weeks before | events adas_disengagement op=count ref=period
+events tyre_pressure_warning op=count >> go further back, to last month | events tyre_pressure_warning op=count ref=period
+stat tyre_pressure op=mean >> what about in the morning | stat tyre_pressure op=mean ref=period
+now speed >> and last Friday | stat speed op=mean ref=period
+now battery_temperature >> how was it yesterday | stat battery_temperature op=mean ref=period
+events charging_session op=list >> only the ones since the start of the month | events charging_session op=list ref=period
+stat hvac_power op=mean >> compare with last week | stat hvac_power op=mean ref=period
+compare speed op=mean vs=period >> and the month before | compare speed op=mean vs=period ref=period
+stat battery_power op=mean cond=highway >> what about earlier this week | stat battery_power op=mean cond=highway ref=period
+extreme speed op=max >> the same for the week just gone | extreme speed op=max ref=period
+events hard_acceleration op=count >> yesterday only | events hard_acceleration op=count ref=period
+
+# ------------------------------------------------------------------------------------------------ follow-ups: only the quantity changes (ref=concept)
+stat speed op=mean >> same period, the pack temperature | stat battery_temperature op=mean ref=concept
+stat speed op=mean >> and for the 12 volt battery | stat aux_battery_voltage op=mean ref=concept
+extreme battery_temperature op=max >> now the motor | extreme motor_temperature op=max ref=concept
+extreme battery_temperature op=max >> and what about the highest speed | extreme speed op=max ref=concept
+stat wh_per_km op=mean >> and distance driven | stat distance_driven op=mean ref=concept
+stat wh_per_km op=mean >> how about the energy used | stat energy_used op=sum ref=concept
+trend motor_temperature op=change >> do that for the coolant flow | trend coolant_flow op=change ref=concept
+trend motor_temperature op=change >> and the pack | trend battery_temperature op=change ref=concept
+events hard_braking op=count >> and how about hard cornering | events hard_cornering op=count ref=concept
+events hard_braking op=count >> what about the camera being blocked | events camera_blocked op=count ref=concept
+events adas_disengagement op=count >> and ecu resets | events ecu_reset op=count ref=concept
+events tyre_pressure_warning op=count >> same for low voltage warnings | events low_12v_warning op=count ref=concept
+now speed >> and the heater power | now hvac_power ref=concept
+now battery_temperature >> what about the motor right now | now motor_temperature ref=concept
+now tyre_pressure >> and the outside temperature | now ambient_temperature ref=concept
+stat tyre_pressure op=mean >> what about regen power | stat regen_power op=mean ref=concept
+extreme speed op=max >> the same thing for battery power | extreme battery_power op=max ref=concept
+stat hvac_power op=mean >> now the same for the speed | stat speed op=mean ref=concept
+compare speed op=mean vs=period >> and the motor temperature | compare motor_temperature op=mean vs=period ref=concept
+stat speed op=mean cond=city >> and battery power in the same conditions | stat battery_power op=mean cond=city ref=concept
+events charging_session op=list >> what about the diagnostic codes | events diagnostic_code op=list ref=concept
+trend battery_soh op=drop >> and cell temperature | trend cell_temperature_max op=drop ref=concept
+
+# ------------------------------------------------------------------------------------------------ follow-ups: the instant or event the previous answer picked out (ref=focus)
+events battery_overheat_warning op=last >> what was behind that | why battery_overheat_warning ref=focus
+events battery_overheat_warning op=last >> how quick was the car then | at speed ref=focus
+events battery_overheat_warning op=last >> and the coolant flow around that time | at coolant_flow ref=focus
+events hard_braking op=last >> why do you think it happened | why hard_braking ref=focus
+events hard_braking op=last >> what happened in the minutes before it | context hard_braking ref=focus
+events hard_braking op=last >> what was the brake pressure then | at brake_pressure ref=focus
+events adas_disengagement op=last >> what made it drop out | why adas_disengagement ref=focus
+events adas_disengagement op=last >> how fast was I at that point | at speed ref=focus
+events tyre_pressure_warning op=last >> what is the reason for it | why tyre_pressure_warning ref=focus
+events tyre_pressure_warning op=last >> and the temperature outside at that time | at ambient_temperature ref=focus
+events camera_blocked op=last >> what was happening before that | context camera_blocked ref=focus
+events voltage_dip op=last >> why did that dip occur | why voltage_dip ref=focus
+events ecu_reset op=last >> what was the battery level when it restarted | at battery_soc ref=focus
+events diagnostic_code op=last >> what led to that code | context diagnostic_code ref=focus
+events unexpected_shutdown op=last >> what explains the shutdown | why unexpected_shutdown ref=focus
+events power_derate op=last >> how hot was the motor at the time | at motor_temperature ref=focus
+
+# ------------------------------------------------------------------------------------------------ follow-ups: one item of the list just shown (ref=item)
+events hard_braking op=list >> which of them was the harshest | extreme hard_braking op=max ref=item
+events hard_braking op=list >> give me the newest | events hard_braking op=last ref=item
+events hard_braking op=list >> and the oldest | events hard_braking op=first ref=item
+events adas_disengagement op=list >> the most recent one of those | events adas_disengagement op=last ref=item
+events adas_disengagement op=list >> which of those lasted the shortest | extreme adas_disengagement op=min ref=item
+events charging_session op=list >> the biggest of those sessions | extreme charging_session op=max ref=item
+events charging_session op=list >> which one was the first | events charging_session op=first ref=item
+events tyre_pressure_warning op=list >> and the latest of them | events tyre_pressure_warning op=last ref=item
+events battery_overheat_warning op=list >> the worst one | extreme battery_overheat_warning op=max ref=item
+events camera_blocked op=list >> the earliest of them | events camera_blocked op=first ref=item
+events diagnostic_code op=list >> which was raised last | events diagnostic_code op=last ref=item
+events ecu_reset op=list >> and the one that came first | events ecu_reset op=first ref=item
+
+# ------------------------------------------------------------------------------------------------ follow-ups: about the answer itself (explain, ref=answer)
+events hard_braking op=count >> how did you count those | explain none ref=answer
+stat speed op=mean >> what is that average based on | explain none ref=answer
+extreme battery_temperature op=max >> how come you say that | explain none ref=answer
+stat wh_per_km op=mean >> where do those numbers come from | explain none ref=answer
+events charging_session op=list >> how do you know about those sessions | explain none ref=answer
+trend motor_temperature op=change >> how sure can I be about that trend | explain none ref=answer
+now speed >> how did you read the speed | explain none ref=answer
+compare speed op=mean vs=period >> explain that comparison | explain none ref=answer
+
+# ------------------------------------------------------------------------------------------------ new question after an answer: nothing is inherited
+events hard_braking op=count >> what is the battery level | now battery_soc
+stat speed op=mean >> how many warnings were there this week | events any_warning op=count
+extreme battery_temperature op=max >> is my tyre pressure fine | health tyre_condition
+now speed >> when is my next service due | estimate maintenance
+trend motor_temperature op=change >> what is regenerative braking | define regen_power
+events adas_disengagement op=count >> good morning | social none
+stat wh_per_km op=mean >> how big is the battery | spec battery_capacity
+events charging_session op=list >> tell me about the weather in paris | offtopic none
+now battery_temperature >> highest speed last week | extreme speed op=max
+stat hvac_power op=mean >> why did the range fall | why range_estimate op=drop

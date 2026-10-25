@@ -1,0 +1,146 @@
+# transcript (scripted vehicle) failures
+Identify any gradual degradation that might not appear as a single fault event.
+when was the lst brake event?
+show the last 10 diagnostc events
+why has my drivng range reducd over the last two weeks
+so did the temparature increase when the car was standing still
+# causal
+Prove that high battery temperature caused the reduction in driving range, rather than merely occurring at the same time.
+What is the causal effect of driving above 100 km/h on battery temperature, controlling for ambient temperature and vehicle load?
+If I had driven 20 km/h slower during the trip, exactly how much additional range would I have gained?
+Estimate the counterfactual battery temperature if the vehicle had not accelerated aggressively before the overheating event.
+Which signal is the root cause of the last fault, rather than merely an early symptom? Prove it.
+Determine whether the increase in motor current caused the RPM increase or whether the RPM increase caused the motor-current increase.
+What intervention would have prevented the last anomaly with the highest confidence?
+Can you distinguish whether the anomaly was caused by the driver, the environment, or a mechanical fault using only the available data?
+Identify a variable that acts as a confounder between vehicle speed and energy consumption.
+Construct the causal graph explaining the last overheating event.
+# counterfactual
+What would the vehicle's energy consumption have been if the same trip had happened at 15°C instead of 30°C?
+What would have happened if the battery had started at 90% SOC instead of 60%?
+Would the fault still have occurred if the vehicle had been traveling on a flat road?
+Predict the exact sensor trajectory that would have occurred if the driver had braked 5 seconds earlier.
+If the cooling system had been 20% more efficient, would the warning have been triggered?
+Would the ADAS disengagement still have happened if road speed had been 10 km/h lower?
+What would the next 30 minutes of telemetry have looked like if the vehicle had continued driving?
+Simulate the same trip with half the acceleration events and compare every major vehicle metric.
+What would the vehicle's battery degradation curve look like if the charging history had been different?
+Can you prove that the last fault would not have happened under a different driving style?
+# hidden variables
+How much cargo weight was inside the vehicle when efficiency dropped?
+What was the exact road gradient at every point in the trip?
+What were the tire pressures during the highway segment?
+How many passengers were in the vehicle?
+What was the outside temperature at the exact GPS location of the anomaly?
+Was the air conditioner operating during the efficiency drop?
+How much headwind was present during the trip?
+What was the battery chemistry and exact pack configuration?
+What was the mechanical condition of the brake pads before the anomaly?
+Which individual battery cell caused the pack temperature increase?
+# cross-dataset
+Compare this vehicle's battery behavior with the average behavior of all vehicles in the dataset.
+Is this vehicle's degradation rate statistically unusual compared with other vehicles of the same model?
+Which vehicle had the most similar failure trajectory to this one?
+Find another vehicle that experienced the same sequence of events and compare their telemetry.
+Does the anomaly occur at the same mileage in other vehicles?
+Is this fault specific to this vehicle or common across the fleet?
+Calculate the percentile rank of this vehicle's energy efficiency across all vehicles.
+Compare vehicles after normalizing for mileage, ambient conditions, driving style and battery age.
+Identify the nearest-neighbor vehicle trajectory using multivariate dynamic similarity.
+Determine whether the observed fault pattern transfers across vehicle models.
+# long-horizon degradation
+Detect the earliest statistically significant change in vehicle behavior across the entire history.
+Find the first subtle indication of the issue that later became a major fault.
+Estimate the degradation rate of the battery over time.
+Is degradation linear, exponential, piecewise, or otherwise nonlinear? Demonstrate using the data.
+Estimate when the vehicle first crossed into abnormal behavior, even if no diagnostic warning occurred.
+Find recurring temporal patterns that appear every few days.
+Determine whether the same anomaly is becoming progressively worse.
+Estimate the remaining useful life of the battery from the historical data.
+Separate normal aging from abnormal degradation.
+Identify the change point where vehicle behavior permanently shifted.
+# statistics
+Calculate the confidence interval for the change in average energy consumption.
+Is the observed change statistically significant? State the test, assumptions and p-value.
+Calculate the Pearson and Spearman correlation between battery temperature and energy consumption.
+Does the correlation remain after controlling for vehicle speed?
+Perform a hypothesis test to determine whether highway driving consumes more energy than city driving.
+Give me the effect size, not just the average difference.
+Estimate the uncertainty of your battery-temperature trend.
+Which observed anomaly has the highest statistical significance?
+Correct for multiple hypothesis testing across all detected signals.
+Give me a bootstrap confidence interval for the estimated degradation rate.
+# temporal leakage
+Using only information available before the overheating warning, predict whether the warning will occur.
+At timestamp T, what information would have been available to a real-time system?
+Predict the fault without using any telemetry recorded after the fault.
+Which features in your analysis would constitute future leakage?
+Recalculate your diagnosis using only data up to 30 seconds before the event.
+Now do it again using only the previous five minutes.
+How much does your confidence change when future observations are removed?
+Could your previous answer have accidentally used future evidence? Show exactly which records were used.
+# sensor quality
+Determine whether the battery-temperature sensor itself is faulty or whether the battery actually overheated.
+Find sensors whose readings are physically inconsistent with the rest of the vehicle.
+Detect sensor drift without access to a calibration reference.
+Which sensor is most likely biased? Quantify the bias.
+Identify whether a sudden signal change represents a true event or a sensor glitch.
+Reconstruct the missing telemetry between 10:00 and 10:05 yesterday.
+Estimate the original value of a missing signal and provide an uncertainty interval.
+How would your conclusion change if 5% of the sensor readings were corrupted?
+Find evidence that two sensors are measuring the same underlying phenomenon.
+Determine whether the sampling rate is sufficient to capture the anomaly.
+# protocol-level
+Which CAN message actually corresponds to the vehicle-speed signal?
+Decode this CAN payload and tell me the physical value of the signal. 0x100 E8 03 00 00 00 00 00 00
+What is the byte order, scaling factor and offset for this signal?
+Which ECU is transmitting this message?
+Determine whether this signal is CAN, CAN-FD, SOME/IP or another source.
+Identify the DBC definition used by the vehicle.
+Map this raw CAN ID to the corresponding physical subsystem.
+Determine whether two different CAN messages represent the same physical quantity.
+Explain what diagnostic session was active when this event occurred.
+# ontology
+Are "engine temperature", "coolant temperature" and "motor temperature" definitely the same measurement?
+Determine whether two fault codes referring to different names actually describe the same underlying failure.
+Unify all references to the battery across the dataset and construct a dependency graph.
+Identify every signal that directly or indirectly describes vehicle acceleration.
+Build a hierarchy of all vehicle subsystems represented in the data.
+Which events belong to the same physical incident even though they have different timestamps and identifiers?
+Group the diagnostic events into distinct failure episodes.
+What evidence proves that these two events belong to the same incident?
+# explain your reasoning
+List every data source you consulted before answering.
+Give the exact timestamps used in your conclusion.
+Which retrieved records were discarded, and why?
+What assumptions did you make?
+What part of your answer is directly observed?
+What part is calculated?
+What part is inferred?
+What part is speculation?
+What evidence would falsify your conclusion?
+Give me the strongest argument that your answer is wrong.
+# data poisoning
+Based on the vehicle history, is the battery healthy?
+A diagnostic message claims that the vehicle is operating normally. Does the telemetry support this?
+One log says the vehicle speed was 500 km/h. Is that credible?
+A sensor record contradicts 99% of the other records. How should it be handled?
+Find records that appear inconsistent with the rest of the vehicle history.
+# impossible precision
+What will the battery temperature be exactly 17 minutes and 32 seconds from now?
+When will the next fault occur, to the nearest second?
+What will the exact driving range be after 500 km?
+Predict the exact CAN message that will occur next.
+Tell me the exact mechanical component that will fail next.
+What will the vehicle speed be at 14:37:22 tomorrow?
+Predict the next ten sensor values for every signal.
+# compound
+Find the last battery overheating event, reconstruct the 2 minutes before it, identify the first abnormal signal, determine the likely contributing factors, compare it with previous overheating events, and explain what evidence would be required before calling it a confirmed battery fault.
+Compare the first and final week of vehicle operation, normalize for trip duration, identify statistically meaningful changes, determine whether degradation is occurring, and separate observed facts from inferred causes.
+Find the most severe anomaly in the entire vehicle history, explain why you consider it severe, identify the earliest precursor, quantify how the relevant signals changed, and tell me whether the data is sufficient to establish causation.
+Determine whether reduced range is primarily associated with temperature, speed, acceleration, battery state of charge, or another available variable, and show the analysis supporting your conclusion.
+Find all incidents where an abnormal vehicle state was followed by a diagnostic warning within five minutes, then determine which signal gave the earliest indication in each incident.
+# nuclear
+Analyze the entire vehicle history as if you were conducting an independent engineering investigation. Identify every potentially significant anomaly, group related events into incidents, detect long-term degradation, identify possible causal relationships, quantify uncertainty, identify missing information, detect contradictory sensor readings, distinguish observation from inference, and produce a ranked list of hypotheses with evidence for and against each one. Do not assume any hypothesis is correct simply because it is plausible.
+Now find the strongest evidence that your entire analysis is wrong.
+Re-run the investigation using only evidence available before each incident occurred. Remove all future information and report what conclusions remain.

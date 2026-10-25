@@ -1,0 +1,86 @@
+# the owner's own pasted test session of 2026-10-19: prompt <TAB> the analysis a person would expect (reviewed by hand); '-' = an ordinary question for the frame model
+How much battery is left?	-
+how fast are we going now	-
+what was me speed at 10 yest morning	-
+what is my speed right now	-
+when should i change my oil	-
+Why has my driving range decreased over the last two weeks	-
+Why has my driving range decreased over the last two weeks? Compare battery or fuel levels, energy consumption, average speed, trip duration, ambient temperature, and accessory usage. Rank the most likely contributing factors and show evidence for each.	change_explain
+Find the three trips where my energy consumption was unusually high despite similar distances. Compare speed patterns, acceleration, braking, idle time, road conditions if available, and HVAC usage to explain what made those trips different.	trip_outliers
+My range estimate dropped by 15% in the middle of a journey even though I drove only a short distance. Reconstruct what happened in the preceding ten minutes and determine whether the change came from actual energy consumption, a revised prediction, or a sensor reading	range_drop
+Compare my last seven days of city driving with the previous seven days. Which changes in driving behavior or vehicle conditions contributed most to the difference in fuel efficiency or energy consumption?	compare_periods
+Identify the exact time when my efficiency began deteriorating. Compare the 30 minutes before and after that point, and determine which measurable vehicle signals changed first.	efficiency_onset
+My estimated remaining range keeps fluctuating even when the displayed battery percentage or fuel level changes very little. Check historical consumption, recent driving conditions, and relevant sensor data to determine whether this is expected estimation behavior or a possible data-quality issue.	range_drop
+Compare two trips of similar distance and duration where one consumed substantially more energy. Build a side-by-side timeline of speed, acceleration, braking, idle periods, and auxiliary-system usage.	trip_outliers
+Has my vehicle's energy efficiency deteriorated gradually over the last month, or was the decline caused by one or two unusual trips? Quantify the trend and identify the largest contributors.	trend_vs_outliers
+Estimate how much additional energy I used because of prolonged idling and aggressive acceleration during the last ten trips. Show the calculation method, assumptions, and confidence in the estimate.	energy_attribution
+Find the driving conditions under which my vehicle consistently achieves its best efficiency. Compare city and highway trips, different speed ranges, trip lengths, and available environmental measurements. Give me a vehicle-specific summary based on historical evidence.	best_conditions
+A battery overheating warning appeared at 14:32 yesterday. Reconstruct the preceding ten minutes and following five minutes using battery temperature, current, voltage, cooling-system signals, relevant ECU events, and diagnostic logs. Identify the earliest abnormal signal and distinguish confirmed facts from possible explanations.	incident
+Show every warning that occurred during the last 24 hours, group warnings that may share a common cause, and order each group by the first abnormal measurement rather than by the time the warning appeared.	group_warnings
+The vehicle displayed a powertrain warning, followed by reduced acceleration and then a diagnostic fault. Reconstruct the sequence and determine whether the measurements support a common underlying issue or several independent events.	incident
+Investigate the most recent unexpected vehicle shutdown. What changed immediately before it, which ECUs reported errors, what were the last valid sensor readings, and what evidence is missing to establish the cause?	incident
+Find all instances in the last two weeks when a sensor measurement became abnormal before a warning was generated. Calculate the lead time between the first anomaly and the warning, and show whether the pattern repeats.	leadtime
+A warning disappeared after restarting the vehicle. Determine whether the underlying signal returned to normal, the fault became inactive, or the available logs simply stopped reporting it. Compare the before-and-after measurements.	dtc_cycle
+Identify events where multiple warnings appeared within 30 seconds of one another. Construct a timeline showing their order, shared signals, affected subsystems, and any evidence suggesting one event triggered another.	cooccur
+Compare the last five occurrences of this fault. What conditions were consistent across all occurrences, what changed between them, and what distinguishes the most severe incident?	occurrences
+Was the abnormal temperature reading a brief spike or part of a sustained thermal trend? Compare raw or summarized measurements, sampling timestamps, related sensor readings, and diagnostic events before deciding.	spike_or_trend
+Generate a complete incident report for the latest major fault. Include the initial abnormal condition, event sequence, affected subsystems, supporting measurements, recovery behavior, unresolved questions, and the evidence that a service engineer should inspect next.	incident
+Show every ADAS disengagement event from yesterday. For each event, include the timestamp, available vehicle speed, driver inputs, preceding warnings, system status, and the closest related diagnostic entries.	adas
+ADAS disengaged three times during one highway trip. Compare the 60 seconds before each disengagement and determine which conditions were shared across all three incidents.	adas
+Compare ADAS performance across city and highway driving. Examine disengagement frequency per hour or distance, available warning categories, speed ranges, and relevant fault logs. Explain where the available evidence indicates a meaningful difference.	adas
+Identify incidents where several ADAS-related warnings occurred together. Which subsystem reported the first warning, which other signals changed afterward, and is there enough evidence to identify a common cause?	cooccur
+Did any recent ADAS disengagements coincide with communication errors, sensor faults, or ECU resets? Correlate the timestamps across available logs and rank the strongest supported relationships.	cooccur
+Find instances where ADAS status changed repeatedly within a short period. Identify the time spent in each state, surrounding warnings, and whether the logs suggest repeated switching, interrupted operation, or insufficient data.	adas
+Compare two trips with similar distances where ADAS disengaged at very different rates. What differences can be established from speed, duration, available environmental data, warning logs, and system status?	trip_outliers
+Create an engineering summary of the five most unusual ADAS incidents. Rank them by severity using available evidence, reconstruct each event, identify recurring patterns, and list additional data needed to validate each suspected cause.	adas
+Investigate whether battery temperature rises unusually fast during high-power driving. Compare temperature changes with current, voltage, estimated state of charge, vehicle speed, and cooling-system behavior across comparable trips.	thermal_rise
+Find every instance where battery temperature continued rising after the vehicle stopped. Determine how long the rise continued, whether cooling-system signals changed, and how this behavior compares with previous stops.	thermal_stop
+My battery warning appeared only during long journeys, not short trips. Compare trip duration, starting temperature, power demand, state of charge, and cooling behavior to identify conditions associated with the warning.	conditions
+Look for instances where voltage fluctuations occurred alongside powertrain faults or unexpected changes in vehicle performance. Align the signals by timestamp and determine whether their timing supports a possible connection.	cooccur
+Did the cooling system respond before or after the battery temperature crossed its warning threshold? Reconstruct the latest event using the temperature trend, available cooling commands, measured system response, and warning logs.	incident
+Find situations where battery temperature, energy consumption, and estimated range changed unusually at the same time. Determine whether these were independent changes or whether the timeline supports a common explanation.	joint_change
+Compare cold-start behavior across the last two weeks. How do initial temperature, warm-up duration, early-trip energy consumption, and powertrain warnings differ between successful trips and trips with anomalies?	cold_start
+Investigate whether an intermittent powertrain fault occurs under a particular combination of speed, load, temperature, or trip duration. Identify matching incidents and contrast them with similar trips where the fault did not occur.	conditions
+how much is tyre pressure	-
+After the latest powertrain warning, did measured performance return to its previous baseline? Compare relevant signals before the event, during the fault, and after recovery. Flag any parameter that remained abnormal.	recovery
+Create a subsystem-level health summary using available battery, powertrain, thermal, and diagnostic information. Separate active faults from historical events and explain which findings have sufficient evidence for escalation.	health
+Find every period in the last week when a communication fault, a sensor anomaly, and a vehicle warning occurred within two minutes of one another. Reconstruct each timeline and determine which events appear related based on timestamp order and available evidence.	cooccur
+The dashboard reported an abnormal measurement, but the diagnostic log did not record a corresponding fault. Compare the relevant data sources, timestamps, signal availability, and update intervals to determine whether this represents a genuine discrepancy or insufficient evidence.	discrepancy
+Identify periods when two sources reported conflicting values or states for the same vehicle parameter. Show the disagreement, duration, source timestamps, and any available diagnostic information that helps explain it.	discrepancy
+Find unexpected vehicle behavior that occurred without a corresponding dashboard warning. Search available sensor histories, ECU events, and diagnostic logs for preceding anomalies that might explain the behavior.	discrepancy
+Correlate sudden changes in energy consumption with engine or motor measurements, HVAC activity, vehicle speed, and relevant ECU events. Find the strongest matching incidents and distinguish direct evidence from correlation.	correlate_changes
+Detect repeated sequences in which one abnormal signal is followed by two or more additional events. Group similar sequences, measure the time between events, and report how often each pattern occurred.	leadtime
+Find cases where a subsystem's reported status changed while its associated measurements remained nearly constant. Check whether other logs support a real state change or indicate a potential reporting inconsistency.	status_vs_signal
+how did you get that	-
+how did you answer the questions give me explanation for it	-
+Compare the timestamps from vehicle warnings, diagnostic logs, and available telemetry. Are there any ordering inconsistencies, missing intervals, or delayed reports that could change the interpretation of an incident?	discrepancy
+Identify the largest unexplained change in vehicle behavior over the last month. Search across relevant data sources, compare the measurements before and after the change, and explain what can and cannot be established from the available history.	largest_change
+For the latest unusual event, build a cross-system timeline that combines relevant sensor changes, ECU states, ADAS events, warnings, and diagnostic logs. Identify the earliest observed deviation and rank plausible explanations by evidential support.	incident
+Which three vehicle anomalies have become more frequent over the past month? Compare counts and rates over equivalent time periods, account for differences in driving distance where possible, and show the signals associated with each anomaly.	frequency_trend
+Search the historical logs for events similar to the latest fault. Compare their initial signals, event sequences, operating conditions, duration, and outcomes. Which earlier incidents provide the closest match, and what evidence distinguishes them	similar
+Find vehicle behaviors that repeatedly occur before a warning but have not yet triggered their own warning. Measure how consistently each behavior precedes the warning and explain why this is a candidate pattern rather than a proven predictor.	leadtime
+Compare the ten most recent trips with no recorded faults against the ten trips that contained major warnings. Which measurable features differ most consistently, and which differences might simply reflect different driving conditions?	trip_outliers
+Construct a chronological history of recurring faults for each affected subsystem. Show the first occurrence, subsequent recurrences, inactive periods, recovery events, and whether any fault has persisted or returned.	fault_history
+Which fault should a service engineer investigate first? Rank the active and recurring faults using recorded severity, recurrence, affected subsystems, measurable performance impact, and available supporting evidence. Do not infer a safety risk from frequency alone.	health
+Given the latest fault, find the smallest set of relevant historical events and telemetry intervals that would help an engineer investigate it. Explain why each item is relevant and provide its timestamp and source.	incident
+Summarize all events related to the battery overheating warning over the past four weeks. Group repeated patterns, compare the most and least severe incidents, and identify what additional measurements would help distinguish the leading explanations.	event_summary
+Review the last month of vehicle history and identify the most important unanswered diagnostic question. State the observed behavior, the evidence already available, the competing explanations, and the single additional measurement or log that would most help resolve the uncertainty.	unanswered
+Investigate the latest unexpected powertrain warning. Search the preceding ten minutes and following five minutes across available telemetry and diagnostic logs. Identify the earliest abnormal measurement, reconstruct the sequence of state changes, find similar historical incidents, and rank the plausible explanations. Include timestamps, source evidence, missing data, and confidence. Do not claim a confirmed root cause unless the evidence supports it.	incident
+Explain the largest unexpected reduction in estimated range over the past two weeks. Identify when it began, compare the actual energy measurements with the range estimate, inspect changes in driving conditions and auxiliary loads, and check for related warnings or sensor inconsistencies. Quantify each supported contribution where possible and identify what cannot be determined from the logs.	change_explain
+what is turning radius	-
+what is turning radius for this car	-
+what is avg acceleration btw the speeds of 20 and 30 kmph	-
+Analyze every ADAS disengagement in the last month. Group similar incidents, reconstruct the conditions preceding each one, correlate available ECU and diagnostic events, compare the disengagement rate across driving conditions, and find recurring event sequences. Separate confirmed observations from potential common causes and recommend what a validation engineer should inspect next.	adas
+Find the most significant discrepancy between available vehicle telemetry, subsystem status reports, and diagnostic logs over the past week. Show the original readings and timestamps, identify missing or delayed updates, determine whether the sources can be aligned reliably, and explain how the discrepancy affects the interpretation of vehicle behavior.	discrepancy
+Review the last four weeks of vehicle history and produce an evidence-backed health report. Find worsening trends, recurring faults, unusual energy consumption, thermal anomalies, ADAS disengagements, and communication inconsistencies. Rank the findings by their engineering significance, compare them with historical baselines where available, link each finding to source events, and identify the highest-value next investigation.	health
+how many fingers do i have	-
+when to get servicing	-
+what is odometer reading	-
+how many hard brakes last week	-
+i want to know for just yesterday	-
+what is tyre pressure	-
+what is break pad temps	-
+what is break pad temperature	-
+How are my tyres?	-
+what are the issues in my car	-
+what would you rate my driving	-

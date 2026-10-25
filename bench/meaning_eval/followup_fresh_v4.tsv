@@ -1,0 +1,169 @@
+# FOLLOWUP_FRESH_V4: complete questions after another answer; they inherit nothing.  Written 2026-10-21 after the first frame-2 runs were read, before the data that addresses the failure was used.  Never trained on.
+# Format: id <TAB> previous frame (8 words) <TAB> text <TAB> gold frame (8 words) <TAB> tag
+X001	trend motor_temperature change none none none none none none	what is the altitude here	now altitude none none none none none none	fresh_v4
+X002	health battery_condition none none none none none none	is the engine oil temperature normal right now	now engine_oil_temperature none none typical none none none	fresh_v4
+X003	events any_warning count none none none none none none	did the vehicle do anything unexpected this week	anomaly none none none none none none none	fresh_v4
+X004	events any_warning count none none none none none none	anything that looks like a fault in the data lately	anomaly none none none none none none none	fresh_v4
+X005	summary none none none none none none none none	what is the usual engine oil temperature when driving	stat engine_oil_temperature usual none none none none none	fresh_v4
+X006	stat wh_per_km mean none none none none none none	summarise how the battery is doing	summary battery_condition none none none none none none	fresh_v4
+X007	health battery_condition none none none none none none	what was special about my shortest journey	summary none none none none trip none none	fresh_v4
+X008	social none none none none none none none none	look for unusual tyre pressure readings	anomaly tyre_pressure none none none none none none	fresh_v4
+X009	extreme speed max none none none none none none	did my longest drive have anything strange in it	anomaly none none none none trip none none	fresh_v4
+X010	events hard_braking count none none none none none none	peak oil temperature this week	extreme engine_oil_temperature max none none none none none	fresh_v4
+X011	stat wh_per_km mean none none none none none none	what does the throttle position sensor do	define throttle_position none none none none none none	fresh_v4
+X012	social none none none none none none none none	what range does my 12 volt battery usually sit in	stat aux_battery_voltage usual none none none none none	fresh_v4
+X013	estimate range_estimate none none none none none none none	how has the cooling system been lately	summary cooling_condition none none none none none none	fresh_v4
+X014	stat tyre_pressure mean none none none none none none	were there any peculiar readings	anomaly none none none none none none none	fresh_v4
+X015	events any_warning count none none none none none none	catalyst temperature now	now catalyst_temperature none none none none none none	fresh_v4
+X016	health battery_condition none none none none none none	what has my car been through this week	summary none none none none none none none	fresh_v4
+X017	now range_estimate none none none none none none none	how much current is the charger pushing	now charging_current none none none none none none	fresh_v4
+X018	extreme speed max none none none none none none	how did the state of charge go over the week	summary battery_soc none none none none none none	fresh_v4
+X019	events hard_braking count none none none none none none	was the last journey normal or odd	anomaly none none none none trip none none	fresh_v4
+X020	stat battery_temperature usual none none none none none none	how did yesterday go for the car	summary none none none none day none none	fresh_v4
+X021	now range_estimate none none none none none none none	what explains the high fuel burn on the latest drive	why fuel_rate rise none none trip none none	fresh_v4
+X022	social none none none none none none none none	rundown of my fuel use lately	summary fuel_rate none none none none none none	fresh_v4
+X023	summary none change none none none none none none	what is the charge cap	now charge_limit none none none none none none	fresh_v4
+X024	extreme speed max none none none none none none	overview of the hard braking this month	summary hard_braking none none none none none none	fresh_v4
+X025	now range_estimate none none none none none none none	what is the ignition advance	now ignition_timing none none none none none none	fresh_v4
+X026	anomaly none none none none none none none none	an overview of everything that happened this week	summary none none none none none none none	fresh_v4
+X027	now range_estimate none none none none none none none	highest boost last week	extreme boost_pressure max none none none none none	fresh_v4
+X028	events any_warning count none none none none none none	how is this fortnight different from the previous one	summary none change none none none none none	fresh_v4
+X029	stat battery_temperature mean none none none none none none	how warm is the air entering the engine	now intake_air_temperature none none none none none none	fresh_v4
+X030	extreme speed max none none none none none none	highest individual cell voltage	now cell_voltage_max none none none none none none	fresh_v4
+X031	now range_estimate none none none none none none none	check my data for anything fishy	anomaly none none none none none none none	fresh_v4
+X032	now range_estimate none none none none none none none	normal climate control power draw	stat hvac_power usual none none none none none	fresh_v4
+X033	estimate range_estimate none none none none none none none	how much fuel does the engine normally burn per hour	stat fuel_rate usual none none none none none	fresh_v4
+X034	health battery_condition none none none none none none	is any door ajar	now door_state none none none none none none	fresh_v4
+X035	now battery_soc none none none none none none none	did anything shift this week compared with last	summary none change none none none none none	fresh_v4
+X036	social none none none none none none none none	what is AdBlue for	define def_level none none none none none none	fresh_v4
+X037	events charging_session list none none none none none none	what does the oxygen sensor say	now lambda none none none none none none	fresh_v4
+X038	now speed none none none none none none none	what is the fuel delivery pressure	now fuel_pressure none none none none none none	fresh_v4
+X039	trend motor_temperature change none none none none none none	is the engine oil temperature showing anything odd	anomaly engine_oil_temperature none none none none none none	fresh_v4
+X040	stat tyre_pressure mean none none none none none none	how have the warnings been	summary any_warning none none none none none none	fresh_v4
+X041	now range_estimate none none none none none none none	mean throttle opening yesterday	stat throttle_position mean none none none none none	fresh_v4
+X042	why wh_per_km rise none none trip none none none	mean rail pressure last month	stat fuel_rail_pressure mean none none none none none	fresh_v4
+X043	compare speed mean highway city none none none none	mean charging current this month	stat charging_current mean none none none none none	fresh_v4
+X044	estimate range_estimate none none none none none none none	why was yesterday so tough on the battery	why battery_temperature rise none none day none none	fresh_v4
+X045	anomaly none none none none none none none none	are the wipers going	now wiper_state none none none none none none	fresh_v4
+X046	stat tyre_pressure mean none none none none none none	so how was last week	summary none none none none none none none	fresh_v4
+X047	now speed none none none none none none none	hottest intake air this month	extreme intake_air_temperature max none none none none none	fresh_v4
+X048	extreme speed max none none none none none none	what speed do I usually drive at	stat speed usual none none none none none	fresh_v4
+X049	anomaly none none none none none none none none	fuel rate and engine rpm side by side	compare fuel_rate mean none none none engine_rpm none	fresh_v4
+X050	social none none none none none none none none	how often does hard braking normally happen to me	stat hard_braking usual none none none none none	fresh_v4
+X051	stat battery_temperature usual none none none none none none	is the filter cleaning itself right now	now dpf_regeneration none none none none none none	fresh_v4
+X052	health battery_condition none none none none none none	how long since the engine started	now engine_run_time none none none none none none	fresh_v4
+X053	summary none none none none none none none none	has the catalyst temperature fallen over the month	trend catalyst_temperature drop none none none none none	fresh_v4
+X054	now speed none none none none none none none	why was the coolant flow low on the previous drive	why coolant_flow drop none none trip none none	fresh_v4
+X055	estimate range_estimate none none none none none none none	am I wearing my seat belt	now seatbelt_state none none none none none none	fresh_v4
+X056	stat battery_temperature usual none none none none none none	which gear is the car in	now gear none none none none none none	fresh_v4
+X057	health battery_condition none none none none none none	how hot are the exhaust gases	now exhaust_gas_temperature none none none none none none	fresh_v4
+X058	now speed none none none none none none none	anything that has changed since the week before	summary none change none none none none none	fresh_v4
+X059	extreme speed max none none none none none none	what is a particulate filter	define dpf_soot_load none none none none none none	fresh_v4
+X060	stat wh_per_km mean none none none none none none	how much air is going into the engine	now mass_air_flow none none none none none none	fresh_v4
+X061	social none none none none none none none none	what is different about the car versus last month	summary none change none none none none none	fresh_v4
+X062	now speed none none none none none none none	what is the cooling system pressure	now coolant_pressure none none none none none none	fresh_v4
+X063	events charging_session list none none none none none none	how hot is the oil in the engine	now engine_oil_temperature none none none none none none	fresh_v4
+X064	stat battery_temperature usual none none none none none none	has the coolant flow behaved strangely	anomaly coolant_flow none none none none none none	fresh_v4
+X065	extreme speed max none none none none none none	describe the most efficient trip I made	summary none none none none trip none none	fresh_v4
+X066	health battery_condition none none none none none none	minimum oil pressure last month	extreme engine_oil_pressure min none none none none none	fresh_v4
+X067	anomaly none none none none none none none none	compare the whole picture of this week with the last and tell me what changed	summary none change none none none none none	fresh_v4
+X068	now battery_soc none none none none none none none	how far is the throttle open	now throttle_position none none none none none none	fresh_v4
+X069	stat battery_temperature usual none none none none none none	minutes until fully charged	now time_to_full none none none none none none	fresh_v4
+X070	why wh_per_km rise none none trip none none none	is the charging flap open	now charge_port_state none none none none none none	fresh_v4
+X071	estimate range_estimate none none none none none none none	how has the battery temperature been this week	summary battery_temperature none none none none none none	fresh_v4
+X072	stat battery_temperature usual none none none none none none	average manifold pressure over the week	stat intake_manifold_pressure mean none none none none none	fresh_v4
+X073	anomaly none none none none none none none none	did the battery temperature do anything odd this week	anomaly battery_temperature none none none none none none	fresh_v4
+X074	now range_estimate none none none none none none none	what is the inverter temperature	now inverter_temperature none none none none none none	fresh_v4
+X075	stat battery_temperature mean none none none none none none	what has the car started doing differently	summary none change none none none none none	fresh_v4
+X076	estimate range_estimate none none none none none none none	lowest AdBlue level this week	extreme def_level min none none none none none	fresh_v4
+X077	events charging_session list none none none none none none	what is the overall picture for the past month	summary none none none none none none none	fresh_v4
+X078	now battery_soc none none none none none none none	tell me how the longest trip went	summary none none none none trip none none	fresh_v4
+X079	trend motor_temperature change none none none none none none	did the warnings look unusual this week	anomaly any_warning none none none none none none	fresh_v4
+X080	compare speed mean highway city none none none none	normal outside temperature where I drive	stat ambient_temperature usual none none none none none	fresh_v4
+X081	anomaly none none none none none none none none	what is the charging voltage	now charging_voltage none none none none none none	fresh_v4
+X082	stat wh_per_km mean none none none none none none	current long term fuel trim	now long_term_fuel_trim none none none none none none	fresh_v4
+X083	now range_estimate none none none none none none none	what is the egr for	define egr_position none none none none none none	fresh_v4
+X084	stat battery_temperature mean none none none none none none	headline numbers for my driving this month please	summary none none none none none none none	fresh_v4
+X085	summary none change none none none none none none	total engine hours	now engine_hours none none none none none none	fresh_v4
+X086	now speed none none none none none none none	tell me what the car has been up to	summary none none none none none none none	fresh_v4
+X087	events any_warning count none none none none none none	how has the soot load moved this month	trend dpf_soot_load change none none none none none	fresh_v4
+X088	events hard_braking count none none none none none none	what is the short term trim at	now short_term_fuel_trim none none none none none none	fresh_v4
+X089	events any_warning count none none none none none none	tell me what has moved lately	summary none change none none none none none	fresh_v4
+X090	health battery_condition none none none none none none	do you see any outliers this week	anomaly none none none none none none none	fresh_v4
+X091	stat battery_temperature mean none none none none none none	is boost related to engine load	stat boost_pressure corr none none none engine_load none	fresh_v4
+X092	events charging_session list none none none none none none	give me a picture of the motor temperature this month	summary motor_temperature none none none none none none	fresh_v4
+X093	why wh_per_km rise none none trip none none none	walk me through the past seven days of driving	summary none none none none none none none	fresh_v4
+X094	summary none change none none none none none none	how did I use the vehicle lately	summary none none none none none none none	fresh_v4
+X095	compare speed mean highway city none none none none	what made the last journey so energy hungry	why wh_per_km rise none none trip none none	fresh_v4
+X096	stat battery_temperature usual none none none none none none	any signals acting up lately	anomaly none none none none none none none	fresh_v4
+X097	anomaly none none none none none none none none	what is the oil pressure at	now engine_oil_pressure none none none none none none	fresh_v4
+X098	stat battery_temperature mean none none none none none none	what range is the dashboard claiming	now reported_range none none none none none none	fresh_v4
+X099	stat battery_temperature mean none none none none none none	what is the normal operating range of the pack temperature	stat battery_temperature usual none none none none none	fresh_v4
+X100	compare speed mean highway city none none none none	is the handbrake applied	now parking_brake none none none none none none	fresh_v4
+X101	health battery_condition none none none none none none	overall health picture of the vehicle	summary vehicle_health none none none none none none	fresh_v4
+X102	compare speed mean highway city none none none none	typical tyre pressure for my car	stat tyre_pressure usual none none none none none	fresh_v4
+X103	anomaly none none none none none none none none	how have my last few weeks looked	summary none none none none none none none	fresh_v4
+X104	summary none change none none none none none none	what should I take away from the last seven days	summary none none none none none none none	fresh_v4
+X105	anomaly none none none none none none none none	report on my recent journeys	summary none none none none none none none	fresh_v4
+X106	stat wh_per_km mean none none none none none none	what is the common rail pressure	now fuel_rail_pressure none none none none none none	fresh_v4
+X107	anomaly none none none none none none none none	highlight the differences since last week	summary none change none none none none none	fresh_v4
+X108	stat battery_temperature mean none none none none none none	any oddities in the 12 volt battery readings	anomaly aux_battery_voltage none none none none none none	fresh_v4
+X109	stat battery_temperature mean none none none none none none	what is manifold pressure	define intake_manifold_pressure none none none none none none	fresh_v4
+X110	now speed none none none none none none none	hottest exhaust last week	extreme exhaust_gas_temperature max none none none none none	fresh_v4
+X111	why wh_per_km rise none none trip none none none	overview of how my speed has been	summary speed none none none none none none	fresh_v4
+X112	events any_warning count none none none none none none	what is turbo boost	define boost_pressure none none none none none none	fresh_v4
+X113	why wh_per_km rise none none trip none none none	anything off about the tyres lately	anomaly tyre_condition none none none none none none	fresh_v4
+X114	why wh_per_km rise none none trip none none none	fill me in on the week	summary none none none none none none none	fresh_v4
+X115	now speed none none none none none none none	how do throttle position and speed relate	stat throttle_position corr none none none speed none	fresh_v4
+X116	trend motor_temperature change none none none none none none	gearbox oil temperature	now transmission_temperature none none none none none none	fresh_v4
+X117	now battery_soc none none none none none none none	average lambda this week	stat lambda mean none none none none none	fresh_v4
+X118	stat tyre_pressure mean none none none none none none	is anything wrong with the way the battery is behaving	anomaly battery_condition none none none none none none	fresh_v4
+X119	events hard_braking count none none none none none none	what does a lambda sensor measure	define lambda none none none none none none	fresh_v4
+X120	now speed none none none none none none none	quick recap of the past fortnight	summary none none none none none none none	fresh_v4
+X121	summary none none none none none none none none	how clogged is the diesel particulate filter	now dpf_soot_load none none none none none none	fresh_v4
+X122	stat wh_per_km mean none none none none none none	what is the atmospheric pressure	now barometric_pressure none none none none none none	fresh_v4
+X123	stat battery_temperature usual none none none none none none	how far open is the EGR	now egr_position none none none none none none	fresh_v4
+X124	stat wh_per_km mean none none none none none none	was the boost pressure higher than usual this week	compare boost_pressure mean none typical none none none	fresh_v4
+X125	compare speed mean highway city none none none none	what has gone up or down recently	summary none change none none none none none	fresh_v4
+X126	anomaly none none none none none none none none	why did the range collapse during the last trip	why range_estimate drop none none trip none none	fresh_v4
+X127	now range_estimate none none none none none none none	go over my last drive	summary none none none none trip none none	fresh_v4
+X128	stat battery_temperature usual none none none none none none	sum up my driving since the start of the month	summary none none none none none none none	fresh_v4
+X129	health battery_condition none none none none none none	what are normal values for the coolant flow	stat coolant_flow usual none none none none none	fresh_v4
+X130	now range_estimate none none none none none none none	what is a normal barometric pressure here	stat barometric_pressure usual none none none none none	fresh_v4
+X131	stat wh_per_km mean none none none none none none	why was the pack so warm on the longest drive	why battery_temperature rise none none trip none none	fresh_v4
+X132	social none none none none none none none none	describe how the car behaved over the weekend	summary none none none none none none none	fresh_v4
+X133	events charging_session list none none none none none none	anything strange in the motor temperature this month	anomaly motor_temperature none none none none none none	fresh_v4
+X134	stat wh_per_km mean none none none none none none	what stands out as strange in the last month	anomaly none none none none none none none	fresh_v4
+X135	estimate range_estimate none none none none none none none	which readings are not what they were last month	summary none change none none none none none	fresh_v4
+X136	anomaly none none none none none none none none	were there any notable changes this month	summary none change none none none none none	fresh_v4
+X137	extreme speed max none none none none none none	what is fuel trim	define short_term_fuel_trim none none none none none none	fresh_v4
+X138	now speed none none none none none none none	is there anything unusual going on with the car	anomaly none none none none none none none	fresh_v4
+X139	stat wh_per_km mean none none none none none none	are the lights on	now headlight_state none none none none none none	fresh_v4
+X140	stat battery_temperature usual none none none none none none	how is my driving style looking	summary driving_style none none none none none none	fresh_v4
+X141	now battery_soc none none none none none none none	run through the recent period for me	summary none none none none none none none	fresh_v4
+X142	trend motor_temperature change none none none none none none	how does the motor temperature typically run	stat motor_temperature usual none none none none none	fresh_v4
+X143	why wh_per_km rise none none trip none none none	did the exhaust temperature spike this week	extreme exhaust_gas_temperature max none none none none none	fresh_v4
+X144	events any_warning count none none none none none none	how much AdBlue is in the tank	now def_level none none none none none none	fresh_v4
+X145	events any_warning count none none none none none none	give me the story of this week	summary none none none none none none none	fresh_v4
+X146	stat wh_per_km mean none none none none none none	what's moved in my numbers	summary none change none none none none none	fresh_v4
+X147	events any_warning count none none none none none none	give me an account of the last few days	summary none none none none none none none	fresh_v4
+X148	stat wh_per_km mean none none none none none none	what is the typical number of warnings per week	stat any_warning usual none none none none none	fresh_v4
+X149	events any_warning count none none none none none none	does oil temperature follow coolant temperature	stat engine_oil_temperature corr none none none motor_temperature none	fresh_v4
+X150	stat battery_temperature mean none none none none none none	recap today for me	summary none none none none day none none	fresh_v4
+X151	stat battery_temperature mean none none none none none none	look through my recent data for anything abnormal	anomaly none none none none none none none	fresh_v4
+X152	stat wh_per_km mean none none none none none none	tell me about any unexpected spikes	anomaly none none none none none none none	fresh_v4
+X153	estimate range_estimate none none none none none none none	what is the fuel temperature	now fuel_temperature none none none none none none	fresh_v4
+X154	events any_warning count none none none none none none	a snapshot of the last ten days	summary none none none none none none none	fresh_v4
+X155	summary none none none none none none none none	what is typical for the engine load	stat engine_load usual none none none none none	fresh_v4
+X156	health battery_condition none none none none none none	brief me on the month	summary none none none none none none none	fresh_v4
+X157	events charging_session list none none none none none none	is the 12 volt battery low	now aux_battery_voltage none none none none none none	fresh_v4
+X158	events charging_session list none none none none none none	how is the dpf doing	now dpf_soot_load none none none none none none	fresh_v4
+X159	now speed none none none none none none none	why did the motor get hot on my most recent trip	why motor_temperature rise none none trip none none	fresh_v4
+X160	compare speed mean highway city none none none none	how has long term trim moved this month	trend long_term_fuel_trim change none none none none none	fresh_v4
+X161	extreme speed max none none none none none none	why was the oil so hot on that big trip	why engine_oil_temperature rise none none trip none none	fresh_v4
+X162	compare speed mean highway city none none none none	hottest inverter this month	extreme inverter_temperature max none none none none none	fresh_v4
+X163	stat tyre_pressure mean none none none none none none	current intake manifold pressure	now intake_manifold_pressure none none none none none none	fresh_v4
+X164	social none none none none none none none none	anything weird yesterday	anomaly none none none none day none none	fresh_v4
+X165	summary none change none none none none none none	how much does the battery voltage normally vary	stat battery_voltage usual none none none none none	fresh_v4
+X166	stat tyre_pressure mean none none none none none none	summarise the tyre pressure situation	summary tyre_pressure none none none none none none	fresh_v4
+X167	extreme speed max none none none none none none	what is the turbo boost right now	now boost_pressure none none none none none none	fresh_v4

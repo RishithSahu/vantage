@@ -1,0 +1,43 @@
+VERSION "Meridian E5 main CAN-FD (29-bit ids, Motorola)"
+
+NS_ :
+
+BS_:
+
+BU_: GW BMS THERM CHG HVAC BCM
+
+BO_ 2566852608 VehDynamics: 16 GW
+ SG_ VehSpdAvgDrvn_mph : 7|16@0+ (0.01,0) [0|300] "mph" Vector__XXX
+ SG_ AccelPedalPct : 23|8@0+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ BrkPedalPct : 31|8@0+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ SteerWhlAngle_deg : 39|16@0- (0.1,0) [-780|780] "deg" Vector__XXX
+ SG_ YawRate_dps : 55|16@0- (0.01,0) [-120|120] "deg/s" Vector__XXX
+ SG_ LatAcc_g : 71|16@0- (0.0005,0) [-3|3] "g" Vector__XXX
+ SG_ LongAcc_g : 87|16@0- (0.0005,0) [-3|3] "g" Vector__XXX
+
+BO_ 2566852864 HVBattery: 16 BMS
+ SG_ HVBatt_SOC_Disp : 7|8@0+ (0.5,0) [0|100] "%" Vector__XXX
+ SG_ HVBatt_Volt : 15|16@0+ (0.05,0) [0|1000] "V" Vector__XXX
+ SG_ HVBatt_Curr : 31|16@0- (0.05,0) [-1500|1500] "A" Vector__XXX
+ SG_ HVBatt_Temp_F : 47|16@0- (0.1,0) [-40|250] "degF" Vector__XXX
+ SG_ HVBatt_CellMaxTemp_F : 63|16@0- (0.1,0) [-40|250] "degF" Vector__XXX
+ SG_ HVBatt_CellMinTemp_F : 79|16@0- (0.1,0) [-40|250] "degF" Vector__XXX
+ SG_ HVBatt_CellMinV : 95|16@0+ (0.001,0) [0|6] "V" Vector__XXX
+
+BO_ 2566853120 ThermalSys: 16 THERM
+ SG_ CoolPumpFlow_lpm : 7|16@0+ (0.1,0) [0|100] "L/min" Vector__XXX
+ SG_ MotorTemp_F : 23|16@0- (0.1,0) [-40|400] "degF" Vector__XXX
+ SG_ MotorTorque_Nm : 39|16@0- (0.1,0) [-600|600] "Nm" Vector__XXX
+ SG_ MotorSpeed_rpm : 55|16@0- (1,0) [-2000|20000] "rpm" Vector__XXX
+ SG_ BrkDiscTempMax_C : 71|16@0+ (0.1,0) [0|1000] "degC" Vector__XXX
+
+BO_ 2566853376 ClimateSys: 8 HVAC
+ SG_ OutsideTemp_F : 7|16@0- (0.1,0) [-60|150] "degF" Vector__XXX
+ SG_ CabinTemp_F : 23|16@0- (0.1,0) [-40|180] "degF" Vector__XXX
+ SG_ HvacPwr_kW : 39|16@0+ (0.01,0) [0|10] "kW" Vector__XXX
+
+BO_ 2566853632 ChargeSys: 8 CHG
+ SG_ ChgPwr_kW : 7|16@0+ (0.1,0) [0|400] "kW" Vector__XXX
+ SG_ ChgSt : 23|8@0+ (1,0) [0|3] "" Vector__XXX
+
+VAL_ 2566853632 ChgSt 0 "unplugged" 1 "charging" 2 "complete" 3 "fault" ;

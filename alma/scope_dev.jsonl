@@ -1,0 +1,12 @@
+{"text":"Compare city and highway consumption, excluding charging.","label":"scope:common"}
+{"text":"How does city consumption compare with highway consumption when charging periods are removed from both?","label":"scope:common"}
+{"text":"Compare the two periods, ignoring rain in either period.","label":"scope:common"}
+{"text":"City versus highway efficiency, with hard-braking samples left out throughout.","label":"scope:common"}
+{"text":"Compare city consumption excluding charging with highway consumption.","label":"scope:left"}
+{"text":"How does non-charging city use compare with unrestricted highway use?","label":"scope:left"}
+{"text":"Contrast the first period without rain against the complete second period.","label":"scope:left"}
+{"text":"Compare cold-weather weekday efficiency with weekend efficiency overall.","label":"scope:left"}
+{"text":"Compare city consumption with highway consumption excluding charging.","label":"scope:right"}
+{"text":"How does unrestricted city use compare with non-charging highway use?","label":"scope:right"}
+{"text":"Contrast the complete first period against the second period without rain.","label":"scope:right"}
+{"text":"Compare weekday efficiency overall with cold-weather weekend efficiency.","label":"scope:right"}

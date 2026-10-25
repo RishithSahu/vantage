@@ -1,0 +1,15 @@
+{
+  "note": "Closed-class discourse cues used ONLY by vgpt/meaning/dialogue.py.  They mark that an utterance depends on the previous turn (ellipsis, a pointer back, a question about the last answer); they never say what quantity or operation is asked - that stays with the learned frame.  INTERIM: every cue here is a candidate for a trained 'continuation' / 'meta' act (see docs/TRAINING_QUEUE.md); until that training is run these lists carry the behaviour.",
+  "ellipsis_openers": ["and", "and what about", "what about", "how about", "and how about", "same for", "same question for", "also", "what of", "and for", "and the"],
+  "provenance": [
+    "how did you get that", "how did you get this", "how did you get it", "how did you work that out", "how did you work it out", "how did you calculate", "how did you answer", "how did you arrive", "how did you come up",
+    "how do you know", "where did you get that", "where did that come from", "where does that come from", "where does this come from", "what is your source", "what was your source",
+    "explain your answer", "explain how you", "explain that answer", "show your working", "show me your working", "show your workings", "how was that calculated", "how is that calculated", "how was that worked out",
+    "what data did you use", "which data did you use", "what did you use to answer", "on what basis", "what is that based on", "what are you basing", "why do you say that", "how sure are you", "how reliable is that",
+    "how accurate is that", "can you prove that", "what is the evidence"
+  ],
+  "deixis_time": ["then", "at that time", "at that moment", "back then", "at that point", "that time", "at the time"],
+  "referent_why": ["why did it happen", "why did that happen", "why was that", "why is that", "what caused it", "what caused that", "what was the cause", "what is the cause", "why did this happen", "what happened there", "why"],
+  "ordinal": {"longest": "max", "highest": "max", "most": "max", "worst": "max", "biggest": "max", "largest": "max", "fastest": "max", "hottest": "max", "hardest": "max", "strongest": "max", "shortest": "min", "lowest": "min", "least": "min", "smallest": "min", "slowest": "min", "coolest": "min", "mildest": "min", "first": "first", "earliest": "first", "oldest": "first", "last": "last", "latest": "last", "newest": "last", "most recent": "last"},
+  "pointer": ["which one", "which of them", "which of those", "which of these", "the one", "that one", "which was"]
+}

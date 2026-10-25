@@ -1,0 +1,70 @@
+# USER-v1: questions the owner actually typed into the assistant that failed (taken from tests/test_driver_semantic_families.py and tests/test_bug_layers.py, where the rule-based fixes for them were recorded).
+# Real-user wording, a different author from the training data. Held out: every row is excluded from every training set. Gold frames were assigned by Claude under the same conventions as novel_v1.tsv.
+# Context-dependent turns ("why" after "how is battery") are omitted: they are scored in the dialogue evaluation, not here.
+U001	how many ppl can fit in my car	spec seat_count none none none none	slang
+U002	how many passengers can this vehicle carry	spec seat_count none none none none	plain
+U003	what is the seating capacity	spec seat_count none none none none	plain
+U004	how much can we travel	estimate range_estimate none none none none	plain
+U005	how far can this car drive	estimate range_estimate none none none none	plain
+U006	what distance can we go	estimate range_estimate none none none none	plain
+U007	how fast can this vehicle go	spec rated_max_speed none none none none	plain
+U008	how many miles have we gone	now odometer none none none none	plain
+U009	when to service	estimate maintenance none none none none	terse
+U010	when to get servicing	estimate maintenance none none none none	terse
+U011	when should I go for servicing	estimate maintenance none none none none	plain
+U012	when to service our car	estimate maintenance none none none none	terse
+U013	how is wheel alignment	health unlisted none none none none	plain
+U014	did betry get hoy	events battery_overheat_warning exists none none none	typo
+U015	how is break pad	health brake_pad_life none none none none	typo
+U016	why did the battery overheat	why battery_overheat_warning none none none none	plain
+U017	when did the battery overheat	events battery_overheat_warning last none none none	plain
+U018	were there any overheating issues	events battery_overheat_warning exists none none none	plain
+U019	how is battery	health battery_condition none none none none	terse
+U020	why did the engine overheat	why motor_temperature none none none none	plain
+U021	tell all tyres	now tyre_pressure none none none none	terse
+U022	show every tire	now tyre_pressure none none none none	terse
+U023	how are tyres	health tyre_condition none none none none	terse
+U024	tell tyres	now tyre_pressure none none none none	terse
+U025	what is avg speed since last drive	stat speed mean none none trip	slang
+U026	is my car better than the Tesla Roadster	unsupported none none none none none	plain
+U027	average speed in the last 2hrs	stat speed mean none none none	terse
+U028	how can I take care of my car	advice maintenance none none none none	plain
+U029	what are the issues in my vehicle	health vehicle_health none none none none	plain
+U030	how much is the battery charge now	now battery_soc none none none none	plain
+U031	I want to know the charge left in the battery	now battery_soc none none none none	long
+U032	what is our battery capacity	spec battery_capacity none none none none	plain
+U033	how many mAh is our battery	spec battery_capacity none none none none	plain
+U034	total number of charging cycles	spec charge_cycles none none none none	plain
+U035	can I charge my laptop using the car	spec export_power none none none none	plain
+U036	what is our motor power	now motor_power none none none none	plain
+U037	how to calculate motor power	howto motor_power none none none none	plain
+U038	acceleration between speeds 20 to 30 km per hour	stat acceleration mean threshold none none	plain
+U039	acceleration going 10 to 20 m per second	stat acceleration mean threshold none none	plain
+U040	what was my RPM yesterday at 10:00 night	at motor_rpm none none none none	plain
+U041	where was I at 10:00 yesterday	at location none none none none	plain
+U042	average speed from 3 days ago to 5 days ago	stat speed mean none none none	plain
+U043	do I drive properly	health driving_style none none none none	plain
+U044	ADAS	define adas_state none none none none	terse
+U045	driver assistant state zero mean	define adas_state none none none none	terse
+U046	what is the vehicle speed right now	now speed none none none none	plain
+U047	how has washer fluid level changed over the last 14 days	trend unlisted change none none none	plain
+U048	how fast can we go	spec rated_max_speed none none none none	plain
+U049	temperature	ambiguous none none none none none	terse
+U050	where are we	now location none none none none	plain
+U051	what car is this	spec vehicle_model none none none none	plain
+U052	what is ADAS	define adas_state none none none none	plain
+U053	average acceleration	stat acceleration mean none none none	terse
+U054	how much petrol left	estimate range_estimate none none none none	plain
+U055	cant you calculate how much my battery life has reduced	trend battery_soh drop none none none	plain
+U056	diagnostics	events diagnostic_code list none none none	terse
+U057	When did I charge?	events charging_session last none none none	plain
+U058	How long ago was the car last plugged in?	events charging_session last none none none	plain
+U059	How many driving modes does my car have?	spec drive_modes none none none none	plain
+U060	Which selectable drive modes are fitted?	spec drive_modes none none none none	plain
+U061	What is the difference between city and highway?	compare wh_per_km mean city highway none	plain
+U062	Compare city versus motorway driving	compare wh_per_km mean city highway none	plain
+U063	How many 7000 mAh batteries can I charge?	estimate battery_capacity none none none none	plain
+U064	How can I improve my score?	advice driving_style none none none none	plain
+U065	critical diagnostics	events diagnostic_code list none none none	terse
+U066	How many Hog Riders can destroy my car?	unsupported none none none none none	plain
+U067	How many imaginary robots would wreck the vehicle?	unsupported none none none none none	plain

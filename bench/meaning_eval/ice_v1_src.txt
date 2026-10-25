@@ -1,0 +1,123 @@
+# ICE-v1 (petrol and diesel), written 2026-10-24 before the data of round 10 existed; never trained on.
+# line: vehicle | question | act concept [op= cond= vs= ent= c2=]      (vehicle: petrol or diesel = the car type the model is told)
+petrol | how much fuel have I got | now fuel_level
+petrol | is there enough petrol to get to work and back | estimate range_estimate
+petrol | what is the tank holding right now | now fuel_level
+petrol | what is the capacity of the petrol tank | spec fuel_level
+petrol | how many km can I do before the next fill-up | estimate range_estimate
+petrol | what mileage did I get this week | stat fuel_rate op=mean
+petrol | total litres burned in the last 30 days | stat fuel_rate op=sum
+petrol | how much petrol did the trip to the airport use | stat fuel_rate op=sum ent=trip
+petrol | which trip was the thirstiest | extreme fuel_rate op=max ent=trip
+petrol | when did I last put fuel in | events charging_session op=last
+petrol | how many fill-ups in the last two months | events charging_session op=count
+petrol | is fuel economy getting worse over the months | trend fuel_rate op=rise
+petrol | did the economy improve since the service | trend fuel_rate op=drop
+petrol | compare fuel use in town and on the motorway | compare fuel_rate op=mean cond=city vs=highway
+petrol | does a faster speed mean more fuel | stat fuel_rate op=corr c2=speed
+petrol | anything strange in how much fuel it drinks | anomaly fuel_rate
+petrol | how many revs is the engine doing | now engine_rpm
+petrol | what rpm did I hit at most last week | extreme engine_rpm op=max
+petrol | average engine speed on the motorway | stat engine_rpm op=mean cond=highway
+petrol | how fast is the engine turning when idling | now engine_rpm
+petrol | what is the throttle at | now throttle_position
+petrol | pedal opening right now | now throttle_position
+petrol | how much load is the engine under | now engine_load
+petrol | coolant temperature please | now motor_temperature
+petrol | has the engine ever run too hot | events overtemp_warning op=exists
+petrol | peak coolant temperature this month | extreme motor_temperature op=max
+petrol | how is the oil temperature | now engine_oil_temperature
+petrol | is oil pressure normal | now engine_oil_pressure
+petrol | what is the intake air temperature | now intake_air_temperature
+petrol | how much air is the engine breathing | now mass_air_flow
+petrol | what do the fuel trims say | now long_term_fuel_trim
+petrol | what is the lambda reading | now lambda
+petrol | is the catalytic converter hot | now catalyst_temperature
+petrol | which gear is engaged | now gear
+petrol | how many hours has the engine run | now engine_hours
+petrol | is the engine management light lit | health diagnostic_status
+petrol | what lit the check engine lamp | why diagnostic_code
+petrol | what does a p0300 mean | define diagnostic_code
+petrol | any stored fault codes | health diagnostic_status
+petrol | show the fault code history | events diagnostic_code op=list
+petrol | is the starter battery healthy | health aux_battery_condition
+petrol | what is the battery voltage | now aux_battery_voltage
+petrol | will it start tomorrow morning | health aux_battery_condition
+petrol | when is the oil change due | estimate maintenance
+petrol | how often should I change the oil | spec service_interval
+petrol | how are the engine and gearbox | health motor_condition
+petrol | is the engine running rough | anomaly motor_condition
+petrol | give me the weekly summary | summary
+petrol | are my tyres alright | health tyre_condition
+petrol | how many hard brakes did I do | events hard_braking op=count
+petrol | is this car petrol or diesel | spec vehicle_model
+petrol | does it have a turbocharger | spec unlisted
+petrol | what is the boost pressure | now boost_pressure
+petrol | how much adblue is left | now def_level
+petrol | what is the dpf soot load | now dpf_soot_load
+petrol | how long does the engine take to heat up | now unlisted
+petrol | how many cylinders does it have | spec unlisted
+petrol | what is the octane rating needed | spec unlisted
+petrol | how loud is the engine | now unlisted
+petrol | switch the engine off | control
+petrol | turn off the check engine light for me | unsafe
+petrol | where is the nearest petrol pump | control
+petrol | how much does petrol cost today | unsupported
+petrol | thanks mate | social
+petrol | juice left | now fuel_level
+petrol | gas in the tank | now fuel_level
+petrol | how far on a tank | estimate range_estimate
+petrol | revs now | now engine_rpm
+petrol | engine temp | now motor_temperature
+petrol | oil temp | now engine_oil_temperature
+petrol | tank cap | spec fuel_level
+petrol | kitna petrol bacha hai | now fuel_level
+petrol | engine ka temperature kitna hai | now motor_temperature
+petrol | pichle hafte kitna petrol laga | stat fuel_rate op=sum
+petrol | rpm kitni hai | now engine_rpm
+petrol | gaadi ki mileage kya hai | stat fuel_rate op=mean
+diesel | how much diesel have I got left | now fuel_level
+diesel | litres left in the tank | now fuel_level
+diesel | tank volume | spec fuel_level
+diesel | how far will the diesel take me | estimate range_estimate
+diesel | average fuel use per hour of engine running | stat fuel_rate op=usual
+diesel | fuel burned this week | stat fuel_rate op=sum
+diesel | when did I refuel last | events charging_session op=last
+diesel | how many litres did the last refuel add | events charging_session op=last
+diesel | is the fuel consumption rising | trend fuel_rate op=rise
+diesel | how is the dpf doing | now dpf_soot_load
+diesel | soot loading | now dpf_soot_load
+diesel | is a regeneration happening | trend dpf_soot_load op=drop
+diesel | what is the adblue level | now def_level
+diesel | do I need to refill adblue soon | advice def_level
+diesel | what is the egr doing | now egr_position
+diesel | boost pressure now | now boost_pressure
+diesel | highest boost this week | extreme boost_pressure op=max
+diesel | exhaust gas temperature | now exhaust_gas_temperature
+diesel | what is the coolant temperature | now motor_temperature
+diesel | oil pressure | now engine_oil_pressure
+diesel | engine revs | now engine_rpm
+diesel | peak revs this month | extreme engine_rpm op=max
+diesel | how long was the engine idling | stat drive_mode op=duration cond=idling
+diesel | what gear is it in | now gear
+diesel | engine load while driving on average | stat engine_load op=mean cond=driving
+diesel | is the check engine light on | health diagnostic_status
+diesel | why is the engine warning on | why diagnostic_code
+diesel | the 12 volt battery is it fine | health aux_battery_condition
+diesel | what voltage is the battery at | now aux_battery_voltage
+diesel | is the dpf getting more clogged over time | trend dpf_soot_load op=rise
+diesel | anything odd with the exhaust treatment | anomaly dpf_soot_load
+diesel | what is adblue | define def_level
+diesel | what does the dpf do | define dpf_soot_load
+diesel | how much of the truck's load capacity is used | now unlisted
+diesel | how many axles does it have | spec unlisted
+diesel | what is the engine power | spec unlisted
+diesel | tell me the fuel price | unsupported
+diesel | delete my fuel records | control
+diesel | remove the dpf warning permanently | unsafe
+diesel | summary of the week | summary
+diesel | anything weird this week | anomaly
+diesel | ye gaadi petrol hai ya diesel | spec vehicle_model
+diesel | adblue kitna bacha hai | now def_level
+diesel | tank mein diesel kitna hai | now fuel_level
+diesel | engine ka rpm batao | now engine_rpm

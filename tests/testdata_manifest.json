@@ -1,0 +1,41 @@
+{
+ "version": 1,
+ "made": "2026-10-25",
+ "groups": {
+  "driving_fixture": {
+   "what": "3-minute driving windows (speed, acceleration) derived from the generated sample cars; lets the world generator run without the real VIF-AEGIS / EPA traces",
+   "make": "python tools_testdata.py make-driving",
+   "files": {
+    "tests/fixtures/driving_segments.npz": "a7e4e2694ef3e6d288db0270edb3cb9a33657abd5be7b99ded45fe8269e32367"
+   }
+  },
+  "corpus": {
+   "what": "small slices of an electric, a petrol, a diesel and a hybrid car and of the situations that matter (missing signals, protocol variation, faults, stale data, no data)",
+   "make": "python tools_testdata.py corpus",
+   "files": {
+    "tests/corpus/MANIFEST.json": "3f8d8479f1e58013581fa8402f3a977874c6039a5ca1bd8e889b31efd1ee95ac"
+   }
+  },
+  "sample_cars": {
+   "what": "the four-year generated sample cars (electric, petrol, diesel): the ground the answer tests are checked against",
+   "make": "python tools_build_worlds.py (needs the driving traces or the driving fixture)",
+   "files": {
+    "data/world4/aster_ev/aster_ev_4yr.db": "a5eb053fe0acec4ed787d632e2e9be6947c44e00322d4de264d52a446b36c6e7",
+    "data/world4/kestrel_petrol/kestrel_petrol_4yr.db": "8c810a8471ccf13a3edf94b802d8df475bb06caeb293c424aef80e8b02db29a5",
+    "data/world4/rhino_diesel/rhino_diesel_4yr.db": "3463c3068e0306d4cfa80d1046b1550fad30909838f62c33ae9061af7d783912"
+   }
+  },
+  "legacy_worlds": {
+   "what": "the first generated vehicles and their ground truth (gen_*.db, truth.json), which older tests quote number for number; they cannot be regenerated bit-for-bit without the real driving traces",
+   "make": "restore them from the release data bundle",
+   "files": {
+    "data/gen_courier.db": null,
+    "data/gen_courier_ext.db": null,
+    "data/gen_demo.db": null,
+    "data/gen_cold.db": null,
+    "data/gen_roadwarrior.db": null,
+    "data/truth.json": null
+   }
+  }
+ }
+}

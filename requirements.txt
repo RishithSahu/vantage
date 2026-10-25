@@ -1,0 +1,12 @@
+# VehicleGPT runtime requirements (Python 3.10 or newer). Everything else is the Python standard library.
+numpy>=1.24
+opencv-python-headless>=4.8
+# TLS for the car <-> Vantage link and encryption at rest (vgpt/tlsmat.py, vgpt/atrest.py); wheels exist for 64-bit Raspberry Pi OS
+cryptography>=42
+# Optional - lets the Privacy page list live connections (without it that one check says 'cannot be checked here')
+# psutil>=5.9
+# Optional - a small language model for unusual wording. Without it the assistant answers with its rules only
+# (about 9 in 10 everyday questions are understood either way). Needs a C++ build toolchain or a prebuilt wheel:
+# llama-cpp-python>=0.2.90
+# Optional - voice input (the microphone button): an offline speech recogniser.  Also needs the small English model in models/asr/ (see deploy/raspberrypi/README.md).
+# vosk>=0.3.45

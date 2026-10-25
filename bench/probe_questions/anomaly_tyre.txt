@@ -1,0 +1,28 @@
+# The alert chips of the UI (ui/modern/app.js EVQ) and the questions around them
+Which tyre is low?
+Why did the tyre pressure drop?
+Is any tyre low right now?
+Is anything wrong with my tyres?
+How are my tyres?
+What is the tyre pressure?
+Show me the tyre pressure warnings
+Any tyre warnings this week?
+When was the last tyre pressure warning?
+Is anything unusual with the tyres?
+Which diagnostic codes are active?
+What is the last diagnostic code and what could be causing it?
+How many diagnostic codes are there?
+Are there any warnings?
+Is anything wrong with the car?
+What is wrong with the car?
+Any problems?
+Is there anything I should worry about?
+Tell me about the last warning
+Why was the last warning raised?
+What happened before the last warning?
+Is the car healthy?
+Did anything unusual happen this week?
+Is anything unusual today?
+Anything weird with the battery?
+Anything odd with the motor temperature?
+Were there any anomalies yesterday?

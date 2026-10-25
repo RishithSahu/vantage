@@ -1,0 +1,131 @@
+# Frame version 2, round 3 (2026-10-21): hand-written rows for the KINDS of failure left after the first frame-2 run on the older frozen sets (user_v1, platform_v2, hard_v3, adv_v3 lost 4-8 points
+# against full_v11) and for a failure seen in the review of real answers: nonsense typed right after an answer was read as a follow-up ("blah blah quantum" after a summary became `summary none ... ref=concept`).
+# The frozen questions are not copied; the builder drops any row whose wording matches one.  Same format as natural_v3.txt.
+
+# ------------------------------------------------------------------------------------------------ nonsense or off-topic text after an answer inherits nothing
+summary none >> blah blah quantum | offtopic none
+summary none >> asdf qwerty | ambiguous none
+summary none >> purple elephants on a bicycle | offtopic none
+summary none >> who won the football match | offtopic none
+summary none >> what is the capital of france | offtopic none
+summary none >> tell me a joke | offtopic none
+summary none >> hmm | ambiguous none
+summary none >> that thing | ambiguous none
+summary none >> and the other one | ambiguous none
+summary none >> blue banana window | offtopic none
+anomaly none >> lorem ipsum dolor | offtopic none
+anomaly none >> what should i cook tonight | offtopic none
+anomaly none >> zzzz | ambiguous none
+anomaly none >> recommend a good film | offtopic none
+anomaly none >> uh what | ambiguous none
+now speed >> what is the meaning of life | offtopic none
+now speed >> sing me a song | offtopic none
+now speed >> rrrr | ambiguous none
+now speed >> the thing from before | ambiguous none
+now battery_soc >> how tall is mount everest | offtopic none
+now battery_soc >> flibber flobber | offtopic none
+now battery_soc >> whatever | ambiguous none
+stat battery_temperature op=mean >> translate hello into german | offtopic none
+stat battery_temperature op=mean >> xyzzy | ambiguous none
+stat battery_temperature op=mean >> what is the weather on mars | offtopic none
+why wh_per_km ent=trip >> blah blah blah | offtopic none
+why wh_per_km ent=trip >> give me a recipe for pasta | offtopic none
+events any_warning op=count >> who is the president | offtopic none
+events any_warning op=count >> ok | ambiguous none
+extreme speed op=max >> random words here | offtopic none
+extreme speed op=max >> what | ambiguous none
+blah blah quantum | offtopic none
+asdf qwerty | ambiguous none
+purple elephants on a bicycle | offtopic none
+what is the capital of spain | offtopic none
+how do airplanes fly | offtopic none
+write me a poem | offtopic none
+the thing | ambiguous none
+hmm well | ambiguous none
+
+# ------------------------------------------------------------------------------------------------ range, charging time, cycles
+how much further can this car go on what it has | estimate range_estimate
+how far can we get | estimate range_estimate
+what distance can i cover from here | estimate range_estimate
+how many more kilometres have i got | estimate range_estimate
+what is my range at the moment | estimate range_estimate
+estimated range at this moment | estimate range_estimate
+how long to top up the battery | estimate charge_time
+how long will it take to charge | estimate charge_time
+time to recharge fully | estimate charge_time
+how many hours to fill up the battery | estimate charge_time
+how many charge cycles has the battery done | spec charge_cycles
+number of full charge cycles so far | spec charge_cycles
+how many times has the pack been cycled | spec charge_cycles
+count of battery cycles | spec charge_cycles
+
+# ------------------------------------------------------------------------------------------------ service, health wordings
+when is the next service due | estimate maintenance
+when do i need to take it in for a service | estimate maintenance
+how long until the next service | estimate maintenance
+is a service reminder active | events service_reminder op=exists
+has the service light come on | events service_reminder op=exists
+is the twelve volt battery fine | health aux_battery_condition
+12 volt battery status | health aux_battery_condition
+how is the auxiliary battery | health aux_battery_condition
+give me the health report of the main battery | health battery_condition
+report card for the traction battery | health battery_condition
+how are my brake pads | health brake_pad_life
+how worn are the pads | health brake_pad_life
+how much pad is left | health brake_pad_life
+how is the brake pad wear | health brake_pad_life
+how is the state of health of the pack | health battery_soh
+battery state of health please | health battery_soh
+what is the motor power right now | now motor_power
+how much power is the motor making | now motor_power
+what is the power output of our motor | now motor_power
+what is the rated power of the motor | spec motor_power
+what is adas | define adas_state
+explain the driver assistance | define adas_state
+what do the adas states mean | define adas_state
+
+# ------------------------------------------------------------------------------------------------ comparisons of conditions, days, events
+what is the difference between city and highway driving | compare wh_per_km op=mean cond=city vs=highway
+how do city and motorway consumption differ | compare wh_per_km op=mean cond=city vs=highway
+city versus highway energy use | compare wh_per_km op=mean cond=city vs=highway
+how does highway speed differ from city speed | compare speed op=mean cond=highway vs=city
+speeds on the motorway against the city | compare speed op=mean cond=highway vs=city
+compare charging and driving battery heat | compare battery_temperature op=mean cond=charging vs=driving
+which day was the car most efficient | extreme wh_per_km op=min ent=day
+on which day did i use the least energy per km | extreme wh_per_km op=min ent=day
+what was my most efficient day | extreme wh_per_km op=min ent=day
+which was the least efficient day | extreme wh_per_km op=max ent=day
+how many hard cornering events this month | events hard_cornering op=count
+number of sharp corners this week | events hard_cornering op=count
+list the harsh cornering events | events hard_cornering op=list
+how many times did i corner hard last week | events hard_cornering op=count
+how many battery overheat warnings were there | events battery_overheat_warning op=count
+number of battery over temperature alerts | events battery_overheat_warning op=count
+did the battery overheat warning come on | events battery_overheat_warning op=exists
+why is regeneration low today | why regen_energy op=drop
+why did regen fall this week | why regen_energy op=drop
+what is regenerative braking | define regen_energy
+explain how regen works | define regen_energy
+how long was the pack above forty degrees | stat battery_temperature op=duration cond=threshold
+time the battery spent over a temperature limit | stat battery_temperature op=duration cond=threshold
+how long did the pack stay hotter than a given value | stat battery_temperature op=duration cond=threshold
+
+# ------------------------------------------------------------------------------------------------ Hinglish and clipped wording
+gaadi ki battery kitni bachi hai | now battery_soc
+battery kitni hai abhi | now battery_soc
+kitna charge bacha hai | now battery_soc
+gaadi kitni door jayegi | estimate range_estimate
+kitne km chalegi | estimate range_estimate
+battery ka temperature kya hai | now battery_temperature
+aaj kitni speed thi | stat speed op=mean
+service kab due hai | estimate maintenance
+tyre pressure kitna hai | now tyre_pressure
+kitna charge ho gaya | now battery_soc
+soc | now battery_soc
+soh | health battery_soh
+range | estimate range_estimate
+12v | health aux_battery_condition
+batt temp | now battery_temperature
+pack temp | now battery_temperature
+odo | now odometer
+tyres | now tyre_pressure

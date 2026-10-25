@@ -1,0 +1,36 @@
+{
+ "id": "vw_golf_mqbevo",
+ "name": "Volkswagen Golf (MQB evo)",
+ "year": 2020,
+ "region": "Europe / global",
+ "powertrain": "petrol",
+ "class": "Compact hatchback, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Volkswagen Golf (MQB evo) database (accelerator_position, battery_temperature, brake_pedal, brake_pressure, engine_load, gear, longitudinal_acceleration, motor_temperature, speed, throttle_position, wheel_speed_fl, wheel_speed_fr ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Android infotainment (logcat)",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 14 drafted, 1183 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): vw_mqbevo.dbc",
+ "bound": 34,
+ "concepts": 34,
+ "extension": [
+  "ambient_temperature",
+  "aux_battery_voltage",
+  "barometric_pressure",
+  "cabin_temperature",
+  "engine_oil_temperature",
+  "fuel_level",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

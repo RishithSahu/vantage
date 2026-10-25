@@ -1,0 +1,407 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "kia_hyundai_generic",
+ "vehicle": {
+  "make": "Kia / Hyundai",
+  "model": "Generic Kia / Hyundai CAN (2019)",
+  "year": 2019,
+  "powertrain": "diesel",
+  "specs": {
+   "veh.tyre_spec_front": 230,
+   "veh.tyre_spec_rear": 230,
+   "veh.service_km": 15000,
+   "veh.wheelbase_m": 2.7,
+   "veh.wheel_radius_m": 0.32,
+   "veh.rated_max_speed": 190,
+   "veh.seats": 5,
+   "veh.tank_l": 54,
+   "veh.sw": "ecu 1.0",
+   "veh.model": "Kia / Hyundai Generic Kia / Hyundai CAN (2019)"
+  }
+ },
+ "concepts": [],
+ "sources": [
+  {
+   "id": "hyundai_kia_generic",
+   "type": "can",
+   "name": "CAN 500 kbit/s (OEM database hyundai_kia_generic)",
+   "dbc": "hyundai_kia_generic.dbc",
+   "channel": "can0",
+   "bitrate": 500000
+  },
+  {
+   "id": "ext",
+   "type": "can",
+   "name": "Generic Kia / Hyundai CAN (2019) extension CAN (SYNTHETIC: quantities the open database lacks)",
+   "dbc": "kia_hyundai_generic_ext.dbc",
+   "channel": "can1",
+   "bitrate": 500000
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS / OBD-II (ISO 15765-4)",
+   "response_ids": [
+    "0x7E8..0x7EF"
+   ],
+   "dtc": "dtc.json"
+  },
+  {
+   "id": "ivi",
+   "type": "log",
+   "name": "Android infotainment (logcat)",
+   "format": "logcat"
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS receiver (NMEA 0183)"
+  },
+  {
+   "id": "cam",
+   "type": "camera",
+   "name": "Forward camera (SmartSense)",
+   "cams": [
+    "front"
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "concept": "def_level",
+   "from": "can:hyundai_kia_generic/EMS21.SCR_UREA_LEVEL",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "odometer",
+   "from": "can:hyundai_kia_generic/CLU12.CF_Clu_Odometer",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "steering_angle",
+   "from": "can:hyundai_kia_generic/SAS11.SAS_Angle",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "parking_brake",
+   "from": "can:hyundai_kia_generic/TCS13.PBRAKE_ACT",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:hyundai_kia_generic/TPMS11.PRESSURE_FL",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:hyundai_kia_generic/TPMS11.PRESSURE_FR",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:hyundai_kia_generic/TPMS11.PRESSURE_RL",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:hyundai_kia_generic/TPMS11.PRESSURE_RR",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "engine_oil_temperature",
+   "from": "can:hyundai_kia_generic/EMS19.CR_Ems_EngOilTemp",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "wheel_speed_fl",
+   "from": "can:hyundai_kia_generic/WHL_SPD11.WHL_SPD_FL",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_fr",
+   "from": "can:hyundai_kia_generic/WHL_SPD11.WHL_SPD_FR",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_rl",
+   "from": "can:hyundai_kia_generic/WHL_SPD11.WHL_SPD_RL",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "wheel_speed_rr",
+   "from": "can:hyundai_kia_generic/WHL_SPD11.WHL_SPD_RR",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "can:hyundai_kia_generic/FATC11.CR_Fatc_OutTemp",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "steering_torque",
+   "from": "can:hyundai_kia_generic/MDPS11.CR_Mdps_DrvTq",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "engine_rpm",
+   "from": "can:hyundai_kia_generic/EMS13.N_32",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "intake_manifold_pressure",
+   "from": "can:hyundai_kia_generic/EMS13.MAP",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "intake_air_temperature",
+   "from": "can:hyundai_kia_generic/EMS15.IntAirTemp",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "fuel_temperature",
+   "from": "can:hyundai_kia_generic/EMS14.TEMP_FUEL",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "cabin_temperature",
+   "from": "can:hyundai_kia_generic/DATC11.CF_Datc_IncarTemp",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "headlight_state",
+   "from": "can:hyundai_kia_generic/CGW1.CF_Gway_HeadLampLow",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "speed",
+   "from": "can:hyundai_kia_generic/CLU15.CF_Clu_VehicleSpeed",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "gear",
+   "from": "can:hyundai_kia_generic/CLU15.CF_Clu_Gear",
+   "unit": "none",
+   "rate_hz": 10.0,
+   "map": {
+    "P": 0,
+    "R": -1,
+    "N": 0,
+    "D": 1
+   },
+   "snap": true
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:hyundai_kia_generic/EMS12.TEMP_ENG",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "throttle_position",
+   "from": "can:hyundai_kia_generic/EMS12.TPS",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "lead_vehicle_distance",
+   "from": "can:hyundai_kia_generic/SCC11.ACC_ObjDist",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "lateral_acceleration",
+   "from": "can:hyundai_kia_generic/ESP12.LAT_ACCEL",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "longitudinal_acceleration",
+   "from": "can:hyundai_kia_generic/ESP12.LONG_ACCEL",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "yaw_rate",
+   "from": "can:hyundai_kia_generic/ESP12.YAW_RATE",
+   "unit": "none",
+   "rate_hz": 20
+  },
+  {
+   "concept": "transmission_temperature",
+   "from": "can:hyundai_kia_generic/TCU11.TEMP_AT",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "reported_range",
+   "from": "can:hyundai_kia_generic/CLU13.CF_Clu_DTE",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "brake_pedal",
+   "from": "can:hyundai_kia_generic/E_EMS11.Brake_Pedal_Pos",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "accelerator_position",
+   "from": "can:hyundai_kia_generic/E_EMS11.Accel_Pedal_Pos",
+   "unit": "none",
+   "rate_hz": 10.0
+  },
+  {
+   "concept": "engine_load",
+   "from": "uds:diag/obd_engine_load",
+   "unit": "%",
+   "rate_hz": 2
+  },
+  {
+   "concept": "mass_air_flow",
+   "from": "uds:diag/obd_maf",
+   "unit": "g/s",
+   "rate_hz": 2
+  },
+  {
+   "concept": "fuel_level",
+   "from": "uds:diag/obd_fuel_level",
+   "unit": "%",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "uds:diag/obd_module_voltage",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "fuel_rate",
+   "from": "uds:diag/obd_fuel_rate",
+   "unit": "L/h",
+   "rate_hz": 2
+  },
+  {
+   "concept": "barometric_pressure",
+   "from": "uds:diag/obd_barometric",
+   "unit": "kPa",
+   "rate_hz": 0.5
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:ext/EXT_DATA_1HZ.TyreTemperature",
+   "unit": "C",
+   "rate_hz": 1
+  }
+ ],
+ "events": [
+  {
+   "id": "overtemp",
+   "from": "signal:motor_temperature",
+   "when": ">105",
+   "hold_s": 10,
+   "type": "WARN_OVERTEMP",
+   "severity": "critical",
+   "detail": "Coolant above 105 °C ({value:.1f} °C)"
+  },
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.6",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<200",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "tyre pressure low ({value:.0f} kPa, spec 230 kPa)"
+  },
+  {
+   "id": "log_reset",
+   "from": "log:any",
+   "match": "watchdog reset",
+   "max_severity": 3,
+   "type": "ECU_RESET",
+   "severity": "warn"
+  },
+  {
+   "id": "log_brownout",
+   "from": "log:any",
+   "match": "brown-out",
+   "max_severity": 3,
+   "type": "VOLTAGE_DIP",
+   "severity": "warn"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "thresholds": {
+  "overtemp_c": 105,
+  "tyre_low_kpa": 200,
+  "low_12v": 11.6
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}

@@ -1,0 +1,191 @@
+# Adversarial bank 4 (authored by Claude, 2026-10-20), written from the FAMILIES in which full_v10 still failed (state of the fault codes - active / cleared / recurring; the history of one typed code; a breakdown of events by reporting
+# unit or reason; the total time a source was silent; fast charges; look-alike events under a condition (emergency braking against hard braking, a silent source under a condition); counts of log lines; where a camera
+# measurement comes from; "got more frequent"; time under a limit) and from the families that regressed on the owner's own phrasing (service estimates, "every tyre", one-word requests, battery ageing).  Never from the
+# sentences of any evaluation set: the builder's filter (--eval-leak v11) drops any row at Jaccard >= 0.8 to a frozen set.  Source name `adv4`, repeated twice.
+# Format as natural_a.txt:  text | act concept [op=..] [cond=..] [vs=..] [ent=..]
+# ---------------------------------------------------------------- the state of the fault codes: a status question, not a list of events
+which fault codes are still active | health diagnostic_status
+which codes are currently open | health diagnostic_status
+which codes have been cleared | health diagnostic_status
+which faults came back after being cleared | health diagnostic_status
+which fault codes keep recurring | health diagnostic_status
+list the recurring codes | health diagnostic_status
+what are the codes that returned after a reset | health diagnostic_status
+which diagnostic codes were never cleared | health diagnostic_status
+show active, cleared and returning faults | health diagnostic_status
+what is the state of my fault codes | health diagnostic_status
+are any of the codes still set | health diagnostic_status
+which dtcs are active at the moment | health diagnostic_status
+did any cleared code reappear | health diagnostic_status
+break the fault codes down into active and cleared | health diagnostic_status
+the status of every stored code | health diagnostic_status
+which stored faults are permanent | health diagnostic_status
+how many of the codes are still active | health diagnostic_status
+what codes have come back more than once | health diagnostic_status
+# ---------------------------------------------------------------- the history of one typed code
+the history of p0a94 | events diagnostic_code op=list
+everything about code u0100 | events diagnostic_code op=list
+show me the u0121 history | events diagnostic_code op=list
+how often did p0aa6 occur | events diagnostic_code op=count
+how many times was b1000 set | events diagnostic_code op=count
+when was c0035 last set | events diagnostic_code op=last
+when did p0c74 first appear | events diagnostic_code op=first
+has u0155 ever been stored | events diagnostic_code op=exists
+was p1e00 set this month | events diagnostic_code op=exists
+list every time p0a7f came up | events diagnostic_code op=list
+when did u0140 come up | events diagnostic_code op=last
+how many times did p0d2c show up last week | events diagnostic_code op=count
+has code b1a00 been cleared | events diagnostic_code_cleared op=exists
+when was p0a94 cleared | events diagnostic_code_cleared op=last
+how many times was u0100 cleared | events diagnostic_code_cleared op=count
+trace the life of fault c1234 | events diagnostic_code op=list
+what happened with code p0562 | events diagnostic_code op=list
+did p0420 return after it was cleared | events diagnostic_code op=exists
+give me the timeline for u0073 | events diagnostic_code op=list
+# ---------------------------------------------------------------- a breakdown of events by reporting unit or reason
+split the lane assist dropouts by reason | events adas_disengagement op=count ent=source
+lane keeping disengagements broken down by cause | events adas_disengagement op=count ent=source
+what reasons made the assist switch off and how often | events adas_disengagement op=count ent=source
+break down the driver assistance dropouts by reason | events adas_disengagement op=count ent=source
+fault codes by subsystem | events diagnostic_code op=count ent=source
+break the codes down per subsystem | events diagnostic_code op=count ent=source
+how are the fault codes spread across the units | events diagnostic_code op=count ent=source
+resets by unit | events ecu_reset op=count ent=source
+which controllers reset and how many times each | events ecu_reset op=count ent=source
+count the resets per controller | events ecu_reset op=count ent=source
+dropouts per bus | events source_dropout op=count ent=source
+silences by source | events source_dropout op=count ent=source
+which buses went quiet and how often each | events source_dropout op=count ent=source
+sensor conflicts by signal | events sensor_conflict op=count ent=source
+break the warnings down by type | events any_warning op=count ent=source
+warnings per source | events any_warning op=count ent=source
+which unit raised the most warnings | extreme any_warning op=max ent=source
+which module resets least | extreme ecu_reset op=min ent=source
+# ---------------------------------------------------------------- the total time a source was silent
+how much time in total were the sources silent | stat source_dropout op=duration
+total time the buses were silent | stat source_dropout op=duration
+add up all the time a source was quiet | stat source_dropout op=duration
+how long were the data sources down in all | stat source_dropout op=duration
+sum of the silent periods | stat source_dropout op=duration
+how many minutes in total did a source stay silent | stat source_dropout op=duration
+what was the total outage time of the sources this month | stat source_dropout op=duration
+how long did the can go quiet altogether | stat source_dropout op=duration
+# ---------------------------------------------------------------- fast charges
+list the fast charges | events charging_session op=list cond=fast_charging
+show my latest fast charges | events charging_session op=list cond=fast_charging
+the last few dc fast charges | events charging_session op=list cond=fast_charging
+what were the most recent fast charging sessions | events charging_session op=list cond=fast_charging
+the latest fast charge and how much energy it gave | events charging_session op=last cond=fast_charging
+when was the last fast charge and what did it add | events charging_session op=last cond=fast_charging
+my most recent rapid charge with its energy | events charging_session op=last cond=fast_charging
+how much energy did the last fast charge deliver | events charging_session op=last cond=fast_charging
+how many rapid charges did i make this month | events charging_session op=count cond=fast_charging
+how often have i used a dc charger | events charging_session op=count cond=fast_charging
+did i use a fast charger this week | events charging_session op=exists cond=fast_charging
+the first fast charge on record | events charging_session op=first cond=fast_charging
+# ---------------------------------------------------------------- look-alike events under a condition
+how many times did emergency braking kick in when it was raining | events aeb_activation op=count cond=raining
+how often did the automatic emergency brake act at night | events aeb_activation op=count cond=night
+how many aeb interventions happened on the motorway | events aeb_activation op=count cond=highway
+how many emergency stops did the car make by itself in the city | events aeb_activation op=count cond=city
+did automatic braking trigger while it rained | events aeb_activation op=exists cond=raining
+count the autonomous emergency brake events in the dark | events aeb_activation op=count cond=night
+how many times did i brake hard when it was raining | events hard_braking op=count cond=raining
+how often did i brake hard at night | events hard_braking op=count cond=night
+how many hard stops did i make in the city | events hard_braking op=count cond=city
+hard braking on the highway this month | events hard_braking op=count cond=highway
+did a source go silent while the car was driving | events source_dropout op=exists cond=driving
+did any bus drop out while charging | events source_dropout op=exists cond=charging
+did a data source go quiet during the night | events source_dropout op=exists cond=night
+did the radar stay silent when it was raining | events source_dropout op=exists cond=raining
+how many times did a source go silent while driving | events source_dropout op=count cond=driving
+how many dropouts happened while the car was charging | events source_dropout op=count cond=charging
+did a controller reset while charging | events ecu_reset op=exists cond=charging
+how many resets happened in the rain | events ecu_reset op=count cond=raining
+did the camera get blocked at night | events camera_blocked op=exists cond=night
+how often was the camera blocked when it rained | events camera_blocked op=count cond=raining
+# ---------------------------------------------------------------- counts of log lines
+how many log lines mention the pump | events service_log op=count
+count the log entries about the battery | events service_log op=count
+number of lines in the log about charging | events service_log op=count
+how many warnings did the thermal service write | events service_log op=count
+how many messages did the gateway log this week | events service_log op=count
+how many log lines contain the word timeout | events service_log op=count
+how many entries does the log hold about coolant | events service_log op=count
+count the lines the battery manager wrote | events service_log op=count
+how many times does the log say overtemperature | events service_log op=count
+the earliest log line mentioning the pump | events service_log op=first
+when is the first log entry about the gateway | events service_log op=first
+the latest log message about voltage | events service_log op=last
+the most recent line the thermal service wrote | events service_log op=last
+show me everything the battery manager logged | events service_log op=list
+list the log lines about the camera | events service_log op=list
+# ---------------------------------------------------------------- where a camera or other measurement comes from
+where does the camera blockage figure come from | spec camera_blockage
+which unit measures the camera blockage | spec camera_blockage
+what reports the blockage of the camera | spec camera_blockage
+how is the camera blockage value obtained | spec camera_blockage
+where does the sharpness of the camera image come from | spec camera_sharpness
+which source gives the camera sharpness | spec camera_sharpness
+how often is the camera brightness reported | spec camera_brightness
+which sensors feed the camera brightness | spec camera_brightness
+where does the tyre temperature come from | spec tyre_temperature
+which source reports the lead vehicle distance | spec lead_vehicle_distance
+where does the following distance come from | spec lead_vehicle_distance
+# ---------------------------------------------------------------- got more frequent
+did hard braking get more frequent | trend hard_braking op=change
+has hard braking become more common lately | trend hard_braking op=change
+are there more hard stops than before | trend hard_braking op=change
+did emergency braking get more frequent | trend aeb_activation op=change
+did the lane assist disengagements get more frequent | trend adas_disengagement op=change
+have disengagements become rarer | trend adas_disengagement op=change
+did resets become more frequent over the month | trend ecu_reset op=change
+is the camera blocking more often than before | trend camera_blocked op=change
+have the fault codes become more frequent | trend diagnostic_code op=change
+did source dropouts get more frequent | trend source_dropout op=change
+are warnings coming more often than they did | trend any_warning op=change
+has the number of hard accelerations gone up | trend hard_acceleration op=change
+# ---------------------------------------------------------------- time under or over a limit, and a limit on a signal that is not speed
+time spent with the tyre pressure under 2 bar | stat tyre_pressure op=duration cond=threshold
+how long were the tyres below 200 kpa | stat tyre_pressure op=duration cond=threshold
+minutes the pack was above 40 degrees | stat battery_temperature op=duration cond=threshold
+hours with the soc under 20 percent | stat battery_soc op=duration cond=threshold
+time the motor spent over 90 degrees | stat motor_temperature op=duration cond=threshold
+how long was the speed over 120 | stat speed op=duration cond=threshold
+time the charging power was above 100 kw | stat charging_power op=duration cond=threshold
+time with the 12 v battery under 12 volts | stat aux_battery_voltage op=duration cond=threshold
+how often did the tyre pressure go under 2 bar | stat tyre_pressure op=count cond=threshold
+how many times did the following distance fall under 8 metres | stat lead_vehicle_distance op=count cond=threshold
+how often did the cabin go over 30 degrees | stat cabin_temperature op=count cond=threshold
+# ---------------------------------------------------------------- phrasing of the owner's own questions: service estimates, every tyre, battery ageing
+when should i go for a service | estimate maintenance
+when is my next service due | estimate maintenance
+when do i need to have it serviced | estimate maintenance
+how soon is the next maintenance | estimate maintenance
+when should the car go in for its check | estimate maintenance
+show every wheel | now tyre_pressure
+show each tyre | now tyre_pressure
+show me all tyres | now tyre_pressure
+pressure in every tyre please | now tyre_pressure
+display the pressure of each wheel | now tyre_pressure
+can you work out how much my battery has aged | trend battery_soh op=drop
+how much capacity has the battery lost over time | trend battery_soh op=drop
+calculate the battery degradation | trend battery_soh op=drop
+how much has the battery life gone down | trend battery_soh op=drop
+estimate how much my battery has worn out | trend battery_soh op=drop
+how much has the battery degraded since new | trend battery_soh op=drop
+temp | ambiguous none
+the temperature | ambiguous none
+power | ambiguous none
+the level | ambiguous none
+and the rest | ambiguous none
+# ---------------------------------------------------------------- remaining wording from the adversarial families
+how do i find out the battery health value | howto battery_soh
+how do i read the tyre pressure numbers | howto tyre_pressure
+what is the loading on the can bus | unsupported none
+how loaded is the network | unsupported none
+what is the can utilisation right now | unsupported none
+switch off the abs warning light | unsafe none
+turn off the check engine light for me | unsafe none
+get rid of the warning lamp | unsafe none
+make the airbag light go away | unsafe none

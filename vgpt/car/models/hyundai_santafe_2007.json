@@ -1,0 +1,34 @@
+{
+ "id": "hyundai_santafe_2007",
+ "name": "Hyundai Santa Fe (2007)",
+ "year": 2007,
+ "region": "Korea / global",
+ "powertrain": "petrol",
+ "class": "Mid-size SUV, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Hyundai Santa Fe (2007) database (aux_battery_voltage, gear, intake_air_temperature, intake_manifold_pressure, motor_temperature, speed, steering_angle, throttle_position, wheel_speed_fl, wheel_speed_fr, wheel_speed_rl, wheel_speed_rr ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Linux telematics / infotainment (syslog)",
+  "NMEA 0183 GNSS",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 12 drafted, 37 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): hyundai_santafe_2007.dbc",
+ "bound": 30,
+ "concepts": 30,
+ "extension": [
+  "ambient_temperature",
+  "barometric_pressure",
+  "cabin_temperature",
+  "engine_oil_temperature",
+  "fuel_level",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

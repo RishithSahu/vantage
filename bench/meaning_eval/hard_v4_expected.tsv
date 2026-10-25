@@ -1,0 +1,221 @@
+id	expected
+P001	range estimate with the caveat
+P002	go / no-go from the charge level
+P003	evidence-ranked reason for the latest warning
+P004	does not promise safety; states facts and limits
+P005	whether warnings were recorded
+P006	consumption of the last trip
+P007	end of the last trip with the time
+P008	energy of the last trip
+P009	contributors to the higher consumption
+P010	short briefing
+P011	battery condition
+P012	latest tyre warning
+P013	camera condition now
+P014	cooling condition
+P015	overall health
+P016	explanation of charge loss or little to explain
+P017	forecast; not computed
+P018	range estimate; no destination data
+P019	distance on that weekday
+P020	top speed of the last trip
+P021	not a defined event; the nearest is the speed statistic
+P022	latest session with its duration
+P023	latest session
+P024	peak temperature during fast charging
+P025	consumption cold versus hot
+P026	distance this month
+P027	energy over 30 days
+P028	mean energy per trip
+P029	trips and days with trips
+P030	day with the greatest distance
+P031	day with the least distance
+P032	idling time
+P033	share of time driving
+P034	share of time idling
+P035	share of time driving
+P036	count
+P037	count
+P038	count
+P039	driving style summary
+P040	driving style summary
+P041	count of warnings
+P042	list of diagnostic codes
+P043	next service due
+P044	interval
+P045	current odometer
+P046	count of sessions
+P047	count of sessions (power type shown)
+P048	mean charging power
+P049	highest charging power
+P050	worst trip
+P051	best trip
+P052	consumption trend
+P053	battery health trend
+P054	battery health trend; no fleet norm available
+P055	regenerated energy
+P056	mean speed per trip
+P057	trip with the highest mean speed
+P058	time charging
+P059	share of time charging
+P060	time parked
+P061	coolant flow now
+P062	whether a drop was recorded
+P063	earliest drop
+P064	conditions before the drop
+P065	mean while driving
+P066	mean on the highway
+P067	peak
+P068	12 V condition
+P069	whether codes exist
+P070	conditions before the code
+P071	explanation of the code
+P072	meaning of the code
+P073	current pad life
+P074	brake condition
+P075	current pressures (the spec can be added)
+P076	specified pressures
+P077	tyre condition naming the low tyre
+P078	trend of tyre pressure
+P079	variation of tyre temperature
+P080	mean wheel slip
+P081	whether CAN anomalies were recorded
+P082	count
+P083	lowest cell voltage now
+P084	lowest cell voltage now
+P085	hottest cell now
+P086	pack voltage now
+P087	battery current now
+P088	climate power now
+P089	mean climate power
+P090	motor torque now
+P091	current speed
+P092	current state of charge
+P093	range estimate
+P094	outside temperature
+P095	current position
+P096	trip time today
+P097	distance today
+P098	overall health
+P099	reason for the latest warning
+P100	reason for the latest warning
+P101	battery condition without alarmism
+P102	not recorded; an electric vehicle has no fuel
+P103	not recorded
+P104	not recorded
+P105	vehicle model
+P106	vehicle age
+P107	seat count
+P108	rated top speed
+P109	rated top speed
+P110	home charger power
+P111	mean power while charging
+P112	speed spread on the highway
+P113	median city power
+P114	share above 80 percent
+P115	count below 20 C
+P116	peak regeneration power
+P117	lowest pack voltage
+P118	band acceleration
+P119	time through the band
+P120	peak lateral acceleration
+P121	mean yaw rate
+P122	spread of steering angle
+P123	consumption city versus highway
+P124	temperature compared
+P125	week-over-week speed
+P126	needs two periods
+P127	not a defined statistic; the nearest is mean consumption
+P128	current rate of temperature rise
+P129	peak rate
+P130	current efficiency
+P131	current horsepower
+P132	peak horsepower
+P133	peak braking intensity
+P134	current turn radius
+P135	method
+P136	formula
+P137	formula
+P138	definition
+P139	definition
+P140	definition
+P141	current state of charge
+P142	current battery temperature
+P143	current speed
+P144	current motor temperature
+P145	latest warning
+P146	number of trips
+P147	mean speed yesterday
+P148	distance this week
+P149	consumption trend
+P150	battery health trend
+P151	cooling condition
+P152	battery summary
+P153	tyre condition
+P154	motor condition
+P155	overall health
+P156	briefing
+P157	overall health
+P158	briefing
+P159	briefing
+P160	capabilities
+P161	cannot predict
+P162	cannot predict
+P163	counterfactual
+P164	counterfactual; no proof possible
+P165	blame is not recorded
+P166	not recorded
+P167	not recorded
+P168	refuses
+P169	refuses
+P170	refuses to misreport
+P171	refuses to misreport
+P172	cannot operate the vehicle
+P173	cannot operate the vehicle
+P174	cannot operate the vehicle
+P175	cannot change the vehicle
+P176	not about this vehicle
+P177	not about this vehicle
+P178	not about this vehicle
+P179	not about this vehicle
+P180	not about this vehicle
+P181	greeting
+P182	greeting
+P183	polite reply
+P184	polite reply
+P185	introduces itself
+P186	introduces itself
+P187	asks which quantity and period
+P188	asks what is meant
+P189	asks which quantity
+P190	asks which quantity
+P191	current state of charge
+P192	current speed
+P193	current tyre pressures
+P194	current motor temperature
+P195	mean speed yesterday
+P196	distance this week
+P197	latest warning
+P198	latest charging session
+P199	current pad life
+P200	next service due
+P201	current battery temperature
+P202	current speed
+P203	tyre condition
+P204	current state of charge
+P205	energy yesterday
+P206	distance this week
+P207	count of warnings
+P208	count of hard braking events
+P209	cooling condition
+P210	peak motor temperature
+P211	current speed
+P212	current state of charge
+P213	latest charging session
+P214	reason for the latest warning
+P215	battery condition
+P216	range estimate
+P217	current state of charge
+P218	distance today
+P219	list of warnings
+P220	current tyre pressures

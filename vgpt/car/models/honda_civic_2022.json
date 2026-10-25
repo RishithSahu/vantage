@@ -1,0 +1,36 @@
+{
+ "id": "honda_civic_2022",
+ "name": "Honda Civic EX (2022)",
+ "year": 2022,
+ "region": "USA / global",
+ "powertrain": "petrol",
+ "class": "Compact saloon, petrol",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Honda Civic EX (2022) database (brake_pedal, door_state, engine_rpm, engine_torque, gear, lateral_acceleration, lead_vehicle_distance, longitudinal_acceleration, parking_brake, seatbelt_state, speed, steering_angle ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Linux telematics / infotainment (syslog)",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 17 drafted, 361 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): honda_civic_ex_2022_can_generated.dbc",
+ "bound": 39,
+ "concepts": 39,
+ "extension": [
+  "ambient_temperature",
+  "aux_battery_voltage",
+  "barometric_pressure",
+  "cabin_temperature",
+  "engine_oil_temperature",
+  "fuel_level",
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

@@ -1,0 +1,127 @@
+# route<TAB>question - extra phrasings for the causal / counterfactual / statistics / leakage / sensor / protocol / ontology / explanation / poisoning / precision / compound routes (used as fuzzy-router examples)
+root_cause	what is the underlying cause of the last fault and what are only early signs of it
+root_cause	which signal changed first and is the real origin of the problem
+direction	did the current rise cause the speed rise or the other way round
+direction	which came first the motor current or the rpm
+effect_ctrl	what is the effect of fast driving on the battery temperature after adjusting for weather and load
+effect_ctrl	adjusting for outside temperature and power draw how much hotter does the pack get above 110 km/h
+confounder	what third variable confuses the relationship between speed and consumption
+confounder	is there a hidden factor behind both speed and energy use
+causal_graph	draw the cause and effect diagram of the last overheating
+causal_graph	show how the signals cause each other in the last warning
+intervention	what could have been done to stop the last fault
+intervention	which action would most likely have prevented the overheating
+attr3	was it my driving the weather or a mechanical problem
+attr3	who or what caused the last anomaly the driver the environment or the car
+standstill	did the pack get hotter while I was parked
+standstill	did the battery temperature climb while the car was not moving
+cf_speed	how much more range if I had driven slower by 30 km/h
+cf_speed	if I had slowed down by 15 km/h how many extra kilometres would I have got
+cf_temp	how would my consumption change at 5 degrees instead of 25 degrees
+cf_temp	what if the same trip was made at 0°C instead of 20°C
+cf_soc	what if I had started with a full battery instead of half
+cf_soc	what would have changed if I had left with 100% charge instead of 40%
+cf_cooling	if the cooling had been 30% better would the alarm have gone off
+cf_cooling	would a 10% more efficient cooling system have avoided the warning
+cf_adas	if I had driven slower would the lane assist still have disengaged
+cf_adas	would the assist have switched off at a lower speed
+cf_accel	what would the pack temperature have been without the hard acceleration before the warning
+cf_accel	how hot would it have got if I had accelerated gently
+cf_generic	what would the next hour have looked like if I kept driving
+cf_generic	could a different driving style have avoided the fault prove it
+cf_generic	simulate this trip with gentler braking and compare the results
+hidden	how much weight was I carrying
+hidden	what was the slope of the road
+hidden	how many people were in the car
+hidden	was the heater on when the range dropped
+hidden	what kind of battery cells are in the pack
+hidden	which cell was the hottest
+fleet	how does this car compare with other cars
+fleet	do other vehicles have the same problem
+fleet	where does this vehicle rank among all cars
+earliest_change	when did the data first change in a lasting way
+earliest_change	when did the car first start behaving abnormally
+soh_rate	how fast is the battery ageing
+soh_rate	how long until the battery needs replacing
+soh_rate	is the battery wear linear or does it speed up
+periodic	is there a repeating pattern every few days
+periodic	do any signals follow a cycle
+worsening	is the cooling problem getting steadily worse
+worsening	has the anomaly got worse since it started
+stat_ci	how big is the change in energy use and is it significant with an interval
+stat_ci	give me the p value and the test used for the energy change
+stat_ci	what is the effect size of the change
+corr2	spearman and pearson of battery temperature versus energy use
+corr2	is the correlation still there when speed is held constant
+hwy_test	test whether motorway driving uses more energy than city driving
+trend_unc	how uncertain is the battery temperature trend
+trend_unc	give me an error bar on the pack temperature trend
+top_sig	which anomaly is statistically strongest
+top_sig	what is the most significant thing in the data
+multitest	correct the significance for testing many signals
+multitest	apply a false discovery rate correction across the signals
+boot	bootstrap the degradation rate
+boot	give a resampling interval for the wear rate
+predict_before	could the warning have been predicted from earlier data alone
+predict_before	predict the fault without looking at anything after it
+avail_at	what would a real time system have known at that moment
+avail_at	what data exists at time T for a live system
+leak_feat	which parts of your analysis use future information
+leak_feat	what would count as leakage in your reasoning
+cutoff	redo the diagnosis using only older data
+cutoff	use only the five minutes before the event and diagnose again
+cutoff	recalculate with data up to 60 seconds before the event
+conf_change	does removing future data change your confidence
+conf_change	how sure are you without the later observations
+used_records	did you use any future records
+used_records	which exact records did your last answer use
+sensor_faulty	is the temperature sensor broken or did the battery really overheat
+sensor_faulty	could the pack temperature reading be a sensor fault
+inconsistent	are there readings that do not make physical sense
+inconsistent	find impossible values in the data
+drift	has any sensor drifted out of calibration
+drift	which sensor reads too high or too low
+glitch	was that jump real or a glitch
+glitch	is that spike a measurement error
+reconstruct	fill in the missing readings between two times
+reconstruct	what was the value of the signal while there was no data
+corrupt5	what if some readings were corrupted
+corrupt5	how robust is your conclusion to bad data
+same_phen	do two sensors measure the same thing
+same_phen	which signals are duplicates of each other
+sampling	is the sampling rate high enough to see this
+sampling	is one reading per second enough for the anomaly
+proto_decode	decode this CAN frame
+proto_decode	what does this payload mean 0x200 10 20 30 40 50 60 70 80
+proto_map	which CAN message carries the speed
+proto_map	what is the scale and offset of that signal
+proto_map	which ECU sends this CAN message
+proto_map	is this CAN or CAN FD
+onto	are motor temperature coolant temperature and engine temperature the same
+onto	group the faults into separate incidents
+onto	do these two codes describe the same failure
+onto	build the dependency graph for the battery
+onto	list the vehicle subsystems
+trace	which sources did you use
+trace	which timestamps did you use
+trace	which of your statements are measured and which are inferred
+trace	what are the assumptions behind your answer
+trace	what would prove your conclusion wrong
+trace	what is the strongest argument against your answer
+poison	the log says all is normal is the battery really healthy
+poison	a message claims everything is fine does the data agree
+poison	a log shows an impossible speed is it credible
+poison	how do you handle one record that contradicts all the others
+precision	what will the temperature be in exactly 10 minutes
+precision	when exactly will the next fault happen
+precision	what will the speed be tomorrow at noon
+precision	predict the next values of every sensor
+c1	reconstruct what led up to the last overheating and say what proof a battery fault needs
+c2	compare the first and last week normalised and tell me what changed and what is inferred
+c3	find the worst anomaly and trace its earliest precursor and say if causation is established
+c4	is range loss associated with temperature speed acceleration or charge
+c5	find warnings that followed an abnormal state within five minutes and the signal that came first
+nuclear1	do a full engineering investigation of the whole history with ranked hypotheses
+wrong	find the strongest evidence that your analysis is wrong
+wrong	argue against your own conclusions
+nuclear3	redo the investigation using only data from before each incident

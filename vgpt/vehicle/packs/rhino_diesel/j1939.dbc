@@ -1,0 +1,72 @@
+VERSION "Rhino T4 diesel - SAE J1939 (250 kbit/s, 29-bit)"
+
+NS_ :
+
+BS_:
+
+BU_: ENG ABS DASH BCM
+
+BO_ 2364539904 EEC1: 8 ENG
+ SG_ EngDemandTrq : 8|8@1+ (1,-125) [-125|125] "%" Vector__XXX
+ SG_ EngActualTrq : 16|8@1+ (1,-125) [-125|125] "%" Vector__XXX
+ SG_ EngSpeed : 24|16@1+ (0.125,0) [0|8031.875] "rpm" Vector__XXX
+
+BO_ 2364539648 EEC2: 8 ENG
+ SG_ AccelPedal : 8|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ EngPctLoad : 24|8@1+ (1,0) [0|250] "%" Vector__XXX
+
+BO_ 2566843904 ET1: 8 ENG
+ SG_ EngCoolantTemp : 0|8@1+ (1,-40) [-40|210] "degC" Vector__XXX
+ SG_ FuelTemp : 8|8@1+ (1,-40) [-40|210] "degC" Vector__XXX
+ SG_ EngOilTemp : 16|16@1+ (0.03125,-273) [-273|1735] "degC" Vector__XXX
+
+BO_ 2566844672 CCVS1: 8 ABS
+ SG_ WheelBasedSpeed : 8|16@1+ (0.00390625,0) [0|250.996] "km/h" Vector__XXX
+
+BO_ 2566844928 LFE1: 8 ENG
+ SG_ FuelRate : 0|16@1+ (0.05,0) [0|3212.75] "L/h" Vector__XXX
+
+BO_ 2566847511 DD: 8 DASH
+ SG_ FuelLevel1 : 8|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+
+BO_ 2566845696 AMB: 8 BCM
+ SG_ BaroPress : 0|8@1+ (0.5,0) [0|125] "kPa" Vector__XXX
+ SG_ AmbAirTemp : 24|16@1+ (0.03125,-273) [-273|1735] "degC" Vector__XXX
+
+BO_ 2566846208 VEP1: 8 BCM
+ SG_ BatteryPotential : 32|16@1+ (0.05,0) [0|3212.75] "V" Vector__XXX
+
+BO_ 2566845440 TIRE: 8 BCM
+ SG_ TireLoc M : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ PressFL m0 : 8|8@1+ (4,0) [0|1000] "kPa" Vector__XXX
+ SG_ PressFR m1 : 8|8@1+ (4,0) [0|1000] "kPa" Vector__XXX
+ SG_ PressRL m2 : 8|8@1+ (4,0) [0|1000] "kPa" Vector__XXX
+ SG_ PressRR m3 : 8|8@1+ (4,0) [0|1000] "kPa" Vector__XXX
+ SG_ TireTemp : 16|16@1+ (0.03125,-273) [-273|1735] "degC" Vector__XXX
+
+BO_ 2566832384 VDHR: 8 DASH
+ SG_ HiResDistance : 0|32@1+ (5,0) [0|21055406000] "m" Vector__XXX
+
+BO_ 2364539136 EBC1: 8 ABS
+ SG_ BrakePedalPos : 8|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+
+BO_ 2566845952 IC1: 8 ENG
+ SG_ BoostPress : 8|8@1+ (2,0) [0|500] "kPa" Vector__XXX
+ SG_ ExhaustGasTemp : 40|16@1+ (0.03125,-273) [-273|1735] "degC" Vector__XXX
+
+BO_ 2566804992 AT1T1I: 8 ENG
+ SG_ DEFLevel : 0|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+
+BO_ 2633858048 DPF1S: 8 ENG
+ SG_ DPFSootLoad : 0|8@1+ (0.4,0) [0|100] "%" Vector__XXX
+ SG_ DPFRegenStatus : 8|8@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 2566839040 IMR1: 8 ENG
+ SG_ RailPress : 16|16@1+ (100,0) [0|250000] "kPa" Vector__XXX
+
+BO_ 2364541184 VDC2: 8 ABS
+ SG_ SteerWheelAngle : 0|16@1+ (0.0009765625,-31.374) [-31.374|32.2] "rad" Vector__XXX
+ SG_ YawRate : 16|16@1+ (0.0001220703,-3.92) [-3.92|4.0] "rad/s" Vector__XXX
+ SG_ LateralAccel : 32|16@1+ (0.00048828,-15.687) [-15.687|16.4] "m/s2" Vector__XXX
+ SG_ LongitudinalAccel : 48|8@1+ (0.1,-12.5) [-12.5|13.0] "m/s2" Vector__XXX
+

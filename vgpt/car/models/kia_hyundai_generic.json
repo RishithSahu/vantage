@@ -1,0 +1,28 @@
+{
+ "id": "kia_hyundai_generic",
+ "name": "Kia / Hyundai Generic Kia / Hyundai CAN (2019)",
+ "year": 2019,
+ "region": "Korea / global",
+ "powertrain": "diesel",
+ "class": "Compact diesel SUV on the shared Kia / Hyundai CAN layout (AdBlue level included)",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s: the real Kia / Hyundai Generic Kia / Hyundai CAN (2019) database (accelerator_position, ambient_temperature, brake_pedal, cabin_temperature, def_level, engine_oil_temperature, engine_rpm, fuel_temperature, gear, headlight_state, intake_air_temperature, intake_manifold_pressure ...)",
+  "OBD-II service 01 over ISO 15765-4 CAN",
+  "UDS diagnostic trouble codes",
+  "Android infotainment (logcat)",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure, odometer and the quantities the open database lacks on a synthetic extension CAN"
+ ],
+ "notes": "Bindings were drafted by the signal mapper (refuse-not-guess) from the open database and each one verified by driving the car through the pack: 33 drafted, 1282 left unmapped. Quantities the database does not publish ride a labelled synthetic extension CAN.",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): hyundai_kia_generic.dbc",
+ "bound": 40,
+ "concepts": 40,
+ "extension": [
+  "aux_battery_voltage",
+  "barometric_pressure",
+  "fuel_level",
+  "tyre_temperature"
+ ]
+}

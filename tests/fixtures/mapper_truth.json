@@ -1,0 +1,5823 @@
+{
+ "about": "Signals reviewed by hand against real vehicle databases (opendbc, MIT). 'overrides' replace a labelled answer of the curated car models where the car model used a judgment the database itself does not support (the mapper must not claim it). 'items' are further reviewed signals: a quantity, or null = must be refused (a counter, a request, a flag whose meaning the name does not give ...). See bench/mapper_benchmark.py.",
+ "overrides": [],
+ "items": [
+  {
+   "dbc": "ESR.dbc",
+   "msg": "ESR_Status",
+   "sig": "CAN_TX_VEHICLE_SPEED_CALC",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ESR.dbc",
+   "msg": "SensorInput",
+   "sig": "CAN_RX_HIGH_YAW_ANGLE",
+   "concept": null,
+   "note": "a yaw angle relative to the car (6 bits), not a compass heading"
+  },
+  {
+   "dbc": "ESR.dbc",
+   "msg": "SensorInput",
+   "sig": "CAN_RX_WIPER_STATUS",
+   "concept": "wiper_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ESR.dbc",
+   "msg": "Vehicle_Data",
+   "sig": "CAN_RX_YAW_RATE",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ESR.dbc",
+   "msg": "Vehicle_Data2",
+   "sig": "CAN_RX_LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ESR.dbc",
+   "msg": "Vehicle_Data2",
+   "sig": "CAN_RX_LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ESR.dbc",
+   "msg": "Vehicle_Data2",
+   "sig": "CAN_RX_RADAR_HEIGHT",
+   "concept": null,
+   "note": "the radar's mounting height, not an altitude"
+  },
+  {
+   "dbc": "FORD_CADS.dbc",
+   "msg": "MRR_Status_Temp_Volt",
+   "sig": "CAN_BATT_VOLTS",
+   "concept": "aux_battery_voltage",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_ilx_2016_nidec.dbc",
+   "msg": "VEHICLE_STATE",
+   "sig": "VEHICLE_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "CAR_SPEED",
+   "sig": "CAR_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "DOORS_STATUS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "GAS_PEDAL_2",
+   "sig": "ENGINE_TORQUE_ESTIMATE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "GEARBOX",
+   "sig": "GEAR_SHIFTER",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "POWERTRAIN_DATA",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_PASS_UNLATCHED",
+   "concept": null,
+   "note": "the passenger's belt"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "acura_rdx_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "AccPedal",
+   "sig": "AcceleratorPedalPercentage",
+   "concept": null,
+   "note": "the database marks its factor 'ToDo to be adjusted': 16 bits at 0.04 reach 2621 percent"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "AccPedal",
+   "sig": "EngineSpeed",
+   "concept": "engine_rpm",
+   "note": "bmw_3_series_e9x"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "Accelerometer2",
+   "sig": "LateralAcceleration",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "EngineAndBrake",
+   "sig": "BrakePressed",
+   "concept": "brake_pedal",
+   "note": "bmw_3_series_e9x"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "EngineAndBrake",
+   "sig": "EngineTorque",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "EngineData",
+   "sig": "TEMP_ENG",
+   "concept": "motor_temperature",
+   "note": "bmw_3_series_e9x"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "EngineData",
+   "sig": "TEMP_EOI",
+   "concept": null,
+   "note": "an abbreviation nobody can read from the database"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "InstrumentClusterStatus_KOMBI",
+   "sig": "HandbrakeActive",
+   "concept": "parking_brake",
+   "note": "bmw_3_series_e9x"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "PowerBatteryVoltage",
+   "sig": "BatteryVoltage",
+   "concept": "aux_battery_voltage",
+   "note": "bmw_3_series_e9x"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "Speed",
+   "sig": "VehicleSpeed",
+   "concept": "speed",
+   "note": "bmw_3_series_e9x"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "Speed",
+   "sig": "YawRate",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "StatusDSC_KCAN",
+   "sig": "BrakePressure",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "SteeringWheelAngle",
+   "sig": "SteeringPosition",
+   "concept": "steering_angle",
+   "note": "bmw_3_series_e9x"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "SteeringWheelAngle_DSC",
+   "sig": "SteeringPosition",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "TransmissionDataDisplay",
+   "sig": "GearAct",
+   "concept": null,
+   "note": "no value table: what the numbers mean is not stated"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "WheelSpeeds",
+   "sig": "Wheel_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "WheelSpeeds",
+   "sig": "Wheel_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "WheelSpeeds",
+   "sig": "Wheel_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "bmw_e9x_e8x.dbc",
+   "msg": "WheelSpeeds",
+   "sig": "Wheel_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "DRIVE_STATE",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "byd_atto_3"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "DRIVE_STATE",
+   "sig": "GEAR",
+   "concept": "gear",
+   "note": "byd_atto_3"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "METER_CLUSTER",
+   "sig": "FRONT_LEFT_DOOR",
+   "concept": null,
+   "note": "a door flag with no stated polarity (open or closed)"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "PEDAL",
+   "sig": "BRAKE_PEDAL",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "PEDAL",
+   "sig": "GAS_PEDAL",
+   "concept": "accelerator_position",
+   "note": "byd_atto_3"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "STEERING_TORQUE",
+   "sig": "DRIVER_TORQUE",
+   "concept": "steering_torque",
+   "note": "byd_atto_3"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "STEER_MODULE_2",
+   "sig": "STEER_ANGLE_2",
+   "concept": "steering_angle",
+   "note": "byd_atto_3"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "WHEELSPEED_CLEAN",
+   "sig": "WHEELSPEED_CLEAN",
+   "concept": "wheel_speed",
+   "note": "the name says wheel speed; that it is the vehicle speed is outside knowledge"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "WHEEL_SPEED",
+   "sig": "WHEELSPEED_BL",
+   "concept": "wheel_speed_rl",
+   "note": "byd_atto_3"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "WHEEL_SPEED",
+   "sig": "WHEELSPEED_BR",
+   "concept": "wheel_speed_rr",
+   "note": "byd_atto_3"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "WHEEL_SPEED",
+   "sig": "WHEELSPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "byd_atto_3"
+  },
+  {
+   "dbc": "byd_atto3.dbc",
+   "msg": "WHEEL_SPEED",
+   "sig": "WHEELSPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "byd_atto_3"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "AcceleratorPedal",
+   "sig": "AcceleratorPedal",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "BECMBatteryVoltageCurrent",
+   "sig": "HVBatteryCurrent",
+   "concept": "battery_current",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "BECMBatteryVoltageCurrent",
+   "sig": "HVBatteryVoltage",
+   "concept": "battery_voltage",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "EBCMVehicleDynamic",
+   "sig": "LateralAcceleration",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "EBCMVehicleDynamic",
+   "sig": "YawRate",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "EBCMWheelSpdFront",
+   "sig": "FLWheelSpd",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "EBCMWheelSpdFront",
+   "sig": "FRWheelSpd",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "EBCMWheelSpdRear",
+   "sig": "RLWheelSpd",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "EBCMWheelSpdRear",
+   "sig": "RRWheelSpd",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "ECMAcceleratorPos",
+   "sig": "BrakePedalPos",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "ECMEngineCoolantTemp",
+   "sig": "EngineCoolantTemp",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "ECMEngineStatus",
+   "sig": "EngineRPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "ECMEngineStatus",
+   "sig": "EngineTPS",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "ECMVehicleSpeed",
+   "sig": "VehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "PSCMSteeringAngle",
+   "sig": "SteeringWheelAngle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "cadillac_ct6_powertrain.dbc",
+   "msg": "PSCMSteeringAngle",
+   "sig": "SteeringWheelRate",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "ACC_HUD",
+   "sig": "DISTANCE_TO_LEAD",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "BRAKE_1",
+   "sig": "DRIVER_BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "BRAKE_1",
+   "sig": "VEHICLE_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "DOORS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "EPS_STATUS",
+   "sig": "TORQUE_DRIVER",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "EPS_STATUS",
+   "sig": "TORQUE_MOTOR",
+   "concept": null,
+   "note": "the steering motor's torque, not the drive motor's"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "STEERING",
+   "sig": "STEERING_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "STEERING",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "WHEEL_SPEEDS_FRONT",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "WHEEL_SPEEDS_FRONT",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "WHEEL_SPEEDS_REAR",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_cusw.dbc",
+   "msg": "WHEEL_SPEEDS_REAR",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "BCM_1",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "ECM_1",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "ECM_1",
+   "sig": "ENGINE_TORQUE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "ECM_5",
+   "sig": "Accelerator_Position",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "EPS_2",
+   "sig": "COLUMN_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "ESP_1",
+   "sig": "BRAKE_PRESSED_ACC",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "ESP_8",
+   "sig": "BRK_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "ESP_8",
+   "sig": "Vehicle_Speed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "ORC_1",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "STEERING",
+   "sig": "STEERING_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "STEERING",
+   "sig": "STEERING_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_pacifica_2017_hybrid_generated.dbc",
+   "msg": "Transmission_Status",
+   "sig": "Gear_State",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "BCM_1",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "ECM_1",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "ECM_1",
+   "sig": "ENGINE_TORQUE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "ECM_5",
+   "sig": "Accelerator_Position",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "EPS_2",
+   "sig": "COLUMN_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "ESP_1",
+   "sig": "BRAKE_PRESSED_ACC",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "ESP_4",
+   "sig": "Yaw_Rate",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "ESP_8",
+   "sig": "BRK_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "ESP_8",
+   "sig": "Vehicle_Speed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "ORC_1",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "STEERING",
+   "sig": "STEERING_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "STEERING",
+   "sig": "STEERING_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "chrysler_ram_dt_generated.dbc",
+   "msg": "Transmission_Status",
+   "sig": "Gear_State",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "comma_body.dbc",
+   "msg": "BODY_DATA",
+   "sig": "BATT_PERCENTAGE",
+   "concept": "battery_soc",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "comma_body.dbc",
+   "msg": "BODY_DATA",
+   "sig": "BATT_VOLTAGE",
+   "concept": "battery_voltage",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "comma_body.dbc",
+   "msg": "MOTORS_DATA",
+   "sig": "SPEED_L",
+   "concept": null,
+   "note": "the left motor only (a trailing L is a side)"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ABS_1",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ABS_1",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ABS_1",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ABS_1",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ABS_2",
+   "sig": "LATERAL_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ABS_2",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ABS_2",
+   "sig": "YAW_RATE",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ABS_6",
+   "sig": "BRAKE_PRESSURE_1",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ENGINE_1",
+   "sig": "ACCEL_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "ENGINE_1",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "EPS_1",
+   "sig": "STEERING_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "EPS_1",
+   "sig": "STEERING_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "EPS_2",
+   "sig": "DRIVER_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "fca_giorgio.dbc",
+   "msg": "NEW_MSG_11C",
+   "sig": "VEHICLE_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_bodycan_2011.dbc",
+   "msg": "BodyInformation_3_MS",
+   "sig": "Smart_Wiper_Motor_Stat_UB",
+   "concept": null,
+   "note": "UB is the update bit of the signal, not the wipers"
+  },
+  {
+   "dbc": "ford_cgea1_2_bodycan_2011.dbc",
+   "msg": "Engine_Data_MS",
+   "sig": "ENG_SPD",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_bodycan_2011.dbc",
+   "msg": "Engine_Data_MS",
+   "sig": "VEH_SPD",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_bodycan_2011.dbc",
+   "msg": "GPS_Data_Nav_3",
+   "sig": "GPS_Heading",
+   "concept": "heading",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_bodycan_2011.dbc",
+   "msg": "GPS_Data_Nav_3",
+   "sig": "GPS_Speed",
+   "concept": "gps_speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_bodycan_2011.dbc",
+   "msg": "Ignition_Switch_PositionM",
+   "sig": "OdometerMasterValue",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_bodycan_2011.dbc",
+   "msg": "MS_Steering_Data",
+   "sig": "VehYaw_W_Actl",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_bodycan_2011.dbc",
+   "msg": "TPM_Frame",
+   "sig": "TirePress_Frame_Press",
+   "concept": null,
+   "note": "one frame of a sensor whose wheel is given by another signal (ID)"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Accel_Data",
+   "sig": "VehLat_A_Actl",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Accel_Data",
+   "sig": "VehLong_A_Actl",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Cluster_Information",
+   "sig": "OdometerMasterValue",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Cluster_Information_3_CG1",
+   "sig": "FUEL_LVL_PER_MEAN",
+   "concept": "fuel_level",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Diesel_Data_Legacy_1",
+   "sig": "TURBO_BOOST",
+   "concept": "boost_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "EONV_Status",
+   "sig": "EONV_BATT_VOLT",
+   "concept": "aux_battery_voltage",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "EPAS_INFO",
+   "sig": "SteeringColumnTorque",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "EngineData_1_CG1",
+   "sig": "TurboBoostPressure",
+   "concept": "boost_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "EngineData_4_CG1",
+   "sig": "TrnAin_Tq_Actl",
+   "concept": null,
+   "note": "transmission input torque, not the engine's (the TrnAin prefix is shared and not in the message name)"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "GPS_Data_Nav_3_HS",
+   "sig": "GPS_Heading",
+   "concept": "heading",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "GPS_Data_Nav_3_HS",
+   "sig": "GPS_Speed",
+   "concept": "gps_speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Global_PATS_Target_Info",
+   "sig": "immoTarget1Data",
+   "concept": null,
+   "note": "immobiliser data, a 40-bit block"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Steering_Data",
+   "sig": "Smart_Wiper_Motor_Stat",
+   "concept": null,
+   "note": "a 2-bit status with no value table: its meaning is not stated"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Tire_Pressure_Data",
+   "sig": "Tire_Press_LF_Data",
+   "concept": "tyre_pressure_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Tire_Pressure_Data",
+   "sig": "Tire_Press_RF_Data",
+   "concept": "tyre_pressure_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_cgea1_2_ptcan_2011.dbc",
+   "msg": "Yaw_Data",
+   "sig": "VehYaw_W_Actl",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_fusion_2018_pt.dbc",
+   "msg": "Accel_Data",
+   "sig": "VehLat_A_Actl",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_fusion_2018_pt.dbc",
+   "msg": "Accel_Data",
+   "sig": "VehLong_A_Actl",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_fusion_2018_pt.dbc",
+   "msg": "Doors",
+   "sig": "Door_FL_Open",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_fusion_2018_pt.dbc",
+   "msg": "EPAS_INFO",
+   "sig": "SteeringColumnTorque",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_fusion_2018_pt.dbc",
+   "msg": "Yaw_Data",
+   "sig": "VehYaw_W_Actl",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "APIMGPS_Data_Nav_3_FD1",
+   "sig": "GPS_Heading",
+   "concept": "heading",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "APIMGPS_Data_Nav_3_FD1",
+   "sig": "GPS_Speed",
+   "concept": "gps_speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "BCM_Lamp_Stat_FD1",
+   "sig": "HeadLampLoFrOn_B_Stat",
+   "concept": "headlight_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "Cluster_Info1_FD1",
+   "sig": "OdometerMasterValue",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "DTE_HPCMtoECG",
+   "sig": "DteVehEId_No_Actl",
+   "concept": null,
+   "note": "an identifier number (Id, No), not a distance"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "EPAS_INFO",
+   "sig": "SteeringColumnTorque",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "Global_PATS_Target2_FD1",
+   "sig": "immoTarget2Data",
+   "concept": null,
+   "note": "immobiliser data, a 40-bit block"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "PowertrainData_10",
+   "sig": "GearPos_D_Actl",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "SelectDriveModeData",
+   "sig": "AutoEpbButtnOn_B_Stat",
+   "concept": null,
+   "note": "a button that switches the automatic parking brake, not the brake"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "Tire_Pressure_Data_FD1",
+   "sig": "Tire_Press_LF_Data",
+   "concept": "tyre_pressure_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "ford_lincoln_base_pt.dbc",
+   "msg": "Tire_Pressure_Data_FD1",
+   "sig": "Tire_Press_RF_Data",
+   "concept": "tyre_pressure_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_high_voltage_management.dbc",
+   "msg": "Battery_temp",
+   "sig": "Temp_A",
+   "concept": null,
+   "note": "one of several module temperatures: the pack temperature is not stated"
+  },
+  {
+   "dbc": "gm_global_a_high_voltage_management.dbc",
+   "msg": "Charger_stats",
+   "sig": "Charger_HV_Current",
+   "concept": "charging_current",
+   "note": "chevrolet_bolt_ev"
+  },
+  {
+   "dbc": "gm_global_a_high_voltage_management.dbc",
+   "msg": "Charger_stats",
+   "sig": "HV_Voltage",
+   "concept": "charging_voltage",
+   "note": "chevrolet_bolt_ev"
+  },
+  {
+   "dbc": "gm_global_a_high_voltage_management.dbc",
+   "msg": "Charger_stats",
+   "sig": "LV_Voltage",
+   "concept": "aux_battery_voltage",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_high_voltage_management.dbc",
+   "msg": "Pack_Stats",
+   "sig": "Pack_Voltage",
+   "concept": "battery_voltage",
+   "note": "chevrolet_bolt_ev"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed.dbc",
+   "msg": "BrakePedal",
+   "sig": "BrakeSensor",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed.dbc",
+   "msg": "DriverDoorStatus",
+   "sig": "DriverDoorOpened",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed.dbc",
+   "msg": "GasPedalRegenCruise",
+   "sig": "GasPedal",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed.dbc",
+   "msg": "SteeringWheelAngle",
+   "sig": "SteeringWheelAngle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed.dbc",
+   "msg": "VehicleSpeed",
+   "sig": "VehicleSpeed1",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed.dbc",
+   "msg": "WheelSpeed",
+   "sig": "WheelSpeedFL",
+   "concept": null,
+   "note": "unit yd/s is not one the mapper can convert"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed_1818125.dbc",
+   "msg": "Analog_Values_Slow_LS",
+   "sig": "EngCltTmp",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed_1818125.dbc",
+   "msg": "Analog_Values_Slow_LS",
+   "sig": "EngIntAirTmp",
+   "concept": "intake_air_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed_1818125.dbc",
+   "msg": "Analog_Values_Slow_LS",
+   "sig": "EngOilPrs",
+   "concept": "engine_oil_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed_1818125.dbc",
+   "msg": "Analog_Values_Slow_LS",
+   "sig": "EngOilTmp",
+   "concept": "engine_oil_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed_1818125.dbc",
+   "msg": "Engine_Information_1_LS",
+   "sig": "EngSpd",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed_1818125.dbc",
+   "msg": "Engine_Information_1_LS",
+   "sig": "ThrPos",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed_1818125.dbc",
+   "msg": "Outside_Air_Temperature_LS",
+   "sig": "OtsAirTmpCrVal",
+   "concept": "ambient_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_lowspeed_1818125.dbc",
+   "msg": "Vehicle_Odo_LS",
+   "sig": "VehOdo",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_object.dbc",
+   "msg": "ASCMAccSpeedStatus",
+   "sig": "VehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "AcceleratorPedal",
+   "sig": "AcceleratorPedal",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "BECMBatteryVoltageCurrent",
+   "sig": "HVBatteryCurrent",
+   "concept": "battery_current",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "BECMBatteryVoltageCurrent",
+   "sig": "HVBatteryVoltage",
+   "concept": "battery_voltage",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "EBCMVehicleDynamic",
+   "sig": "LateralAcceleration",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "EBCMVehicleDynamic",
+   "sig": "YawRate",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "EBCMWheelSpdFront",
+   "sig": "FLWheelSpd",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "EBCMWheelSpdFront",
+   "sig": "FRWheelSpd",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "EBCMWheelSpdRear",
+   "sig": "RLWheelSpd",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "EBCMWheelSpdRear",
+   "sig": "RRWheelSpd",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "ECMAcceleratorPos",
+   "sig": "BrakePedalPos",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "ECMEngineCoolantTemp",
+   "sig": "EngineCoolantTemp",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "ECMEngineStatus",
+   "sig": "EngineRPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "ECMEngineStatus",
+   "sig": "EngineTPS",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "ECMVehicleSpeed",
+   "sig": "VehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "PSCMSteeringAngle",
+   "sig": "SteeringWheelAngle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gm_global_a_powertrain_generated.dbc",
+   "msg": "PSCMSteeringAngle",
+   "sig": "SteeringWheelRate",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "BRAKE",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "BRAKE",
+   "sig": "REQ_REVIEW_HANDBRAKE_ENABLED",
+   "concept": null,
+   "note": "REQ_REVIEW is the database author's 'needs review' note"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "CAR_OVERALL_SIGNALS2",
+   "sig": "ACC_GAS_POSITION",
+   "concept": "accelerator_position",
+   "note": "gwm_haval_h6_phev"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "CAR_OVERALL_SIGNALS2",
+   "sig": "GAS_POSITION",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "DOOR_DRIVER",
+   "sig": "DOOR_DRIVER_OPEN",
+   "concept": "door_state",
+   "note": "gwm_haval_h6_phev"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "SPEED",
+   "sig": "SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "SPEED2",
+   "sig": "SPEED_REAL",
+   "concept": "speed",
+   "note": "gwm_haval_h6_phev"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "FRONT_LEFT_WHEEL_SPEED",
+   "concept": "wheel_speed_fl",
+   "note": "gwm_haval_h6_phev"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "FRONT_RIGHT_WHEEL_SPEED",
+   "concept": "wheel_speed_fr",
+   "note": "gwm_haval_h6_phev"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "REAR_LEFT_WHEEL_SPEED",
+   "concept": "wheel_speed_rl",
+   "note": "gwm_haval_h6_phev"
+  },
+  {
+   "dbc": "gwm_haval_h6_phev_2024.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "REAR_RIGHT_WHEEL_SPEED",
+   "concept": "wheel_speed_rr",
+   "note": "gwm_haval_h6_phev"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "CAR_SPEED",
+   "sig": "CAR_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "DOORS_STATUS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "EPB_STATUS",
+   "sig": "EPB_ACTIVE",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "GAS_PEDAL_2",
+   "sig": "ENGINE_TORQUE_ESTIMATE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "GEARBOX_15T",
+   "sig": "GEAR_SHIFTER",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "ODOMETER",
+   "sig": "ODOMETER",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "POWERTRAIN_DATA",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "RADAR_HUD",
+   "sig": "LEAD_DISTANCE",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "STEER_STATUS",
+   "sig": "STEER_ANGLE_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_accord_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "CAR_SPEED",
+   "sig": "CAR_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "DOORS_STATUS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "EPB_STATUS",
+   "sig": "EPB_ACTIVE",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "GAS_PEDAL_2",
+   "sig": "ENGINE_TORQUE_ESTIMATE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "GEARBOX",
+   "sig": "GEAR_SHIFTER",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "POWERTRAIN_DATA",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "RADAR_HUD",
+   "sig": "LEAD_DISTANCE",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "STEER_STATUS",
+   "sig": "STEER_ANGLE_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_ex_2022_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "CAR_SPEED",
+   "sig": "CAR_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "DOORS_STATUS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "ODOMETER",
+   "concept": null,
+   "note": "8 bits of 10 m wrap after 2.5 km: a trip counter, not the odometer"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "EPB_STATUS",
+   "sig": "EPB_ACTIVE",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "GAS_PEDAL_2",
+   "sig": "ENGINE_TORQUE_ESTIMATE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "GEARBOX",
+   "sig": "GEAR_SHIFTER",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "ODOMETER",
+   "sig": "ODOMETER",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "POWERTRAIN_DATA",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "STALK_STATUS",
+   "sig": "HEADLIGHTS_ON",
+   "concept": null,
+   "note": "the stalk's position, not the lamp"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "STALK_STATUS",
+   "sig": "WIPER_SWITCH",
+   "concept": null,
+   "note": "the stalk's position: a 2-bit setting with no value table"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_civic_touring_2016_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "CAR_SPEED",
+   "sig": "CAR_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "DOORS_STATUS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "EPB_STATUS",
+   "sig": "EPB_ACTIVE",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "GAS_PEDAL_2",
+   "sig": "ENGINE_TORQUE_ESTIMATE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "GEARBOX",
+   "sig": "GEAR_SHIFTER",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "POWERTRAIN_DATA",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_clarity_hybrid_2018_can_generated.dbc",
+   "msg": "XXX_27",
+   "sig": "ODOMETER",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "CAR_SPEED",
+   "sig": "CAR_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "DOORS_STATUS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "EPB_STATUS",
+   "sig": "EPB_ACTIVE",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "GAS_PEDAL_2",
+   "sig": "ENGINE_TORQUE_ESTIMATE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "GEARBOX",
+   "sig": "GEAR_SHIFTER",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "ODOMETER",
+   "sig": "ODOMETER",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "POWERTRAIN_DATA",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "RADAR_HUD",
+   "sig": "LEAD_DISTANCE",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "STEER_STATUS",
+   "sig": "STEER_ANGLE_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_crv_ex_2017_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "CAR_SPEED",
+   "sig": "CAR_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "DOORS_STATUS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "EPB_STATUS",
+   "sig": "EPB_ACTIVE",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "GAS_PEDAL_2",
+   "sig": "ENGINE_TORQUE_ESTIMATE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "GEARBOX",
+   "sig": "GEAR",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "POWERTRAIN_DATA",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "RADAR_HUD",
+   "sig": "LEAD_DISTANCE",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "STEER_STATUS",
+   "sig": "STEER_ANGLE_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_insight_ex_2019_can_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "CAR_SPEED",
+   "sig": "CAR_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "DOORS_STATUS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "EPB_STATUS",
+   "sig": "EPB_ACTIVE",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "GAS_PEDAL_2",
+   "sig": "ENGINE_TORQUE_ESTIMATE",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "GEARBOX",
+   "sig": "GEAR_SHIFTER",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "ODOMETER",
+   "sig": "ODOMETER",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "POWERTRAIN_DATA",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "SEATBELT_STATUS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "STEERING_SENSORS",
+   "sig": "STEER_ANGLE_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "honda_odyssey_exl_2018_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hongqi_hs5.dbc",
+   "msg": "ABS_1",
+   "sig": "VEHICLE_SPEED",
+   "concept": "speed",
+   "note": "hongqi_hs5"
+  },
+  {
+   "dbc": "hongqi_hs5.dbc",
+   "msg": "ABS_2",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hongqi_hs5.dbc",
+   "msg": "ECM_1",
+   "sig": "DRIVER_THROTTLE",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hongqi_hs5.dbc",
+   "msg": "EPS_2",
+   "sig": "EPS_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hongqi_hs5.dbc",
+   "msg": "MAYBE_ABS",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "hongqi_hs5"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "CGW1",
+   "sig": "CF_Gway_HeadLampLow",
+   "concept": "headlight_state",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "CGW1",
+   "sig": "CF_Gway_WiperLowSw",
+   "concept": null,
+   "note": "low-speed switch only: not the whole wiper state"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "CLU12",
+   "sig": "CF_Clu_Odometer",
+   "concept": "odometer",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "CLU13",
+   "sig": "CF_Clu_DTE",
+   "concept": "reported_range",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "CLU15",
+   "sig": "CF_Clu_VehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "DATC11",
+   "sig": "CF_Datc_IncarTemp",
+   "concept": "cabin_temperature",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS11",
+   "sig": "N",
+   "concept": "engine_rpm",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS11",
+   "sig": "TQI",
+   "concept": null,
+   "note": "indicated torque in percent: an engine load only by approximation"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS11",
+   "sig": "VS",
+   "concept": "speed",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS12",
+   "sig": "TEMP_ENG",
+   "concept": "motor_temperature",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS12",
+   "sig": "TPS",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS13",
+   "sig": "MAF",
+   "concept": null,
+   "note": "unit mg/TDC is air per stroke, not a flow in g/s"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS13",
+   "sig": "MAP",
+   "concept": "intake_manifold_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS13",
+   "sig": "N_32",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS14",
+   "sig": "TEMP_FUEL",
+   "concept": "fuel_temperature",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS15",
+   "sig": "IntAirTemp",
+   "concept": "intake_air_temperature",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS19",
+   "sig": "CR_Ems_EngOilTemp",
+   "concept": "engine_oil_temperature",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "EMS21",
+   "sig": "SCR_UREA_LEVEL",
+   "concept": "def_level",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "ESP12",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "ESP12",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "ESP12",
+   "sig": "YAW_RATE",
+   "concept": "yaw_rate",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "FATC11",
+   "sig": "CR_Fatc_OutTemp",
+   "concept": "ambient_temperature",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "MDPS11",
+   "sig": "CR_Mdps_DrvTq",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "SAS11",
+   "sig": "SAS_Angle",
+   "concept": "steering_angle",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "SCC11",
+   "sig": "ACC_ObjDist",
+   "concept": "lead_vehicle_distance",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "TCS13",
+   "sig": "BrakeLight",
+   "concept": null,
+   "note": "the brake light is not the pedal"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "TCS13",
+   "sig": "PBRAKE_ACT",
+   "concept": "parking_brake",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "TCU11",
+   "sig": "TEMP_AT",
+   "concept": "transmission_temperature",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "TPMS11",
+   "sig": "PRESSURE_FL",
+   "concept": "tyre_pressure_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "TPMS11",
+   "sig": "PRESSURE_FR",
+   "concept": "tyre_pressure_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "TPMS11",
+   "sig": "PRESSURE_RL",
+   "concept": "tyre_pressure_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "TPMS11",
+   "sig": "PRESSURE_RR",
+   "concept": "tyre_pressure_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "WHL_SPD11",
+   "sig": "WHL_SPD_FL",
+   "concept": "wheel_speed_fl",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "WHL_SPD11",
+   "sig": "WHL_SPD_FR",
+   "concept": "wheel_speed_fr",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "WHL_SPD11",
+   "sig": "WHL_SPD_RL",
+   "concept": "wheel_speed_rl",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_ccan.dbc",
+   "msg": "WHL_SPD11",
+   "sig": "WHL_SPD_RR",
+   "concept": "wheel_speed_rr",
+   "note": "hyundai_elantra_ccan"
+  },
+  {
+   "dbc": "hyundai_2015_mcan.dbc",
+   "msg": "AMP_HU_PE_03",
+   "sig": "AMP_VehicleSpeedamp",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_mcan.dbc",
+   "msg": "CLU_HU_P_03",
+   "sig": "CR_Mcu_MotActRotSpd_rpm",
+   "concept": null,
+   "note": "a motor speed (Mot) in a name nobody can fully read; not the engine"
+  },
+  {
+   "dbc": "hyundai_2015_mcan.dbc",
+   "msg": "CLU_HU_P_05",
+   "sig": "Clu_DTE",
+   "concept": "reported_range",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_mcan.dbc",
+   "msg": "CLU_HU_P_05",
+   "sig": "Clu_Odometer",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_mcan.dbc",
+   "msg": "DATC_P_02",
+   "sig": "DATC_AmbientTemp_C",
+   "concept": "ambient_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_mcan.dbc",
+   "msg": "DATC_P_02",
+   "sig": "DATC_AmbientTemp_F",
+   "concept": "ambient_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_mcan.dbc",
+   "msg": "HU_CLU_PE_12",
+   "sig": "Navi_Compass",
+   "concept": "heading",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_2015_mcan.dbc",
+   "msg": "HU_CLU_P_02",
+   "sig": "NV_Hour",
+   "concept": null,
+   "note": "the navigation clock's hour, not engine hours"
+  },
+  {
+   "dbc": "hyundai_canfd.dbc",
+   "msg": "ACCELERATOR",
+   "sig": "ACCELERATOR_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_canfd.dbc",
+   "msg": "ACCELERATOR",
+   "sig": "GEAR",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_canfd.dbc",
+   "msg": "DOORS_SEATBELTS",
+   "sig": "DRIVER_DOOR",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_canfd.dbc",
+   "msg": "DOORS_SEATBELTS",
+   "sig": "DRIVER_SEATBELT",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_canfd.dbc",
+   "msg": "ESP_STATUS",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_canfd.dbc",
+   "msg": "ESP_STATUS",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_canfd.dbc",
+   "msg": "MDPS",
+   "sig": "STEERING_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "CLU1",
+   "sig": "CF_Clu_Odometer",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "CLU2",
+   "sig": "CF_Clu_HeadLampLow",
+   "concept": "headlight_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "CLU2",
+   "sig": "CF_Clu_WiperLow",
+   "concept": null,
+   "note": "the low-speed wiper flag only"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "CLU3",
+   "sig": "CF_Clu_DTE",
+   "concept": "reported_range",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "CLU3",
+   "sig": "CF_Clu_HeadLampTail",
+   "concept": null,
+   "note": "the tail lamp, not the headlamp"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "EMS1",
+   "sig": "VS",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "EMS2",
+   "sig": "TEMP_ENG",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "EMS2",
+   "sig": "TPS",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "EMS4",
+   "sig": "TEMP_FUEL",
+   "concept": "fuel_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "EMS5",
+   "sig": "IntAirTemp",
+   "concept": "intake_air_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "EMS9",
+   "sig": "CR_Ems_EngOilTemp",
+   "concept": "engine_oil_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "EMS_DCT1",
+   "sig": "N",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "ESP2",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "ESP2",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "ESP2",
+   "sig": "YAW_RATE",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "FATC",
+   "sig": "CR_Fatc_OutTemp",
+   "concept": "ambient_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "SAS1",
+   "sig": "SAS_Speed",
+   "concept": null,
+   "note": "an unsigned steering speed: a magnitude, not the signed rate"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "WHL_SPD",
+   "sig": "WHL_SPD_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "WHL_SPD",
+   "sig": "WHL_SPD_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "WHL_SPD",
+   "sig": "WHL_SPD_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_i30_2014.dbc",
+   "msg": "WHL_SPD",
+   "sig": "WHL_SPD_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "CGW1",
+   "sig": "CF_Gway_HeadLampLow",
+   "concept": "headlight_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "CLU12",
+   "sig": "CF_Clu_Odometer",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "CLU13",
+   "sig": "CF_Clu_DTE",
+   "concept": "reported_range",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "CLU15",
+   "sig": "CF_Clu_Gear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "CLU15",
+   "sig": "CF_Clu_VehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "DATC11",
+   "sig": "CF_Datc_IncarTemp",
+   "concept": "cabin_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "EMS12",
+   "sig": "TEMP_ENG",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "EMS12",
+   "sig": "TPS",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "EMS13",
+   "sig": "MAP",
+   "concept": "intake_manifold_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "EMS13",
+   "sig": "N_32",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "EMS14",
+   "sig": "TEMP_FUEL",
+   "concept": "fuel_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "EMS15",
+   "sig": "IntAirTemp",
+   "concept": "intake_air_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "EMS19",
+   "sig": "CR_Ems_EngOilTemp",
+   "concept": "engine_oil_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "EMS21",
+   "sig": "SCR_UREA_LEVEL",
+   "concept": "def_level",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "ESP12",
+   "sig": "LAT_ACCEL",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "ESP12",
+   "sig": "LONG_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "ESP12",
+   "sig": "YAW_RATE",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "E_EMS11",
+   "sig": "Accel_Pedal_Pos",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "E_EMS11",
+   "sig": "Brake_Pedal_Pos",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "FATC11",
+   "sig": "CR_Fatc_OutTemp",
+   "concept": "ambient_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "MDPS11",
+   "sig": "CR_Mdps_DrvTq",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "SAS11",
+   "sig": "SAS_Angle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "SCC11",
+   "sig": "ACC_ObjDist",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "TCS13",
+   "sig": "PBRAKE_ACT",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "TCU11",
+   "sig": "TEMP_AT",
+   "concept": "transmission_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "TPMS11",
+   "sig": "PRESSURE_FL",
+   "concept": "tyre_pressure_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "TPMS11",
+   "sig": "PRESSURE_FR",
+   "concept": "tyre_pressure_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "TPMS11",
+   "sig": "PRESSURE_RL",
+   "concept": "tyre_pressure_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "TPMS11",
+   "sig": "PRESSURE_RR",
+   "concept": "tyre_pressure_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "WHL_SPD11",
+   "sig": "WHL_SPD_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "WHL_SPD11",
+   "sig": "WHL_SPD_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "WHL_SPD11",
+   "sig": "WHL_SPD_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_kia_generic.dbc",
+   "msg": "WHL_SPD11",
+   "sig": "WHL_SPD_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ECU_Data2",
+   "sig": "IAT",
+   "concept": "intake_air_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ECU_Data2",
+   "sig": "MAF",
+   "concept": null,
+   "note": "mg per stroke, not a flow"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ECU_Data2",
+   "sig": "MAP",
+   "concept": "intake_manifold_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ECU_Data5",
+   "sig": "ECT",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ECU_Data5",
+   "sig": "TPS",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ECU_Data6",
+   "sig": "BatteryVoltage",
+   "concept": "aux_battery_voltage",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ESP_Flags",
+   "sig": "VehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ESP_WheelSpeed",
+   "sig": "FrontLeftWheelSpeed",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ESP_WheelSpeed",
+   "sig": "FrontRightWheelSpeed",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ESP_WheelSpeed",
+   "sig": "RearLeftWheelSpeed",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "ESP_WheelSpeed",
+   "sig": "RearRightWheelSpeed",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "SAS_Data",
+   "sig": "SAS_Angle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "hyundai_santafe_2007.dbc",
+   "msg": "TCU_Data",
+   "sig": "CurrentGear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "CONSOLE_STATUS",
+   "sig": "HEAD_LIGHT_HANDLE_SWITCH",
+   "concept": null,
+   "note": "the driver's handle, not the lamp"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "DASH_STATUS",
+   "sig": "CAR_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "GEAR_RPM_SPEED_STATUS",
+   "sig": "ENGINE_TEMP",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "STEERING_ANGLE_STATUS",
+   "sig": "STEER_ANGLE_9000",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "THROTTLE_STATUS",
+   "sig": "THROTTLE_PEDAL_POS",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "THROTTLE_STATUS",
+   "sig": "THROTTLE_POS",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "WHEEL_RPM_STATUS",
+   "sig": "WHEEL_RL_SPEED",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "WHEEL_RPM_STATUS",
+   "sig": "WHEEL_RR_SPEED",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "luxgen_s5_2015.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "BLINK_INFO",
+   "sig": "WIPER_LO",
+   "concept": null,
+   "note": "the low-speed wiper flag only"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "BRAKE",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "BRAKE",
+   "sig": "VEHICLE_ACC_X",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "BRAKE",
+   "sig": "VEHICLE_ACC_Y",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "CHECK_AND_TEMP",
+   "sig": "COOLANT_TEMP",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "CHECK_AND_TEMP",
+   "sig": "OUTDOOR_TEMP",
+   "concept": "ambient_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "EPB",
+   "sig": "EPB_ACTIVE",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "GEAR",
+   "sig": "GEAR",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "RADAR_DISTANCE",
+   "sig": "DISTANCE_LEAD",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "STEER_RATE",
+   "sig": "STEER_ANGLE_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "STEER_RELATED",
+   "sig": "STEER_ANGLE_2",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "STEER_RELATED",
+   "sig": "STEER_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_2017.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_3_2019.dbc",
+   "msg": "BLINK_INFO",
+   "sig": "Speed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_3_2019.dbc",
+   "msg": "BRAKE_PEDAL",
+   "sig": "BRAKE_PEDAL_PRESSED",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_3_2019.dbc",
+   "msg": "ENGINE_DATA",
+   "sig": "RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_3_2019.dbc",
+   "msg": "GEAR",
+   "sig": "GEAR",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_3_2019.dbc",
+   "msg": "LKAS",
+   "sig": "LEAD_DIST",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_3_2019.dbc",
+   "msg": "STEER",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_3_2019.dbc",
+   "msg": "STEER_TORQUE",
+   "sig": "STEER_TORQUE_SENSOR",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "coolant",
+   "sig": "CoolantTemperature",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "instrument_cluster",
+   "sig": "FuelLevel",
+   "concept": "fuel_level",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "speed",
+   "sig": "AcceleratorPos",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "speed",
+   "sig": "EngineRPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "speed",
+   "sig": "VehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "steering",
+   "sig": "SteeringAngle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "throttle_body",
+   "sig": "IntakeAirTemperature",
+   "concept": "intake_air_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "wheel_speed",
+   "sig": "WheelSpeedFL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "wheel_speed",
+   "sig": "WheelSpeedFR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "wheel_speed",
+   "sig": "WheelSpeedRL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mazda_rx8.dbc",
+   "msg": "wheel_speed",
+   "sig": "WheelSpeedRR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "BRAKE_MODULE",
+   "sig": "BRAKE_PRESSED",
+   "concept": "brake_pedal",
+   "note": "mercedes_e350_w212"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "DOOR_SENSORS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "mercedes_e350_w212"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "GAS_PEDAL",
+   "sig": "GAS_PEDAL",
+   "concept": "accelerator_position",
+   "note": "mercedes_e350_w212"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "SEATBELT_SENSORS",
+   "sig": "SEATBELT_DRIVER_LATCHED",
+   "concept": "seatbelt_state",
+   "note": "mercedes_e350_w212"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "STEER_SENSOR",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "mercedes_e350_w212"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "STEER_SENSOR",
+   "sig": "STEER_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "mercedes_e350_w212"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "mercedes_e350_w212"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "mercedes_e350_w212"
+  },
+  {
+   "dbc": "mercedes_benz_e350_2010.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "mercedes_e350_w212"
+  },
+  {
+   "dbc": "mg.dbc",
+   "msg": "EHBS_HSC2_FrP00",
+   "sig": "BrkPdlAppdHSC2",
+   "concept": "brake_pedal",
+   "note": "mg_zs_ev"
+  },
+  {
+   "dbc": "mg.dbc",
+   "msg": "GW_HSC2_BCM_FrP04",
+   "sig": "DrvrDoorOpenStsHSC2",
+   "concept": "door_state",
+   "note": "mg_zs_ev"
+  },
+  {
+   "dbc": "mg.dbc",
+   "msg": "GW_HSC2_ECM_FrP04",
+   "sig": "TrEstdGearHSC2",
+   "concept": "gear",
+   "note": "mg_zs_ev"
+  },
+  {
+   "dbc": "mg.dbc",
+   "msg": "GW_HSC2_HCU_FrP00",
+   "sig": "EPTAccelActuPosHSC2",
+   "concept": "accelerator_position",
+   "note": "mg_zs_ev"
+  },
+  {
+   "dbc": "mg.dbc",
+   "msg": "SAS_HSC2_FrP00",
+   "sig": "StrgWhlAngHSC2",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "mg.dbc",
+   "msg": "SCS_HSC2_FrP09",
+   "sig": "BrkPdlDrvrAppdPrsHSC2",
+   "concept": "brake_pressure",
+   "note": "mg_zs_ev"
+  },
+  {
+   "dbc": "mg.dbc",
+   "msg": "SCS_HSC2_FrP19",
+   "sig": "VehSpdAvgHSC2",
+   "concept": "speed",
+   "note": "mg_zs_ev"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "BRAKE_PEDAL",
+   "sig": "BRAKE_PEDAL",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "CRUISE_THROTTLE",
+   "sig": "GAS_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "DOORS_LIGHTS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "GEARBOX",
+   "sig": "GEAR_SHIFTER",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "SEATBELT",
+   "sig": "SEATBELT_DRIVER_LATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "STEER_TORQUE_SENSOR",
+   "sig": "STEER_TORQUE_DRIVER",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "WHEEL_SPEEDS_FRONT",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "WHEEL_SPEEDS_FRONT",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "WHEEL_SPEEDS_REAR",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_leaf_2018_generated.dbc",
+   "msg": "WHEEL_SPEEDS_REAR",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "DOORS_LIGHTS",
+   "sig": "DOOR_CLOSED_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "GAS_PEDAL",
+   "sig": "GAS_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "GEARBOX",
+   "sig": "GEAR_SHIFTER",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "HUD",
+   "sig": "SEATBELT_DRIVER_LATCHED",
+   "concept": "seatbelt_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "LIGHTS",
+   "sig": "HEADLIGHTS",
+   "concept": "headlight_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "STEER_TORQUE_SENSOR",
+   "sig": "STEER_TORQUE_DRIVER",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "WHEEL_SPEEDS_FRONT",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "WHEEL_SPEEDS_FRONT",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "WHEEL_SPEEDS_REAR",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_x_trail_2017_generated.dbc",
+   "msg": "WHEEL_SPEEDS_REAR",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_xterra_2011.dbc",
+   "msg": "ENGINE_1",
+   "sig": "RPM",
+   "concept": "engine_rpm",
+   "note": "nissan_xterra_2011"
+  },
+  {
+   "dbc": "nissan_xterra_2011.dbc",
+   "msg": "ENGINE_2",
+   "sig": "Pedal_position",
+   "concept": "accelerator_position",
+   "note": "nissan_xterra_2011"
+  },
+  {
+   "dbc": "nissan_xterra_2011.dbc",
+   "msg": "ENGINE_4",
+   "sig": "EstimatedTorque",
+   "concept": "engine_torque",
+   "note": "nissan_xterra_2011"
+  },
+  {
+   "dbc": "nissan_xterra_2011.dbc",
+   "msg": "ENGINE_4",
+   "sig": "Throttle_position",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_xterra_2011.dbc",
+   "msg": "ENGINE_6",
+   "sig": "OIL_TEMP",
+   "concept": "engine_oil_temperature",
+   "note": "nissan_xterra_2011"
+  },
+  {
+   "dbc": "nissan_xterra_2011.dbc",
+   "msg": "ENGINE_7",
+   "sig": "CLT",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "nissan_xterra_2011.dbc",
+   "msg": "SPEED",
+   "sig": "SPEED",
+   "concept": "speed",
+   "note": "nissan_xterra_2011"
+  },
+  {
+   "dbc": "nissan_xterra_2011.dbc",
+   "msg": "STEERING",
+   "sig": "STEERING_ANGLE",
+   "concept": "steering_angle",
+   "note": "nissan_xterra_2011"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "ABS_WheelSpeed",
+   "sig": "FrontLeftWheelSpeed",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "ABS_WheelSpeed",
+   "sig": "FrontRightWheelSpeed",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "ABS_WheelSpeed",
+   "sig": "RearLeftWheelSpeed",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "ABS_WheelSpeed",
+   "sig": "RearRightWheelSpeed",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "ECU_Data2",
+   "sig": "TPS",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "ECU_Data4",
+   "sig": "ECT",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "ECU_Data4",
+   "sig": "IAT",
+   "concept": "intake_air_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "SAS_Data",
+   "sig": "SteeringAngle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "SAS_Data",
+   "sig": "SteeringSpeed",
+   "concept": null,
+   "note": "an unsigned steering speed: a magnitude, not the signed rate"
+  },
+  {
+   "dbc": "opel_omega_2001.dbc",
+   "msg": "TCU_Data3",
+   "sig": "CurrentGear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "psa_aee2010_r3.dbc",
+   "msg": "DRIVER",
+   "sig": "GAS_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "psa_aee2010_r3.dbc",
+   "msg": "Dyn2_FRE",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "psa_aee2010_r3.dbc",
+   "msg": "HS2_DYN_ABR_38D",
+   "sig": "VITESSE_VEHICULE_ROUES",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "psa_aee2010_r3.dbc",
+   "msg": "STEERING",
+   "sig": "ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "psa_aee2010_r3.dbc",
+   "msg": "STEERING",
+   "sig": "DRIVER_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "psa_aee2010_r3.dbc",
+   "msg": "STEERING",
+   "sig": "RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "BCM_Status",
+   "sig": "BCM_AmbientAirTemperature",
+   "concept": "ambient_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "Cluster",
+   "sig": "Cluster_Odometer",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "EPAS_AdasStatus",
+   "sig": "EPAS_SteeringAngleSpeed",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "ESP_AebFb",
+   "sig": "iB_BrakePedalApplied",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "ESP_AebFb",
+   "sig": "iB_BrakePedalApplied_Q",
+   "concept": null,
+   "note": "the quality of the pedal signal (Q), with a fault value"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "ESP_EpbStatus",
+   "sig": "ESP_EpbServiceMode",
+   "concept": null,
+   "note": "the brake's service mode, not whether it is applied"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "ESP_EpbStatus",
+   "sig": "ESP_EpbStatus",
+   "concept": "parking_brake",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "ESP_WSpeed_Front",
+   "sig": "ESP_Wheel_Speed_Left_Front",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "ESP_WSpeed_Front",
+   "sig": "ESP_Wheel_Speed_Right_Front",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "ESP_WSpeed_Rear",
+   "sig": "ESP_Wheel_Speed_Left_Rear",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "ESP_WSpeed_Rear",
+   "sig": "ESP_Wheel_Speed_Right_Rear",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "IndicatorLights",
+   "sig": "DriverDoor",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "IndicatorLights",
+   "sig": "RearDriverDoor",
+   "concept": null,
+   "note": "the rear door on the driver's side, not the driver's door"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "VDM_PropStatus",
+   "sig": "VDM_AcceleratorPedalPosition",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "rivian_primary_actuator.dbc",
+   "msg": "VDM_PropStatus",
+   "sig": "VDM_VehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "BodyInfo",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Brake_Pedal",
+   "sig": "Brake_Pedal",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Brake_Pedal",
+   "sig": "Speed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "ES_Brake",
+   "sig": "Brake_Pressure",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Engine",
+   "sig": "Engine_Torque",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Engine_Temp",
+   "sig": "Coolant_Temp",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Engine_Temp",
+   "sig": "Oil_Temp",
+   "concept": "engine_oil_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Steering",
+   "sig": "Steering_Angle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Steering_Torque_2",
+   "sig": "Steer_Torque_Sensor",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Throttle",
+   "sig": "Engine_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Throttle",
+   "sig": "Throttle_Pedal",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Transmission",
+   "sig": "Gear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_forester_2017_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "BodyInfo",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "BodyInfo",
+   "sig": "WIPERS",
+   "concept": "wiper_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Brake_Pedal",
+   "sig": "Brake_Pedal",
+   "concept": null,
+   "note": "12 raw bits with no scale to percent"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Brake_Pedal",
+   "sig": "Speed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "ES_Brake",
+   "sig": "Brake_Pressure",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Steering",
+   "sig": "Steering_Angle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Steering_Torque",
+   "sig": "Steer_Torque_Sensor",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Throttle",
+   "sig": "Engine_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Throttle",
+   "sig": "Throttle_Cruise",
+   "concept": null,
+   "note": "the cruise control's throttle value"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Throttle",
+   "sig": "Throttle_Pedal",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Transmission",
+   "sig": "Gear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2017_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "BodyInfo",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "BodyInfo",
+   "sig": "WIPERS",
+   "concept": "wiper_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Brake_Hybrid",
+   "sig": "Brake_Pedal",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Brake_Pedal",
+   "sig": "Speed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "ES_Brake",
+   "sig": "Brake_Pressure",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Steering",
+   "sig": "Steering_Angle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Steering_Torque",
+   "sig": "Steer_Torque_Sensor",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Throttle",
+   "sig": "Engine_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Throttle",
+   "sig": "Throttle_Pedal",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Transmission",
+   "sig": "Gear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_global_2020_hybrid_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "BodyInfo",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Brake_Pedal",
+   "sig": "Brake_Pedal",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Brake_Pedal",
+   "sig": "Speed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "ES_Brake",
+   "sig": "Brake_Pressure",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Engine",
+   "sig": "Engine_Torque",
+   "concept": "engine_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Engine_Temp",
+   "sig": "Coolant_Temp",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Engine_Temp",
+   "sig": "Oil_Temp",
+   "concept": "engine_oil_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Stalk",
+   "sig": "Headlights",
+   "concept": null,
+   "note": "the stalk's position, not the lamp"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Stalk",
+   "sig": "Wiper",
+   "concept": null,
+   "note": "the stalk's position, not the wipers"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Steering",
+   "sig": "Steering_Angle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Steering_Torque_2",
+   "sig": "Steer_Torque_Sensor",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Throttle",
+   "sig": "Engine_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Throttle",
+   "sig": "Throttle_Pedal",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Transmission",
+   "sig": "Gear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "subaru_outback_2015_generated.dbc",
+   "msg": "Wheel_Speeds",
+   "sig": "RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "BODY_R1",
+   "sig": "WprOutsdPkPosn",
+   "concept": null,
+   "note": "the wiper's outer park position"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "DI_torque1",
+   "sig": "DI_motorRPM",
+   "concept": "motor_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "DI_torque1",
+   "sig": "DI_pedalPos",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "DI_torque1",
+   "sig": "DI_torqueMotor",
+   "concept": "motor_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "DI_torque2",
+   "sig": "DI_brakePedal",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "DI_torque2",
+   "sig": "DI_gear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "DI_torque2",
+   "sig": "DI_vehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "EPAS3P_sysStatus",
+   "sig": "EPAS_torsionBarTorque",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "GTW_carState",
+   "sig": "DOOR_STATE_FL",
+   "concept": "door_state",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "GTW_carState",
+   "sig": "Hour",
+   "concept": null,
+   "note": "a clock hour, not engine hours"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "MCU_locationStatus2",
+   "sig": "MCU_elevation",
+   "concept": "altitude",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "UI_csaOfframpCurvature",
+   "sig": "UI_csaOfframpCurvRange",
+   "concept": null,
+   "note": "the range of a curvature fit (Curv), not the vehicle's range"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "UI_gpsVehicleSpeed",
+   "sig": "UI_gpsVehicleHeading",
+   "concept": "heading",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_can.dbc",
+   "msg": "UI_gpsVehicleSpeed",
+   "sig": "UI_gpsVehicleSpeed",
+   "concept": "gps_speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "DI_speed",
+   "sig": "DI_vehicleSpeed",
+   "concept": "speed",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "DI_state",
+   "sig": "DI_parkBrakeState",
+   "concept": "parking_brake",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "DI_systemStatus",
+   "sig": "DI_accelPedalPos",
+   "concept": "accelerator_position",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "DI_systemStatus",
+   "sig": "DI_brakePedalState",
+   "concept": "brake_pedal",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "DI_systemStatus",
+   "sig": "DI_gear",
+   "concept": "gear",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "DI_torque",
+   "sig": "DI_torqueActual",
+   "concept": "motor_torque",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "EPAS3S_sysStatus",
+   "sig": "EPAS3S_torsionBarTorque",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "ESP_B",
+   "sig": "ESP_vehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "ESP_wheelSpeeds",
+   "sig": "ESP_wheelSpeedFrL",
+   "concept": "wheel_speed_fl",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "ESP_wheelSpeeds",
+   "sig": "ESP_wheelSpeedFrR",
+   "concept": "wheel_speed_fr",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "ESP_wheelSpeeds",
+   "sig": "ESP_wheelSpeedReL",
+   "concept": "wheel_speed_rl",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "ESP_wheelSpeeds",
+   "sig": "ESP_wheelSpeedReR",
+   "concept": "wheel_speed_rr",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "SCCM_steeringAngleSensor",
+   "sig": "SCCM_steeringAngle",
+   "concept": "steering_angle",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "SCCM_steeringAngleSensor",
+   "sig": "SCCM_steeringAngleSpeed",
+   "concept": "steering_rate",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_party.dbc",
+   "msg": "UI_warning",
+   "sig": "anyDoorOpen",
+   "concept": "door_state",
+   "note": "tesla_model_3"
+  },
+  {
+   "dbc": "tesla_model3_vehicle.dbc",
+   "msg": "DI_systemStatus",
+   "sig": "DI_accelPedalPos",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_model3_vehicle.dbc",
+   "msg": "DI_systemStatus",
+   "sig": "DI_gear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_model3_vehicle.dbc",
+   "msg": "SCCM_steeringAngleSensor",
+   "sig": "SCCM_steeringAngle",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_model3_vehicle.dbc",
+   "msg": "SCCM_steeringAngleSensor",
+   "sig": "SCCM_steeringAngleSpeed",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_model3_vehicle.dbc",
+   "msg": "VCLEFT_switchStatus",
+   "sig": "VCLEFT_brakePressed",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_powertrain.dbc",
+   "msg": "DI_torque1",
+   "sig": "DI_motorRPM",
+   "concept": "motor_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_powertrain.dbc",
+   "msg": "DI_torque1",
+   "sig": "DI_pedalPos",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_powertrain.dbc",
+   "msg": "DI_torque1",
+   "sig": "DI_torqueMotor",
+   "concept": "motor_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_powertrain.dbc",
+   "msg": "DI_torque2",
+   "sig": "DI_brakePedal",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_powertrain.dbc",
+   "msg": "DI_torque2",
+   "sig": "DI_gear",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "tesla_powertrain.dbc",
+   "msg": "DI_torque2",
+   "sig": "DI_vehicleSpeed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_2017_ref_pt.dbc",
+   "msg": "AVN1S13",
+   "sig": "COMPASS",
+   "concept": "heading",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_2017_ref_pt.dbc",
+   "msg": "ENG1F07",
+   "sig": "NE1",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_2017_ref_pt.dbc",
+   "msg": "ENG2F05",
+   "sig": "VM",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_2017_ref_pt.dbc",
+   "msg": "MET1S02_21",
+   "sig": "ODO",
+   "concept": null,
+   "note": "unit 'km/mile' changes with a setting: the odometer's unit is not known"
+  },
+  {
+   "dbc": "toyota_2017_ref_pt.dbc",
+   "msg": "MET1S04_23",
+   "sig": "RANGE",
+   "concept": "reported_range",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "BRAKING_PLUS_OTHER",
+   "sig": "ENGINE_TEMPERATURE",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "ENGINE",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "LOW_RES_INDICATORS",
+   "sig": "LOW_RES_ACC_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "STEERING",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "TOTAL_DIST",
+   "sig": "TOTAL_DISTANCE",
+   "concept": "odometer",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "VEHICLE_DYNAMICS",
+   "sig": "VEHICLE_SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "WHEELS_SPEEDS",
+   "sig": "FRONT_LEFT_WHEEL_SPEED",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "WHEELS_SPEEDS",
+   "sig": "FRONT_RIGHT_WHEEL_SPEED",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "WHEELS_SPEEDS",
+   "sig": "REAR_LEFT_WHEEL_SPEED",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_iQ_2009_can.dbc",
+   "msg": "WHEELS_SPEEDS",
+   "sig": "REAR_RIGHT_WHEEL_SPEED",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "ACCELEROMETER",
+   "sig": "ACCEL_X",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "BRAKE",
+   "sig": "BRAKE_PEDAL",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "BRAKE_MODULE",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "ENGINE_RPM",
+   "sig": "RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "GAS_PEDAL_HYBRID",
+   "sig": "GAS_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "GEAR_PACKET_HYBRID",
+   "sig": "GEAR",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "KINEMATICS",
+   "sig": "ACCEL_Y",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "KINEMATICS",
+   "sig": "STEERING_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "KINEMATICS",
+   "sig": "YAW_RATE",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "LEAD_INFO",
+   "sig": "LEAD_LONG_DIST",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "SPEED",
+   "sig": "SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_new_mc_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "ACCELEROMETER",
+   "sig": "ACCEL_X",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "BRAKE",
+   "sig": "BRAKE_PEDAL",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "BRAKE_MODULE",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "ENGINE_RPM",
+   "sig": "RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "GAS_PEDAL_HYBRID",
+   "sig": "GAS_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "GEAR_PACKET_HYBRID",
+   "sig": "GEAR",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "KINEMATICS",
+   "sig": "ACCEL_Y",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "KINEMATICS",
+   "sig": "STEERING_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "KINEMATICS",
+   "sig": "YAW_RATE",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "LEAD_INFO",
+   "sig": "LEAD_LONG_DIST",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "SPEED",
+   "sig": "SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_nodsu_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "ACCELEROMETER",
+   "sig": "ACCEL_X",
+   "concept": "longitudinal_acceleration",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "BRAKE",
+   "sig": "BRAKE_PEDAL",
+   "concept": "brake_pedal",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "BRAKE_MODULE",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "GAS_PEDAL",
+   "sig": "GAS_PEDAL",
+   "concept": "accelerator_position",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "GEAR_PACKET",
+   "sig": "GEAR",
+   "concept": "gear",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "KINEMATICS",
+   "sig": "ACCEL_Y",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "KINEMATICS",
+   "sig": "STEERING_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "KINEMATICS",
+   "sig": "YAW_RATE",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "LEAD_INFO",
+   "sig": "LEAD_LONG_DIST",
+   "concept": "lead_vehicle_distance",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "POWERTRAIN",
+   "sig": "ENGINE_RPM",
+   "concept": "engine_rpm",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "SEATS_DOORS",
+   "sig": "DOOR_OPEN_FL",
+   "concept": "door_state",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "SEATS_DOORS",
+   "sig": "SEATBELT_DRIVER_UNLATCHED",
+   "concept": "seatbelt_state",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "SPEED",
+   "sig": "SPEED",
+   "concept": "speed",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_prius_2010_pt.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "toyota_prius_hybrid"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "ACCELEROMETER",
+   "sig": "ACCEL_X",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "BRAKE",
+   "sig": "BRAKE_PEDAL",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "BRAKE_MODULE",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "ENGINE_RPM",
+   "sig": "RPM",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "GAS_PEDAL_HYBRID",
+   "sig": "GAS_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "GEAR_PACKET_HYBRID",
+   "sig": "GEAR",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "KINEMATICS",
+   "sig": "ACCEL_Y",
+   "concept": "lateral_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "KINEMATICS",
+   "sig": "STEERING_TORQUE",
+   "concept": "steering_torque",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "KINEMATICS",
+   "sig": "YAW_RATE",
+   "concept": "yaw_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "LEAD_INFO",
+   "sig": "LEAD_LONG_DIST",
+   "concept": "lead_vehicle_distance",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "SPEED",
+   "sig": "SPEED",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_ANGLE",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "STEER_ANGLE_SENSOR",
+   "sig": "STEER_RATE",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "toyota_tnga_k_pt_generated.dbc",
+   "msg": "WHEEL_SPEEDS",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "BrakeMessages",
+   "sig": "BrakePress0",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "EngineInfo",
+   "sig": "EngineSpeed",
+   "concept": "engine_rpm",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "PSCM1",
+   "sig": "SteeringAngleServo",
+   "concept": "steering_angle",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "PedalandBrake",
+   "sig": "AccPedal",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "PedalandBrake",
+   "sig": "BrakePedalActive2",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "SpeedSignal0",
+   "sig": "VehicleSpeedSignal",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "TCM0",
+   "sig": "GearShifter",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "wheel_speed1",
+   "sig": "WhlSpdLR",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "wheel_speed1",
+   "sig": "WhlSpdRR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "wheelspeed0",
+   "sig": "WhlSpdLF",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v40_2017_pt.dbc",
+   "msg": "wheelspeed0",
+   "sig": "WhlSpdRF",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "AccPedal",
+   "sig": "AccPedal",
+   "concept": "accelerator_position",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "Accessories_01",
+   "sig": "Wipers",
+   "concept": "wiper_state",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "Doors",
+   "sig": "DriverDoorClosed",
+   "concept": "door_state",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "EngineData",
+   "sig": "BrakePressed2",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "EngineData",
+   "sig": "EngineRpm",
+   "concept": "engine_rpm",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "PSCM1",
+   "sig": "SteeringAngleServo",
+   "concept": "steering_angle",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "SAS0",
+   "sig": "SteeringRateOfChange",
+   "concept": "steering_rate",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "VehicleSpeed1",
+   "sig": "BrakePressure2",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "VehicleSpeed1",
+   "sig": "VehicleSpeed",
+   "concept": "speed",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "wheelspeed0",
+   "sig": "WhlSpdLF",
+   "concept": "wheel_speed_fl",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "wheelspeed0",
+   "sig": "WhlSpdRF",
+   "concept": "wheel_speed_fr",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "wheelspeed1",
+   "sig": "WhlSpdLR",
+   "concept": "wheel_speed_rl",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "volvo_v60_2015_pt.dbc",
+   "msg": "wheelspeed1",
+   "sig": "WhlSpdRR",
+   "concept": "wheel_speed_rr",
+   "note": "volvo_v60_2015"
+  },
+  {
+   "dbc": "vw_golf_mk4.dbc",
+   "msg": "Bremse_5",
+   "sig": "Bremsdruck",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb.dbc",
+   "msg": "BMS_Hybrid_01",
+   "sig": "BMS_Temperatur",
+   "concept": "battery_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb.dbc",
+   "msg": "ESP_05",
+   "sig": "ESP_Bremsdruck",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb.dbc",
+   "msg": "Kombi_01",
+   "sig": "KBI_angez_Geschw",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Abs_Load_Val",
+   "concept": "engine_load",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Abs_Pedal_Pos",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Abs_Throttle_Pos",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Calc_Load_Val",
+   "concept": "engine_load",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Eng_Cool_Temp",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb_2010.dbc",
+   "msg": "BMS_Hybrid_01",
+   "sig": "BMS_Temperatur",
+   "concept": "battery_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb_2010.dbc",
+   "msg": "ESP_05",
+   "sig": "ESP_Bremsdruck",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb_2010.dbc",
+   "msg": "EV_Gearshift",
+   "sig": "GearPosition",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb_2010.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Abs_Load_Val",
+   "concept": "engine_load",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb_2010.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Abs_Pedal_Pos",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb_2010.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Abs_Throttle_Pos",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb_2010.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Calc_Load_Val",
+   "concept": "engine_load",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb_2010.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Eng_Cool_Temp",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqb_2010.dbc",
+   "msg": "VehicleSpeed",
+   "sig": "Speed",
+   "concept": "speed",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "BMS_Hybrid_01",
+   "sig": "BMS_Temperatur",
+   "concept": "battery_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "ESP_05",
+   "sig": "ESP_Bremsdruck",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "ESP_NEW_1",
+   "sig": "WHEEL_SPEED_FL",
+   "concept": "wheel_speed_fl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "ESP_NEW_1",
+   "sig": "WHEEL_SPEED_FR",
+   "concept": "wheel_speed_fr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "ESP_NEW_1",
+   "sig": "WHEEL_SPEED_RL",
+   "concept": "wheel_speed_rl",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "ESP_NEW_1",
+   "sig": "WHEEL_SPEED_RR",
+   "concept": "wheel_speed_rr",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "ESP_NEW_2",
+   "sig": "LONGITUDINAL_ACCEL",
+   "concept": "longitudinal_acceleration",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "ESP_NEW_3",
+   "sig": "BRAKE_PRESSED_1",
+   "concept": "brake_pedal",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "ESP_NEW_3",
+   "sig": "BRAKE_PRESSURE",
+   "concept": "brake_pressure",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "EV_Gearshift",
+   "sig": "GearPosition",
+   "concept": "gear",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "MOTOR_NEW_1",
+   "sig": "ACCEL_PEDAL",
+   "concept": "accelerator_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Abs_Load_Val",
+   "concept": "engine_load",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Abs_Throttle_Pos",
+   "concept": "throttle_position",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Calc_Load_Val",
+   "concept": "engine_load",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "OBD_01",
+   "sig": "OBD_Eng_Cool_Temp",
+   "concept": "motor_temperature",
+   "note": "reviewed"
+  },
+  {
+   "dbc": "vw_mqbevo.dbc",
+   "msg": "VehicleSpeed",
+   "sig": "Speed",
+   "concept": "speed",
+   "note": "reviewed"
+  }
+ ]
+}

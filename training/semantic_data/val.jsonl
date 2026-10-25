@@ -1,0 +1,42 @@
+{"text": "Show how external air temperature changed over the week", "frame": "data trend outside none"}
+{"text": "Show how state of charge changed over the week", "frame": "data trend charge none"}
+{"text": "Report the current state of charge", "frame": "data now charge none"}
+{"text": "Find the peak state of charge this month", "frame": "data maximum charge none"}
+{"text": "Show how efficiency changed over the week", "frame": "data trend energy none"}
+{"text": "Find the lowest power flowing into the pack this month", "frame": "data minimum chargepower none"}
+{"text": "How many fault records occurred?", "frame": "data events none fault"}
+{"text": "Return the greatest recorded cooling circuit flow", "frame": "data maximum coolant none"}
+{"text": "Summarise the typical power flowing into the pack yesterday", "frame": "data average chargepower none"}
+{"text": "Return the greatest recorded electricity use", "frame": "data maximum energy none"}
+{"text": "Return the greatest recorded state of charge", "frame": "data maximum charge none"}
+{"text": "Report the current electrical charging rate", "frame": "data now chargepower none"}
+{"text": "Give me the live thermal-loop flow", "frame": "data now coolant none"}
+{"text": "Contrast city and highway operation", "frame": "data compare none none"}
+{"text": "Find the lowest traction motor temperature this month", "frame": "data minimum motor none"}
+{"text": "Report the current power flowing into the pack", "frame": "data now chargepower none"}
+{"text": "Calculate the mean traction motor temperature for last week", "frame": "data average motor none"}
+{"text": "Calculate the mean coolant flow for last week", "frame": "data average coolant none"}
+{"text": "Calculate the mean efficiency for last week", "frame": "data average energy none"}
+{"text": "Return the greatest recorded efficiency", "frame": "data maximum energy none"}
+{"text": "Give me the live energy consumption", "frame": "data now energy none"}
+{"text": "Return the smallest recorded thermal-loop flow", "frame": "data minimum coolant none"}
+{"text": "Give me the live state of charge", "frame": "data now charge none"}
+{"text": "What does the term regenerative braking mean?", "frame": "define other driving none"}
+{"text": "Recommend replacement tyres", "frame": "advice other tyre none"}
+{"text": "Return the smallest recorded energy consumption", "frame": "data minimum energy none"}
+{"text": "Recommend winter wheels", "frame": "advice other tyre none"}
+{"text": "Show how electrical charging rate changed over the week", "frame": "data trend chargepower none"}
+{"text": "Return the greatest recorded pack temperature", "frame": "data maximum battery none"}
+{"text": "Find the peak pack temperature this month", "frame": "data maximum battery none"}
+{"text": "Summarise the typical outside temperature yesterday", "frame": "data average outside none"}
+{"text": "Find the peak motor heat this month", "frame": "data maximum motor none"}
+{"text": "Find the lowest external air temperature this month", "frame": "data minimum outside none"}
+{"text": "Describe the trend in state of charge", "frame": "data trend charge none"}
+{"text": "Summarise the typical remaining battery percentage yesterday", "frame": "data average charge none"}
+{"text": "Describe the trend in ambient temperature", "frame": "data trend outside none"}
+{"text": "Give me the live cooling circuit flow", "frame": "data now coolant none"}
+{"text": "Find the peak driving pace this month", "frame": "data maximum speed none"}
+{"text": "Return the greatest recorded electric drive unit", "frame": "data maximum motor none"}
+{"text": "Return the greatest recorded power flowing into the pack", "frame": "data maximum chargepower none"}
+{"text": "Return the smallest recorded outside temperature", "frame": "data minimum outside none"}
+{"text": "Report the current remaining battery percentage", "frame": "data now charge none"}

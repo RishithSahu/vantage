@@ -1,0 +1,22 @@
+VERSION "Aster Volt S body CAN (250 kbit/s): TPMS, environment sensors, odometer"
+
+NS_ :
+
+BS_:
+
+BU_: BCM CLU
+
+BO_ 1024 Tpms: 8 BCM
+ SG_ PressFL : 0|8@1+ (2,0) [0|510] "kPa" Vector__XXX
+ SG_ PressFR : 8|8@1+ (2,0) [0|510] "kPa" Vector__XXX
+ SG_ PressRL : 16|8@1+ (2,0) [0|510] "kPa" Vector__XXX
+ SG_ PressRR : 24|8@1+ (2,0) [0|510] "kPa" Vector__XXX
+ SG_ TyreTemp : 32|8@1+ (1,-40) [-40|215] "degC" Vector__XXX
+
+BO_ 1040 BodyEnv: 8 BCM
+ SG_ Rain : 0|8@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Lux : 8|16@1+ (1,0) [0|65535] "lux" Vector__XXX
+ SG_ Aux12V : 24|16@1+ (0.01,0) [0|20] "V" Vector__XXX
+
+BO_ 1056 Odo: 8 CLU
+ SG_ Odometer : 0|32@1+ (0.1,0) [0|400000] "km" Vector__XXX

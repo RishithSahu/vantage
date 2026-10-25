@@ -1,0 +1,848 @@
+# route<TAB>question - written by tools_everyday_paraphrases.py (do not edit by hand)
+battery_now	how is my battery now
+battery_now	how is the battery this morning
+battery_now	battery ok
+battery_now	how are the battery and charge
+battery_now	is the battery alright
+battery_now	is my battery good
+battery_now	is my battery healthy and charged
+battery_now	what is the condition of the pack
+battery_now	is the pack in good state
+battery_now	how is the battery doing
+battery_now	battery status please
+battery_now	what shape is the battery in
+battery_now	how healthy is my battery right now
+battery_now	give me a battery update
+battery_now	how much charge and health does the battery have
+battery_now	what is the battery condition
+battery_now	check the battery for me
+battery_now	battery report
+battery_now	how's the pack doing
+battery_now	where does my battery stand
+battery_now	tell me how the battery is
+battery_now	is the battery in good shape
+battery_now	battery level and health
+battery_now	what's going on with my battery
+battery_now	how much juice is left and how is the battery health
+battery_now	how is my pack now
+battery_now	can you tell me how is my battery now
+battery_now	how is the pack this morning
+battery_now	can you tell me how is the battery this morning
+battery_now	pack ok
+battery_now	is the pack alright
+battery_now	so is the battery alright
+battery_now	is my pack good
+battery_now	is my pack healthy and charged
+battery_now	so what is the condition of the pack
+battery_now	quick question: is the pack in good state
+battery_now	how is the pack doing
+battery_now	pack status please
+battery_now	what shape is the pack in
+battery_now	please what shape is the battery in
+battery_now	how healthy is my pack right now
+battery_now	give me a pack update
+battery_now	hey give me a battery update
+battery_now	how much charge and health does the pack have
+battery_now	I want to know how much charge and health does the battery have
+battery_now	uh check the battery for me
+battery_now	pack report
+battery_now	where does my pack stand
+battery_now	tell me how the pack is
+battery_now	what's going on with my pack
+battery_now	so how much juice is left and how is the battery health
+last_charge	when did I charge last
+last_charge	when was the last time I charged
+last_charge	last time the car was charged
+last_charge	what was the most recent charge
+last_charge	when did I last plug in
+last_charge	how long ago did I charge
+last_charge	tell me about my latest charge
+last_charge	when was it charged last
+last_charge	date of my last charging session
+last_charge	when did the battery last get charged
+last_charge	most recent charging session details
+last_charge	did I charge recently
+last_charge	when was I last on a charger
+last_charge	how did my last charge go
+last_charge	when did I charging last
+last_charge	can you tell me when did I charge last
+last_charge	so last time the car was charged
+last_charge	what was the most latest charging
+last_charge	tell me about my latest charging
+last_charge	please tell me about my latest charge
+last_charge	I want to know when did the battery last get charged
+last_charge	most latest charging session details
+last_charge	I want to know did I charge recently
+charge_cost	how much does charging cost me
+charge_cost	what did I pay for electricity
+charge_cost	how much did I spend on energy this week
+charge_cost	cost of charging last week
+charge_cost	what is my charging bill
+charge_cost	how expensive is it to run the car
+charge_cost	what does a full charge cost
+charge_cost	how much would charging cost at 0.2 per kWh
+charge_cost	money spent on charging
+charge_cost	cost per km of driving
+charge_cost	what is my running cost
+charge_cost	how much have I paid to charge
+charge_cost	electricity cost this month
+charge_cost	charging expenses
+charge_cost	uh how much does charging cost me
+charge_cost	please how much did I spend on energy this week
+charge_cost	please how expensive is it to run the car
+charge_cost	what does a full charging cost
+charge_cost	so what does a full charge cost
+charge_cost	so money spent on charging
+charge_cost	I want to know cost per km of driving
+charge_cost	please what is my running cost
+charge_cost	so charging expenses
+charge_time	how long will it take to charge
+charge_time	how many hours to charge to full
+charge_time	time needed to reach 80 percent
+charge_time	how long until the battery is full
+charge_time	how long to top up the battery
+charge_time	how quickly can it charge
+charge_time	estimated charging time
+charge_time	how long does a charge take
+charge_time	when will the car be charged
+charge_time	how long to get to 90% charge
+charge_time	charging duration from now
+charge_time	I want to know how long will it take to charge
+charge_time	how many hours to charging to full
+charge_time	uh how many hours to charge to full
+charge_time	how quickly can it charging
+charge_time	when will the vehicle be charged
+charge_time	so charging duration from now
+reach	can I get to the next city on this charge
+reach	will I make it to the next town
+reach	is there enough power to reach my destination
+reach	can I get there and back
+reach	will it last until I reach home
+reach	do I have enough to get to the office
+reach	do I have enough charge to get there
+reach	can the car do 200 km
+reach	will the battery last for the trip home
+reach	how many more km can I go
+reach	how far will this charge take me
+reach	is the battery enough for the drive to work
+reach	can I reach 120 km on what is left
+reach	how many kilometres do I have left
+reach	will I make it back home
+reach	what distance can I still cover
+reach	should I recharge before leaving
+reach	is it time to charge
+reach	am I low on battery
+reach	do I have to plug in tonight
+reach	how much driving is left in the battery
+reach	is there enough battery for a 80 km trip
+reach	how much range remains
+reach	how many miles left in the battery
+reach	please can I get there and back
+reach	do I have enough charging to get there
+reach	can the vehicle do 200 km
+reach	I want to know how many more km can I go
+reach	how many km will this charging take me
+reach	hey how many kilometres do I have left
+reach	is it time to charging
+reach	am I low on pack
+reach	quick question: how much driving is left in the battery
+reach	is there enough pack for a 80 km journey
+reach	uh how much range remains
+advice	is it safe to drive today
+advice	should I drive the car in this state
+advice	can I take the car out
+advice	would it be a bad idea to drive now
+advice	is it alright to keep using the car
+advice	do you think it is fine to drive
+advice	should I avoid driving for now
+advice	would you advise against a long journey
+advice	is it ok to go on the motorway
+advice	can the car handle a long drive
+advice	is the vehicle ready for a road trip
+advice	can I safely use the car with these faults
+advice	is it advisable to travel today
+advice	would it be wise to drive to another city
+advice	do I need to stay home or can I drive
+advice	is driving this car right now a problem
+advice	can I do a long drive with the warning on
+advice	is it okay to take a long journey now
+advice	can I go ahead and drive
+advice	may I drive the car
+advice	is it irresponsible to drive it like this
+advice	go or no go for driving today
+advice	do the faults stop me from driving
+advice	can I trust the car for a trip
+advice	is it reliable enough for a long ride
+advice	should I postpone my trip
+advice	any risk in going for a drive
+advice	is it recommended that I drive
+advice	will it be fine to drive to the beach
+advice	is it all right to leave for a long drive
+advice	is it fine to go on the highway with these warnings
+advice	do you recommend that I to go out with the current faults
+advice	is it to drive far
+advice	can I to drive right now
+advice	do you recommend that I to go out given the car's state
+advice	do you recommend that I to drive like this
+advice	is it fine to go on a long drive right now
+advice	may I to head out today
+advice	is it ok to take a long trip given the car's state
+advice	can I to take the car out today
+advice	can I to head out with the current faults
+advice	is it ok to continue my drive
+advice	can I to take the car out with these warnings
+advice	would it be wise to head out in this condition
+advice	is it ok to go on a long drive like this
+advice	is it safe to head out
+advice	would it be wise to go out given the car's state
+advice	is it ok to go for a long journey with the current faults
+advice	can I to go on a long drive given the car's state
+advice	may I to drive given the car's state
+advice	is it to head out right now
+advice	can I to drive like this
+advice	is it to travel today in this condition
+advice	can I to go on a long drive
+advice	can I to go on the highway like this
+advice	is it ok to keep driving given the car's state
+advice	could I to take a road trip with the current faults
+advice	is it advisable to go on a long drive like this
+advice	should I to go for a long journey with the current faults
+advice	is it advisable to drive given the car's state
+advice	could I to go for a long journey with the current faults
+advice	do you recommend that I to drive far
+advice	should I to go out given the car's state
+advice	is it safe to go out
+advice	could I to go on the highway like this
+advice	would it be wise to take a road trip with the current faults
+advice	is it safe to drive far right now
+advice	may I to take a road trip in this condition
+advice	can I to take a road trip today
+advice	is it fine to continue my drive given the car's state
+advice	should I to drive far with the current faults
+advice	would it be wise to head out with these warnings
+advice	is it ok to take a long trip with the current faults
+advice	is it ok to continue my drive today
+advice	is it ok to go on the highway like this
+advice	would it be wise to take a long trip today
+advice	would it be wise to go on a long drive with the current faults
+advice	is it to use the car with these warnings
+advice	do you recommend that I to go on a long drive given the car's state
+advice	is it ok to drive far like this
+advice	is it safe to head out like this
+advice	is it advisable to take a long trip with the current faults
+advice	can I to go on the highway right now
+advice	would it be wise to take a road trip
+advice	could I to take the car out in this condition
+advice	can I to take a road trip right now
+advice	can I to take a road trip
+advice	can I to use the car right now
+advice	is it ok to continue my drive with these warnings
+advice	would it be wise to take the car out
+advice	could I to head out today
+advice	can I to go for a long journey with these warnings
+advice	would it be wise to go on the highway like this
+advice	is it ok to keep driving
+advice	may I to take a road trip
+advice	would it be wise to go on the highway
+advice	may I to continue my drive today
+advice	do you recommend that I to take a long trip in this condition
+advice	should I to head out given the car's state
+advice	is it advisable to go on a long drive
+advice	is it safe to go today
+advice	so is it safe to drive today
+advice	should I drive the vehicle in this state
+advice	I want to know would it be a bad idea to drive now
+advice	is it alright to keep using the vehicle
+advice	I want to know is it alright to keep using the car
+advice	would you advise against a big journey
+advice	I want to know would you advise against a long journey
+advice	can the car handle a long go
+advice	is the vehicle ready for a road journey
+advice	uh is the vehicle ready for a road trip
+advice	can I safely use the vehicle with these faults
+advice	so can I safely use the car with these faults
+advice	would it be wise to go to another city
+advice	do I need to stay home or can I go
+advice	can I do a long go with the warning on
+advice	uh can I do a long drive with the warning on
+advice	is it okay to take a big journey now
+advice	can I go ahead and go
+advice	is it irresponsible to go it like this
+advice	can I trust the car for a journey
+advice	can you tell me is it reliable enough for a long ride
+advice	should I postpone my journey
+advice	I want to know should I postpone my trip
+advice	any risk in going for a go
+advice	will it be fine to go to the beach
+advice	is it all right to leave for a big go
+advice	hey is it fine to go on the highway with these warnings
+advice	I want to know is it to drive far
+advice	can I to go right now
+advice	I want to know can I to drive right now
+advice	do you recommend that I to go like this
+advice	is it ok to take a big trip given the car's state
+advice	can I to take the vehicle out with these warnings
+advice	please can I to take the car out with these warnings
+advice	is it ok to go on a big drive like this
+advice	please is it safe to head out
+advice	uh is it ok to go for a long journey with the current faults
+advice	can I to go on a long go given the car's state
+advice	may I to go given the car's state
+advice	can you tell me is it to travel today in this condition
+advice	can I to go on a big drive
+advice	could I to take a road journey with the current faults
+advice	is it advisable to go on a big drive like this
+advice	should I to go for a big journey with the current faults
+advice	uh is it advisable to drive given the car's state
+advice	uh could I to go for a long journey with the current faults
+advice	I want to know should I to go out given the car's state
+advice	is it okay to go out
+advice	hey is it safe to go out
+advice	would it be wise to take a road journey with the current faults
+advice	is it safe to go far right now
+advice	quick question: is it safe to drive far right now
+advice	may I to take a road journey in this condition
+advice	I want to know may I to take a road trip in this condition
+advice	can you tell me can I to take a road trip today
+advice	is it ok to continue my drive given the car's state
+advice	should I to go far with the current faults
+advice	is it ok to take a big trip with the current faults
+advice	is it ok to continue my go today
+advice	hey is it ok to continue my drive today
+advice	I want to know is it ok to go on the highway like this
+advice	do you recommend that I to go on a big drive given the car's state
+advice	is it ok to go far like this
+advice	is it okay to head out like this
+advice	hey is it safe to head out like this
+advice	is it advisable to take a big journey with the current faults
+advice	uh can I to go on the highway right now
+advice	can you tell me could I to take the car out in this condition
+advice	can I to take a road journey right now
+advice	hey can I to take a road trip right now
+advice	can I to take a road journey
+advice	can I to consume the car right now
+advice	is it ok to continue my go with these warnings
+advice	uh is it ok to continue my drive with these warnings
+advice	would it be wise to take the vehicle out
+advice	can I to go for a big journey with these warnings
+advice	uh may I to take a road trip
+advice	may I to continue my go today
+advice	do you recommend that I to take a big journey in this condition
+advice	hey do you recommend that I to take a long trip in this condition
+advice	so should I to head out given the car's state
+advice	is it advisable to go on a long go
+advice	uh is it advisable to go on a long drive
+signal_why	why is the power showing a minus sign
+signal_why	why is the power below zero
+signal_why	why does the battery power go negative
+signal_why	why is the flow zero when parked
+signal_why	why is there no coolant flow
+signal_why	why is the motor so hot
+signal_why	why is the motor temperature high
+signal_why	why does the pack heat up when charging fast
+signal_why	why is the battery hotter after a drive
+signal_why	why does power go negative when I brake
+signal_why	what does a minus kW reading mean
+signal_why	why is the speed reading nothing
+signal_why	why is the temperature rising
+signal_why	why is the coolant flow low
+signal_why	why is the state of charge going up
+signal_why	why is the power so high
+signal_why	why did the battery temperature jump
+signal_why	why does it show negative current
+signal_why	what is the meaning of negative power
+signal_why	why is the heater power high
+signal_why	why is the pump flow dropping
+signal_why	why is the battery warm while the car is parked
+signal_why	why is the speed so different
+signal_why	why is the state of charge low
+signal_why	why is the coolant flow dropping
+signal_why	why is the battery power dropping
+signal_why	why is the motor temperature so different
+signal_why	why is the pack temperature low
+signal_why	why is the coolant flow negative
+signal_why	why is the speed dropping
+signal_why	why is the motor temperature rising
+signal_why	why is the battery current zero
+signal_why	why is the battery current high
+signal_why	why is the motor temperature negative
+signal_why	why is the state of charge zero
+signal_why	why is the battery current dropping
+signal_why	why is the power so different
+signal_why	why is the battery power low
+signal_why	why is the power rising
+signal_why	why is the coolant flow zero
+signal_why	why is the pack temperature jumping around
+signal_why	why is the power low
+signal_why	why is the coolant flow high
+signal_why	why is the state of charge negative
+signal_why	why is the state of charge so different
+signal_why	why is the coolant flow so different
+signal_why	why is the pack temperature negative
+signal_why	why is the battery current jumping around
+signal_why	why is the battery current so different
+signal_why	why is the motor temperature dropping
+signal_why	why is the coolant flow rising
+signal_why	I want to know why is the power showing a minus sign
+signal_why	so why is the power below zero
+signal_why	why is the motor so warm
+signal_why	uh why does the pack heat up when charging fast
+signal_why	why is the pack hotter after a drive
+signal_why	hey why is the speed reading nothing
+signal_why	hey why is the coolant flow low
+signal_why	why did the pack temperature jump
+signal_why	quick question: why did the battery temperature jump
+signal_why	uh why does it show negative current
+signal_why	quick question: why is the pump flow dropping
+signal_why	why is the pack warm while the car is parked
+signal_why	uh why is the battery warm while the car is parked
+signal_why	so why is the speed so different
+signal_why	why is the state of charging low
+signal_why	uh why is the motor temperature so different
+signal_why	hey why is the coolant flow negative
+signal_why	please why is the motor temperature negative
+signal_why	I want to know why is the state of charge zero
+signal_why	I want to know why is the battery current dropping
+signal_why	hey why is the motor temperature high
+signal_why	can you tell me why is the coolant flow zero
+signal_why	uh why is the state of charge negative
+signal_why	why is the state of charging so different
+signal_why	uh why is the pack temperature negative
+drive_safely	what should I remember to drive safely
+drive_safely	tips so I avoid a crash
+drive_safely	how do I prevent accidents
+drive_safely	what should I be careful about while driving
+drive_safely	advice to stay safe on the road
+drive_safely	how do I drive safely in bad weather
+drive_safely	tips for safer driving
+drive_safely	how to drive carefully in this car
+drive_safely	what are good safe driving habits
+drive_safely	driving safety advice please
+drive_safely	how can I avoid accidents
+drive_safely	advice on driving safely in rain
+drive_safely	how do I stay safe on the motorway
+drive_safely	safe driving rules for an electric car
+drive_safely	what should I do to drive safely
+drive_safely	how to be a careful driver
+drive_safely	recommendations for safe driving
+drive_safely	how can I reduce the risk of accidents
+drive_safely	what should I remember to go safely
+drive_safely	hey what should I be careful about while driving
+drive_safely	how do I go safely in bad weather
+drive_safely	uh how do I drive safely in bad weather
+drive_safely	advice for safer driving
+drive_safely	what are good okay driving habits
+drive_safely	uh how can I avoid accidents
+drive_safely	how do I stay okay on the motorway
+drive_safely	okay driving rules for an electric vehicle
+drive_safely	so safe driving rules for an electric car
+drive_safely	what should I do to go safely
+drive_safely	I want to know how can I reduce the risk of accidents
+improve_range	how can I make the battery last longer
+improve_range	tips to get more kilometres per charge
+improve_range	how do I drive more economically
+improve_range	how to cut my energy use
+improve_range	what can I do to use less electricity
+improve_range	how to increase my mileage per charge
+improve_range	advice to save battery
+improve_range	how do I stretch my range
+improve_range	ways to be more efficient
+improve_range	how can I reduce consumption
+improve_range	what would make the car more efficient
+improve_range	eco driving tips
+improve_range	how can I get more distance from a charge
+improve_range	what saves the most energy
+improve_range	how to improve my efficiency
+improve_range	how can I lower my Wh per km
+improve_range	how can I make the pack last longer
+improve_range	so how can I make the battery last longer
+improve_range	advice to get more kilometres per charging
+improve_range	hey tips to get more kilometres per charge
+improve_range	how do I go more economically
+improve_range	how to cut my power consume
+improve_range	uh how to increase my mileage per charge
+improve_range	advice to save pack
+improve_range	I want to know advice to save battery
+improve_range	what would make the vehicle more efficient
+improve_range	please what would make the car more efficient
+improve_range	how can I get more distance from a charging
+improve_range	can you tell me how can I get more distance from a charge
+speeding	do I drive above the speed limit
+speeding	am I going too quick
+speeding	do I exceed the limit
+speeding	am I a speeder
+speeding	how fast do I usually drive
+speeding	do I drive too quickly on the motorway
+speeding	is my speed too high
+speeding	how often do I go above 120
+speeding	am I a fast driver
+speeding	do I break the speed limit
+speeding	do I go above the speed limit
+speeding	hey do I exceed the limit
+speeding	quick question: am I a speeder
+speeding	how fast do I usually go
+speeding	so how fast do I usually drive
+speeding	uh do I drive too quickly on the motorway
+speeding	please is my speed too high
+speeding	hey am I a fast driver
+hot_battery	did the battery ever overheat
+hot_battery	has the pack been too hot
+hot_battery	was the battery temperature ever high
+hot_battery	did the battery get hot at any point
+hot_battery	what was the hottest the battery got
+hot_battery	how warm did the pack get
+hot_battery	maximum battery temperature ever
+hot_battery	did the battery temperature go too high
+hot_battery	has the battery ever been over the limit
+hot_battery	peak pack temperature
+hot_battery	was the battery running hot
+hot_battery	quick question: did the battery ever overheat
+hot_battery	was the pack temperature ever high
+hot_battery	what was the hottest the pack got
+hot_battery	uh what was the hottest the battery got
+hot_battery	please how warm did the pack get
+hot_battery	quick question: maximum battery temperature ever
+hot_battery	did the pack temperature go too high
+hot_battery	has the pack ever been over the limit
+hot_battery	was the pack running warm
+pump_ok	is the coolant pump fine
+pump_ok	is there anything wrong with the cooling system
+pump_ok	how is the cooling doing
+pump_ok	is the battery cooling working properly
+pump_ok	does the cooling system have a problem
+pump_ok	is the pump healthy
+pump_ok	check the coolant flow for me
+pump_ok	is coolant circulating normally
+pump_ok	any cooling issues
+pump_ok	how's the thermal system
+pump_ok	is the cooling circuit okay
+pump_ok	does the cooling system have a issue
+pump_ok	quick question: is the pump healthy
+pump_ok	I want to know is coolant circulating normally
+v12	what is the state of the twelve volt battery
+v12	how is the 12V doing
+v12	condition of the 12V system
+v12	is the small battery in good state
+v12	how is the 12 volt battery
+v12	is the auxiliary battery good
+v12	12 V battery voltage
+v12	is the small 12v battery healthy
+v12	how's the low voltage battery
+v12	check the 12 V battery
+v12	is the accessory battery weak
+v12	what's the voltage of the 12 volt battery
+v12	is the 12v battery low
+v12	what is the state of the twelve volt pack
+v12	can you tell me what is the state of the twelve volt battery
+v12	please how is the 12V doing
+v12	please is the small battery in good state
+v12	I want to know how is the 12 volt battery
+v12	uh is the auxiliary battery good
+v12	12 V pack voltage
+v12	is the small 12v pack healthy
+v12	quick question: is the small 12v battery healthy
+v12	please how's the low voltage battery
+v12	look at the 12 V pack
+v12	is the accessory pack weak
+v12	quick question: is the accessory battery weak
+v12	what's the voltage of the 12 volt pack
+v12	I want to know is the 12v battery low
+motor_now	how is the motor temperature
+motor_now	is the drive motor overheating
+motor_now	motor temperature check
+motor_now	is the motor running hot
+motor_now	what is the motor temperature now
+motor_now	how warm is the electric motor
+motor_now	is the motor too hot
+motor_now	motor heat status
+motor_now	is the go motor overheating
+motor_now	is the motor running warm
+motor_now	please is the motor running hot
+motor_now	can you tell me what is the motor temperature now
+motor_now	is the motor too warm
+unusual	did the car act strangely yesterday
+unusual	did the car misbehave today
+unusual	was the car behaving oddly
+unusual	anything off with the car lately
+unusual	has the car done anything strange
+unusual	did anything odd happen today
+unusual	was there anything strange yesterday
+unusual	anything abnormal today
+unusual	did the car do anything unusual this morning
+unusual	was anything out of the ordinary yesterday
+unusual	did something go wrong today
+unusual	any strange behaviour today
+unusual	has anything unusual happened this week
+unusual	anything noteworthy today
+unusual	did anything weird happen on my drive
+unusual	did the vehicle act strangely yesterday
+unusual	was the vehicle behaving oddly
+unusual	anything off with the car recently
+unusual	has the vehicle done anything strange
+unusual	please did anything odd happen today
+unusual	was there anything strange the day before today
+unusual	uh was there anything strange yesterday
+unusual	please anything abnormal today
+unusual	did the vehicle do anything unusual this morning
+unusual	hey did the car do anything unusual this morning
+unusual	please any strange behaviour today
+overview	what is the overall picture for my car
+overview	how are things overall with the vehicle
+overview	what is the general state of my car
+overview	overall situation of the car
+overview	how is everything with the car
+overview	summarise my last week
+overview	give me a weekly summary
+overview	how did the week go
+overview	overview of this week
+overview	recap of the past seven days
+overview	what did I do this week with the car
+overview	week in review
+overview	tell me about this week
+overview	how has the last week been
+overview	report for the week
+overview	summary of my driving this week
+overview	how is the car doing overall
+overview	overall car status
+overview	general status of the vehicle
+overview	give me the big picture of the car
+overview	how are things with the car
+overview	what is the overall picture for my vehicle
+overview	so what is the overall picture for my car
+overview	can you tell me overall situation of the car
+overview	give me a weekly overview
+overview	please recap of the past seven days
+overview	so week in review
+overview	quick question: report for the week
+overview	how is the vehicle doing overall
+overview	overall vehicle status
+style	how do I drive
+style	am I a smooth driver
+style	is my driving style good
+style	do I brake too hard
+style	do I accelerate too fast
+style	am I an aggressive driver
+style	what is my driving rating
+style	give my driving a score
+style	how well do I drive
+style	how would you rate my driving
+style	is my driving smooth
+style	rate how I drive
+style	how do I go
+style	so how do I drive
+style	hey am I an aggressive driver
+style	please what is my driving rating
+style	can you tell me give my driving a score
+style	how well do I go
+style	hey how would you rate my driving
+style	uh rate how I drive
+dtc_explain	what does the fault code mean
+dtc_explain	explain the trouble code
+dtc_explain	what is that error code
+dtc_explain	what is the dtc about
+dtc_explain	tell me about the diagnostic code
+dtc_explain	what does P1A00 stand for
+dtc_explain	what is the meaning of the fault
+dtc_explain	what is the code that appeared
+dtc_explain	decode the last trouble code
+dtc_explain	what is the error that was stored
+dtc_explain	what does the code say
+dtc_explain	uh tell me about the diagnostic code
+dtc_explain	please what does P1A00 stand for
+dtc_explain	hey what is the meaning of the fault
+dtc_explain	hey what does the code say
+battery_age	how degraded is the pack
+battery_age	how much has my battery worn out
+battery_age	how bad is the battery degradation
+battery_age	has my battery lost capacity
+battery_age	how much capacity does the battery have left compared to new
+battery_age	how old is the battery
+battery_age	how much has the battery degraded
+battery_age	what is the battery wear
+battery_age	how much capacity is gone
+battery_age	how worn is the battery
+battery_age	battery degradation so far
+battery_age	how many percent capacity lost
+battery_age	state of health of the battery
+battery_age	how much has the battery aged
+battery_age	what is the health of the pack in percent
+battery_age	how much has my pack worn out
+battery_age	quick question: how bad is the battery degradation
+battery_age	has my pack lost capacity
+battery_age	so how much capacity does the battery have left compared to new
+battery_age	how old is the pack
+battery_age	what is the pack wear
+battery_age	how worn is the pack
+battery_age	can you tell me how worn is the battery
+battery_age	I want to know state of health of the battery
+battery_age	quick question: how much has the battery aged
+battery_age	so what is the health of the pack in percent
+charging_now	is it charging
+charging_now	is the car plugged in right now
+charging_now	am I charging at the moment
+charging_now	is the car connected to a charger
+charging_now	is charging in progress
+charging_now	is the battery being charged now
+charging_now	are we charging
+charging_now	is the charger connected
+charging_now	is the vehicle plugged in right now
+charging_now	is the vehicle connected to a charger
+charging_now	I want to know is charging in progress
+charging_now	is the pack being charged now
+charging_now	I want to know are we charging
+top_speed	how fast have I been
+top_speed	what is the fastest speed I reached
+top_speed	highest speed I reached
+top_speed	what was the maximum speed I did
+top_speed	my record speed
+top_speed	fastest speed recorded
+top_speed	how fast did I go at most
+top_speed	peak speed
+top_speed	so how fast did I go at most
+places_most	where do I go most
+places_most	which are my most visited places
+places_most	my frequent destinations
+places_most	what places do I drive to often
+places_most	where do I charge most often
+places_most	which place do I visit most
+places_most	usual destinations
+places_most	my regular stops
+places_most	where do I usually charge
+places_most	hey what places do I drive to often
+places_most	where do I charging most often
+places_most	can you tell me my regular stops
+places_most	where do I usually charging
+places_most	hey where do I usually charge
+commute	how long does my regular trip take
+commute	how long is my daily drive
+commute	what is my usual commute time
+commute	time of my normal route
+commute	how long does my work trip take
+commute	my typical journey time
+commute	what is my most common route
+commute	I want to know how long is my daily drive
+commute	how long does my work journey take
+longest_trip	what was my biggest drive
+longest_trip	longest drive I did
+longest_trip	my farthest trip
+longest_trip	what was the longest journey
+longest_trip	which trip was the longest
+longest_trip	longest distance in one trip
+longest_trip	furthest I have driven in one go
+longest_trip	so what was my biggest drive
+longest_trip	longest go I did
+longest_trip	so which trip was the longest
+longest_trip	longest distance in one journey
+longest_trip	I want to know furthest I have driven in one go
+last_trip	describe the previous drive
+last_trip	walk me through my last trip
+last_trip	give details of the last drive
+last_trip	how did my last drive go
+last_trip	what did I do on my last trip
+last_trip	summary of the most recent drive
+last_trip	tell me about my last drive
+last_trip	details of the latest trip
+last_trip	how was my previous journey
+last_trip	what happened on my last trip
+last_trip	last journey summary
+last_trip	information about my most recent drive
+last_trip	describe the previous go
+last_trip	please describe the previous drive
+last_trip	walk me through my last journey
+last_trip	quick question: walk me through my last trip
+last_trip	give details of the last go
+last_trip	how did my last go go
+last_trip	quick question: what did I do on my last trip
+last_trip	summary of the most latest go
+last_trip	hey summary of the most recent drive
+last_trip	hey tell me about my last drive
+last_trip	so details of the latest trip
+last_trip	I want to know how was my previous journey
+eff_day	how efficient was my driving yesterday
+eff_day	energy per km yesterday
+eff_day	what was my consumption yesterday
+eff_day	how much energy per kilometre did I use today
+eff_day	yesterday's efficiency
+eff_day	how much did I use per km yesterday
+eff_day	efficiency of the last day
+eff_day	how efficient was my driving the day before today
+eff_day	power per km the day before today
+eff_day	what was my consumption the day before today
+eff_day	how much power per kilometre did I use today
+eff_day	how much did I use per km the day before today
+best_day	on which day was I most efficient
+best_day	what was my best day for consumption
+best_day	which day used the least energy per km
+best_day	on which day was my consumption worst
+best_day	my most wasteful day
+best_day	most economical day
+best_day	what day had the highest consumption
+best_day	I want to know what was my best day for consumption
+eff_trend	is my energy use going up
+eff_trend	am I consuming more than before
+eff_trend	has my consumption changed lately
+eff_trend	is the car using more power than it used to
+eff_trend	is my efficiency getting worse recently
+eff_trend	am I using more electricity than normal
+eff_trend	is my consumption higher this week
+eff_trend	has my consumption changed recently
+eff_trend	I want to know is the car using more power than it used to
+trip_count	number of trips this week
+trip_count	how many drives did I take
+trip_count	how many journeys did I make last week
+trip_count	count of my trips
+trip_count	how many times did I drive this week
+trip_count	so number of trips this week
+trip_count	how many times did I go this week
+trip_count	please how many times did I drive this week
+regen	how much energy did braking give back
+regen	how much did regeneration save
+regen	energy recovered by regen this week
+regen	how much regen braking did I do
+regen	how much power was recuperated
+regen	how much power did braking give back
+regen	uh how much did regeneration save
+regen	uh energy recovered by regen this week
+regen	can you tell me how much power was recuperated
+leave_time	when did I leave home
+leave_time	what time did I set off
+leave_time	when did I last go out of the house
+leave_time	when did I depart this morning
+leave_time	I want to know when did I leave home
+leave_time	can you tell me when did I depart this morning
+compare_months	compare this month to the previous month
+compare_months	how is this month versus last month
+compare_months	month over month comparison
+compare_months	is this month different from last month
+explain_simple	explain the last alert in simple words
+explain_simple	what does the latest warning mean in plain english
+explain_simple	tell me about the last warning like I am five
+explain_simple	explain that warning briefly
+explain_simple	what was the last alarm about in simple terms
+explain_simple	in plain words what was the last fault
+briefing	give me a briefing
+briefing	brief me before I drive
+briefing	what should I know before I leave
+briefing	morning briefing
+briefing	pre drive check please
+briefing	give me the daily report
+briefing	update me on the car
+briefing	tell me what I need to know about the car today
+briefing	pre drive look at please
+help	what are you able to answer
+help	which kinds of questions do you handle
+help	what can you tell me about
+help	what are the things I can ask
+help	what questions do you support
+help	what can I ask you about my car
+help	which questions do you understand
+help	how should I ask you things
+help	give me some sample questions
+help	what do I say to you
+help	list of things you can tell me
+help	what topics can I ask about
+help	I do not know what to ask
+help	quick question: what questions do you support
+help	can you tell me what can I ask you about my car
+help	hey which questions do you understand
+help	can you tell me give me some sample questions

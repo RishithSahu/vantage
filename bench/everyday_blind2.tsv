@@ -1,0 +1,68 @@
+# second unseen set, written after the first one was used for tuning (measure with: python bench/eval_everyday.py data/gen_courier.db bench/everyday_blind2.tsv)
+advice	hey so is it fine if I drive to my parents place which is 200 km away
+advice	do you think the car will manage a long drive given what is wrong with it
+advice	should I be taking the car out at all right now
+advice	is there any danger in driving now
+advice	I want to go to the beach tomorrow, is that a good idea
+advice	can I use the car for my daily commute with this problem
+advice	is it responsible to continue driving
+signal_why	why does it say minus on the power when I slow down
+signal_why	why is my coolant flow showing zero right now
+signal_why	why is the motor so warm after the motorway
+signal_why	what is negative kW
+signal_why	why is the battery heating when I fast charge
+drive_safely	what should I keep in mind to drive safely
+drive_safely	give me some tips so I do not have an accident
+drive_safely	how can I improve my driving safety
+battery_now	how is my battery today
+battery_now	can you tell me about the state of the pack
+battery_now	is my battery fine
+last_charge	when did I plug the car in last
+last_charge	tell me about the last time I charged
+reach	uh how much charge do I have and how far can I go
+reach	can I get to the next town on what I have
+reach	do I need to charge before tomorrow morning
+charge_cost	what did the electricity for the car cost me last week
+charge_cost	how much am I paying for charging
+charge_time	how long would it take to get to full
+charge_time	time to charge from here to 90 percent
+improve_range	what can I do to make my range better
+improve_range	how do I save power while driving
+speeding	do I drive over the speed limit a lot
+speeding	am I too fast on the highway
+hot_battery	has my battery been overheating
+hot_battery	was the pack ever dangerously hot
+pump_ok	how's the coolant pump
+pump_ok	is there a cooling problem
+v12	what's the state of my 12V
+motor_now	how hot is my motor
+unusual	was anything strange going on today
+unusual	did the car behave weirdly yesterday
+overview	how has the car been this week
+overview	sum up the last seven days
+overview	what's the overall situation with my car
+style	is my driving smooth or rough
+style	give me a score for my driving
+dtc_explain	explain the fault code to me
+dtc_explain	what does the stored error mean
+battery_age	how degraded is my battery
+battery_age	how much of the battery capacity have I lost
+charging_now	is anything plugged into the car right now
+top_speed	how fast did I drive at the maximum
+places_most	which places does the car go to the most
+commute	how much time does my daily commute take
+longest_trip	what is the longest drive the car has done
+last_trip	describe my most recent trip
+eff_day	how efficient was today
+best_day	when was my best day for efficiency
+eff_trend	am I using more energy lately
+trip_count	how many trips did the car do last week
+regen	how much energy did regenerative braking return
+explain_simple	explain the last warning in easy words
+briefing	give me a quick overview before I go
+help	what questions are you able to answer
+smalltalk	hey there
+smalltalk	thanks a lot
+smalltalk	that was helpful
+foreign	bhai gaadi theek hai kya
+foreign	mujhe batao battery kitni bachi hai

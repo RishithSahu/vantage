@@ -1,0 +1,269 @@
+# Round 10 (2026-10-24), file b: near-synonym concepts, health / anomaly / trend wording, figurative speech, Hindi-English, typos, specs and things the car does not record.
+# No row copies a frozen question; the held-out families (bench/meaning_eval/holdout_v10.tsv) have no variants here.
+#  R5  "how is X doing / what shape is X in" -> health <X>_condition;  "anything odd / strange / off with X" -> anomaly <X>_condition;  "how do i look after X" -> advice <X>_condition
+#  R6  a number of days / weeks asked about is `ent`, a time literal is not
+#  R7  "<thing> in <unit>" (kelvin, fahrenheit, psi) is the current value, not a definition
+
+# ------------------------------------------------------------------------------------------------ R5 health / anomaly / advice
+how are the brakes holding up | health brake_condition
+state of the brakes | health brake_condition
+are my brakes ok | health brake_condition
+what condition are the brakes in | health brake_condition
+is the cooling system alright | health cooling_condition
+is the pump fine | health cooling_condition
+how is the coolant system doing | health cooling_condition
+are the cooling pump and loop ok | health cooling_condition
+confirm the pump works | health cooling_condition
+how is the coolant feeling | health cooling_condition
+is the coolant happy | health cooling_condition
+did the coolant recover on its own | health cooling_condition
+is the cooling problem gone now | health cooling_condition
+how is the battery condition | health battery_condition
+battery cond | health battery_condition
+batery condtion | health battery_condition
+bat condition pls | health battery_condition
+how is the traction battery doing overall | health battery_condition
+motor cond | health motor_condition
+how is the motor doing | health motor_condition
+how are the tyres holding up | health tyre_condition
+tyre condition | health tyre_condition
+how is the 12 volt doing | health aux_battery_condition
+state of the auxiliary battery | health aux_battery_condition
+give me the full report | health briefing
+status report please | health briefing
+overall report | health briefing
+report on the car | health briefing
+bring me up to date on the car | health briefing
+my usual update | health briefing
+same as always please | health briefing
+how do i look after the battery | advice battery_condition
+tips to make the battery last longer | advice battery_condition
+how can i keep the pack healthy for years | advice battery_condition
+how should i charge to protect the battery | advice battery_condition
+what is the best way to treat the traction battery | advice battery_condition
+anything abnormal in how the battery is behaving | anomaly battery_condition
+is the battery acting strange | anomaly battery_condition
+is the motor behaving oddly | anomaly motor_condition
+anything strange with the cooling | anomaly cooling_condition
+any odd behaviour from the brakes | anomaly brake_condition
+is the 12 volt acting strange | anomaly aux_battery_condition
+anything off with the tyres | anomaly tyre_condition
+is anything unusual with the tyres | anomaly tyre_condition
+did the tyres do anything unusual this week | anomaly tyre_condition
+anything weird with the motor temperature this week | anomaly motor_temperature
+did the battery temperature behave strangely | anomaly battery_temperature
+is the speed data odd today | anomaly speed
+was my consumption unusual last month | anomaly wh_per_km
+anything unusual about the charging lately | anomaly charging_session
+anything out of the ordinary about how i drive | anomaly driving_style
+were there any anomalies in the cooling flow | anomaly coolant_flow
+anything weird in the 12 volt supply | anomaly aux_battery_voltage
+
+# ------------------------------------------------------------------------------------------------ trend (retrieval + understanding of change over time)
+is my battery health dropping quicker than it should | trend battery_soh op=drop
+is the pack ageing faster than normal | trend battery_soh op=drop
+battery degradation faster than expected | trend battery_soh op=drop
+has the state of health stayed the same | trend battery_soh op=change
+did the battery health change at all | trend battery_soh op=change
+since when did hard braking become less frequent | trend hard_braking op=drop
+when did hard acceleration start to rise | trend hard_acceleration op=rise
+is the pack hotter lately than before | trend battery_temperature op=rise
+is the pack temperature creeping up | trend battery_temperature op=rise
+has my efficiency improved over the last month | trend wh_per_km op=drop
+is my consumption getting worse | trend wh_per_km op=rise
+how has my range changed since last month | trend range_estimate op=change
+is the tyre losing pressure slowly | trend tyre_pressure op=drop
+did regen improve lately | trend regen_energy op=rise
+is the 12 volt getting weaker | trend aux_battery_voltage op=drop
+has charging got slower | trend charging_power op=drop
+are my trips getting longer | trend distance_driven op=rise ent=trip
+is the motor running hotter than it used to | trend motor_temperature op=rise
+did the coolant flow fall over the weeks | trend coolant_flow op=drop
+has my speed changed over the month | trend speed op=change
+did warnings become more common | trend any_warning op=rise
+are there fewer faults than before | trend diagnostic_code op=drop
+how did the battery charge level move today | trend battery_soc op=change
+what is the trend in my energy use | trend energy_used op=change
+is the number of hard brakes going up | trend hard_braking op=rise
+did the camera get worse over time | trend camera_sharpness op=drop
+
+# ------------------------------------------------------------------------------------------------ figurative / slang (training families; pulse, vital signs, fever, tired, heartbeat are HELD OUT)
+what mood is the pump in | health cooling_condition
+is my ride in good shape | health vehicle_health
+the car seems off, is anything wrong | health vehicle_health
+any gremlins in the wiring | health vehicle_health
+how long since it last pinged me | events any_warning op=last
+when did the thing last chirp at me | events any_warning op=last
+is the battery still holding its charge | trend battery_soh op=drop
+how thirsty is she | stat wh_per_km op=mean
+burning through juice lately | stat energy_used op=sum
+how much juice is left | now battery_soc
+is the car running on fumes | now battery_soc
+the pack is baking, is that normal | health battery_condition
+
+# ------------------------------------------------------------------------------------------------ Hindi-English
+battery kitni bachi hai | now battery_soc
+battery kitna percent hai | now battery_soc
+charge kitna hai abhi | now battery_soc
+gaadi ki speed kitni hai | now speed
+speed kitni hai abhi | now speed
+tyre pressure kitna hai | now tyre_pressure
+tyre ka pressure theek hai kya | health tyre_condition
+engine garam hai kya | now motor_temperature
+pichle hafte kitne km chale | stat distance_driven op=sum
+pichle hafte ki average speed batao | stat speed op=mean
+is hafte ki average speed kya thi | stat speed op=mean
+kitni baar hard brake lagaya is hafte | events hard_braking op=count
+brake pads kitne bache hain | now brake_pad_life
+odometer kitna dikha raha hai | now odometer
+gaadi theek hai kya | health vehicle_health
+koi warning aayi kya | events any_warning op=exists
+range kitni bachi hai | estimate range_estimate
+charge hone mein kitna time lagega | estimate charge_time
+service kab hai gaadi ki | estimate maintenance
+kitna fuel bacha hai | now fuel_level
+fuel kitna bacha hai | now fuel_level
+mileage kitna de raha hai | stat wh_per_km op=mean
+kitne trip kiye is hafte | stat trip_record op=count
+sabse lamba trip kaunsa tha | extreme distance_driven op=max ent=trip
+aaj ka mausam kaisa hai | offtopic none
+shukriya | social none
+namaste | social none
+
+# ------------------------------------------------------------------------------------------------ typos / shorthand / telegraphic
+whats my battry level | now battery_soc
+battry temp | now battery_temperature
+motr temp now | now motor_temperature
+tyre presure | now tyre_pressure
+spd now | now speed
+avg spd last wk | stat speed op=mean
+max spd this mnth | extreme speed op=max
+km this wk | stat distance_driven op=sum
+odo reading | now odometer
+soc pls | now battery_soc
+soh now | now battery_soh
+wh/km last 7 days | stat wh_per_km op=mean
+warnings this wk | events any_warning op=count
+dtc list | events diagnostic_code op=list
+last dtc | events diagnostic_code op=last
+y is batt hot | why battery_overheat_warning
+pls tell me the range | estimate range_estimate
+hrd brakes today | events hard_braking op=count
+regen this wk | stat regen_energy op=sum
+chrg time left | estimate charge_time
+temp of pack max | extreme battery_temperature op=max
+brk pad life | now brake_pad_life
+cabin temp | now cabin_temperature
+tyr pressures psi | now tyre_pressure
+
+# ------------------------------------------------------------------------------------------------ R7 display units: the value, not the definition
+show the pack temperature in kelvin | now battery_temperature
+motor temp in fahrenheit please | now motor_temperature
+battery temperature in degrees f | now battery_temperature
+tyre pressure in psi please | now tyre_pressure
+speed in miles per hour | now speed
+range in miles | estimate range_estimate
+distance driven this week in miles | stat distance_driven op=sum
+
+# ------------------------------------------------------------------------------------------------ now: concepts that were confused
+what is the steering wheel angle | now steering_angle
+how far is the wheel turned | now steering_angle
+steering angle now | now steering_angle
+how much torque is the driver putting into the wheel | now steering_torque
+driver steering effort | now steering_torque
+where is the car parked | now location
+where am i parked right now | now location
+show me my parking spot | now location
+where did i leave the car | now location
+current motor output | now motor_power
+how much power is the motor making | now motor_power
+what does the odometer say | now odometer
+km on the clock | now odometer
+reading on the odometer | now odometer
+what is the oil pressure reading | now engine_oil_pressure
+
+# ------------------------------------------------------------------------------------------------ spec: things the vehicle profile lists
+which drive modes does the car have | spec drive_modes
+list the selectable driving modes | spec drive_modes
+does it have a sport mode | spec drive_modes
+can i power a laptop from the car | spec export_power
+does the car support v2l | spec export_power
+how much power can the car supply to an appliance | spec export_power
+what is the rating of my home charger | spec home_charger_power
+how powerful is the wallbox | spec home_charger_power
+what kw is the home charger | spec home_charger_power
+how often should the car be serviced | spec service_interval
+service interval in km | spec service_interval
+what is the recommended service gap | spec service_interval
+distance between services | spec service_interval
+
+# ------------------------------------------------------------------------------------------------ things the car does not record
+cabin humidity level | now unlisted
+is there a cabin humidity sensor | now unlisted
+heated steering wheel status | now unlisted
+is the steering wheel heater on | now unlisted
+how many cup holders does it have | spec unlisted
+number of usb ports | spec unlisted
+is there a sunroof | spec unlisted
+boot space in litres | spec unlisted
+how many airbags are fitted | spec unlisted
+what colour is the paint | spec unlisted
+what is the sound level in the cabin | now unlisted
+how noisy is the cabin | now unlisted
+what is the gearbox oil temperature | now unlisted
+what is the brake fluid temperature | now unlisted
+how many people are in the car | now unlisted
+
+# ------------------------------------------------------------------------------------------------ stat conventions
+how many times did the battery exceed 40 degrees | stat battery_temperature op=count cond=threshold
+number of minutes the pack was over 35c | stat battery_temperature op=duration cond=threshold
+how long was the battery hotter than 40 | stat battery_temperature op=duration cond=threshold
+how often did the motor go above 90 | stat motor_temperature op=count cond=threshold
+time spent with the tyres below 200 kpa | stat tyre_pressure op=duration cond=threshold
+total distance covered since new | stat distance_driven op=sum
+all time distance driven | stat distance_driven op=sum
+how many km in total so far | stat distance_driven op=sum
+how many hours was the car parked this week | stat drive_mode op=duration cond=parked
+time spent parked last month | stat drive_mode op=duration cond=parked
+parking time yesterday | stat drive_mode op=duration cond=parked
+total energy the drive unit consumed yesterday | stat energy_used op=sum
+kwh used this week | stat energy_used op=sum
+how many kwh did my trip to the shops use | stat energy_used op=sum ent=trip
+how did the cold affect my energy use | stat wh_per_km op=mean cond=cold
+was my consumption higher when it was freezing | stat wh_per_km op=mean cond=cold
+what is the usual coolant temperature when driving | stat motor_temperature op=usual
+typical battery temperature while charging | stat battery_temperature op=usual
+what is the fuel consumption this week | stat fuel_rate op=mean
+how long did the car stand charging last week | stat drive_mode op=duration cond=charging
+share of time charging this month | stat drive_mode op=share cond=charging
+average speed on the highway | stat speed op=mean cond=highway
+time at highway speed last week | stat speed op=duration cond=high_speed
+how many hard brakes were outside the city | events hard_braking op=count cond=not_city
+trips that were not on the highway | stat trip_record op=count cond=not_highway
+how many dc fast charges did i do this month | events charging_session op=count cond=fast_charging
+how many of my charges were fast charges | events charging_session op=count cond=fast_charging
+compare city and motorway speeds | compare speed op=mean cond=highway vs=city
+city versus highway average speed | compare speed op=mean cond=city vs=highway
+how does my highway speed differ from city speed | compare speed op=mean cond=highway vs=city
+compare motorway and urban consumption | compare wh_per_km op=mean cond=highway vs=city
+is the consumption lower in the city than on the highway | compare wh_per_km op=mean cond=city vs=highway
+
+# ------------------------------------------------------------------------------------------------ at (a past moment)
+what was the speed 90 minutes ago | at speed
+battery temperature half an hour back | at battery_temperature
+tyre pressure at three pm | at tyre_pressure
+speed two hours ago | at speed
+soc yesterday at noon | at battery_soc
+how much charge did i have this morning | at battery_soc
+motor temperature at eight last night | at motor_temperature
+where was the car an hour ago | at location
+
+# ------------------------------------------------------------------------------------------------ context: what happened around an event
+what was going on before the pack overheated | context battery_overheat_warning
+what led up to the battery warning | context battery_overheat_warning
+what happened just before the coolant flow dropped | context coolant_flow_drop
+the minutes before the flow fell | context coolant_flow_drop
+what was happening around the voltage dip | context voltage_dip
+what happened before the last reset | context ecu_reset
+what happened before the engine temperature warning | context overtemp_warning
+what led to the shutdown | context unexpected_shutdown

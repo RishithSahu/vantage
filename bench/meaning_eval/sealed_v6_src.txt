@@ -1,0 +1,129 @@
+# sealed_v6: written 2026-10-24 (round 11), after natural_v11c/d existed and BEFORE the round-11 model was evaluated. Never trained on; the builder's leak filter reads it. Free wording, three car types.
+
+ev | how much juice is left in the pack | now battery_soc
+ev | whats my range if I keep driving like this | estimate range_estimate
+ev | how many kilometres have I done today | stat distance_driven op=sum
+ev | what was the temperature of the battery at its worst this week | extreme battery_temperature op=max
+ev | has the car had any faults this month | events diagnostic_code op=exists
+ev | how often did the lane assist give up last month | events adas_disengagement op=count
+ev | give me a rundown of the tyres | health tyre_condition
+ev | is the front left tyre low | now tyre_pressure
+ev | how fast was I going at the top of that hill | extreme speed op=max
+ev | average speed on my trips this week | stat speed op=mean
+ev | how much do I spend to charge | estimate charge_cost
+ev | what does regen mean | define regen_energy
+ev | how do you calculate the range | howto range_estimate
+ev | how big is the battery | spec battery_capacity
+ev | what is the software version | spec software_version
+ev | tell me my driving score | health driving_style
+ev | how smooth is my driving compared with before | trend driving_style op=change
+ev | why did the pack get so warm after the motorway | why battery_overheat_warning
+ev | what caused the warning light yesterday | why any_warning
+ev | what is the air pressure at the moment | now tyre_pressure
+ev | highest charging power I ever saw | extreme charging_power op=max
+ev | how long will it take to charge fully | estimate charge_time
+ev | what is P0A94 | define diagnostic_code
+ev | is the car okay to drive | health vehicle_health
+ev | anything I should do for the battery | advice battery_condition
+ev | how do I stop the tyres wearing out | advice tyre_condition
+ev | when is the next service due | estimate maintenance
+ev | whats the 12v at | now aux_battery_voltage
+ev | is the 12v battery healthy | health aux_battery_condition
+ev | did the motor overheat this week | events overtemp_warning op=exists
+ev | how many times did the pack go above 38 degrees this week | stat battery_temperature op=count cond=threshold
+ev | minutes spent above 120 km/h yesterday | stat speed op=duration cond=threshold
+ev | is it raining | now rain
+ev | what is the outside temperature | now ambient_temperature
+ev | how much energy did I use yesterday | stat energy_used op=sum
+ev | my average consumption this week | stat wh_per_km op=mean
+ev | which trip used the most energy | extreme energy_used op=max ent=trip
+ev | when did I last charge | events charging_session op=last
+ev | how many charging sessions last week | events charging_session op=count
+ev | how much did I regenerate this month | stat regen_energy op=sum
+ev | compare this week's consumption with last week | compare wh_per_km op=mean vs=period
+ev | is the pack warmer than the motor | compare battery_temperature op=mean c2=motor_temperature
+ev | did the 12 volt dip below 12 last week | events voltage_dip op=exists
+ev | list the faults from this week | events diagnostic_code op=list
+ev | how many hard stops today | events hard_braking op=count
+ev | whats the steering angle now | now steering_angle
+ev | which way am I heading | now heading
+ev | how high are we | now altitude
+ev | is the door open | now door_state
+ev | are the headlights on | now headlight_state
+ev | did the cameras get blocked this week | events camera_blocked op=exists
+ev | has the software been updated | spec software_version
+ev | brake pad life left | now brake_pad_life
+ev | how hot are the brakes | now brake_temperature
+ev | can you open the sunroof | control none
+ev | play my playlist | offtopic none
+ev | tell me a joke | social none
+ev | what is the capital of France | offtopic none
+ev | switch off the speed limit warning for good | unsafe none
+ev | what was the colour of my seats | unsupported none
+ev | how much did I pay for parking | unsupported none
+ev | who drove the car yesterday | unsupported none
+ev | export my trips to my phone | unsafe none
+ev | hello there | social none
+ev | thank you | social none
+petrol | how much petrol do I have | now fuel_level
+petrol | how far will the tank take me | estimate range_estimate
+petrol | mileage this week | stat fuel_rate op=mean
+petrol | how many litres did I burn today | stat fuel_rate op=sum
+petrol | what is the fuel tank capacity | spec fuel_level
+petrol | how hot is the engine | now motor_temperature
+petrol | what are the revs | now engine_rpm
+petrol | highest revs this month | extreme engine_rpm op=max
+petrol | engine oil temperature | now engine_oil_temperature
+petrol | oil pressure now | now engine_oil_pressure
+petrol | is the check engine light on | health diagnostic_status
+petrol | what does P0420 mean | define diagnostic_code
+petrol | why is the engine light on | why diagnostic_code
+petrol | when should I change the oil | estimate maintenance
+petrol | tips to save petrol | advice fuel_rate
+petrol | how do I drive more efficiently | advice driving_style
+petrol | was my driving efficient this week | health driving_style
+petrol | how long did I idle yesterday | stat drive_mode op=duration cond=idling
+petrol | fuel used on the highway versus city | compare fuel_rate op=mean cond=highway vs=city
+petrol | what was my worst trip for fuel | extreme fuel_rate op=max ent=trip
+petrol | when did I last fill up | events charging_session op=last
+petrol | has the oil temperature been going up | trend engine_oil_temperature op=rise
+petrol | is the engine healthy | health motor_condition
+petrol | how is the starter battery | health aux_battery_condition
+petrol | how much torque is the engine making | now engine_torque
+petrol | how much power does the engine have | spec horsepower
+petrol | what is the throttle position | now throttle_position
+petrol | how many hours has the engine run in total | now engine_hours
+petrol | what is the odometer | now odometer
+petrol | how much petrol per 100 km last month | stat fuel_rate op=mean
+petrol | fuel price near me | unsupported none
+petrol | what is a lambda sensor | define lambda
+petrol | what is fuel trim | define short_term_fuel_trim
+petrol | any misfire codes | events diagnostic_code op=exists
+petrol | intake air temperature now | now intake_air_temperature
+petrol | is the engine knocking | unsupported none
+petrol | turn on the heater | control none
+diesel | how much diesel is in the tank | now fuel_level
+diesel | how much adblue is left | now def_level
+diesel | is the dpf clogged | now dpf_soot_load
+diesel | how many regenerations did the dpf do | stat dpf_regeneration op=count
+diesel | what is the exhaust temperature | now exhaust_gas_temperature
+diesel | what is the boost pressure | now boost_pressure
+diesel | what is the egr valve doing | now egr_position
+diesel | highest exhaust temperature this week | extreme exhaust_gas_temperature op=max
+diesel | what does the dpf do | define dpf_soot_load
+diesel | what is adblue | define def_level
+diesel | when do I need to refill adblue | now def_level
+diesel | how far can I go on a tank | estimate range_estimate
+diesel | km per litre this month | stat fuel_rate op=mean
+diesel | is the soot level rising | trend dpf_soot_load op=rise
+diesel | is the turbo working properly | health motor_condition
+diesel | any warnings about the exhaust | events diagnostic_code op=exists
+diesel | engine load now | now engine_load
+diesel | average engine load this week | stat engine_load op=mean
+diesel | how long was the engine idling this week | stat drive_mode op=duration cond=idling
+diesel | engine speed now | now engine_rpm
+diesel | fuel rail pressure | now fuel_rail_pressure
+diesel | what is the catalyst temperature | now catalyst_temperature
+diesel | how heavy is the load | unsupported none
+diesel | is the cab warm | now cabin_temperature
+diesel | how much fuel per hour of work | stat fuel_rate op=mean

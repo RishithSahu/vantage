@@ -1,0 +1,42 @@
+{
+  "_comment": "Resource tiers: ONE application, several resource profiles.  The interfaces (profile packs, runtime, database schema, assistant API) never change between tiers; only these numbers do.  These are the FIXED fallback profiles. The running product computes its own plan from the hardware (vgpt/scale/plan.py, explained in docs/SCALING.md) and corrects it by measurement; the Raspberry Pi 4 and laptop figures are in results/scaling/.",
+  "default": "edge2g",
+  "tiers": {
+    "edge2g": {
+      "label": "Reference board: 2 ARM A5x cores, 2 GB RAM (the case study's constraint)",
+      "ram_gb": 2, "cores": 2,
+      "model": {"base": "qwen2.5-0.5b-instruct-q4_k_m.gguf", "adapter": "meaning-lora-full_v11.gguf", "threads": 2, "n_ctx": 1024, "workers": 1, "mmap": true},
+      "sqlite": {"cache_kb": 4096, "mmap_mb": 0},
+      "sessions": 2, "ring_s": 420,
+      "retention": {"fine_days": 7, "coarse_days": 365, "log_days": 1825, "context_days": 1825, "archive_days": 365, "records_days": 1825},
+      "notes": "one model context; one year of numerical history and five years of durable records"
+    },
+    "pi5": {
+      "label": "Raspberry Pi 5 (4 x A76, 8 GB) or an automotive Cortex-A76 board",
+      "ram_gb": 8, "cores": 4,
+      "model": {"base": "qwen2.5-0.5b-instruct-q4_k_m.gguf", "adapter": "meaning-lora-full_v11.gguf", "threads": 4, "n_ctx": 1024, "workers": 1, "mmap": true},
+      "sqlite": {"cache_kb": 16384, "mmap_mb": 128},
+      "sessions": 4, "ring_s": 420,
+      "retention": {"fine_days": 14, "coarse_days": 365, "log_days": 1825, "context_days": 1825, "archive_days": 365, "records_days": 1825},
+      "notes": "same model, more threads; twice the fine history"
+    },
+    "vm8": {
+      "label": "Virtual machine / validation rig: 8 vCPU, 16 GB",
+      "ram_gb": 16, "cores": 8,
+      "model": {"base": "qwen2.5-0.5b-instruct-q4_k_m.gguf", "adapter": "meaning-lora-full_v11.gguf", "threads": 2, "n_ctx": 1024, "workers": 3, "mmap": true},
+      "sqlite": {"cache_kb": 65536, "mmap_mb": 512},
+      "sessions": 12, "ring_s": 900,
+      "retention": {"fine_days": 30, "coarse_days": 365, "log_days": 1825, "context_days": 1825, "archive_days": 365, "records_days": 1825},
+      "notes": "three model contexts: three questions in flight at once; a year of minute history for a fleet-sized replay"
+    },
+    "hpc": {
+      "label": "Vehicle HPC: 8-16 Cortex-A7x cores, 16-32 GB",
+      "ram_gb": 32, "cores": 12,
+      "model": {"base": "qwen2.5-0.5b-instruct-q4_k_m.gguf", "adapter": "meaning-lora-frame2d.gguf", "threads": 4, "n_ctx": 2048, "workers": 3, "mmap": true},
+      "sqlite": {"cache_kb": 262144, "mmap_mb": 2048},
+      "sessions": 32, "ring_s": 1800,
+      "retention": {"fine_days": 60, "coarse_days": 730, "log_days": 1825, "context_days": 1825, "archive_days": 730, "records_days": 1825},
+      "notes": "the same 0.5B model and interfaces; more workers and a larger data tier, not a different model"
+    }
+  }
+}

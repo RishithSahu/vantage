@@ -1,0 +1,233 @@
+# Frame version 2, round 5 (2026-10-21): more wording for the quantities of the universal catalogue and for the digest acts, written after catalog_v1 stood at 85 % with 170 hand-written rows (about four per quantity).
+# Different sentence shapes on purpose: "how is the X", "X reading", "tell me the X", "is the X high / ok", elliptical and clipped forms, a few typos.  Frozen questions are not copied; the builder drops any row that matches one.
+
+# ------------------------------------------------------------------------------------------------ oil, throttle, air
+how is the engine oil temperature looking | now engine_oil_temperature
+oil temp reading | now engine_oil_temperature
+tell me the temperature of the oil | now engine_oil_temperature
+is the oil too hot | now engine_oil_temperature
+oil temperature right now please | now engine_oil_temperature
+what's the oil running at | now engine_oil_temperature
+how warm has the oil been this week | stat engine_oil_temperature op=mean
+did the oil temperature spike yesterday | extreme engine_oil_temperature op=max
+how is the oil pressure looking | now engine_oil_pressure
+oil pressure reading | now engine_oil_pressure
+tell me the oil pressure | now engine_oil_pressure
+is the oil pressure low | now engine_oil_pressure
+what psi is the oil at | now engine_oil_pressure
+did the oil pressure ever drop this month | extreme engine_oil_pressure op=min
+how far down is the throttle pedal plate | now throttle_position
+throttle reading | now throttle_position
+what is the throttle at | now throttle_position
+is the throttle fully open | now throttle_position
+how wide open was the throttle on average this week | stat throttle_position op=mean
+barometer | now barometric_pressure
+air pressure outside the car | now barometric_pressure
+what is the atmospheric pressure reading | now barometric_pressure
+is the outside air pressure low today | now barometric_pressure
+how is the manifold pressure | now intake_manifold_pressure
+manifold absolute pressure reading | now intake_manifold_pressure
+tell me the map value | now intake_manifold_pressure
+what is the inlet manifold pressure at | now intake_manifold_pressure
+how warm is the intake air | now intake_air_temperature
+intake air temp reading | now intake_air_temperature
+temperature of the air the engine is breathing | now intake_air_temperature
+is the intake air hot | now intake_air_temperature
+how much air flow is there | now mass_air_flow
+air flow reading | now mass_air_flow
+tell me the maf | now mass_air_flow
+grams per second of air | now mass_air_flow
+
+# ------------------------------------------------------------------------------------------------ fuel system and mixture
+how is the short term trim | now short_term_fuel_trim
+short term fuel trim reading | now short_term_fuel_trim
+tell me the stft | now short_term_fuel_trim
+is the short term trim positive | now short_term_fuel_trim
+how is the long term trim | now long_term_fuel_trim
+long term fuel trim reading | now long_term_fuel_trim
+tell me the ltft | now long_term_fuel_trim
+is the long term trim out of range | now long_term_fuel_trim
+how is the air fuel mixture | now lambda
+lambda reading | now lambda
+tell me the lambda | now lambda
+what does the oxygen sensor say | now lambda
+is the engine running rich | now lambda
+how is the catalytic converter temperature | now catalyst_temperature
+catalyst temp reading | now catalyst_temperature
+tell me the cat temperature | now catalyst_temperature
+is the catalyst hot enough | now catalyst_temperature
+how is the spark timing | now ignition_timing
+ignition advance reading | now ignition_timing
+tell me the timing advance | now ignition_timing
+what is the spark advance at | now ignition_timing
+how warm is the diesel in the tank lines | now fuel_temperature
+fuel temp reading | now fuel_temperature
+tell me the fuel temperature | now fuel_temperature
+how is the common rail pressure | now fuel_rail_pressure
+rail pressure reading | now fuel_rail_pressure
+tell me the rail pressure | now fuel_rail_pressure
+is the rail pressure normal | now fuel_rail_pressure
+how is the fuel supply pressure | now fuel_pressure
+fuel pressure reading | now fuel_pressure
+tell me the fuel pressure | now fuel_pressure
+is the fuel pressure low | now fuel_pressure
+
+# ------------------------------------------------------------------------------------------------ turbo, exhaust, emissions
+how is the boost | now boost_pressure
+boost reading | now boost_pressure
+tell me the turbo pressure | now boost_pressure
+is the turbo making enough boost | now boost_pressure
+how is the exhaust temperature | now exhaust_gas_temperature
+exhaust temp reading | now exhaust_gas_temperature
+tell me the egt | now exhaust_gas_temperature
+is the exhaust too hot | now exhaust_gas_temperature
+how is the adblue | now def_level
+adblue reading | now def_level
+tell me the adblue level | now def_level
+is the urea tank low | now def_level
+how much diesel exhaust fluid is left | now def_level
+how is the dpf | now dpf_soot_load
+soot load reading | now dpf_soot_load
+tell me the dpf soot level | now dpf_soot_load
+does the dpf need cleaning | now dpf_soot_load
+how full of soot is the filter | now dpf_soot_load
+is the filter cleaning itself | now dpf_regeneration
+dpf regen status | now dpf_regeneration
+is a regen going on | now dpf_regeneration
+how is the egr valve | now egr_position
+egr position reading | now egr_position
+tell me the egr opening | now egr_position
+is the egr open | now egr_position
+
+# ------------------------------------------------------------------------------------------------ engine load, time, gear
+what percent torque is the engine giving | now engine_torque_percent
+torque percent reading | now engine_torque_percent
+how hard is the engine working in torque terms | now engine_torque_percent
+how long has the engine been on this trip | now engine_run_time
+engine run time reading | now engine_run_time
+tell me the engine hours | now engine_hours
+total hours on the engine | now engine_hours
+how many hours has the motor run in its life | now engine_hours
+which gear is it in | now gear
+gear reading | now gear
+tell me the gear | now gear
+am i in a high gear | now gear
+how much time did i spend in each gear | stat gear op=share
+
+# ------------------------------------------------------------------------------------------------ electric drive and charging
+how is the inverter temperature | now inverter_temperature
+inverter temp reading | now inverter_temperature
+tell me the power electronics temperature | now inverter_temperature
+is the inverter hot | now inverter_temperature
+how is the top cell voltage | now cell_voltage_max
+highest cell voltage reading | now cell_voltage_max
+tell me the max cell voltage | now cell_voltage_max
+how many amps is it charging at | now charging_current
+charging current reading | now charging_current
+tell me the charge current | now charging_current
+is the charge current high | now charging_current
+what voltage is the charger giving | now charging_voltage
+charging voltage reading | now charging_voltage
+tell me the charge voltage | now charging_voltage
+what is the charge limit set at | now charge_limit
+charge limit reading | now charge_limit
+tell me the charge target | now charge_limit
+where is the charge cap set | now charge_limit
+how far will it charge to | now charge_limit
+is the charge flap open | now charge_port_state
+charge port reading | now charge_port_state
+tell me if the plug is in | now charge_port_state
+is the cable connected | now charge_port_state
+how long till the charge is done | now time_to_full
+time to full reading | now time_to_full
+tell me the charging time left | now time_to_full
+how many minutes of charging remain | now time_to_full
+what does the dashboard say the range is | now reported_range
+dashboard range reading | now reported_range
+tell me the range the car shows | now reported_range
+what range is displayed | now reported_range
+
+# ------------------------------------------------------------------------------------------------ body and chassis
+is the handbrake applied | now parking_brake
+parking brake reading | now parking_brake
+tell me if the epb is on | now parking_brake
+is the electric handbrake on | now parking_brake
+how high up am i | now altitude
+altitude reading | now altitude
+tell me the elevation | now altitude
+how many metres above sea level | now altitude
+is any door open | now door_state
+door reading | now door_state
+tell me if the doors are closed | now door_state
+is a door ajar | now door_state
+is the seat belt fastened | now seatbelt_state
+seat belt reading | now seatbelt_state
+tell me if the belt is on | now seatbelt_state
+is the belt warning on | now seatbelt_state
+are the headlights on right now | now headlight_state
+headlight reading | now headlight_state
+tell me if the lights are on | now headlight_state
+is the main beam switched on | now headlight_state
+are the wipers going right now | now wiper_state
+wiper reading | now wiper_state
+tell me if the wipers are on | now wiper_state
+what speed are the wipers at | now wiper_state
+how is the gearbox temperature | now transmission_temperature
+transmission temp reading | now transmission_temperature
+tell me the gearbox oil temperature | now transmission_temperature
+is the gearbox hot | now transmission_temperature
+how is the coolant system pressure | now coolant_pressure
+coolant pressure reading | now coolant_pressure
+tell me the cooling system pressure | now coolant_pressure
+
+# ------------------------------------------------------------------------------------------------ digests: more wording, clipped and chatty
+what's new with the car | summary none
+anything to tell me about the week | summary none
+how's the car been | summary none
+week in review | summary none
+last week in a few lines | summary none
+my driving this month in short | summary none
+what's happened lately | summary none
+quick recap of the past days | summary none
+how did the month go | summary none
+sum up my week | summary none
+yesterday in short | summary none ent=day
+how did yesterday go | summary none ent=day
+what did the car do today | summary none ent=day
+how was the last trip | summary none ent=trip
+tell me about the trip i just finished | summary none ent=trip
+what changed lately | summary none op=change
+anything different this week | summary none op=change
+is anything different from last month | summary none op=change
+what is different from before | summary none op=change
+anything odd | anomaly none
+anything strange this week | anomaly none
+is something off | anomaly none
+any weird readings | anomaly none
+something unusual yesterday | anomaly none ent=day
+anything funny with the battery | anomaly battery_condition
+anything wrong with the motor lately | anomaly motor_condition
+is anything unusual about the tyres | anomaly tyre_condition
+is the speed pattern normal for me | stat speed op=usual
+is my usual battery temperature around this | stat battery_temperature op=usual
+what is usual for the motor temperature | stat motor_temperature op=usual
+how high does the oil temperature normally go | stat engine_oil_temperature op=usual
+what does the fuel trim normally look like | stat short_term_fuel_trim op=usual
+
+# ------------------------------------------------------------------------------------------------ complete questions after another answer (they inherit nothing)
+now speed >> anything odd | anomaly none
+now speed >> what's new with the car | summary none
+stat battery_temperature op=mean >> how's the car been | summary none
+events hard_braking op=count >> anything strange this week | anomaly none
+extreme speed op=max >> week in review | summary none
+trend motor_temperature op=change >> what changed lately | summary none op=change
+health battery_condition >> how did yesterday go | summary none ent=day
+summary none >> how is the boost | now boost_pressure
+anomaly none >> how is the adblue | now def_level
+now battery_soc >> how is the oil pressure looking | now engine_oil_pressure
+stat wh_per_km op=mean >> how is the exhaust temperature | now exhaust_gas_temperature
+events any_warning op=count >> is the handbrake applied | now parking_brake
+now speed >> thanks a lot | social none
+anomaly none >> great thank you | social none
+summary none >> cheers | social none
+now battery_soc >> ok thanks | social none

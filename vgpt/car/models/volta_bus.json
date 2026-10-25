@@ -1,0 +1,20 @@
+{
+ "id": "volta_bus",
+ "decoder_installed": true,
+ "bound": 23,
+ "concepts": 23,
+ "extension": 0,
+ "name": "Volta CityBus 12 m",
+ "year": 2026,
+ "region": "anywhere",
+ "powertrain": "bev",
+ "class": "Battery-electric city bus (simulated with the SUV drive profile) on a CANopen network",
+ "interfaces": [
+  "CANopen 250 kbit/s (CiA 301): TPDOs of the battery, inverter, charger, HVAC and tyre-pressure nodes; heartbeat; emergency messages for faults; SDO reads of the odometer and 12 V supply",
+  "UDS / OBD-II diagnostics",
+  "syslog",
+  "NMEA 0183 GNSS"
+ ],
+ "notes": "A fictional maker. The object dictionary and PDO mapping are written for the test bench; the protocol is the real one (CiA 301).",
+ "source": "written for the test bench (tools_make_protocol_cars.py)"
+}

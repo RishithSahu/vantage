@@ -1,0 +1,61 @@
+# Read-through grading of results/ref7b_plain.json (Qwen2.5-7B-Instruct Q4_K_M, plain structured description, 60 slice questions) against the independent annotation and the gold description. Graded by reading the five lines of each output; strictness: the CALCULATION must be the requested kind of result (count / list / existence / share of time are NOT interchangeable), the period must be stated iff the person stated it (a relative period resolved to the right dates is fine), restrictions/scope must match. G = right; C = wrong calculation; P = period invented or missed; M = wrong measure; A = the question/annotation/gold itself is ambiguous (not counted for or against). Written once, not revised after seeing totals.
+d001 C why -> "trend"
+d003 C,P why -> "when changed"; period invented (today)
+d005 C,P why -> "current value"; "last month" missed
+d007 C "when had the lowest value" for "when did it get the most worse"
+d009 G
+d011 P period invented (today) for "is it trending up"
+d013 C list asked, count given
+d015 G
+d017 G
+d019 C list asked, count given
+d021 G
+d023 G
+d025 G
+d027 G
+d029 G
+d031 G
+d033 G
+d035 G
+d037 G weekdays flagged "(not stated)" but present
+d039 G
+d041 G
+d043 G
+d045 G
+d047 C "current value of the rise rate" instead of the change over the session
+d049 C list/ranking of "five most efficient city trips" given as list of occurrences, scope "all"
+d051 G
+d053 A "how often below 30 psi": count or share of time
+d055 A "count the minutes ... below 20 percent": count or share of time
+d057 A "can you tell me the cabin temperature": value or whether it is recorded
+d059 C capability question answered as "is X ok / any problems"
+d061 C "turn the air conditioning off" not recognised as not-a-data-request
+d063 G
+d065 G
+d067 C "navigate me ..." not recognised
+d069 G
+d071 M "highest or lowest value" (the motor temperature was lost)
+d073 G
+d075 G
+d077 G
+d079 G
+d081 G
+d083 G
+d085 G
+d087 G
+d089 G
+d091 G
+d093 C "first warning" given as the most recent
+d095 G
+d097 C why -> "comparison"
+d099 G
+d101 G
+d103 C not recognised as not-a-data-request
+d105 C future question not flagged; period "next week" missed
+d107 G
+d109 G
+d111 G
+d113 G
+d115 G
+d117 G
+d119 G

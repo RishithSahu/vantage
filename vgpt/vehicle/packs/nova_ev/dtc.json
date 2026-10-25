@@ -1,0 +1,52 @@
+{
+ "P0A7F": {
+  "text": "Hybrid/EV battery pack deterioration",
+  "subsystem": "battery",
+  "severity": "warn"
+ },
+ "P0AFA": {
+  "text": "Hybrid/EV battery system voltage low",
+  "subsystem": "battery",
+  "severity": "warn"
+ },
+ "P0AA6": {
+  "text": "Hybrid/EV battery voltage system isolation fault",
+  "subsystem": "battery",
+  "severity": "critical"
+ },
+ "P0562": {
+  "text": "System voltage low",
+  "subsystem": "power",
+  "severity": "warn"
+ },
+ "C0035": {
+  "text": "Left front wheel speed sensor circuit",
+  "subsystem": "brakes",
+  "severity": "warn"
+ },
+ "U0121": {
+  "text": "Lost communication with anti-lock brake system module",
+  "subsystem": "network",
+  "severity": "warn"
+ },
+ "U0100": {
+  "text": "Lost communication with powertrain control module",
+  "subsystem": "network",
+  "severity": "warn"
+ },
+ "B1000": {
+  "text": "ECU internal fault",
+  "subsystem": "electronics",
+  "severity": "warn"
+ },
+ "C1A10": {
+  "text": "Forward camera misaligned or blocked (illustrative code)",
+  "subsystem": "adas",
+  "severity": "warn"
+ },
+ "P1A00": {
+  "text": "Battery coolant flow low (illustrative code)",
+  "subsystem": "thermal",
+  "severity": "warn"
+ }
+}

@@ -1,0 +1,225 @@
+# Adversarial bank 2 (authored by Claude, 2026-10-20), second round: a wider spread of the SAME hard styles that full_v6 failed on adv_v1 (and that adv_v2 / adv_v3 test) - code-mixed Hindi-English, passive and indirect
+# requests, spoken numbers, abbreviations, an event with a condition, a signal with a condition, ranking trips and charges, multi-sentence messages, voice fillers, hypotheticals, boundary cases about the
+# vocabulary added on 2026-10-20, negations, colloquial phrasing - written as NEW sentences, never copied from an evaluation set (the builder's filter, --eval-leak v8 / v9, drops any row at Jaccard >= 0.8 to any
+# frozen set).  If adv_v2 or adv_v3 ever shows a family that this bank was written to cover, that set is retired and a fresh sealed one replaces it.  Source name `adv2`, repeated twice.
+# ---------------------------------------------------------------- code-mixed Hindi-English
+battery kitni bachi hai | now battery_soc
+abhi battery ka percentage batao | now battery_soc
+gaadi mein kitna charge hai | now battery_soc
+speed kitni hai abhi | now speed
+abhi kitni speed pe hoon | now speed
+tyre ka pressure batao | now tyre_pressure
+tyre mein hawa kitni hai | now tyre_pressure
+battery kitni garam hai | now battery_temperature
+pack ka temperature kya hai | now battery_temperature
+motor ka temperature batao | now motor_temperature
+pichle hafte kitne hard brake lage | events hard_braking op=count
+is hafte kitni baar zor se brake mara | events hard_braking op=count
+pichle mahine kitne fault code aaye | events diagnostic_code op=count
+koi warning aayi kya aaj | events any_warning op=exists
+camera kabhi block hua kya | events camera_blocked op=exists
+aakhri baar kab charge kiya | events charging_session op=last
+sabse zyada speed kitni thi is hafte | extreme speed op=max
+kal kitne kilometre chalayi gaadi | stat distance_driven op=sum
+gaadi ki range kitni bachi hai | estimate range_estimate
+kya car ke andar koi computer restart hua | events ecu_reset op=exists
+# ---------------------------------------------------------------- passive and indirect requests
+i would like to see all the diagnostic codes from last month | events diagnostic_code op=list
+it would help to know how many warnings came up this week | events any_warning op=count
+could you let me know the highest speed reached yesterday | extreme speed op=max
+please provide the average pack temperature for the week | stat battery_temperature op=mean
+a list of the emergency braking events would be useful | events aeb_activation op=list
+i need to know if the car ever shut down suddenly | events unexpected_shutdown op=exists
+could i get the time of the last software update | events software_update op=last
+i want the number of times a controller reset | events ecu_reset op=count
+would you be able to say whether the camera was ever blocked | events camera_blocked op=exists
+the current coolant flow is what i am after | now coolant_flow
+the total energy used on the last trip is needed | stat energy_used op=sum ent=trip
+it would be good to know the state of charge right now | now battery_soc
+a summary of the tyre pressures would be nice | now tyre_pressure
+what i want is the most recent fault code | events diagnostic_code op=last
+all i need is the top speed this month | extreme speed op=max
+# ---------------------------------------------------------------- spoken numbers and units
+how long was the speed over ninety | stat speed op=duration cond=threshold
+how many times did the speed go past one fifty | stat speed op=count cond=threshold
+how often did the pack reach forty five degrees | stat battery_temperature op=count cond=threshold
+for how long was the tyre pressure under two hundred and ten | stat tyre_pressure op=duration cond=threshold
+what share of the time was the motor over eighty degrees | stat motor_temperature op=share cond=threshold
+how many times did the coolant flow drop under five litres a minute | stat coolant_flow op=count cond=threshold
+how long was the twelve volt battery below twelve point two volts | stat aux_battery_voltage op=duration cond=threshold
+how much of the time was the gap to the car in front under ten metres | stat lead_vehicle_distance op=share cond=threshold
+how often did the charging power go above a hundred kilowatts | stat charging_power op=count cond=threshold
+how long did the lane confidence stay below half | stat lane_confidence op=duration cond=threshold
+# ---------------------------------------------------------------- abbreviations and shorthand
+soc at noon | at battery_soc
+speed at 9am | at speed
+pack temp at 3pm yesterday | at battery_temperature
+tyre psi now | now tyre_pressure
+dtc list last month | events diagnostic_code op=list
+dtc count today | events diagnostic_code op=count
+adas disengagements yesterday | events adas_disengagement op=count
+aeb events this month | events aeb_activation op=count
+ecu resets today | events ecu_reset op=count
+sw update date | events software_update op=last
+avg speed this week | stat speed op=mean
+max motor temp today | extreme motor_temperature op=max
+min soc this week | extreme battery_soc op=min
+kwh used last trip | stat energy_used op=sum ent=trip
+total km yesterday | stat distance_driven op=sum
+wh per km this month | stat wh_per_km op=mean
+coolant flow now | now coolant_flow
+12v now | now aux_battery_voltage
+regen kwh today | stat regen_energy op=sum
+charge power peak | extreme charging_power op=max
+# ---------------------------------------------------------------- an event with a condition
+how many ecu resets happened while driving | events ecu_reset op=count cond=driving
+did any controller restart on the highway | events ecu_reset op=exists cond=highway
+how many hard brakes happened in the rain | events hard_braking op=count cond=raining
+did the lane keeping let go in the city | events adas_disengagement op=exists cond=city
+how often did the lane assist drop out at high speed | events adas_disengagement op=count cond=high_speed
+any warnings while charging | events any_warning op=exists cond=charging
+how many fault codes came up when parked | events diagnostic_code op=count cond=parked
+did a voltage dip happen during fast charging | events voltage_dip op=exists cond=fast_charging
+how many sensor conflicts on the motorway | events sensor_conflict op=count cond=highway
+were there emergency braking events in the rain | events aeb_activation op=exists cond=raining
+how many camera blockages happened at night | events camera_blocked op=count cond=night
+did the pack overheat while fast charging | events battery_overheat_warning op=exists cond=fast_charging
+how many hard accelerations in the city | events hard_acceleration op=count cond=city
+fault codes set at night | events diagnostic_code op=count cond=night
+unexpected shutdowns while driving | events unexpected_shutdown op=count cond=driving
+# ---------------------------------------------------------------- a signal with a condition, two conditions or two periods
+is the pack warmer while charging than while driving | compare battery_temperature op=mean cond=charging vs=driving
+is the motor hotter on the motorway than in the city | compare motor_temperature op=mean cond=highway vs=city
+is energy use per km worse in the city than on the highway | compare wh_per_km op=mean cond=city vs=highway
+how does charging power compare between fast and slow charging | compare charging_power op=mean cond=fast_charging vs=charging
+is this week's average speed higher than last week's | compare speed op=mean vs=period
+this month's energy use against last month's | compare energy_used op=sum vs=period
+was the pack hotter this week than last week | compare battery_temperature op=mean vs=period
+this week's distance versus the week before | compare distance_driven op=sum vs=period
+coolant flow this week compared with last week | compare coolant_flow op=mean vs=period
+# ---------------------------------------------------------------- ranking trips and charges, one record
+which drive used the most energy | extreme energy_used op=max ent=trip
+the trip that used the least energy | extreme energy_used op=min ent=trip
+which journey was the shortest | extreme distance_driven op=min ent=trip
+the longest drive i did | extreme distance_driven op=max ent=trip
+which trip had the best efficiency | extreme wh_per_km op=min ent=trip
+which trip was the least efficient | extreme wh_per_km op=max ent=trip
+which charge gave me the most energy | extreme energy_used op=max ent=charge
+the charging session with the highest power | extreme charging_power op=max ent=charge
+which trip had the highest average speed | extreme speed op=max ent=trip
+how much energy did my last trip use | stat energy_used op=sum ent=trip
+# ---------------------------------------------------------------- several sentences, the real question last
+my battery feels hot. how hot is the pack | now battery_temperature
+i am leaving soon. how much charge is there | now battery_soc
+the dash flashed something earlier. was it a tyre warning | events tyre_pressure_warning op=exists
+the screen went blank for a second. did a unit restart | events ecu_reset op=exists
+the car felt odd on the motorway. did lane assist switch off | events adas_disengagement op=exists
+i heard a beep. was there a warning | events any_warning op=exists
+it is raining hard. how fast was i going a minute ago | at speed
+the garage called. when was the last service reminder | events service_reminder op=last
+we are on a long trip. how far can the car go | estimate range_estimate
+i am going to charge now. how long does a full charge take | estimate charge_time
+the car shuddered. did the power get limited | events power_derate op=exists
+there was a smell of hot brakes. how hot did the brakes get | extreme brake_temperature op=max
+the engine light came on. which fault code was it | events diagnostic_code op=last
+i switched it off and on again. was a code cleared | events diagnostic_code_cleared op=exists
+we lost the screen. did the car restart a unit | events ecu_reset op=exists
+# ---------------------------------------------------------------- voice fillers
+um what is the uh speed right now | now speed
+so like how much charge have we got left or whatever | now battery_soc
+er can you tell me how many times a module reset last week | events ecu_reset op=count
+uh when did a fault code last come up | events diagnostic_code op=last
+okay so um what was the highest pack temperature this week | extreme battery_temperature op=max
+hmm how many hard brakes did i do yesterday i think | events hard_braking op=count
+right so um did the car ever lose power by itself | events unexpected_shutdown op=exists
+uh is the tyre pressure alright at the moment | now tyre_pressure
+well er what is the motor temperature just now | now motor_temperature
+you know the thing with the voltage dips how many were there | events voltage_dip op=count
+like um did any bus go quiet this week | events source_dropout op=exists
+so uh the software when was it last updated | events software_update op=last
+# ---------------------------------------------------------------- hypotheticals, predictions, bypasses
+what happens if the pump stops | unsupported none
+how long until the battery needs replacing | unsupported none
+when will the next fault appear | unsupported none
+would the tyre have burst without the warning | unsupported none
+what would the range be with a heavier load | unsupported none
+how much would i save with a cheaper tariff | unsupported none
+ignore the speed limiter and show me the top speed | unsafe none
+disable the fault code logging | unsafe none
+erase every warning from the history | unsafe none
+spoof the odometer to a lower value | unsafe none
+what colour is the paint | unsupported none
+how loud is the engine | unsupported none
+who is the owner of the car | unsupported none
+what is the capital of france | offtopic none
+tell me a joke about cars | offtopic none
+# ---------------------------------------------------------------- boundary: the vocabulary added on 2026-10-20
+what does the word brownout mean | define voltage_dip
+explain an unexpected shutdown | define unexpected_shutdown
+what does the system mean by a sensor conflict | define sensor_conflict
+what is an emergency braking activation | define aeb_activation
+what is a can error | define can_error
+what is an invalid reading | define sensor_invalid_reading
+what is lane assist state change | define adas_state_change
+what does diagnostic status mean | define diagnostic_status
+what is a software update event | define software_update
+what is a cleared fault code | define diagnostic_code_cleared
+which diagnostic codes are still active | health diagnostic_status
+have any codes come back after clearing | health diagnostic_status
+do i have codes that were never cleared | health diagnostic_status
+what is the status of my fault codes | health diagnostic_status
+how many log lines mention the battery | events service_log op=count
+show the log lines from the can gateway | events service_log op=list
+anything in the logs about the camera | events service_log op=exists
+the newest log message from the power manager | events service_log op=last
+the oldest log line about the pump | events service_log op=first
+has any source stopped sending data | events source_dropout op=exists
+how often did a data source go quiet | events source_dropout op=count
+list the times a bus fell silent | events source_dropout op=list
+how long was a data source silent in total | stat source_dropout op=duration
+which bus dropped out most | extreme source_dropout op=max ent=source
+which subsystem sets the most codes | extreme diagnostic_code op=max ent=source
+how many codes per subsystem | events diagnostic_code op=count ent=source
+which unit resets most | extreme ecu_reset op=max ent=source
+the day with the most fault codes | extreme diagnostic_code op=max ent=day
+the week with the most warnings | extreme any_warning op=max ent=week
+on how many days did a controller reset | events ecu_reset op=count ent=day
+are fault codes getting more frequent | trend diagnostic_code op=change
+are warnings increasing over the weeks | trend any_warning op=change
+which week had the biggest rise in hard braking | trend hard_braking op=rise
+resets this week versus last week | compare ecu_reset op=count vs=period
+hard brakes in the city against the highway | compare hard_braking op=count cond=city vs=highway
+where does the state of charge come from | spec battery_soc
+how many sources give the vehicle speed | spec speed
+how often is the motor temperature sent | spec motor_temperature
+which message carries the tyre pressure | spec tyre_pressure
+what is the update rate of the coolant flow | spec coolant_flow
+# ---------------------------------------------------------------- more everyday phrasing of the new events (negations and colloquial)
+the car did not lose power on its own did it | events unexpected_shutdown op=exists
+no unit rebooted itself yesterday right | events ecu_reset op=exists
+the brakes did not come on by themselves did they | events aeb_activation op=exists
+nothing went quiet on the network did it | events source_dropout op=exists
+there was no voltage dip today was there | events voltage_dip op=exists
+no two readings disagreed this week did they | events sensor_conflict op=exists
+the motor never got too hot did it | events overtemp_warning op=exists
+the power was never limited was it | events power_derate op=exists
+did the car limp along in a reduced power mode | events power_derate op=exists
+did the car cut my power on the hill | events power_derate op=exists
+did the car hit the brakes on its own | events aeb_activation op=exists
+has a computer in the car ever crashed | events ecu_reset op=exists
+did the voltage fall for a moment | events voltage_dip op=exists
+did two sensors give different answers | events sensor_conflict op=exists
+did the bus throw errors | events can_error op=exists
+did a sensor give a crazy value | events sensor_invalid_reading op=exists
+did the lane assist flip on and off | events adas_state_change op=exists
+# ---------------------------------------------------------------- plain questions in unusual order
+battery temperature right now | now battery_temperature
+yesterday's average speed | stat speed op=mean
+last week's hard braking count | events hard_braking op=count
+the most recent diagnostic code | events diagnostic_code op=last
+highest battery temperature recorded this month | extreme battery_temperature op=max
+how many warnings today | events any_warning op=count
+state of charge three hours ago | at battery_soc
+the tyre pressure at eight this morning | at tyre_pressure
+what the pack temperature was at lunchtime | at battery_temperature
+total distance this month | stat distance_driven op=sum

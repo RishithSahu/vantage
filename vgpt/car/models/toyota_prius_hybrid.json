@@ -1,0 +1,30 @@
+{
+ "id": "toyota_prius_hybrid",
+ "name": "Toyota Prius (XW30 hybrid)",
+ "year": 2010,
+ "region": "Japan / global",
+ "powertrain": "petrol",
+ "class": "Hybrid hatchback (simulated with the petrol drive)",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real Prius powertrain / chassis database",
+  "OBD-II service 01 over ISO 15765-4 CAN (the rest of the engine data)",
+  "UDS diagnostic trouble codes",
+  "syslog from the telematics unit",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "tyre pressure and odometer on a synthetic extension CAN (the open database does not publish them)"
+ ],
+ "notes": "",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): toyota_prius_2010_pt.dbc",
+ "bound": 36,
+ "concepts": 36,
+ "extension": [
+  "odometer",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

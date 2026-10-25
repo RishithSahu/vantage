@@ -1,0 +1,53 @@
+# anomaly_v2: written 2026-10-24 for round 11. Its concepts (brake pressure, wheel speed, oil / intake / exhaust temperature, charging power, tyre temperature, hvac, battery current, engine revs, tyre condition) and most of its wording are NOT in training/meaning/natural_v11c.txt. Never trained on.
+
+ev | is the brake pressure acting weird | anomaly brake_pressure
+ev | did the brake pressure do anything unexpected | anomaly brake_pressure
+ev | were the wheel speeds consistent or did something look off | anomaly wheel_speed
+ev | any wheel speed that does not match the others | anomaly wheel_speed
+ev | is the charging power odd compared with how it normally is | anomaly charging_power
+ev | did the charger deliver anything unusual | anomaly charging_power
+ev | is the air conditioning drawing a strange amount | anomaly hvac_power
+ev | hvac power looks abnormal to me | anomaly hvac_power
+ev | is the tyre temperature normal | anomaly tyre_temperature
+ev | any tyre running unusually hot | anomaly tyre_temperature
+ev | is the battery current behaving itself | anomaly battery_current
+ev | did the current into the pack spike unusually | anomaly battery_current
+ev | anything off with the tyres lately | anomaly tyre_condition
+ev | do the tires seem abnormal | anomaly tyre_condition
+ev | is there anything fishy with the 12 volt battery | anomaly aux_battery_condition
+ev | are the brakes doing anything weird | anomaly brake_condition
+ev | has the cooling been normal | anomaly cooling_condition
+ev | is anything unusual going on with the drive motor | anomaly motor_condition
+ev | any strange behaviour in the battery pack | anomaly battery_condition
+ev | the motor temperature seems unusual, is it | anomaly motor_temperature
+ev | is the regen unusually weak | anomaly regen_energy
+ev | is my consumption per km abnormal | anomaly wh_per_km
+ev | is the range estimate behaving oddly | anomaly range_estimate
+ev | anything odd about the state of charge readings | anomaly battery_soc
+ev | is the pack voltage doing anything weird | anomaly battery_voltage
+ev | is the outside temperature reading believable | anomaly ambient_temperature
+petrol | is the oil temperature normal | anomaly engine_oil_temperature
+petrol | has the oil temperature been unusual | anomaly engine_oil_temperature
+petrol | is the intake air temperature acting strange | anomaly intake_air_temperature
+petrol | does the engine rev behaviour look abnormal | anomaly engine_rpm
+petrol | are the revs doing anything unexpected | anomaly engine_rpm
+petrol | is the fuel level dropping abnormally | anomaly fuel_level
+petrol | is the fuel burn unusual | anomaly fuel_rate
+petrol | anything strange in the engine load | anomaly engine_load
+petrol | is the lambda reading odd | anomaly lambda
+petrol | is the fuel trim abnormal | anomaly short_term_fuel_trim
+petrol | has the oil pressure looked abnormal | anomaly engine_oil_pressure
+petrol | any irregularities in the throttle position | anomaly accelerator_position
+petrol | anything unusual with the engine | anomaly motor_condition
+petrol | does the cooling system behave strangely | anomaly cooling_condition
+petrol | are the brakes behaving normally | anomaly brake_condition
+diesel | is the exhaust temperature unusual | anomaly exhaust_gas_temperature
+diesel | exhaust gas temperature looking weird | anomaly exhaust_gas_temperature
+diesel | is the boost pressure abnormal | anomaly boost_pressure
+diesel | anything odd with the soot level | anomaly dpf_soot_load
+diesel | is the adblue level dropping strangely | anomaly def_level
+diesel | is the oil temperature acting up | anomaly engine_oil_temperature
+diesel | is the engine speed behaving normally | anomaly engine_rpm
+diesel | does the fuel consumption look abnormal | anomaly fuel_rate
+diesel | any strange behaviour from the engine | anomaly motor_condition
+diesel | are the tyres normal | anomaly tyre_condition

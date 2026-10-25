@@ -1,0 +1,121 @@
+# sealed_v7: written 2026-10-24 AFTER the round-12 adapter was chosen; its questions were not looked at while data or code was written. Used ONCE for the final number of the chosen adapter against frame2w. Never trained on.
+
+ev | what percent is the battery at right now | now battery_soc
+ev | how many km can I still drive | estimate range_estimate
+ev | did I use more energy yesterday than the day before | compare energy_used op=sum vs=period
+ev | what is the hottest the battery got today | extreme battery_temperature op=max
+ev | any faults on the car | events diagnostic_code op=exists
+ev | how are the tires looking | health tyre_condition
+ev | is any tire low on air | now tyre_pressure
+ev | top speed I reached this week | extreme speed op=max
+ev | my average speed over the last month | stat speed op=mean
+ev | what will it cost to fill the battery from 20 to 80 | estimate charge_cost
+ev | what is regenerative braking | define regen_energy
+ev | how is battery health worked out | howto battery_soh
+ev | how large is the battery pack | spec battery_capacity
+ev | rate my driving | health driving_style
+ev | am I driving better than last month | trend driving_style op=change
+ev | why was the battery so hot yesterday evening | why battery_temperature op=rise
+ev | is the car safe to drive right now | health vehicle_health
+ev | how can I make the battery last longer | advice battery_condition
+ev | when is the next service | estimate maintenance
+ev | voltage of the 12v battery | now aux_battery_voltage
+ev | how is the small 12 volt battery | health aux_battery_condition
+ev | did the motor get too hot this month | events overtemp_warning op=exists
+ev | how many times did the pack pass 40 degrees last month | stat battery_temperature op=count cond=threshold
+ev | outside temperature now | now ambient_temperature
+ev | kwh used last week | stat energy_used op=sum
+ev | how much energy do I use per km on average | stat wh_per_km op=mean
+ev | which of my trips was the longest | extreme distance_driven op=max ent=trip
+ev | when did I plug in last | events charging_session op=last
+ev | how many times did I charge this month | events charging_session op=count
+ev | total regen this week | stat regen_energy op=sum
+ev | is my consumption this week different from last week | compare wh_per_km op=mean vs=period
+ev | list the fault codes from the last 7 days | events diagnostic_code op=list
+ev | number of hard stops this week | events hard_braking op=count
+ev | how many trips did I make today | stat trip_record op=count ent=trip
+ev | which direction is the car facing | now heading
+ev | what altitude are we at | now altitude
+ev | are the lights on | now headlight_state
+ev | is the battery getting weaker over time | trend battery_soh op=drop
+ev | are my hard brakes becoming more frequent | trend hard_braking op=rise
+ev | is the range getting worse | trend range_estimate op=drop
+ev | has the motor temperature gone up lately | trend motor_temperature op=rise
+ev | is my charging getting faster or slower | trend charging_power op=change
+ev | anything unusual with the battery this week | anomaly battery_condition
+ev | does the motor behave normally | anomaly motor_condition
+ev | is the pack temperature unusual today | anomaly battery_temperature
+ev | is my energy use per km abnormal this week | anomaly wh_per_km
+ev | what changed since last week | summary none vs=period
+ev | summarise my month | summary none
+ev | what was strange about yesterday | anomaly none
+ev | the car feels slow what is wrong | health vehicle_health
+ev | tell me a bedtime story | offtopic none
+ev | book a table for two tonight | offtopic none
+ev | send my location to my brother | unsafe none
+ev | turn off the lane warning permanently | unsafe none
+ev | open the boot | control none
+ev | what did the last software update change | unsupported none
+ev | how much did I pay for charging at the mall | unsupported none
+ev | namaste | social none
+ev | kya battery theek hai | health battery_condition
+ev | aaj kitna chala | stat distance_driven op=sum
+ev | brake kaisa hai | health brake_condition
+ev | tyre ka pressure kitna hai | now tyre_pressure
+petrol | fuel left in the tank | now fuel_level
+petrol | how far can I go with this petrol | estimate range_estimate
+petrol | what is my fuel economy this week | stat fuel_rate op=mean
+petrol | how much petrol did I burn yesterday | stat fuel_rate op=sum
+petrol | size of the tank | spec fuel_level
+petrol | how hot is the coolant | now motor_temperature
+petrol | engine speed | now engine_rpm
+petrol | what is the oil temperature | now engine_oil_temperature
+petrol | is the check engine lamp lit | health diagnostic_status
+petrol | what does code P0171 mean | define diagnostic_code
+petrol | when do I change the oil next | estimate maintenance
+petrol | how can I use less fuel | advice fuel_rate
+petrol | how long did the engine idle this week | stat drive_mode op=duration cond=idling
+petrol | highway fuel use against city fuel use | compare fuel_rate op=mean cond=highway vs=city
+petrol | which trip used the most petrol | extreme fuel_rate op=max ent=trip
+petrol | when was my last refill | events charging_session op=last
+petrol | is the engine running hotter these days | trend motor_temperature op=rise
+petrol | is the engine in good shape | health motor_condition
+petrol | is the starter battery strong | health aux_battery_condition
+petrol | engine power rating | spec horsepower
+petrol | throttle opening now | now throttle_position
+petrol | total engine running hours | now engine_hours
+petrol | odometer reading | now odometer
+petrol | is the fuel consumption getting worse | trend fuel_rate op=rise
+petrol | was the last trip normal | anomaly trip_record
+petrol | any unusual engine behaviour this week | anomaly motor_condition
+petrol | fuel cost per litre today | unsupported none
+petrol | what is the short term fuel trim | now short_term_fuel_trim
+petrol | which day this month burned the most fuel | extreme fuel_rate op=max ent=day
+petrol | petrol kitna bacha hai | now fuel_level
+petrol | mileage kya aa raha hai | stat fuel_rate op=mean
+petrol | engine ka temperature | now motor_temperature
+diesel | diesel level | now fuel_level
+diesel | adblue level now | now def_level
+diesel | how full is the particulate filter | now dpf_soot_load
+diesel | how many dpf regenerations this month | stat dpf_regeneration op=count
+diesel | exhaust gas temperature now | now exhaust_gas_temperature
+diesel | turbo boost pressure | now boost_pressure
+diesel | what is the egr for | define egr_position
+diesel | what is a particulate filter | define dpf_soot_load
+diesel | how many km per litre am I getting | stat fuel_rate op=mean
+diesel | is the soot level increasing | trend dpf_soot_load op=rise
+diesel | any exhaust faults this month | events diagnostic_code op=exists
+diesel | average engine load this week | stat engine_load op=mean
+diesel | how long was the engine idling today | stat drive_mode op=duration cond=idling
+diesel | highest exhaust temperature this month | extreme exhaust_gas_temperature op=max
+diesel | is the exhaust temperature normal | anomaly exhaust_gas_temperature
+diesel | is the engine temperature unusual | anomaly motor_temperature
+diesel | how is the engine | health motor_condition
+diesel | fuel per hour of work | stat fuel_rate op=mean
+diesel | how much diesel did I use last week | stat fuel_rate op=sum
+diesel | is my consumption higher than usual | compare fuel_rate op=mean vs=typical
+diesel | catalyst temperature | now catalyst_temperature
+diesel | fuel rail pressure now | now fuel_rail_pressure
+diesel | how much is the load on the truck | unsupported none
+diesel | gaadi ka diesel kitna hai | now fuel_level
+diesel | adblue kab bharna hai | now def_level

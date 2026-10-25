@@ -1,0 +1,23 @@
+# Acceptance review package (kept separate from development)
+
+**What this is.** `bench/acceptance_v1.tsv` holds 114 questions and expected interpretations written by the implementation's author (an AI assistant) as an *unreviewed draft*. It has not been used for any development decision: nothing in the implementation opened it, no system was run on it, and no rule, lexicon, prompt, guard or candidate generator was changed because of it. Its only checks so far were that every gold query parses, validates and executes (`bench/check_indep.py`, which reads gold queries only, not predictions).
+
+**What the reviewer must do - before seeing any prediction.**
+1. Read every row: the question, the expected IR, and the previous turn for follow-ups. IR syntax is documented in `docs/query_compiler.md`; `vgpt/paraphrase.py` renders any IR as an English sentence if that is easier to review (`python -c "from vgpt.paraphrase import describe; from vgpt.query_ir import Query; print(describe(Query.from_text('op=...')))"`).
+2. Correct wrong expected interpretations in place. If a question has more than one legitimate reading, keep the most natural one in column 4 and list the other acceptable readings in the optional **7th column**, separated by ` || `. Questions that should be answered with an explained limitation (missing signal / no data) keep the query that would be asked; the evaluator then requires the exact plan *and* the right status.
+3. Mark questions that should be clarified rather than answered: put `op=none` in column 4 only for questions that must be refused (out of scope or unsafe); an ambiguous question is represented by listing its readings in the 7th column (a clarification that offers one of them counts as a clarification with the intended reading; it is NOT counted as a correct answer, and "correct after one extra turn" is an oracle upper bound that assumes the person picks the right reading).
+4. Check the documented conventions are what the reviewer wants: "last week" = the last 7 days, "last month" = the last 30 days, no period for a statistic = the last 7 days, trips and sessions with no period = the whole history, change/trend questions with no period = the last 14 days; a statistic with no word is the average (sum for energy and distance). Each such default is disclosed to the user in the answer.
+5. Do **not** look at `results/` predictions for this file. Save the reviewed file in place and write brief notes (what was changed and why) to `results/acceptance/review_notes.md`.
+
+**Configuration to freeze.** The product configuration is `vgpt.product.make_brain` (rules + clarification-first policy, no model on the answer path). `--system policy-rules` below is the interpretation-only harness for the same policy; `bench/eval_product.py` runs the same questions end to end through `make_brain` and agreed with it on 120 of 120 development, 30 of 30 diagnostic and 307 of 308 final questions (`results/product_vs_harness.txt`). The frozen selector (`policy-select`) failed its criteria and the Qwen-LoRA (`policy-qwen`) is an experimental comparator; neither is the product. The freeze is deferred until the gold interpretations have been reviewed without looking at any prediction.
+
+**Then freeze (one command), then run once.**
+```
+python bench/freeze_acceptance.py --system policy-rules --reviewer "<name>" --review-notes results/acceptance/review_notes.md        # --system is an explicit choice: policy-rules (no model), policy-select (frozen LFM selection) or policy-qwen (earlier LoRA); see VANTAGE_STATUS.md section 5 for what each measured
+python tools_pin.py 8,9 bench/run_acceptance.py
+```
+Freeze records the hashes of: the questions, the scoring code, the evaluation databases, the system source, the models, the configuration (selector model, context 4608, retrieval off, `--complete` off, clarification-first policy, the system's own accepted state as conversation history), and the reviewer. `run_acceptance.py` refuses to run if any of them changed, and refuses a second run.
+
+**Reading the result.** Report together: answers (correct / wrong), explained limitations, refusals, clarifications and whether they contained the intended reading, false actions on refusal questions, and latency. A set of 114 questions can show whether the system generalises beyond the development questions; it cannot establish reliability, and a failure list from this run is disclosed and then treated as regression data.
+
+**Known limits of the set.** One author wrote both the system's vocabulary and these questions; the question wordings partly overlap in style with the development set; the gold interpretations of ambiguous questions are the author's choice until the reviewer edits them.

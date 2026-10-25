@@ -1,0 +1,81 @@
+id	expected
+C001	mixed: the current state of charge
+C002	mixed: a count of hard braking
+C003	mixed: the current tyre pressure
+C004	mixed: the current motor temperature
+C005	mixed: the highest speed
+C006	mixed: an existence check on fault codes
+C007	passive: an existence check on fault codes
+C008	passive: list ECU resets
+C009	passive: a count of unexpected shutdowns
+C010	passive: the current pack temperature
+C011	passive: list hard braking
+C012	spoken: time above a limit
+C013	spoken: episodes above a limit
+C014	spoken: share of time below a limit
+C015	abbrev: a past instant
+C016	abbrev: a count of codes
+C017	abbrev: the highest pack temperature
+C018	abbrev: average consumption
+C019	abbrev: an existence check on emergency braking
+C020	evcond: a conditional count
+C021	evcond: a conditional count
+C022	evcond: a conditional existence check
+C023	evcond: a conditional count
+C024	evcond: a conditional existence check
+C025	sigcond: two conditions
+C026	sigcond: two conditions
+C027	sigcond: two periods
+C028	sigcond: two periods
+C029	rank: the trip with the most energy
+C030	rank: the longest trip
+C031	rank: the charge with the most energy
+C032	multi: the current pack temperature
+C033	multi: the range
+C034	multi: an existence check on tyre warnings
+C035	multi: an existence check on ECU resets
+C036	voice: the current pack temperature
+C037	voice: a count of ECU resets
+C038	voice: the current state of charge
+C039	voice: the latest fault code
+C040	hypo: not computable
+C041	hypo: a prediction
+C042	hypo: not recorded
+C043	hypo: asks to ignore a limit
+C044	boundary: a definition
+C045	boundary: a definition
+C046	boundary: a definition
+C047	boundary: a definition
+C048	boundary: the latest software update
+C049	boundary: an existence check on cleared codes
+C050	boundary: an existence check on silent sources
+C051	boundary: a count of log lines
+C052	boundary: the latest log line
+C053	boundary: a log search
+C054	boundary: the state of the codes
+C055	boundary: time with the state on
+C056	boundary: the latest fast charge
+C057	boundary: the most used charging place
+C058	boundary: the unit with the most codes
+C059	boundary: frequency over time
+C060	boundary: two periods
+C061	boundary: the day with the most events
+C062	boundary: where a reading comes from
+C063	boundary: the range
+C064	boundary: tyre condition
+C065	plain: the current pack temperature
+C066	plain: the lowest tyre pressure
+C067	plain: list ECU resets
+C068	plain: the current charging power
+C069	plain: distance driven
+C070	plain: the average coolant flow
+C071	plain: a past instant
+C072	plain: the latest camera blockage
+C073	plain: a fixed fact
+C074	plain: a fixed fact
+C075	plain: a method
+C076	plain: advice
+C077	plain: a go / no-go decision
+C078	plain: the charge time
+C079	plain: the cause of a pack warning
+C080	plain: a rise in consumption

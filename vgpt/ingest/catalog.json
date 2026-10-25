@@ -1,0 +1,2205 @@
+{
+ "version": 1,
+ "note": "The universal signal catalogue: what a vehicle can tell us, and every way the world sends it.  'concepts' are quantities the shared registry did not have (added to it at start-up, so the language model's vocabulary and every vehicle know them); 'map' says, for any concept, how the standards carry it: OBD-II service 01 (pid, bytes, scale, offset on the combined raw value), SAE J1939 (pgn, spn, first byte (1-based), length in bytes, scale, offset; 0xFF.. = not available, 0xFE.. = error), Android VHAL property names, COVESA VSS paths, and 'names' (extra name fragments seen in DBC files, CSV headers and JSON keys).  Nothing here is a rule about what a question means; it describes data.",
+ "concepts": [
+  {
+   "name": "engine_oil_temperature",
+   "label": "engine oil temperature",
+   "unit": "C",
+   "category": "powertrain",
+   "synonyms": [
+    "oil temperature",
+    "oil temp",
+    "engine oil temp",
+    "engine oil temperature",
+    "lubricant temperature"
+   ],
+   "lo": -40,
+   "hi": 200
+  },
+  {
+   "name": "engine_oil_pressure",
+   "label": "engine oil pressure",
+   "unit": "kPa",
+   "category": "powertrain",
+   "synonyms": [
+    "oil pressure",
+    "engine oil pressure",
+    "oil psi",
+    "lube oil pressure"
+   ],
+   "lo": 0,
+   "hi": 1000
+  },
+  {
+   "name": "throttle_position",
+   "label": "throttle position",
+   "unit": "%",
+   "category": "powertrain",
+   "synonyms": [
+    "throttle",
+    "throttle position",
+    "throttle opening",
+    "throttle plate",
+    "butterfly opening"
+   ],
+   "lo": 0,
+   "hi": 100
+  },
+  {
+   "name": "barometric_pressure",
+   "label": "barometric pressure",
+   "unit": "kPa",
+   "category": "environment",
+   "synonyms": [
+    "barometric pressure",
+    "air pressure",
+    "atmospheric pressure",
+    "baro pressure"
+   ],
+   "lo": 30,
+   "hi": 125
+  },
+  {
+   "name": "intake_manifold_pressure",
+   "label": "intake manifold pressure",
+   "unit": "kPa",
+   "category": "powertrain",
+   "synonyms": [
+    "intake manifold pressure",
+    "manifold pressure",
+    "map",
+    "manifold absolute pressure",
+    "inlet manifold pressure"
+   ],
+   "lo": 0,
+   "hi": 255
+  },
+  {
+   "name": "intake_air_temperature",
+   "label": "intake air temperature",
+   "unit": "C",
+   "category": "powertrain",
+   "synonyms": [
+    "intake air temperature",
+    "intake air temp",
+    "air intake temperature",
+    "iat",
+    "inlet air temperature"
+   ],
+   "lo": -40,
+   "hi": 215
+  },
+  {
+   "name": "mass_air_flow",
+   "label": "mass air flow",
+   "unit": "g/s",
+   "category": "powertrain",
+   "synonyms": [
+    "mass air flow",
+    "air flow",
+    "maf",
+    "airflow",
+    "air mass"
+   ],
+   "lo": 0,
+   "hi": 655
+  },
+  {
+   "name": "short_term_fuel_trim",
+   "label": "short-term fuel trim",
+   "unit": "%",
+   "category": "powertrain",
+   "synonyms": [
+    "short term fuel trim",
+    "short-term fuel trim",
+    "stft",
+    "fuel trim"
+   ],
+   "lo": -100,
+   "hi": 100
+  },
+  {
+   "name": "long_term_fuel_trim",
+   "label": "long-term fuel trim",
+   "unit": "%",
+   "category": "powertrain",
+   "synonyms": [
+    "long term fuel trim",
+    "long-term fuel trim",
+    "ltft"
+   ],
+   "lo": -100,
+   "hi": 100
+  },
+  {
+   "name": "lambda",
+   "label": "air-fuel ratio (lambda)",
+   "unit": "none",
+   "category": "powertrain",
+   "synonyms": [
+    "lambda",
+    "air fuel ratio",
+    "air-fuel ratio",
+    "afr",
+    "oxygen sensor",
+    "o2 sensor"
+   ],
+   "lo": 0,
+   "hi": 2
+  },
+  {
+   "name": "catalyst_temperature",
+   "label": "catalyst temperature",
+   "unit": "C",
+   "category": "powertrain",
+   "synonyms": [
+    "catalyst temperature",
+    "catalytic converter temperature",
+    "cat temperature",
+    "catalyst temp",
+    "catalyst",
+    "catalytic converter"
+   ],
+   "lo": -40,
+   "hi": 1000
+  },
+  {
+   "name": "ignition_timing",
+   "label": "ignition timing",
+   "unit": "deg",
+   "category": "powertrain",
+   "synonyms": [
+    "ignition timing",
+    "spark timing",
+    "spark advance",
+    "timing advance"
+   ],
+   "lo": -64,
+   "hi": 64
+  },
+  {
+   "name": "fuel_temperature",
+   "label": "fuel temperature",
+   "unit": "C",
+   "category": "powertrain",
+   "synonyms": [
+    "fuel temperature",
+    "fuel temp",
+    "diesel temperature"
+   ],
+   "lo": -40,
+   "hi": 120
+  },
+  {
+   "name": "fuel_rail_pressure",
+   "label": "fuel rail pressure",
+   "unit": "kPa",
+   "category": "powertrain",
+   "synonyms": [
+    "fuel rail pressure",
+    "rail pressure",
+    "common rail pressure"
+   ],
+   "lo": 0,
+   "hi": 250000
+  },
+  {
+   "name": "boost_pressure",
+   "label": "boost pressure",
+   "unit": "kPa",
+   "category": "powertrain",
+   "synonyms": [
+    "boost pressure",
+    "boost",
+    "turbo pressure",
+    "turbo boost",
+    "charge air pressure"
+   ],
+   "lo": 0,
+   "hi": 500
+  },
+  {
+   "name": "exhaust_gas_temperature",
+   "label": "exhaust gas temperature",
+   "unit": "C",
+   "category": "powertrain",
+   "synonyms": [
+    "exhaust gas temperature",
+    "exhaust temperature",
+    "egt",
+    "exhaust temp",
+    "exhaust"
+   ],
+   "lo": -40,
+   "hi": 1000
+  },
+  {
+   "name": "def_level",
+   "label": "AdBlue level",
+   "unit": "%",
+   "category": "powertrain",
+   "synonyms": [
+    "adblue level",
+    "adblue",
+    "def level",
+    "diesel exhaust fluid",
+    "urea level",
+    "scr fluid"
+   ],
+   "lo": 0,
+   "hi": 100
+  },
+  {
+   "name": "dpf_soot_load",
+   "label": "particulate filter soot load",
+   "unit": "%",
+   "category": "powertrain",
+   "synonyms": [
+    "soot load",
+    "dpf soot load",
+    "particulate filter",
+    "dpf load",
+    "dpf",
+    "particulate filter load",
+    "soot"
+   ],
+   "lo": 0,
+   "hi": 100
+  },
+  {
+   "name": "dpf_regeneration",
+   "label": "particulate filter regeneration",
+   "unit": "none",
+   "category": "powertrain",
+   "synonyms": [
+    "dpf regeneration",
+    "filter regeneration",
+    "regeneration status",
+    "dpf regen"
+   ],
+   "lo": 0,
+   "hi": 3
+  },
+  {
+   "name": "egr_position",
+   "label": "EGR valve position",
+   "unit": "%",
+   "category": "powertrain",
+   "synonyms": [
+    "egr",
+    "egr valve",
+    "egr position",
+    "exhaust gas recirculation",
+    "commanded egr"
+   ],
+   "lo": 0,
+   "hi": 100
+  },
+  {
+   "name": "engine_torque_percent",
+   "label": "engine torque (percent of reference)",
+   "unit": "%",
+   "category": "powertrain",
+   "synonyms": [
+    "engine percent torque",
+    "actual engine torque percent",
+    "torque percent"
+   ],
+   "lo": -125,
+   "hi": 125
+  },
+  {
+   "name": "engine_run_time",
+   "label": "time since engine start",
+   "unit": "s",
+   "category": "powertrain",
+   "synonyms": [
+    "engine run time",
+    "time since engine start",
+    "runtime since start",
+    "how long the engine has been running"
+   ],
+   "lo": 0,
+   "hi": 65535
+  },
+  {
+   "name": "engine_hours",
+   "label": "total engine hours",
+   "unit": "h",
+   "category": "powertrain",
+   "synonyms": [
+    "engine hours",
+    "total engine hours",
+    "hours of operation",
+    "engine running hours"
+   ],
+   "lo": 0,
+   "hi": 200000
+  },
+  {
+   "name": "gear",
+   "label": "current gear",
+   "unit": "category",
+   "category": "powertrain",
+   "synonyms": [
+    "current gear",
+    "gear",
+    "selected gear",
+    "which gear"
+   ],
+   "lo": -1,
+   "hi": 20
+  },
+  {
+   "name": "inverter_temperature",
+   "label": "inverter temperature",
+   "unit": "C",
+   "category": "powertrain",
+   "synonyms": [
+    "inverter temperature",
+    "inverter temp",
+    "power electronics temperature",
+    "pcu temperature"
+   ],
+   "lo": -40,
+   "hi": 200
+  },
+  {
+   "name": "cell_voltage_max",
+   "label": "highest cell voltage",
+   "unit": "V",
+   "category": "battery",
+   "synonyms": [
+    "highest cell voltage",
+    "max cell voltage",
+    "top cell voltage"
+   ],
+   "lo": 0,
+   "hi": 5
+  },
+  {
+   "name": "charging_current",
+   "label": "charging current",
+   "unit": "A",
+   "category": "battery",
+   "synonyms": [
+    "charging current",
+    "charge current",
+    "charger current"
+   ],
+   "lo": 0,
+   "hi": 600
+  },
+  {
+   "name": "charging_voltage",
+   "label": "charging voltage",
+   "unit": "V",
+   "category": "battery",
+   "synonyms": [
+    "charging voltage",
+    "charge voltage",
+    "charger voltage"
+   ],
+   "lo": 0,
+   "hi": 1000
+  },
+  {
+   "name": "charge_limit",
+   "label": "charge limit",
+   "unit": "%",
+   "category": "battery",
+   "synonyms": [
+    "charge limit",
+    "charge target",
+    "charging limit",
+    "target state of charge"
+   ],
+   "lo": 0,
+   "hi": 100
+  },
+  {
+   "name": "charge_port_state",
+   "label": "charge port state",
+   "unit": "category",
+   "category": "battery",
+   "synonyms": [
+    "charge port",
+    "charging port",
+    "plug state",
+    "charge flap",
+    "is it plugged in"
+   ],
+   "lo": 0,
+   "hi": 3
+  },
+  {
+   "name": "time_to_full",
+   "label": "time to full charge",
+   "unit": "min",
+   "category": "battery",
+   "synonyms": [
+    "time to full",
+    "time to full charge",
+    "charging time remaining",
+    "minutes to full",
+    "how long to charge"
+   ],
+   "lo": 0,
+   "hi": 3000
+  },
+  {
+   "name": "reported_range",
+   "label": "dashboard range estimate",
+   "unit": "km",
+   "category": "battery",
+   "synonyms": [
+    "dashboard range",
+    "range on the dashboard",
+    "displayed range",
+    "range shown",
+    "range estimate on the dashboard",
+    "reported range",
+    "guess-o-meter"
+   ],
+   "lo": 0,
+   "hi": 1500,
+   "description": "the remaining range the vehicle itself displays (as opposed to the range this assistant computes from energy use)"
+  },
+  {
+   "name": "parking_brake",
+   "label": "parking brake",
+   "unit": "category",
+   "category": "chassis",
+   "synonyms": [
+    "parking brake",
+    "handbrake",
+    "hand brake",
+    "epb",
+    "electric parking brake"
+   ],
+   "lo": 0,
+   "hi": 1
+  },
+  {
+   "name": "altitude",
+   "label": "altitude",
+   "unit": "m",
+   "category": "vehicle",
+   "synonyms": [
+    "altitude",
+    "elevation",
+    "height above sea level",
+    "how high up"
+   ],
+   "lo": -500,
+   "hi": 6000
+  },
+  {
+   "name": "door_state",
+   "label": "door state",
+   "unit": "category",
+   "category": "vehicle",
+   "synonyms": [
+    "door",
+    "doors",
+    "door state",
+    "door open",
+    "door ajar",
+    "is a door open"
+   ],
+   "lo": 0,
+   "hi": 1
+  },
+  {
+   "name": "seatbelt_state",
+   "label": "seat belt state",
+   "unit": "category",
+   "category": "vehicle",
+   "synonyms": [
+    "seat belt",
+    "seatbelt",
+    "seat belt state",
+    "belt fastened",
+    "belt reminder"
+   ],
+   "lo": 0,
+   "hi": 1
+  },
+  {
+   "name": "headlight_state",
+   "label": "headlight state",
+   "unit": "category",
+   "category": "vehicle",
+   "synonyms": [
+    "headlights",
+    "headlight",
+    "head lamps",
+    "lights on",
+    "main beam",
+    "high beam"
+   ],
+   "lo": 0,
+   "hi": 3
+  },
+  {
+   "name": "wiper_state",
+   "label": "wiper state",
+   "unit": "category",
+   "category": "vehicle",
+   "synonyms": [
+    "wipers",
+    "wiper",
+    "windscreen wipers",
+    "wiper speed"
+   ],
+   "lo": 0,
+   "hi": 3
+  },
+  {
+   "name": "fuel_pressure",
+   "label": "fuel pressure",
+   "unit": "kPa",
+   "category": "powertrain",
+   "synonyms": [
+    "fuel pressure",
+    "fuel delivery pressure",
+    "fuel supply pressure"
+   ],
+   "lo": 0,
+   "hi": 1000
+  },
+  {
+   "name": "coolant_pressure",
+   "label": "coolant pressure",
+   "unit": "kPa",
+   "category": "powertrain",
+   "synonyms": [
+    "coolant pressure",
+    "cooling system pressure"
+   ],
+   "lo": 0,
+   "hi": 600
+  }
+ ],
+ "map": {
+  "speed": {
+   "obd": {
+    "pid": "0D",
+    "bytes": 1,
+    "scale": 1,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 65265,
+     "spn": 84,
+     "start": 2,
+     "len": 2,
+     "scale": 0.00390625,
+     "offset": 0
+    },
+    {
+     "pgn": 65132,
+     "spn": 1624,
+     "start": 7,
+     "len": 2,
+     "scale": 0.00390625,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.Speed",
+    "Vehicle.OBD.Speed"
+   ],
+   "vhal": [
+    "PERF_VEHICLE_SPEED",
+    "PERF_VEHICLE_SPEED_DISPLAY"
+   ],
+   "names": [
+    "veh speed",
+    "vehicle velocity",
+    "vss",
+    "spd",
+    "speed kph",
+    "speed kmh",
+    "v ego",
+    "vego",
+    "wheel based speed",
+    "ground speed",
+    "tachograph speed",
+    "car speed",
+    "velocity",
+    "abs speed",
+    "esp speed"
+   ]
+  },
+  "engine_rpm": {
+   "obd": {
+    "pid": "0C",
+    "bytes": 2,
+    "scale": 0.25,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 61444,
+     "spn": 190,
+     "start": 4,
+     "len": 2,
+     "scale": 0.125,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.Powertrain.CombustionEngine.Speed",
+    "Vehicle.OBD.EngineSpeed"
+   ],
+   "vhal": [
+    "ENGINE_RPM"
+   ],
+   "names": [
+    "eng speed",
+    "engspeed",
+    "n eng",
+    "rpm",
+    "revs",
+    "crank speed",
+    "engine revolutions",
+    "engine speed"
+   ]
+  },
+  "engine_load": {
+   "obd": {
+    "pid": "04",
+    "bytes": 1,
+    "scale": 0.39215686,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 61443,
+     "spn": 92,
+     "start": 3,
+     "len": 1,
+     "scale": 1,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.OBD.EngineLoad",
+    "Vehicle.Powertrain.CombustionEngine.EngineLoad"
+   ],
+   "names": [
+    "calculated load",
+    "engine load",
+    "eng load",
+    "load value",
+    "abs load"
+   ]
+  },
+  "engine_torque": {
+   "names": [
+    "eng torque",
+    "engine torque nm",
+    "indicated torque",
+    "crankshaft torque"
+   ],
+   "vss": [
+    "Vehicle.Powertrain.CombustionEngine.Torque"
+   ]
+  },
+  "engine_torque_percent": {
+   "obd": {
+    "pid": "62",
+    "bytes": 1,
+    "scale": 1,
+    "offset": -125
+   },
+   "j1939": [
+    {
+     "pgn": 61444,
+     "spn": 513,
+     "start": 3,
+     "len": 1,
+     "scale": 1,
+     "offset": -125
+    }
+   ],
+   "names": [
+    "actual engine percent torque",
+    "engine percent torque",
+    "trq pct",
+    "torque pct"
+   ]
+  },
+  "accelerator_position": {
+   "obd": {
+    "pid": "49",
+    "bytes": 1,
+    "scale": 0.39215686,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 61443,
+     "spn": 91,
+     "start": 2,
+     "len": 1,
+     "scale": 0.4,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.Chassis.Accelerator.PedalPosition"
+   ],
+   "vhal": [],
+   "names": [
+    "accel pedal",
+    "accelerator pedal",
+    "gas pedal",
+    "pedal position d",
+    "apps",
+    "acc pedal pos",
+    "throttle pedal"
+   ]
+  },
+  "throttle_position": {
+   "obd": {
+    "pid": "11",
+    "bytes": 1,
+    "scale": 0.39215686,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 65266,
+     "spn": 51,
+     "start": 7,
+     "len": 1,
+     "scale": 0.4,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.OBD.ThrottlePosition",
+    "Vehicle.Powertrain.CombustionEngine.TPS"
+   ],
+   "names": [
+    "tps",
+    "throttle pos",
+    "throttle opening",
+    "absolute throttle"
+   ]
+  },
+  "motor_temperature": {
+   "obd": {
+    "pid": "05",
+    "bytes": 1,
+    "scale": 1,
+    "offset": -40
+   },
+   "j1939": [
+    {
+     "pgn": 65262,
+     "spn": 110,
+     "start": 1,
+     "len": 1,
+     "scale": 1,
+     "offset": -40
+    }
+   ],
+   "vss": [
+    "Vehicle.Powertrain.CombustionEngine.ECT",
+    "Vehicle.OBD.CoolantTemperature",
+    "Vehicle.Powertrain.ElectricMotor.Temperature"
+   ],
+   "vhal": [
+    "ENGINE_COOLANT_TEMP"
+   ],
+   "names": [
+    "coolant temp",
+    "ect",
+    "clt",
+    "engine coolant",
+    "water temp",
+    "coolant temperature",
+    "motor temp",
+    "stator temperature",
+    "e motor temp",
+    "coolant temperature",
+    "engine coolant temperature",
+    "ect sensor"
+   ]
+  },
+  "engine_oil_temperature": {
+   "obd": {
+    "pid": "5C",
+    "bytes": 1,
+    "scale": 1,
+    "offset": -40
+   },
+   "j1939": [
+    {
+     "pgn": 65262,
+     "spn": 175,
+     "start": 3,
+     "len": 2,
+     "scale": 0.03125,
+     "offset": -273
+    }
+   ],
+   "vss": [
+    "Vehicle.Powertrain.CombustionEngine.EOT",
+    "Vehicle.OBD.OilTemperature"
+   ],
+   "vhal": [
+    "ENGINE_OIL_TEMP"
+   ],
+   "names": [
+    "eot",
+    "oil temp",
+    "eng oil temp"
+   ]
+  },
+  "engine_oil_pressure": {
+   "j1939": [
+    {
+     "pgn": 65263,
+     "spn": 100,
+     "start": 4,
+     "len": 1,
+     "scale": 4,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.Powertrain.CombustionEngine.EOP"
+   ],
+   "names": [
+    "eop",
+    "oil press",
+    "oil pressure"
+   ]
+  },
+  "fuel_level": {
+   "obd": {
+    "pid": "2F",
+    "bytes": 1,
+    "scale": 0.39215686,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 65276,
+     "spn": 96,
+     "start": 2,
+     "len": 1,
+     "scale": 0.4,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.Powertrain.FuelSystem.RelativeLevel",
+    "Vehicle.OBD.FuelLevel"
+   ],
+   "vhal": [
+    "FUEL_LEVEL"
+   ],
+   "names": [
+    "fuel tank level",
+    "tank level",
+    "fuel gauge",
+    "fuel lvl",
+    "fuel remaining",
+    "fuel left"
+   ]
+  },
+  "fuel_rate": {
+   "obd": {
+    "pid": "5E",
+    "bytes": 2,
+    "scale": 0.05,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 65266,
+     "spn": 183,
+     "start": 1,
+     "len": 2,
+     "scale": 0.05,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.Powertrain.FuelSystem.InstantConsumption",
+    "Vehicle.OBD.FuelRate"
+   ],
+   "names": [
+    "fuel consumption rate",
+    "fuel flow",
+    "fuel burn",
+    "injection quantity",
+    "fuel use rate",
+    "engine fuel rate"
+   ]
+  },
+  "fuel_temperature": {
+   "j1939": [
+    {
+     "pgn": 65262,
+     "spn": 174,
+     "start": 2,
+     "len": 1,
+     "scale": 1,
+     "offset": -40
+    }
+   ],
+   "names": [
+    "fuel temp"
+   ]
+  },
+  "fuel_rail_pressure": {
+   "obd": {
+    "pid": "23",
+    "bytes": 2,
+    "scale": 10,
+    "offset": 0
+   },
+   "names": [
+    "rail pressure",
+    "rail press",
+    "frp",
+    "common rail"
+   ]
+  },
+  "fuel_pressure": {
+   "obd": {
+    "pid": "0A",
+    "bytes": 1,
+    "scale": 3,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 65263,
+     "spn": 94,
+     "start": 1,
+     "len": 1,
+     "scale": 4,
+     "offset": 0
+    }
+   ],
+   "names": [
+    "fuel press",
+    "fuel supply pressure"
+   ]
+  },
+  "intake_manifold_pressure": {
+   "obd": {
+    "pid": "0B",
+    "bytes": 1,
+    "scale": 1,
+    "offset": 0
+   },
+   "vss": [
+    "Vehicle.Powertrain.CombustionEngine.MAP",
+    "Vehicle.OBD.IntakePressure"
+   ],
+   "names": [
+    "map",
+    "manifold press",
+    "manifold abs pressure",
+    "intake press"
+   ]
+  },
+  "boost_pressure": {
+   "j1939": [
+    {
+     "pgn": 65270,
+     "spn": 102,
+     "start": 2,
+     "len": 1,
+     "scale": 2,
+     "offset": 0
+    }
+   ],
+   "names": [
+    "turbo boost",
+    "boost press",
+    "charge pressure",
+    "turbo pressure"
+   ]
+  },
+  "intake_air_temperature": {
+   "obd": {
+    "pid": "0F",
+    "bytes": 1,
+    "scale": 1,
+    "offset": -40
+   },
+   "j1939": [
+    {
+     "pgn": 65269,
+     "spn": 172,
+     "start": 6,
+     "len": 1,
+     "scale": 1,
+     "offset": -40
+    }
+   ],
+   "vss": [
+    "Vehicle.Powertrain.CombustionEngine.IntakeAirTemperature",
+    "Vehicle.OBD.IntakeTemp"
+   ],
+   "names": [
+    "iat",
+    "air intake temp",
+    "intake temp",
+    "inlet air temp"
+   ]
+  },
+  "mass_air_flow": {
+   "obd": {
+    "pid": "10",
+    "bytes": 2,
+    "scale": 0.01,
+    "offset": 0
+   },
+   "vss": [
+    "Vehicle.Powertrain.CombustionEngine.MAF",
+    "Vehicle.OBD.MAF"
+   ],
+   "names": [
+    "maf",
+    "air mass flow"
+   ]
+  },
+  "barometric_pressure": {
+   "obd": {
+    "pid": "33",
+    "bytes": 1,
+    "scale": 1,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 65269,
+     "spn": 108,
+     "start": 1,
+     "len": 1,
+     "scale": 0.5,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.OBD.BarometricPressure"
+   ],
+   "names": [
+    "baro",
+    "baro press",
+    "atmospheric press",
+    "ambient pressure"
+   ]
+  },
+  "ambient_temperature": {
+   "obd": {
+    "pid": "46",
+    "bytes": 1,
+    "scale": 1,
+    "offset": -40
+   },
+   "j1939": [
+    {
+     "pgn": 65269,
+     "spn": 171,
+     "start": 4,
+     "len": 2,
+     "scale": 0.03125,
+     "offset": -273
+    }
+   ],
+   "vss": [
+    "Vehicle.Exterior.AirTemperature",
+    "Vehicle.OBD.AmbientAirTemperature"
+   ],
+   "vhal": [
+    "ENV_OUTSIDE_TEMPERATURE"
+   ],
+   "names": [
+    "outside temp",
+    "outdoor temp",
+    "ambient air",
+    "oat",
+    "external temp",
+    "exterior temp",
+    "air temp outside"
+   ]
+  },
+  "cabin_temperature": {
+   "j1939": [
+    {
+     "pgn": 65269,
+     "spn": 170,
+     "start": 2,
+     "len": 2,
+     "scale": 0.03125,
+     "offset": -273
+    }
+   ],
+   "vss": [
+    "Vehicle.Cabin.HVAC.AmbientAirTemperature"
+   ],
+   "vhal": [
+    "HVAC_TEMPERATURE_CURRENT"
+   ],
+   "names": [
+    "interior temp",
+    "inside temp",
+    "cabin temp",
+    "cab temp",
+    "passenger compartment temperature"
+   ]
+  },
+  "short_term_fuel_trim": {
+   "obd": {
+    "pid": "06",
+    "bytes": 1,
+    "scale": 0.78125,
+    "offset": -100
+   },
+   "vss": [
+    "Vehicle.OBD.ShortTermFuelTrim1"
+   ],
+   "names": [
+    "stft",
+    "short term trim",
+    "fuel trim st",
+    "sfT",
+    "stft b1"
+   ]
+  },
+  "long_term_fuel_trim": {
+   "obd": {
+    "pid": "07",
+    "bytes": 1,
+    "scale": 0.78125,
+    "offset": -100
+   },
+   "vss": [
+    "Vehicle.OBD.LongTermFuelTrim1"
+   ],
+   "names": [
+    "ltft",
+    "long term trim",
+    "fuel trim lt",
+    "ltft b1"
+   ]
+  },
+  "lambda": {
+   "obd": {
+    "pid": "24",
+    "bytes": 2,
+    "scale": 3.05176e-05,
+    "offset": 0
+   },
+   "names": [
+    "lambda",
+    "equivalence ratio",
+    "air fuel equivalence",
+    "o2 lambda",
+    "afr"
+   ]
+  },
+  "catalyst_temperature": {
+   "obd": {
+    "pid": "3C",
+    "bytes": 2,
+    "scale": 0.1,
+    "offset": -40
+   },
+   "names": [
+    "cat temp",
+    "catalyst temp b1s1",
+    "scr temperature"
+   ]
+  },
+  "exhaust_gas_temperature": {
+   "obd": {
+    "pid": "78",
+    "bytes": 2,
+    "scale": 0.1,
+    "offset": -40
+   },
+   "j1939": [
+    {
+     "pgn": 65270,
+     "spn": 173,
+     "start": 6,
+     "len": 2,
+     "scale": 0.03125,
+     "offset": -273
+    }
+   ],
+   "names": [
+    "egt",
+    "exhaust temp",
+    "exh gas temp",
+    "turbine inlet temperature"
+   ]
+  },
+  "ignition_timing": {
+   "obd": {
+    "pid": "0E",
+    "bytes": 1,
+    "scale": 0.5,
+    "offset": -64
+   },
+   "names": [
+    "timing advance",
+    "spark advance",
+    "ign timing",
+    "ignition advance"
+   ]
+  },
+  "egr_position": {
+   "obd": {
+    "pid": "2C",
+    "bytes": 1,
+    "scale": 0.39215686,
+    "offset": 0
+   },
+   "names": [
+    "egr",
+    "commanded egr",
+    "egr valve"
+   ]
+  },
+  "engine_run_time": {
+   "obd": {
+    "pid": "1F",
+    "bytes": 2,
+    "scale": 1,
+    "offset": 0
+   },
+   "names": [
+    "run time",
+    "runtime",
+    "time since start"
+   ]
+  },
+  "engine_hours": {
+   "j1939": [
+    {
+     "pgn": 65253,
+     "spn": 247,
+     "start": 1,
+     "len": 4,
+     "scale": 0.05,
+     "offset": 0
+    }
+   ],
+   "names": [
+    "total engine hours",
+    "engine hrs",
+    "hour meter"
+   ]
+  },
+  "def_level": {
+   "j1939": [
+    {
+     "pgn": 65110,
+     "spn": 1761,
+     "start": 1,
+     "len": 1,
+     "scale": 0.4,
+     "offset": 0
+    }
+   ],
+   "names": [
+    "adblue",
+    "def tank level",
+    "urea level",
+    "scr tank level",
+    "reductant level"
+   ]
+  },
+  "dpf_soot_load": {
+   "names": [
+    "soot",
+    "dpf soot",
+    "particulate filter load",
+    "dpf load"
+   ]
+  },
+  "odometer": {
+   "obd": {
+    "pid": "A6",
+    "bytes": 4,
+    "scale": 0.1,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 65248,
+     "spn": 245,
+     "start": 5,
+     "len": 4,
+     "scale": 0.125,
+     "offset": 0
+    },
+    {
+     "pgn": 65217,
+     "spn": 917,
+     "start": 1,
+     "len": 4,
+     "scale": 0.005,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.TraveledDistance"
+   ],
+   "vhal": [
+    "PERF_ODOMETER"
+   ],
+   "names": [
+    "odo",
+    "total distance",
+    "mileage",
+    "distance total",
+    "total vehicle distance",
+    "km counter",
+    "kilometre reading",
+    "hi res distance",
+    "high resolution total vehicle distance",
+    "hires distance",
+    "total vehicle distance high resolution"
+   ]
+  },
+  "aux_battery_voltage": {
+   "obd": {
+    "pid": "42",
+    "bytes": 2,
+    "scale": 0.001,
+    "offset": 0
+   },
+   "j1939": [
+    {
+     "pgn": 65271,
+     "spn": 168,
+     "start": 7,
+     "len": 2,
+     "scale": 0.05,
+     "offset": 0
+    }
+   ],
+   "vss": [
+    "Vehicle.LowVoltageBattery.CurrentVoltage",
+    "Vehicle.OBD.ControlModuleVoltage"
+   ],
+   "names": [
+    "12v",
+    "12 v",
+    "battery 12v",
+    "kl30",
+    "module voltage",
+    "control module voltage",
+    "system voltage",
+    "bat voltage",
+    "vbatt",
+    "supply voltage",
+    "battery potential",
+    "power input",
+    "key switch battery potential",
+    "battery voltage 12v",
+    "vbat",
+    "ubat"
+   ]
+  },
+  "battery_soc": {
+   "obd": {
+    "pid": "5B",
+    "bytes": 1,
+    "scale": 0.39215686,
+    "offset": 0
+   },
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.StateOfCharge.Current",
+    "Vehicle.Powertrain.TractionBattery.StateOfCharge.Displayed"
+   ],
+   "vhal": [
+    "EV_BATTERY_LEVEL"
+   ],
+   "names": [
+    "soc",
+    "state of charge",
+    "hv battery level",
+    "bms soc",
+    "charge level",
+    "battery percent",
+    "battery level",
+    "hv soc",
+    "soc display",
+    "usable soc"
+   ]
+  },
+  "battery_soh": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.StateOfHealth"
+   ],
+   "names": [
+    "soh",
+    "state of health",
+    "battery health",
+    "battery degradation",
+    "capacity retention"
+   ]
+  },
+  "battery_voltage": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.CurrentVoltage"
+   ],
+   "names": [
+    "hv voltage",
+    "pack voltage",
+    "bms voltage",
+    "traction voltage",
+    "hv bus voltage",
+    "battery pack voltage",
+    "hvbat voltage",
+    "udc"
+   ]
+  },
+  "battery_current": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.CurrentCurrent"
+   ],
+   "names": [
+    "hv current",
+    "pack current",
+    "bms current",
+    "traction current",
+    "battery pack current",
+    "idc"
+   ]
+  },
+  "battery_power": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.CurrentPower"
+   ],
+   "names": [
+    "hv power",
+    "pack power",
+    "bms power",
+    "battery pack power",
+    "traction power",
+    "drive power"
+   ]
+  },
+  "battery_temperature": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Temperature.Average"
+   ],
+   "names": [
+    "hv battery temp",
+    "pack temp",
+    "bms temp",
+    "battery pack temp",
+    "traction battery temperature",
+    "avg cell temp",
+    "average cell temperature",
+    "batt temp"
+   ]
+  },
+  "cell_temperature_max": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Temperature.Max"
+   ],
+   "names": [
+    "max cell temp",
+    "cell temp max",
+    "hottest cell",
+    "tmax"
+   ]
+  },
+  "cell_temperature_min": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Temperature.Min"
+   ],
+   "names": [
+    "min cell temp",
+    "cell temp min",
+    "coolest cell",
+    "tmin"
+   ]
+  },
+  "cell_voltage_min": {
+   "names": [
+    "min cell voltage",
+    "cell volt min",
+    "lowest cell",
+    "vmin"
+   ]
+  },
+  "cell_voltage_max": {
+   "names": [
+    "max cell voltage",
+    "cell volt max",
+    "highest cell",
+    "vmax"
+   ]
+  },
+  "charging_power": {
+   "vhal": [
+    "EV_BATTERY_INSTANTANEOUS_CHARGE_RATE"
+   ],
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Charging.ChargeRate",
+    "Vehicle.Powertrain.TractionBattery.Charging.MaxPower"
+   ],
+   "names": [
+    "charge power",
+    "charger power",
+    "ac charge power",
+    "dc charge power",
+    "chg power",
+    "charge rate"
+   ]
+  },
+  "charging_current": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Charging.ChargeCurrent.DC",
+    "Vehicle.Powertrain.TractionBattery.Charging.ChargeCurrent.Phase1"
+   ],
+   "names": [
+    "charge current",
+    "chg current",
+    "evse current",
+    "charger current"
+   ]
+  },
+  "charging_voltage": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Charging.ChargeVoltage.DC"
+   ],
+   "names": [
+    "charge voltage",
+    "chg voltage",
+    "evse voltage",
+    "charger voltage"
+   ]
+  },
+  "charging_state": {
+   "vhal": [
+    "EV_CHARGE_STATE"
+   ],
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Charging.IsCharging"
+   ],
+   "names": [
+    "charge state",
+    "is charging",
+    "charging status",
+    "chg state",
+    "charge status"
+   ]
+  },
+  "charge_limit": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Charging.ChargeLimit"
+   ],
+   "names": [
+    "charge limit",
+    "target soc",
+    "charge target",
+    "soc limit"
+   ]
+  },
+  "charge_port_state": {
+   "vhal": [
+    "EV_CHARGE_PORT_CONNECTED",
+    "EV_CHARGE_PORT_OPEN"
+   ],
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Charging.IsChargingCableConnected"
+   ],
+   "names": [
+    "plug connected",
+    "cable connected",
+    "charge port open",
+    "charge flap",
+    "inlet connected"
+   ]
+  },
+  "time_to_full": {
+   "vss": [
+    "Vehicle.Powertrain.TractionBattery.Charging.TimeToComplete"
+   ],
+   "names": [
+    "time to full",
+    "charge time remaining",
+    "remaining charge time",
+    "minutes to full"
+   ]
+  },
+  "regen_power": {
+   "names": [
+    "regen",
+    "recuperation",
+    "recuperated power",
+    "regenerative power",
+    "brake energy recovery",
+    "energy recovery power"
+   ]
+  },
+  "motor_torque": {
+   "vss": [
+    "Vehicle.Powertrain.ElectricMotor.Torque"
+   ],
+   "names": [
+    "e motor torque",
+    "em torque",
+    "traction torque",
+    "motor trq",
+    "drive torque",
+    "torque request"
+   ]
+  },
+  "motor_rpm": {
+   "vss": [
+    "Vehicle.Powertrain.ElectricMotor.Speed"
+   ],
+   "names": [
+    "e motor speed",
+    "em speed",
+    "motor speed",
+    "rotor speed",
+    "traction motor speed"
+   ]
+  },
+  "motor_power": {
+   "vss": [
+    "Vehicle.Powertrain.ElectricMotor.Power"
+   ],
+   "names": [
+    "e motor power",
+    "em power",
+    "mechanical power",
+    "shaft power"
+   ]
+  },
+  "inverter_temperature": {
+   "names": [
+    "inverter temp",
+    "igbt temp",
+    "power electronics temp",
+    "pcu temp",
+    "inv temp"
+   ]
+  },
+  "coolant_flow": {
+   "names": [
+    "coolant flow rate",
+    "coolant pump flow",
+    "cooling flow",
+    "water flow",
+    "pump flow",
+    "battery coolant flow",
+    "cool pump flow",
+    "pump flow lpm"
+   ]
+  },
+  "hvac_power": {
+   "names": [
+    "ac power",
+    "heater power",
+    "climate power",
+    "hvac consumption",
+    "ptc power",
+    "compressor power",
+    "cabin heater power"
+   ]
+  },
+  "range_estimate": {
+   "vhal": [
+    "RANGE_REMAINING"
+   ],
+   "vss": [
+    "Vehicle.Powertrain.Range"
+   ],
+   "names": [
+    "remaining range",
+    "range remaining",
+    "dte",
+    "distance to empty",
+    "range km"
+   ]
+  },
+  "reported_range": {
+   "names": [
+    "dte",
+    "distance to empty",
+    "range display",
+    "dash range",
+    "range shown"
+   ]
+  },
+  "transmission_temperature": {
+   "j1939": [
+    {
+     "pgn": 65272,
+     "spn": 177,
+     "start": 5,
+     "len": 2,
+     "scale": 0.03125,
+     "offset": -273
+    }
+   ],
+   "names": [
+    "trans temp",
+    "atf temp",
+    "gearbox temp",
+    "transmission oil temp",
+    "gearbox oil temperature"
+   ]
+  },
+  "gear": {
+   "j1939": [
+    {
+     "pgn": 61445,
+     "spn": 523,
+     "start": 4,
+     "len": 1,
+     "scale": 1,
+     "offset": -125
+    }
+   ],
+   "vhal": [
+    "CURRENT_GEAR"
+   ],
+   "vss": [
+    "Vehicle.Powertrain.Transmission.CurrentGear"
+   ],
+   "names": [
+    "gear",
+    "gear position",
+    "current gear",
+    "selected gear",
+    "gear engaged"
+   ]
+  },
+  "steering_angle": {
+   "vss": [
+    "Vehicle.Chassis.SteeringWheel.Angle"
+   ],
+   "vhal": [
+    "PERF_STEERING_ANGLE"
+   ],
+   "names": [
+    "steer angle",
+    "steering wheel angle",
+    "swa",
+    "steering wheel position",
+    "sas angle",
+    "lenkwinkel"
+   ]
+  },
+  "steering_rate": {
+   "names": [
+    "steer rate",
+    "steering speed",
+    "steering angle velocity",
+    "swa rate"
+   ]
+  },
+  "yaw_rate": {
+   "vss": [
+    "Vehicle.AngularVelocity.Yaw"
+   ],
+   "names": [
+    "yaw",
+    "yaw velocity",
+    "gier rate",
+    "esp yaw",
+    "rotation rate z",
+    "yaw rate",
+    "vehicle yaw rate",
+    "gierrate"
+   ]
+  },
+  "longitudinal_acceleration": {
+   "vss": [
+    "Vehicle.Acceleration.Longitudinal"
+   ],
+   "names": [
+    "long accel",
+    "ax",
+    "acc x",
+    "accel x",
+    "longitudinal accel",
+    "lon accel"
+   ]
+  },
+  "lateral_acceleration": {
+   "vss": [
+    "Vehicle.Acceleration.Lateral"
+   ],
+   "names": [
+    "lat accel",
+    "ay",
+    "acc y",
+    "accel y",
+    "lateral accel"
+   ]
+  },
+  "brake_pedal": {
+   "vss": [
+    "Vehicle.Chassis.Brake.PedalPosition"
+   ],
+   "names": [
+    "brake pedal pos",
+    "brake pedal position",
+    "bpp",
+    "brake switch",
+    "brk pedal",
+    "bremspedal"
+   ]
+  },
+  "brake_pressure": {
+   "names": [
+    "brake press",
+    "master cylinder pressure",
+    "brake line pressure",
+    "mc pressure",
+    "bremsdruck"
+   ]
+  },
+  "parking_brake": {
+   "vss": [
+    "Vehicle.Chassis.ParkingBrake.IsEngaged"
+   ],
+   "names": [
+    "handbrake",
+    "epb",
+    "parking brake state",
+    "park brake"
+   ]
+  },
+  "wheel_speed_fl": {
+   "vss": [
+    "Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed"
+   ],
+   "names": [
+    "wheel speed front left",
+    "whl spd fl",
+    "wss fl",
+    "fl wheel speed",
+    "v wheel fl",
+    "wheel fl"
+   ]
+  },
+  "wheel_speed_fr": {
+   "vss": [
+    "Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed"
+   ],
+   "names": [
+    "wheel speed front right",
+    "whl spd fr",
+    "wss fr",
+    "fr wheel speed",
+    "v wheel fr",
+    "wheel fr"
+   ]
+  },
+  "wheel_speed_rl": {
+   "vss": [
+    "Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed"
+   ],
+   "names": [
+    "wheel speed rear left",
+    "whl spd rl",
+    "wss rl",
+    "rl wheel speed",
+    "v wheel rl",
+    "wheel rl"
+   ]
+  },
+  "wheel_speed_rr": {
+   "vss": [
+    "Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed"
+   ],
+   "names": [
+    "wheel speed rear right",
+    "whl spd rr",
+    "wss rr",
+    "rr wheel speed",
+    "v wheel rr",
+    "wheel rr"
+   ]
+  },
+  "tyre_pressure_fl": {
+   "vss": [
+    "Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure"
+   ],
+   "vhal": [
+    "TIRE_PRESSURE"
+   ],
+   "names": [
+    "tire pressure front left",
+    "tyre press fl",
+    "tpms fl",
+    "tp fl",
+    "fl tire pressure",
+    "reifendruck vl"
+   ]
+  },
+  "tyre_pressure_fr": {
+   "vss": [
+    "Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure"
+   ],
+   "names": [
+    "tire pressure front right",
+    "tyre press fr",
+    "tpms fr",
+    "tp fr",
+    "fr tire pressure",
+    "reifendruck vr"
+   ]
+  },
+  "tyre_pressure_rl": {
+   "vss": [
+    "Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure"
+   ],
+   "names": [
+    "tire pressure rear left",
+    "tyre press rl",
+    "tpms rl",
+    "tp rl",
+    "rl tire pressure",
+    "reifendruck hl"
+   ]
+  },
+  "tyre_pressure_rr": {
+   "vss": [
+    "Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure"
+   ],
+   "names": [
+    "tire pressure rear right",
+    "tyre press rr",
+    "tpms rr",
+    "tp rr",
+    "rr tire pressure",
+    "reifendruck hr"
+   ]
+  },
+  "tyre_temperature": {
+   "j1939": [
+    {
+     "pgn": 65268,
+     "spn": 242,
+     "start": 3,
+     "len": 2,
+     "scale": 0.03125,
+     "offset": -273
+    }
+   ],
+   "vss": [
+    "Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Temperature"
+   ],
+   "names": [
+    "tire temp",
+    "tyre temp",
+    "tpms temp",
+    "tire temperature",
+    "tyr temp",
+    "tyre temp f"
+   ]
+  },
+  "gps_speed": {
+   "names": [
+    "gnss speed",
+    "gps spd",
+    "speed over ground",
+    "sog",
+    "gps velocity",
+    "nmea speed"
+   ]
+  },
+  "heading": {
+   "vss": [
+    "Vehicle.CurrentLocation.Heading"
+   ],
+   "names": [
+    "course",
+    "bearing",
+    "course over ground",
+    "cog",
+    "gps heading",
+    "direction of travel",
+    "yaw angle"
+   ]
+  },
+  "altitude": {
+   "vss": [
+    "Vehicle.CurrentLocation.Altitude"
+   ],
+   "names": [
+    "alt",
+    "gps altitude",
+    "elevation",
+    "height"
+   ]
+  },
+  "humidity": {
+   "names": [
+    "relative humidity",
+    "rh",
+    "air humidity",
+    "cabin humidity"
+   ]
+  },
+  "light": {
+   "vss": [
+    "Vehicle.Exterior.LightIntensity"
+   ],
+   "names": [
+    "lux",
+    "light sensor",
+    "ambient light",
+    "brightness sensor",
+    "illuminance",
+    "daylight"
+   ]
+  },
+  "rain": {
+   "vss": [
+    "Vehicle.Exterior.Humidity",
+    "Vehicle.Body.Windshield.Front.WiperSystem.IsRainDetected"
+   ],
+   "names": [
+    "rain sensor",
+    "rain detected",
+    "wetness"
+   ]
+  },
+  "lead_vehicle_distance": {
+   "names": [
+    "lead distance",
+    "headway",
+    "distance to lead",
+    "object distance",
+    "acc target distance",
+    "front vehicle distance",
+    "radar distance"
+   ]
+  },
+  "lane_confidence": {
+   "names": [
+    "lane quality",
+    "lane marking confidence",
+    "lka confidence",
+    "lane detection quality"
+   ]
+  },
+  "adas_state": {
+   "names": [
+    "adas status",
+    "lka state",
+    "lane keeping state",
+    "driver assist state",
+    "autopilot state",
+    "l2 state"
+   ]
+  },
+  "acc_state": {
+   "names": [
+    "acc status",
+    "cruise state",
+    "adaptive cruise state",
+    "cruise control state",
+    "acc active"
+   ]
+  },
+  "aeb_state": {
+   "names": [
+    "aeb status",
+    "emergency braking state",
+    "collision mitigation",
+    "fcw state",
+    "aeb active"
+   ]
+  },
+  "blindspot_state": {
+   "names": [
+    "bsm",
+    "blind spot",
+    "blindspot warning",
+    "side assist",
+    "bsd"
+   ]
+  },
+  "drive_mode": {
+   "vhal": [
+    "IGNITION_STATE"
+   ],
+   "names": [
+    "ignition",
+    "ignition state",
+    "key position",
+    "power state",
+    "vehicle state",
+    "drive state",
+    "terminal 15",
+    "kl15",
+    "ready state"
+   ]
+  },
+  "door_state": {
+   "vss": [
+    "Vehicle.Cabin.Door.Row1.Driver.IsOpen"
+   ],
+   "names": [
+    "door open",
+    "door ajar",
+    "driver door",
+    "door status"
+   ]
+  },
+  "seatbelt_state": {
+   "vss": [
+    "Vehicle.Cabin.Seat.Row1.DriverSide.IsBelted"
+   ],
+   "names": [
+    "belt",
+    "seat belt",
+    "belt buckled",
+    "seatbelt status"
+   ]
+  },
+  "headlight_state": {
+   "vss": [
+    "Vehicle.Body.Lights.Beam.Low.IsOn"
+   ],
+   "names": [
+    "headlamp",
+    "low beam",
+    "high beam",
+    "lights on",
+    "light switch"
+   ]
+  },
+  "wiper_state": {
+   "vss": [
+    "Vehicle.Body.Windshield.Front.Wiping.Mode"
+   ],
+   "names": [
+    "wiper",
+    "wipers",
+    "wiper speed",
+    "wiper mode"
+   ]
+  }
+ }
+}

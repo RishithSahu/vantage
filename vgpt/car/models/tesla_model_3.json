@@ -1,0 +1,40 @@
+{
+ "id": "tesla_model_3",
+ "name": "Tesla Model 3 Long Range",
+ "year": 2020,
+ "region": "USA / global",
+ "powertrain": "bev",
+ "class": "Battery-electric saloon",
+ "decoder_installed": true,
+ "interfaces": [
+  "CAN 500 kbit/s, 11-bit identifiers: the real Model 3 drive-unit, ESP and steering database",
+  "UDS diagnostic trouble codes",
+  "syslog from the Linux computer",
+  "NMEA 0183 GNSS",
+  "forward camera pictures (JPEG)",
+  "battery, range, charging, tyres, odometer and 12 V on a synthetic extension CAN (the open database does not publish the battery bus)"
+ ],
+ "notes": "",
+ "source": "opendbc (https://github.com/commaai/opendbc, MIT licence): tesla_model3_party.dbc",
+ "bound": 31,
+ "concepts": 31,
+ "extension": [
+  "_charging_active",
+  "ambient_temperature",
+  "aux_battery_voltage",
+  "battery_current",
+  "battery_soc",
+  "battery_temperature",
+  "battery_voltage",
+  "charging_power",
+  "coolant_flow",
+  "motor_temperature",
+  "odometer",
+  "reported_range",
+  "tyre_pressure_fl",
+  "tyre_pressure_fr",
+  "tyre_pressure_rl",
+  "tyre_pressure_rr",
+  "tyre_temperature"
+ ]
+}

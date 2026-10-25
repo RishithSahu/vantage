@@ -1,0 +1,530 @@
+{
+ "schema": "vehiclegpt.profile/1",
+ "id": "nova_ev",
+ "vehicle": {
+  "make": "Nova",
+  "model": "N7 Ethernet",
+  "year": 2026,
+  "powertrain": "bev",
+  "specs": {
+   "veh.model": "Nova N7 Ethernet 82 kWh",
+   "veh.cap_kwh": 82.0,
+   "veh.soh": 100.0,
+   "veh.tyre_spec_front": 241,
+   "veh.tyre_spec_rear": 241,
+   "veh.service_km": 12000,
+   "veh.home_charger_kw": 11.0,
+   "veh.sw": "3.4.2",
+   "veh.wheelbase_m": 2.89,
+   "veh.wheel_radius_m": 0.35,
+   "veh.gear_ratio": 10.2,
+   "veh.steering_ratio": 15.0,
+   "veh.rated_max_speed": 200,
+   "veh.seats": 5,
+   "veh.nominal_voltage": 400
+  }
+ },
+ "sources": [
+  {
+   "id": "main",
+   "type": "can",
+   "name": "Main CAN-FD (29-bit, Motorola)",
+   "dbc": "main.dbc",
+   "fd": true,
+   "channel": "can0"
+  },
+  {
+   "id": "body",
+   "type": "can",
+   "name": "Body CAN 250 kbit/s",
+   "dbc": "body.dbc",
+   "channel": "can1"
+  },
+  {
+   "id": "diag",
+   "type": "uds",
+   "name": "UDS over DoIP (ISO 13400, automotive Ethernet)",
+   "transport": "doip",
+   "tester": "0x0E80",
+   "entity": "0x1001",
+   "eid": "0050c2a1b2c3",
+   "gid": "0050c2a1b2c3",
+   "dtc": "dtc.json",
+   "dids": {
+    "0xF40D": {
+     "concept": "speed",
+     "fmt": ">B",
+     "unit": "km/h",
+     "rate_hz": 2,
+     "priority": 2
+    },
+    "0xF446": {
+     "concept": "ambient_temperature",
+     "fmt": ">B",
+     "offset": -40,
+     "unit": "C",
+     "rate_hz": 0.5,
+     "priority": 2
+    },
+    "0xF442": {
+     "concept": "aux_battery_voltage",
+     "fmt": ">H",
+     "scale": 0.001,
+     "unit": "V",
+     "rate_hz": 1,
+     "priority": 2
+    }
+   }
+  },
+  {
+   "id": "eth",
+   "type": "someip",
+   "name": "SOME/IP",
+   "catalog": "services.json"
+  },
+  {
+   "id": "hal",
+   "type": "vhal",
+   "name": "Android Automotive VHAL"
+  },
+  {
+   "id": "logs",
+   "type": "log",
+   "name": "QNX + logcat",
+   "format": "slog2info"
+  },
+  {
+   "id": "cam",
+   "type": "camera",
+   "name": "Forward camera",
+   "cams": [
+    "front"
+   ]
+  },
+  {
+   "id": "gnss",
+   "type": "gnss",
+   "name": "GNSS"
+  },
+  {
+   "id": "lin1",
+   "type": "lin",
+   "name": "LIN 2.1 body network, 19.2 kbit/s (rain / light, climate, driver seat)",
+   "ldf": "body.ldf",
+   "channel": "lin0",
+   "enhanced": true
+  }
+ ],
+ "signals": [
+  {
+   "concept": "speed",
+   "from": "can:main/VehDynamics.VehSpdAvgDrvn_mph",
+   "unit": "mph",
+   "rate_hz": 10
+  },
+  {
+   "concept": "speed",
+   "from": "vhal:hal/PERF_VEHICLE_SPEED",
+   "unit": "m/s",
+   "rate_hz": 1,
+   "priority": 2,
+   "conflict_abs": 3
+  },
+  {
+   "concept": "accelerator_position",
+   "from": "can:main/VehDynamics.AccelPedalPct",
+   "unit": "%",
+   "rate_hz": 10
+  },
+  {
+   "concept": "brake_pedal",
+   "from": "can:main/VehDynamics.BrkPedalPct",
+   "unit": "%",
+   "rate_hz": 10
+  },
+  {
+   "concept": "steering_angle",
+   "from": "can:main/VehDynamics.SteerWhlAngle_deg",
+   "unit": "deg",
+   "rate_hz": 10
+  },
+  {
+   "concept": "yaw_rate",
+   "from": "can:main/VehDynamics.YawRate_dps",
+   "unit": "deg/s",
+   "rate_hz": 10
+  },
+  {
+   "concept": "lateral_acceleration",
+   "from": "can:main/VehDynamics.LatAcc_g",
+   "unit": "g",
+   "rate_hz": 10
+  },
+  {
+   "concept": "longitudinal_acceleration",
+   "from": "can:main/VehDynamics.LongAcc_g",
+   "unit": "g",
+   "rate_hz": 10
+  },
+  {
+   "concept": "battery_soc",
+   "from": "can:main/HVBattery.HVBatt_SOC_Disp",
+   "unit": "%",
+   "rate_hz": 10
+  },
+  {
+   "concept": "battery_voltage",
+   "from": "can:main/HVBattery.HVBatt_Volt",
+   "unit": "V",
+   "rate_hz": 10
+  },
+  {
+   "concept": "battery_current",
+   "from": "can:main/HVBattery.HVBatt_Curr",
+   "unit": "A",
+   "rate_hz": 10
+  },
+  {
+   "concept": "battery_temperature",
+   "from": "can:main/HVBattery.HVBatt_Temp_F",
+   "unit": "F",
+   "rate_hz": 10
+  },
+  {
+   "concept": "cell_temperature_max",
+   "from": "can:main/HVBattery.HVBatt_CellMaxTemp_F",
+   "unit": "F",
+   "rate_hz": 10
+  },
+  {
+   "concept": "cell_temperature_min",
+   "from": "can:main/HVBattery.HVBatt_CellMinTemp_F",
+   "unit": "F",
+   "rate_hz": 10
+  },
+  {
+   "concept": "cell_voltage_min",
+   "from": "can:main/HVBattery.HVBatt_CellMinV",
+   "unit": "V",
+   "rate_hz": 10
+  },
+  {
+   "concept": "coolant_flow",
+   "from": "can:main/ThermalSys.CoolPumpFlow_lpm",
+   "unit": "L/min",
+   "rate_hz": 10
+  },
+  {
+   "concept": "motor_temperature",
+   "from": "can:main/ThermalSys.MotorTemp_F",
+   "unit": "F",
+   "rate_hz": 10
+  },
+  {
+   "concept": "motor_torque",
+   "from": "can:main/ThermalSys.MotorTorque_Nm",
+   "unit": "Nm",
+   "rate_hz": 10
+  },
+  {
+   "concept": "motor_rpm",
+   "from": "can:main/ThermalSys.MotorSpeed_rpm",
+   "unit": "rpm",
+   "rate_hz": 10
+  },
+  {
+   "concept": "brake_temperature",
+   "from": "can:main/ThermalSys.BrkDiscTempMax_C",
+   "unit": "C",
+   "rate_hz": 10
+  },
+  {
+   "concept": "ambient_temperature",
+   "from": "can:main/ClimateSys.OutsideTemp_F",
+   "unit": "F",
+   "rate_hz": 1
+  },
+  {
+   "concept": "hvac_power",
+   "from": "can:main/ClimateSys.HvacPwr_kW",
+   "unit": "kW",
+   "rate_hz": 1
+  },
+  {
+   "concept": "charging_power",
+   "from": "can:main/ChargeSys.ChgPwr_kW",
+   "unit": "kW",
+   "rate_hz": 10
+  },
+  {
+   "concept": "_charging_active",
+   "from": "can:main/ChargeSys.ChgSt",
+   "unit": "none",
+   "rate_hz": 10,
+   "map": {
+    "charging": 1,
+    "unplugged": 0,
+    "complete": 0,
+    "fault": 0
+   }
+  },
+  {
+   "concept": "_charging_active",
+   "from": "vhal:hal/EV_CHARGE_STATE",
+   "unit": "none",
+   "rate_hz": 0.2,
+   "priority": 2,
+   "map": {
+    "1": 1,
+    "3": 0,
+    "2": 0,
+    "4": 0
+   }
+  },
+  {
+   "concept": "_ignition",
+   "from": "vhal:hal/IGNITION_STATE",
+   "unit": "none",
+   "rate_hz": 0.2,
+   "map": {
+    "4": 1,
+    "5": 1,
+    "3": 0,
+    "2": 0,
+    "1": 0
+   }
+  },
+  {
+   "concept": "tyre_pressure_fl",
+   "from": "can:body/TpmsData.TyrPres_FL_psi",
+   "unit": "psi",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_fr",
+   "from": "can:body/TpmsData.TyrPres_FR_psi",
+   "unit": "psi",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rl",
+   "from": "can:body/TpmsData.TyrPres_RL_psi",
+   "unit": "psi",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_pressure_rr",
+   "from": "can:body/TpmsData.TyrPres_RR_psi",
+   "unit": "psi",
+   "rate_hz": 1
+  },
+  {
+   "concept": "tyre_temperature",
+   "from": "can:body/TpmsData.TyrTemp_F",
+   "unit": "F",
+   "rate_hz": 1
+  },
+  {
+   "concept": "aux_battery_voltage",
+   "from": "can:body/EnvSensors.Batt12V",
+   "unit": "V",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "can:body/Cluster.Odometer_mi",
+   "unit": "mi",
+   "rate_hz": 1
+  },
+  {
+   "concept": "odometer",
+   "from": "vhal:hal/PERF_ODOMETER",
+   "unit": "km",
+   "rate_hz": 0.2,
+   "priority": 2,
+   "conflict_abs": 8
+  },
+  {
+   "concept": "adas_state",
+   "from": "someip:eth/AdasState.SystemState.engaged",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "camera_blockage",
+   "from": "camera:cam/blockage",
+   "unit": "ratio",
+   "rate_hz": 1
+  },
+  {
+   "concept": "camera_sharpness",
+   "from": "camera:cam/sharpness",
+   "unit": "ratio",
+   "rate_hz": 1
+  },
+  {
+   "concept": "camera_brightness",
+   "from": "camera:cam/luma",
+   "unit": "none",
+   "rate_hz": 1
+  },
+  {
+   "concept": "lane_confidence",
+   "from": "camera:cam/lane_conf",
+   "unit": "ratio",
+   "rate_hz": 1
+  },
+  {
+   "concept": "rain",
+   "from": "lin:lin1/RainLight.RainIntensity",
+   "unit": "none",
+   "rate_hz": 2
+  },
+  {
+   "concept": "light",
+   "from": "lin:lin1/RainLight.AmbientLight",
+   "unit": "lux",
+   "rate_hz": 2
+  },
+  {
+   "concept": "cabin_temperature",
+   "from": "lin:lin1/ClimateSensor.CabinTemp",
+   "unit": "C",
+   "rate_hz": 1
+  },
+  {
+   "concept": "humidity",
+   "from": "lin:lin1/ClimateSensor.CabinHumidity",
+   "unit": "%",
+   "rate_hz": 0.5
+  },
+  {
+   "concept": "seatbelt_state",
+   "from": "lin:lin1/SeatDriver.SeatBelt",
+   "unit": "none",
+   "rate_hz": 2,
+   "map": {
+    "on": 1,
+    "off": 0
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "adas_dis",
+   "from": "someip:AdasState.Disengaged",
+   "type": "ADAS_DISENGAGE",
+   "severity": "info",
+   "detail": "{reason_text}"
+  },
+  {
+   "id": "aeb",
+   "from": "someip:AdasState.AebActivation",
+   "type": "AEB_ACTIVATION",
+   "severity": "warn",
+   "detail": "automatic emergency braking at {speed_kmh} km/h ({decel_g:.2f} g)"
+  },
+  {
+   "id": "chg_start",
+   "from": "someip:ChargingService.SessionStarted",
+   "type": "CHARGE_START",
+   "severity": "info",
+   "detail": "{kind_text} {kw:.0f} kW"
+  },
+  {
+   "id": "ecu_reset",
+   "from": "someip:EcuSupervisor.EcuReset",
+   "type": "ECU_RESET",
+   "severity": "warn",
+   "detail": "{ecu_text} reset ({cause_text})"
+  },
+  {
+   "id": "shutdown",
+   "from": "someip:EcuSupervisor.UnexpectedShutdown",
+   "type": "UNEXPECTED_SHUTDOWN",
+   "severity": "critical",
+   "detail": "unexpected shutdown ({cause_text}); last valid data {last_valid_ms} ms before"
+  },
+  {
+   "id": "vdip",
+   "from": "someip:PowerManager.VoltageDip",
+   "type": "VOLTAGE_DIP",
+   "severity": "warn",
+   "detail": "12 V supply dipped to {min_v:.1f} V for {duration_ms} ms"
+  },
+  {
+   "id": "batt_sig",
+   "from": "signal:battery_temperature",
+   "when": ">45",
+   "hold_s": 10,
+   "type": "WARN_BATT_OVERTEMP",
+   "severity": "critical",
+   "detail": "Battery temperature above 45 °C ({value:.1f} °C)"
+  },
+  {
+   "id": "tpms_fl",
+   "from": "signal:tyre_pressure_fl",
+   "when": "<207",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "front left tyre pressure low ({value:.0f} kPa, spec 241 kPa)"
+  },
+  {
+   "id": "tpms_fr",
+   "from": "signal:tyre_pressure_fr",
+   "when": "<207",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "front right tyre pressure low ({value:.0f} kPa, spec 241 kPa)"
+  },
+  {
+   "id": "tpms_rl",
+   "from": "signal:tyre_pressure_rl",
+   "when": "<207",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "rear left tyre pressure low ({value:.0f} kPa, spec 241 kPa)"
+  },
+  {
+   "id": "tpms_rr",
+   "from": "signal:tyre_pressure_rr",
+   "when": "<207",
+   "hold_s": 60,
+   "type": "TPMS_LOW",
+   "severity": "warn",
+   "detail": "rear right tyre pressure low ({value:.0f} kPa, spec 241 kPa)"
+  },
+  {
+   "id": "low12v",
+   "from": "signal:aux_battery_voltage",
+   "when": "<11.8",
+   "hold_s": 20,
+   "type": "LOW_12V",
+   "severity": "warn",
+   "detail": "12 V battery at {value:.2f} V"
+  },
+  {
+   "id": "dtc",
+   "from": "uds:dtc"
+  }
+ ],
+ "transitions": [
+  "adas_state"
+ ],
+ "thresholds": {
+  "overtemp_c": 45,
+  "tyre_low_kpa": 207,
+  "low_12v": 11.8
+ },
+ "retention": {
+  "fine_days": 14,
+  "coarse_days": 1830,
+  "log_days": 1825,
+  "context_days": 1825,
+  "archive_days": 1830,
+  "records_days": 1825
+ }
+}
