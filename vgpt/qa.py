@@ -282,12 +282,20 @@ class QABase:
         return (SAFETY_TEXT + " " + extra, "SAFETY")
 
     def scan_injection(self):
-        n = bad = 0
+        """How many stored event and log texts there are, and how many contain instruction-like text.  Reading every text is 6 s on the Pi for a four-year history, so the count is kept per table and only rows added since the last scan are read; if rows were
+        removed (the count fell) the table is read again from the start.  -> (texts, flagged)"""
+        st = self.__dict__.setdefault("_inj_state", {}); n = bad = 0
         for tbl, col in (("events", "detail"), ("logs", "msg")):
             try:
-                for (x,) in self.c.execute(f"SELECT {col} FROM {tbl}"):
-                    n += 1
-                    if Q.flagged(x) or LOGSAYS_RX.search((x or "").lower()): bad += 1
+                total = self.c.execute(f"SELECT COUNT(*) FROM {tbl}").fetchone()[0]
+                last, tn, tb = st.get(tbl, (0, 0, 0))
+                if total < tn: last, tn, tb = 0, 0, 0
+                top = self.c.execute(f"SELECT MAX(rowid) FROM {tbl}").fetchone()[0] or 0
+                if top > last:
+                    for (x,) in self.c.execute(f"SELECT {col} FROM {tbl} WHERE rowid>? AND rowid<=?", (last, top)):
+                        tn += 1
+                        if Q.flagged(x) or LOGSAYS_RX.search((x or "").lower()): tb += 1
+                st[tbl] = (top, tn, tb); n += tn; bad += tb
             except Exception: pass
         return n, bad
 

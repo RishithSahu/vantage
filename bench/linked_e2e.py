@@ -22,6 +22,22 @@ QUESTIONS = ["how fast am I going", "what is my battery level", "how is my tyre 
              "how far have I driven", "what is the motor temperature", "how much energy did I use per kilometre"]
 
 
+ICE_CARS = {"kestrel_petrol", "rhino_diesel", "generic_obd_dongle", "heavy_truck_j1939"}
+PROBES = {"ev": ["ev_broad.txt", "owner_round2_1024.txt"], "ice": ["ice_basic.txt", "owner_round2_ice.txt"]}
+
+
+def questions_for(cid, n):
+    """The questions of the car's type (a fuel car is asked fuel questions): the first `n` distinct lines of its probe files; the short fixed list when no file is there."""
+    out, seen = [], set()
+    for f in PROBES["ice" if cid in ICE_CARS else "ev"]:
+        p = os.path.join(ROOT, "bench", "probe_questions", f)
+        if not os.path.exists(p): continue
+        for ln in open(p, encoding="utf-8"):
+            q = ln.strip()
+            if q and not q.startswith("#") and q.lower() not in seen: seen.add(q.lower()); out.append(q)
+    return out[:n] if out else QUESTIONS
+
+
 def wait(cond, seconds, step=0.5):
     end = time.monotonic() + seconds
     while time.monotonic() < end:
@@ -32,7 +48,7 @@ def wait(cond, seconds, step=0.5):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("cars", nargs="+"); ap.add_argument("--drive", type=float, default=90.0, help="seconds of the car's own clock to drive before asking"); ap.add_argument("--speed", type=float, default=4.0)
-    ap.add_argument("--out", default="results/linked_e2e.json"); a = ap.parse_args()
+    ap.add_argument("--out", default="results/linked_e2e.json"); ap.add_argument("--n", type=int, default=8, help="questions per car"); ap.add_argument("--threads", type=int, default=2); a = ap.parse_args()
     os.environ["VEHICLEGPT_HOME"] = tempfile.mkdtemp(prefix="vgpt_e2e_home_")
     import vehiclegpt; vehiclegpt._adopt_product_model()
     from ui import server as S
@@ -40,7 +56,7 @@ def main():
     from vgpt.car.car import Car
     from vgpt.pipe import transport as PT
     home = tempfile.mkdtemp(prefix="vgpt_e2e_link_"); endpoint = PT.endpoint("e" + secrets.token_hex(4))
-    ns = SimpleNamespace(db="data/vehicle.db", model="0.5b", camera="clip", webcam_index=0, live=None, linked=True, link_home=home, link_endpoint=endpoint, planner="fast", threads=2)
+    ns = SimpleNamespace(db="data/vehicle.db", model="0.5b", camera="clip", webcam_index=0, live=None, linked=True, link_home=home, link_endpoint=endpoint, planner="fast", threads=a.threads)
     t = time.monotonic(); app = S.App(ns); print("assistant ready in %.1fs (%s)" % (time.monotonic() - t, type(getattr(app.brain, "slm", None)).__name__), flush=True)
     app.ask("how fast am I going", "driver"); results = []
     for cid in a.cars:
@@ -57,7 +73,7 @@ def main():
             info["signals"] = c.execute("SELECT COUNT(*) FROM sig_catalog").fetchone()[0]; info["rows_1s"] = c.execute("SELECT COUNT(*) FROM sig_1s").fetchone()[0]; c.close()
         except Exception as e: info["db_error"] = str(e)[:80]
         qa = []
-        for q in QUESTIONS:
+        for q in questions_for(cid, a.n):
             t = time.monotonic(); r = app.ask(q, "driver"); qa.append({"q": q, "s": round(time.monotonic() - t, 2), "a": str(r.get("answer"))[:140]})
         info["answers"] = qa; ts = [x["s"] for x in qa]; info["median_s"] = round(st.median(ts), 2); info["max_s"] = max(ts); results.append(info)
         print("%-22s buses=%s recognised=%s (%s as %s) in %.0fs signals=%s | answers median %.2fs max %.2fs" % (cid, ",".join(info["buses"]), got, info["how"], info["vehicle"], t_adopt, info.get("signals"), info["median_s"], info["max_s"]), flush=True)

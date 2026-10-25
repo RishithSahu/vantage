@@ -20,7 +20,10 @@ def kendall(y):
     """(tau, p) of the values against their order; normal approximation without tie correction (daily means rarely tie)."""
     n = len(y)
     if n < 6: return 0.0, 1.0
-    s = sum((y[j] > y[i]) - (y[j] < y[i]) for i in range(n) for j in range(i + 1, n))
+    import numpy as np
+    a = np.asarray(y, dtype=float); s = 0
+    for i in range(n - 1):                                                   # one row of the pair table at a time: the same count as the double loop, in C (0.8 s -> a few ms on the Pi for 1,460 days)
+        d = a[i + 1:] - a[i]; s += int(np.count_nonzero(d > 0)) - int(np.count_nonzero(d < 0))
     var = n * (n - 1) * (2 * n + 5) / 18.0; z = (abs(s) - (1 if s else 0)) / math.sqrt(var)
     p = math.erfc(z / math.sqrt(2)); return s / (n * (n - 1) / 2.0), p
 

@@ -9,10 +9,19 @@ WHEELS = ["front left", "front right", "rear left", "rear right"]
 TYPICAL_BRAKE_PER_100KM = (2.0, 6.0)             # hard-braking events per 100 km seen in real driving (VIF-AEGIS accelerometer, 0.28 g)
 
 
+_META = {}
+
+
 def _m(c, key, default=None):
-    try: r = c.execute("SELECT v FROM meta WHERE k=?", (key,)).fetchone()
-    except sqlite3.Error: return default
-    return r[0] if r else default
+    """A value of the vehicle's meta table.  The table is tiny and changes only when a vehicle is provisioned, but a health summary asks for the same tyre specification thousands of times: the table is read once per connection and kept for 5 seconds."""
+    import time
+    hit = _META.get(id(c)); now = time.monotonic()
+    if hit is None or hit[2] is not c or now - hit[0] > 5.0:
+        try: rows = dict(c.execute("SELECT k, v FROM meta").fetchall())
+        except sqlite3.Error: return default
+        hit = _META[id(c)] = (now, rows, c)
+    r = hit[1].get(key)
+    return r if r is not None else default
 
 
 def _mf(c, key, default=None):

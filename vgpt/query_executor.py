@@ -130,14 +130,14 @@ class Executor:
         (lo, hi), label) read from the daily tier, else None (the minute rows are scanned as before).  mean = sum(n x daily mean) / sum(n); min / max / count are exact; the minute of an extreme is found by reading that one day."""
         if os.environ.get("VGPT_TIER_FAST", "1") != "1" or scope.select is not None or scope.conditions or target in D.ACCUMULATED or target not in R.CONCEPTS or R.CONCEPTS[target].dtype == "categorical": return None
         ent = (R.STORE.get(target) or {}).get("1m")
-        if not ent or ent[0] != "sig_1m" or ent[1] == "tp_*" or (aggs is not None and (q.agg or "mean") not in aggs): return None
+        if not ent or not (ent[0] == "sig_1m" or (str(ent[0]).startswith("lkv_") and ent[1] == "v")) or ent[1] == "tp_*" or (aggs is not None and (q.agg or "mean") not in aggs): return None       # a core column of the minute table, or a lake signal (its minute view)
         try: lo, hi, label = resolve_time(scope.time, self.ctx)
         except Exception: return None
         if hi - lo < TIER_FROM_DAYS * 86400: return None
         from . import dailytier as DT, store
         tz = store.tz_of(self.c)
-        if DT._tier_state(self.c, "sig_1m", False, tz) is None: return None
-        per = DT.per_day(self.c, tz, "sig_1m", False, [ent[1]], lo, hi).get(ent[1]) or {}
+        if DT._tier_state(self.c, ent[0], False, tz) is None: return None
+        per = DT.per_day(self.c, tz, ent[0], False, [ent[1]], lo, hi, has_mode=ent[0] == "sig_1m").get(ent[1]) or {}
         if not per: return None
         return per, ent[1], float(ent[2]), float(ent[3]) if len(ent) > 3 else 0.0, (lo, hi), label, tz
 
@@ -515,13 +515,16 @@ class Executor:
     # ------------------------------------------------------------------ day buckets (trend / compare significance)
     def _daily(self, q, scope, target, allow_tier=False):
         """[(day_start, value)] of the target per local day inside the scope (mean for signals, sum/ratio for accumulated metrics).  `allow_tier`: a long plain window reads the daily means from the daily tier (the trend)."""
-        self._tier_hit = None
+        self._tier_hit = None; self._tier_kind = None
         if allow_tier:
             got = self._tier_days(q, scope, target, None)
             if got is not None:
                 per, col, sc, off, period, label, tz = got
                 out = [(int(d * DAY - tz), float(v[1]) / sc + off, int(v[0])) for d, v in sorted(per.items()) if v[0] >= 3]
                 if out: self._tier_hit = col; return out, label, period, "", None
+        if allow_tier and scope.conditions:
+            got = self._daily_sql(q, scope, target)
+            if got is not None: return got
         # For unrestricted complete local days, the trip ledger is the
         # authoritative accounting source for accumulated driving quantities.
         # It preserves trip-boundary energy and distance and therefore avoids
@@ -585,6 +588,58 @@ class Executor:
                 if len(v) >= 3: out.append((int(d * DAY - tz), float(np.mean(v)), len(v)))
         return out, label, period, "", fr
 
+    SQL_OPS = {"gt": ">", "lt": "<", "ge": ">=", "le": "<=", "eq": "="}
+
+    def _sql_condition(self, c):
+        """One condition as SQL over the minute table `t` (sig_1m), or None when it needs the samples in Python.  Each atom is COALESCE(..., 0): a missing value is 'not true', as in the Python mask, so that `not` is the same complement."""
+        if c.predicate and c.op == "not":
+            inner = self._sql_condition(type(c)(predicate=c.predicate))
+            return None if inner is None else f"NOT ({inner})"
+        if c.predicate:
+            rule = R.PREDICATES[c.predicate][1]; kind = rule[0]
+            if kind == "mode": return f"COALESCE(t.mode = {int(rule[1])}, 0)"
+            if kind == "mode_in": return "COALESCE(t.mode IN (" + ",".join(str(int(x)) for x in rule[1]) + "), 0)"
+            if kind == "signal":
+                e = self._sql_signal(rule[1])
+                if e is None or rule[2] not in ("<", ">"): return None
+                return f"COALESCE(({e} {rule[2]} {float(rule[3])!r}) AND t.{(R.STORE.get(rule[1]) or {})['1m'][1]} IS NOT NULL" + (" AND t.mode IN (1,2)" if len(rule) > 4 and rule[4] == "driving" else "") + ", 0)"
+            return None
+        e = self._sql_signal(c.signal)
+        if e is None or c.op not in self.SQL_OPS: return None
+        thr = float(c.value)
+        if c.unit and R.unit_family(c.unit) == R.unit_family(R.CONCEPTS[c.signal].unit): thr = R.convert(thr, c.unit, R.CONCEPTS[c.signal].unit)
+        return f"COALESCE(({e} {self.SQL_OPS[c.op]} {thr!r}) AND t.{R.STORE[c.signal]['1m'][1]} IS NOT NULL, 0)"
+
+    def _sql_signal(self, concept):
+        """The value of a measured column of the minute table in engineering units, as an SQL expression; None for anything else."""
+        ent = (R.STORE.get(concept) or {}).get("1m")
+        if not ent or ent[0] != "sig_1m" or ent[1] == "tp_*" or concept not in R.CONCEPTS: return None
+        sc = float(ent[2]); off = float(ent[3]) if len(ent) > 3 else 0.0
+        return f"(t.{ent[1]} * 1.0 / {sc!r} + {off!r})"
+
+    def _daily_sql(self, q, scope, target):
+        """The daily means of a measured quantity under conditions (hot weather, a driving mode, a threshold on another measured column), computed by SQLite over the minute table instead of loading millions of rows into Python: the same days, the same
+        means (a day needs three values), a few hundred rows back.  None when the question needs anything the database cannot say (trip selections, events, derived or lake signals) - the Python path then runs as before."""
+        if os.environ.get("VGPT_SQL_DAILY", "1") != "1" or scope.select is not None or target in D.ACCUMULATED or target not in R.CONCEPTS or R.CONCEPTS[target].dtype == "categorical": return None
+        ent = (R.STORE.get(target) or {}).get("1m")
+        if not ent or ent[0] != "sig_1m" or ent[1] == "tp_*" or "sig_1m" not in self.p.tables: return None
+        try: intervals, _, label, period = self._intervals(scope, None)
+        except Exception: return None
+        if not intervals or max(b for _, b in intervals) - min(a for a, _ in intervals) < 6 * 3600: return None             # a short window is read from the 1 Hz tier as before
+        parts = [self._sql_condition(c) for c in scope.conditions]
+        if any(p is None for p in parts): return None
+        sc = float(ent[2]); off = float(ent[3]) if len(ent) > 3 else 0.0; tz = int(self.ctx.tz); per = {}
+        for a, b in intervals:
+            sql = f"SELECT CAST((t.ts + {tz}) / {DAY} AS INTEGER) d, AVG(t.{ent[1]}), COUNT(t.{ent[1]}) FROM sig_1m t WHERE t.ts>=? AND t.ts<? AND " + " AND ".join(parts) + " GROUP BY d"
+            assert_read_only(sql)
+            for d, av, n in self.c.execute(sql, (int(a), int(b))):
+                if av is not None and n:
+                    k = int(d); x = per.setdefault(k, [0.0, 0]); x[0] += float(av) * n; x[1] += int(n)
+        out = [(int(d * DAY - tz), x[0] / x[1] / sc + off, x[1]) for d, x in sorted(per.items()) if x[1] >= 3]
+        if not out: return None
+        self._tier_hit = ent[1]; self._tier_kind = "per-minute rows, aggregated in the database"
+        return out, label, period, "", None
+
     def _trend(self, q):
         out, label, period, err, fr = self._daily(q, q.scope, q.target, allow_tier=True)
         if out is None: return self._no_data("trend", err, q, label, period)
@@ -595,7 +650,7 @@ class Executor:
                    extra={"first": a, "last": b, "change": b - a, "pct": (100 * (b - a) / a) if abs(a) > 1e-9 and R.unit_family(c.unit) != "temperature" else None, "p": st["p"] if st else None, "r2": st["r2"] if st else None, "days": len(out), "significant": bool(st and st["p"] < 0.01 and abs(b - a) > 0.02 * max(abs(a), 1e-9))})
         r = self._finish(r, fr, [q.target])
         if getattr(self, "_tier_hit", None):
-            r.tier = "daily tier"; r.sources = [f"sig_1m.{self._tier_hit} (daily tier)"]; self._tier_hit = None
+            r.tier = getattr(self, "_tier_kind", None) or "daily tier"; r.sources = [f"{R.STORE.get(q.target, {}).get('1m', ['sig_1m'])[0]}.{self._tier_hit} ({r.tier})"]; self._tier_kind = None; self._tier_hit = None
         return r
 
     # ------------------------------------------------------------------ compare

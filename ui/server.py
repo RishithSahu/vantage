@@ -324,7 +324,7 @@ class CameraRig(threading.Thread):
             with self.cond: self.jpeg = jb.tobytes(); self.seq += 1; self.cond.notify_all()
 
 
-WARM_UP = ("what is my speed right now", "why has my range dropped lately", "what was the average battery temperature over the last trip", "how is my tyre pressure")
+WARM_UP = ("what is my speed right now", "why has my range dropped lately", "what was the average battery temperature over the last trip", "how is my tyre pressure", "how is my car")      # the health summary reads every stored event and log text once (then only new rows): pay for it before the first real question
 
 
 def _private_folder():
