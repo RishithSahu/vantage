@@ -435,13 +435,13 @@ class BrainWorker(threading.Thread):
             if job.cancelled or time.monotonic() > job.deadline:                                          # nobody is waiting for this any more: it is not run
                 job.cancelled = True; self.expired += 1; job.ev.set(); continue
             self.busy = True; job.running = True
-            try: brain = self._handle(brain, job)
+            try: brain = self._run_job(brain, job)
             except Exception:
                 LOG.exception("assistant worker failed on a job"); job.box[:] = [{"answer": "Sorry, something went wrong.", "intent": "NONE", "path": "error", "ms": {"total": 0}, "params": {}}]
             finally:
                 job.running = False; self.busy = False; job.ev.set()
 
-    def _handle(self, brain, job):
+    def _run_job(self, brain, job):
         """Run one job; -> the brain to use next (a reload builds a new one)."""
         text, persona, box = job.text, job.payload, job.box
         if brain is None and text != "__reload__":                                                          # the history was never opened: every request says so

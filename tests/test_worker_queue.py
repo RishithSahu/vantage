@@ -92,6 +92,14 @@ class Queue(unittest.TestCase):
         self.assertIsNone(w.ask("other first", "driver", "tok-other")["saw"])
 
 
+class ThreadNames(unittest.TestCase):
+    def test_the_worker_does_not_shadow_an_attribute_of_threading_thread(self):
+        """Python 3.13 keeps a `_handle` on every Thread: a method of that name broke every question on the Pi (Python 3.13) while the laptop (3.11) was fine."""
+        import threading
+        m = server(); mine = {k for k in vars(m.BrainWorker) if not k.startswith("__")}; theirs = set(dir(threading.Thread)) | {"_handle", "_started", "_os_thread_handle", "_is_stopped", "_tstate_lock", "_ident", "_native_id", "_name", "_args", "_kwargs", "_target", "_daemonic", "_initialized", "_stderr", "_invoke_excepthook"}
+        self.assertEqual(sorted((mine & theirs) - {"run"}), [])                                                  # run() is the one method a Thread subclass is meant to override
+
+
 class AppAsk(unittest.TestCase):
     def app(self, **kw):
         import collections

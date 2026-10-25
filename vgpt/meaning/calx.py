@@ -17,6 +17,7 @@ from .. import signal_registry as R
 from ..query_ir import TimeSpec
 from . import digest as DG
 from . import fuelx as FX
+from ..qa_core import minmax_ts
 from .eventx import DAY, _events, _r, _stored, _types, _window
 
 LEDGER = ("wh_per_km", "energy_used", "distance_driven", "trip_record")
@@ -166,7 +167,7 @@ def collect(res, c, frame, lit, text, lo, hi):
 
 def _clamp(b, lo, hi):
     """The period cut to the recorded history: months before the first record would only show zeros."""
-    try: first, last = b.c.execute("SELECT MIN(ts), MAX(ts) FROM sig_1m").fetchone()
+    try: first, last = minmax_ts(b.c, "sig_1m")
     except Exception: return int(lo), int(hi)
     if first is None: return int(lo), int(hi)
     return max(int(lo), int(first)), min(int(hi), int(last) + 1)

@@ -115,9 +115,15 @@ def meta(c, k, d=None):
     return r[0] if r else d
 
 
+def minmax_ts(c, table):
+    """(first, last) timestamp of a table keyed by ts.  Two statements, never `SELECT MIN(ts), MAX(ts)`: SQLite answers a single MIN or MAX from the end of the index, but both together scan the whole table (0.6 s for the two million minute rows of a four-year history on the Pi, at every question)."""
+    lo = c.execute(f"SELECT MIN(ts) FROM {table}").fetchone()[0]
+    return (lo, c.execute(f"SELECT MAX(ts) FROM {table}").fetchone()[0]) if lo is not None else (None, None)
+
+
 def coverage(c, now):
     """Span of the history that exists (first/last second, and the 1 Hz tier's start)."""
-    a = c.execute("SELECT MIN(ts), MAX(ts) FROM sig_1m").fetchone(); b = c.execute("SELECT MIN(ts), MAX(ts) FROM sig_1s").fetchone()
+    a = minmax_ts(c, "sig_1m"); b = minmax_ts(c, "sig_1s")
     lo = min(x for x in (a[0], b[0]) if x is not None) if (a[0] is not None or b[0] is not None) else None
     hi = max(x for x in (a[1], b[1]) if x is not None) if lo is not None else None
     return {"lo": lo, "hi": min(hi, now) if hi else None, "hz_lo": b[0], "hz_hi": b[1]}
@@ -143,10 +149,10 @@ class Sig:
 
 def load(c, lo, hi, prefer="auto", cols=("speed", "soc", "power", "batt", "flow", "amb", "hvac", "motor", "mode"), edge=False):
     """1 Hz tier when the window lies inside it (last 7 days), else the per-minute tier.  `edge`: the window may run past the newest row (a question about right now on a live vehicle): the 1 Hz tier still serves it."""
-    hz_lo, hz_hi = c.execute("SELECT MIN(ts), MAX(ts) FROM sig_1s").fetchone()
+    hz_lo, hz_hi = minmax_ts(c, "sig_1s")
     if prefer == "1s" and (hz_lo is None or hz_lo > lo) and hi - lo <= 45 * 86400:
         from . import archive
-        if archive.hydrate(c, lo, hi)["rows"]: hz_lo, hz_hi = c.execute("SELECT MIN(ts), MAX(ts) FROM sig_1s").fetchone()
+        if archive.hydrate(c, lo, hi)["rows"]: hz_lo, hz_hi = minmax_ts(c, "sig_1s")
     hz_covers = hz_lo is not None and hz_lo <= lo and hz_hi is not None and (hz_hi >= hi - 1 or (edge and hz_hi >= lo + 25))
     use_hz = hz_covers and prefer in ("1s", "auto")
     if use_hz:

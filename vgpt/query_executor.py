@@ -811,11 +811,14 @@ _SPAN = {}
 def _span(conn, now):
     """The history span (first/last second of each tier, the archive's range).  Reading it scans the ends of the big tables (70 ms on the Pi) and the assistant asks several times per question: the last answer is kept while the database is unchanged (PRAGMA data_version) and `now` is the same.  One slot, for the connection asked last."""
     from . import archive
-    try: key = (conn.execute("PRAGMA data_version").fetchone()[0], now)
+    try: key = conn.execute("PRAGMA data_version").fetchone()[0]                                    # the span depends on the data, not on the clock: only its newest end is cut at `now`
     except sqlite3.Error: return Q.coverage(conn, now), archive.coverage(conn)
     hit = _SPAN.get("last")
-    if hit and hit[0] is conn and hit[1] == key: return hit[2], hit[3]
-    cv = Q.coverage(conn, now); ar = archive.coverage(conn); _SPAN["last"] = (conn, key, cv, ar); return cv, ar
+    if not (hit and hit[0] is conn and hit[1] == key):
+        hit = _SPAN["last"] = (conn, key, Q.coverage(conn, 2 ** 40), archive.coverage(conn))
+    cv = dict(hit[2])
+    if cv.get("hi"): cv["hi"] = min(cv["hi"], now)
+    return cv, hit[3]
 
 
 def context_for(conn, now=None):

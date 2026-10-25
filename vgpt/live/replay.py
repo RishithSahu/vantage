@@ -153,7 +153,7 @@ class Recorded:
         return best
 
     def span(self):
-        r = self.c.execute("SELECT MIN(ts), MAX(ts) FROM sig_1s").fetchone(); return r if r and r[0] is not None else (None, None)
+        from ..qa_core import minmax_ts; return minmax_ts(self.c, "sig_1s")
 
     def close(self):
         try: self.c.close()
