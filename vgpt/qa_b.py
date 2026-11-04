@@ -1,7 +1,7 @@
 """QA part B: periods and durations, statistics, comparisons, trends, degradation, correlations and driving conditions."""
 import re, math, datetime as dt
 from collections import Counter
-from . import analytics as A, analytics_x as AX, qa_core as Q
+from . import analytics as A, analytics_x as AX, qa_core as Q, fastcols as FC
 from .qa_core import mean, sd, F1, F0, SIGNED, plural, pfmt
 from .qa_a import UNIT, NAME, fmt_val, WARN_TYPES
 
@@ -22,6 +22,8 @@ def runs(sg, pred, gap=None):
 
 class MixB:
     def daily(self, col, lo, hi, modes=(1, 2), minv=None, scale=10.0, agg="AVG", minn=20):
+        fast = FC.daily(self.c, col, lo, hi, modes, minv, scale, agg, minn)
+        if fast is not None: return fast
         q = f"SELECT ((ts+({A.TZ}))/86400)*86400-({A.TZ}) d, {agg}({col}), COUNT(*) FROM sig_1m WHERE ts>=? AND ts<? AND mode IN ({','.join(str(m) for m in modes)})" + (f" AND {col}>{int(minv * scale)}" if minv is not None else "") + " GROUP BY d ORDER BY d"
         return [(d, v / scale, n) for d, v, n in self.c.execute(q, (lo, hi)).fetchall() if v is not None and n >= minn]
 
@@ -460,7 +462,7 @@ class MixB:
     def h_conditions(self, s, raw):
         lo, hi, wtxt = self.win(s, default=(self.cov()["lo"], self.cov()["hi"] + 1, "the whole recorded history"))
         T = Q.trips_between(self.c, lo, hi)
-        for t in T: t["tyre"] = Q.tyre_deficit(self.c, t["start"])
+        Q.attach_tyre(self.c, T)
         T = [t for t in T if t["km"] >= 3]
         if len(T) < 12: return "Not enough trips to compare driving conditions."
         groups = [("cold weather (below 8 C)", lambda t: t["amb"] < 8), ("mild weather (8 to 24 C)", lambda t: 8 <= t["amb"] <= 24), ("hot weather (above 24 C)", lambda t: t["amb"] > 24), ("mostly motorway (over 60% of the distance)", lambda t: t["hwy"] > 0.6),

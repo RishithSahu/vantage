@@ -90,6 +90,10 @@ def adopt_product_model(root=None):
                 os.environ["VGPT_FRAME"] = str(int(j.get("frame", 1))); os.environ.setdefault("VGPT_MEANING_ADAPTER", ad); r["source"] = "models/product.json"
             od = os.path.join(root, "models", str(j.get("ort") or ""))                                              # the same model as an int8 ONNX Runtime build (tools/build_ort_model.py)
             if j.get("ort") and os.path.exists(os.path.join(od, "model.onnx")): os.environ.setdefault("VGPT_ORT_DIR", od)
+            nat = os.path.join(root, "models", str(j.get("native") or ""))                                          # the native engine's weight file (tools/export_vgw.py); used only when it exists and the engine builds
+            if j.get("native") and os.path.exists(nat): os.environ.setdefault("VGPT_NATIVE", nat)
+            if j.get("ice_only"): os.environ.setdefault("VGPT_ICE_ONLY", "line" if j["ice_only"] == "line" else "1")                                       # the car-type line and the glossary hints go to combustion cars only
+            if j.get("hint_short"): os.environ.setdefault("VGPT_HINT_SHORT", "1")                                    # compact glossary meanings in the hint line (vgpt/meaning/glossary_short.json): fewer prompt tokens
             if j.get("vehicle_hint"): os.environ.setdefault("VGPT_VEHICLE_HINT", "1")                              # the adapter was trained with the car type in its system prompt
     except (OSError, ValueError, TypeError): pass
     ad = os.environ.get("VGPT_MEANING_ADAPTER"); od = os.environ.get("VGPT_ORT_DIR")
@@ -108,7 +112,7 @@ def describe_model(model):
     """What a loaded frame model really is: the backend that runs it, the frame version, the vocabulary version, the decoder and the thread count.  None-safe."""
     if model is None: return {"loaded": False}
     kind = type(model).__name__
-    d = {"loaded": True, "class": kind, "backend": "onnxruntime-int8" if kind == "OrtFrameModel" else "llama.cpp" if hasattr(model, "llm") else kind, "frame": getattr(model, "version", None),
+    d = {"loaded": True, "class": kind, "backend": ("native-engine-int8" if getattr(model, "eng", None) is not None else "onnxruntime-int8") if kind == "OrtFrameModel" else "llama.cpp" if hasattr(model, "llm") else kind, "frame": getattr(model, "version", None),
          "decoder": getattr(model, "decoder", None), "provider": getattr(model, "provider", None), "vehicle_hint": bool(getattr(model, "vehicle_hint", False)), "vehicle": getattr(model, "vehicle", None)}
     try: d["ontology"] = int(model.onto.version)
     except Exception: pass

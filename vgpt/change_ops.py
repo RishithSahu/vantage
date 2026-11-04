@@ -114,14 +114,23 @@ def _tstats_all(ys, ks):
     return np.where(va + vb > 0, np.abs(ma - mb) / np.where(den > 0, den, 1.0), 0.0)
 
 
+def _tstats_rows(P, ks):
+    """`_tstats_all` for every row of P at once (row-wise cumulative sums: the same numbers as one row at a time)."""
+    n = P.shape[1]; B = P.shape[0]; ki = np.asarray(ks, int); k = np.asarray(ks, float); na, nb = k, n - k
+    c1 = np.concatenate([np.zeros((B, 1)), np.cumsum(P, axis=1)], axis=1); c2 = np.concatenate([np.zeros((B, 1)), np.cumsum(P * P, axis=1)], axis=1)
+    sa, sb = c1[:, ki], c1[:, [n]] - c1[:, ki]; qa, qb = c2[:, ki], c2[:, [n]] - c2[:, ki]; ma, mb = sa / na, sb / nb
+    va = np.maximum((qa - na * ma * ma) / (na - 1), 0.0) / na; vb = np.maximum((qb - nb * mb * mb) / (nb - 1), 0.0) / nb; den = np.sqrt(va + vb)
+    return np.where(va + vb > 0, np.abs(ma - mb) / np.where(den > 0, den, 1.0), 0.0)
+
+
 def _split(ys, B=400):
     """Best two-level split (>= 3 days each side) with a permutation p-value of the LARGEST statistic over all splits (accounts for the search; days exchangeable). -> dict or None."""
     n = len(ys)
     if n < 6: return None
     ys = np.asarray(ys, float); ks = list(range(3, n - 2)); stats = _tstats_all(ys, ks); k = ks[int(np.argmax(stats))]; obs = float(np.max(stats))
-    rng = np.random.default_rng(7); ge = 0
-    for _ in range(B):
-        p = rng.permutation(ys); ge += float(np.max(_tstats_all(p, ks))) >= obs - 1e-12
+    rng = np.random.default_rng(7); P = np.empty((B, n))
+    for i in range(B): P[i] = rng.permutation(ys)                                                          # the same random stream, in the same order, as shuffling one at a time
+    ge = int(np.sum(_tstats_rows(P, ks).max(axis=1) >= obs - 1e-12))                                    # all the shuffles at once (400 calls of 1 ms each were 0.4 s on the Raspberry Pi)
     a, b = ys[:k], ys[k:]; ma, mb = float(np.mean(a)), float(np.mean(b)); xs = np.arange(n)
     sse_step = float(np.sum((a - ma) ** 2) + np.sum((b - mb) ** 2)); lin = np.polyfit(xs, ys, 1); sse_lin = float(np.sum((ys - np.polyval(lin, xs)) ** 2))
     sp = math.sqrt(((len(a) - 1) * np.var(a, ddof=1) + (len(b) - 1) * np.var(b, ddof=1)) / max(n - 2, 1)) or 1e-9
@@ -189,7 +198,7 @@ def explain_change(ex, q):
     contrib = None; assoc = []; restricted = bool(q.scope.conditions or q.scope.select or (q.scope_b is not None and (q.scope_b.conditions or q.scope_b.select)))
     if t in ("wh_per_km", "range_estimate") and not restricted:
         Tall = Q.trips_between(ex.c, ex.ctx.lo, ex.ctx.hi + 1); Ta, Tb = Q.trips_between(ex.c, lo2, hi2), Q.trips_between(ex.c, lo, hi)
-        for tr in Tall + Ta + Tb: tr["tyre"] = Q.tyre_deficit(ex.c, tr["start"])
+        Q.attach_tyre(ex.c, Tall + Ta + Tb)
         res = _weighted_attribution(ex.c, Tall, Tb, Ta); fit = {"r2": res["r2"]} if res else None
         if res and abs(res["gap"]) > 1e-6:
             contrib = {"gap": res["gap"], "explained": res["explained"], "residual": res["gap"] - res["explained"], "r2": fit["r2"], "n_trips": (len(Ta), len(Tb)), "basis": "distance-weighted trips (total energy / total distance)", "trip_before": res["good_mean"], "trip_after": res["bad_mean"],

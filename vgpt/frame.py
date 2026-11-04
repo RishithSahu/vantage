@@ -19,7 +19,9 @@ class Frame:
     def mask_between(self, lo, hi): return (self.ts >= lo) & (self.ts < hi)
 
     def take(self, mask):
-        f = Frame(self.ts[mask], {k: v[mask] for k, v in self.cols.items()}, self.res, self.tier, dict(self.source), list(self.intervals)); return f
+        m = np.asarray(mask)
+        if m.dtype == bool: m = np.flatnonzero(m)                                                                  # the positions once, not one scan of the mask per column
+        f = Frame(self.ts[m], {k: v[m] for k, v in self.cols.items()}, self.res, self.tier, dict(self.source), list(self.intervals)); return f
 
     def column(self, name):
         v = self.cols.get(name)

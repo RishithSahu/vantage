@@ -16,6 +16,7 @@ import sqlite3
 from ..query_ir import TimeSpec
 from ..vehicle import caps as CAPS
 from .. import analytics as A
+from ..nearest import nearest
 from .eventx import DAY, _plural, _r, _window, _win
 
 NL = chr(10)
@@ -199,7 +200,7 @@ def engine_temperature(res, frame, lit, text=""):
         from . import literals as L
         ts = L.instant(text, b.now, b.tz) if text else None
         if ts is None: return _r(res, "Which time do you mean? Give me a clock time or how long ago (for example '3 pm yesterday' or '2 hours ago').", "clarify:instant", frame, ok=False)
-        r = b.c.execute("SELECT ts, motor / 10.0 FROM sig_1m WHERE motor IS NOT NULL ORDER BY ABS(ts - ?) LIMIT 1", (int(ts),)).fetchone()
+        r = nearest(b.c, "sig_1m", "ts, motor / 10.0", int(ts), "motor")
         if not r or abs(r[0] - ts) > 180: return _r(res, f"No engine temperature is recorded close enough to {A.stamp(ts)}.", "at:engine_temperature", frame, ok=False)
         return _r(res, f"Engine coolant temperature at {A.stamp(r[0])} was {r[1]:.0f} °C.\nBased on the nearest stored one-minute value.", "at:engine_temperature", frame, value=r[1], sample_ts=r[0])
     if frame.act == "now":

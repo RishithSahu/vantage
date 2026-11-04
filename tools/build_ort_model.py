@@ -31,6 +31,19 @@ def load_weights(base_gguf, lora_gguf):
     return out
 
 
+def qnbits(w, block=32, bits=4):
+    """w: [N, K] float -> (packed uint8 [N, K/block, block/2], scales float32 [N * K/block], zero points uint8 packed [N * ceil(K/block / 2)]) for the com.microsoft MatMulNBits operator: 4-bit weights, one scale and one zero point per
+    block of 32 weights along K, minimum / maximum (asymmetric) rounding.  Post-training only: nothing is trained, the same merged weights as the int8 build are rounded to fewer bits."""
+    N, K = w.shape; nb = K // block; assert K % block == 0 and bits == 4
+    wb = w.reshape(N, nb, block); lo = wb.min(axis=2); hi = wb.max(axis=2); sc = np.maximum((hi - lo) / 15.0, 1e-8); zp = np.clip(np.rint(-lo / sc), 0, 15)
+    q = np.clip(np.rint(wb / sc[:, :, None]) + zp[:, :, None], 0, 15).astype(np.uint8)
+    packed = (q[:, :, 0::2] | (q[:, :, 1::2] << 4)).astype(np.uint8)                                  # element 2i in the low nibble, 2i+1 in the high one
+    zq = zp.astype(np.uint8)
+    if nb % 2: zq = np.concatenate([zq, np.zeros((N, 1), np.uint8)], axis=1)
+    zpk = (zq[:, 0::2] | (zq[:, 1::2] << 4)).astype(np.uint8).reshape(-1)
+    return np.ascontiguousarray(packed), sc.astype(np.float32).reshape(-1), zpk
+
+
 def qint(w):
     """w: [out, in] float -> (int8 [in, out], float32 scale [out]), symmetric, one scale per output channel."""
     s = np.maximum(np.abs(w).max(axis=1), 1e-8) / 127.0
@@ -53,6 +66,9 @@ class G:
         if os.environ.get("FLOAT") == "1":
             y = self.op("MatMul", [x, self.const(np.ascontiguousarray(w.T.astype(np.float32)), "wf")])
             return self.op("Add", [y, self.const(bias.astype(np.float32))]) if bias is not None else y
+        if os.environ.get("QBITS") == "4" and w.shape[1] % 32 == 0:                                   # 4-bit weights, float activations: half the bytes a decode pass has to read, no activation quantisation operators
+            pk, sc, zpk = qnbits(w); ins = [x, self.const(pk, "w4"), self.const(sc, "s4"), self.const(zpk, "z4"), "", self.const(bias.astype(np.float32))] if bias is not None else [x, self.const(pk, "w4"), self.const(sc, "s4"), self.const(zpk, "z4")]
+            return self.op("MatMulNBits", ins, domain="com.microsoft", K=int(w.shape[1]), N=int(w.shape[0]), bits=4, block_size=32, **({"accuracy_level": int(os.environ["QACC"])} if os.environ.get("QACC") else {}))
         wq, ws = qint(w); wq_n, ws_n = self.const(wq, "wq"), self.const(ws, "ws"); zp = self.const(np.array(128, np.uint8), "zp")
         if os.environ.get("QMODE") == "dyn":                                                          # one fused operator, one activation scale for the whole call (not per token)
             return self.op("DynamicQuantizeMatMul", [x, wq_n, ws_n] + ([self.const(np.zeros(len(ws), np.int8), "wz"), self.const(bias.astype(np.float32))] if bias is not None else []), domain="com.microsoft")
@@ -84,7 +100,17 @@ class G:
         xq = self.quant(x, s)
         return self.op("Mul", [self.op("Mul", [self.op("Cast", [self.op("MatMulInteger", [xq, b, zp])], to=T.FLOAT), s]), sc])
 
+    def head_rows(self, x, wq_n, ws_n, rows):
+        """The output head over the listed token rows only, with the head matrix stored as [tokens, hidden]: choosing 3,000 rows reads 3,000 contiguous rows (2.7 MB, about 1 ms) instead of 896 scattered bytes per row of a [hidden, tokens] matrix (46 ms on the
+        Raspberry Pi 4, measured, every pass).  The arithmetic is the same as `linear_rows`: the same int8 weights, the same scales, the same per-token activation scale."""
+        zp = self.const(np.array(128, np.uint8), "zp"); b = self.op("Transpose", [self.op("Gather", [wq_n, rows], axis=0)], perm=[1, 0]); sc = self.op("Gather", [ws_n, rows], axis=0)
+        amax = self.op("ReduceMax", [self.op("Abs", [x]), self.const(np.array([-1], np.int64))], keepdims=1)
+        sx = self.op("Div", [self.op("Max", [amax, self.const(np.array(1e-8, np.float32))]), self.const(np.array(127.0, np.float32))]); xq = self.quant(x, sx)
+        return self.op("Mul", [self.op("Mul", [self.op("Cast", [self.op("MatMulInteger", [xq, b, zp])], to=T.FLOAT), sx]), sc])
+
     def rms(self, x, w):
+        if os.environ.get("RMSFUSE") == "1":                                                          # one operator instead of six (the per-node cost of a decode pass is most of its time on a small CPU)
+            return self.op("SimplifiedLayerNormalization", [x, self.const(w.astype(np.float32))], epsilon=EPS, axis=-1)
         ms = self.op("ReduceMean", [self.op("Mul", [x, x]), self.const(np.array([-1], np.int64))], keepdims=1)
         return self.op("Mul", [self.op("Div", [x, self.op("Sqrt", [self.op("Add", [ms, self.const(np.array(EPS, np.float32))])])]), self.const(w.astype(np.float32))])
 
@@ -92,7 +118,8 @@ class G:
 def build(W, path):
     g = G(); ids, pos, nkeep = "ids", "pos", "nkeep"; i1 = lambda *v: g.const(np.array(list(v), np.int64))
     emb = W["token_embd.weight"]; es = (np.maximum(np.abs(emb).max(axis=1), 1e-8) / 127.0).astype(np.float32); embq = np.clip(np.rint(emb / es[:, None]), -127, 127).astype(np.int8)
-    x = g.op("Mul", [g.op("Cast", [g.op("Gather", [g.const(embq, "emb"), ids], axis=0)], to=T.FLOAT), g.op("Unsqueeze", [g.op("Gather", [g.const(es, "embs"), ids], axis=0), i1(-1)])])
+    emb_n, embs_n = g.const(embq, "emb"), g.const(es, "embs")
+    x = g.op("Mul", [g.op("Cast", [g.op("Gather", [emb_n, ids], axis=0)], to=T.FLOAT), g.op("Unsqueeze", [g.op("Gather", [embs_n, ids], axis=0), i1(-1)])])
     inv = 1.0 / (THETA ** (np.arange(0, HD, 2, dtype=np.float64) / HD)); ang = np.outer(np.arange(4096), inv); e2 = np.concatenate([ang, ang], axis=1)
     cos = g.op("Unsqueeze", [g.op("Gather", [g.const(np.cos(e2).astype(np.float32), "cos"), pos], axis=0), i1(1)]); sin = g.op("Unsqueeze", [g.op("Gather", [g.const(np.sin(e2).astype(np.float32), "sin"), pos], axis=0), i1(1)])
 
@@ -126,7 +153,13 @@ def build(W, path):
     x = g.rms(x, W["output_norm.weight"])
     start = g.op("Sub", [T_, g.op("Gather", [nkeep, g.const(np.array(0, np.int64))], axis=0)])
     last = g.op("Slice", [x, g.op("Unsqueeze", [start, i1(0)]), g.op("Unsqueeze", [T_, i1(0)]), i1(1)])                                      # the last nkeep positions
-    outs.append((g.linear_rows(last, W.get("output.weight", emb), "cand"), "logits"))                                                      # the output head, over the listed token rows only (the decoder allows a few thousand tokens, not 151,936)
+    head_w = W.get("output.weight", emb)
+    if os.environ.get("HEAD", "rows") == "rows" and os.environ.get("FLOAT") != "1":
+        if head_w is emb or np.array_equal(head_w, emb): outs.append((g.head_rows(last, emb_n, embs_n, "cand"), "logits"))                  # a tied head: the embedding matrix itself, stored once
+        else:
+            hq = np.clip(np.rint(head_w / (np.maximum(np.abs(head_w).max(axis=1), 1e-8) / 127.0)[:, None]), -127, 127).astype(np.int8); hs = (np.maximum(np.abs(head_w).max(axis=1), 1e-8) / 127.0).astype(np.float32)
+            outs.append((g.head_rows(last, g.const(hq, "headq"), g.const(hs, "heads"), "cand"), "logits"))
+    else: outs.append((g.linear_rows(last, head_w, "cand"), "logits"))                                                      # the output head, over the listed token rows only (the decoder allows a few thousand tokens, not 151,936)
     inputs = [helper.make_tensor_value_info("ids", T.INT64, [1, "T"]), helper.make_tensor_value_info("pos", T.INT64, [1, "T"]), helper.make_tensor_value_info("nkeep", T.INT64, [1]), helper.make_tensor_value_info("cand", T.INT64, ["C"])] + \
              [helper.make_tensor_value_info(f"p{kv}{l}", T.FLOAT, [1, NKV, "P", HD]) for l in range(L) for kv in "kv"]
     nodes = g.nodes + [helper.make_node("Identity", [a], [b]) for a, b in outs]; outputs = [helper.make_tensor_value_info(b, T.FLOAT, None) for _, b in outs]

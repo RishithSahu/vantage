@@ -90,6 +90,8 @@ THREE_YEARS = os.path.join(ROOT, "data", "world_3yr.db")
 class ThreeYearCounting(unittest.TestCase):
     def test_every_trip_of_three_years_is_counted(self):
         from vgpt.product import make_brain
+        from vgpt import bootstrap
+        bootstrap.adopt_product_model()                                                              # the model models/product.json names (the launcher does this when it runs; conftest puts the environment back)
         c = sqlite3.connect(f"file:{THREE_YEARS}?mode=ro", uri=True); end = int(c.execute("SELECT v FROM meta WHERE k='end'").fetchone()[0]); n = c.execute("SELECT COUNT(*) FROM trips").fetchone()[0]; c.close()
         b = make_brain(THREE_YEARS, now=end)
         r = b.ask("how many trips in total")

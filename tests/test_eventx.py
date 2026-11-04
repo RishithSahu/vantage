@@ -27,7 +27,7 @@ class Scripted:
     glossary = GL.load()
 
     def __init__(self): self.t = {}
-    def parse(self, text, hint=None):
+    def parse(self, text, hint=None, prev=None):
         f = self.t.get(text)
         return (f, {"raw": f.to_text(), "pmin": 0.99, "ms": 0.0, "hint": ""}) if f is not None else (None, {"raw": "", "pmin": 0.0, "ms": 0.0})
 
@@ -171,9 +171,9 @@ class Logs(Base):
 class Refusals(Base):
     def test_a_refusal_the_model_is_not_sure_of_is_asked_again_not_accused(self):
         class Unsure:
-            def parse(self, text, hint=None): return Frame("unsafe", "none"), {"raw": "unsafe none none none none none", "pmin": 0.5, "ms": 0.0, "hint": ""}
+            def parse(self, text, hint=None, prev=None): return Frame("unsafe", "none"), {"raw": "unsafe none none none none none", "pmin": 0.5, "ms": 0.0, "hint": ""}
         class Sure(Unsure):
-            def parse(self, text, hint=None): return Frame("unsafe", "none"), {"raw": "unsafe none none none none none", "pmin": 0.97, "ms": 0.0, "hint": ""}
+            def parse(self, text, hint=None, prev=None): return Frame("unsafe", "none"), {"raw": "unsafe none none none none none", "pmin": 0.97, "ms": 0.0, "hint": ""}
         keep = self.b.frame_model
         try:
             self.b.frame_model = Unsure(); self.b.dialogue.reset(); r = self.b.ask("zxcv qwer unsure refusal"); self.assertNotIn("bypass", r["answer"]); self.assertRegex((r.get("facts") or {}).get("route", "") + str(r.get("intent")) + r["answer"].lower(), "ambiguous|low_confidence")                                            # asked again, either through the unsafe floor or through the calibrated refusal

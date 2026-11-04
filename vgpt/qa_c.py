@@ -27,7 +27,7 @@ class MixC:
         shape = "a step (the level changed on one date and stayed)" if sse_step < 0.8 * sse_lin else "a gradual drift"
         jumps = sorted(((D[i]["wh_km"] - D[i - 1]["wh_km"], D[i]) for i in range(1, len(D))), key=lambda x: -x[0])[:3]
         fit = Q.eff_fit(self.c, cv["lo"], cv["hi"] + 1); Ta, Tb = Q.trips_between(self.c, *pa), Q.trips_between(self.c, *pb)
-        for t in Ta + Tb: t["tyre"] = Q.tyre_deficit(self.c, t["start"])
+        Q.attach_tyre(self.c, Ta + Tb)
         res = Q.eff_period(fit, Tb, Ta) if fit else None
         cap = A.cap_kwh(self.c); ra, rb = cap * 1000 / ma, cap * 1000 / mb
         d = {"topic": topic, "kind": "range", "lo": lo, "hi": hi, "pa": pa, "pb": pb, "ma": ma, "mb": mb, "pct": pct, "w": w, "shape": shape, "jumps": jumps, "res": res, "days_a": k, "days_b": len(D) - k, "ra": ra, "rb": rb, "D": D, "Ta": Ta, "Tb": Tb, "fit": fit, "sse": (sse_step, sse_lin)}

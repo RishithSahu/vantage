@@ -26,7 +26,7 @@ class Scripted:
 
     def __init__(self, table): self.table = {k.lower(): v for k, v in table.items()}
 
-    def parse(self, text, hint=None):
+    def parse(self, text, hint=None, prev=None):
         f = self.table.get(text.lower().strip(), F("ambiguous", "none"))
         return f, {"raw": f.to_text(), "pmin": 0.99, "ms": 0.0, "hint": ""}
 

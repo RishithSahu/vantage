@@ -1,8 +1,9 @@
 """Evidence engine for the analytical questions (stdlib only): time parsing, access to every tier of the store, derived signals, statistics, event helpers,
 anomaly definition and the efficiency / overheating hypothesis models. Everything returns plain numbers + the timestamps they came from, so answers can cite and
 recompute them. Nothing here talks to the language model."""
-import math, re, statistics, datetime as dt
-from . import analytics as A, analytics_x as AX
+import math, operator, re, statistics, datetime as dt
+import numpy as np
+from . import analytics as A, analytics_x as AX, fastcols as FC
 
 # ------------------------------------------------------------------------------------------------ metrics
 SIGS = {"speed": ("speed", 10.0, "km/h", "vehicle speed"), "soc": ("soc", 10.0, "%", "state of charge"), "power": ("power", 1000.0, "kW", "battery power"), "batt": ("batt", 10.0, "C", "battery temperature"),
@@ -159,8 +160,10 @@ def load(c, lo, hi, prefer="auto", cols=("speed", "soc", "power", "batt", "flow"
         rows = c.execute("SELECT ts, speed, soc, power, batt, flow, amb, hvac, motor, mode FROM sig_1s WHERE ts>=? AND ts<? ORDER BY ts", (lo, hi)).fetchall(); res, tier = 1, "1 Hz"
         sc = (10.0, 10.0, 1000.0, 10.0, 10.0, 10.0, 1.0, 10.0, 1.0)
     else:
-        rows = c.execute("SELECT ts, speed, soc, power, batt, flow, amb, hvac, motor, mode FROM sig_1m WHERE ts>=? AND ts<? ORDER BY ts", (lo, hi)).fetchall(); res, tier = 60, "per-minute"
-        sc = (10.0, 10.0, 1000.0, 10.0, 10.0, 10.0, 1.0, 10.0, 1.0)
+        res, tier = 60, "per-minute"; sc = (10.0, 10.0, 1000.0, 10.0, 10.0, 10.0, 1.0, 10.0, 1.0)
+        names = ("speed", "soc", "power", "batt", "flow", "amb", "hvac", "motor", "mode"); fast = FC.minute_columns(c, names, lo, hi)
+        if fast is not None: return Sig(fast[0].astype(np.int64).tolist(), {n: (fast[i + 1] / sc[i]).tolist() for i, n in enumerate(names)}, res, tier)        # NULL is NaN in the copy, and NaN / scale is NaN
+        rows = c.execute("SELECT ts, speed, soc, power, batt, flow, amb, hvac, motor, mode FROM sig_1m WHERE ts>=? AND ts<? ORDER BY ts", (lo, hi)).fetchall()
     names = ("speed", "soc", "power", "batt", "flow", "amb", "hvac", "motor", "mode")
     # SQL NULL is a missing observation, not zero.  Keep the parallel numeric
     # arrays usable by analytics while allowing the snapshot boundary to turn
@@ -242,7 +245,7 @@ def mean(x): return sum(x) / len(x) if x else float("nan")
 
 def sd(x):
     if len(x) < 2: return 0.0
-    m = mean(x); return (sum((v - m) ** 2 for v in x) / (len(x) - 1)) ** 0.5
+    m = mean(x); d = [v - m for v in x]; return (sum(map(operator.mul, d, d)) / (len(x) - 1)) ** 0.5            # the same sum of the same squares in the same order, in C (23 calls over 20 000 values took 0.34 s on the Pi)
 
 
 def pearson(x, y):
@@ -305,11 +308,12 @@ def ols_multi(X, y, ridge=1e-6):
     """Multiple linear regression with intercept (normal equations) -> (coefs [b0, b1..], r2) or None."""
     n, p = len(X), len(X[0]) if X else 0
     if n < p + 3: return None
-    Z = [[1.0] + list(r) for r in X]; k = p + 1
-    A_ = [[sum(Z[i][a] * Z[i][b] for i in range(n)) + (ridge if a == b and a > 0 else 0) for b in range(k)] for a in range(k)]; b_ = [sum(Z[i][a] * y[i] for i in range(n)) for a in range(k)]
-    beta = solve(A_, b_)
+    k = p + 1; Z = np.ones((n, k)); Z[:, 1:] = np.asarray(X, dtype=float).reshape(n, p); yy = np.asarray(y, dtype=float)       # the normal equations as array products (the same sums, 2900 trips x 7 terms took 0.4 s as Python loops on the Pi)
+    A_ = Z.T @ Z
+    for a in range(1, k): A_[a, a] += ridge
+    beta = solve(A_.tolist(), (Z.T @ yy).tolist())
     if beta is None: return None
-    my = mean(y); ss_tot = sum((v - my) ** 2 for v in y); ss_res = sum((y[i] - sum(beta[a] * Z[i][a] for a in range(k))) ** 2 for i in range(n))
+    my = float(yy.mean()); ss_tot = float(((yy - my) ** 2).sum()); ss_res = float(((yy - Z @ np.asarray(beta)) ** 2).sum())
     return beta, (1 - ss_res / ss_tot if ss_tot > 0 else 0.0)
 
 
@@ -402,6 +406,32 @@ def tyre_deficit(c, ts):
     except Exception: return 0.0
 
 
+def attach_tyre(c, trips):
+    """trip["tyre"] = tyre_deficit(c, trip["start"]) for every trip.  Many trips are answered from one read of the tyre-pressure minutes (each trip takes the last reading at or before its start, as tyre_deficit does), not one query per trip (a health summary has thousands)."""
+    if len(trips) < 4:
+        for t in trips: t["tyre"] = tyre_deficit(c, t["start"])
+        return
+    try:
+        sf, sr = AX._mf(c, "veh.tyre_spec_front"), AX._mf(c, "veh.tyre_spec_rear")
+        if sf is None:
+            for t in trips: t["tyre"] = 0.0
+            return
+        last = max(int(t["start"]) for t in trips) + 1
+        from . import colstore
+        cs = colstore.of(c); arr = cs.read(c, "ext_1m", ["tp_fl", "tp_fr", "tp_rl", "tp_rr", "tt"], 0, last) if cs is not None else None
+        if arr is None: arr = np.array(c.execute("SELECT ts, tp_fl, tp_fr, tp_rl, tp_rr, tt FROM ext_1m WHERE ts<? ORDER BY ts", (last,)).fetchall(), dtype=float).reshape(-1, 6)
+    except Exception:
+        for t in trips: t["tyre"] = tyre_deficit(c, t["start"])
+        return
+    ts = arr[:, 0]; spec = [sf, sf, sr, sr]
+    for t in trips:
+        i = int(np.searchsorted(ts, t["start"], side="right")) - 1
+        if i < 0 or np.isnan(arr[i, 1:5]).any(): t["tyre"] = 0.0; continue
+        tt = None if np.isnan(arr[i, 5]) else float(arr[i, 5])
+        try: t["tyre"] = mean([max(0.0, 100 * (1 - AX._cold(float(arr[i, 1 + k]) / 10.0, tt) / spec[k])) for k in range(4)])
+        except Exception: t["tyre"] = 0.0
+
+
 FEATURES = [("heating", "cold weather (heating load)", lambda t: max(0.0, 18 - t["amb"]), "degrees below 18 C"), ("cooling", "hot weather (air conditioning)", lambda t: max(0.0, t["amb"] - 24), "degrees above 24 C"),
             ("speed", "higher average speed", lambda t: t["speed"], "km/h"), ("hwy", "more motorway driving", lambda t: 100 * t["hwy"], "% of distance"), ("rain", "rain on the road", lambda t: 100 * t["rain"], "% of the trip in rain"),
             ("harsh", "harder driving", lambda t: t["harsh"], "hard events per 100 km"), ("tyre", "low tyre pressure", lambda t: t["tyre"], "% below spec")]
@@ -413,7 +443,7 @@ PHYS = ("heating", "cooling", "rain", "harsh", "tyre", "hwy")
 def eff_fit(c, lo, hi):
     """Trip-level multiple regression of Wh/km on the conditions in FEATURES (standardised, lightly ridge-regularised). -> dict(T, feats, beta, mu, sg, r2) or None."""
     T = trips_between(c, lo, hi)
-    for t in T: t["tyre"] = tyre_deficit(c, t["start"])
+    attach_tyre(c, T)
     if len(T) < 12: return None
     feats = [f for f in FEATURES if sd([f[2](t) for t in T]) > 1e-6]
     if not feats: return None
@@ -513,8 +543,10 @@ def slope(ts, v):
 
 def baseline_stats(c, col, lo, hi, modes=(1, 2), scale=10.0, minv=None):
     """Mean, sd, 1st and 99th percentile of a per-minute signal while driving (or the given modes) over [lo, hi)."""
-    q = "SELECT %s FROM sig_1m WHERE ts>=? AND ts<? AND mode IN (%s) AND %s IS NOT NULL" % (col, ",".join(str(m) for m in modes), col) + (f" AND {col}>{int(minv * scale)}" if minv is not None else "")
-    v = sorted(r[0] / scale for r in c.execute(q, (lo, hi)).fetchall())
+    v = FC.baseline_values(c, col, lo, hi, modes, scale, minv)
+    if v is None:
+        q = "SELECT %s FROM sig_1m WHERE ts>=? AND ts<? AND mode IN (%s) AND %s IS NOT NULL" % (col, ",".join(str(m) for m in modes), col) + (f" AND {col}>{int(minv * scale)}" if minv is not None else "")
+        v = sorted(r[0] / scale for r in c.execute(q, (lo, hi)).fetchall())
     if len(v) < 30: return None
     return {"p50": v[len(v) // 2], "mean": mean(v), "sd": sd(v) or 0.1, "p1": v[int(0.01 * len(v))], "p99": v[min(len(v) - 1, int(0.99 * len(v)))], "n": len(v)}
 
@@ -530,9 +562,13 @@ def last_abnormal(c, now):
         if kind == "high": thr = b["p99"] + max(2.0, 2.0 * b["sd"]); cond = f"{col} > ?"; lim = thr * 10
         else: thr = 0.6 * b["p50"]; cond = f"{col} < ? AND {col} > 30"; lim = thr * 10
         if kind == "low":
-            rows = c.execute(f"SELECT ts, {col} FROM sig_1m WHERE ts>=? AND ts<=? AND {cond} ORDER BY ts DESC LIMIT 600", (hi, cv["hi"], lim)).fetchall(); have = {x[0] for x in rows}
+            rows = FC.recent_below(c, col, hi, cv["hi"], lim, 30, 600)
+            if rows is None: rows = c.execute(f"SELECT ts, {col} FROM sig_1m WHERE ts>=? AND ts<=? AND {cond} ORDER BY ts DESC LIMIT 600", (hi, cv["hi"], lim)).fetchall()
+            have = {x[0] for x in rows}
             r = next((x for x in rows if (x[0] - 60 in have and x[0] + 60 in have) or (x[0] - 60 in have and x[0] - 120 in have)), None)           # three low minutes in a row = a real condition, not a spin-up / spin-down edge
-        else: r = c.execute(f"SELECT ts, {col} FROM sig_1m WHERE ts>=? AND ts<=? AND {cond} ORDER BY ts DESC LIMIT 1", (hi, cv["hi"], lim)).fetchone()
+        else:
+            r = FC.latest_above(c, col, hi, cv["hi"], lim)
+            if r is None: r = c.execute(f"SELECT ts, {col} FROM sig_1m WHERE ts>=? AND ts<=? AND {cond} ORDER BY ts DESC LIMIT 1", (hi, cv["hi"], lim)).fetchone()
         if r and (best is None or r[0] > best["ts"]):
             best = {"ts": r[0], "signal": key, "value": r[1] / 10.0, "normal": (f"{b['p50']:.1f} typical" if kind == "low" else f"up to {b['p99']:.1f}"), "threshold": thr, "kind": kind, "baseline": b, "label": SIGS[key][3] + (" above the outside temperature" if col.startswith("(") else ""), "unit": SIGS[key][2]}
     return best
@@ -558,6 +594,8 @@ def pfmt(p): return "p < 0.001" if p < 0.001 else f"p = {p:.3f}"
 
 def flow_days(c, lo, hi, minn=15):
     """Median coolant flow (L/min, pump running) per local day: [(day_start_ts, median, n)]. Daily medians ignore the partial minutes when the pump spins up or down."""
+    fast = FC.flow_days(c, lo, hi, minn)
+    if fast is not None: return fast
     days = {}
     for ts, f in c.execute("SELECT ts, flow FROM sig_1m WHERE ts>=? AND ts<? AND flow>30 AND mode IN (1,2,3)", (lo, hi)):
         days.setdefault((ts + A.TZ) // 86400 * 86400 - A.TZ, []).append(f / 10.0)

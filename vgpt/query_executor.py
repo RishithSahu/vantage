@@ -15,7 +15,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from . import analytics as A, derived as D, kinematics as K, live_snapshot as LIVE, qa_core as Q, sensor_quality as SQ, signal_registry as R
+from . import colstore, fastcols as FC, analytics as A, derived as D, kinematics as K, live_snapshot as LIVE, qa_core as Q, sensor_quality as SQ, signal_registry as R
 from .frame import Frame
 from .query_ir import EVENT_PAGE
 from .query_planner import Ctx, PlanError, assert_read_only, compile_entities, compile_events, compile_select, plan as make_plan, resolve_time, local_midnight, DAY
@@ -24,6 +24,20 @@ MAX_ROWS = 1_800_000              # per load: three years of minute rows are 1.6
 MAX_INTERVALS = 200
 TIER_FROM_DAYS = int(os.environ.get("VGPT_TIER_FROM_DAYS", "120"))        # windows at least this long are answered from the DAILY TIER when the question is a plain statistic (no conditions, no trip selection)
 DEFAULT_CONTEXT = ("speed", "battery_power", "battery_temperature", "coolant_flow", "battery_soc", "ambient_temperature", "motor_temperature")
+
+
+def _match_idx(tts, ts):
+    """== np.searchsorted(tts, ts, side="right") - 1 for sorted ts, found from the smaller side: where each row of the smaller table falls in ts, then a running count (1.8 M lookups became 0.3 M on the Pi)."""
+    if len(tts) * 3 < len(ts):
+        pos = np.searchsorted(ts, tts, side="left"); return np.cumsum(np.bincount(pos, minlength=len(ts) + 1)[:len(ts)]) - 1
+    return np.searchsorted(tts, ts, side="right") - 1
+
+
+class _Cols:
+    """The columns of one loaded table, time first: arrays (slices of the column copy's files, or columns of a fetched block)."""
+    def __init__(self, cols): self.cols = cols
+    def __len__(self): return len(self.cols[0])
+    def col(self, j): return self.cols[j]
 
 
 @dataclass
@@ -70,10 +84,8 @@ class Executor:
 
     def load_frame(self, concepts, lo, hi, tier):
         """Aligned Frame of the MEASURED concepts over [lo, hi) from the best table/tier for each; columns converted to engineering units.
-        One question often asks for the same days several times (an explanation compares periods that share a window): the last few loads are kept, valid only while the database is unchanged (PRAGMA data_version), and handed out as copies."""
-        try: ver = self.c.execute("PRAGMA data_version").fetchone()[0]
-        except sqlite3.Error: return self._load_frame(concepts, lo, hi, tier)
-        memo = self.__dict__.setdefault("_frame_memo", {}); key = (tuple(sorted(set(concepts))), int(lo), int(hi), tier, ver, getattr(self.ctx, "hz_lo", None))
+        One question often asks for the same days several times (an explanation compares periods that share a window): the last few loads of THIS question are kept (dropped when the next question starts; the live writer bumps the data version while a question runs, which made every load a miss) and handed out as copies."""
+        memo = self.__dict__.setdefault("_frame_memo", {}); key = (tuple(sorted(set(concepts))), int(lo), int(hi), tier, getattr(self.ctx, "hz_lo", None))
         hit = memo.get(key)
         if hit is None:
             if len(memo) >= 6: memo.pop(next(iter(memo)))
@@ -100,26 +112,37 @@ class Executor:
             for _, col, _, _ in items:                                                          # the virtual "tyre pressure" concept needs all four wheel columns next to whatever else the table is asked for
                 for x in (["tp_fl", "tp_fr", "tp_rl", "tp_rr"] if col == "tp_*" else [col]):
                     if x not in cols: cols.append(x)
-            sql, args = compile_select(tb, cols, lo, hi)
-            rows = self._rows(sql + f" LIMIT {MAX_ROWS}", args)
-            loaded.append((tb, use, items, cols, rows))
-        base_tb, base_use, _, _, base_rows = loaded[0]
+            sql, args = compile_select(tb, cols, lo, hi)                                          # the whitelist check, and the statement when the columnar copy cannot answer
+            arr = None; cs = colstore.of(self.c) if use == "1m" else None
+            if cs is not None:
+                got = cs.columns(self.c, tb, cols, int(lo), int(hi))                               # a long window of a per-minute table: the copy's columns beside the database (slices of its files, nothing copied), not millions of rows from SQLite
+                if got is not None: arr = _Cols([x[:MAX_ROWS] for x in got])
+            if arr is None:
+                rows = self._rows(sql + f" LIMIT {MAX_ROWS}", args); a2 = np.array(rows, dtype=float).reshape(len(rows), 1 + len(cols)) if rows else np.empty((0, 1 + len(cols))); arr = _Cols([a2[:, j] for j in range(a2.shape[1])])
+            loaded.append((tb, use, items, cols, arr))
+        base_tb, base_use, _, _, base_arr = loaded[0]
         res = 1 if base_use == "1s" else 60 if base_use == "1m" else 86400
-        ts = np.array([r[0] for r in base_rows], dtype=np.int64); frame = Frame(ts, {}, res, base_use if base_use in ("1s", "1m") else "day", {}, [(lo, hi)])
-        for (tb, use, items, cols, rows) in loaded:
-            if not rows:
+        ts = base_arr.col(0).astype(np.int64); frame = Frame(ts, {}, res, base_use if base_use in ("1s", "1m") else "day", {}, [(lo, hi)])
+        for (tb, use, items, cols, arr) in loaded:
+            if len(arr) == 0:
                 for c, col, sc, off in items: frame.cols[c] = np.full(len(ts), np.nan); frame.source[c] = f"{tb}.{col}"
                 continue
-            arr = np.array(rows, dtype=float); tts = arr[:, 0].astype(np.int64)
-            idx = np.searchsorted(tts, ts, side="right") - 1; ok = (idx >= 0)
-            tol = 90 if use == "1m" else 5 if use == "1s" else 86400
-            ok &= (np.abs(ts - tts[np.clip(idx, 0, len(tts) - 1)]) <= tol) if tb != base_tb else True
-            idx = np.clip(idx, 0, len(tts) - 1)
+            if tb == base_tb and use == base_use: pick = lambda j: arr.col(j)                      # the base table is the frame's own rows: no matching by time
+            else:
+                tts = arr.col(0).astype(np.int64)
+                if len(tts) == len(ts) and np.array_equal(tts, ts): pick = lambda j: arr.col(j); same_grid = True                  # the same minutes as the base table: every row matches itself, no search
+                else: same_grid = False
+                idx = _match_idx(tts, ts) if not same_grid else None; ok = (idx >= 0) if not same_grid else None
+                if not same_grid:
+                    tol = 90 if use == "1m" else 5 if use == "1s" else 86400
+                    ok &= (np.abs(ts - tts[np.clip(idx, 0, len(tts) - 1)]) <= tol)
+                    idx = np.clip(idx, 0, len(tts) - 1)
+                    pick = lambda j: np.where(ok, arr.col(j)[idx], np.nan)
             for c, col, sc, off in items:
                 if col == "tp_*":
-                    v = arr[idx][:, [1 + cols.index(x) for x in ("tp_fl", "tp_fr", "tp_rl", "tp_rr")]] / sc + off; vals = np.where(ok, np.nanmin(v, axis=1), np.nan)
+                    v = np.stack([pick(1 + cols.index(x)) for x in ("tp_fl", "tp_fr", "tp_rl", "tp_rr")], axis=1) / sc + off; vals = np.nanmin(v, axis=1)
                 else:
-                    j = 1 + cols.index(col); vals = np.where(ok, arr[idx][:, j] / sc + off, np.nan)
+                    vals = pick(1 + cols.index(col)) / sc + off
                 if c == "gps_speed": vals = np.where(vals < 0, np.nan, vals)
                 frame.cols[c] = vals; frame.source[c] = f"{tb}.{col}"
         return frame
@@ -305,7 +328,7 @@ class Executor:
 
     # ------------------------------------------------------------------ entry point
     def run(self, q):
-        pl = make_plan(q, self.p, self.ctx)
+        pl = make_plan(q, self.p, self.ctx); self.__dict__.pop("_frame_memo", None)                          # frames are shared only inside one question
         fn = {"current_value": self._current, "aggregate": self._aggregate, "acceleration_band": self._acceleration_band, "extreme": self._extreme, "trend": self._trend, "compare": self._compare, "count": self._count, "list_events": self._list_events,
               "event_context": self._event_context, "rank": self._rank, "correlation": self._correlation, "percent_time": self._percent_time, "explain_event": self._explain, "capability": self._capability, "explain_change": self._explain_change, "detect_change": self._detect_change}[q.op]
         r = fn(q); r.plan = pl.explain(); r.query_text = q.to_text(); r.op = r.op or q.op
@@ -561,7 +584,8 @@ class Executor:
             support_counts = {}
             if "sig_1m" in self.p.tables:
                 for a, b in intervals:
-                    for day_index, count in self.c.execute("SELECT CAST((ts + ?) / ? AS INTEGER), COUNT(*) FROM sig_1m WHERE ts>=? AND ts<? GROUP BY 1", (self.ctx.tz, DAY, int(a), int(b))):
+                    per = FC.rows_per_day(self.c, "sig_1m", int(a), int(b), self.ctx.tz, DAY)
+                    for day_index, count in (per.items() if per is not None else self.c.execute("SELECT CAST((ts + ?) / ? AS INTEGER), COUNT(*) FROM sig_1m WHERE ts>=? AND ts<? GROUP BY 1", (self.ctx.tz, DAY, int(a), int(b)))):
                         day = int(day_index * DAY - self.ctx.tz)
                         support_counts[day] = support_counts.get(day, 0) + int(count)
             out = []
@@ -577,14 +601,16 @@ class Executor:
         tz = self.ctx.tz; days = (fr.ts + tz) // DAY; out = []
         vals = None if target in D.ACCUMULATED else self._series(fr, target)
         if vals is None and target not in D.ACCUMULATED: return None, label, period, f"{R.label_of(target)} could not be computed", None
-        for d in np.unique(days[mask]):
-            m = mask & (days == d)
+        dm = days[mask]; days_in = dm[np.concatenate([[True], dm[1:] != dm[:-1]])] if len(dm) else dm; lo_i = np.searchsorted(days, days_in, side="left"); hi_i = np.searchsorted(days, days_in, side="right")             # the samples are in time order: a day is one slice, not a pass over the whole window
+        pre = D.prepare(fr, self.p) if target in D.ACCUMULATED else None
+        for d, i0, i1 in zip(days_in, lo_i, hi_i):
+            sl = slice(int(i0), int(i1))
             if target in D.ACCUMULATED:
-                acc = D.accumulate(target, fr, self.p, m);
+                acc = D.accumulate(target, fr, self.p, mask, pre=pre, part=sl)
                 if acc is None: continue
-                out.append((int(d * DAY - tz), float(acc[0]), int(m.sum())))
+                out.append((int(d * DAY - tz), float(acc[0]), int(mask[sl].sum())))
             else:
-                v = vals[m]; v = v[~np.isnan(v)]
+                v = vals[sl][mask[sl]]; v = v[~np.isnan(v)]
                 if len(v) >= 3: out.append((int(d * DAY - tz), float(np.mean(v)), len(v)))
         return out, label, period, "", fr
 
@@ -754,14 +780,12 @@ class Executor:
         """Events found in the signals themselves. COOLANT_FLOW_DROP: first minute from which coolant flow stays below 75% of this vehicle's normal for 30+ minutes while the pump should be running."""
         b = Q.flow_baseline(self.c, self.ctx.now)
         if not b: return []
-        rows = self._rows("SELECT ts, flow, mode FROM sig_1m WHERE ts>=? AND ts<? ORDER BY ts", (int(lo), int(hi)))
         thr = 0.75 * b["p50"] * 10; run = []; out = []; previous = None
-        for ts, fl, mode in rows:
+        sql = "SELECT ts FROM sig_1m WHERE ts>=? AND ts<? AND flow>30 AND flow<? AND mode IN (1,2,3) ORDER BY ts"; assert_read_only(sql)         # only the minutes that count (a few thousand of the 2 million) leave the database, and the scan stops at the first run
+        for (ts,) in self.c.execute(sql, (int(lo), int(hi), thr)):                                                                         # minutes are 60 s apart, so a minute that does not count always breaks the run through the gap test
             if previous is not None and ts - previous > 60: run = []
-            previous = ts
-            if fl is not None and mode in (1, 2, 3) and 30 < fl < thr: run.append(ts)
-            else: run = []
-            if len(run) >= 30 and not out: out.append({"ts": run[0], "type": etype, "sev": "info", "detail": f"coolant flow fell below 75% of its normal {b['p50']:.1f} L/min"})
+            previous = ts; run.append(ts)
+            if len(run) >= 30: out.append({"ts": run[0], "type": etype, "sev": "info", "detail": f"coolant flow fell below 75% of its normal {b['p50']:.1f} L/min"}); break
         return out
 
     def _list_events(self, q):

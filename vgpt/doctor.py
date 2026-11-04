@@ -41,7 +41,7 @@ def run_checks(root, port=None, model="0.5b"):
     ddir = os.path.join(root, "data"); good = []
     if os.path.isdir(ddir):
         for f in sorted(os.listdir(ddir)):
-            if f == "vehicle.db" or (f.startswith(("gen_", "world_")) and f.endswith(".db")):
+            if f.endswith(".db") and not f.endswith(("-wal.db", "-shm.db")):                                   # any history file (vehicle.db, gen_*, world_*, aster_ev_4yr.db ...): what counts is that it opens and has minute rows
                 c = None
                 try:
                     c = sqlite3.connect(f"file:{os.path.join(ddir, f)}?mode=ro", uri=True); r = c.execute("PRAGMA quick_check").fetchone()[0]; n = c.execute("SELECT COUNT(*) FROM sig_1m").fetchone()[0]
@@ -49,7 +49,9 @@ def run_checks(root, port=None, model="0.5b"):
                 except sqlite3.Error: pass
                 finally:
                     if c is not None: c.close()                                    # (an open handle would lock the file on Windows)
-    out.append(_c("Vehicle histories", OK if good else FAIL, f"{len(good)} readable: {', '.join(good)}" if good else "none found in the data folder", "" if good else "re-extract the release zip (data/*.db is part of it)"))
+    if not good and os.environ.get("VGPT_LINKED") == "1":                                                      # linked to a car: its history is stored by the receiver as the car sends it, there is no data folder to check
+        out.append(_c("Vehicle histories", OK, "linked to the car's pipe: the history is stored by the receiver as the car sends it"))
+    else: out.append(_c("Vehicle histories", OK if good else FAIL, f"{len(good)} readable: {', '.join(good)}" if good else "none found in the data folder", "" if good else "re-extract the release zip (data/*.db is part of it)"))
     clip = os.path.join(root, "data", "ref", "camera_clip.hevc")
     try:
         from . import voice as _voice

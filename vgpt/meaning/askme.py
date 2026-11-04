@@ -136,7 +136,7 @@ def charge_state(brain, m, text):
     if row is None: return "This vehicle has no charging or battery reading, so I cannot say whether it is charging."
     try:
         from . import fuelx as FX
-        if FX.CAPS.is_combustion(FX.caps_of(brain.resolver)): return "This is not an electric vehicle: it has no traction battery to charge. Its energy is fuel."
+        if FX.CAPS.is_combustion(FX.caps_of(brain.resolver)): return None                                          # a fuel vehicle: the typed resolver gives the one standard "no traction battery" answer (fuelx.no_battery, route outcome:no_traction_battery)
     except Exception: pass
     ts, soc, pw, mode = row; soc = soc / 10.0 if soc is not None else None; age = now - ts; kw = abs(pw) / 1000.0 if pw is not None else 0.0
     if abs(pw or 0) < 100 and mode == 3: kw = 0.0

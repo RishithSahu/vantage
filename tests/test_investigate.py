@@ -49,7 +49,7 @@ class NoModel:
     """A frame model that must never be called by an investigation."""
     glossary = GL.load(); calls = 0
 
-    def parse(self, text, hint=None):
+    def parse(self, text, hint=None, prev=None):
         NoModel.calls += 1; f = Frame("ambiguous", "none"); return f, {"raw": f.to_text(), "pmin": 0.99, "ms": 0.0, "hint": ""}
 
 

@@ -18,7 +18,7 @@ class FakeModel:
 
     def __init__(self, delay=0.15): self.delay = delay; self.thread = None
 
-    def parse(self, text, hint=None):
+    def parse(self, text, hint=None, prev=None):
         time.sleep(self.delay); self.thread = threading.current_thread().name; return ("frame:" + text, {"raw": text})
 
 
@@ -95,7 +95,7 @@ class Pool(unittest.TestCase):
 
     def test_a_failing_parse_reaches_the_caller_and_the_worker_survives(self):
         class Flaky(FakeModel):
-            def parse(self, text, hint=None):
+            def parse(self, text, hint=None, prev=None):
                 if text == "boom": raise RuntimeError("bad input")
                 return super().parse(text, hint)
         pool = S.ModelPool(lambda: Flaky(0.0), workers=1)

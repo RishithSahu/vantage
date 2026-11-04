@@ -29,7 +29,7 @@ DBS = sorted(glob.glob(os.path.join(HERE, "data", "world_*.db")))
 def clean(x):
     if isinstance(x, dict): return {k: clean(v) for k, v in x.items() if k != "_features" and k != "cause"}
     if isinstance(x, (list, tuple)): return [clean(v) for v in x]
-    if isinstance(x, (np.floating, float)): return None if x != x else float(x)
+    if isinstance(x, (np.floating, float)): return None if x != x else float(f"{float(x):.9g}")      # two sums of the same numbers in a different order differ in the 16th digit: compare to 9 significant digits
     if isinstance(x, (np.integer,)): return int(x)
     return x
 

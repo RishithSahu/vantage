@@ -36,6 +36,7 @@ def _shm():
 def _alive(pid):
     try: os.kill(pid, 0)
     except ProcessLookupError: return False
+    except SystemError: return False                                                                     # Windows: os.kill on a pid that is gone can raise SystemError (WinError 87) instead of OSError
     except OSError as e: return getattr(e, "winerror", None) != 87                                       # Windows: 87 = no such process
     return True
 

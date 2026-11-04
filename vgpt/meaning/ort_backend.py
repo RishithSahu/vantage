@@ -13,6 +13,7 @@ import time
 
 import numpy as np
 
+from . import glossary as _gl
 from .frame import Frame
 from .interface import FrameModel, prompt_text
 
@@ -65,14 +66,21 @@ class DraftTable:
 
 class OrtFrameModel(FrameModel):
     """FrameModel with the language model run by ONNX Runtime (int8 weights, per-token int8 activations, KV cache, cached system prefix)."""
-    def __init__(self, model_dir, base=None, threads=2, version=None, use_hints=True, provider="cpu"):
+    def __init__(self, model_dir, base=None, threads=2, version=None, use_hints=True, provider="cpu", native=None):
         import onnxruntime as ort
         from llama_cpp import Llama
         from vgpt.meaning import glossary as _gl, ontology as _on
         self.version = int(version or _on.active_version()); self.onto = _on.load(self.version); self.glossary = _gl.load(); self.use_hints = use_hints
-        t = time.perf_counter(); so = ort.SessionOptions(); so.intra_op_num_threads = threads; so.inter_op_num_threads = 1; so.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL; so.add_session_config_entry("session.intra_op.allow_spinning", spin_default(threads))
-        avail = ort.get_available_providers(); prov = [p for p in (("CUDAExecutionProvider", "DmlExecutionProvider") if provider == "gpu" else ()) if p in avail] + ["CPUExecutionProvider"]
-        self.provider = prov[0]; self.sess = ort.InferenceSession(os.path.join(model_dir, "model.onnx"), so, providers=prov)
+        t = time.perf_counter(); self.eng = None
+        if native:                                                                                       # the native engine (engine/vg_engine.c) runs the forward pass; no ONNX session is built
+            from .native import Engine; self.eng = Engine(native, threads=threads); self.sess = self.sess_dec = None; self.decode_bits = 8; self.provider = "native-" + self.eng.kernel
+        else:
+          so = ort.SessionOptions(); so.intra_op_num_threads = threads; so.inter_op_num_threads = 1; so.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL; so.add_session_config_entry("session.intra_op.allow_spinning", spin_default(threads))
+          avail = ort.get_available_providers(); prov = [p for p in (("CUDAExecutionProvider", "DmlExecutionProvider") if provider == "gpu" else ()) if p in avail] + ["CPUExecutionProvider"]
+          self.provider = prov[0]; self.sess = ort.InferenceSession(os.path.join(model_dir, "model.onnx"), so, providers=prov)
+          self.sess_dec = self.sess; self.decode_bits = 8                                                          # a second graph of the same model with 4-bit weights, used for the decode passes (they are limited by the bytes of weights read, not by arithmetic): VGPT_ORT_DECODE_DIR or model_q4.onnx beside model.onnx
+          q4 = os.environ.get("VGPT_ORT_DECODE_DIR"); q4 = os.path.join(q4, "model.onnx") if q4 else os.path.join(model_dir, "model_q4.onnx")
+          if os.environ.get("VGPT_ORT_DECODE", "q4") != "int8" and os.path.exists(q4): self.sess_dec = ort.InferenceSession(q4, so, providers=prov); self.decode_bits = 4
         self.llm = Llama(model_path=base or os.path.join(ROOT, "models", "qwen2.5-0.5b-instruct-q4_k_m.gguf"), vocab_only=True, verbose=False)          # the tokenizer only
         self.decoder = "mask"; self.mask = None; self.mask_misses = 0; self._build_mask(); self._cands(); self.base = None; self.load_s = time.perf_counter() - t
         self._cue = {}; self.cues = None; self._build_cues()
@@ -99,15 +107,17 @@ class OrtFrameModel(FrameModel):
 
     def set_vehicle(self, kind):
         """As FrameModel.set_vehicle; the processed system prompt is recomputed once when the car type changes, never per question."""
-        kind = kind if self.vehicle_hint else None
+        kind = kind if (self.vehicle_hint and (kind in _gl.COMBUSTION or not _gl.ice_line_only())) else None
         if kind != self.vehicle: self.vehicle = kind; self.base = None
 
     def _empty(self): return [np.zeros((1, NKV, 0, HD), np.float32) for _ in range(2 * L)]
 
-    def _fwd(self, ids, start, kv, nkeep=1):
+    def _fwd(self, ids, start, kv, nkeep=1, decode=False):
+        if self.eng is not None: return self.eng.forward1(ids, start, kv, nkeep, self.cand)
+        decode = decode or (self.decode_bits == 4 and os.environ.get("VGPT_ORT_PREFILL", "int8") == "q4")                  # VGPT_ORT_PREFILL=q4: the prompt pass uses the 4-bit graph too (one graph in memory would do)
         feed = {"ids": np.asarray(ids, np.int64)[None], "pos": np.arange(start, start + len(ids), dtype=np.int64)[None], "nkeep": np.array([nkeep], np.int64), "cand": self.cand}
         for l in range(L): feed[f"pk{l}"] = kv[2 * l]; feed[f"pv{l}"] = kv[2 * l + 1]
-        out = self.sess.run(None, feed); return out[-1][0], out[:-1]
+        out = (self.sess_dec if decode else self.sess).run(None, feed); return out[-1][0], out[:-1]
 
     def _prefix(self):
         """KV of the system prompt, computed once (it is the same for every question)."""
@@ -132,6 +142,15 @@ class OrtFrameModel(FrameModel):
             tok = int(ids[0]) if len(ids) == 1 else self._guess(g, set(ids.tolist()))
             if tok is None: break
             out.append(tok); st = self.mask.advance(st, tok); g.append(tok)
+        return out
+
+    def _seeded(self, seed, gen, states, k):
+        """The next tokens of an earlier reading of the same question, as far as the decoder allows them (a guess, checked by the model like every other)."""
+        out = []; st = states; n = len(gen)
+        while len(out) < k and n + len(out) < len(seed):
+            tok = seed[n + len(out)]
+            if tok not in set(self.mask.open_ids(st).tolist()): break
+            out.append(tok); st = self.mask.advance(st, tok)
         return out
 
     def _guess(self, g, idset):
@@ -191,22 +210,38 @@ class OrtFrameModel(FrameModel):
         """The frame of a question.  The previous turn's frame is shown to the model only when the question needs it (vgpt/meaning/prevgate.py); VGPT_PREV=always shows it every time."""
         if prev is None or os.environ.get("VGPT_PREV", "gate") == "always": return self._parse(text, hint, prev)
         from . import prevgate as PG
-        spent = 0.0
-        if not PG.wants_prev(text):
-            f, info = self._parse(text, hint, None); spent = info["ms"]
+        spent = 0.0; share = None
+        if os.environ.get("VGPT_CONTEXT", "1") == "1" and PG.wants_prev(text):
+            from . import context as CX
+            if CX.eligible(text):                                                                      # an ellipsis: the previous frame completes the bare reading, no previous line in the prompt
+                f, info = CX.attempt(self, text, hint, prev)
+                if f is not None: return f, info
+                spent = info; share = getattr(self, "_kept", None)                                     # not completed: the reading with the previous line starts from this one's work
+        if spent == 0.0 and not PG.wants_prev(text):
+            f, info = self._parse(text, hint, None, keep=True, gate=os.environ.get("VGPT_GATE_ABORT", "1") == "1"); spent = info["ms"]
             if f is not None and not PG.frame_needs_prev(f, info.get("pmin")): info["prev_used"] = False; return f, info
-        f, info = self._parse(text, hint, prev); info["ms"] += spent; info["prev_used"] = True; return f, info
+            share = self._kept                                                                         # the second reading starts from the first one's work (see _parse)
+        f, info = self._parse(text, hint, prev, share=share); info["ms"] += spent; info["prev_used"] = True; return f, info
 
-    def _parse(self, text, hint=None, prev=None):
+    def _parse(self, text, hint=None, prev=None, keep=False, share=None, gate=False):
         text = str(text).encode("utf-8", "replace").decode("utf-8", "replace")                               # a lone surrogate (a garbled paste) must not crash the request
-        hint = (self.glossary.hint_line(text, vehicle=self.vehicle) if self.use_hints else "") if hint is None else hint
+        hint = (("" if _gl.ice_only() and self.vehicle not in _gl.COMBUSTION else self.glossary.hint_line(text, vehicle=self.vehicle)) if self.use_hints else "") if hint is None else hint        # VGPT_ICE_ONLY=1: electric and unknown cars get no hint line (shorter prompt; 2026-10-26 audit)
         t0 = time.perf_counter(); prompt = prompt_text("frame", text, hint, prev, self.version, self.vehicle); budget = 24 if self.version < 2 else 40; spec = os.environ.get("VGPT_SPEC", "1") == "1"
         self._cue = self.cues.propose(text) if self.cues is not None else {}
         if self.base is None: self._prefix()
         bids, bkv = self.base; ids = self.llm.tokenize(prompt.encode(), add_bos=False, special=True)
         if ids[:len(bids)] != bids:                                                                  # a question whose first characters join the `:` into one token: read it without the cached state
             bids, bkv = [], self._empty()
-        rest = ids[len(bids):]; t1 = time.perf_counter(); logits, kv = self._fwd(rest, len(bids), bkv, 1); t2 = time.perf_counter()
+        rest = ids[len(bids):]; t1 = time.perf_counter(); seed = None; reused = 0
+        if share is not None and os.environ.get("VGPT_SHARE", "1") == "1":
+            ids1, kv1, gen1 = share; L = 0
+            while L < min(len(ids), len(ids1)) and ids[L] == ids1[L]: L += 1
+            if L - len(bids) >= 4 and L < len(ids):                                                    # the two prompts are the same up to the end of the question and its hint: those positions have the same keys and values, so they are not computed again
+                bkv2 = [np.ascontiguousarray(a[:, :, :L]) for a in kv1]; logits, kv = self._fwd(ids[L:], L, bkv2, 1); reused = L - len(bids); seed = gen1
+            else: logits, kv = self._fwd(rest, len(bids), bkv, 1)
+        else: logits, kv = self._fwd(rest, len(bids), bkv, 1)
+        t2 = time.perf_counter()
+        if keep: self._kept = (ids, kv, None)
         cur = logits[-1].astype(np.float64); pos = len(ids); eos = self.llm.token_eos(); states = self.mask.start(); gen = []; steps = []; passes = 0; tdec = 0.0
 
         def pick(lg, st):
@@ -223,20 +258,23 @@ class OrtFrameModel(FrameModel):
             for k in order:
                 if int(o[int(k)]) != tok: return int(o[int(k)]), float(np.exp(sc[int(k)] - lg.max()) / np.exp(lg - lg.max()).sum())
             return None, 0.0
+        from . import prevgate as PG; aborted = False
         budget = min(budget, self.mask.max_tokens); dead = False                                       # decoding never runs longer than the longest valid frame
         weakest = None                                                                              # (confidence, tokens before the step, token chosen, runner-up token, runner-up probability)
         done = False
         while not done and len(gen) < budget:
             if not len(self.mask.open_ids(states)): dead = True; break                              # no token is open: fail closed, no frame
             tok = pick(cur, states); c_now = conf(cur); steps.append(c_now)
+            if gate and c_now < PG.MIN_P: aborted = True; break                                      # the first reading is only read to decide whether the previous turn is needed; a step this unsure already decides it (the minimum can only go down), so the rest is not decoded
             if tok == eos: break
             if c_now < ALT_BELOW and (weakest is None or c_now < weakest[0]):
                 alt_tok, alt_p = runner_up(cur, states, tok)
                 if alt_tok is not None: weakest = (c_now, list(gen), tok, alt_tok, alt_p)
             gen.append(tok); states = self.mask.advance(states, tok)
-            drafts = self._draft(states, min(DRAFT_MAX, budget - len(gen)), gen) if spec else []
+            drafts = (self._seeded(seed, gen, states, min(DRAFT_MAX, budget - len(gen))) if seed and gen == seed[:len(gen)] else None) if spec else []
+            if drafts is None: drafts = self._draft(states, min(DRAFT_MAX, budget - len(gen)), gen)       # a guess from the first reading while the second still agrees with it; the model checks every token as before
             if os.environ.get("DEBUG_DRAFT"): print("   gen=%r drafts=%r" % (self.llm.detokenize(gen).decode(), self.llm.detokenize(drafts).decode() if drafts else ""))
-            td = time.perf_counter(); out, kvn = self._fwd([tok] + drafts, pos, kv, 1 + len(drafts)); tdec += time.perf_counter() - td; passes += 1
+            td = time.perf_counter(); out, kvn = self._fwd([tok] + drafts, pos, kv, 1 + len(drafts), decode=True); tdec += time.perf_counter() - td; passes += 1
             out = out.astype(np.float64); cur = out[0]; m = 0
             for j, d in enumerate(drafts):
                 if pick(cur, states) != d: break
@@ -244,11 +282,16 @@ class OrtFrameModel(FrameModel):
                 if d == eos: done = True; break
             keep = pos + 1 + m; kv = [np.ascontiguousarray(a[:, :, :keep]) for a in kvn]; pos = keep
             if gen and gen[-1] == eos: gen.pop(); done = True
-        raw = self.llm.detokenize(gen).decode("utf-8", "replace").strip(); self.stats = {"prefill_ms": (t2 - t1) * 1000, "decode_ms": tdec * 1000, "tail_tokens": len(rest), "out_tokens": len(gen), "passes": passes}
+            if gate and not done and len(gen) >= 2:
+                w = self.llm.detokenize(gen).decode("utf-8", "replace").split(" ")
+                if len(w) >= 3 and (w[0] == "ambiguous" or (w[1] in ("none", "unlisted") and w[0] not in PG.STANDS_ALONE)): aborted = True; break      # act and concept are complete and they already say 'not a complete reading' (prevgate.frame_needs_prev)
+        if keep and getattr(self, "_kept", None) is not None: self._kept = (self._kept[0], self._kept[1], list(gen) + ([eos] if gen and not dead and not aborted else []))
+        raw = self.llm.detokenize(gen).decode("utf-8", "replace").strip(); self.stats = {"prefill_ms": (t2 - t1) * 1000, "decode_ms": tdec * 1000, "tail_tokens": len(ids) - len(bids), "out_tokens": len(gen), "passes": passes, "reused_tokens": reused}
         info = {"raw": raw, "pmin": min(steps) if steps else None, "ms": (time.perf_counter() - t0) * 1000, "hint": hint, "tokens": len(steps)}
         if weakest is not None and info["pmin"] is not None and info["pmin"] < ALT_BELOW and weakest[0] == info["pmin"]:
             try: info["alt"] = self._alternative(raw, *weakest[1:])
             except Exception: pass
+        if aborted: info["gate_abort"] = True; return None, info                                      # the caller reads the question again with the previous turn
         if dead: info["decode_error"] = "no token was open"; return None, info
         try: return Frame.from_text(raw), info
         except ValueError: info["decode_error"] = "not a frame"; return None, info

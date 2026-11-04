@@ -137,16 +137,12 @@ class Data:
 
 def runs(ts, ok):
     """Maximal stretches of consecutive qualifying samples that are no more than BREAK seconds apart -> [(start_index, end_index)] (inclusive)."""
-    out = []; start = None; prev = None
-    for i in range(len(ts)):
-        if ok[i]:
-            if start is not None and ts[i] - ts[prev] > BREAK: out.append((start, prev)); start = i
-            elif start is None: start = i
-            prev = i
-        else:
-            if start is not None: out.append((start, prev)); start = None
-    if start is not None: out.append((start, prev))
-    return out
+    idx = np.flatnonzero(np.asarray(ok, dtype=bool))
+    if not len(idx): return []
+    tsv = np.asarray(ts)[idx]
+    cut = np.flatnonzero((idx[1:] != idx[:-1] + 1) | ((tsv[1:] - tsv[:-1]) > BREAK)) + 1                      # a run ends at a sample that does not qualify, or before a gap of more than BREAK seconds
+    first = np.concatenate([[0], cut]); last = np.concatenate([cut - 1, [len(idx) - 1]])
+    return [(int(a), int(b)) for a, b in zip(idx[first], idx[last])]
 
 
 def run_seconds(ts, a, b): return int(ts[b] - ts[a]) + STEP

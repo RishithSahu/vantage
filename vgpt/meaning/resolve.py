@@ -13,6 +13,7 @@ import sqlite3
 import statistics
 
 from .. import analytics as A
+from ..nearest import nearest
 from .. import kinematics
 from .. import outcomes
 from .. import plan_exec
@@ -561,11 +562,11 @@ class Resolver:
         if ts is None: return _result("Which time do you mean? Give me a clock time or how long ago (for example '3 pm yesterday' or '2 hours ago').", "clarify:instant", "clarify", frame, intent="CLARIFY", ok=False)
         label = c.label
         if c.id == "location":
-            row = b.c.execute("SELECT ts,lat,lon FROM gps_1s ORDER BY ABS(ts-?) LIMIT 1", (ts,)).fetchone()
+            row = nearest(b.c, "gps_1s", "ts,lat,lon", ts)
             if not row or abs(row[0] - ts) > 90: return _result(f"No GPS fix is recorded close enough to {A.stamp(ts)}; I will not substitute the current location.", "at:location", "instant", frame, ok=False)
             return _result(f"At {A.stamp(row[0])} the car was at GPS {row[1] / 1e6:.5f} N, {row[2] / 1e6:.5f} E.", "at:location", "instant", frame, sample_ts=row[0], target_ts=ts)
         if c.id == "tyre_pressure":
-            row = b.c.execute("SELECT ts,tp_fl,tp_fr,tp_rl,tp_rr FROM ext_1m ORDER BY ABS(ts-?) LIMIT 1", (ts,)).fetchone()
+            row = nearest(b.c, "ext_1m", "ts,tp_fl,tp_fr,tp_rl,tp_rr", ts)
             if not row or abs(row[0] - ts) > 90 or any(x is None for x in row[1:]): return _result(f"No tyre-pressure sample is recorded close enough to {A.stamp(ts)}.", "at:tyre_pressure", "instant", frame, ok=False)
             return _result(f"Tyre pressures at {A.stamp(row[0])}: front left {row[1] / 10:.0f}, front right {row[2] / 10:.0f}, rear left {row[3] / 10:.0f}, rear right {row[4] / 10:.0f} kPa.", "at:tyre_pressure", "instant", frame, sample_ts=row[0])
         store = R.STORE.get(c.id) or {}; tier = store.get("1s") or store.get("1m"); row = None; tol = 5; coarse = False
@@ -573,13 +574,13 @@ class Resolver:
             cand = store.get(key)
             if not cand: continue
             table, col, scale = cand
-            try: got = b.c.execute(f"SELECT ts,{col} FROM {table} WHERE {col} IS NOT NULL ORDER BY ABS(ts-?) LIMIT 1", (int(ts),)).fetchone()
+            try: got = nearest(b.c, table, f"ts,{col}", int(ts), col)
             except sqlite3.OperationalError: continue
             tier, tol = cand, t_tol
             if got is not None and abs(got[0] - ts) <= t_tol: row = got; coarse = key == "1m"; break
             if row is None: row = got
         if not tier and c.id == "motor_rpm":
-            row = b.c.execute("SELECT ts,speed FROM sig_1s WHERE speed IS NOT NULL ORDER BY ABS(ts-?) LIMIT 1", (ts,)).fetchone()
+            row = nearest(b.c, "sig_1s", "ts,speed", ts, "speed")
             if not row or abs(row[0] - ts) > 5: return _result(f"No speed sample is recorded close enough to {A.stamp(ts)} to estimate motor RPM.", "at:motor_rpm", "instant", frame, ok=False)
             from ..qa_core import rpm_of
             return _result(f"Estimated motor speed at {A.stamp(row[0])} was {rpm_of(row[1] / 10.0):,.0f} rpm, derived from the recorded {row[1] / 10.0:.1f} km/h with the documented nominal gear ratio and wheel radius; no RPM sensor is recorded.", "at:motor_rpm", "instant", frame, estimated=True, sample_ts=row[0])

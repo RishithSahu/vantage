@@ -197,7 +197,7 @@ class LakeAndAssistant(unittest.TestCase):
 
         class Stub:
             glossary = GL.load()
-            def parse(self, text, hint=None):
+            def parse(self, text, hint=None, prev=None):
                 f = text_frames.get(text.lower(), Frame("ambiguous", "none")); return f, {"raw": f.to_text(), "pmin": 0.99, "ms": 0.0, "hint": ""}
         try:
             b = MeaningBrain(path, Stub(), now=T0 + 300); return [b.ask(q) for q in text_frames]

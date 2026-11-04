@@ -67,7 +67,7 @@ def maybe(res, text, frame, lit, c):
     m_n = LAST_N.search(t); has_trip = HAS_TRIP.search(t)
     s_, e_ = bool(START.search(t)), bool(END.search(t))
     if not has_trip: return None
-    anchor = (s_ or e_) and not m_n and (frame.act in ("at", "now", "stat", "extreme") or (frame.act == "none"))
+    anchor = (s_ or e_) and not m_n and (frame.act in ("at", "now", "stat", "extreme") or (frame.act == "none") or (s_ and e_ and frame.act in ("compare", "trend")))     # "at the beginning AND end of my last trip" names both ends of one trip: a model that read it as a comparison of periods is still asking for the two values
     if not anchor and not (m_n and frame.act in ("compare", "stat", "trend", "extreme", "now", "at")): return None
     cx = DG.Ctx(res, c, frame, lit, text)
     try:

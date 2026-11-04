@@ -73,10 +73,10 @@ class CombustionVehicles(unittest.TestCase):
         r = ask("world_rhino.db", {"what is soh": self.frame("define", "battery_soh")}, "what is soh")
         self.assertEqual(r["facts"]["route"], "define:battery_soh"); self.assertIn("usable capacity", r["answer"]); self.assertIn("does not have or record it", r["answer"])
         r = ask("world_rhino.db", {"lowest the battery charge has been": self.frame("extreme", "battery_soc", "min")}, "lowest the battery charge has been")
-        self.assertEqual(r["facts"]["route"], "outcome:no_traction_battery")
+        self.assertEqual(r["facts"]["route"], "qc:extreme"); self.assertIn("no traction battery", r["answer"]); self.assertIn("fuel level", r["answer"])        # since 1.3.4 (petrol/diesel parity, evmap.py) a "state of charge" asked of a fuel car is answered with the fuel level and says so
 
     def test_the_engine_temperature_at_an_instant(self):
-        r = ask("world_rhino.db", {"motor temp 4pm yday": self.frame("at", "motor_temperature")}, "motor temp 4pm yday")
+        r = ask("world_rhino.db", {"motor temperature 4pm yesterday": self.frame("at", "motor_temperature")}, "motor temp 4pm yday")       # the pre-parser spells the shorthand out before the model sees it
         self.assertEqual(r["facts"]["route"], "at:engine_temperature"); self.assertIn("Engine coolant temperature at", r["answer"])
 
 

@@ -7,6 +7,7 @@ import sqlite3
 import numpy as np
 
 from .. import signal_registry as R
+from ..tablenames import table_names
 
 DAY = 86400
 ANY_TIME = {"ambient_temperature", "aux_battery_voltage", "barometric_pressure", "tyre_pressure_fl", "tyre_pressure_fr", "tyre_pressure_rl", "tyre_pressure_rr", "tyre_pressure", "battery_soh"}
@@ -14,7 +15,7 @@ ANY_TIME = {"ambient_temperature", "aux_battery_voltage", "barometric_pressure",
 
 class History:
     def __init__(self, conn, horizon_days=70, now=None):
-        self.c = conn; self.tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type IN ('table','view')")}
+        self.c = conn; self.tables = table_names(conn)
         meta = {k: v for k, v in conn.execute("SELECT k, v FROM meta").fetchall() if not str(k).startswith("gen.")} if "meta" in self.tables else {}
         self.meta = meta
         try: self.tz = int(float(meta.get("env.tz_h", 0)) * 3600)

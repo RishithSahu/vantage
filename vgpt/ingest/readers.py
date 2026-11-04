@@ -271,17 +271,28 @@ def _read_json(path, anchor, stats, lines):
     yield from _json_records(doc, anchor, stats)
 
 
+def _safe_rows(rows, stats):
+    """The rows of a csv.reader; a row the csv module refuses (a field over its size limit, a NUL) ends the table with a note instead of raising."""
+    while True:
+        try: row = next(rows)
+        except StopIteration: return
+        except csv.Error as e: stats.skipped += 1; stats.notes.append(f"the table stops at a line the csv reader refused: {e}"); return
+        yield row
+
+
 def _read_csv(path, anchor, stats):
     raw = open(path, encoding="utf-8-sig", errors="replace", newline="").read(); sample = "\n".join(raw.splitlines()[:30])
+    raw = re.sub(r"\r(?!\n)", "\n", raw)                                                                # a lone carriage return inside a row is a line break to this reader, not an error
     try: delim = csv.Sniffer().sniff(sample, delimiters=",;\t|").delimiter
     except csv.Error: delim = ","
-    rows = csv.reader(io.StringIO(raw), delimiter=delim); header = None; ts_col = None; n = 0; first_ts = None
+    rows = _safe_rows(csv.reader(io.StringIO(raw), delimiter=delim), stats); header = None; ts_col = None; n = 0; first_ts = None
     for row in rows:
         if not row or all(not c.strip() for c in row): continue
         if header is None:
             if sum(1 for c in row if num(c) is None and c.strip()) >= max(1, len(row) // 2): header = [c.strip() for c in row]; ts_col = next((i for i, h in enumerate(header) if h.lower().split("(")[0].split("[")[0].strip().replace(" ", "_") in TS_KEYS or h.lower() in TS_KEYS), None); continue
             header = [f"col{i}" for i in range(len(row))]
         if len(row) < len(header) - 1: stats.skipped += 1; continue
+        if len(row) < len(header): row = row + [""] * (len(header) - len(row))                              # one cell short (a trailing empty value left out): the missing cell is empty
         ts = to_epoch(row[ts_col], anchor) if ts_col is not None else None
         if ts_col is None and first_ts is None:
             for i, h in enumerate(header):                                                                  # a time column under an odd name: the first column whose cells parse as times

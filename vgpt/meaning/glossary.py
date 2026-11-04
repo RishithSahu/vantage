@@ -16,6 +16,20 @@ _TOKEN = re.compile(r"[a-z0-9]+(?:[/'.-][a-z0-9]+)*")
 def _norm(s): return " ".join(_TOKEN.findall(str(s).lower().replace("’", "'")))
 
 
+COMBUSTION = ("petrol", "diesel", "ice", "hybrid")
+
+
+def ice_only(): return os.environ.get("VGPT_ICE_ONLY") == "1"                                                    # no hint line for electric / unknown cars
+
+
+def ice_line_only(): return os.environ.get("VGPT_ICE_ONLY") in ("1", "line")                                        # the car-type line only for combustion cars ("line": the hints stay for every car)
+
+
+def first_clause(meaning, words=6):
+    """The first clause of a meaning (up to the first ; , or " - "), at most `words` words: the short form of a hint (VGPT_HINT_CLAUSE=1)."""
+    return " ".join(meaning.split(";")[0].split(",")[0].split(" - ")[0].split()[:words])
+
+
 class Glossary:
     def __init__(self, path=None):
         path = path or os.path.join(HERE, "glossary.jsonl")
@@ -49,12 +63,37 @@ class Glossary:
     def hint_line(self, text, limit=4, vehicle=None):
         """-> 'Terms: a = meaning; b = meaning' for the flagged entries found in text, or '' when none (the usual case: no extra prompt tokens).  For a combustion vehicle (petrol / diesel / ice / hybrid) an entry that has a
         `meaning_ice` gives that one: "rpm" is the engine's, "gas" is the fuel in the tank - the electric wording would push the model the wrong way."""
-        hit = [e for e in self.lookup(text) if e.get("hint")][:limit]; ice = vehicle in ("petrol", "diesel", "ice", "hybrid")
-        return "Terms: " + "; ".join(f"{e['term']} = {e['meaning_ice'] if ice and e.get('meaning_ice') else e['meaning']}" for e in hit) if hit else ""
+        ice = vehicle in COMBUSTION
+        hit = [e for e in self.lookup(text) if e.get("hint")][:limit]
+        if os.environ.get("VGPT_HINT_SHORT") == "1" and not ice: hit = [e for e in hit if e["term"] not in skipped_terms()]       # terms the model reads correctly without a hint (bench/hint_ablation.py: removing each loses nothing on the 3,842 audit questions); combustion cars keep every hint
+        mean = lambda e: e["meaning_ice"] if ice and e.get("meaning_ice") else e["meaning"]
+        if os.environ.get("VGPT_HINT_SHORT") == "1":                                                                       # compact hand-written meanings (glossary_short.json): fewer prompt tokens; combustion-car meanings stay as they are
+            sh = short_meanings(); full = mean
+            mean = lambda e, full=full: full(e) if (ice and e.get("meaning_ice")) else sh.get(e["term"], full(e))
+        if os.environ.get("VGPT_HINT_CLAUSE") == "1": mean = lambda e, m=mean: first_clause(m(e))                        # fewer prompt tokens (about 2 per question on average); the 2026-10-26 audit: no loss (bench/speed_variants.py)
+        return "Terms: " + "; ".join(f"{e['term']} = {mean(e)}" for e in hit) if hit else ""
 
     def aliases(self, concept):
         """-> every surface form the glossary attaches to a concept (used by the training-data generator)."""
         return sorted({f for e in self.entries if e.get("concept") == concept for f in [e["term"]] + list(e.get("forms", ()))})
+
+
+_SKIP = None
+
+
+def skipped_terms():
+    global _SKIP
+    if _SKIP is None: _SKIP = frozenset(json.load(open(os.path.join(HERE, "glossary_skip.json"), encoding="utf-8"))) | frozenset(t for t in os.environ.get("VGPT_SKIP_EXTRA", "").split(",") if t)        # VGPT_SKIP_EXTRA: more terms without a hint, to try them (bench/hint_delta.py)
+    return _SKIP
+
+
+_SHORT = None
+
+
+def short_meanings():
+    global _SHORT
+    if _SHORT is None: _SHORT = json.load(open(os.path.join(HERE, "glossary_short.json"), encoding="utf-8"))
+    return _SHORT
 
 
 _G = None

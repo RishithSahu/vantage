@@ -113,7 +113,7 @@ def _word_number(w):
 
 
 _UNIT_VOCAB = ("minutes", "minute", "hours", "hour", "days", "day", "weeks", "week", "months", "month", "fortnight", "yesterday", "today")
-_STOP_NEAR = {"mount", "mouth", "daily", "dawn", "dash", "hold", "hose", "house", "hair", "wheel", "weeks", "weak", "week", "weeks", "wake", "work", "word", "month", "today", "toady", "yes"}
+_STOP_NEAR = {"mount", "mouth", "daily", "dawn", "dash", "hold", "hose", "house", "hair", "wheel", "weeks", "weak", "week", "wake", "work", "word", "month", "today", "toady", "yes"}
 
 
 def _fix_unit_typos(t):

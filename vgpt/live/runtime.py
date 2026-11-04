@@ -59,6 +59,7 @@ class LiveIngestor(store.Ingestor):
         if self.sec is not None and self._rolled is not None:                                                         # the minute that was still open when the link ended: a short session still has a minute row
             try: store.rollup(self.c, self._rolled, self.sec // 60 * 60 + 60)
             except Exception: pass
+        self._freeze_x(None)                                                                                          # (this method was defined twice and the second definition hid the roll-up above)
 
     def _event(self, ts, ty, sv, de):
         super()._event(ts, ty, sv, de)
@@ -73,8 +74,6 @@ class LiveIngestor(store.Ingestor):
             if sig: self.c.execute("INSERT OR REPLACE INTO event_ctx_x VALUES(?,?,?)", (ts, ty, zlib.compress(json.dumps({"t0": a0, "hz": 1, "sig": sig}, separators=(",", ":")).encode(), 6)))
         self.xpend = keep
 
-    def close(self):
-        super().close(); self._freeze_x(None)
 
 
 class BusMonitor:

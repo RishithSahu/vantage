@@ -12,6 +12,7 @@ import re
 from dataclasses import dataclass, field
 
 from . import signal_registry as R
+from . import fastcols as FC
 
 DAY = 86400
 UNIT_S = {"minute": 60, "hour": 3600, "day": DAY, "week": 7 * DAY, "month": 30 * DAY}
@@ -97,9 +98,11 @@ def _signal_days(conn, ctx, q, lo, hi, profile=None):
         if not known: out[n] = None; continue
         if not act: continue
         table, col = ent[0], ent[1]
-        try: rows = conn.execute(f"SELECT (ts + ?) / 86400, COUNT(*) FROM {table} WHERE ts >= ? AND ts < ? AND {col} IS NOT NULL GROUP BY 1", (ctx.tz, lo, hi)).fetchall()
-        except Exception: out[n] = None; continue
-        cnt = dict(rows); cov = part = miss = 0
+        cnt = FC.count_per_day(conn, table, col, lo, hi, ctx.tz)
+        if cnt is None:
+            try: cnt = dict(conn.execute(f"SELECT (ts + ?) / 86400, COUNT(*) FROM {table} WHERE ts >= ? AND ts < ? AND {col} IS NOT NULL GROUP BY 1", (ctx.tz, lo, hi)).fetchall())
+            except Exception: out[n] = None; continue
+        cov = part = miss = 0
         for d, minutes in act.items():
             k = cnt.get(d, 0)
             if k >= MIN_DAY_FRACTION * minutes: cov += 1

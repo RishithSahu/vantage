@@ -16,6 +16,8 @@ import numpy as np
 
 from .. import analytics as A
 from .. import dailytier as DT
+from .. import fastcols as FC
+from ..nearest import nearest
 from .. import signal_registry as R
 from ..investigate.primitives import Data, effect, robust_z
 from ..plan_exec import resolve_time
@@ -222,7 +224,9 @@ def _energy_level_line(cx):
     concept, word = ("fuel_level", "fuel level") if cx.cls == "ice" else ("battery_soc", "state of charge")
     ent = (R.STORE.get(concept) or {}).get("1m")
     if not ent or ent[0] not in cx.D.have: return None
-    table, col, scale = ent; r = cx.b.c.execute(f"SELECT MIN({col}), COUNT(*) FROM {table} WHERE ts>=? AND ts<? AND {col} IS NOT NULL", (cx.lo, cx.hi)).fetchone(); last = cx.b.c.execute(f"SELECT {col} FROM {table} WHERE ts>=? AND ts<? AND {col} IS NOT NULL ORDER BY ts DESC LIMIT 1", (cx.lo, cx.hi)).fetchone()
+    table, col, scale = ent; got = FC.min_count_last(cx.b.c, table, col, cx.lo, cx.hi)
+    if got is not None: r, last = got[:2], (None if got[2] is None else (got[2],))
+    else: r = cx.b.c.execute(f"SELECT MIN({col}), COUNT(*) FROM {table} WHERE ts>=? AND ts<? AND {col} IS NOT NULL", (cx.lo, cx.hi)).fetchone(); last = cx.b.c.execute(f"SELECT {col} FROM {table} WHERE ts>=? AND ts<? AND {col} IS NOT NULL ORDER BY ts DESC LIMIT 1", (cx.lo, cx.hi)).fetchone()
     if not r or not r[1] or not last: return None
     cx.step(f"the {word} readings"); return f"Lowest {word}: {_num(r[0] / scale, 0)}%; at the end of the period {_num(last[0] / scale, 0)}%."
 
@@ -472,7 +476,9 @@ def usual(cx, c):
     if len(meds) >= 2 and max(meds.values()) - min(meds.values()) >= 0.15 * max(p90 - p10, 1e-9):
         hi_b, lo_b = max(meds, key=meds.get), min(meds, key=meds.get); txt += f"\nPattern: highest in the {hi_b} ({_num(meds[hi_b])}{u}), lowest in the {lo_b} ({_num(meds[lo_b])}{u})."
     modesql = "t.mode" if table == "sig_1m" else "(SELECT mode FROM sig_1m s WHERE s.ts = t.ts)"
-    last = cx.b.c.execute(f"SELECT t.{col}, {modesql} FROM {table} t WHERE t.ts<=? AND t.{col} IS NOT NULL ORDER BY t.ts DESC LIMIT 1", (cx.now,)).fetchone()
+    for span in (2 * DAY, 60 * DAY, None):                                            # the newest reading is almost always a few minutes old: look in a bounded window first (a view that groups its rows is otherwise built over the whole history, 0.8 s)
+        last = cx.b.c.execute(f"SELECT t.{col}, {modesql} FROM {table} t WHERE t.ts<=? AND t.{col} IS NOT NULL" + ("" if span is None else " AND t.ts>?") + " ORDER BY t.ts DESC LIMIT 1", (cx.now,) if span is None else (cx.now, cx.now - span)).fetchone()
+        if last: break
     if last:
         x = float(last[0]) / scale
         if masked and last[1] not in (1, 2): txt += f"\nThe vehicle is not driving now (the latest reading, {_num(x)}{u}, cannot be compared with the readings while driving)."
@@ -572,8 +578,8 @@ def _parked_stretches(cx, table, col, scale, lo, hi, min_min=60):
 
 
 def _level_near(cx, table, col, scale, ts, within=900):
-    r = cx.b.c.execute(f"SELECT {col} FROM {table} WHERE ts BETWEEN ? AND ? AND {col} IS NOT NULL ORDER BY ABS(ts - ?) LIMIT 1", (int(ts) - within, int(ts) + within, int(ts))).fetchone()
-    return None if not r else float(r[0]) / scale
+    r = nearest(cx.b.c, table, f"ts, {col}", int(ts), col)
+    return None if not r or abs(r[0] - int(ts)) > within else float(r[1]) / scale
 
 
 def _pts(n): return f"{_num(n, 1)} point{'' if abs(round(n, 1)) == 1 else 's'}"

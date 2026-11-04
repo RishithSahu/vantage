@@ -30,6 +30,6 @@ def test_daily_identical(db, horizon):
         for agg in ("AVG", "MAX", "MIN"):
             for drive in (None, True, False):
                 x, y = a.daily(concept, agg, drive), b.daily(concept, agg, drive)
-                assert np.array_equal(x, y, equal_nan=True), (concept, agg, drive)
+                assert np.array_equal(np.isnan(x), np.isnan(y)) and np.allclose(x, y, rtol=1e-12, atol=0, equal_nan=True), (concept, agg, drive)       # the same days are empty and the values agree to 1e-12 (a sum in another order differs in the 16th digit)
                 n += 1
     assert n > 100

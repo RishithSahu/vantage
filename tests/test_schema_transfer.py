@@ -101,7 +101,7 @@ class SchemaTransfer(unittest.TestCase):
         from vgpt import nl2ir
         b, qc, c = self.vehicle("opaque_signal"); lo, hi = self.window()
         x = np.array([r[0] for r in c.execute("SELECT c0417 FROM sig_1m WHERE ts >= ? AND ts < ? AND c0417 IS NOT NULL", (lo, hi))], float) / 10.0
-        for text, ref in (("average inverter coolant temperature last week", x.mean()), ("how hot did the inverter coolant outlet temperature get last week", x.max())):
+        for text, ref in (("average inverter coolant temperature in the last 7 days", x.mean()), ("how hot did the inverter coolant outlet temperature get in the last 7 days", x.max())):
             p = nl2ir.parse(text, now=NOW, tz=3600, profile=qc.profile); self.assertTrue(p.ok, text); self.assertEqual(p.query.target, "CH_0417")
             r = qc.execute(p.query); self.assertEqual(r.status, "answered"); self.assertAlmostEqual(float(r.result.value), float(ref), delta=1e-6); self.assertNotIn("CH_0417", r.answer.text); self.assertRegex(r.answer.text, r"(?i)inverter coolant")
         a = b.ask("what is the power electronics coolant temperature now", use_slm=False)["answer"]; self.assertNotIn("CH_0417", a)

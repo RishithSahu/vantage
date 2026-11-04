@@ -84,14 +84,18 @@ def stuck(values, moving=None, min_run=30, signal=""):
     if signal and signal not in FAST_SIGNALS: return []
     v = np.asarray(values, dtype=float)
     if len(v) < min_run: return []
-    same = np.concatenate([[False], v[1:] == v[:-1]]); run = best = 0; val = None
-    for i, s in enumerate(same):
-        if s and (moving is None or moving[i]) and not (moving is None and v[i] == 0):                  # a flat zero without a speed reference is just a signal at rest
-            run += 1
-            if run > best: best, val = run, v[i]
-        else: run = 0
+    same = np.concatenate([[False], v[1:] == v[:-1]])
+    cond = same & (np.asarray(moving, dtype=bool) if moving is not None else ~(v == 0))                      # a flat zero without a speed reference is just a signal at rest
+    best = _longest_true(cond)
     if best >= min_run and np.nanstd(v) > 0: return [Flag("STUCK", "major", signal, f"the value did not change for {best} consecutive samples while the vehicle was active")]
     return []
+
+
+def _longest_true(c):
+    """Length of the longest stretch of consecutive True values."""
+    if not len(c): return 0
+    x = np.concatenate([[False], c, [False]]).astype(np.int8); d = np.diff(x); a = np.flatnonzero(d == 1); b = np.flatnonzero(d == -1)
+    return int((b - a).max()) if len(a) else 0
 
 
 def spikes(values, signal="", k=8.0):
@@ -101,8 +105,8 @@ def spikes(values, signal="", k=8.0):
     if ok.sum() < 20: return []
     med = np.nanmedian(np.abs(np.diff(v[ok]))) or 1e-9; d = np.abs(np.diff(v[ok])); idx = np.where(d > k * max(med, 1e-6) * 10)[0]
     sd3 = 6 * np.nanstd(v[ok]) / 3                                                                                  # loop-invariant: computed once, not once per candidate
-    iso = [i for i in idx if i + 2 < len(d) and d[i + 1] > 0.8 * d[i] and d[i] > sd3]
-    return [Flag("SPIKE", "minor", signal, f"{len(iso)} isolated jump(s) that reverse immediately")] if len(iso) >= 1 and len(iso) / max(len(v), 1) < 0.02 else []
+    i2 = idx[idx + 2 < len(d)]; n_iso = int(np.count_nonzero((d[i2 + 1] > 0.8 * d[i2]) & (d[i2] > sd3)))
+    return [Flag("SPIKE", "minor", signal, f"{n_iso} isolated jump(s) that reverse immediately")] if n_iso >= 1 and n_iso / max(len(v), 1) < 0.02 else []
 
 
 def cross_check_speed(vehicle, gps=None, wheels=None):

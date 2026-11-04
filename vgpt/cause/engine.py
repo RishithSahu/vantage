@@ -14,6 +14,7 @@ How it works (docs/CAUSES.md):
 
 The engine reads only the vehicle's stored data; it never reads how a history was made."""
 import math
+import warnings
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -157,7 +158,8 @@ def build(H: History):
     tp = {w: H.daily(f"tyre_pressure_{w}") for w in ("fl", "fr", "rl", "rr") if H.available(f"tyre_pressure_{w}")}
     if len(tp) == 4:
         M = np.vstack([tp[w] for w in tp]); names = list(tp)
-        with np.errstate(all="ignore"):
+        with np.errstate(all="ignore"), warnings.catch_warnings():
+            warnings.simplefilter("ignore", RuntimeWarning)                                                # a wheel with no readings yet is an empty slice, not a problem
             for i, w in enumerate(names):
                 others = np.nanmedian(np.delete(M, i, axis=0), axis=0); rel = tp[w] - others; c = analyse(rel, f"tyre_{w}", f"{w.upper()} tyre pressure relative to the other tyres", "kPa", rel_floor=0.0, abs_floor=2.0)
                 F[f"tyre_{w}"] = c; c.extra["y"] = rel; c.extra["abs"] = tp[w]; base = np.nanmedian(rel[: max(8, len(rel) // 3)]); c.extra["depth"] = float(base - np.nanmin(rel)) if np.isfinite(rel).sum() > 8 else 0.0

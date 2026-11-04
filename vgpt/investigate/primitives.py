@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from .. import analytics as A, signal_registry as R, store
+from ..tablenames import table_names
 
 CTX_CORE = {"speed": ("speed", 10.0), "battery_soc": ("soc", 10.0), "battery_power": ("power", 1000.0), "battery_temperature": ("batt", 10.0), "coolant_flow": ("flow", 10.0), "ambient_temperature": ("amb", 10.0),
             "hvac_power": ("hvac", 1.0), "motor_temperature": ("motor", 10.0)}
@@ -60,7 +61,7 @@ class Data:
         self.b = brain; self.c = brain.c; self.now = int(brain.now); self.tz = int(brain.tz); self.qc = brain.qc(); A.set_tz(self.tz)
         row = self.c.execute("SELECT v FROM meta WHERE k='t0'").fetchone(); self.t0 = int(float(row[0])) if row else 0
         row = self.c.execute("SELECT v FROM meta WHERE k='end'").fetchone(); self.end = int(float(row[0])) if row else self.now
-        self.have = {r[0] for r in self.c.execute("SELECT name FROM sqlite_master WHERE type IN ('table','view')")}
+        self.have = table_names(self.c)
         self._avail = {}
 
     # ------------------------------------------------------------------------------------------------ small helpers

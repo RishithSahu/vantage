@@ -6,6 +6,7 @@ the model reads the question into a six-word frame from the ontology vocabulary 
 absent from this package.
 """
 import os
+import sys
 
 from .brain import Brain
 
@@ -58,7 +59,12 @@ def make_qwen05_brain(db, slm=None, persona="driver", now=None, threads=2, meani
 def _frame_model(adapter, threads):
     """The frame model: the int8 ONNX Runtime build when the product names one (VGPT_ORT_DIR, set from models/product.json) and the runtime is installed, else llama.cpp.  VGPT_BACKEND=llama forces llama.cpp."""
     from .meaning.interface import FrameModel
-    d = os.environ.get("VGPT_ORT_DIR")
+    d = os.environ.get("VGPT_ORT_DIR"); nv = os.environ.get("VGPT_NATIVE")
+    if nv and d and os.environ.get("VGPT_BACKEND", "auto") not in ("llama", "ort") and os.path.exists(nv):                    # the native engine (engine/vg_engine.c, models/product.json "native"): same int8 arithmetic, no operator overhead
+        try:
+            from .meaning.ort_backend import OrtFrameModel
+            return OrtFrameModel(d, threads=int(os.environ.get("VGPT_THREADS", threads)), native=nv)                             # d only supplies the draft table; no ONNX session is built
+        except Exception as e: print("native engine not used:", e, file=sys.stderr)                                             # no compiler / wrong CPU: ONNX Runtime gives the same frames
     if d and os.environ.get("VGPT_BACKEND", "auto") != "llama" and os.path.exists(os.path.join(d, "model.onnx")):
         try:
             from .meaning.ort_backend import OrtFrameModel

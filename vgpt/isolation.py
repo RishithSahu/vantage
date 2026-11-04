@@ -44,6 +44,7 @@ COLLECTOR_DOMAIN = {
     "ui/server.py": "the application object and the in-process dispatcher of the interface (no listener); reads the process's memory use through the platform's own call",
     "vehiclegpt.py": "command line: starts the window, the self-test and the tools",
     "vgpt/hardening.py": "start-up only: sets the process non-dumpable and without core dumps through prctl (ctypes) before any vehicle data is read; reads no data, opens no socket",
+    "vgpt/meaning/native.py": "loads the compute-only native engine (engine/vg_engine.c) through ctypes: it holds the model's weights and does arithmetic, has no socket, file write or process call, and the compiler is run only by engine/build.py, never by this module",
     "vgpt/scale/probe.py": "asks the platform how many cores, how much memory and which accelerator it has (Windows through ctypes, nvidia-smi as a process); reads no vehicle data",
     "vgpt/scale/procpool.py": "the supervisor of the assistant's worker processes (one per model context): starts them and talks to each over an anonymous operating-system pipe (no socket, no bus); the worker body in this file runs the unchanged assistant code",
     "vgpt/scale/service.py": "the scaling service: owns the pool of workers and reads the process's own memory use through the platform's call; it holds no bus and no network",

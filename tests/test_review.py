@@ -22,7 +22,6 @@ class Review(unittest.TestCase):
     def req(self, method, path, body=None):
         if method == "POST" and isinstance(body, dict): body = dict(body, consent=True)                                   # the study's recording calls need the participant's consent (vgpt/routepolicy.py)
         r = self.dispatch(method, path, {"Content-Type": "application/json"} if body is not None else {}, json.dumps(body) if body is not None else b""); return r.status, r.body
-        c = http.client.HTTPConnection("127.0.0.1", self.port, timeout=60); c.request(method, path, json.dumps(body) if body is not None else None, {"Content-Type": "application/json"} if body is not None else {}); r = c.getresponse(); d = r.read(); c.close(); return r.status, d
 
     def test_page_and_catalogue_are_generated_from_the_registry(self):
         st, page = self.req("GET", "/review"); self.assertEqual(st, 200); self.assertIn(b"Review the interpretation", page)

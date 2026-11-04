@@ -16,7 +16,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE);
 try: import cv2                                                                                    # only the test rig's camera pictures need it; a system without it runs everything else
 except ImportError: cv2 = None
 import numpy as np
-from vgpt import memuse, recordstore, datacatalog, store, adapters, analytics as A, analytics_x as AX, paths, applog, access, privacy, rolepages, securestore, livebus, live_snapshot as LSNAP, voice, rolelens, routepolicy, releasecheck
+from vgpt import colstore, memuse, recordstore, datacatalog, store, adapters, analytics as A, analytics_x as AX, paths, applog, access, privacy, rolepages, securestore, livebus, live_snapshot as LSNAP, voice, rolelens, routepolicy, releasecheck
 from vgpt.live import replay as RP
 from vgpt.vehicle.profile import Profile
 from vgpt.vehicle import caps as CAPS
@@ -434,7 +434,7 @@ class BrainWorker(threading.Thread):
             job = self.q.get()
             if job.cancelled or time.monotonic() > job.deadline:                                          # nobody is waiting for this any more: it is not run
                 job.cancelled = True; self.expired += 1; job.ev.set(); continue
-            self.busy = True; job.running = True
+            self.busy = True; job.running = True; self._brain = brain
             try: brain = self._run_job(brain, job)
             except Exception:
                 LOG.exception("assistant worker failed on a job"); job.box[:] = [{"answer": "Sorry, something went wrong.", "intent": "NONE", "path": "error", "ms": {"total": 0}, "params": {}}]
@@ -498,7 +498,11 @@ class BrainWorker(threading.Thread):
     def wait(self, job, timeout=None):
         """-> the job's result, or None when it did not finish in time (the job is then cancelled: it is not run, or its effects are undone)."""
         if not job.ev.wait(job.deadline - time.monotonic() if timeout is None else timeout):
-            job.cancel(); return None
+            job.cancel()
+            if job.running and not job.ev.is_set():                                                   # a database scan that outlives its question must not keep the one worker busy (every later question is answered "busy" until it ends)
+                try: getattr(getattr(self, "_brain", None), "c").interrupt()                              # the assistant's own read-only connection (the executor and the analyses use it)
+                except Exception: pass
+            return None
         return job.box[0] if job.box else None
 
     def drain(self, timeout=30.0):
@@ -758,7 +762,7 @@ class App:
 
     def _adopt(self, dest, name, plan=None):
         """Make `dest` the application's storage: read what it is (meta, time zone, scenarios, capabilities), start the clock on it, forget what was cached about the previous one.  `plan=None`: derive it from the history."""
-        self.db = dest
+        self.db = dest; colstore.warm_async(dest)                                                                         # the column copy of the history is built, or read into the file cache, while the app starts
         c = sqlite3.connect(self.db); m = dict(c.execute("SELECT k, v FROM meta").fetchall())
         self.meta = m; self.tz = int(float(m.get("env.tz_h", 0)) * 3600); self.scen = make_scenarios(c, self.tz); self.plan = plan or make_plan(c); self.caps = CAPS.detect(c); self.eco_cache = (None, None); c.close()
         first = "morning" if "morning" in self.scen else next(iter(self.scen)); self.clock.use(self.plan, t=self.scen[first][1], scenario=first); self.dataset = name; self.gen += 1; self.tele_cache = (None, 0, None); self.tyre_cache = (None, 0, None); self.pos_cache = (None, 0, None)
@@ -1347,6 +1351,7 @@ def make_app(a):
 def main(argv=None):
     a = build_parser().parse_args(argv)
     from vgpt import bootstrap, shell
+    if getattr(a, "linked", False): os.environ["VGPT_LINKED"] = "1"
     ok, report = bootstrap.startup(ROOT, a.model, a.memory_limit_mb)                  # the same start-up as `python vehiclegpt.py run`: hardening, the product model, the memory guard, the doctor (once per process)
     if not ok: print(report, file=sys.stderr); return 2
     try: app = make_app(a)

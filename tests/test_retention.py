@@ -20,6 +20,9 @@ class Retention(unittest.TestCase):
 
     def delete(self, sql, *args):
         c = sqlite3.connect(self.db); c.execute(sql, args); c.commit(); c.close()
+        # rows removed from the MIDDLE of the history by another process are not noticed by the columnar copy (it re-checks 14 spread-out rows, not every day): start it afresh, as a restart of the assistant would
+        from vgpt import colstore
+        colstore._STORES.pop(self.db, None); shutil.rmtree(self.db + ".cols", ignore_errors=True)
 
     def test_losing_the_one_second_tier_narrows_the_claim_about_peaks(self):
         q = "op=extreme tgt=speed agg=max t=last:1:hour"; before = self.run_q(q); self.assertEqual(before.result.tier, "1 Hz"); self.assertNotIn("one-minute averages", before.answer.text)

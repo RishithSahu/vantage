@@ -68,6 +68,7 @@ def _memory_guard(limit_mb): return bootstrap.memory_guard(limit_mb, rss=lambda:
 
 def cmd_run(a):
     """The application in a window of its own (full screen with --kiosk), fully offline."""
+    if getattr(a, "linked", False): os.environ["VGPT_LINKED"] = "1"
     ok, report = bootstrap.startup(ROOT, a.model, a.memory_limit_mb, guard=_memory_guard)                       # the same start-up as `python ui/server.py`: hardening, the product model, the memory guard, the doctor
     if not ok:
         _tell(report); return 2

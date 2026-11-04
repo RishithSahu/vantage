@@ -8,6 +8,7 @@ interface (`vgpt/shell/page.py`).  Everything but `file:`, `data:`, `blob:` and 
 Chromium that accepts pipes: Edge on Windows hands the pipes to a launcher process that exits).  It is the first thing to try on the Pi under Raspberry Pi OS and on a Yocto image with `chromium`."""
 import json
 import os
+import sys
 import shutil
 import subprocess
 import tempfile
@@ -20,6 +21,14 @@ FLAGS = ["--no-first-run", "--no-default-browser-check", "--noerrdialogs", "--di
          "--disable-domain-reliability", "--disable-client-side-phishing-detection", "--disable-default-apps", "--no-pings", "--disable-breakpad", "--password-store=basic", "--overscroll-history-navigation=0",
          "--disable-pinch", "--use-fake-ui-for-media-stream", "--disable-features=Translate,TranslateUI,MediaRouter,OptimizationHints,AutofillServerCommunication,InterestFeedContentSuggestions",
          "--autoplay-policy=no-user-gesture-required", "--host-resolver-rules=MAP * ~NOTFOUND", "--disable-quic"]
+
+
+_EXEC = ("import fcntl, os, sys\n"                                                          # puts the two pipe ends where Chromium expects them (descriptors 3 and 4) and becomes the browser
+         "r, w = (fcntl.fcntl(int(a), fcntl.F_DUPFD, 10) for a in sys.argv[1:3])\n"           # moved out of the way first, so that neither can be 3 or 4 when the other is placed
+         "os.dup2(r, 3); os.dup2(w, 4); os.set_inheritable(3, True); os.set_inheritable(4, True)\n"
+         "for fd in (r, w, int(sys.argv[1]), int(sys.argv[2])):\n"
+         "    if fd > 4: os.close(fd)\n"
+         "os.execv(sys.argv[3], sys.argv[3:])\n")
 
 
 def find_browser():
@@ -122,8 +131,8 @@ def run(bridge, html, title="Vantage", kiosk=False, browser=None):
     with open(page, "w", encoding="utf-8", newline="") as f: f.write(html)
     r_in, w_in = os.pipe(); r_out, w_out = os.pipe()                                      # we write to w_in (the browser reads r_in as fd 3), the browser writes w_out (as fd 4) and we read r_out
     flags = browser_flags(work, kiosk)
-    cmd = ["/bin/sh", "-c", 'exec "$@" 3<&%d 4>&%d' % (r_in, w_out), "vantage-shell", browser, *flags]
-    proc = subprocess.Popen(cmd, pass_fds=(r_in, w_out), stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    cmd = [sys.executable, "-c", _EXEC, str(r_in), str(w_out), browser, *flags]                  # not `sh -c 'exec ... 3<&N 4>&M'`: dash (the Raspberry Pi's /bin/sh) refuses descriptors above 9 and this process has many open
+    proc = subprocess.Popen(cmd, pass_fds=(r_in, w_out), stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=open(os.environ["VGPT_BROWSER_LOG"], "ab") if os.environ.get("VGPT_BROWSER_LOG") else subprocess.DEVNULL)      # VGPT_BROWSER_LOG=file: keep the browser's own messages (why it would not start)
     os.close(r_in); os.close(w_out)
     cdp = CdpPipe(r_out, w_in)
     try:

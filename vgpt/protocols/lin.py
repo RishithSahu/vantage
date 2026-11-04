@@ -154,6 +154,13 @@ class Ldf:
 
     @classmethod
     def parse(cls, text):
+        """A file from outside can be cut or damaged anywhere: a statement that does not have the expected shape raises LinError (a ValueError), never a TypeError / IndexError."""
+        try: return cls._parse(text)
+        except LinError: raise
+        except (TypeError, IndexError, ValueError, KeyError, AttributeError) as e: raise LinError(f"malformed LIN description file ({type(e).__name__}: {e})") from e
+
+    @classmethod
+    def _parse(cls, text):
         toks = _tokens(_strip(text)); sec = _blocks(toks); L = cls()
         for st in sec.get("Signals", ()):
             if len(st) >= 7 and st[1] == ("p", ":"): L.signals[st[0][1]] = Signal(st[0][1], int(st[2][1]), st[4][1] if st[4][0] == "n" else 0, st[-3][1] if len(st) > 6 and st[-3][0] == "i" else "")

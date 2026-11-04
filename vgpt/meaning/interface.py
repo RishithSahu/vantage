@@ -111,7 +111,7 @@ class FrameModel:
 
     def set_vehicle(self, kind):
         """Tell the model what kind of vehicle it reads for (ev / petrol / diesel / hybrid / ice / None). Only an adapter trained with the line (VGPT_VEHICLE_HINT=1) is shown it."""
-        self.vehicle = kind if self.vehicle_hint else None
+        self.vehicle = kind if (self.vehicle_hint and (kind in _gl.COMBUSTION or not _gl.ice_line_only())) else None
 
     def refresh(self):
         """The vehicle changed (another dataset was opened): rebuild the decoding grammar from the registered concepts, so that the vocabulary the model may emit is the trained one plus THIS vehicle's own names."""
@@ -126,7 +126,7 @@ class FrameModel:
         VGPT_DECODER=grammar selects llama.cpp's grammar sampler (the reference the mask is tested against), whose confidence is read over the whole vocabulary."""
         import numpy as np
         from llama_cpp import LogitsProcessorList
-        hint = (self.glossary.hint_line(text, vehicle=self.vehicle) if self.use_hints else "") if hint is None else hint
+        hint = (("" if _gl.ice_only() and self.vehicle not in _gl.COMBUSTION else self.glossary.hint_line(text, vehicle=self.vehicle)) if self.use_hints else "") if hint is None else hint        # VGPT_ICE_ONLY=1: electric and unknown cars get no hint line (shorter prompt; 2026-10-26 audit)
         steps = []; state = {}
         t = time.perf_counter(); prompt = prompt_text("frame", text, hint, prev, self.version, self.vehicle); budget = 24 if self.version < 2 else 40
         if self.mask is not None:

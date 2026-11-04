@@ -1,0 +1,201 @@
+{
+"made": "2026-10-28 14:52",
+"files": {
+"data/gen_courier_ext.db": {
+"size": 31330304,
+"sha256": "d18639202e828c90c846b6fbe6fc78756f5e98c0cc39311755171155275915d7"
+},
+"data/ref/camera_clip.hevc": {
+"size": 37491754,
+"sha256": "1551393e01bea2dc149d7f01dcbea6e7909f1436b0ddcacf8a3bc5654335cb87"
+},
+"data/ref/epa/ftpcol.txt": {
+"size": 17689,
+"sha256": "9791a45a7fb2415de0bf01948b96e8aeff499bfd63744a8c6ca781ae88826f8a"
+},
+"data/ref/epa/hwycol.txt": {
+"size": 7266,
+"sha256": "e48e278a40312dfe84d31b5f448b601e7046c72487a6a20d3db1d4f85fb3e10a"
+},
+"data/ref/epa/sc03col.txt": {
+"size": 5502,
+"sha256": "8effd573ccafd3d090840186adca9775fe609687554f5f80c2a8ce2af7dd4140"
+},
+"data/ref/epa/uddscol.txt": {
+"size": 12611,
+"sha256": "cc9f3edf2f0626976a6552d9f5c88867e1805ed3f321df9ec943a3e0353687b6"
+},
+"data/ref/epa/us06col.txt": {
+"size": 5700,
+"sha256": "84e9d8cc16fcd4ee3c30c3880f333eb25b61352e56f24e453411a7245c725ad2"
+},
+"data/ref/weather/12.97_77.59_2026-05-20_2026-09-26.json": {
+"size": 173072,
+"sha256": "4e72d6e46bbc45da4046cc21c5e2621e475087f7c93ef8027b1943ded674a87a"
+},
+"data/ref/weather/12.97_77.59_2026-07-27_2026-08-26.json": {
+"size": 42021,
+"sha256": "2749e41066509b42e65f23a154349ea1781129165beba447bf6ae5a57e80fe48"
+},
+"data/ref/weather/12.97_77.59_2026-08-26_2026-09-25.json": {
+"size": 41546,
+"sha256": "fbb1371aafc2f3d1e726fc331d49fd8055626de1e62f1bb6e4b86ca77ebc8860"
+},
+"data/ref/weather/33.45_-112.07_2026-08-23_2026-09-22.json": {
+"size": 40759,
+"sha256": "0b49dfe0e0dc49fda52790005e7443c248001edb8e0e368294e47f1cadc639f3"
+},
+"data/ref/weather/33.45_-112.07_2026-09-14_2026-09-22.json": {
+"size": 12260,
+"sha256": "8c1b86e1a3bfb4f2fda593b82a4b1dddd09e7e5524dcbcc592faba7e41ab3fe4"
+},
+"data/ref/weather/47.07_15.44_2026-08-22_2026-09-21.json": {
+"size": 40841,
+"sha256": "b48b079e6c418454adc56ac85b2e3f99705c5aad6c3442baac5b944a33fbb556"
+},
+"data/ref/weather/47.07_15.44_2026-08-26_2026-09-25.json": {
+"size": 40759,
+"sha256": "25b9ef1cac415bd31a8a5eeae7f675c34f2fd0928ab569a71f74b5028d776217"
+},
+"data/ref/weather/47.07_15.44_2026-08-27_2026-09-26.json": {
+"size": 40724,
+"sha256": "4ba10477a858a540574c98085aedb6f6c8ee00c1db77343e53f11072ab74adb9"
+},
+"data/ref/weather/51.51_-0.13_2026-08-26_2026-09-25.json": {
+"size": 42127,
+"sha256": "f28c29fab77215c5711248aa0f32c965c86822d99c252446f7deee9097d1399d"
+},
+"data/ref/weather/51.51_-0.13_2026-08-27_2026-09-26.json": {
+"size": 42105,
+"sha256": "3d56ace8106eb304da15249969696e6ec6908771f64e84447d096dbda2f1fcd5"
+},
+"data/ref/weather/59.91_10.75_2026-01-02_2026-02-01.json": {
+"size": 42060,
+"sha256": "a9bfcadcec4ca3db6bc4827d1abf7de28dceaa37b273d633927fa61d6c774f9f"
+},
+"data/ref/weather/59.91_10.75_2026-08-22_2026-09-21.json": {
+"size": 41690,
+"sha256": "a4b0c8e5de5044f64e1277066a95c3bd00215141fc0301ec822221bc9d0515ac"
+},
+"data/world4/aster_ev/aster_ev_4yr.db": {
+"size": 388579328,
+"sha256": "a5eb053fe0acec4ed787d632e2e9be6947c44e00322d4de264d52a446b36c6e7"
+},
+"data/world4/kestrel_petrol/kestrel_petrol_4yr.db": {
+"size": 627474432,
+"sha256": "8c810a8471ccf13a3edf94b802d8df475bb06caeb293c424aef80e8b02db29a5"
+},
+"data/world4/rhino_diesel/rhino_diesel_4yr.db": {
+"size": 976896000,
+"sha256": "3463c3068e0306d4cfa80d1046b1550fad30909838f62c33ae9061af7d783912"
+},
+"data/world_3yr.db": {
+"size": 510705664,
+"sha256": "7975deed970ed2c36b7b8d9e1ac096c0c8b52d9e79381e44c4d0c5371a9e3996"
+},
+"data/world_aster.db": {
+"size": 97533952,
+"sha256": "13e19d61f78fc2eb9de5da1ba32912153accc81624abacc9c689c507d1fc67fb"
+},
+"data/world_kestrel.db": {
+"size": 64528384,
+"sha256": "39c8c9ec158ca50d4aa8a3bdf05eee93e3936248a441dfd8b009e196e8f68130"
+},
+"data/world_meridian.db": {
+"size": 101400576,
+"sha256": "0e767f9a2bb7fd29d0a92883420384a4ce971963926745d7c811c3adf387e9db"
+},
+"data/world_rhino.db": {
+"size": 79642624,
+"sha256": "cbe7c521d5c13beca8a99ca9d49b0391acfcfeca2e42f49659940d01036eee39"
+},
+"models/asr/vosk-model-small-en-us-0.15/README": {
+"size": 199,
+"sha256": "c0cf286e4f7783306c5f6469b37db69228fb16803b03cae661edb2d7bba64ebb"
+},
+"models/asr/vosk-model-small-en-us-0.15/am/final.mdl": {
+"size": 15962575,
+"sha256": "75370a0137f9daf8f469dedd7daa4513ae7a621f03240c6e512e2b50b656a7b6"
+},
+"models/asr/vosk-model-small-en-us-0.15/conf/mfcc.conf": {
+"size": 131,
+"sha256": "1e2228006d01d805ad1c267fee9f79709ca87ac51bd82b0e3f5c69ba543f0fc4"
+},
+"models/asr/vosk-model-small-en-us-0.15/conf/model.conf": {
+"size": 290,
+"sha256": "8f14cb1eeb07c762c371db648c6be688d347236155ca0f64fb13b6567a8ce81f"
+},
+"models/asr/vosk-model-small-en-us-0.15/graph/Gr.fst": {
+"size": 24013795,
+"sha256": "023c8b7e30704a9e37765c635c252e608a02f361235bf94abdcf2a5225d85b20"
+},
+"models/asr/vosk-model-small-en-us-0.15/graph/HCLr.fst": {
+"size": 22416994,
+"sha256": "5caafba3081e1646545ac6bff0dd7a318e53dcbdc86f237909ce1d2ac1293d34"
+},
+"models/asr/vosk-model-small-en-us-0.15/graph/disambig_tid.int": {
+"size": 102,
+"sha256": "9ad87cc166d0998f08f758f47a6223a120dfffcbee805c4849c3aa5e6bb3c0fc"
+},
+"models/asr/vosk-model-small-en-us-0.15/graph/phones/word_boundary.int": {
+"size": 1761,
+"sha256": "da199d9c991e0e84681ddbb34627b915b26302d50a8fdaa23c51e2bc3a50b5c3"
+},
+"models/asr/vosk-model-small-en-us-0.15/ivector/final.dubm": {
+"size": 168048,
+"sha256": "8c5d7dd69d2122313baaf19f61f35dd3fa18b70c62ac0687e311e1c46e6daca7"
+},
+"models/asr/vosk-model-small-en-us-0.15/ivector/final.ie": {
+"size": 8288887,
+"sha256": "3f37faf90c375b9e4740b569398b5829ed9cc07d19be6d441f72c3b71d7efcc6"
+},
+"models/asr/vosk-model-small-en-us-0.15/ivector/final.mat": {
+"size": 44975,
+"sha256": "ddd83586dc5f928cda8738b922c85ffe38fc789cb5f9151a712ca12f37265382"
+},
+"models/asr/vosk-model-small-en-us-0.15/ivector/global_cmvn.stats": {
+"size": 1080,
+"sha256": "33be09afcc80059847a275c3d043b51f1ab954c7c2438ddbbf4745e8ba144ff9"
+},
+"models/asr/vosk-model-small-en-us-0.15/ivector/online_cmvn.conf": {
+"size": 95,
+"sha256": "a2f3571754b64297cb7efb2e7ca3df61995c5a45fcbb97188f90613552bb2dfe"
+},
+"models/asr/vosk-model-small-en-us-0.15/ivector/splice.conf": {
+"size": 35,
+"sha256": "9f0c5f7c82d18eaf25d8bce470efa9f7741f88411fe428774bc0a9bb69a24756"
+},
+"models/meaning-lora-frame2r12.gguf": {
+"size": 35215840,
+"sha256": "0075c7e57b12961edc11e17edfabc61353d0e0469890fad31608d5e112b402bf"
+},
+"models/ort_frame2r12/draft.json": {
+"size": 131415,
+"sha256": "c1720317b07b8afe4d15189a499c6a088f8f15766df52609d0d2ddad832bd8df"
+},
+"models/ort_frame2r12/model.onnx": {
+"size": 144728,
+"sha256": "17620ce36fce4d92315c59e9cd10b0fce3196e7051c9507b57e38d4b2b9e1f22"
+},
+"models/ort_frame2r12/model.onnx.data": {
+"size": 634911232,
+"sha256": "4816051e633f01e71a3809b03269464a54d695c2d1e29284644371b9f55318d9"
+},
+"models/ort_frame2r12/model_s8.onnx": {
+"size": 131593,
+"sha256": "75e93b4f1e5c887cadd5a2d1d30b80dbe78fa2bf8c9b51168d33cce62bd8348c"
+},
+"models/product.json": {
+"size": 257,
+"sha256": "1d337f12828e505defe44d8e050de09998c9a3338b0bfe20b8ef2d6d199339dc"
+},
+"models/qwen2.5-0.5b-instruct-q4_k_m.gguf": {
+"size": 491400032,
+"sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"
+},
+"models/vg_frame2r12.vgw": {
+"size": 498186112,
+"sha256": "99375f09c55d688558d99af713455fa3157be7120a2214e36eeb4423d6fa3e42"
+}
+}
+}

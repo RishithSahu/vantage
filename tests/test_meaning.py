@@ -22,7 +22,7 @@ class StubModel:
 
     def __init__(self, frame): self.frame = frame; self.calls = []
 
-    def parse(self, text, hint=None):
+    def parse(self, text, hint=None, prev=None):
         self.calls.append(text); return self.frame, {"raw": self.frame.to_text(), "pmin": 0.99, "ms": 0.0, "hint": ""}
 
 

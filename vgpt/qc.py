@@ -49,7 +49,8 @@ class QueryCompiler:
         try: version = self.conn.execute("PRAGMA data_version").fetchone()[0]
         except sqlite3.Error: version = self._data_version
         if version != self._data_version:
-            self.profile = R.Profile(self.conn); self._data_version = version; self.executor.profile = self.profile
+            old = self.profile; self.profile = R.Profile(self.conn); self._data_version = version; self.executor.profile = self.profile
+            self.profile._avail = {k: v for k, v in getattr(old, "_avail", {}).items() if v is True}                        # a column that held data still does after new rows arrived: only absence is looked at again (a live car changes the data at every question, and proving a view of the lake non-empty can read millions of rows)
         self.executor.ctx = self.ctx
 
     def execute(self, q, text=None):

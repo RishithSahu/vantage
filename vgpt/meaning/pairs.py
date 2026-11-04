@@ -11,6 +11,7 @@ import sqlite3
 import statistics
 
 from .. import analytics as A
+from .. import fastcols as FC
 from .. import signal_registry as R
 from ..query_ir import TimeSpec
 from . import fuelx as FX
@@ -26,6 +27,8 @@ def minute_series(b, c, lo, hi):
     try:
         if tier:
             table, col, scale = tier
+            fast = FC.series(b.c, table, col, scale, int(lo), int(hi))
+            if fast is not None: return fast
             return {int(ts): v / scale for ts, v in b.c.execute(f"SELECT ts, {col} FROM {table} WHERE ts>=? AND ts<? AND {col} IS NOT NULL", (int(lo), int(hi))).fetchall()}
         sid, _ = FX._sid(b, c.id)
         if sid is not None: return {int(ts): float(v) for ts, v in b.c.execute("SELECT ts, v FROM lk_1m WHERE sid=? AND ts>=? AND ts<? AND v IS NOT NULL", (sid, int(lo), int(hi))).fetchall()}

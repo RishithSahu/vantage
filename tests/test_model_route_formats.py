@@ -263,6 +263,8 @@ class Support(unittest.TestCase):
 
 
 def test_intent_grammar_for_a_decided_result():
+    import pytest
+    if not os.path.exists(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "gen_courier_ext.db")): pytest.skip("data/gen_courier_ext.db is not in this tree")
     """The grammar of an already-decided result starts at that result's rule only (the factored design: the result is decided first)."""
     import sqlite3
     from vgpt import capreg, plangrammar, signal_registry as R

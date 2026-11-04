@@ -13,6 +13,7 @@ import statistics
 
 from . import analytics as A
 from . import analytics_x as AX
+from .nearest import nearest
 from . import kinematics
 from . import live_snapshot
 from . import dialogue_state
@@ -345,13 +346,13 @@ def _temporal_lookup(brain, t, cs):
         return _result(f"Average vehicle speed from {A.stamp(target)} to {A.stamp(hi)} was {row[0]:.1f} km/h across {row[1]} valid driving-minute samples.", "clock_range", "SUMMARY", value=row[0], samples=row[1], period=(target, hi))
 
     if re.search(r"\bwhere\b|\blocation\b", t):
-        row = brain.c.execute("SELECT ts,lat,lon,hdop FROM gps_1s ORDER BY ABS(ts-?) LIMIT 1", (target,)).fetchone()
+        row = nearest(brain.c, "gps_1s", "ts,lat,lon,hdop", target)
         if not row or abs(row[0]-target) > 90: return _result(f"No valid GPS fix is recorded close enough to {A.stamp(target)}; I will not substitute the current location.", "location_point", "PLACES", available=False, target_ts=target)
         return _result(f"At {A.stamp(row[0])}, the recorded location was GPS {row[1]/1e6:.5f} N, {row[2]/1e6:.5f} E (HDOP {row[3]/10:.1f}).", "location_point", "PLACES", sample_ts=row[0], target_ts=target, lat=row[1]/1e6, lon=row[2]/1e6)
 
     concept = next((c for c in cs if c in ("speed", "motor_rpm")), None)
     if not concept: return None
-    row = brain.c.execute("SELECT ts,speed FROM sig_1s WHERE speed IS NOT NULL ORDER BY ABS(ts-?) LIMIT 1", (target,)).fetchone()
+    row = nearest(brain.c, "sig_1s", "ts,speed", target, "speed")
     if not row or abs(row[0]-target) > 5: return _result(f"No valid {R.label_of(concept)} sample is recorded close enough to {A.stamp(target)}.", "signal_point", "LOOKUP", available=False, target_ts=target)
     speed = row[1] / 10.0
     if concept == "motor_rpm":
@@ -466,7 +467,7 @@ def _history_special(brain, t, cs):
 
     if re.search(r"\bexactly\s+\d+\s+days?\s+ago\b", t) and "battery_temperature" in cs:
         n = int(re.search(r"\bexactly\s+(\d+)\s+days?\s+ago\b", t).group(1)); target = brain.now - n*86400
-        row = brain.c.execute("SELECT ts,batt FROM sig_1m WHERE batt IS NOT NULL ORDER BY ABS(ts-?) LIMIT 1", (target,)).fetchone()
+        row = nearest(brain.c, "sig_1m", "ts,batt", target, "batt")
         if not row or abs(row[0]-target) > 3600: return _result(f"No battery-temperature observation exists within one hour of {A.stamp(target)} ({n} days ago).", "point_lookup", "LOOKUP", available=False, target_ts=target)
         return _result(f"Battery temperature nearest exactly {n} days ago was {row[1]/10:.1f} C at {A.stamp(row[0])}; offset {abs(row[0]-target)} seconds from the requested instant.", "point_lookup", "LOOKUP", target_ts=target, sample_ts=row[0], value=row[1]/10)
 
@@ -730,7 +731,7 @@ def _driver_semantics(brain, t, cs):
             unit = ago.group(2); factor = 86400 if unit.startswith("day") else 3600 if unit.startswith(("hour", "hr")) else 60 if unit.startswith(("minute", "min")) else 1
             target = brain.now - float(ago.group(1)) * factor; store = R.STORE[concept].get("1s") or R.STORE[concept].get("1m")
             if store:
-                table, col, scale = store; row = brain.c.execute(f"SELECT ts,{col} FROM {table} WHERE {col} IS NOT NULL ORDER BY ABS(ts-?) LIMIT 1", (int(target),)).fetchone(); tolerance = 5 if table == "sig_1s" else 90
+                table, col, scale = store; row = nearest(brain.c, table, f"ts,{col}", int(target), col); tolerance = 5 if table == "sig_1s" else 90
                 if row and abs(row[0] - target) <= tolerance: return _result(f"{R.label_of(concept).capitalize()} {ago.group(0)} was {_fmt_value(concept, row[1] / scale)}, at {A.stamp(row[0])}.", "point_ago", "LOOKUP", concept=concept, sample_ts=row[0], target_ts=target)
                 return _result(f"There is no valid {R.label_of(concept)} sample close enough to the requested instant ({ago.group(0)}), so I will not substitute a different time.", "point_ago", "LOOKUP", concept=concept, available=False)
 
@@ -817,7 +818,7 @@ def _advice_and_diagnostics(brain, t, cs):
     if re.search(r"\bover[- ]?temperature warnings?\b", t) and re.search(r"\b(?:parked|moving)\b", t):
         ev=brain.c.execute("SELECT ts,detail FROM events WHERE type='WARN_BATT_OVERTEMP' AND ts<=? ORDER BY ts",(brain.now,)).fetchall(); lines=[]
         for ts,detail in ev:
-            s=brain.c.execute("SELECT ts,speed,mode FROM sig_1m ORDER BY ABS(ts-?) LIMIT 1",(ts,)).fetchone()
+            s=nearest(brain.c, "sig_1m", "ts,speed,mode", ts)
             if not s or abs(s[0]-ts)>90: lines.append(f"{A.stamp(ts)}: no contemporaneous motion sample")
             else: lines.append(f"{A.stamp(ts)}: {'moving' if s[1]/10>.5 else 'parked'}, speed {s[1]/10:.1f} km/h (sample offset {abs(s[0]-ts)} s)")
         return _result("Over-temperature warning context:\n  - "+("\n  - ".join(lines) if lines else "no warnings recorded"),"warning_motion_context","EVENTS",events=len(ev))

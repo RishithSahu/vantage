@@ -198,14 +198,25 @@ def _driving(frame):
     return moving, known, inferred
 
 
-def accumulate(name, frame, profile, mask=None):
-    """-> (value, unit, quality, via, assumptions, sample_count) for energy_used / distance_driven / regen_energy / wh_per_km over the (masked) samples of a frame, or None."""
+def prepare(frame, profile):
+    """The whole-frame arrays accumulate() reads (sample spacing, speed, battery power, driving state, regeneration power), computed once: a window of many days is split into days without redoing them for every day."""
+    bp = _battery_power(frame, profile); drv, known, inferred = _driving(frame)
+    return (_dt(frame), _col(frame, "speed"), None if bp is None else bp.values, drv, known, inferred, _col(frame, "regen_power"))
+
+
+def accumulate(name, frame, profile, mask=None, pre=None, part=None):
+    """-> (value, unit, quality, via, assumptions, sample_count) for energy_used / distance_driven / regen_energy / wh_per_km over the (masked) samples of a frame, or None.
+    `pre` = prepare(frame, profile) and `part` = a slice of the frame (one day of it): the same arithmetic over those samples only, where `mask` is still the mask of the whole frame."""
     n = len(frame.ts)
     if n == 0: return None
     m = np.ones(n, bool) if mask is None else np.asarray(mask, bool)
-    dt = _dt(frame); interval_ok = np.isfinite(dt) & (dt > 0)
-    sp = _col(frame, "speed"); bp = _battery_power(frame, profile); bp = None if bp is None else bp.values
-    drv, state_known, state_inferred = _driving(frame)
+    arr = pre if pre is not None else prepare(frame, profile)
+    if part is not None: arr = tuple(None if a is None else a[part] for a in arr); m = m[part]
+    return _accumulate(name, *arr, m)
+
+
+def _accumulate(name, dt, sp, bp, drv, state_known, state_inferred, rp, m):
+    interval_ok = np.isfinite(dt) & (dt > 0)
     if name == "distance_driven" and sp is not None:
         sel = m & interval_ok & np.isfinite(sp); return float(np.sum(sp[sel] / 3.6 * dt[sel]) / 1000.0), "km", "derived", ("speed",), [], int(sel.sum())
     if name == "energy_used" and bp is not None:
@@ -216,14 +227,13 @@ def accumulate(name, frame, profile, mask=None):
         if unknown: ass.append(f"excluded {unknown} sample(s) because moving/parked state was unknown")
         return float(np.sum(bp[sel] * dt[sel]) / 3600.0), "kWh", "derived", ("battery_power",), ass, int(sel.sum())             # net: regeneration reduces it
     if name == "regen_energy":
-        rp = _col(frame, "regen_power")
         if rp is not None:
             sel = m & interval_ok & np.isfinite(rp); return float(np.sum(rp[sel] * dt[sel]) / 3600.0), "kWh", "derived", ("regen_power",), [], int(sel.sum())
         if bp is not None and sp is not None:
             sel = m & interval_ok & state_known & drv & (sp > 1.0) & (bp < 0) & np.isfinite(bp); return float(np.sum(-bp[sel] * dt[sel]) / 3600.0), "kWh", "derived", ("battery_power", "speed"), [], int(sel.sum())
     if name == "wh_per_km":
         eligible = m & interval_ok & state_known & drv
-        e = accumulate("energy_used", frame, profile, eligible); d = accumulate("distance_driven", frame, profile, eligible)
+        e = _accumulate("energy_used", dt, sp, bp, drv, state_known, state_inferred, rp, eligible); d = _accumulate("distance_driven", dt, sp, bp, drv, state_known, state_inferred, rp, eligible)
         if e and d and d[0] > 0.2: return e[0] * 1000.0 / d[0], "Wh/km", "derived", ("battery_power", "speed"), [], min(e[5], d[5])
     return None
 
