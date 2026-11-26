@@ -72,4 +72,3 @@ This is the register of the rules the owner set and the design decisions taken, 
 * `bench/probe_ask.py` uses the ONNX build named in `product.json` and ignores `--adapter` unless `VGPT_BACKEND=llama`.
 * Run Python benchmarks on the Pi with `~/vehiclegpt2/.venv/bin/python` (it has onnxruntime and llama.cpp); system Python lacks one of them and the model "could not be loaded".
 * Never delete a trained adapter you may need: old models were removed on 22 Oct to free 30.5 GB and cannot be recovered except by retraining.
-* The Pi's password was shared in a chat during a parallel session and a no-passphrase SSH key was added (`~/.ssh/vantage_pi_claude`): rotate the password and remove that key.

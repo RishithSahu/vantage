@@ -143,6 +143,6 @@ Read [`CONTRIBUTING.md`](CONTRIBUTING.md) first; it is short and explains the th
 
 ## Licence
 
-[MIT](LICENSE). Third-party components and datasets are listed in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md); some dataset licences (VIF-AEGIS, HCRL, comma2k19, Open-Meteo) are still to be verified before redistribution.
+[MIT](LICENSE). The licence covers this project's own code and docs. Third-party components and datasets keep their own terms, listed in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md); no third-party dataset is redistributed in this repository. Weather data by Open-Meteo.com (CC BY 4.0).
 
 The earlier README (from the VehicleGPT 1.1 era) is kept at [`docs/README_legacy.md`](docs/README_legacy.md).

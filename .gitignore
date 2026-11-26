@@ -25,3 +25,6 @@ __pycache__/
 # the small test corpus IS tracked (tests/corpus/*.db, 54 MB, with its MANIFEST.json); other databases are not
 *.db
 !/tests/corpus/*.db
+
+# third-party authored, redistribution rights unconfirmed: kept locally only
+/VehicleGPT_500_QA.csv

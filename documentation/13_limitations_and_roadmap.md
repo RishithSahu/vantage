@@ -52,7 +52,6 @@ Read this before relying on any number in this folder. These are the things we k
 ## 6. Housekeeping on record
 
 * The 26 Oct speed work and everything after the v1.3.4 tag are **not committed** and not in any installer; a 1.3.5 build and tag are still to be made. The v1.3.4 installer lacks the Pi fixes.
-* The Pi's password was shared in a chat and a no-passphrase key was installed: rotate and remove.
 * `VantageCli version` once printed a stale constant (1.2.3) (24 Oct note; recheck).
 * Disk: results caches (`results/_cache` prefix states, about 9.8 GB), old installers (3.5 GB in `deploy/windows/dist`), backups and temporary folders can be pruned when space is needed.
 

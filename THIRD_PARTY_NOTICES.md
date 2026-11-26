@@ -27,7 +27,11 @@ VehicleGPT bundles or uses the following. **Items marked VERIFY need a licence c
 | Open-source CAN / OBD / UDS protocol knowledge | public standards (ISO 15765, SAE J1979, ...) | implemented from the public descriptions |
 
 ## This project
-`LICENSE.txt` is intentionally **not supplied yet**: the choice of licence (or an "all rights reserved, evaluation use only" notice) belongs to the project owner and must reflect the VERIFY items above. Until it is chosen, treat the package as *not licensed for redistribution*.
+The VANTAGE source code is released under the MIT licence (`LICENSE`). That licence covers this project's own code and documentation only. Third-party components and datasets keep their own terms, listed in this file.
+
+**Datasets in this repository.** The repository does not redistribute VIF-AEGIS, HCRL Car-Hacking or comma2k19 data (the camera clip and raw captures are kept out of the repository), and it does not include the externally written 500-question file. The simulated worlds use values derived from real weather and real driving cycles; anyone using the generators or distributing generated histories should check the VERIFY rows above first.
+
+**Attribution.** Weather data by Open-Meteo.com (CC BY 4.0). CAN databases from opendbc (MIT, comma.ai).
 
 ## Added 2026-10-20 (voice input)
 | Component | Licence | Status |
