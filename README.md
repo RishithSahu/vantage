@@ -117,7 +117,7 @@ See [`documentation/12_operations_guide.md`](documentation/12_operations_guide.m
 
 ## Where help is wanted
 
-This was built for a hackathon-style case study (TATA ELXSI Teliport S4, Case Study 5) and is bigger than a small team can finish. High-value places to contribute:
+High-value places to contribute:
 
 - **Run it on something real**: one real CAN capture, a real SocketCAN listen-only interface, a Pi 5 or an A55-class board.
 - **Break it**: write questions in your own words (slang, Hinglish, long preambles) and report what it misreads. Wrong answers are the most useful issues.
